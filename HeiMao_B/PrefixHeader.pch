@@ -1,0 +1,27 @@
+//
+//  PrefixHeader.pch
+//  JewelryApp
+//
+//  Created by kequ on 15/5/1.
+//  Copyright (c) 2015年 jewelry. All rights reserved.
+//
+
+#ifndef JewelryApp_PrefixHeader_pch
+#define JewelryApp_PrefixHeader_pch
+#import "UIView+Sizes.h"
+#import "UIViewAdditions.h"
+#import "SWCommonMacro.h"
+#import "ToastAlertView.h"
+#import "UIImageView+WebCache.h"
+#import "MBProgressHUD.h"
+#import "UIViewController+Method.h"
+#import "NetWorkEntiry.h"
+#import "JSONKit.h"
+#import "NSDictionary+StrDic.h"
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#define RGB_Color(r,g,b)    RGBA_Color(r,g,b,1)
+#define RGBA_Color(r,g,b,a) ([UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:a])
+
+#endif
