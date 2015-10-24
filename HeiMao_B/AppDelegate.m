@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-
+#import "AFNetworkActivityLogger.h"
+#import "MobClick.h"
 @interface AppDelegate ()
 
 @end
@@ -16,10 +17,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
 //    [MobClick startWithAppkey:@"55a4d82f67e58eeece0038be" reportPolicy:BATCH   channelId:@"蒲公英"];
-//
-//    [[AFNetworkActivityLogger sharedLogger] startLogging];
-
+    
+    AFNetworkReachabilityManager *  manager = [AFNetworkReachabilityManager sharedManager];
+    [manager startMonitoring];
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+    
     return YES;
 }
 
