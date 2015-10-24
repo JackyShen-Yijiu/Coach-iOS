@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BMHMNagationController : UINavigationController
+@interface HMNagationController : UINavigationController
 - (BOOL)isAnimaiton;
 @end

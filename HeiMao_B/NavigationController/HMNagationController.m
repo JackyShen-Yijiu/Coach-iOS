@@ -6,13 +6,13 @@
 //  Copyright (c) 2015年 jewelry. All rights reserved.
 //
 
-#import "BMHMNagationController.h"
+#import "HMNagationController.h"
 
-@interface BMHMNagationController()<UINavigationControllerDelegate>
+@interface HMNagationController()<UINavigationControllerDelegate>
 @property(nonatomic,assign)BOOL isAnimaiton;
 @end
 
-@implementation BMHMNagationController
+@implementation HMNagationController
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController
 {
