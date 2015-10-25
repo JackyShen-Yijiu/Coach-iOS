@@ -8,7 +8,7 @@
 
 #import "RFSegmentView.h"
 
-#define kDefaultTintColor   RGB_Color(80.f, 218.f, 123.f)
+#define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 #define kLeftMargin         15
 #define kItemHeight         30
 #define kBorderLineWidth    0.5
@@ -35,7 +35,7 @@
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         _titleLabel.textAlignment   = NSTextAlignmentCenter;
         _titleLabel.backgroundColor = [UIColor clearColor];
-        _titleLabel.font = [UIFont systemFontOfSize:13.f];
+        _titleLabel.font = [UIFont systemFontOfSize:14.f];
         [self addSubview:_titleLabel];
         
         self.norColor        = norColor;
@@ -116,9 +116,9 @@
         self.bgView = [[UIView alloc] initWithFrame:CGRectMake(kLeftMargin, (viewHeight - kItemHeight)/2, viewWidth -2*kLeftMargin, kItemHeight)];
         self.bgView.backgroundColor    = [UIColor whiteColor];
         self.bgView.clipsToBounds      = YES;
-        self.bgView.layer.cornerRadius = 4.f;
+        self.bgView.layer.cornerRadius = 2.f;
         self.bgView.layer.borderWidth  = kBorderLineWidth;
-        self.bgView.layer.borderColor  = kDefaultTintColor.CGColor;
+        self.bgView.layer.borderColor  = [UIColor whiteColor].CGColor;
         [self addSubview:self.bgView];
         
         init_x = 0;

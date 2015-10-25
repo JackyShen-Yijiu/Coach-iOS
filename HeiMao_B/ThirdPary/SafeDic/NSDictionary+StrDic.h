@@ -12,11 +12,5 @@
 - (NSString *)objectStringForKey:(NSString *)key;
 - (NSArray *)objectArrayForKey:(NSString *)key;
 - (NSDictionary *)objectInfoForKey:(NSString *)key;
-- (NSString *)objectForImageStr:(NSString *)key;
-- (NSArray *)objectForImageArray:(NSString*)key;
 @end
 
-
-@interface NSArray(StrDic)
-- (NSArray*)stripImageUrlBase:(NSArray *)array;
-@end

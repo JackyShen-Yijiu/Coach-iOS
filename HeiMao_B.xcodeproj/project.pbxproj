@@ -8,10 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
+		B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B811E4681BDD3CF90077EAF5 /* NGOSegmentControl.m */; settings = {ASSET_TAGS = (); }; };
+		B865C1631BDC95B000C1E681 /* HMOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1621BDC95B000C1E681 /* HMOrderModel.m */; settings = {ASSET_TAGS = (); }; };
+		B865C1661BDC969700C1E681 /* HMStudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1651BDC969700C1E681 /* HMStudentModel.m */; settings = {ASSET_TAGS = (); }; };
+		B865C16A1BDC9ABB00C1E681 /* HMClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1691BDC9ABB00C1E681 /* HMClassModel.m */; settings = {ASSET_TAGS = (); }; };
+		B865C1701BDC9D8E00C1E681 /* HMSchoolModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C16F1BDC9D8E00C1E681 /* HMSchoolModel.m */; settings = {ASSET_TAGS = (); }; };
+		B865C1731BDC9F1C00C1E681 /* HMPorTraitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1721BDC9F1C00C1E681 /* HMPorTraitModel.m */; settings = {ASSET_TAGS = (); }; };
+		B865C1761BDCA0B400C1E681 /* RefreshTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1751BDCA0B400C1E681 /* RefreshTableView.m */; settings = {ASSET_TAGS = (); }; };
+		B865C1791BDCA49400C1E681 /* OrderSummaryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1781BDCA49400C1E681 /* OrderSummaryListCell.m */; settings = {ASSET_TAGS = (); }; };
+		B865C17C1BDCA4A300C1E681 /* OrderSummaryDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C17B1BDCA4A300C1E681 /* OrderSummaryDayCell.m */; settings = {ASSET_TAGS = (); }; };
+		B865C17F1BDCA4D600C1E681 /* PortraitView.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C17E1BDCA4D600C1E681 /* PortraitView.m */; settings = {ASSET_TAGS = (); }; };
+		B865C1821BDD2DE800C1E681 /* BaseModelMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1811BDD2DE800C1E681 /* BaseModelMethod.m */; settings = {ASSET_TAGS = (); }; };
 		B86EB3561BDB50EB0014EBD7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B86EB3551BDB50EB0014EBD7 /* main.m */; };
 		B86EB3591BDB50EB0014EBD7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B86EB3581BDB50EB0014EBD7 /* AppDelegate.m */; };
 		B86EB3611BDB50EB0014EBD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B86EB3601BDB50EB0014EBD7 /* Assets.xcassets */; };
 		B8AFED191BDB96AC00EF8726 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8AFED181BDB96AC00EF8726 /* OrderViewController.m */; settings = {ASSET_TAGS = (); }; };
+		B8AFED1D1BDB988000EF8726 /* UserCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8AFED1C1BDB988000EF8726 /* UserCenterController.m */; settings = {ASSET_TAGS = (); }; };
 		B8C458571BDB592B00901F71 /* HMNagationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458561BDB592B00901F71 /* HMNagationController.m */; settings = {ASSET_TAGS = (); }; };
 		B8C4586E1BDB59AC00901F71 /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4585B1BDB59AC00901F71 /* AFNetworkActivityLogger.m */; settings = {ASSET_TAGS = (); }; };
 		B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4585F1BDB59AC00901F71 /* YiRefreshFooter.m */; settings = {ASSET_TAGS = (); }; };
@@ -30,6 +42,29 @@
 		1371250ABB78626F8329AC98 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2823AFD5ABA09767DD4F0623 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B811E4671BDD3CF90077EAF5 /* NGOSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGOSegmentControl.h; sourceTree = "<group>"; };
+		B811E4681BDD3CF90077EAF5 /* NGOSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGOSegmentControl.m; sourceTree = "<group>"; };
+		B865C1611BDC95B000C1E681 /* HMOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMOrderModel.h; path = HeiMao_B/DataModel/HMOrderModel.h; sourceTree = "<group>"; };
+		B865C1621BDC95B000C1E681 /* HMOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMOrderModel.m; path = HeiMao_B/DataModel/HMOrderModel.m; sourceTree = "<group>"; };
+		B865C1641BDC969700C1E681 /* HMStudentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMStudentModel.h; path = HeiMao_B/DataModel/HMStudentModel.h; sourceTree = "<group>"; };
+		B865C1651BDC969700C1E681 /* HMStudentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMStudentModel.m; path = HeiMao_B/DataModel/HMStudentModel.m; sourceTree = "<group>"; };
+		B865C1671BDC970700C1E681 /* ModelDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelDefine.h; sourceTree = "<group>"; };
+		B865C1681BDC9ABB00C1E681 /* HMClassModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMClassModel.h; sourceTree = "<group>"; };
+		B865C1691BDC9ABB00C1E681 /* HMClassModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMClassModel.m; sourceTree = "<group>"; };
+		B865C16E1BDC9D8E00C1E681 /* HMSchoolModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSchoolModel.h; sourceTree = "<group>"; };
+		B865C16F1BDC9D8E00C1E681 /* HMSchoolModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSchoolModel.m; sourceTree = "<group>"; };
+		B865C1711BDC9F1C00C1E681 /* HMPorTraitModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMPorTraitModel.h; sourceTree = "<group>"; };
+		B865C1721BDC9F1C00C1E681 /* HMPorTraitModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMPorTraitModel.m; sourceTree = "<group>"; };
+		B865C1741BDCA0B400C1E681 /* RefreshTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshTableView.h; sourceTree = "<group>"; };
+		B865C1751BDCA0B400C1E681 /* RefreshTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshTableView.m; sourceTree = "<group>"; };
+		B865C1771BDCA49400C1E681 /* OrderSummaryListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderSummaryListCell.h; sourceTree = "<group>"; };
+		B865C1781BDCA49400C1E681 /* OrderSummaryListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderSummaryListCell.m; sourceTree = "<group>"; };
+		B865C17A1BDCA4A300C1E681 /* OrderSummaryDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderSummaryDayCell.h; sourceTree = "<group>"; };
+		B865C17B1BDCA4A300C1E681 /* OrderSummaryDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderSummaryDayCell.m; sourceTree = "<group>"; };
+		B865C17D1BDCA4D600C1E681 /* PortraitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortraitView.h; sourceTree = "<group>"; };
+		B865C17E1BDCA4D600C1E681 /* PortraitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortraitView.m; sourceTree = "<group>"; };
+		B865C1801BDD2DE800C1E681 /* BaseModelMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModelMethod.h; sourceTree = "<group>"; };
+		B865C1811BDD2DE800C1E681 /* BaseModelMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModelMethod.m; sourceTree = "<group>"; };
 		B86EB3511BDB50EB0014EBD7 /* HeiMao_B.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeiMao_B.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86EB3551BDB50EB0014EBD7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B86EB3571BDB50EB0014EBD7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -38,6 +73,8 @@
 		B86EB3651BDB50EB0014EBD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = HeiMao_B/Info.plist; sourceTree = "<group>"; };
 		B8AFED171BDB96AC00EF8726 /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
 		B8AFED181BDB96AC00EF8726 /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
+		B8AFED1B1BDB988000EF8726 /* UserCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterController.h; sourceTree = "<group>"; };
+		B8AFED1C1BDB988000EF8726 /* UserCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterController.m; sourceTree = "<group>"; };
 		B8C4584C1BDB571A00901F71 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B8C458551BDB592B00901F71 /* HMNagationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMNagationController.h; sourceTree = "<group>"; };
 		B8C458561BDB592B00901F71 /* HMNagationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMNagationController.m; sourceTree = "<group>"; };
@@ -97,9 +134,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B865C1601BDC953E00C1E681 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				B865C1671BDC970700C1E681 /* ModelDefine.h */,
+				B865C1801BDD2DE800C1E681 /* BaseModelMethod.h */,
+				B865C1811BDD2DE800C1E681 /* BaseModelMethod.m */,
+				B865C1611BDC95B000C1E681 /* HMOrderModel.h */,
+				B865C1621BDC95B000C1E681 /* HMOrderModel.m */,
+				B865C1641BDC969700C1E681 /* HMStudentModel.h */,
+				B865C1651BDC969700C1E681 /* HMStudentModel.m */,
+				B865C1711BDC9F1C00C1E681 /* HMPorTraitModel.h */,
+				B865C1721BDC9F1C00C1E681 /* HMPorTraitModel.m */,
+				B865C1681BDC9ABB00C1E681 /* HMClassModel.h */,
+				B865C1691BDC9ABB00C1E681 /* HMClassModel.m */,
+				B865C16E1BDC9D8E00C1E681 /* HMSchoolModel.h */,
+				B865C16F1BDC9D8E00C1E681 /* HMSchoolModel.m */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
 		B86EB3481BDB50EB0014EBD7 = {
 			isa = PBXGroup;
 			children = (
+				B865C1601BDC953E00C1E681 /* DataModel */,
 				B86EB3531BDB50EB0014EBD7 /* HeiMao_B */,
 				B86EB3601BDB50EB0014EBD7 /* Assets.xcassets */,
 				B86EB3651BDB50EB0014EBD7 /* Info.plist */,
@@ -123,10 +181,11 @@
 				B86EB3571BDB50EB0014EBD7 /* AppDelegate.h */,
 				B86EB3581BDB50EB0014EBD7 /* AppDelegate.m */,
 				B8C4584C1BDB571A00901F71 /* PrefixHeader.pch */,
+				B8AFED1A1BDB983B00EF8726 /* MyUserController */,
 				B8AFED161BDB96A000EF8726 /* OrderViewController */,
 				B8C458851BDB5B9200901F71 /* NetWorkEntity */,
 				B8C458541BDB592B00901F71 /* NavigationController */,
-				B8C458811BDB5B7600901F71 /* ViewControllerMethod */,
+				B8C458811BDB5B7600901F71 /* Common */,
 				B8C458581BDB59AC00901F71 /* ThirdPary */,
 				B86EB3541BDB50EB0014EBD7 /* Supporting Files */,
 			);
@@ -146,8 +205,21 @@
 			children = (
 				B8AFED171BDB96AC00EF8726 /* OrderViewController.h */,
 				B8AFED181BDB96AC00EF8726 /* OrderViewController.m */,
+				B865C1771BDCA49400C1E681 /* OrderSummaryListCell.h */,
+				B865C1781BDCA49400C1E681 /* OrderSummaryListCell.m */,
+				B865C17A1BDCA4A300C1E681 /* OrderSummaryDayCell.h */,
+				B865C17B1BDCA4A300C1E681 /* OrderSummaryDayCell.m */,
 			);
 			path = OrderViewController;
+			sourceTree = "<group>";
+		};
+		B8AFED1A1BDB983B00EF8726 /* MyUserController */ = {
+			isa = PBXGroup;
+			children = (
+				B8AFED1B1BDB988000EF8726 /* UserCenterController.h */,
+				B8AFED1C1BDB988000EF8726 /* UserCenterController.m */,
+			);
+			path = MyUserController;
 			sourceTree = "<group>";
 		};
 		B8C458541BDB592B00901F71 /* NavigationController */ = {
@@ -235,13 +307,19 @@
 			path = ToastAlertView;
 			sourceTree = "<group>";
 		};
-		B8C458811BDB5B7600901F71 /* ViewControllerMethod */ = {
+		B8C458811BDB5B7600901F71 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B865C17D1BDCA4D600C1E681 /* PortraitView.h */,
+				B865C17E1BDCA4D600C1E681 /* PortraitView.m */,
+				B811E4671BDD3CF90077EAF5 /* NGOSegmentControl.h */,
+				B811E4681BDD3CF90077EAF5 /* NGOSegmentControl.m */,
+				B865C1741BDCA0B400C1E681 /* RefreshTableView.h */,
+				B865C1751BDCA0B400C1E681 /* RefreshTableView.m */,
 				B8C458821BDB5B8E00901F71 /* UIViewController+Method.h */,
 				B8C458831BDB5B8E00901F71 /* UIViewController+Method.m */,
 			);
-			name = ViewControllerMethod;
+			name = Common;
 			sourceTree = "<group>";
 		};
 		B8C458851BDB5B9200901F71 /* NetWorkEntity */ = {
@@ -265,6 +343,7 @@
 				B86EB34E1BDB50EB0014EBD7 /* Frameworks */,
 				B86EB34F1BDB50EB0014EBD7 /* Resources */,
 				A30143097D6A7E2D3F024558 /* Copy Pods Resources */,
+				61B7E27D52A438D81C48E845 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -319,6 +398,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		61B7E27D52A438D81C48E845 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		645EAEDC627068E72417072E /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -359,17 +453,29 @@
 				B8C458571BDB592B00901F71 /* HMNagationController.m in Sources */,
 				B8C458731BDB59AC00901F71 /* UIView+TKCategory.m in Sources */,
 				B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */,
+				B865C1821BDD2DE800C1E681 /* BaseModelMethod.m in Sources */,
 				B8C458721BDB59AC00901F71 /* UIView+Sizes.m in Sources */,
+				B865C1701BDC9D8E00C1E681 /* HMSchoolModel.m in Sources */,
+				B865C1661BDC969700C1E681 /* HMStudentModel.m in Sources */,
 				B86EB3591BDB50EB0014EBD7 /* AppDelegate.m in Sources */,
 				B8C458801BDB5B5C00901F71 /* ToastAlertView.m in Sources */,
+				B865C17C1BDCA4A300C1E681 /* OrderSummaryDayCell.m in Sources */,
 				B8C4587C1BDB5ABB00901F71 /* NSDictionary+StrDic.m in Sources */,
 				B8C4586E1BDB59AC00901F71 /* AFNetworkActivityLogger.m in Sources */,
+				B865C1631BDC95B000C1E681 /* HMOrderModel.m in Sources */,
 				B8C458741BDB59AC00901F71 /* UIViewAdditions.m in Sources */,
 				B8C458711BDB59AC00901F71 /* RFSegmentView.m in Sources */,
 				B8AFED191BDB96AC00EF8726 /* OrderViewController.m in Sources */,
 				B8C458841BDB5B8E00901F71 /* UIViewController+Method.m in Sources */,
+				B865C1791BDCA49400C1E681 /* OrderSummaryListCell.m in Sources */,
+				B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */,
+				B865C17F1BDCA4D600C1E681 /* PortraitView.m in Sources */,
 				B8C458701BDB59AC00901F71 /* YiRefreshHeader.m in Sources */,
+				B865C1731BDC9F1C00C1E681 /* HMPorTraitModel.m in Sources */,
+				B865C1761BDCA0B400C1E681 /* RefreshTableView.m in Sources */,
+				B865C16A1BDC9ABB00C1E681 /* HMClassModel.m in Sources */,
 				B86EB3561BDB50EB0014EBD7 /* main.m in Sources */,
+				B8AFED1D1BDB988000EF8726 /* UserCenterController.m in Sources */,
 				B8C458881BDB5BAD00901F71 /* NetWorkEntiry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

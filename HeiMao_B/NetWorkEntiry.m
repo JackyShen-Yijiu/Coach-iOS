@@ -9,7 +9,6 @@
 #import "NetWorkEntiry.h"
 #import "JSONKit.h"
 #import "NSString+MD5.h"
-#import "Reachability.h"
 
 #define  HOST_TEST_DAMIAN @"http://101.200.204.240"
 #define  HOST_LINE_DOMAIN @""
@@ -181,6 +180,8 @@
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+    userId = @"5616352721ec29041a9af889";
+    token = @"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI1NjE2MzUyNzIxZWMyOTA0MWE5YWY4ODkiLCJ0aW1lc3RhbXAiOiIyMDE1LTEwLTA4VDA5OjIzOjQ4LjY5NloiLCJhdWQiOiJibGFja2NhdGUiLCJpYXQiOjE0NDQyOTYyMjh9.-iOZ5fIQjdmdHBthsCP7VQWRYYM68zWWHWWnIUxRSEg";
     if (!userId || !token) {
         return [self missParagramercallBackFailure:failure];
     }

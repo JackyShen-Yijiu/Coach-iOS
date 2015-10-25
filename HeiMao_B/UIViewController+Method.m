@@ -97,11 +97,10 @@
     self.myNavigationItem.rightBarButtonItem = nil;
     self.myNavigationItem.rightBarButtonItems = nil;
     
-    [[[self myNavController] navigationBar] setBarTintColor:[UIColor colorWithRed:0 green:172/255.f blue:87/255.f alpha:1]];
+    [[[self myNavController] navigationBar] setBarTintColor:RGB_Color(31, 124, 235)];
     NSDictionary *textAttributes1 = @{NSFontAttributeName: [UIFont systemFontOfSize:18.f],
                                       NSForegroundColorAttributeName: [UIColor whiteColor]
-                                      };
-    
+                                      };    
     [[[self myNavController] navigationBar]  setTitleTextAttributes:textAttributes1];
 }
 
