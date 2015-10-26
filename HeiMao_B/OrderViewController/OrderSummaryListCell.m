@@ -9,14 +9,16 @@
 #import "OrderSummaryListCell.h"
 
 
+#define LINE_COLOR  RGB_Color(0xe6, 0xe6, 0xe6)
+
 @interface OrderSummaryListCell()
 @property(nonatomic,strong)UIView * bgView;
 @property(nonatomic,strong)PortraitView * potraitView;
 @property(nonatomic,strong)UILabel * mainTitle;
 @property(nonatomic,strong)UILabel * subTitle;
 @property(nonatomic,strong)UILabel * statueLabel;
-@property(nonatomic,strong)UILabel * classTime;
-@property(nonatomic,strong)UILabel * trainingAddressLabel;
+@property(nonatomic,strong)UILabel * orderTimeLabel;
+@property(nonatomic,strong)UILabel * orderAddressLabel;
 @property(nonatomic,strong)UILabel * pickAddressLabel;
 
 @property(nonatomic,strong)UIView * topLine;
@@ -28,7 +30,7 @@
 @implementation OrderSummaryListCell
 + (CGFloat)cellHeight
 {
-    return 180;
+    return 180 + 10;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -42,7 +44,11 @@
 
 - (void)initUI
 {
+    self.contentView.backgroundColor  = RGB_Color(247, 249, 251);
     self.potraitView = [[PortraitView alloc] init];
+    self.potraitView.layer.cornerRadius = 1.f;
+    self.potraitView.layer.shouldRasterize = YES;
+    self.potraitView.backgroundColor = [UIColor redColor];
     [self.bgView addSubview:self.potraitView];
     
     self.mainTitle = [[UILabel alloc] init];
@@ -70,11 +76,11 @@
     self.statueLabel.numberOfLines = 1;
     [self.bgView addSubview:self.statueLabel];
     
-    self.classTime = [self getOnePropertyLabel];
-    [self.bgView addSubview:self.classTime];
+    self.orderTimeLabel = [self getOnePropertyLabel];
+    [self.bgView addSubview:self.orderTimeLabel];
     
-    self.trainingAddressLabel = [self getOnePropertyLabel];
-    [self.bgView addSubview:self.trainingAddressLabel];
+    self.orderAddressLabel = [self getOnePropertyLabel];
+    [self.bgView addSubview:self.orderAddressLabel];
     
     self.pickAddressLabel = [self getOnePropertyLabel];
     [self.bgView addSubview:self.pickAddressLabel];
@@ -87,61 +93,144 @@
     
     self.bottomLine = [self getOnelineView];
     [self.bgView addSubview:self.bottomLine];
+//    [self updateConstraints];
 }
 
 #pragma mark Layout
-//- (void)updateConstraints
+- (void)updateConstraints
+{
+    [super updateConstraints];
+    
+    CGFloat leftOffsetSpacing = 15.f;
+    
+    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView);
+        make.left.equalTo(self.contentView);
+        make.width.equalTo(self.contentView);
+        make.bottom.equalTo(self.contentView).offset(-10);
+        
+    }];
+    
+    [self.topLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.bgView);
+        make.left.equalTo(self.bgView);
+        make.width.equalTo(self.bgView);
+        make.height.equalTo(@(0.5));
+    }];
+    
+    [self.potraitView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.bgView).offset(leftOffsetSpacing);
+        make.top.equalTo(self.bgView).offset(15.f);
+        make.size.mas_equalTo(CGSizeMake(60.f, 60.f));
+    }];
+    
+    [self.statueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.bgView).offset(14.f);
+        make.right.equalTo(self.bgView).offset(-leftOffsetSpacing);
+        make.left.equalTo(self.mainTitle.mas_right).offset(10);
+    }];
+    
+    [self.mainTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.potraitView.mas_right).offset(12.f);
+        make.height.equalTo(@(16.f));
+        make.top.equalTo(@((90 - 16 - 10 - 14)/2.f));
+    }];
+    
+    [self.subTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mainTitle);
+        make.width.equalTo(self.mainTitle);
+        make.top.equalTo(self.mainTitle.mas_bottom).offset(10.f);
+        make.height.equalTo(@(16.f));
+    }];
+    
+    [self.midLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.bgView).offset(leftOffsetSpacing);
+        make.right.equalTo(self.bgView).offset(-leftOffsetSpacing);
+        make.top.equalTo(self.potraitView.mas_bottom).offset(15.f);
+        make.height.equalTo(self.topLine);
+    }];
+    
+    
+    [self.orderTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.bgView).offset(leftOffsetSpacing);
+        make.right.equalTo(self.bgView).offset(-leftOffsetSpacing);
+        make.top.equalTo(self.midLine.mas_top).offset((90 - 14 * 3 - 8 * 2)/2.f);
+        make.height.equalTo(@(14));
+    }];
+    
+    [self.orderAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(self.orderTimeLabel);
+        make.top.equalTo(self.orderTimeLabel.mas_bottom).offset(8.f);
+        make.centerX.equalTo(self.orderTimeLabel);
+    }];
+    
+    [self.pickAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(self.orderAddressLabel);
+        make.top.equalTo(self.orderAddressLabel.mas_bottom).offset(8.f);
+        make.centerX.equalTo(self.orderAddressLabel);
+    }];
+    
+    [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.bgView.mas_bottom).offset(-1);
+        make.size.equalTo(self.topLine);
+        make.left.equalTo(self.topLine);
+    }];
+    
+}
+
+//- (void)layoutSubviews
 //{
-//    [super updateConstraints];
-//    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.contentView);
-//        make.left.equalTo(self.contentView);
-//        make.width.equalTo(self.contentView);
-//        make.bottom.equalTo(self.contentView).offset(-10);
-//        
-//    }];
+//    [super layoutSubviews];
+//    CGFloat leftOffsetSpacing = 15.f;
+//    self.bgView.frame = CGRectMake(0, 0, self.width, self.height - 10);
+//    self.topLine.frame = CGRectMake(0, 0, self.width, 0.5);
+//    self.potraitView.frame = CGRectMake(leftOffsetSpacing, 15, 60, 60);
+//    [self.statueLabel sizeToFit];
+//    self.statueLabel.frame = CGRectMake(self.width - self.statueLabel.width - leftOffsetSpacing, 14.f, self.statueLabel.width, 14);
+//    self.mainTitle.frame = CGRectMake(self.potraitView.right + 12, (90 - 16 - 10 - 14)/2.f, self.width - (self.potraitView.right + 12) - self.statueLabel.width - 12 - leftOffsetSpacing, 16.f);
+//    self.subTitle.frame = CGRectOffset(self.mainTitle.frame, 0, self.mainTitle.height + 10.f);
 //    
-//    [self.topLine mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.bgView);
-//        make.left.equalTo(self.bgView);
-//        make.width.equalTo(self.bgView);
-//        make.height.equalTo(@(1));
-//    }];
+//    self.midLine.frame = CGRectMake(leftOffsetSpacing, self.potraitView.bottom + 15, self.width - leftOffsetSpacing * 2, 0.5);
 //    
-//    [self.potraitView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//    }];
+//    self.orderTimeLabel.frame = CGRectMake(leftOffsetSpacing, self.midLine.top + (90 - 14 * 3 - 8 * 2)/2.f, self.width - leftOffsetSpacing * 2, 14.f);
+//    self.orderAddressLabel.frame = CGRectOffset(self.orderTimeLabel.frame, 0, self.orderTimeLabel.height + 8.f);
+//    self.pickAddressLabel.frame = CGRectOffset(self.orderTimeLabel.frame, 0, self.orderTimeLabel.height + 8.f);
+//    
+//    self.bottomLine.frame = CGRectMake(0, self.bgView.height - 1, self.width, 1);
+//    
 //}
 
-
-- (void)layoutSubviews
+#pragma mark - Data
+- (void)setModel:(HMOrderModel *)model
 {
-    [super layoutSubviews];
-    [CATransaction begin];
-    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    if (_model == model) {
+        return;
+    }
+    _model = model;
+    UIImage * defaultImage = [UIImage imageNamed:@"temp"];
+    NSString * imageStr = _model.userInfo.porInfo.thumbnailpic;
+    if(imageStr)
+        [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];
     
-    CGFloat leftSpacing = 15.f;
-    
-    self.topLine.frame = CGRectMake(0, 0, self.width, 1);
-    
-    self.potraitView.frame = CGRectMake(leftSpacing, 15, 60, 60);
+    self.mainTitle.text = _model.userInfo.userName;
+    self.subTitle.text = _model.orderProgress;
+    self.statueLabel.text = @"学员待确认";
 
-    [self.statueLabel sizeToFit];
-    self.statueLabel.frame = CGRectMake(self.width - self.statueLabel.width - leftSpacing , 14, self.statueLabel.width, self.statueLabel.height);
-    
-    self.mainTitle.frame = CGRectMake(self.potraitView.right + 12,(90 - 16 - 10 - 14)/2.f,
-                                      self.statueLabel.left - (self.potraitView.right + 12) - 10, 16.f);
-    self.subTitle.frame = CGRectMake(self.mainTitle.left, self.mainTitle.bottom + 10,self.width - self.mainTitle.left - leftSpacing , 14.f);
-    
-    self.midLine.frame = CGRectMake(leftSpacing, self.potraitView.bottom + self.potraitView.top, self.width - leftSpacing * 2, 1);
-    
-    self.trainingAddressLabel.frame = CGRectMake(leftSpacing, self.midLine.bottom + (90 - 14 * 3 - 8 * 2)/2.f, self.width - leftSpacing * 2, 14);
-    
-    self.classTime.frame = CGRectOffset(self.trainingAddressLabel.frame, 0, -self.trainingAddressLabel.height - 8);
-    
-    self.pickAddressLabel.frame = CGRectOffset(self.trainingAddressLabel.frame, 0, self.trainingAddressLabel.height + 8);
-    
-    [CATransaction commit];
+    self.orderTimeLabel.text = _model.orderTime;
+    self.orderAddressLabel.text = _model.orderAddress;
+    self.pickAddressLabel.text = _model.orderPikerAddres;
+    [self setNeedsUpdateConstraints];
+//    [self setNeedsLayout];
+}
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+    self.bgView.backgroundColor = highlighted ? [UIColor grayColor] : [UIColor whiteColor];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    self.bgView.backgroundColor = selected ? [UIColor grayColor] : [UIColor whiteColor];
 }
 
 #pragma mark - Common
@@ -149,7 +238,7 @@
 - (UIView *)getOnelineView
 {
     UIView * view = [[UIView alloc] init];
-    view.backgroundColor = RGB_Color(0xe6, 0xe6, 0xe6);
+    view.backgroundColor = LINE_COLOR;
     return view;
 }
 
@@ -169,6 +258,7 @@
 {
     if (!_bgView) {
         _bgView = [[UIView alloc] init];
+        _bgView.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:_bgView];
     }
     return _bgView;

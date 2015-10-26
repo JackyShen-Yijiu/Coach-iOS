@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HMOrderModel.h"
 
 @interface OrderSummaryDayCell : UITableViewCell
+
+@property(nonatomic,strong)HMOrderModel * model;
+
++ (CGFloat)cellHeight;
 
 @end

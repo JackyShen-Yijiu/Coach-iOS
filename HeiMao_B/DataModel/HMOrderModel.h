@@ -16,9 +16,10 @@
 @interface HMOrderModel : NSObject
 
 @property(nonatomic,strong)NSString * orderId;
-@property(nonatomic,strong)NSString * orderCreateTime;
+@property(nonatomic,strong)NSString * orderTime;
 @property(nonatomic,strong)NSString * orderBeginTime;
-@property(nonatomic,strong)NSString * orderEndTime;
+@property(nonatomic,strong)NSString * orderEndtime;
+@property(nonatomic,strong)NSString * orderProgress;
 @property(nonatomic,strong)NSString * orderAddress;     //训练场地
 @property(nonatomic,strong)NSString * orderPikerAddres; //接送地址
 @property(nonatomic,assign)KOrderStatue orderStatue;

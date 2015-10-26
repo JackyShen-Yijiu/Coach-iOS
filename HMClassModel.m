@@ -11,12 +11,15 @@
 @implementation HMClassModel
 + (HMClassModel *)converJsonDicToModel:(NSDictionary *)dic
 {
-    if (!dic || ![dic isKindOfClass:[NSDictionary class]] ||![dic allKeys].count) {
-        return nil;
-    }
     HMClassModel * classType = [[HMClassModel alloc] init];
-    classType.classTypeName = [dic objectStringForKey:@"name"];
-    classType.classTypeId = [dic objectStringForKey:@"subjectid"];
+    classType.classTypeName = @"科目2";
+//    if (!dic || ![dic isKindOfClass:[NSDictionary class]] ||![dic allKeys].count) {
+//        return nil;
+//    }
+//    HMClassModel * classType = [[HMClassModel alloc] init];
+//    classType.classTypeName = [dic objectStringForKey:@"name"];
+//    classType.classTypeId = [dic objectStringForKey:@"subjectid"];
+    
     return classType;
 }
 @end

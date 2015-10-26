@@ -15,16 +15,25 @@
 
 + (NSArray *)getOrderListArrayFormDicInfo:(NSArray *)array
 {
-    if (![array isKindOfClass:[NSArray class]] || !array.count) {
-        return nil;
-    }
     NSMutableArray * oArray = [NSMutableArray arrayWithCapacity:0];
-    for (NSDictionary * info in array) {
-        HMOrderModel * orderModel = [HMOrderModel converJsonDicToModel:info];
+    for (int i = 0;i < 20;i++) {
+        HMOrderModel * orderModel = [HMOrderModel converJsonDicToModel:nil];
         if (orderModel) {
             [oArray addObject:orderModel];
         }
     }
     return [oArray copy];
+
+//    if (![array isKindOfClass:[NSArray class]] || !array.count) {
+//        return nil;
+//    }
+//    NSMutableArray * oArray = [NSMutableArray arrayWithCapacity:0];
+//    for (NSDictionary * info in array) {
+//        HMOrderModel * orderModel = [HMOrderModel converJsonDicToModel:info];
+//        if (orderModel) {
+//            [oArray addObject:orderModel];
+//        }
+//    }
+//    return [oArray copy];
 }
 @end

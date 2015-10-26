@@ -112,7 +112,7 @@
  *  获取教练每天的预约数据
  *
  *  @param userId （req）教练ID
- *  @param dayTime (req）如 014-5-10格式 NSString 类型
+ *  @param dayTime (req）如 2014-5-10格式 NSString 类型
  *  @param token   （req) 登陆Token
  */
 + (void)getAllCourseInfoWithUserId:(NSString *)userId  DayTime:(NSString *)dayTime token:(NSString *)token

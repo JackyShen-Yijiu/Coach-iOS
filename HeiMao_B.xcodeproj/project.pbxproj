@@ -36,6 +36,8 @@
 		B8C458801BDB5B5C00901F71 /* ToastAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587F1BDB5B5C00901F71 /* ToastAlertView.m */; settings = {ASSET_TAGS = (); }; };
 		B8C458841BDB5B8E00901F71 /* UIViewController+Method.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458831BDB5B8E00901F71 /* UIViewController+Method.m */; settings = {ASSET_TAGS = (); }; };
 		B8C458881BDB5BAD00901F71 /* NetWorkEntiry.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458871BDB5BAD00901F71 /* NetWorkEntiry.m */; settings = {ASSET_TAGS = (); }; };
+		B8FFDF691BDE78E6005BD535 /* FDCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFDF661BDE78E6005BD535 /* FDCalendar.m */; settings = {ASSET_TAGS = (); }; };
+		B8FFDF6A1BDE78E6005BD535 /* FDCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFDF681BDE78E6005BD535 /* FDCalendarItem.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +105,10 @@
 		B8C458831BDB5B8E00901F71 /* UIViewController+Method.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Method.m"; sourceTree = "<group>"; };
 		B8C458861BDB5BAD00901F71 /* NetWorkEntiry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkEntiry.h; sourceTree = "<group>"; };
 		B8C458871BDB5BAD00901F71 /* NetWorkEntiry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkEntiry.m; sourceTree = "<group>"; };
+		B8FFDF651BDE78E6005BD535 /* FDCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCalendar.h; sourceTree = "<group>"; };
+		B8FFDF661BDE78E6005BD535 /* FDCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendar.m; sourceTree = "<group>"; };
+		B8FFDF671BDE78E6005BD535 /* FDCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCalendarItem.h; sourceTree = "<group>"; };
+		B8FFDF681BDE78E6005BD535 /* FDCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendarItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +240,7 @@
 		B8C458581BDB59AC00901F71 /* ThirdPary */ = {
 			isa = PBXGroup;
 			children = (
+				B8FFDF641BDE78E6005BD535 /* FDCalendar */,
 				B8C4587D1BDB5B5C00901F71 /* ToastAlertView */,
 				B8C458791BDB5ABB00901F71 /* SafeDic */,
 				B8C458591BDB59AC00901F71 /* AFNetworkActivityLogger */,
@@ -329,6 +336,17 @@
 				B8C458871BDB5BAD00901F71 /* NetWorkEntiry.m */,
 			);
 			name = NetWorkEntity;
+			sourceTree = "<group>";
+		};
+		B8FFDF641BDE78E6005BD535 /* FDCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				B8FFDF651BDE78E6005BD535 /* FDCalendar.h */,
+				B8FFDF661BDE78E6005BD535 /* FDCalendar.m */,
+				B8FFDF671BDE78E6005BD535 /* FDCalendarItem.h */,
+				B8FFDF681BDE78E6005BD535 /* FDCalendarItem.m */,
+			);
+			path = FDCalendar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -453,6 +471,7 @@
 				B8C458571BDB592B00901F71 /* HMNagationController.m in Sources */,
 				B8C458731BDB59AC00901F71 /* UIView+TKCategory.m in Sources */,
 				B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */,
+				B8FFDF691BDE78E6005BD535 /* FDCalendar.m in Sources */,
 				B865C1821BDD2DE800C1E681 /* BaseModelMethod.m in Sources */,
 				B8C458721BDB59AC00901F71 /* UIView+Sizes.m in Sources */,
 				B865C1701BDC9D8E00C1E681 /* HMSchoolModel.m in Sources */,
@@ -473,6 +492,7 @@
 				B8C458701BDB59AC00901F71 /* YiRefreshHeader.m in Sources */,
 				B865C1731BDC9F1C00C1E681 /* HMPorTraitModel.m in Sources */,
 				B865C1761BDCA0B400C1E681 /* RefreshTableView.m in Sources */,
+				B8FFDF6A1BDE78E6005BD535 /* FDCalendarItem.m in Sources */,
 				B865C16A1BDC9ABB00C1E681 /* HMClassModel.m in Sources */,
 				B86EB3561BDB50EB0014EBD7 /* main.m in Sources */,
 				B8AFED1D1BDB988000EF8726 /* UserCenterController.m in Sources */,

@@ -15,6 +15,3 @@ typedef NS_ENUM(NSInteger, KOrderStatue){
     KOrderStatueWating
 };
 
-
-
-

@@ -12,21 +12,37 @@
 
 + (HMOrderModel *)converJsonDicToModel:(NSDictionary *)dic
 {
-    if (!dic || ![dic isKindOfClass:[NSDictionary class]] ||![dic allKeys].count) {
-        return nil;
-    }
+    
     HMOrderModel *  model = [[HMOrderModel alloc] init];
-
-    model.orderId = [dic objectStringForKey:@"_id"];
-    model.orderCreateTime = [dic objectStringForKey:@"reservationcreatetime"];
-    model.orderBeginTime = [dic objectStringForKey:@"begintime"];
-    model.orderEndTime = [dic objectStringForKey:@"endtime"];
-    model.orderPikerAddres = [dic objectStringForKey:@"shuttleaddress"];
-    model.isPickerUp = [[dic objectForKey:@"is_shuttle"] boolValue];
+    model.orderProgress = @"科目二路口第二学时";
+    model.orderTime = @"2015年12月11 13:00-18:00";
+    model.orderBeginTime = @"13:00";
+    model.orderEndtime = @"18:00";
+    model.orderAddress =  @"北京沙河训练场";
+    model.orderPikerAddres = @"北京昌平区天通苑";
+    model.isPickerUp = YES;
     model.orderStatue = [[dic objectForKey:@"reservationstate"] integerValue];
     model.userInfo = [HMStudentModel converJsonDicToModel:[dic objectInfoForKey:@"userid"]];
     model.classType = [HMClassModel converJsonDicToModel:[dic objectInfoForKey:@"subject"]];
     
     return model;
+
+    
+//    if (!dic || ![dic isKindOfClass:[NSDictionary class]] ||![dic allKeys].count) {
+//        return nil;
+//    }
+//    HMOrderModel *  model = [[HMOrderModel alloc] init];
+//
+//    model.orderId = [dic objectStringForKey:@"_id"];
+//    model.orderCreateTime = [dic objectStringForKey:@"reservationcreatetime"];
+//    model.orderBeginTime = [dic objectStringForKey:@"begintime"];
+//    model.orderEndTime = [dic objectStringForKey:@"endtime"];
+//    model.orderPikerAddres = [dic objectStringForKey:@"shuttleaddress"];
+//    model.isPickerUp = [[dic objectForKey:@"is_shuttle"] boolValue];
+//    model.orderStatue = [[dic objectForKey:@"reservationstate"] integerValue];
+//    model.userInfo = [HMStudentModel converJsonDicToModel:[dic objectInfoForKey:@"userid"]];
+//    model.classType = [HMClassModel converJsonDicToModel:[dic objectInfoForKey:@"subject"]];
+//    
+//    return model;
 }
 @end
