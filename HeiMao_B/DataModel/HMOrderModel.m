@@ -45,4 +45,33 @@
 //    
 //    return model;
 }
+
+- (NSString *)getStatueString
+{
+    NSString * str = @"";
+    switch (self.orderStatue) {
+            
+        case KOrderStatueInvalid:
+            break;
+        case KOrderStatueRequest:
+            str = @"等待确认";
+            break;
+        case KOrderStatueUnderWay:
+            str = @"进行中";
+            break;
+        case KOrderStatueWatingToDone:
+            str = @"学完待确认";
+            break;
+        case KOrderStatueOnDone:
+            str = @"待评论";
+            break;
+        case KOrderStatueCanceld:
+            str = @"取消";
+            break;
+        case KOrderStatueOnCommended:
+            str = @"完成";
+            break;
+    }
+    return str;
+}
 @end

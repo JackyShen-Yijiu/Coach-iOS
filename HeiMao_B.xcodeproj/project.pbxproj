@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
 		B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B811E4681BDD3CF90077EAF5 /* NGOSegmentControl.m */; };
+		B84479D21BDF74AA004E5E15 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84479D11BDF74AA004E5E15 /* OrderDetailViewController.m */; };
+		B84479D51BDF7890004E5E15 /* OrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = B84479D41BDF7890004E5E15 /* OrderDetailView.m */; };
+		B84479DB1BDFB35D004E5E15 /* HMButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B84479DA1BDFB35D004E5E15 /* HMButton.m */; };
 		B865C1631BDC95B000C1E681 /* HMOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1621BDC95B000C1E681 /* HMOrderModel.m */; };
 		B865C1661BDC969700C1E681 /* HMStudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1651BDC969700C1E681 /* HMStudentModel.m */; };
 		B865C16A1BDC9ABB00C1E681 /* HMClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1691BDC9ABB00C1E681 /* HMClassModel.m */; };
@@ -46,6 +49,12 @@
 		61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B811E4671BDD3CF90077EAF5 /* NGOSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGOSegmentControl.h; sourceTree = "<group>"; };
 		B811E4681BDD3CF90077EAF5 /* NGOSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGOSegmentControl.m; sourceTree = "<group>"; };
+		B84479D01BDF74AA004E5E15 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
+		B84479D11BDF74AA004E5E15 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		B84479D31BDF7890004E5E15 /* OrderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailView.h; sourceTree = "<group>"; };
+		B84479D41BDF7890004E5E15 /* OrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailView.m; sourceTree = "<group>"; };
+		B84479D91BDFB35D004E5E15 /* HMButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMButton.h; sourceTree = "<group>"; };
+		B84479DA1BDFB35D004E5E15 /* HMButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMButton.m; sourceTree = "<group>"; };
 		B865C1611BDC95B000C1E681 /* HMOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMOrderModel.h; path = HeiMao_B/DataModel/HMOrderModel.h; sourceTree = "<group>"; };
 		B865C1621BDC95B000C1E681 /* HMOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMOrderModel.m; path = HeiMao_B/DataModel/HMOrderModel.m; sourceTree = "<group>"; };
 		B865C1641BDC969700C1E681 /* HMStudentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMStudentModel.h; path = HeiMao_B/DataModel/HMStudentModel.h; sourceTree = "<group>"; };
@@ -140,6 +149,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B84479CF1BDF745D004E5E15 /* OrderDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B84479D01BDF74AA004E5E15 /* OrderDetailViewController.h */,
+				B84479D11BDF74AA004E5E15 /* OrderDetailViewController.m */,
+				B84479D31BDF7890004E5E15 /* OrderDetailView.h */,
+				B84479D41BDF7890004E5E15 /* OrderDetailView.m */,
+			);
+			name = OrderDetailViewController;
+			path = OrderViewController;
+			sourceTree = "<group>";
+		};
 		B865C1601BDC953E00C1E681 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +209,7 @@
 				B86EB3581BDB50EB0014EBD7 /* AppDelegate.m */,
 				B8C4584C1BDB571A00901F71 /* PrefixHeader.pch */,
 				B8AFED1A1BDB983B00EF8726 /* MyUserController */,
+				B84479CF1BDF745D004E5E15 /* OrderDetailViewController */,
 				B8AFED161BDB96A000EF8726 /* OrderViewController */,
 				B8C458851BDB5B9200901F71 /* NetWorkEntity */,
 				B8C458541BDB592B00901F71 /* NavigationController */,
@@ -325,6 +347,8 @@
 				B865C1751BDCA0B400C1E681 /* RefreshTableView.m */,
 				B8C458821BDB5B8E00901F71 /* UIViewController+Method.h */,
 				B8C458831BDB5B8E00901F71 /* UIViewController+Method.m */,
+				B84479D91BDFB35D004E5E15 /* HMButton.h */,
+				B84479DA1BDFB35D004E5E15 /* HMButton.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -474,6 +498,8 @@
 				B8FFDF691BDE78E6005BD535 /* FDCalendar.m in Sources */,
 				B865C1821BDD2DE800C1E681 /* BaseModelMethod.m in Sources */,
 				B8C458721BDB59AC00901F71 /* UIView+Sizes.m in Sources */,
+				B84479D51BDF7890004E5E15 /* OrderDetailView.m in Sources */,
+				B84479D21BDF74AA004E5E15 /* OrderDetailViewController.m in Sources */,
 				B865C1701BDC9D8E00C1E681 /* HMSchoolModel.m in Sources */,
 				B865C1661BDC969700C1E681 /* HMStudentModel.m in Sources */,
 				B86EB3591BDB50EB0014EBD7 /* AppDelegate.m in Sources */,
@@ -488,6 +514,7 @@
 				B8C458841BDB5B8E00901F71 /* UIViewController+Method.m in Sources */,
 				B865C1791BDCA49400C1E681 /* OrderSummaryListCell.m in Sources */,
 				B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */,
+				B84479DB1BDFB35D004E5E15 /* HMButton.m in Sources */,
 				B865C17F1BDCA4D600C1E681 /* PortraitView.m in Sources */,
 				B8C458701BDB59AC00901F71 /* YiRefreshHeader.m in Sources */,
 				B865C1731BDC9F1C00C1E681 /* HMPorTraitModel.m in Sources */,

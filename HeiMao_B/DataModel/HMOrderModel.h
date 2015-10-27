@@ -29,4 +29,5 @@
 
 + (HMOrderModel *)converJsonDicToModel:(NSDictionary *)dic;
 
+- (NSString *)getStatueString;
 @end

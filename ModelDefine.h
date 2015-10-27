@@ -12,9 +12,10 @@
 #define LOADMOREDATACOUNT   20
 
 typedef NS_ENUM(NSInteger, KOrderStatue){
-    KOrderStatueInvalid,
+    KOrderStatueInvalid =0,
     KOrderStatueRequest,
     KOrderStatueUnderWay,
+    KOrderStatueWatingToDone,
     KOrderStatueOnDone,
     KOrderStatueOnCommended,
     KOrderStatueCanceld

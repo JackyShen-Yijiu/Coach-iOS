@@ -137,7 +137,7 @@
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
-    self.contentView.backgroundColor = highlighted ? [UIColor colorWithWhite:0.9 alpha:1] : [UIColor whiteColor];
+    self.contentView.backgroundColor = highlighted ? HM_HIGHTCOLOR : [UIColor whiteColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

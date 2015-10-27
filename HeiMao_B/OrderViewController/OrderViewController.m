@@ -14,6 +14,8 @@
 
 #import "FDCalendar.h"
 #import "OrderSummaryDayCell.h"
+#import "OrderDetailViewController.h"
+
 
 @interface OrderViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate,FDCalendarDelegate>
 
@@ -250,15 +252,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    HMOrderModel  * orderModel = nil;
     if (tableView == self.orderSummaryTableView) {
-//        HMOrderModel * model = [[self orderSummaryData] objectAtIndex:indexPath.row];
-//        FactoryViewController * fac = [[FactoryViewController alloc] initWithFactoryId:model.factoryId facoryCode:model.factoryName];
-//        [self.navigationController pushViewController:fac animated:YES];
+        orderModel = [[self orderSummaryData] objectAtIndex:indexPath.row];
     }else{
-//        GoodsModel * model = [[[self goodsFeedsModel] feedsList] objectAtIndex:indexPath.row];
-//        GoodsDetailController * detailC = [[GoodsDetailController alloc] init];
-//        detailC.goodsID = model.goodsID;
-//        [self.navigationController pushViewController:detailC animated:YES];
+        orderModel = [[self orderDayTableData] objectAtIndex:indexPath.row];
+    }
+    if (orderModel) {
+        OrderDetailViewController * decv = [[OrderDetailViewController alloc] init];
+        decv.orderModel = orderModel;
+        [self.navigationController pushViewController:decv animated:YES];
     }
 }
 

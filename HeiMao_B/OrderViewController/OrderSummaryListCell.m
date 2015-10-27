@@ -214,23 +214,22 @@
     
     self.mainTitle.text = _model.userInfo.userName;
     self.subTitle.text = _model.orderProgress;
-    self.statueLabel.text = @"学员待确认";
+    self.statueLabel.text = [_model getStatueString];
 
     self.orderTimeLabel.text = _model.orderTime;
     self.orderAddressLabel.text = _model.orderAddress;
     self.pickAddressLabel.text = _model.orderPikerAddres;
     [self setNeedsUpdateConstraints];
-//    [self setNeedsLayout];
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
-    self.bgView.backgroundColor = highlighted ? [UIColor colorWithWhite:0.9 alpha:1] : [UIColor whiteColor];
+    self.bgView.backgroundColor = highlighted ? HM_HIGHTCOLOR : [UIColor whiteColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    self.bgView.backgroundColor = selected ?  [UIColor colorWithWhite:0.9 alpha:1] : [UIColor whiteColor];
+    self.bgView.backgroundColor = selected ?  HM_HIGHTCOLOR : [UIColor whiteColor];
 }
 
 #pragma mark - Common

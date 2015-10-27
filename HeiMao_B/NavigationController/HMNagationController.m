@@ -33,7 +33,7 @@
     @try {
         [super pushViewController:viewController animated:animated];
         [viewController.navigationItem setHidesBackButton:YES];
-        if (viewController.navigationItem.leftBarButtonItem == nil && [self.viewControllers count] > 2)
+        if (viewController.navigationItem.leftBarButtonItem == nil && [self.viewControllers count] > 1)
             
         {
             viewController.navigationItem.leftBarButtonItems = @[[self barSpaingItem],[self createBackButton]];

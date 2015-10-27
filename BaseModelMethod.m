@@ -18,6 +18,7 @@
     NSMutableArray * oArray = [NSMutableArray arrayWithCapacity:0];
     for (int i = 0;i < 20;i++) {
         HMOrderModel * orderModel = [HMOrderModel converJsonDicToModel:nil];
+        orderModel.orderStatue = i % 7;
         if (orderModel) {
             [oArray addObject:orderModel];
         }
