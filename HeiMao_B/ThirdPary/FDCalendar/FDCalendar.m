@@ -63,22 +63,21 @@ static NSDateFormatter *dateFormattor;
     titleView.backgroundColor = [UIColor whiteColor];
     [self addSubview:titleView];
     
-    UILabel * titleLabel = [[UILabel alloc] initWithFrame:titleView.bounds];
+    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((DeviceWidth - 150)/2.f, 0, 150, titleView.height)];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = [UIFont systemFontOfSize:15.f];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.textColor = [UIColor colorWithRed:0x33/255.f green:0x33/255.f blue:0x33/255.f alpha:1];
+    titleLabel.textColor = [UIColor colorWithRed:0x33/255.f green:0x33/255.f blue:0x33/255.f alpha:1];    
     [titleView addSubview:titleLabel];
     self.titleLabel = titleLabel;
     
-    CGFloat spacing = 100.f;
-    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(spacing, 10, 32, 24)];
+    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(titleLabel.left - 44, 10, 32, 24)];
     [leftButton setImage:[UIImage imageNamed:@"icon_previous"] forState:UIControlStateNormal];
     [leftButton setImage:[UIImage imageNamed:@"icon_previous_h"] forState:UIControlStateHighlighted];
     [leftButton addTarget:self action:@selector(setPreviousMonthDate) forControlEvents:UIControlEventTouchUpInside];
     [titleView addSubview:leftButton];
     
-    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(titleView.frame.size.width - spacing - 24, 10, 32, 24)];
+    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(titleLabel.right + 20, 10, 32, 24)];
     [rightButton setImage:[UIImage imageNamed:@"icon_next"] forState:UIControlStateNormal];
     [rightButton setImage:[UIImage imageNamed:@"icon_next_h"] forState:UIControlStateHighlighted];
     [rightButton addTarget:self action:@selector(setNextMonthDate) forControlEvents:UIControlEventTouchUpInside];
@@ -137,7 +136,6 @@ static NSDateFormatter *dateFormattor;
     self.centerCalendarItem = [[FDCalendarItem alloc] init];
     self.centerCalendarItem.frame = itemFrame;
     self.centerCalendarItem.delegate = self;
-    [[self.centerCalendarItem collectionView] reloadData];
     [self.scrollView addSubview:self.centerCalendarItem];
     
     itemFrame.origin.x = DeviceWidth * 2;
@@ -153,6 +151,10 @@ static NSDateFormatter *dateFormattor;
     self.rightCalendarItem.date = [self.centerCalendarItem nextMonthDate];
     
     [self.titleLabel setText:[self stringFromDate:self.centerCalendarItem.date]];
+    
+    self.centerCalendarItem.seletedDate = date;
+    self.leftCalendarItem.seletedDate = date;
+    self.rightCalendarItem.seletedDate = date;
 }
 
 // 重新加载日历items的数据
@@ -190,7 +192,7 @@ static NSDateFormatter *dateFormattor;
     self.date = date;
     [self setCurrentDate:self.date];
     if ([_delegate respondsToSelector:@selector(fdCalendar:didSelectedDate:)]) {
-        [_delegate fdCalendar:self didSelectedDate:date];
+        [_delegate fdCalendar:self didSelectedDate:self.date];
     }
 }
 

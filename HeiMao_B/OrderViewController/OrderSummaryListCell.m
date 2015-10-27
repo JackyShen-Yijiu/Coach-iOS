@@ -225,12 +225,12 @@
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
-    self.bgView.backgroundColor = highlighted ? [UIColor grayColor] : [UIColor whiteColor];
+    self.bgView.backgroundColor = highlighted ? [UIColor colorWithWhite:0.9 alpha:1] : [UIColor whiteColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    self.bgView.backgroundColor = selected ? [UIColor grayColor] : [UIColor whiteColor];
+    self.bgView.backgroundColor = selected ?  [UIColor colorWithWhite:0.9 alpha:1] : [UIColor whiteColor];
 }
 
 #pragma mark - Common

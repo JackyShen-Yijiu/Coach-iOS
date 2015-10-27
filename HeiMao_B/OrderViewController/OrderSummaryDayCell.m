@@ -135,6 +135,16 @@
     
 }
 
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+    self.contentView.backgroundColor = highlighted ? [UIColor colorWithWhite:0.9 alpha:1] : [UIColor whiteColor];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    self.contentView.backgroundColor = selected ? [UIColor colorWithWhite:0.9 alpha:1]  : [UIColor whiteColor];
+}
+
 #pragma mark - Data
 - (void)setModel:(HMOrderModel *)model
 {
@@ -155,16 +165,6 @@
     self.orderEndTime.text = _model.orderEndtime;
     
 //    [self setNeedsUpdateConstraints];
-}
-
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
-{
-    self.contentView.backgroundColor = highlighted ? [UIColor grayColor] : [UIColor whiteColor];
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    self.contentView.backgroundColor = selected ? [UIColor grayColor] : [UIColor whiteColor];
 }
 
 #pragma mark - Common

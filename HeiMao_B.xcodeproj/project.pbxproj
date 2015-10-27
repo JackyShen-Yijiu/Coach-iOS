@@ -8,36 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
-		B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B811E4681BDD3CF90077EAF5 /* NGOSegmentControl.m */; settings = {ASSET_TAGS = (); }; };
-		B865C1631BDC95B000C1E681 /* HMOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1621BDC95B000C1E681 /* HMOrderModel.m */; settings = {ASSET_TAGS = (); }; };
-		B865C1661BDC969700C1E681 /* HMStudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1651BDC969700C1E681 /* HMStudentModel.m */; settings = {ASSET_TAGS = (); }; };
-		B865C16A1BDC9ABB00C1E681 /* HMClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1691BDC9ABB00C1E681 /* HMClassModel.m */; settings = {ASSET_TAGS = (); }; };
-		B865C1701BDC9D8E00C1E681 /* HMSchoolModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C16F1BDC9D8E00C1E681 /* HMSchoolModel.m */; settings = {ASSET_TAGS = (); }; };
-		B865C1731BDC9F1C00C1E681 /* HMPorTraitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1721BDC9F1C00C1E681 /* HMPorTraitModel.m */; settings = {ASSET_TAGS = (); }; };
-		B865C1761BDCA0B400C1E681 /* RefreshTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1751BDCA0B400C1E681 /* RefreshTableView.m */; settings = {ASSET_TAGS = (); }; };
-		B865C1791BDCA49400C1E681 /* OrderSummaryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1781BDCA49400C1E681 /* OrderSummaryListCell.m */; settings = {ASSET_TAGS = (); }; };
-		B865C17C1BDCA4A300C1E681 /* OrderSummaryDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C17B1BDCA4A300C1E681 /* OrderSummaryDayCell.m */; settings = {ASSET_TAGS = (); }; };
-		B865C17F1BDCA4D600C1E681 /* PortraitView.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C17E1BDCA4D600C1E681 /* PortraitView.m */; settings = {ASSET_TAGS = (); }; };
-		B865C1821BDD2DE800C1E681 /* BaseModelMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1811BDD2DE800C1E681 /* BaseModelMethod.m */; settings = {ASSET_TAGS = (); }; };
+		B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B811E4681BDD3CF90077EAF5 /* NGOSegmentControl.m */; };
+		B865C1631BDC95B000C1E681 /* HMOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1621BDC95B000C1E681 /* HMOrderModel.m */; };
+		B865C1661BDC969700C1E681 /* HMStudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1651BDC969700C1E681 /* HMStudentModel.m */; };
+		B865C16A1BDC9ABB00C1E681 /* HMClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1691BDC9ABB00C1E681 /* HMClassModel.m */; };
+		B865C1701BDC9D8E00C1E681 /* HMSchoolModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C16F1BDC9D8E00C1E681 /* HMSchoolModel.m */; };
+		B865C1731BDC9F1C00C1E681 /* HMPorTraitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1721BDC9F1C00C1E681 /* HMPorTraitModel.m */; };
+		B865C1761BDCA0B400C1E681 /* RefreshTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1751BDCA0B400C1E681 /* RefreshTableView.m */; };
+		B865C1791BDCA49400C1E681 /* OrderSummaryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1781BDCA49400C1E681 /* OrderSummaryListCell.m */; };
+		B865C17C1BDCA4A300C1E681 /* OrderSummaryDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C17B1BDCA4A300C1E681 /* OrderSummaryDayCell.m */; };
+		B865C17F1BDCA4D600C1E681 /* PortraitView.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C17E1BDCA4D600C1E681 /* PortraitView.m */; };
+		B865C1821BDD2DE800C1E681 /* BaseModelMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1811BDD2DE800C1E681 /* BaseModelMethod.m */; };
 		B86EB3561BDB50EB0014EBD7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B86EB3551BDB50EB0014EBD7 /* main.m */; };
 		B86EB3591BDB50EB0014EBD7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B86EB3581BDB50EB0014EBD7 /* AppDelegate.m */; };
 		B86EB3611BDB50EB0014EBD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B86EB3601BDB50EB0014EBD7 /* Assets.xcassets */; };
-		B8AFED191BDB96AC00EF8726 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8AFED181BDB96AC00EF8726 /* OrderViewController.m */; settings = {ASSET_TAGS = (); }; };
-		B8AFED1D1BDB988000EF8726 /* UserCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8AFED1C1BDB988000EF8726 /* UserCenterController.m */; settings = {ASSET_TAGS = (); }; };
-		B8C458571BDB592B00901F71 /* HMNagationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458561BDB592B00901F71 /* HMNagationController.m */; settings = {ASSET_TAGS = (); }; };
-		B8C4586E1BDB59AC00901F71 /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4585B1BDB59AC00901F71 /* AFNetworkActivityLogger.m */; settings = {ASSET_TAGS = (); }; };
-		B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4585F1BDB59AC00901F71 /* YiRefreshFooter.m */; settings = {ASSET_TAGS = (); }; };
-		B8C458701BDB59AC00901F71 /* YiRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458611BDB59AC00901F71 /* YiRefreshHeader.m */; settings = {ASSET_TAGS = (); }; };
-		B8C458711BDB59AC00901F71 /* RFSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458641BDB59AC00901F71 /* RFSegmentView.m */; settings = {ASSET_TAGS = (); }; };
-		B8C458721BDB59AC00901F71 /* UIView+Sizes.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458691BDB59AC00901F71 /* UIView+Sizes.m */; settings = {ASSET_TAGS = (); }; };
-		B8C458731BDB59AC00901F71 /* UIView+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4586B1BDB59AC00901F71 /* UIView+TKCategory.m */; settings = {ASSET_TAGS = (); }; };
-		B8C458741BDB59AC00901F71 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4586D1BDB59AC00901F71 /* UIViewAdditions.m */; settings = {ASSET_TAGS = (); }; };
-		B8C4587C1BDB5ABB00901F71 /* NSDictionary+StrDic.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587B1BDB5ABB00901F71 /* NSDictionary+StrDic.m */; settings = {ASSET_TAGS = (); }; };
-		B8C458801BDB5B5C00901F71 /* ToastAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587F1BDB5B5C00901F71 /* ToastAlertView.m */; settings = {ASSET_TAGS = (); }; };
-		B8C458841BDB5B8E00901F71 /* UIViewController+Method.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458831BDB5B8E00901F71 /* UIViewController+Method.m */; settings = {ASSET_TAGS = (); }; };
-		B8C458881BDB5BAD00901F71 /* NetWorkEntiry.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458871BDB5BAD00901F71 /* NetWorkEntiry.m */; settings = {ASSET_TAGS = (); }; };
-		B8FFDF691BDE78E6005BD535 /* FDCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFDF661BDE78E6005BD535 /* FDCalendar.m */; settings = {ASSET_TAGS = (); }; };
-		B8FFDF6A1BDE78E6005BD535 /* FDCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFDF681BDE78E6005BD535 /* FDCalendarItem.m */; settings = {ASSET_TAGS = (); }; };
+		B8AFED191BDB96AC00EF8726 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8AFED181BDB96AC00EF8726 /* OrderViewController.m */; };
+		B8AFED1D1BDB988000EF8726 /* UserCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8AFED1C1BDB988000EF8726 /* UserCenterController.m */; };
+		B8C458571BDB592B00901F71 /* HMNagationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458561BDB592B00901F71 /* HMNagationController.m */; };
+		B8C4586E1BDB59AC00901F71 /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4585B1BDB59AC00901F71 /* AFNetworkActivityLogger.m */; };
+		B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4585F1BDB59AC00901F71 /* YiRefreshFooter.m */; };
+		B8C458701BDB59AC00901F71 /* YiRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458611BDB59AC00901F71 /* YiRefreshHeader.m */; };
+		B8C458711BDB59AC00901F71 /* RFSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458641BDB59AC00901F71 /* RFSegmentView.m */; };
+		B8C458721BDB59AC00901F71 /* UIView+Sizes.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458691BDB59AC00901F71 /* UIView+Sizes.m */; };
+		B8C458731BDB59AC00901F71 /* UIView+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4586B1BDB59AC00901F71 /* UIView+TKCategory.m */; };
+		B8C458741BDB59AC00901F71 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4586D1BDB59AC00901F71 /* UIViewAdditions.m */; };
+		B8C4587C1BDB5ABB00901F71 /* NSDictionary+StrDic.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587B1BDB5ABB00901F71 /* NSDictionary+StrDic.m */; };
+		B8C458801BDB5B5C00901F71 /* ToastAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587F1BDB5B5C00901F71 /* ToastAlertView.m */; };
+		B8C458841BDB5B8E00901F71 /* UIViewController+Method.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458831BDB5B8E00901F71 /* UIViewController+Method.m */; };
+		B8C458881BDB5BAD00901F71 /* NetWorkEntiry.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458871BDB5BAD00901F71 /* NetWorkEntiry.m */; };
+		B8FFDF691BDE78E6005BD535 /* FDCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFDF661BDE78E6005BD535 /* FDCalendar.m */; };
+		B8FFDF6A1BDE78E6005BD535 /* FDCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFDF681BDE78E6005BD535 /* FDCalendarItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -588,12 +588,14 @@
 			baseConfigurationReference = 1371250ABB78626F8329AC98 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "heimao.HeiMao-B";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "13104a99-ec36-48b4-8def-a313f94fdd29";
 			};
 			name = Debug;
 		};
@@ -602,12 +604,14 @@
 			baseConfigurationReference = 61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "heimao.HeiMao-B";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "13104a99-ec36-48b4-8def-a313f94fdd29";
 			};
 			name = Release;
 		};
