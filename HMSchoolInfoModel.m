@@ -6,14 +6,14 @@
 //  Copyright © 2015年 ke. All rights reserved.
 //
 
-#import "HMSchoolModel.h"
+#import "HMSchoolInfoModel.h"
 
-@implementation HMSchoolModel
+@implementation HMSchoolInfoModel
 
-+ (HMSchoolModel *)converJsonDicToModel:(NSDictionary *)dic
++ (HMSchoolInfoModel *)converJsonDicToModel:(NSDictionary *)dic
 {
     
-    HMSchoolModel * classType = [[HMSchoolModel alloc] init];
+    HMSchoolInfoModel * classType = [[HMSchoolInfoModel alloc] init];
     classType.schoolName = @"北京海淀驾校";
     return classType;
     

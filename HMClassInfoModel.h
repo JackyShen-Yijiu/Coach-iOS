@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HMClassModel : NSObject
+@interface HMClassInfoModel : NSObject
 @property(nonatomic,strong)NSString * classTypeName;
 @property(nonatomic,strong)NSString * classTypeId;
-+ (HMClassModel *)converJsonDicToModel:(NSDictionary *)dic;
++ (HMClassInfoModel *)converJsonDicToModel:(NSDictionary *)dic;
 @end

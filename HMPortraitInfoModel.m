@@ -6,15 +6,15 @@
 //  Copyright © 2015年 ke. All rights reserved.
 //
 
-#import "HMPorTraitModel.h"
+#import "HMPortraitInfoModel.h"
 
-@implementation HMPorTraitModel
-+ (HMPorTraitModel *)converJsonDicToModel:(NSDictionary *)dic
+@implementation HMPortraitInfoModel
++ (HMPortraitInfoModel *)converJsonDicToModel:(NSDictionary *)dic
 {
     if (!dic || ![dic isKindOfClass:[NSDictionary class]] ||![dic allKeys].count) {
         return nil;
     }
-    HMPorTraitModel * model = [[HMPorTraitModel alloc] init];
+    HMPortraitInfoModel * model = [[HMPortraitInfoModel alloc] init];
     model.thumbnailpic = [dic objectStringForKey:@"thumbnailpic"];
     model.originalpic = [dic objectStringForKey:@"originalpic"];
     return model;

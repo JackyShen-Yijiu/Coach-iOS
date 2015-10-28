@@ -6,24 +6,24 @@
 //  Copyright © 2015年 ke. All rights reserved.
 //
 
-#import "HMOrderModel.h"
+#import "HMCourseModel.h"
 
-@implementation HMOrderModel
+@implementation HMCourseModel
 
-+ (HMOrderModel *)converJsonDicToModel:(NSDictionary *)dic
++ (HMCourseModel *)converJsonDicToModel:(NSDictionary *)dic
 {
     
-    HMOrderModel *  model = [[HMOrderModel alloc] init];
+    HMCourseModel *  model = [[HMCourseModel alloc] init];
     model.orderProgress = @"科目二路口第二学时";
-    model.orderTime = @"2015年12月11 13:00-18:00";
-    model.orderBeginTime = @"13:00";
-    model.orderEndtime = @"18:00";
-    model.orderAddress =  @"北京沙河训练场";
-    model.orderPikerAddres = @"北京昌平区天通苑";
+    model.courseTime = @"2015年12月11 13:00-18:00";
+    model.courseBeginTime = @"13:00";
+    model.courseEndtime = @"18:00";
+    model.courseAddress =  @"北京沙河训练场";
+    model.coursePikerAddres = @"北京昌平区天通苑";
     model.isPickerUp = YES;
     model.orderStatue = [[dic objectForKey:@"reservationstate"] integerValue];
-    model.userInfo = [HMStudentModel converJsonDicToModel:[dic objectInfoForKey:@"userid"]];
-    model.classType = [HMClassModel converJsonDicToModel:[dic objectInfoForKey:@"subject"]];
+    model.studentInfo = [HMStudentModel converJsonDicToModel:[dic objectInfoForKey:@"userid"]];
+    model.classType = [HMClassInfoModel converJsonDicToModel:[dic objectInfoForKey:@"subject"]];
     
     return model;
 
@@ -51,24 +51,24 @@
     NSString * str = @"";
     switch (self.orderStatue) {
             
-        case KOrderStatueInvalid:
+        case KCourseStatueInvalid:
             break;
-        case KOrderStatueRequest:
+        case KCourseStatueRequest:
             str = @"等待确认";
             break;
-        case KOrderStatueUnderWay:
+        case KCourseStatueUnderWay:
             str = @"进行中";
             break;
-        case KOrderStatueWatingToDone:
+        case KCourseStatueWatingToDone:
             str = @"学完待确认";
             break;
-        case KOrderStatueOnDone:
+        case KCourseStatueOnDone:
             str = @"待评论";
             break;
-        case KOrderStatueCanceld:
+        case KCourseStatueCanceld:
             str = @"取消";
             break;
-        case KOrderStatueOnCommended:
+        case KCourseStatueOnCommended:
             str = @"完成";
             break;
     }

@@ -6,12 +6,12 @@
 //  Copyright © 2015年 ke. All rights reserved.
 //
 
-#import "HMClassModel.h"
+#import "HMClassInfoModel.h"
 
-@implementation HMClassModel
-+ (HMClassModel *)converJsonDicToModel:(NSDictionary *)dic
+@implementation HMClassInfoModel
++ (HMClassInfoModel *)converJsonDicToModel:(NSDictionary *)dic
 {
-    HMClassModel * classType = [[HMClassModel alloc] init];
+    HMClassInfoModel * classType = [[HMClassInfoModel alloc] init];
     classType.classTypeName = @"科目2";
 //    if (!dic || ![dic isKindOfClass:[NSDictionary class]] ||![dic allKeys].count) {
 //        return nil;

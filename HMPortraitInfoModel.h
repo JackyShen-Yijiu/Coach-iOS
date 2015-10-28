@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HMPorTraitModel : NSObject
+@interface HMPortraitInfoModel : NSObject
 @property(nonatomic,strong)NSString * thumbnailpic;
 @property(nonatomic,strong)NSString * originalpic;
-+ (HMPorTraitModel *)converJsonDicToModel:(NSDictionary *)dic;
++ (HMPortraitInfoModel *)converJsonDicToModel:(NSDictionary *)dic;
 @end

@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HMSchoolModel : NSObject
+@interface HMSchoolInfoModel : NSObject
 @property(nonatomic,strong)NSString * schoolName;
 @property(nonatomic,strong)NSString * schoolId;
-+ (HMSchoolModel *)converJsonDicToModel:(NSDictionary *)dic;
++ (HMSchoolInfoModel *)converJsonDicToModel:(NSDictionary *)dic;
 
 @end
