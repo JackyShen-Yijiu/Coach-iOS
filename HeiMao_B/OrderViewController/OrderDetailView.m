@@ -214,33 +214,44 @@
     }];
 
     
-    if(self.rightButton.isHidden){
-        [self.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self).offset(leftOffsetSpacing);
-            make.top.equalTo(self.pickAddressLabel.mas_bottom).offset(15.f);
-            make.right.equalTo(self).offset(-leftOffsetSpacing);
-            make.height.equalTo(@(45.f));
-        }];
-    }else{
-        [self.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self).offset(leftOffsetSpacing);
-            make.top.equalTo(self.pickAddressLabel.mas_bottom).offset(15.f);
-            make.height.equalTo(@(45.f));
-        }];
-        
-        [self.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.equalTo(self.leftButton);
-            make.right.equalTo(self).offset(-15.f);
-            make.left.equalTo(self.leftButton.mas_right).offset(15.f);
-            make.top.equalTo(self.leftButton);
-        }];
-    }
+//    [self.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self).offset(leftOffsetSpacing);
+//        make.top.equalTo(self.pickAddressLabel.mas_bottom).offset(15.f);
+//        make.height.equalTo(@(45.f));
+//        if (self.rightButton.isHidden) {
+//            make.right.equalTo(self).offset(-leftOffsetSpacing);
+//        }
+//    }];
+//    
+//    [self.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.leftButton);
+//        make.height.equalTo(self.leftButton);
+//        
+//        if (!self.rightButton.isHidden) {
+//            make.left.equalTo(self.leftButton.mas_right).offset(15.f);
+//            make.width.equalTo(self.leftButton);
+//            make.right.equalTo(self).offset(-15.f);
+//        }else{
+//            make.left.equalTo(self.mas_right);
+//        }
+//     
+//        
+//    }];
+//    
+
    
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    if (self.rightButton.isHidden) {
+        self.leftButton.frame = CGRectMake(15, self.pickAddressLabel.bottom + 15, self.width - 30, 45);
+    }else{
+        CGFloat width = (self.width - 30 - 15)/2.f;
+        self.leftButton.frame = CGRectMake(15, self.pickAddressLabel.bottom + 15, width, 45);
+        self.rightButton.frame = CGRectMake(self.leftButton.right + 15, self.leftButton.top, width, 45);
+    }
     
 }
 #pragma mark - Data
@@ -330,8 +341,8 @@
             break;
     }
     
-    [self setNeedsUpdateConstraints];
-
+//    [self setNeedsUpdateConstraints];
+    [self setNeedsLayout];
 }
 
 
