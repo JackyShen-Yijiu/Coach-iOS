@@ -262,7 +262,9 @@
     }
     if (courseModel) {
         CourseDetailViewController * decv = [[CourseDetailViewController alloc] init];
+        decv.model = courseModel;
         decv.couresID = courseModel.courseId;
+
         [self.navigationController pushViewController:decv animated:YES];
     }
 }

@@ -9,6 +9,7 @@
 #import "CourseDetailViewController.h"
 #import "CourseDetailView.h"
 #import "SutdentHomeController.h"
+#import "CourseCancelController.h"
 
 @interface CourseDetailViewController()<CourseDetailViewDelegate>
 @property(nonatomic,strong)CourseDetailView* detailView;
@@ -22,9 +23,9 @@
 }
 
 #pragma mark Life Sycle
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     [self initNavBar];
 }
 #pragma mark - initUI
@@ -32,7 +33,7 @@
 - (void)initNavBar
 {
     [self resetNavBar];
-    self.title = @"预约详情";
+    self.myNavigationItem.title = @"预约详情";
 }
 
 -(void)setCouresID:(NSString *)couresID
@@ -53,7 +54,7 @@
 #pragma mark - LoadData
 - (void)refreshData
 {
-    self.detailView.model = [HMCourseModel converJsonDicToModel:nil];
+    self.detailView.model = self.model;
 }
 
 #pragma mark - Action
@@ -67,11 +68,19 @@
 - (void)courseDetailViewDidClickDisAgreeButton:(CourseDetailView *)view
 {
     //拒绝
+    CourseCancelController * cour = [[CourseCancelController alloc] init];
+    cour.controllerType = KControllTypeReject;
+    cour.courseId = self.model.courseId;
+    [self.navigationController pushViewController:cour animated:YES];
 }
 
 - (void)courseDetailViewDidClickCanCelButton:(CourseDetailView *)view
 {
     //取消
+    CourseCancelController * cour = [[CourseCancelController alloc] init];
+    cour.courseId = self.model.courseId;
+    cour.controllerType = KControllTypeCancel;
+    [self.navigationController pushViewController:cour animated:YES];
 }
 
 - (void)courseDetailViewDidClickWatingToDone:(CourseDetailView *)view

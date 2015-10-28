@@ -215,7 +215,12 @@
 #pragma mark - Action
 - (void)telButtonClick:(UIButton *)button
 {
-    
+    if (self.model.telPhoto) {
+        NSString * telPhoto = [NSString stringWithFormat:@"telprompt://%@",self.model.telPhoto];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telPhoto]];
+    }else{
+        [self showTotasViewWithMes:@"用户无手机号码：测试"];
+    }
 }
 
 

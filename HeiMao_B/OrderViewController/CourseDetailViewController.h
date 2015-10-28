@@ -12,4 +12,5 @@
 
 @interface CourseDetailViewController : UIViewController
 @property(nonatomic,strong)NSString * couresID;
+@property(nonatomic,strong)HMCourseModel * model; //测试接口
 @end

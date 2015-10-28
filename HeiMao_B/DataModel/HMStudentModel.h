@@ -15,6 +15,7 @@
 //用户信息
 @property(nonatomic,strong)NSString * userId;
 @property(nonatomic,strong)NSString * userName;
+@property(nonatomic,strong)NSString * telPhoto;
 @property(nonatomic,strong)HMPortraitInfoModel * porInfo;
 //学车信息
 @property(nonatomic,strong)HMSchoolInfoModel * schoolInfo;  //报考驾校

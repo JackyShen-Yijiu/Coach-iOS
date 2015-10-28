@@ -17,6 +17,11 @@
 		B84479E51BE07A46004E5E15 /* StudentHomeUserBasicInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B84479E41BE07A46004E5E15 /* StudentHomeUserBasicInfoCell.m */; };
 		B84479E81BE07B7A004E5E15 /* StudentHomeUserCourseInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B84479E71BE07B7A004E5E15 /* StudentHomeUserCourseInfoCell.m */; };
 		B84479EB1BE099D9004E5E15 /* StudentHomeRecomendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B84479EA1BE099D9004E5E15 /* StudentHomeRecomendCell.m */; };
+		B8447A081BE0D2E3004E5E15 /* CourseCancelController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A071BE0D2E3004E5E15 /* CourseCancelController.m */; };
+		B8447A0B1BE0D394004E5E15 /* PickerItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A0A1BE0D394004E5E15 /* PickerItemView.m */; };
+		B8447A111BE0D8C4004E5E15 /* PickListView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A101BE0D8C4004E5E15 /* PickListView.m */; };
+		B8447A141BE0DE09004E5E15 /* CourseDesInPutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A131BE0DE09004E5E15 /* CourseDesInPutCell.m */; };
+		B8447A171BE0E456004E5E15 /* CoursePicListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A161BE0E456004E5E15 /* CoursePicListCell.m */; };
 		B865C1631BDC95B000C1E681 /* HMCourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1621BDC95B000C1E681 /* HMCourseModel.m */; };
 		B865C1661BDC969700C1E681 /* HMStudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1651BDC969700C1E681 /* HMStudentModel.m */; };
 		B865C16A1BDC9ABB00C1E681 /* HMClassInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1691BDC9ABB00C1E681 /* HMClassInfoModel.m */; };
@@ -70,6 +75,16 @@
 		B84479E71BE07B7A004E5E15 /* StudentHomeUserCourseInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentHomeUserCourseInfoCell.m; sourceTree = "<group>"; };
 		B84479E91BE099D9004E5E15 /* StudentHomeRecomendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentHomeRecomendCell.h; sourceTree = "<group>"; };
 		B84479EA1BE099D9004E5E15 /* StudentHomeRecomendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentHomeRecomendCell.m; sourceTree = "<group>"; };
+		B8447A061BE0D2E3004E5E15 /* CourseCancelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseCancelController.h; sourceTree = "<group>"; };
+		B8447A071BE0D2E3004E5E15 /* CourseCancelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseCancelController.m; sourceTree = "<group>"; };
+		B8447A091BE0D394004E5E15 /* PickerItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerItemView.h; sourceTree = "<group>"; };
+		B8447A0A1BE0D394004E5E15 /* PickerItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerItemView.m; sourceTree = "<group>"; };
+		B8447A0F1BE0D8C4004E5E15 /* PickListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickListView.h; sourceTree = "<group>"; };
+		B8447A101BE0D8C4004E5E15 /* PickListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickListView.m; sourceTree = "<group>"; };
+		B8447A121BE0DE09004E5E15 /* CourseDesInPutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CourseDesInPutCell.h; path = OrderViewController/CourseDesInPutCell.h; sourceTree = "<group>"; };
+		B8447A131BE0DE09004E5E15 /* CourseDesInPutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseDesInPutCell.m; path = OrderViewController/CourseDesInPutCell.m; sourceTree = "<group>"; };
+		B8447A151BE0E456004E5E15 /* CoursePicListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoursePicListCell.h; sourceTree = "<group>"; };
+		B8447A161BE0E456004E5E15 /* CoursePicListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursePicListCell.m; sourceTree = "<group>"; };
 		B865C1611BDC95B000C1E681 /* HMCourseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMCourseModel.h; path = HeiMao_B/DataModel/HMCourseModel.h; sourceTree = "<group>"; };
 		B865C1621BDC95B000C1E681 /* HMCourseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMCourseModel.m; path = HeiMao_B/DataModel/HMCourseModel.m; sourceTree = "<group>"; };
 		B865C1641BDC969700C1E681 /* HMStudentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMStudentModel.h; path = HeiMao_B/DataModel/HMStudentModel.h; sourceTree = "<group>"; };
@@ -164,7 +179,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B84479CF1BDF745D004E5E15 /* OrderDetailViewController */ = {
+		B84479CF1BDF745D004E5E15 /* CourseDetailViewController */ = {
 			isa = PBXGroup;
 			children = (
 				B84479D01BDF74AA004E5E15 /* CourseDetailViewController.h */,
@@ -172,7 +187,7 @@
 				B84479D31BDF7890004E5E15 /* CourseDetailView.h */,
 				B84479D41BDF7890004E5E15 /* CourseDetailView.m */,
 			);
-			name = OrderDetailViewController;
+			name = CourseDetailViewController;
 			path = OrderViewController;
 			sourceTree = "<group>";
 		};
@@ -189,6 +204,23 @@
 				B84479EA1BE099D9004E5E15 /* StudentHomeRecomendCell.m */,
 			);
 			name = StudentHomeController;
+			sourceTree = "<group>";
+		};
+		B8447A021BE0D281004E5E15 /* CourseCancelController */ = {
+			isa = PBXGroup;
+			children = (
+				B8447A091BE0D394004E5E15 /* PickerItemView.h */,
+				B8447A0A1BE0D394004E5E15 /* PickerItemView.m */,
+				B8447A0F1BE0D8C4004E5E15 /* PickListView.h */,
+				B8447A101BE0D8C4004E5E15 /* PickListView.m */,
+				B8447A151BE0E456004E5E15 /* CoursePicListCell.h */,
+				B8447A161BE0E456004E5E15 /* CoursePicListCell.m */,
+				B8447A121BE0DE09004E5E15 /* CourseDesInPutCell.h */,
+				B8447A131BE0DE09004E5E15 /* CourseDesInPutCell.m */,
+				B8447A061BE0D2E3004E5E15 /* CourseCancelController.h */,
+				B8447A071BE0D2E3004E5E15 /* CourseCancelController.m */,
+			);
+			name = CourseCancelController;
 			sourceTree = "<group>";
 		};
 		B865C1601BDC953E00C1E681 /* DataModel */ = {
@@ -242,8 +274,9 @@
 				B8C4584C1BDB571A00901F71 /* PrefixHeader.pch */,
 				B84479DC1BE0710A004E5E15 /* StudentHomeController */,
 				B8AFED1A1BDB983B00EF8726 /* MyUserController */,
-				B84479CF1BDF745D004E5E15 /* OrderDetailViewController */,
+				B84479CF1BDF745D004E5E15 /* CourseDetailViewController */,
 				B8AFED161BDB96A000EF8726 /* CourseViewController */,
+				B8447A021BE0D281004E5E15 /* CourseCancelController */,
 				B8C458851BDB5B9200901F71 /* NetWorkEntity */,
 				B8C458541BDB592B00901F71 /* NavigationController */,
 				B8C458811BDB5B7600901F71 /* Common */,
@@ -530,8 +563,10 @@
 				B8C458731BDB59AC00901F71 /* UIView+TKCategory.m in Sources */,
 				B84479DF1BE07129004E5E15 /* SutdentHomeController.m in Sources */,
 				B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */,
+				B8447A0B1BE0D394004E5E15 /* PickerItemView.m in Sources */,
 				B8FFDF691BDE78E6005BD535 /* FDCalendar.m in Sources */,
 				B865C1821BDD2DE800C1E681 /* BaseModelMethod.m in Sources */,
+				B8447A111BE0D8C4004E5E15 /* PickListView.m in Sources */,
 				B84479E51BE07A46004E5E15 /* StudentHomeUserBasicInfoCell.m in Sources */,
 				B8C458721BDB59AC00901F71 /* UIView+Sizes.m in Sources */,
 				B84479D51BDF7890004E5E15 /* CourseDetailView.m in Sources */,
@@ -552,6 +587,7 @@
 				B8C458841BDB5B8E00901F71 /* UIViewController+Method.m in Sources */,
 				B865C1791BDCA49400C1E681 /* CourseSummaryListCell.m in Sources */,
 				B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */,
+				B8447A141BE0DE09004E5E15 /* CourseDesInPutCell.m in Sources */,
 				B84479DB1BDFB35D004E5E15 /* HMButton.m in Sources */,
 				B865C17F1BDCA4D600C1E681 /* PortraitView.m in Sources */,
 				B8C458701BDB59AC00901F71 /* YiRefreshHeader.m in Sources */,
@@ -559,7 +595,9 @@
 				B865C1761BDCA0B400C1E681 /* RefreshTableView.m in Sources */,
 				B8FFDF6A1BDE78E6005BD535 /* FDCalendarItem.m in Sources */,
 				B84479E21BE0765B004E5E15 /* HMRecomendModel.m in Sources */,
+				B8447A171BE0E456004E5E15 /* CoursePicListCell.m in Sources */,
 				B865C16A1BDC9ABB00C1E681 /* HMClassInfoModel.m in Sources */,
+				B8447A081BE0D2E3004E5E15 /* CourseCancelController.m in Sources */,
 				B86EB3561BDB50EB0014EBD7 /* main.m in Sources */,
 				B8AFED1D1BDB988000EF8726 /* UserCenterController.m in Sources */,
 				B8C458881BDB5BAD00901F71 /* NetWorkEntiry.m in Sources */,
