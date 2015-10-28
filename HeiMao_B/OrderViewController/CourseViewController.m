@@ -1,38 +1,38 @@
 //
-//  OrderViewController.m
+//  courseViewController.m
 //  HeiMao_B
 //
 //  Created by kequ on 15/10/24.
 //  Copyright © 2015年 ke. All rights reserved.
 //
 
-#import "OrderViewController.h"
+#import "CourseViewController.h"
 #import "RFSegmentView.h"
 #import "RefreshTableView.h"
-#import "HMOrderModel.h"
-#import "OrderSummaryListCell.h"
+#import "HMCourseModel.h"
+#import "CourseSummaryListCell.h"
 
 #import "FDCalendar.h"
-#import "OrderSummaryDayCell.h"
-#import "OrderDetailViewController.h"
+#import "CourseSummaryDayCell.h"
+#import "CourseDetailViewController.h"
 
 
-@interface OrderViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate,FDCalendarDelegate>
+@interface CourseViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate,FDCalendarDelegate>
 
 @property(nonatomic,strong)UISegmentedControl * segController;
 @property(nonatomic,strong)UIScrollView * scrollView;
-@property(nonatomic,strong)RefreshTableView * orderSummaryTableView;
-@property(nonatomic,strong)NSMutableArray * orderSummaryData;
+@property(nonatomic,strong)RefreshTableView * courseSummaryTableView;
+@property(nonatomic,strong)NSMutableArray * courseSummaryData;
 
-@property(nonatomic,strong)UITableView * orderDayTableView;
+@property(nonatomic,strong)UITableView * courseDayTableView;
 @property(nonatomic,strong)FDCalendar *calendarHeadView;
-@property(nonatomic,strong)NSMutableArray * orderDayTableData;
+@property(nonatomic,strong)NSMutableArray * courseDayTableData;
 
 @property(nonatomic,assign)BOOL isNeedRefresh;
 @property(nonatomic,strong)NSDateFormatter *dateFormattor;
 @end
 
-@implementation OrderViewController
+@implementation CourseViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -53,7 +53,7 @@
 {
     [super viewDidAppear:animated];
     if(self.isNeedRefresh){
-        [self.orderSummaryTableView.refreshHeader beginRefreshing];
+        [self.courseSummaryTableView.refreshHeader beginRefreshing];
         [self fdCalendar:nil didSelectedDate:[NSDate date]];
     }
     self.isNeedRefresh = NO;
@@ -75,36 +75,29 @@
     UIView * view = [[UIView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:view];
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 64)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 64 - 48)];
     self.scrollView.contentSize = CGSizeMake(self.view.width * 2, 0);
     self.scrollView.pagingEnabled = YES;
     self.scrollView.scrollEnabled = NO;
     [self.view addSubview:self.scrollView];
     
-    self.orderSummaryTableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.width, self.scrollView.height) style:UITableViewStylePlain];
-    self.orderSummaryTableView.delegate = self;
-    self.orderSummaryTableView.dataSource = self;
-    [self.scrollView addSubview:self.orderSummaryTableView];
+    self.courseSummaryTableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.width, self.scrollView.height) style:UITableViewStylePlain];
+    self.courseSummaryTableView.delegate = self;
+    self.courseSummaryTableView.dataSource = self;
+    [self.scrollView addSubview:self.courseSummaryTableView];
     [self initRefreshView];
     
     //日程
-    self.orderDayTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.scrollView.width, 0, self.scrollView.width, self.scrollView.height) style:UITableViewStylePlain];
-    self.orderDayTableView.delegate = self;
-    self.orderDayTableView.dataSource = self;
+    self.courseDayTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.scrollView.width, 0, self.scrollView.width, self.scrollView.height) style:UITableViewStylePlain];
+    self.courseDayTableView.delegate = self;
+    self.courseDayTableView.dataSource = self;
     
     self.calendarHeadView = [[FDCalendar alloc] initWithCurrentDate:[NSDate date]];
     self.calendarHeadView.delegate = self;
-    self.orderDayTableView.tableHeaderView = self.calendarHeadView;
-    self.orderDayTableView.sectionHeaderHeight = self.calendarHeadView.height;
-    [self.scrollView addSubview:self.orderDayTableView];
-    
-    
-    if (self.tabBarController) {
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.orderDayTableView.width, 48)];
-        view.backgroundColor = [UIColor clearColor];
-        self.orderDayTableView.tableFooterView = view;
-        self.orderSummaryTableView.tableFooterView = view;
-    }
+    self.courseDayTableView.tableHeaderView = self.calendarHeadView;
+    self.courseDayTableView.sectionHeaderHeight = self.calendarHeadView.height;
+    [self.scrollView addSubview:self.courseDayTableView];
+
 }
 
 
@@ -126,13 +119,15 @@
 - (void)initRefreshView
 {
     WS(ws);
-    self.orderSummaryTableView.refreshHeader.beginRefreshingBlock = ^(){
-        
-        ws.orderSummaryData = [[BaseModelMethod getOrderListArrayFormDicInfo:nil] mutableCopy];
+    self.courseSummaryTableView.refreshHeader.beginRefreshingBlock = ^(){
+        sleep(1.f);
+
         dispatch_async(dispatch_get_main_queue(), ^{
-            [ws.orderSummaryTableView.refreshHeader endRefreshing];
-            [ws.orderSummaryTableView reloadData];
+            ws.courseSummaryData = [[BaseModelMethod getCourseListArrayFormDicInfo:nil] mutableCopy];
+            [ws.courseSummaryTableView.refreshHeader endRefreshing];
+            [ws.courseSummaryTableView reloadData];
         });
+        
         return;
         
         [NetWorkEntiry getCourseinfoWithUserId:nil pageIndex:1 pageCount:RELOADDATACOUNT token:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -140,39 +135,48 @@
             NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
             
             if (type == 1) {
-                ws.orderSummaryData = [[BaseModelMethod getOrderListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+                ws.courseSummaryData = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [ws.orderSummaryTableView.refreshHeader endRefreshing];
-                    [ws.orderSummaryTableView reloadData];
+                    [ws.courseSummaryTableView.refreshHeader endRefreshing];
+                    [ws.courseSummaryTableView reloadData];
                 });
             }else{
-                [ws dealErrorResponseWithTableView:ws.orderSummaryTableView info:responseObject];
+                [ws dealErrorResponseWithTableView:ws.courseSummaryTableView info:responseObject];
             }
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [ws netErrorWithTableView:ws.orderSummaryTableView];
+            [ws netErrorWithTableView:ws.courseSummaryTableView];
         }];
     };
     
-    self.orderSummaryTableView.refreshFooter.beginRefreshingBlock = ^(){
+    self.courseSummaryTableView.refreshFooter.beginRefreshingBlock = ^(){
+        sleep(1.f);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [ws.courseSummaryData addObjectsFromArray:[BaseModelMethod getCourseListArrayFormDicInfo:nil]];
+            [ws.courseSummaryTableView.refreshFooter endRefreshing];
+            [ws.courseSummaryTableView reloadData];
+        });
+        
+        return;
+
         
         [NetWorkEntiry getCourseinfoWithUserId:nil pageIndex:1 pageCount:RELOADDATACOUNT token:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
             if (type == 1) {
-                NSArray * listArray = [BaseModelMethod getOrderListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]];
+                NSArray * listArray = [BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]];
                 if (listArray.count) {
-                    [ws.orderSummaryData addObjectsFromArray:listArray];
-                    [ws.orderSummaryTableView reloadData];
+                    [ws.courseSummaryData addObjectsFromArray:listArray];
+                    [ws.courseSummaryTableView reloadData];
                 }else{
                     [ws showTotasViewWithMes:@"已经加载所有数据"];
                 }
-                [ws.orderSummaryTableView.refreshFooter endRefreshing];
+                [ws.courseSummaryTableView.refreshFooter endRefreshing];
             }else{
-                [ws dealErrorResponseWithTableView:ws.orderSummaryTableView info:responseObject];
+                [ws dealErrorResponseWithTableView:ws.courseSummaryTableView info:responseObject];
             }
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [ws netErrorWithTableView:ws.orderSummaryTableView];
+            [ws netErrorWithTableView:ws.courseSummaryTableView];
         }];
     };
 }
@@ -185,9 +189,8 @@
         [self.dateFormattor setDateFormat:@"yyyy-M-d"];
     }
     NSString * dataStr = [self.dateFormattor stringFromDate:date];
-    NSLog(@"%@",dataStr);
-    self.orderDayTableData = [[BaseModelMethod getOrderListArrayFormDicInfo:nil] mutableCopy];
-    [self.orderDayTableView reloadData];
+    self.courseDayTableData = [[BaseModelMethod getCourseListArrayFormDicInfo:nil] mutableCopy];
+    [self.courseDayTableView reloadData];
     return;
     
     [NetWorkEntiry getAllCourseInfoWithUserId:nil DayTime:dataStr token:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -198,45 +201,44 @@
 }
 
 
-
 #pragma mark - DataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView == self.orderSummaryTableView) {
-        return self.orderSummaryData.count;
+    if (tableView == self.courseSummaryTableView) {
+        return self.courseSummaryData.count;
     }else{
-        return self.orderDayTableData.count;
+        return self.courseDayTableData.count;
     }
     return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == self.orderSummaryTableView) {
-        return [OrderSummaryListCell cellHeight];
+    if (tableView == self.courseSummaryTableView) {
+        return [CourseSummaryListCell cellHeight];
     }else{
-        return [OrderSummaryDayCell cellHeight];
+        return [CourseSummaryDayCell cellHeight];
     }
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == self.orderSummaryTableView) {
-        OrderSummaryListCell * sumCell = [tableView dequeueReusableCellWithIdentifier:@"SumCell"];
+    if (tableView == self.courseSummaryTableView) {
+        CourseSummaryListCell * sumCell = [tableView dequeueReusableCellWithIdentifier:@"SumCell"];
         if (!sumCell) {
-            sumCell = [[OrderSummaryListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SumCell"];
+            sumCell = [[CourseSummaryListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SumCell"];
         }
-        if (indexPath.row < self.orderSummaryData.count)
-            [sumCell setModel:self.orderSummaryData[indexPath.row]];
+        if (indexPath.row < self.courseSummaryData.count)
+            [sumCell setModel:self.courseSummaryData[indexPath.row]];
         return sumCell;
     }else{
-        OrderSummaryDayCell * dayCell = [tableView dequeueReusableCellWithIdentifier:@"dayCell"];
+        CourseSummaryDayCell * dayCell = [tableView dequeueReusableCellWithIdentifier:@"dayCell"];
         if (!dayCell) {
-            dayCell = [[OrderSummaryDayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dayCell"];
+            dayCell = [[CourseSummaryDayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dayCell"];
         }
-        if (indexPath.row < self.orderDayTableData.count)
-            [dayCell setModel:self.orderDayTableData[indexPath.row]];
+        if (indexPath.row < self.courseDayTableData.count)
+            [dayCell setModel:self.courseDayTableData[indexPath.row]];
         
         return dayCell;
     }
@@ -249,19 +251,18 @@
     [self.scrollView setContentOffset:CGPointMake(index * self.scrollView.width, self.scrollView.contentOffset.y) animated:YES];
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    HMOrderModel  * orderModel = nil;
-    if (tableView == self.orderSummaryTableView) {
-        orderModel = [[self orderSummaryData] objectAtIndex:indexPath.row];
+    HMCourseModel  * courseModel = nil;
+    if (tableView == self.courseSummaryTableView) {
+        courseModel = [[self courseSummaryData] objectAtIndex:indexPath.row];
     }else{
-        orderModel = [[self orderDayTableData] objectAtIndex:indexPath.row];
+        courseModel = [[self courseDayTableData] objectAtIndex:indexPath.row];
     }
-    if (orderModel) {
-        OrderDetailViewController * decv = [[OrderDetailViewController alloc] init];
-        decv.orderModel = orderModel;
+    if (courseModel) {
+        CourseDetailViewController * decv = [[CourseDetailViewController alloc] init];
+        decv.couresID = courseModel.courseId;
         [self.navigationController pushViewController:decv animated:YES];
     }
 }

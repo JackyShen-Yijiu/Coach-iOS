@@ -26,4 +26,6 @@
 #define RGBA_Color(r,g,b,a) ([UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:a])
 
 #define HM_HIGHTCOLOR [UIColor colorWithWhite:0.9 alpha:1]
+#define HM_LINE_COLOR  RGB_Color(0xe6, 0xe6, 0xe6)
+
 #endif

@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface StudentHomeUserBasicInfoCell : UITableViewCell
-@property(nonatomic,strong)NSString *bgImageUrlStr;
+
++ (CGFloat)cellHeigth;
+
+- (void)setBgImageUrlStr:(NSString *)bgImageUrlStr userName:(NSString *)userName userId:(NSString *)userId;
+
 @end

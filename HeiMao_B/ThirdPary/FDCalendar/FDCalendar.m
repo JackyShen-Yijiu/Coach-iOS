@@ -152,9 +152,6 @@ static NSDateFormatter *dateFormattor;
     
     [self.titleLabel setText:[self stringFromDate:self.centerCalendarItem.date]];
     
-    self.centerCalendarItem.seletedDate = date;
-    self.leftCalendarItem.seletedDate = date;
-    self.rightCalendarItem.seletedDate = date;
 }
 
 // 重新加载日历items的数据
@@ -190,6 +187,9 @@ static NSDateFormatter *dateFormattor;
 
 - (void)calendarItem:(FDCalendarItem *)item didSelectedDate:(NSDate *)date {
     self.date = date;
+    self.centerCalendarItem.seletedDate = date;
+    self.leftCalendarItem.seletedDate = date;
+    self.rightCalendarItem.seletedDate = date;
     [self setCurrentDate:self.date];
     if ([_delegate respondsToSelector:@selector(fdCalendar:didSelectedDate:)]) {
         [_delegate fdCalendar:self didSelectedDate:self.date];

@@ -7,15 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HMSchoolModel.h"
-#import "HMClassModel.h"
-#import "HMPorTraitModel.h"
+#import "HMSchoolInfoModel.h"
+#import "HMClassInfoModel.h"
+#import "HMPortraitInfoModel.h"
 
 @interface HMStudentModel : NSObject
+//用户信息
 @property(nonatomic,strong)NSString * userId;
 @property(nonatomic,strong)NSString * userName;
-@property(nonatomic,strong)HMPorTraitModel * porInfo;
-//@property(nonatomic,strong)HMSchoolModel * schoolInfo;
+@property(nonatomic,strong)HMPortraitInfoModel * porInfo;
+//学车信息
+@property(nonatomic,strong)HMSchoolInfoModel * schoolInfo;  //报考驾校
+@property(nonatomic,strong)NSString * carLicenseType;       //车型    C1本
+@property(nonatomic,strong)NSString * courseSchedule;       //课程进度 科目二第16学时
+@property(nonatomic,strong)NSString * commmonAddress;       //常用地址 北京市昌平区天通苑
+//评论信息
+@property(nonatomic,strong)NSMutableArray * recommendArrays;
+
 //@property(nonatomic,strong)HMClassModel * classInfo;
 
 + (HMStudentModel *)converJsonDicToModel:(NSDictionary *)dic;

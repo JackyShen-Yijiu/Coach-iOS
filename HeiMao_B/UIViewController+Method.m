@@ -108,7 +108,7 @@
 - (UIButton *)getBarButtonWithTitle:(NSString *)title
 {
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 60, 34);
+    button.frame = CGRectMake(0, 0, 40, 40);
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitle:title forState:UIControlStateHighlighted];
     [[button titleLabel] setFont:[UIFont systemFontOfSize:15.f]];

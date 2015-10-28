@@ -10,7 +10,7 @@
 #import "AFNetworkActivityLogger.h"
 #import "MobClick.h"
 #import "HMNagationController.h"
-#import "OrderViewController.h"
+#import "CourseViewController.h"
 #import "UserCenterController.h"
 
 
@@ -41,13 +41,13 @@
 
 - (UITabBarController *)getMainTabBar
 {
-    UIImage * nOrder = [UIImage imageNamed:@"order_normal"];
-    UIImage * hOrder = [UIImage imageNamed:@"order_seleted"];
+    UIImage * nCourse = [UIImage imageNamed:@"order_normal"];
+    UIImage * hCourse = [UIImage imageNamed:@"order_seleted"];
     UIImage * nUser = [UIImage imageNamed:@"user_normal"];
     UIImage * hUser = [UIImage imageNamed:@"user_seleted"];
-    OrderViewController * orderContro = [[OrderViewController alloc] init];
+    CourseViewController * courseContro = [[CourseViewController alloc] init];
     UserCenterController * userCentertro = [[UserCenterController alloc] init];
-    return [self getTabWithTitleArray:@[@"预约",@"我的"] nimagesArray:@[nOrder,nUser] himages:@[hOrder,hUser] andControllers:@[orderContro,userCentertro]];
+    return [self getTabWithTitleArray:@[@"预约",@"我的"] nimagesArray:@[nCourse,nUser] himages:@[hCourse,hUser] andControllers:@[courseContro,userCentertro]];
 }
 
 - (UITabBarController *)getTabWithTitleArray:(NSArray *)item nimagesArray:(NSArray *)nImages

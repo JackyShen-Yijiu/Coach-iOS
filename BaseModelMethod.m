@@ -7,20 +7,19 @@
 //
 
 #import "BaseModelMethod.h"
-#import "HMOrderModel.h"
+#import "HMCourseModel.h"
+#import "HMRecomendModel.h"
 
 @implementation BaseModelMethod
 
-
-
-+ (NSArray *)getOrderListArrayFormDicInfo:(NSArray *)array
++ (NSArray *)getCourseListArrayFormDicInfo:(NSArray *)array
 {
     NSMutableArray * oArray = [NSMutableArray arrayWithCapacity:0];
     for (int i = 0;i < 20;i++) {
-        HMOrderModel * orderModel = [HMOrderModel converJsonDicToModel:nil];
-        orderModel.orderStatue = i % 7;
-        if (orderModel) {
-            [oArray addObject:orderModel];
+        HMCourseModel * courseModel = [HMCourseModel converJsonDicToModel:nil];
+        courseModel.courseStatue = i % 7;
+        if (courseModel) {
+            [oArray addObject:courseModel];
         }
     }
     return [oArray copy];
@@ -30,11 +29,24 @@
 //    }
 //    NSMutableArray * oArray = [NSMutableArray arrayWithCapacity:0];
 //    for (NSDictionary * info in array) {
-//        HMOrderModel * orderModel = [HMOrderModel converJsonDicToModel:info];
-//        if (orderModel) {
-//            [oArray addObject:orderModel];
+//        HMcourseModel * courseModel = [HMcourseModel converJsonDicToModel:info];
+//        if (courseModel) {
+//            [oArray addObject:courseModel];
 //        }
 //    }
 //    return [oArray copy];
 }
+
++ (NSArray *)getRecomendListArrayFormDicInfo:(NSArray *)array
+{
+    NSMutableArray * oArray = [NSMutableArray arrayWithCapacity:0];
+    for (int i = 0;i < 20;i++) {
+        HMRecomendModel * recomendModel = [HMRecomendModel converJsonDicToModel:nil];
+        if (recomendModel) {
+            [oArray addObject:recomendModel];
+        }
+    }
+    return [oArray copy];
+}
+
 @end

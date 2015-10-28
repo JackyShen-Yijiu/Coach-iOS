@@ -14,14 +14,14 @@
 {
     
     HMCourseModel *  model = [[HMCourseModel alloc] init];
-    model.orderProgress = @"科目二路口第二学时";
+    model.courseProgress = @"科目二路口第二学时";
     model.courseTime = @"2015年12月11 13:00-18:00";
     model.courseBeginTime = @"13:00";
     model.courseEndtime = @"18:00";
     model.courseAddress =  @"北京沙河训练场";
     model.coursePikerAddres = @"北京昌平区天通苑";
     model.isPickerUp = YES;
-    model.orderStatue = [[dic objectForKey:@"reservationstate"] integerValue];
+    model.courseStatue = [[dic objectForKey:@"reservationstate"] integerValue];
     model.studentInfo = [HMStudentModel converJsonDicToModel:[dic objectInfoForKey:@"userid"]];
     model.classType = [HMClassInfoModel converJsonDicToModel:[dic objectInfoForKey:@"subject"]];
     
@@ -49,7 +49,7 @@
 - (NSString *)getStatueString
 {
     NSString * str = @"";
-    switch (self.orderStatue) {
+    switch (self.courseStatue) {
             
         case KCourseStatueInvalid:
             break;

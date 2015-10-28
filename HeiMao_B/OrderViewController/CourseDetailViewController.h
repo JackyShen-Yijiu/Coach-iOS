@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import "HMOrderModel.h"
+#import "HMCourseModel.h"
 
-@interface OrderDetailViewController : UIViewController
-@property(nonatomic,strong)HMOrderModel * orderModel;
+@interface CourseDetailViewController : UIViewController
+@property(nonatomic,strong)NSString * couresID;
 @end

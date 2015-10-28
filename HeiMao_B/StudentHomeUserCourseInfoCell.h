@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HMStudentModel.h"
 
 @interface StudentHomeUserCourseInfoCell : UITableViewCell
+@property(nonatomic,strong)HMStudentModel * model;
++ (CGFloat)cellHeigth;
 
 @end

@@ -1,27 +1,26 @@
 //
-//  OrderSummaryDayCell.m
+//  courseSummaryDayCell.m
 //  HeiMao_B
 //
 //  Created by kequ on 15/10/25.
 //  Copyright © 2015年 ke. All rights reserved.
 //
 
-#import "OrderSummaryDayCell.h"
+#import "CourseSummaryDayCell.h"
 #import "PortraitView.h"
-#define LINE_COLOR  RGB_Color(0xe6, 0xe6, 0xe6)
 
-@interface OrderSummaryDayCell ()
+@interface CourseSummaryDayCell ()
 @property(nonatomic,strong)PortraitView * potraitView;
 @property(nonatomic,strong)UILabel * mainTitle;
 @property(nonatomic,strong)UILabel * subTitle;
-@property(nonatomic,strong)UILabel * orderBeginTime;
-@property(nonatomic,strong)UILabel * orderEndTime;
+@property(nonatomic,strong)UILabel * courseBeginTime;
+@property(nonatomic,strong)UILabel * courseEndTime;
 @property(nonatomic,strong)UIView * midLine;
 @property(nonatomic,strong)UIView * bottomLine;
 
 @end
 
-@implementation OrderSummaryDayCell
+@implementation CourseSummaryDayCell
 + (CGFloat)cellHeight
 {
     return 92.f;
@@ -63,13 +62,13 @@
     
    
     
-    self.orderBeginTime = [self getOnePropertyLabel];
-    self.orderBeginTime.textColor = RGB_Color(30, 31, 34);
-    [self.contentView addSubview:self.orderBeginTime];
+    self.courseBeginTime = [self getOnePropertyLabel];
+    self.courseBeginTime.textColor = RGB_Color(30, 31, 34);
+    [self.contentView addSubview:self.courseBeginTime];
     
-    self.orderEndTime = [self getOnePropertyLabel];
-    self.orderEndTime.textColor = RGB_Color(153, 153, 153);
-    [self.contentView addSubview:self.orderEndTime];
+    self.courseEndTime = [self getOnePropertyLabel];
+    self.courseEndTime.textColor = RGB_Color(153, 153, 153);
+    [self.contentView addSubview:self.courseEndTime];
     
     
     self.midLine = [self getOnelineView];
@@ -86,21 +85,21 @@
 {
     [super updateConstraints];
     
-    [self.orderBeginTime mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.courseBeginTime mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(58, 16));
         make.top.equalTo(@(([[self class] cellHeight] - 16 * 2 - 8)/2.f));
         make.left.equalTo(self.contentView);
     }];
     
-    [self.orderEndTime mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.equalTo(self.orderBeginTime);
-        make.left.equalTo(self.orderBeginTime);
-        make.top.equalTo(self.orderBeginTime.mas_bottom).offset(8);
+    [self.courseEndTime mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(self.courseBeginTime);
+        make.left.equalTo(self.courseBeginTime);
+        make.top.equalTo(self.courseBeginTime.mas_bottom).offset(8);
     }];
     
     [self.potraitView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(60, 60.f));
-        make.left.equalTo(self.orderBeginTime.mas_right).offset(17.f);
+        make.left.equalTo(self.courseBeginTime.mas_right).offset(17.f);
         make.centerY.equalTo(self.contentView);
     }];
     
@@ -108,7 +107,7 @@
         make.top.equalTo(self.potraitView);
         make.width.equalTo(@(2));
         make.height.equalTo(self.potraitView);
-        make.left.equalTo(self.orderBeginTime.mas_right);
+        make.left.equalTo(self.courseBeginTime.mas_right);
     }];
     
     
@@ -146,7 +145,7 @@
 }
 
 #pragma mark - Data
-- (void)setModel:(HMOrderModel *)model
+- (void)setModel:(HMCourseModel *)model
 {
     if (_model == model) {
         return;
@@ -155,14 +154,14 @@
     _model = model;
     
     UIImage * defaultImage = [UIImage imageNamed:@"temp"];
-    NSString * imageStr = _model.userInfo.porInfo.thumbnailpic;
+    NSString * imageStr = _model.studentInfo.porInfo.thumbnailpic;
     if(imageStr)
         [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];
     
-    self.mainTitle.text = _model.userInfo.userName;
-    self.subTitle.text = _model.orderProgress;
-    self.orderBeginTime.text = _model.orderBeginTime;
-    self.orderEndTime.text = _model.orderEndtime;
+    self.mainTitle.text = _model.studentInfo.userName;
+    self.subTitle.text = _model.courseProgress;
+    self.courseBeginTime.text = _model.courseBeginTime;
+    self.courseEndTime.text = _model.courseEndtime;
     
 //    [self setNeedsUpdateConstraints];
 }
@@ -172,7 +171,7 @@
 - (UIView *)getOnelineView
 {
     UIView * view = [[UIView alloc] init];
-    view.backgroundColor = LINE_COLOR;
+    view.backgroundColor = HM_LINE_COLOR;
     return view;
 }
 

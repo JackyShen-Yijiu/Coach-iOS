@@ -1,24 +1,22 @@
 //
-//  OrderSummaryListCell.m
 //  HeiMao_B
 //
 //  Created by kequ on 15/10/25.
 //  Copyright © 2015年 ke. All rights reserved.
 //
 
-#import "OrderSummaryListCell.h"
+#import "CourseSummaryListCell.h"
 
 
-#define LINE_COLOR  RGB_Color(0xe6, 0xe6, 0xe6)
-
-@interface OrderSummaryListCell()
+@interface CourseSummaryListCell()
 @property(nonatomic,strong)UIView * bgView;
 @property(nonatomic,strong)PortraitView * potraitView;
 @property(nonatomic,strong)UILabel * mainTitle;
 @property(nonatomic,strong)UILabel * subTitle;
 @property(nonatomic,strong)UILabel * statueLabel;
-@property(nonatomic,strong)UILabel * orderTimeLabel;
-@property(nonatomic,strong)UILabel * orderAddressLabel;
+
+@property(nonatomic,strong)UILabel * courseTimeLabel;
+@property(nonatomic,strong)UILabel * courseAddressLabel;
 @property(nonatomic,strong)UILabel * pickAddressLabel;
 
 @property(nonatomic,strong)UIView * topLine;
@@ -27,7 +25,7 @@
 
 @end
 
-@implementation OrderSummaryListCell
+@implementation CourseSummaryListCell
 + (CGFloat)cellHeight
 {
     return 180 + 10;
@@ -76,11 +74,11 @@
     self.statueLabel.numberOfLines = 1;
     [self.bgView addSubview:self.statueLabel];
     
-    self.orderTimeLabel = [self getOnePropertyLabel];
-    [self.bgView addSubview:self.orderTimeLabel];
+    self.courseTimeLabel = [self getOnePropertyLabel];
+    [self.bgView addSubview:self.courseTimeLabel];
     
-    self.orderAddressLabel = [self getOnePropertyLabel];
-    [self.bgView addSubview:self.orderAddressLabel];
+    self.courseAddressLabel = [self getOnePropertyLabel];
+    [self.bgView addSubview:self.courseAddressLabel];
     
     self.pickAddressLabel = [self getOnePropertyLabel];
     [self.bgView addSubview:self.pickAddressLabel];
@@ -151,23 +149,23 @@
     }];
     
     
-    [self.orderTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.courseTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView).offset(leftOffsetSpacing);
         make.right.equalTo(self.bgView).offset(-leftOffsetSpacing);
         make.top.equalTo(self.midLine.mas_top).offset((90 - 14 * 3 - 8 * 2)/2.f);
         make.height.equalTo(@(14));
     }];
     
-    [self.orderAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.equalTo(self.orderTimeLabel);
-        make.top.equalTo(self.orderTimeLabel.mas_bottom).offset(8.f);
-        make.centerX.equalTo(self.orderTimeLabel);
+    [self.courseAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(self.courseTimeLabel);
+        make.top.equalTo(self.courseTimeLabel.mas_bottom).offset(8.f);
+        make.centerX.equalTo(self.courseTimeLabel);
     }];
     
     [self.pickAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.equalTo(self.orderAddressLabel);
-        make.top.equalTo(self.orderAddressLabel.mas_bottom).offset(8.f);
-        make.centerX.equalTo(self.orderAddressLabel);
+        make.size.equalTo(self.courseAddressLabel);
+        make.top.equalTo(self.courseAddressLabel.mas_bottom).offset(8.f);
+        make.centerX.equalTo(self.courseAddressLabel);
     }];
     
     [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -192,33 +190,33 @@
 //    
 //    self.midLine.frame = CGRectMake(leftOffsetSpacing, self.potraitView.bottom + 15, self.width - leftOffsetSpacing * 2, 0.5);
 //    
-//    self.orderTimeLabel.frame = CGRectMake(leftOffsetSpacing, self.midLine.top + (90 - 14 * 3 - 8 * 2)/2.f, self.width - leftOffsetSpacing * 2, 14.f);
-//    self.orderAddressLabel.frame = CGRectOffset(self.orderTimeLabel.frame, 0, self.orderTimeLabel.height + 8.f);
-//    self.pickAddressLabel.frame = CGRectOffset(self.orderTimeLabel.frame, 0, self.orderTimeLabel.height + 8.f);
+//    self.courseTimeLabel.frame = CGRectMake(leftOffsetSpacing, self.midLine.top + (90 - 14 * 3 - 8 * 2)/2.f, self.width - leftOffsetSpacing * 2, 14.f);
+//    self.courseAddressLabel.frame = CGRectOffset(self.courseTimeLabel.frame, 0, self.courseTimeLabel.height + 8.f);
+//    self.pickAddressLabel.frame = CGRectOffset(self.courseTimeLabel.frame, 0, self.courseTimeLabel.height + 8.f);
 //    
 //    self.bottomLine.frame = CGRectMake(0, self.bgView.height - 1, self.width, 1);
 //    
 //}
 
 #pragma mark - Data
-- (void)setModel:(HMOrderModel *)model
+- (void)setModel:(HMCourseModel *)model
 {
     if (_model == model) {
         return;
     }
     _model = model;
     UIImage * defaultImage = [UIImage imageNamed:@"temp"];
-    NSString * imageStr = _model.userInfo.porInfo.thumbnailpic;
+    NSString * imageStr = _model.studentInfo.porInfo.thumbnailpic;
     if(imageStr)
         [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];
     
-    self.mainTitle.text = _model.userInfo.userName;
-    self.subTitle.text = _model.orderProgress;
+    self.mainTitle.text = _model.studentInfo.userName;
+    self.subTitle.text = _model.courseProgress;
     self.statueLabel.text = [_model getStatueString];
 
-    self.orderTimeLabel.text = _model.orderTime;
-    self.orderAddressLabel.text = _model.orderAddress;
-    self.pickAddressLabel.text = _model.orderPikerAddres;
+    self.courseTimeLabel.text = _model.courseTime;
+    self.courseAddressLabel.text = [NSString stringWithFormat:@"训练场地: %@",_model.courseAddress];
+    self.pickAddressLabel.text = [NSString stringWithFormat:@"接送地点: %@",_model.coursePikerAddres];
     [self setNeedsUpdateConstraints];
 }
 
@@ -237,7 +235,7 @@
 - (UIView *)getOnelineView
 {
     UIView * view = [[UIView alloc] init];
-    view.backgroundColor = LINE_COLOR;
+    view.backgroundColor = HM_LINE_COLOR;
     return view;
 }
 

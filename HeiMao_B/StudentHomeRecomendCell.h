@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HMRecomendModel.h"
 
 @interface StudentHomeRecomendCell : UITableViewCell
-
+@property(nonatomic,strong)HMRecomendModel * model;
++ (CGFloat)cellHigthWithModel:(HMRecomendModel *)model;
 @end

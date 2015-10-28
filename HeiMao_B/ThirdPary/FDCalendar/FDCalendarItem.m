@@ -307,7 +307,8 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
             cell.dayLabel.textColor = [UIColor colorWithRed:51/255.f green:51/255.f blue:51/255.f alpha:1.f];
         }
         curDate = [self dateOfMonth:FDCalendarMonthCurrent WithDay:day];
-        [cell setIsSeletedDay:[self.seletedDate isEqualToDate:curDate] curDay:[self isEnqual:curDate :[NSDate date]]];
+        BOOL isSeletedDaya = [self isEnqual:curDate : self.seletedDate];
+        [cell setIsSeletedDay:isSeletedDaya curDay:[self isEnqual:curDate :[NSDate date]]];
     }
     
     if (indexPath.row % 7 == 0) {
@@ -323,6 +324,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
 
 - (BOOL)isEnqual:(NSDate *)date1 :(NSDate *)date2
 {
+    if(!date1 || !date2) return NO;
     NSDateComponents *components1 = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date1];
     NSDateComponents *components2 = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date2];
     return (components1.year == components2.year) && (components1.month == components2.month) && (components1.day == components2.day);

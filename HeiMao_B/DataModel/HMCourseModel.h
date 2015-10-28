@@ -15,14 +15,14 @@
 
 @interface HMCourseModel : NSObject
 
-@property(nonatomic,strong)NSString * orderId;
+@property(nonatomic,strong)NSString * courseId;
 @property(nonatomic,strong)NSString * courseTime;
 @property(nonatomic,strong)NSString * courseBeginTime;
 @property(nonatomic,strong)NSString * courseEndtime;
-@property(nonatomic,strong)NSString * orderProgress;
+@property(nonatomic,strong)NSString * courseProgress;
 @property(nonatomic,strong)NSString * courseAddress;     //训练场地
 @property(nonatomic,strong)NSString * coursePikerAddres; //接送地址
-@property(nonatomic,assign)KCourseStatue orderStatue;
+@property(nonatomic,assign)KCourseStatue courseStatue;
 @property(nonatomic,assign)BOOL isPickerUp;
 @property(nonatomic,strong)HMClassInfoModel * classType;
 @property(nonatomic,strong)HMStudentModel * studentInfo;

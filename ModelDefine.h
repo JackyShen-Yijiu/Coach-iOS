@@ -11,13 +11,13 @@
 //更多加载数据个数
 #define LOADMOREDATACOUNT   20
 
-typedef NS_ENUM(NSInteger, KOrderStatue){
-    KOrderStatueInvalid =0,
-    KOrderStatueRequest,
-    KOrderStatueUnderWay,
-    KOrderStatueWatingToDone,
-    KOrderStatueOnDone,
-    KOrderStatueOnCommended,
-    KOrderStatueCanceld
+typedef NS_ENUM(NSInteger, KCourseStatue){
+    KCourseStatueInvalid =0,
+    KCourseStatueRequest,
+    KCourseStatueUnderWay,
+    KCourseStatueWatingToDone,
+    KCourseStatueOnDone,
+    KCourseStatueOnCommended,
+    KCourseStatueCanceld
 };
 

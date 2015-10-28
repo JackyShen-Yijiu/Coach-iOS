@@ -14,7 +14,13 @@
     
     HMStudentModel * model = [[HMStudentModel alloc] init];
     model.userName = @"王星宇";
-    model.porInfo = [HMPorTraitModel converJsonDicToModel:[dic objectInfoForKey:@"headportrait"]];
+    model.porInfo = [HMPortraitInfoModel converJsonDicToModel:[dic objectInfoForKey:@"headportrait"]];
+    
+    model.schoolInfo = [HMSchoolInfoModel converJsonDicToModel:nil];
+    model.carLicenseType = @"C1本";
+    model.courseSchedule = @"科目二第16学时";
+    model.commmonAddress = @"北京市昌平区天通苑";
+    
 //    if (!dic || ![dic isKindOfClass:[NSDictionary class]] ||![dic allKeys].count) {
 //        return nil;
 //    }

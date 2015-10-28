@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OrderViewController : UIViewController
+@interface CourseViewController : UIViewController
 
 @end

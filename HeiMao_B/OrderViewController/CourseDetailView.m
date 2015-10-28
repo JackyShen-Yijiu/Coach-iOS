@@ -1,19 +1,15 @@
 //
-//  OrderDetailCell.m
+//  courseDetailCell.m
 //  HeiMao_B
 //
 //  Created by kequ on 15/10/27.
 //  Copyright © 2015年 ke. All rights reserved.
 //
 
-#import "OrderDetailView.h"
+#import "CourseDetailView.h"
 #import "HMButton.h"
 
-#define LINE_COLOR  RGB_Color(0xe6, 0xe6, 0xe6)
-
-
-
-@interface OrderDetailView()
+@interface CourseDetailView()
 @property(nonatomic,strong)HMButton * studentBgView;
 @property(nonatomic,strong)PortraitView * potraitView;
 @property(nonatomic,strong)UILabel * mainTitle;
@@ -24,8 +20,8 @@
 @property(nonatomic,strong)UILabel * courseProgressInfo;
 
 @property(nonatomic,strong)UILabel * courseInfoTitle;
-@property(nonatomic,strong)UILabel * orderTimeLabel;
-@property(nonatomic,strong)UILabel * orderAddressLabel;
+@property(nonatomic,strong)UILabel * courseTimeLabel;
+@property(nonatomic,strong)UILabel * courseAddressLabel;
 @property(nonatomic,strong)UILabel * pickAddressLabel;
 
 @property(nonatomic,strong)UIView * midLine;
@@ -34,7 +30,7 @@
 @end
 
 
-@implementation OrderDetailView
+@implementation CourseDetailView
 + (CGFloat)cellHeight
 {
     return 90 //头像
@@ -103,11 +99,11 @@
     self.courseInfoTitle.font = [UIFont boldSystemFontOfSize:14.f];
     [self addSubview:self.courseInfoTitle];
     
-    self.orderTimeLabel = [self getOnePropertyLabel];
-    [self addSubview:self.orderTimeLabel];
+    self.courseTimeLabel = [self getOnePropertyLabel];
+    [self addSubview:self.courseTimeLabel];
     
-    self.orderAddressLabel = [self getOnePropertyLabel];
-    [self addSubview:self.orderAddressLabel];
+    self.courseAddressLabel = [self getOnePropertyLabel];
+    [self addSubview:self.courseAddressLabel];
 
     self.pickAddressLabel = [self getOnePropertyLabel];
     [self addSubview:self.pickAddressLabel];
@@ -124,7 +120,10 @@
     self.rightButton = [self getOnePropertybutton];
     self.rightButton.tag = 200;
     [self addSubview:self.rightButton];
+    
+    [self updateConstraints];
 }
+
 
 #pragma mark Layout
 - (void)updateConstraints
@@ -136,7 +135,7 @@
     [self.studentBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self);
         make.left.equalTo(self);
-        make.width.equalTo(self);
+        make.right.equalTo(self);
         make.height.equalTo(@(90.f));
     }];
     
@@ -194,23 +193,23 @@
         make.top.equalTo(self.courseProgressInfo.mas_bottom).offset(18.f);
     }];
 
-    [self.orderTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.courseTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.equalTo(self.courseInfoTitle);
         make.left.equalTo(self.courseInfoTitle);
         make.top.equalTo(self.courseInfoTitle.mas_bottom).offset(10.f);
     }];
 
     
-    [self.orderAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.equalTo(self.orderTimeLabel);
-        make.top.equalTo(self.orderTimeLabel.mas_bottom).offset(10.f);
-        make.centerX.equalTo(self.orderTimeLabel);
+    [self.courseAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(self.courseTimeLabel);
+        make.top.equalTo(self.courseTimeLabel.mas_bottom).offset(10.f);
+        make.centerX.equalTo(self.courseTimeLabel);
     }];
     
     [self.pickAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.equalTo(self.orderAddressLabel);
-        make.top.equalTo(self.orderAddressLabel.mas_bottom).offset(10.f);
-        make.centerX.equalTo(self.orderAddressLabel);
+        make.size.equalTo(self.courseAddressLabel);
+        make.top.equalTo(self.courseAddressLabel.mas_bottom).offset(10.f);
+        make.centerX.equalTo(self.courseAddressLabel);
     }];
 
     
@@ -252,37 +251,44 @@
         self.leftButton.frame = CGRectMake(15, self.pickAddressLabel.bottom + 15, width, 45);
         self.rightButton.frame = CGRectMake(self.leftButton.right + 15, self.leftButton.top, width, 45);
     }
-    
 }
 #pragma mark - Data
-- (void)setModel:(HMOrderModel *)model
+- (void)setModel:(HMCourseModel *)model
 {
+    if (_model == model) {
+        return;
+    }
     _model = model;
+    [self refreshUI];
+}
+
+- (void)refreshUI
+{
     UIImage * defaultImage = [UIImage imageNamed:@"temp"];
-    NSString * imageStr = _model.userInfo.porInfo.thumbnailpic;
+    NSString * imageStr = _model.studentInfo.porInfo.thumbnailpic;
     if(imageStr)
         [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];
     
-    self.mainTitle.text = _model.userInfo.userName;
-    self.subTitle.text = _model.orderProgress;
+    self.mainTitle.text = _model.studentInfo.userName;
+    self.subTitle.text = _model.courseProgress;
     self.statueLabel.text = [_model getStatueString];
     
     self.courseProgressTtile.text = @"学习进展";
-    self.courseProgressInfo.text = _model.orderProgress;
+    self.courseProgressInfo.text = _model.courseProgress;
     
     self.courseInfoTitle.text = @"课程信息";
-    self.orderTimeLabel.text = _model.orderTime;
-    self.orderAddressLabel.text = _model.orderAddress;
-    self.pickAddressLabel.text = _model.orderPikerAddres;
+    self.courseTimeLabel.text = _model.courseTime;
+    self.courseAddressLabel.text = _model.courseAddress;
+    self.pickAddressLabel.text = _model.coursePikerAddres;
     
     [self.leftButton setHidden:NO];
     [self.rightButton setHidden:YES];
-
-    switch (_model.orderStatue) {
+    
+    switch (_model.courseStatue) {
             
-        case KOrderStatueInvalid:
+        case KCourseStatueInvalid:
             break;
-        case KOrderStatueRequest:
+        case KCourseStatueRequest:
         {
             [self.leftButton setTitle:@"拒绝" forState:UIControlStateNormal];
             [self.leftButton setTitle:@"拒绝" forState:UIControlStateHighlighted];
@@ -301,17 +307,17 @@
         }
             
             break;
-        case KOrderStatueUnderWay:
+        case KCourseStatueUnderWay:
         {
             [self.rightButton setHighlighted:YES];
             [self.leftButton setTitle:@"取消课程" forState:UIControlStateNormal];
             [self.leftButton setTitle:@"取消课程" forState:UIControlStateHighlighted];
             [self.leftButton setNBackColor:RGB_Color(205, 212, 217)];
             [self.leftButton setHBackColor:HM_HIGHTCOLOR];
-
+            
         }
             break;
-        case KOrderStatueWatingToDone:
+        case KCourseStatueWatingToDone:
         {
             [self.leftButton setTitle:@"确定学完" forState:UIControlStateNormal];
             [self.leftButton setTitle:@"确定学完" forState:UIControlStateHighlighted];
@@ -320,7 +326,7 @@
             [self.leftButton setHBackColor:RGB_Color(0x24, 0x6d, 0xd0)];
         }
             break;
-        case KOrderStatueOnDone:
+        case KCourseStatueOnDone:
         {
             [self.leftButton setTitle:@"评论" forState:UIControlStateNormal];
             [self.leftButton setTitle:@"评论" forState:UIControlStateHighlighted];
@@ -329,80 +335,78 @@
             [self.leftButton setHBackColor:RGB_Color(0x24, 0x6d, 0xd0)];
         }
             break;
-        case KOrderStatueCanceld:
+        case KCourseStatueCanceld:
         {
-        
+            
         }
             break;
-        case KOrderStatueOnCommended:
+        case KCourseStatueOnCommended:
         {
             
         }
             break;
     }
     
-//    [self setNeedsUpdateConstraints];
+    //    [self setNeedsUpdateConstraints];
     [self setNeedsLayout];
 }
-
-
 
 #pragma marl - Action
 - (void)userInfoButtonClick:(UIButton *)button
 {
-    if ([_delegate respondsToSelector:@selector(orderDetailViewDidClickStudentDetail:)]) {
-        [_delegate orderDetailViewDidClickStudentDetail:self];
+    if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickStudentDetail:)]) {
+        [_delegate courseDetailViewDidClickStudentDetail:self];
     }
 }
 
 - (void)buttonClick:(UIButton *)button
 {
-    switch (_model.orderStatue) {
+    switch (_model.courseStatue) {
             
-        case KOrderStatueInvalid:
+        case KCourseStatueInvalid:
             break;
-        case KOrderStatueRequest:
+        case KCourseStatueRequest:
         {
             if (button.tag == 200) {
-                if ([_delegate respondsToSelector:@selector(orderDetailViewDidClickAgreeButton:)]) {
-                    [_delegate orderDetailViewDidClickAgreeButton:self];
+                if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickAgreeButton:)]) {
+                    [_delegate courseDetailViewDidClickAgreeButton:self];
                 }
             }else{
-                if ([_delegate respondsToSelector:@selector(orderDetailViewDidClickDisAgreeButton:)]) {
-                    [_delegate orderDetailViewDidClickDisAgreeButton:self];
+                if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickDisAgreeButton:)]) {
+                    [_delegate courseDetailViewDidClickDisAgreeButton:self];
                 }
             }
         }
     
             break;
-        case KOrderStatueUnderWay:
+        case KCourseStatueUnderWay:
         {
-            if ([_delegate respondsToSelector:@selector(orderDetailViewDidClickCanCelButton:)]) {
-                [_delegate orderDetailViewDidClickCanCelButton:self];
+            if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickCanCelButton:)]) {
+                [_delegate courseDetailViewDidClickCanCelButton:self];
             }
             
         }
             break;
-        case KOrderStatueWatingToDone:
+        case KCourseStatueWatingToDone:
         {
-            if ([_delegate respondsToSelector:@selector(orderDetailViewDidClickWatingToDone:)]) {
-                [_delegate orderDetailViewDidClickWatingToDone:self];
+            if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickWatingToDone:)]) {
+                [_delegate courseDetailViewDidClickWatingToDone:self];
             }
         }
             break;
-        case KOrderStatueOnDone:
+        case KCourseStatueOnDone:
         {
-            if ([_delegate respondsToSelector:@selector(orderDetailViewDidClickRecommentButton:)]) {
-                [_delegate orderDetailViewDidClickRecommentButton:self];
+            if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickRecommentButton:)]) {
+                [_delegate courseDetailViewDidClickRecommentButton:self];
             }
         }
             break;
-        case KOrderStatueCanceld:
+        case KCourseStatueCanceld:
         {
             
         }
             break;
-        case KOrderStatueOnCommended:
+        case KCourseStatueOnCommended:
         {
             
         }
@@ -415,7 +419,7 @@
 - (UIView *)getOnelineView
 {
     UIView * view = [[UIView alloc] init];
-    view.backgroundColor = LINE_COLOR;
+    view.backgroundColor = HM_LINE_COLOR;
     return view;
 }
 

@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "PortraitView.h"
-#import "HMOrderModel.h"
+#import "HMCourseModel.h"
 
-@interface OrderSummaryListCell : UITableViewCell
-@property(nonatomic,strong)HMOrderModel * model;
+@interface CourseSummaryListCell : UITableViewCell
+@property(nonatomic,strong)HMCourseModel * model;
 
 + (CGFloat)cellHeight;
 

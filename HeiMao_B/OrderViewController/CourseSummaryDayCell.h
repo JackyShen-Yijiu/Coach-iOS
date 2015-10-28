@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HMOrderModel.h"
+#import "HMCourseModel.h"
 
-@interface OrderSummaryDayCell : UITableViewCell
+@interface CourseSummaryDayCell : UITableViewCell
 
-@property(nonatomic,strong)HMOrderModel * model;
+@property(nonatomic,strong)HMCourseModel * model;
 
 + (CGFloat)cellHeight;
 

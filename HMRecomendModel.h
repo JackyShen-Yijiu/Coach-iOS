@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HMPortraitInfoModel.h"
 
 @interface HMRecomendModel : NSObject
-
+@property(nonatomic,strong)NSString * userId;
+@property(nonatomic,strong)NSString * userName;
+@property(nonatomic,strong)HMPortraitInfoModel * portrait;
+@property(nonatomic,strong)NSString * recomedContent;
+@property(nonatomic,strong)NSString * recomendData;
++ (HMRecomendModel *)converJsonDicToModel:(NSDictionary *)dic;
 @end

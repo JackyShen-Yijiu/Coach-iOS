@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class HMStudentModel;
 @interface SutdentHomeController : UIViewController
-
+@property(nonatomic,strong)NSString * studentId;
 @end

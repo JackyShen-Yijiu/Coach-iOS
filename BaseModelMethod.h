@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface BaseModelMethod : NSObject
-+ (NSArray *)getOrderListArrayFormDicInfo:(NSArray *)array;
++ (NSArray *)getCourseListArrayFormDicInfo:(NSArray *)array;
++ (NSArray *)getRecomendListArrayFormDicInfo:(NSArray *)array;
+
 @end
