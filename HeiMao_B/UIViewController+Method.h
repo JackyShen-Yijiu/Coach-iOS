@@ -26,5 +26,9 @@
 - (void)resetNavBar;
 - (UIButton *)getBarButtonWithTitle:(NSString *)title;
 - (UIBarButtonItem*)barSpaingItem;
+- (void)showMessCountInTabBar:(NSInteger)mesCount;
+- (void)hiddenMessCountInTabBar;
 @end
+
+
 

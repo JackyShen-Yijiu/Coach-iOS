@@ -47,6 +47,7 @@
 {
     [super viewWillAppear:animated];
     [self initNavBar];
+    [self showMessCountInTabBar:10];
 }
 
 - (void)viewDidAppear:(BOOL)animated

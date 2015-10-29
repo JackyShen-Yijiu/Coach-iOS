@@ -54,22 +54,22 @@
         case KCourseStatueInvalid:
             break;
         case KCourseStatueRequest:
-            str = @"等待确认";
+            str = @"待接受";
             break;
         case KCourseStatueUnderWay:
-            str = @"进行中";
+            str = @"";
             break;
         case KCourseStatueWatingToDone:
-            str = @"学完待确认";
+            str = @"学确认学完";
             break;
         case KCourseStatueOnDone:
             str = @"待评论";
             break;
         case KCourseStatueCanceld:
-            str = @"取消";
+            str = @"已取消";
             break;
         case KCourseStatueOnCommended:
-            str = @"完成";
+            str = @"已完成";
             break;
     }
     return str;

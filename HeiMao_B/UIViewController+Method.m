@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "SDImageCache.h"
 #import "ToastAlertView.h"
+#import "UITabBar+RedHot.h"
 
 @implementation UIViewController(Tips)
 - (MBProgressHUD *)waitForMomentsWithTitle:(NSString*)str withView:(UIView *)view
@@ -128,7 +129,6 @@
     return negativeSpacer;
 }
 
-
 - (UIButton *)myLeftButton
 {
     UIButton* backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -141,5 +141,17 @@
 - (void)navigationBack:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)showMessCountInTabBar:(NSInteger)mesCount
+{
+    AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [[appdelegate.tabController tabBar] showBadgeOnItemIndex:0 withMessageCount:mesCount];
+}
+
+- (void)hiddenMessCountInTabBar
+{
+    AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [[appdelegate.tabController tabBar] hideBadgeOnItemIndex:0];
 }
 @end

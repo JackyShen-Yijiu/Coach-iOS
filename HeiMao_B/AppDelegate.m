@@ -54,8 +54,8 @@
                                      himages:(NSArray *)himages
                               andControllers:(NSArray*)controllers
 {
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.tabBar.selectedImageTintColor = [UIColor colorWithRed:0x28/255.f green:0x79/255.f blue:0xf3/255.f alpha:1];
+    self.tabController = [[UITabBarController alloc] init];
+    self.tabController.tabBar.selectedImageTintColor = [UIColor colorWithRed:0x28/255.f green:0x79/255.f blue:0xf3/255.f alpha:1];
     for (int i =0; i < controllers.count;i++) {
         UIViewController * controller = [controllers objectAtIndex:i];
         UIImage * nimage = [nImages[i] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -64,9 +64,9 @@
         tabItem.tag = i;
         controller.tabBarItem = tabItem;
     }
-    [tabBarController setViewControllers:controllers];
-    [tabBarController setHidesBottomBarWhenPushed:YES];
-    return tabBarController;
+    [self.tabController setViewControllers:controllers];
+    [self.tabController setHidesBottomBarWhenPushed:YES];
+    return self.tabController;
 }
 
 @end

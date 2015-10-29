@@ -190,6 +190,13 @@
     
     self.mainTitle.text = _model.studentInfo.userName;
     self.subTitle.text = _model.courseProgress;
+    if (self.model.courseStatue == KCourseStatueRequest ||
+        self.model.courseStatue == KCourseStatueWatingToDone ||
+        self.model.courseStatue == KCourseStatueOnDone) {
+        self.statueLabel.textColor = RGB_Color(255, 197, 143);
+    }else{
+        self.statueLabel.textColor =  RGB_Color(0x99, 0x99, 0x99);;
+    }
     self.statueLabel.text = [_model getStatueString];
 
     self.courseTimeLabel.text = _model.courseTime;

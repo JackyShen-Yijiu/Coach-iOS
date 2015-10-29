@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
+		B80F1B701BE26785008D5843 /* UITabBar+RedHot.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F1B6F1BE26785008D5843 /* UITabBar+RedHot.m */; };
 		B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B811E4681BDD3CF90077EAF5 /* NGOSegmentControl.m */; };
 		B84479D21BDF74AA004E5E15 /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84479D11BDF74AA004E5E15 /* CourseDetailViewController.m */; };
 		B84479D51BDF7890004E5E15 /* CourseDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = B84479D41BDF7890004E5E15 /* CourseDetailView.m */; };
@@ -62,6 +63,8 @@
 		1371250ABB78626F8329AC98 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2823AFD5ABA09767DD4F0623 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B80F1B6E1BE26785008D5843 /* UITabBar+RedHot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+RedHot.h"; sourceTree = "<group>"; };
+		B80F1B6F1BE26785008D5843 /* UITabBar+RedHot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+RedHot.m"; sourceTree = "<group>"; };
 		B811E4671BDD3CF90077EAF5 /* NGOSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGOSegmentControl.h; sourceTree = "<group>"; };
 		B811E4681BDD3CF90077EAF5 /* NGOSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGOSegmentControl.m; sourceTree = "<group>"; };
 		B84479D01BDF74AA004E5E15 /* CourseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailViewController.h; sourceTree = "<group>"; };
@@ -357,6 +360,8 @@
 			children = (
 				B8C458551BDB592B00901F71 /* HMNagationController.h */,
 				B8C458561BDB592B00901F71 /* HMNagationController.m */,
+				B80F1B6E1BE26785008D5843 /* UITabBar+RedHot.h */,
+				B80F1B6F1BE26785008D5843 /* UITabBar+RedHot.m */,
 			);
 			path = NavigationController;
 			sourceTree = "<group>";
@@ -601,6 +606,7 @@
 				B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */,
 				B8447A0B1BE0D394004E5E15 /* PickerItemView.m in Sources */,
 				B8FFDF691BDE78E6005BD535 /* FDCalendar.m in Sources */,
+				B80F1B701BE26785008D5843 /* UITabBar+RedHot.m in Sources */,
 				B865C1821BDD2DE800C1E681 /* BaseModelMethod.m in Sources */,
 				B8447A111BE0D8C4004E5E15 /* PickListView.m in Sources */,
 				B84479E51BE07A46004E5E15 /* StudentHomeUserBasicInfoCell.m in Sources */,
