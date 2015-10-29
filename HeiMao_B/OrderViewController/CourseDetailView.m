@@ -139,7 +139,6 @@
         make.height.equalTo(@(90.f));
     }];
     
-    
     [self.potraitView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.studentBgView).offset(leftOffsetSpacing);
         make.top.equalTo(self.studentBgView).offset(15.f);
@@ -169,7 +168,7 @@
         make.left.equalTo(self.studentBgView).offset(leftOffsetSpacing);
         make.right.equalTo(self.studentBgView).offset(-leftOffsetSpacing);
         make.top.equalTo(self.potraitView.mas_bottom).offset(15.f);
-        make.height.equalTo(@(0.5));
+        make.height.equalTo(@(HM_LINE_HEIGHT));
     }];
     
     

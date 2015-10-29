@@ -91,7 +91,7 @@
     
     self.bottomLine = [self getOnelineView];
     [self.bgView addSubview:self.bottomLine];
-//    [self updateConstraints];
+    [self updateConstraints];
 }
 
 #pragma mark Layout
@@ -113,7 +113,7 @@
         make.top.equalTo(self.bgView);
         make.left.equalTo(self.bgView);
         make.width.equalTo(self.bgView);
-        make.height.equalTo(@(0.5));
+        make.height.equalTo(@(HM_LINE_HEIGHT));
     }];
     
     [self.potraitView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -145,9 +145,8 @@
         make.left.equalTo(self.bgView).offset(leftOffsetSpacing);
         make.right.equalTo(self.bgView).offset(-leftOffsetSpacing);
         make.top.equalTo(self.potraitView.mas_bottom).offset(15.f);
-        make.height.equalTo(self.topLine);
+        make.height.equalTo(@(HM_LINE_HEIGHT));
     }];
-    
     
     [self.courseTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView).offset(leftOffsetSpacing);
@@ -169,34 +168,13 @@
     }];
     
     [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.bgView.mas_bottom).offset(-1);
+        make.top.equalTo(self.bgView.mas_bottom).offset(-HM_LINE_HEIGHT);
         make.size.equalTo(self.topLine);
         make.left.equalTo(self.topLine);
+        make.height.equalTo(@(HM_LINE_HEIGHT));
     }];
     
 }
-
-//- (void)layoutSubviews
-//{
-//    [super layoutSubviews];
-//    CGFloat leftOffsetSpacing = 15.f;
-//    self.bgView.frame = CGRectMake(0, 0, self.width, self.height - 10);
-//    self.topLine.frame = CGRectMake(0, 0, self.width, 0.5);
-//    self.potraitView.frame = CGRectMake(leftOffsetSpacing, 15, 60, 60);
-//    [self.statueLabel sizeToFit];
-//    self.statueLabel.frame = CGRectMake(self.width - self.statueLabel.width - leftOffsetSpacing, 14.f, self.statueLabel.width, 14);
-//    self.mainTitle.frame = CGRectMake(self.potraitView.right + 12, (90 - 16 - 10 - 14)/2.f, self.width - (self.potraitView.right + 12) - self.statueLabel.width - 12 - leftOffsetSpacing, 16.f);
-//    self.subTitle.frame = CGRectOffset(self.mainTitle.frame, 0, self.mainTitle.height + 10.f);
-//    
-//    self.midLine.frame = CGRectMake(leftOffsetSpacing, self.potraitView.bottom + 15, self.width - leftOffsetSpacing * 2, 0.5);
-//    
-//    self.courseTimeLabel.frame = CGRectMake(leftOffsetSpacing, self.midLine.top + (90 - 14 * 3 - 8 * 2)/2.f, self.width - leftOffsetSpacing * 2, 14.f);
-//    self.courseAddressLabel.frame = CGRectOffset(self.courseTimeLabel.frame, 0, self.courseTimeLabel.height + 8.f);
-//    self.pickAddressLabel.frame = CGRectOffset(self.courseTimeLabel.frame, 0, self.courseTimeLabel.height + 8.f);
-//    
-//    self.bottomLine.frame = CGRectMake(0, self.bgView.height - 1, self.width, 1);
-//    
-//}
 
 #pragma mark - Data
 - (void)setModel:(HMCourseModel *)model
@@ -217,7 +195,6 @@
     self.courseTimeLabel.text = _model.courseTime;
     self.courseAddressLabel.text = [NSString stringWithFormat:@"训练场地: %@",_model.courseAddress];
     self.pickAddressLabel.text = [NSString stringWithFormat:@"接送地点: %@",_model.coursePikerAddres];
-    [self setNeedsUpdateConstraints];
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated

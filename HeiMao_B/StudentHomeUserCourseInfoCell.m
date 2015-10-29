@@ -98,8 +98,8 @@
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
         make.right.equalTo(self.contentView);
-        make.top.equalTo(self.contentView.mas_bottom).offset(-1);
-        make.height.equalTo(@(1));
+        make.top.equalTo(self.contentView.mas_bottom).offset(-HM_LINE_HEIGHT);
+        make.height.equalTo(@(HM_LINE_HEIGHT));
     }];
     
     

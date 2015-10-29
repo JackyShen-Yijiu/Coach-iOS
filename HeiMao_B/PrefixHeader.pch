@@ -27,5 +27,6 @@
 
 #define HM_HIGHTCOLOR [UIColor colorWithWhite:0.9 alpha:1]
 #define HM_LINE_COLOR  RGB_Color(0xe6, 0xe6, 0xe6)
+#define HM_LINE_HEIGHT  0.5f
 
 #endif

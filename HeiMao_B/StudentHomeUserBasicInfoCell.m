@@ -93,8 +93,8 @@
     [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.userNameLabel);
         make.width.equalTo(self.contentView);
-        make.bottom.equalTo(self.contentView).offset(-1);
-        make.height.equalTo(@(1));
+        make.bottom.equalTo(self.contentView).offset(-HM_LINE_HEIGHT);
+        make.height.equalTo(@(HM_LINE_HEIGHT));
     }];
     [super updateConstraints];
 }

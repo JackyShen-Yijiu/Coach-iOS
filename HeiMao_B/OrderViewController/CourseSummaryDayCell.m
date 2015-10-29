@@ -126,9 +126,9 @@
     }];
     
     [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_bottom).offset(-1);
+        make.top.equalTo(self.mas_bottom).offset(-HM_LINE_HEIGHT);
         make.width.equalTo(self);
-        make.height.equalTo(@(1));
+        make.height.equalTo(@(HM_LINE_HEIGHT));
         make.left.equalTo(self);
     }];
     
@@ -162,8 +162,6 @@
     self.subTitle.text = _model.courseProgress;
     self.courseBeginTime.text = _model.courseBeginTime;
     self.courseEndTime.text = _model.courseEndtime;
-    
-//    [self setNeedsUpdateConstraints];
 }
 
 #pragma mark - Common

@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "b27_icon_star_yellow.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "b27_icon_star_yellow@2x.png",
       "scale" : "2x"
     },
     {

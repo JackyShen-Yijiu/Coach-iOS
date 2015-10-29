@@ -86,12 +86,10 @@
         make.right.equalTo(self.recomendData.mas_left).offset(-10);
     }];
     
-    
     [self.recomendData mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView).offset(-15);
         make.centerY.equalTo(self.porView);
     }];
-    
     
     [self.recomendContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.porView.mas_bottom).offset(10.f);
@@ -104,8 +102,8 @@
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.userName);
         make.right.equalTo(self.contentView);
-        make.top.equalTo(self.contentView.mas_bottom).offset(-1);
-        make.height.equalTo(@(1));
+        make.top.equalTo(self.contentView.mas_bottom).offset(-HM_LINE_HEIGHT);
+        make.height.equalTo(@(HM_LINE_HEIGHT));
     }];
     
     [super updateConstraints];
