@@ -22,6 +22,7 @@
 		B8447A111BE0D8C4004E5E15 /* PickListView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A101BE0D8C4004E5E15 /* PickListView.m */; };
 		B8447A141BE0DE09004E5E15 /* CourseDesInPutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A131BE0DE09004E5E15 /* CourseDesInPutCell.m */; };
 		B8447A171BE0E456004E5E15 /* CoursePicListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A161BE0E456004E5E15 /* CoursePicListCell.m */; };
+		B8447A1A1BE1BEC2004E5E15 /* CourseEnsureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A191BE1BEC2004E5E15 /* CourseEnsureCell.m */; };
 		B865C1631BDC95B000C1E681 /* HMCourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1621BDC95B000C1E681 /* HMCourseModel.m */; };
 		B865C1661BDC969700C1E681 /* HMStudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1651BDC969700C1E681 /* HMStudentModel.m */; };
 		B865C16A1BDC9ABB00C1E681 /* HMClassInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1691BDC9ABB00C1E681 /* HMClassInfoModel.m */; };
@@ -85,6 +86,8 @@
 		B8447A131BE0DE09004E5E15 /* CourseDesInPutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseDesInPutCell.m; path = OrderViewController/CourseDesInPutCell.m; sourceTree = "<group>"; };
 		B8447A151BE0E456004E5E15 /* CoursePicListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoursePicListCell.h; sourceTree = "<group>"; };
 		B8447A161BE0E456004E5E15 /* CoursePicListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursePicListCell.m; sourceTree = "<group>"; };
+		B8447A181BE1BEC2004E5E15 /* CourseEnsureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseEnsureCell.h; sourceTree = "<group>"; };
+		B8447A191BE1BEC2004E5E15 /* CourseEnsureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseEnsureCell.m; sourceTree = "<group>"; };
 		B865C1611BDC95B000C1E681 /* HMCourseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMCourseModel.h; path = HeiMao_B/DataModel/HMCourseModel.h; sourceTree = "<group>"; };
 		B865C1621BDC95B000C1E681 /* HMCourseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMCourseModel.m; path = HeiMao_B/DataModel/HMCourseModel.m; sourceTree = "<group>"; };
 		B865C1641BDC969700C1E681 /* HMStudentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMStudentModel.h; path = HeiMao_B/DataModel/HMStudentModel.h; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 				B8447A161BE0E456004E5E15 /* CoursePicListCell.m */,
 				B8447A121BE0DE09004E5E15 /* CourseDesInPutCell.h */,
 				B8447A131BE0DE09004E5E15 /* CourseDesInPutCell.m */,
+				B8447A181BE1BEC2004E5E15 /* CourseEnsureCell.h */,
+				B8447A191BE1BEC2004E5E15 /* CourseEnsureCell.m */,
 				B8447A061BE0D2E3004E5E15 /* CourseCancelController.h */,
 				B8447A071BE0D2E3004E5E15 /* CourseCancelController.m */,
 			);
@@ -243,12 +248,12 @@
 				B865C16F1BDC9D8E00C1E681 /* HMSchoolInfoModel.m */,
 			);
 			name = DataModel;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B86EB3481BDB50EB0014EBD7 = {
 			isa = PBXGroup;
 			children = (
-				B865C1601BDC953E00C1E681 /* DataModel */,
 				B86EB3531BDB50EB0014EBD7 /* HeiMao_B */,
 				B86EB3601BDB50EB0014EBD7 /* Assets.xcassets */,
 				B86EB3651BDB50EB0014EBD7 /* Info.plist */,
@@ -272,6 +277,7 @@
 				B86EB3571BDB50EB0014EBD7 /* AppDelegate.h */,
 				B86EB3581BDB50EB0014EBD7 /* AppDelegate.m */,
 				B8C4584C1BDB571A00901F71 /* PrefixHeader.pch */,
+				B865C1601BDC953E00C1E681 /* DataModel */,
 				B84479DC1BE0710A004E5E15 /* StudentHomeController */,
 				B8AFED1A1BDB983B00EF8726 /* MyUserController */,
 				B84479CF1BDF745D004E5E15 /* CourseDetailViewController */,
@@ -586,6 +592,7 @@
 				B8AFED191BDB96AC00EF8726 /* CourseViewController.m in Sources */,
 				B8C458841BDB5B8E00901F71 /* UIViewController+Method.m in Sources */,
 				B865C1791BDCA49400C1E681 /* CourseSummaryListCell.m in Sources */,
+				B8447A1A1BE1BEC2004E5E15 /* CourseEnsureCell.m in Sources */,
 				B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */,
 				B8447A141BE0DE09004E5E15 /* CourseDesInPutCell.m in Sources */,
 				B84479DB1BDFB35D004E5E15 /* HMButton.m in Sources */,

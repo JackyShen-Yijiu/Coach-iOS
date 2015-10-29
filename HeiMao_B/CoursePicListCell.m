@@ -19,6 +19,16 @@
     return height += 10.f;
 }
 
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        
+    }
+    [self updateConstraints];
+    return self;
+}
+
 - (PickListView *)pickListView
 {
     if (!_pickListView) {
@@ -57,4 +67,13 @@
         make.bottom.equalTo(self.contentView);
     }];
 }
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+}
+
 @end

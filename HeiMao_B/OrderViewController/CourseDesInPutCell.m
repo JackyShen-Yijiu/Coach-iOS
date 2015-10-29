@@ -101,6 +101,12 @@
     return _bottomView;
 }
 
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+}
 
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+}
 
 @end

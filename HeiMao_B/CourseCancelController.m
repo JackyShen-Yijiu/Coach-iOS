@@ -9,6 +9,7 @@
 #import "CourseCancelController.h"
 #import "CoursePicListCell.h"
 #import "CourseDesInPutCell.h"
+#import "CourseEnsureCell.h"
 
 @interface CourseCancelControllerModel : NSObject
 @property(nonatomic,strong)NSString * pickerTitle;
@@ -18,7 +19,10 @@
 @implementation CourseCancelControllerModel
 @end
 
-@interface CourseCancelController()<UITableViewDataSource,UITableViewDelegate,CourseDesInPutCellDelegate>
+@interface CourseCancelController()<UITableViewDataSource,UITableViewDelegate,CourseDesInPutCellDelegate,CourseEnsureCellDelegate>
+{
+    CGFloat _scrollViewOffset;
+}
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)CourseCancelControllerModel * model;
 @property(nonatomic,strong)CourseDesInPutCell * inputCell;
@@ -137,7 +141,7 @@
 #pragma mark - TableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
@@ -146,6 +150,8 @@
         return [CoursePicListCell cellHight:[[self model] pickItemsDataList].count];
     }else if (indexPath.row == 1){
         return [CourseDesInPutCell cellHeight];
+    }else if (indexPath.row == 2){
+        return [CourseEnsureCell cellHeigthWithTitle:self.controllerType == KControllTypeCancel];
     }
     return 0;
     
@@ -159,7 +165,6 @@
         }
         [cell.pickListView setTitle:self.model.pickerTitle];
         cell.pickListView.pickItemArray = self.model.pickItemsDataList;
-        [cell setNeedsUpdateConstraints];
         return cell;
     }else if (indexPath.row == 1){
         
@@ -170,6 +175,15 @@
         }
         self.inputCell = cell;
         cell.placeLabel.text =  self.controllerType == KControllTypeCancel ? @"取消预约说明" : @"拒绝预约说明";
+        return cell;
+
+    }else if (indexPath.row == 2){
+        CourseEnsureCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CourseEnsureCell class])];
+        if (!cell) {
+            cell = [[CourseEnsureCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([CourseEnsureCell class])];
+            cell.delegate = self;
+        }
+        [cell setTitle:self.controllerType == KControllTypeCancel ? @"亲，多次取消会影响您的信用积分吆！" : @""];
         return cell;
 
     }
@@ -205,6 +219,26 @@
     [self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, 0) animated:YES];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+//    UIPanGestureRecognizer * pan = scrollView.panGestureRecognizer;
+//    CGPoint  velocityInView = [pan velocityInView:scrollView];
+//    if (velocityInView.y > 0) {
+//        [self.inputCell.textView resignFirstResponder];
+//    }
+    
+    if (_scrollViewOffset > scrollView.contentOffset.y) {
+        [self.inputCell.textView resignFirstResponder];
+    }
+    _scrollViewOffset = scrollView.contentOffset.y;
+}
+
+#pragma mark - Action
+- (void)courseCellDidEnstureClick:(CourseEnsureCell *)cell
+{
+    
+}
+
 #pragma mark - TableView
 - (UITableView *)tableView
 {
@@ -215,6 +249,7 @@
         
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 64)];
         _tableView.autoresizesSubviews = UIViewAutoresizingFlexibleWidth;
+        _tableView.separatorColor = [UIColor clearColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [self.view addSubview:_tableView];
