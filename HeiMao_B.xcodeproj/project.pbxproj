@@ -23,6 +23,10 @@
 		B8447A141BE0DE09004E5E15 /* CourseDesInPutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A131BE0DE09004E5E15 /* CourseDesInPutCell.m */; };
 		B8447A171BE0E456004E5E15 /* CoursePicListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A161BE0E456004E5E15 /* CoursePicListCell.m */; };
 		B8447A1A1BE1BEC2004E5E15 /* CourseEnsureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A191BE1BEC2004E5E15 /* CourseEnsureCell.m */; };
+		B8447A1F1BE1CC0D004E5E15 /* CoureseRatingController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A1E1BE1CC0D004E5E15 /* CoureseRatingController.m */; };
+		B8447A221BE1CC25004E5E15 /* CWStarRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A211BE1CC25004E5E15 /* CWStarRateView.m */; };
+		B8447A251BE1CC9E004E5E15 /* CourseRatingUserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A241BE1CC9E004E5E15 /* CourseRatingUserInfoCell.m */; };
+		B8447A281BE1E150004E5E15 /* CourseRatingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A271BE1E150004E5E15 /* CourseRatingCell.m */; };
 		B865C1631BDC95B000C1E681 /* HMCourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1621BDC95B000C1E681 /* HMCourseModel.m */; };
 		B865C1661BDC969700C1E681 /* HMStudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1651BDC969700C1E681 /* HMStudentModel.m */; };
 		B865C16A1BDC9ABB00C1E681 /* HMClassInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B865C1691BDC9ABB00C1E681 /* HMClassInfoModel.m */; };
@@ -37,7 +41,7 @@
 		B86EB3591BDB50EB0014EBD7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B86EB3581BDB50EB0014EBD7 /* AppDelegate.m */; };
 		B86EB3611BDB50EB0014EBD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B86EB3601BDB50EB0014EBD7 /* Assets.xcassets */; };
 		B8AFED191BDB96AC00EF8726 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8AFED181BDB96AC00EF8726 /* CourseViewController.m */; };
-		B8AFED1D1BDB988000EF8726 /* UserCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8AFED1C1BDB988000EF8726 /* UserCenterController.m */; };
+		B8AFED1D1BDB988000EF8726 /* TeacherCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8AFED1C1BDB988000EF8726 /* TeacherCenterController.m */; };
 		B8C458571BDB592B00901F71 /* HMNagationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458561BDB592B00901F71 /* HMNagationController.m */; };
 		B8C4586E1BDB59AC00901F71 /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4585B1BDB59AC00901F71 /* AFNetworkActivityLogger.m */; };
 		B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4585F1BDB59AC00901F71 /* YiRefreshFooter.m */; };
@@ -88,6 +92,14 @@
 		B8447A161BE0E456004E5E15 /* CoursePicListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursePicListCell.m; sourceTree = "<group>"; };
 		B8447A181BE1BEC2004E5E15 /* CourseEnsureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseEnsureCell.h; sourceTree = "<group>"; };
 		B8447A191BE1BEC2004E5E15 /* CourseEnsureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseEnsureCell.m; sourceTree = "<group>"; };
+		B8447A1D1BE1CC0D004E5E15 /* CoureseRatingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoureseRatingController.h; sourceTree = "<group>"; };
+		B8447A1E1BE1CC0D004E5E15 /* CoureseRatingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoureseRatingController.m; sourceTree = "<group>"; };
+		B8447A201BE1CC25004E5E15 /* CWStarRateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStarRateView.h; sourceTree = "<group>"; };
+		B8447A211BE1CC25004E5E15 /* CWStarRateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWStarRateView.m; sourceTree = "<group>"; };
+		B8447A231BE1CC9E004E5E15 /* CourseRatingUserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseRatingUserInfoCell.h; sourceTree = "<group>"; };
+		B8447A241BE1CC9E004E5E15 /* CourseRatingUserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseRatingUserInfoCell.m; sourceTree = "<group>"; };
+		B8447A261BE1E150004E5E15 /* CourseRatingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseRatingCell.h; sourceTree = "<group>"; };
+		B8447A271BE1E150004E5E15 /* CourseRatingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseRatingCell.m; sourceTree = "<group>"; };
 		B865C1611BDC95B000C1E681 /* HMCourseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMCourseModel.h; path = HeiMao_B/DataModel/HMCourseModel.h; sourceTree = "<group>"; };
 		B865C1621BDC95B000C1E681 /* HMCourseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMCourseModel.m; path = HeiMao_B/DataModel/HMCourseModel.m; sourceTree = "<group>"; };
 		B865C1641BDC969700C1E681 /* HMStudentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMStudentModel.h; path = HeiMao_B/DataModel/HMStudentModel.h; sourceTree = "<group>"; };
@@ -117,8 +129,8 @@
 		B86EB3651BDB50EB0014EBD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = HeiMao_B/Info.plist; sourceTree = "<group>"; };
 		B8AFED171BDB96AC00EF8726 /* CourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseViewController.h; sourceTree = "<group>"; };
 		B8AFED181BDB96AC00EF8726 /* CourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseViewController.m; sourceTree = "<group>"; };
-		B8AFED1B1BDB988000EF8726 /* UserCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterController.h; sourceTree = "<group>"; };
-		B8AFED1C1BDB988000EF8726 /* UserCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterController.m; sourceTree = "<group>"; };
+		B8AFED1B1BDB988000EF8726 /* TeacherCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherCenterController.h; sourceTree = "<group>"; };
+		B8AFED1C1BDB988000EF8726 /* TeacherCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherCenterController.m; sourceTree = "<group>"; };
 		B8C4584C1BDB571A00901F71 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B8C458551BDB592B00901F71 /* HMNagationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMNagationController.h; sourceTree = "<group>"; };
 		B8C458561BDB592B00901F71 /* HMNagationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMNagationController.m; sourceTree = "<group>"; };
@@ -228,6 +240,21 @@
 			name = CourseCancelController;
 			sourceTree = "<group>";
 		};
+		B8447A1C1BE1CBF6004E5E15 /* CoureseRatingController */ = {
+			isa = PBXGroup;
+			children = (
+				B8447A1D1BE1CC0D004E5E15 /* CoureseRatingController.h */,
+				B8447A1E1BE1CC0D004E5E15 /* CoureseRatingController.m */,
+				B8447A231BE1CC9E004E5E15 /* CourseRatingUserInfoCell.h */,
+				B8447A241BE1CC9E004E5E15 /* CourseRatingUserInfoCell.m */,
+				B8447A261BE1E150004E5E15 /* CourseRatingCell.h */,
+				B8447A271BE1E150004E5E15 /* CourseRatingCell.m */,
+				B8447A201BE1CC25004E5E15 /* CWStarRateView.h */,
+				B8447A211BE1CC25004E5E15 /* CWStarRateView.m */,
+			);
+			name = CoureseRatingController;
+			sourceTree = "<group>";
+		};
 		B865C1601BDC953E00C1E681 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,12 +306,13 @@
 				B8C4584C1BDB571A00901F71 /* PrefixHeader.pch */,
 				B865C1601BDC953E00C1E681 /* DataModel */,
 				B84479DC1BE0710A004E5E15 /* StudentHomeController */,
-				B8AFED1A1BDB983B00EF8726 /* MyUserController */,
 				B84479CF1BDF745D004E5E15 /* CourseDetailViewController */,
-				B8AFED161BDB96A000EF8726 /* CourseViewController */,
+				B8AFED161BDB96A000EF8726 /* CourseSummaryController */,
 				B8447A021BE0D281004E5E15 /* CourseCancelController */,
-				B8C458851BDB5B9200901F71 /* NetWorkEntity */,
+				B8447A1C1BE1CBF6004E5E15 /* CoureseRatingController */,
 				B8C458541BDB592B00901F71 /* NavigationController */,
+				B8AFED1A1BDB983B00EF8726 /* TeacherController */,
+				B8C458851BDB5B9200901F71 /* NetWorkEntity */,
 				B8C458811BDB5B7600901F71 /* Common */,
 				B8C458581BDB59AC00901F71 /* ThirdPary */,
 				B86EB3541BDB50EB0014EBD7 /* Supporting Files */,
@@ -300,7 +328,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B8AFED161BDB96A000EF8726 /* CourseViewController */ = {
+		B8AFED161BDB96A000EF8726 /* CourseSummaryController */ = {
 			isa = PBXGroup;
 			children = (
 				B8AFED171BDB96AC00EF8726 /* CourseViewController.h */,
@@ -310,16 +338,17 @@
 				B865C17A1BDCA4A300C1E681 /* CourseSummaryDayCell.h */,
 				B865C17B1BDCA4A300C1E681 /* CourseSummaryDayCell.m */,
 			);
-			name = CourseViewController;
+			name = CourseSummaryController;
 			path = OrderViewController;
 			sourceTree = "<group>";
 		};
-		B8AFED1A1BDB983B00EF8726 /* MyUserController */ = {
+		B8AFED1A1BDB983B00EF8726 /* TeacherController */ = {
 			isa = PBXGroup;
 			children = (
-				B8AFED1B1BDB988000EF8726 /* UserCenterController.h */,
-				B8AFED1C1BDB988000EF8726 /* UserCenterController.m */,
+				B8AFED1B1BDB988000EF8726 /* TeacherCenterController.h */,
+				B8AFED1C1BDB988000EF8726 /* TeacherCenterController.m */,
 			);
+			name = TeacherController;
 			path = MyUserController;
 			sourceTree = "<group>";
 		};
@@ -566,6 +595,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8C458571BDB592B00901F71 /* HMNagationController.m in Sources */,
+				B8447A221BE1CC25004E5E15 /* CWStarRateView.m in Sources */,
 				B8C458731BDB59AC00901F71 /* UIView+TKCategory.m in Sources */,
 				B84479DF1BE07129004E5E15 /* SutdentHomeController.m in Sources */,
 				B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */,
@@ -588,15 +618,18 @@
 				B8C4586E1BDB59AC00901F71 /* AFNetworkActivityLogger.m in Sources */,
 				B865C1631BDC95B000C1E681 /* HMCourseModel.m in Sources */,
 				B8C458741BDB59AC00901F71 /* UIViewAdditions.m in Sources */,
+				B8447A1F1BE1CC0D004E5E15 /* CoureseRatingController.m in Sources */,
 				B8C458711BDB59AC00901F71 /* RFSegmentView.m in Sources */,
 				B8AFED191BDB96AC00EF8726 /* CourseViewController.m in Sources */,
 				B8C458841BDB5B8E00901F71 /* UIViewController+Method.m in Sources */,
+				B8447A281BE1E150004E5E15 /* CourseRatingCell.m in Sources */,
 				B865C1791BDCA49400C1E681 /* CourseSummaryListCell.m in Sources */,
 				B8447A1A1BE1BEC2004E5E15 /* CourseEnsureCell.m in Sources */,
 				B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */,
 				B8447A141BE0DE09004E5E15 /* CourseDesInPutCell.m in Sources */,
 				B84479DB1BDFB35D004E5E15 /* HMButton.m in Sources */,
 				B865C17F1BDCA4D600C1E681 /* PortraitView.m in Sources */,
+				B8447A251BE1CC9E004E5E15 /* CourseRatingUserInfoCell.m in Sources */,
 				B8C458701BDB59AC00901F71 /* YiRefreshHeader.m in Sources */,
 				B865C1731BDC9F1C00C1E681 /* HMPortraitInfoModel.m in Sources */,
 				B865C1761BDCA0B400C1E681 /* RefreshTableView.m in Sources */,
@@ -606,7 +639,7 @@
 				B865C16A1BDC9ABB00C1E681 /* HMClassInfoModel.m in Sources */,
 				B8447A081BE0D2E3004E5E15 /* CourseCancelController.m in Sources */,
 				B86EB3561BDB50EB0014EBD7 /* main.m in Sources */,
-				B8AFED1D1BDB988000EF8726 /* UserCenterController.m in Sources */,
+				B8AFED1D1BDB988000EF8726 /* TeacherCenterController.m in Sources */,
 				B8C458881BDB5BAD00901F71 /* NetWorkEntiry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

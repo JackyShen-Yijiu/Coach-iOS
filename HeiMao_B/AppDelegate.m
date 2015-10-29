@@ -11,7 +11,7 @@
 #import "MobClick.h"
 #import "HMNagationController.h"
 #import "CourseViewController.h"
-#import "UserCenterController.h"
+#import "TeacherCenterController.h"
 
 
 @interface AppDelegate ()
@@ -46,7 +46,7 @@
     UIImage * nUser = [UIImage imageNamed:@"user_normal"];
     UIImage * hUser = [UIImage imageNamed:@"user_seleted"];
     CourseViewController * courseContro = [[CourseViewController alloc] init];
-    UserCenterController * userCentertro = [[UserCenterController alloc] init];
+    TeacherCenterController * userCentertro = [[TeacherCenterController alloc] init];
     return [self getTabWithTitleArray:@[@"预约",@"我的"] nimagesArray:@[nCourse,nUser] himages:@[hCourse,hUser] andControllers:@[courseContro,userCentertro]];
 }
 

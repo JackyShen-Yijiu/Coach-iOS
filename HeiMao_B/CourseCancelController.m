@@ -197,7 +197,7 @@
     self.model.inputDes = str;
 }
 
-#pragma mark - 
+#pragma mark - KeyBoard
 - (void)addKeyBoradNotificaiton
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:)
@@ -221,16 +221,16 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-//    UIPanGestureRecognizer * pan = scrollView.panGestureRecognizer;
-//    CGPoint  velocityInView = [pan velocityInView:scrollView];
-//    if (velocityInView.y > 0) {
-//        [self.inputCell.textView resignFirstResponder];
-//    }
-    
-    if (_scrollViewOffset > scrollView.contentOffset.y) {
+    UIPanGestureRecognizer * pan = scrollView.panGestureRecognizer;
+    CGPoint  velocityInView = [pan velocityInView:scrollView];
+    if (velocityInView.y > 0) {
         [self.inputCell.textView resignFirstResponder];
     }
-    _scrollViewOffset = scrollView.contentOffset.y;
+    
+//    if (_scrollViewOffset > scrollView.contentOffset.y) {
+//        [self.inputCell.textView resignFirstResponder];
+//    }
+//    _scrollViewOffset = scrollView.contentOffset.y;
 }
 
 #pragma mark - Action

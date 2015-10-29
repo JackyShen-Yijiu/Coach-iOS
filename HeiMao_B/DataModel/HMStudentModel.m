@@ -15,7 +15,7 @@
     HMStudentModel * model = [[HMStudentModel alloc] init];
     model.userName = @"王星宇";
     model.porInfo = [HMPortraitInfoModel converJsonDicToModel:[dic objectInfoForKey:@"headportrait"]];
-    
+    model.userId = @"2323423434";
     model.schoolInfo = [HMSchoolInfoModel converJsonDicToModel:nil];
     model.carLicenseType = @"C1本";
     model.courseSchedule = @"科目二第16学时";

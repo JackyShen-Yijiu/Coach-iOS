@@ -10,6 +10,7 @@
 #import "CourseDetailView.h"
 #import "SutdentHomeController.h"
 #import "CourseCancelController.h"
+#import "CoureseRatingController.h"
 
 @interface CourseDetailViewController()<CourseDetailViewDelegate>
 @property(nonatomic,strong)CourseDetailView* detailView;
@@ -91,7 +92,12 @@
 - (void)courseDetailViewDidClickRecommentButton:(CourseDetailView *)view
 {
     //评论
+    CoureseRatingController * crc = [[CoureseRatingController alloc] init];
+    crc.courseId = self.model.courseId;
+    crc.studentModel = self.model.studentInfo;
+    [self.navigationController pushViewController:crc animated:YES];
 }
+
 
 - (void)courseDetailViewDidClickStudentDetail:(CourseDetailView *)view
 {

@@ -45,10 +45,10 @@
     [self.contentView addSubview:self.titleLabel];
     
     self.ensurebutton = [[HMButton alloc] init];
-    [self.ensurebutton setTitle:@"接受" forState:UIControlStateNormal];
-    [self.ensurebutton setTitle:@"接受" forState:UIControlStateHighlighted];
+    [self.ensurebutton setTitle:@"提交" forState:UIControlStateNormal];
+    [self.ensurebutton setTitle:@"提交" forState:UIControlStateHighlighted];
     [self.ensurebutton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.ensurebutton.titleLabel.font = [UIFont systemFontOfSize:13.f];
+    self.ensurebutton.titleLabel.font = [UIFont systemFontOfSize:14.f];
     [self.ensurebutton setNBackColor:RGB_Color(31, 124, 235)];
     [self.ensurebutton setHBackColor:RGB_Color(0x24, 0x6d, 0xd0)];
     [self.ensurebutton addTarget:self action:@selector(didClickEnsure:) forControlEvents:UIControlEventTouchUpInside];
@@ -77,6 +77,13 @@
     if ([_delegate respondsToSelector:@selector(courseCellDidEnstureClick:)]) {
         [_delegate courseCellDidEnstureClick:self];
     }
+}
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+}
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
 }
 
 @end
