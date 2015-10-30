@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
-#define KNETBASEURL          @"http://120.25.209.9/f3"
 
 
 @interface NetWorkEntiry : NSObject

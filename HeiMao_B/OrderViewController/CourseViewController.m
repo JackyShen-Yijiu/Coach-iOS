@@ -121,15 +121,15 @@
 {
     WS(ws);
     self.courseSummaryTableView.refreshHeader.beginRefreshingBlock = ^(){
-        sleep(1.f);
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            ws.courseSummaryData = [[BaseModelMethod getCourseListArrayFormDicInfo:nil] mutableCopy];
-            [ws.courseSummaryTableView.refreshHeader endRefreshing];
-            [ws.courseSummaryTableView reloadData];
-        });
-        
-        return;
+//        sleep(1.f);
+//
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            ws.courseSummaryData = [[BaseModelMethod getCourseListArrayFormDicInfo:nil] mutableCopy];
+//            [ws.courseSummaryTableView.refreshHeader endRefreshing];
+//            [ws.courseSummaryTableView reloadData];
+//        });
+//        
+//        return;
         
         [NetWorkEntiry getCourseinfoWithUserId:nil pageIndex:1 pageCount:RELOADDATACOUNT token:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             

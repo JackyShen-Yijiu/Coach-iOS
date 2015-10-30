@@ -9,11 +9,12 @@
 #import "NetWorkEntiry.h"
 #import "JSONKit.h"
 #import "NSString+MD5.h"
+#define KNETBASEURL
 
-#define  HOST_TEST_DAMIAN @"http://101.200.204.240"
-#define  HOST_LINE_DOMAIN @""
+#define  HOST_TEST_DAMIAN  @"http://101.200.204.240/api/v1/test"
+#define  HOST_LINE_DOMAIN  @"http://123.57.63.15:8181/api/v1"
 
-#define QA_TEST
+//#define QA_TEST
 
 
 @implementation NetWorkEntiry
@@ -181,7 +182,7 @@
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     userId = @"5616352721ec29041a9af889";
-    token = @"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI1NjE2MzUyNzIxZWMyOTA0MWE5YWY4ODkiLCJ0aW1lc3RhbXAiOiIyMDE1LTEwLTA4VDA5OjIzOjQ4LjY5NloiLCJhdWQiOiJibGFja2NhdGUiLCJpYXQiOjE0NDQyOTYyMjh9.-iOZ5fIQjdmdHBthsCP7VQWRYYM68zWWHWWnIUxRSEg";
+    token = @" eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI1NjE2MzUyNzIxZWMyOTA0MWE5YWY4ODkiLCJ0aW1lc3RhbXAiOiIyMDE1LTEwLTA4VDA5OjIzOjQ4LjY5NloiLCJhdWQiOiJibGFja2NhdGUiLCJpYXQiOjE0NDQyOTYyMjh9.-iOZ5fIQjdmdHBthsCP7VQWRYYM68zWWHWWnIUxRSEg";
     if (!userId || !token) {
         return [self missParagramercallBackFailure:failure];
     }
