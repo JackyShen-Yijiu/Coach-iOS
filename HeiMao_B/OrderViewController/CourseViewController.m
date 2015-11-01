@@ -276,10 +276,15 @@
 
 - (void)needRefresh:(NSNotification *)notification
 {
-    if ([self.myNavController topViewController] == self.tabBarController) {
-        [self.courseSummaryTableView.refreshHeader beginRefreshing];
-    }else{
-        self.isNeedRefresh = YES;
+    HMCourseModel * model = [notification object];
+    if (model) {
+        for (HMCourseModel * sumModel in self.courseSummaryData) {
+            if ([sumModel.courseId isEqualToString:model.courseId]) {
+                sumModel.courseStatue = model.courseStatue;
+                [self.courseDayTableView reloadData];
+                break;
+            }
+        }
     }
 }
 

@@ -94,6 +94,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [ws.tableView.refreshHeader endRefreshing];
                     [ws.tableView reloadData];
+                    [ws postNotificationMakeSummarRefreshUI];
                 });
             }else{
                 [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
@@ -178,7 +179,6 @@
         if (type == 1) {
             [ws showTotasViewWithMes:@"操作成功"];
             [[[ws tableView] refreshHeader] beginRefreshing];
-            [ws postNotificationMakeSummarRefreshUI];
         }else{
             [ws dealErrorResponseWithTableView:nil info:responseObject];
         }
@@ -210,20 +210,18 @@
 #pragma mark - delegate
 - (void)courseCancelControllerDidOpeartionSucess:(CourseCancelController *)controller
 {
-    self.isNeedRefresh = YES;
     [self.navigationController popToRootViewControllerAnimated:YES];
-    [self postNotificationMakeSummarRefreshUI];
+    [[self.tableView refreshHeader] beginRefreshing];
 }
 
 - (void)coureseRatingControllerDidOpeartionSucess:(CoureseRatingController *)controller
 {
-    self.isNeedRefresh = YES;
     [self.navigationController popToRootViewControllerAnimated:YES];
-    [self postNotificationMakeSummarRefreshUI];
+    [[self.tableView refreshHeader] beginRefreshing];
 }
 
 - (void)postNotificationMakeSummarRefreshUI
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:KCourseViewController_NeedRefresh object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:KCourseViewController_NeedRefresh object:self.model];
 }
 @end
