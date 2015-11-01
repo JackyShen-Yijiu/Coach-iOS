@@ -120,7 +120,7 @@
     if(_model.portrait.originalpic)
         [self.porView.imageView sd_setImageWithURL:[NSURL URLWithString:_model.portrait.originalpic] placeholderImage:defaultImage];
     
-    self.userName.text = _model.userName;
+    self.userName.text = _model.coachName;
     self.recomendData.text = _model.recomendData;
     self.recomendContent.text = _model.recomedContent;
 }

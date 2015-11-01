@@ -30,11 +30,14 @@
 
 + (NSArray *)getRecomendListArrayFormDicInfo:(NSArray *)array
 {
+    if (![array isKindOfClass:[NSArray class]] || !array.count) {
+        return nil;
+    }
     NSMutableArray * oArray = [NSMutableArray arrayWithCapacity:0];
-    for (int i = 0;i < 20;i++) {
-        HMRecomendModel * recomendModel = [HMRecomendModel converJsonDicToModel:nil];
-        if (recomendModel) {
-            [oArray addObject:recomendModel];
+    for (NSDictionary * info in array) {
+        HMRecomendModel * courseModel = [HMRecomendModel converJsonDicToModel:info];
+        if (courseModel) {
+            [oArray addObject:courseModel];
         }
     }
     return [oArray copy];

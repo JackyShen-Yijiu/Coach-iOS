@@ -10,8 +10,9 @@
 #import "HMPortraitInfoModel.h"
 
 @interface HMRecomendModel : NSObject
-@property(nonatomic,strong)NSString * userId;
-@property(nonatomic,strong)NSString * userName;
+@property(nonatomic,strong)NSString * recomendId;
+@property(nonatomic,strong)NSString * coachid;
+@property(nonatomic,strong)NSString * coachName;
 @property(nonatomic,strong)HMPortraitInfoModel * portrait;
 @property(nonatomic,strong)NSString * recomedContent;
 @property(nonatomic,strong)NSString * recomendData;

@@ -29,7 +29,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.isNeedRefresh = YES;
-
+    
 }
 
 #pragma mark Life Sycle
@@ -73,7 +73,6 @@
     self.tableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 64) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.refreshFooter = nil;
     [self.view addSubview:self.tableView];
     [self initRefreshView];
 }
@@ -102,15 +101,50 @@
             NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
             if (type == 1) {
                 ws.model = [HMStudentModel converJsonDicToModel:[responseObject objectInfoForKey:@"data"]];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [ws.tableView.refreshHeader endRefreshing];
-                    [ws.tableView reloadData];
-                });
+                [NetWorkEntiry getAllRecomendWithUserID:ws.studentId WithIndex:1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+                    if (type == 1) {
+                        ws.model.recommendArrays = [[BaseModelMethod getRecomendListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [ws.tableView.refreshHeader endRefreshing];
+                            [ws.tableView reloadData];
+                        });
+                    }else{
+                        [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
+                    }
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    [ws netErrorWithTableView:ws.tableView];
+                    
+                }];
+                
             }else{
                 [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [ws netErrorWithTableView:ws.tableView];
+        }];
+    };
+    
+    [self.tableView refreshFooter].beginRefreshingBlock = ^(){
+        [NetWorkEntiry getAllRecomendWithUserID:ws.studentId WithIndex:1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+            if (type == 1) {
+                NSArray * listArray = [BaseModelMethod getRecomendListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]];
+                if (listArray.count) {
+                    [ws.model.recommendArrays addObjectsFromArray:listArray];
+                    [ws.tableView reloadData];
+                }else{
+                    [ws showTotasViewWithMes:@"已经加载所有数据"];
+                }
+                
+                [ws.tableView.refreshFooter endRefreshing];
+                
+            }else{
+                [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [ws netErrorWithTableView:ws.tableView];
+            
         }];
     };
 }
@@ -165,7 +199,7 @@
 {
     switch (indexPath.section) {
         case 0:
-           return [StudentHomeUserBasicInfoCell cellHeigth];
+            return [StudentHomeUserBasicInfoCell cellHeigth];
             break;
         case 1:
             return [StudentHomeUserCourseInfoCell cellHeigth];

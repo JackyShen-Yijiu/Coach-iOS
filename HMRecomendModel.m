@@ -13,10 +13,14 @@
 + (HMRecomendModel *)converJsonDicToModel:(NSDictionary *)dic
 {
     HMRecomendModel * model = [[HMRecomendModel alloc] init];
-    model.userName = @"李文政";
-    model.portrait = [HMPortraitInfoModel converJsonDicToModel:nil];
-    model.recomedContent = @"正的不错，学的快，人也聪明，态度好，有礼貌";
-    model.recomendData = @"08-27 14:58";
+    model.recomendId = [dic objectStringForKey:@"_id"];
+    
+    NSDictionary* coachInfo = [dic objectInfoForKey:@"coachid"];
+    model.coachName = [coachInfo objectStringForKey:@"name"];
+    model.coachid = [coachInfo objectStringForKey:@"_id"];
+    model.portrait = [HMPortraitInfoModel converJsonDicToModel:[coachInfo objectInfoForKey:@"headportrait"]];
+    model.recomedContent = [[dic objectInfoForKey:@"coachcomment"] objectStringForKey:@"commentcontent"];
+    model.recomendData = [[dic objectInfoForKey:@"coachcomment"] objectStringForKey:@"commenttime"];
     return model;
 }
 @end
