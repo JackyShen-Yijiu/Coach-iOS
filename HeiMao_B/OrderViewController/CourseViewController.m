@@ -33,12 +33,19 @@
 @end
 
 @implementation CourseViewController
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.isNeedRefresh = YES;
     [self initUI];
+    [self addNotification];
 }
 
 
@@ -105,7 +112,7 @@
 #pragma mark Load Data
 - (void)dealErrorResponseWithTableView:(RefreshTableView *)tableview info:(NSDictionary *)dic
 {
-    [self showTotasViewWithMes:[dic objectForKey:@"result"]];
+    [self showTotasViewWithMes:[dic objectForKey:@"msg"]];
     [tableview.refreshHeader endRefreshing];
     [tableview.refreshFooter endRefreshing];
 }
@@ -121,17 +128,8 @@
 {
     WS(ws);
     self.courseSummaryTableView.refreshHeader.beginRefreshingBlock = ^(){
-//        sleep(1.f);
-//
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            ws.courseSummaryData = [[BaseModelMethod getCourseListArrayFormDicInfo:nil] mutableCopy];
-//            [ws.courseSummaryTableView.refreshHeader endRefreshing];
-//            [ws.courseSummaryTableView reloadData];
-//        });
-//        
-//        return;
         
-        [NetWorkEntiry getCourseinfoWithUserId:nil pageIndex:1 pageCount:RELOADDATACOUNT token:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [NetWorkEntiry getCourseinfoWithUserId:[[UserInfoModel defaultUserInfo] userID] pageIndex:1 pageCount:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
             
@@ -151,17 +149,8 @@
     };
     
     self.courseSummaryTableView.refreshFooter.beginRefreshingBlock = ^(){
-        sleep(1.f);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [ws.courseSummaryData addObjectsFromArray:[BaseModelMethod getCourseListArrayFormDicInfo:nil]];
-            [ws.courseSummaryTableView.refreshFooter endRefreshing];
-            [ws.courseSummaryTableView reloadData];
-        });
-        
-        return;
-
-        
-        [NetWorkEntiry getCourseinfoWithUserId:nil pageIndex:1 pageCount:RELOADDATACOUNT token:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      
+        [NetWorkEntiry getCourseinfoWithUserId:[[UserInfoModel defaultUserInfo] userID] pageIndex:ws.courseSummaryData.count / RELOADDATACOUNT pageCount:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
             if (type == 1) {
                 NSArray * listArray = [BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]];
@@ -190,14 +179,23 @@
         [self.dateFormattor setDateFormat:@"yyyy-M-d"];
     }
     NSString * dataStr = [self.dateFormattor stringFromDate:date];
-    self.courseDayTableData = [[BaseModelMethod getCourseListArrayFormDicInfo:nil] mutableCopy];
-    [self.courseDayTableView reloadData];
-    return;
+    NSString *  userId = [[UserInfoModel defaultUserInfo] userID];
     
-    [NetWorkEntiry getAllCourseInfoWithUserId:nil DayTime:dataStr token:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    WS(ws);
+    [NetWorkEntiry getAllCourseInfoWithUserId:userId DayTime:dataStr  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
         
+        if (type == 1) {
+            ws.courseDayTableData = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [ws.courseDayTableView reloadData];
+            });
+        }else{
+            [ws dealErrorResponseWithTableView:nil info:responseObject];
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [ws netErrorWithTableView:nil];
+
     }];
 }
 
@@ -263,10 +261,25 @@
     }
     if (courseModel) {
         CourseDetailViewController * decv = [[CourseDetailViewController alloc] init];
-        decv.model = courseModel;
         decv.couresID = courseModel.courseId;
-
         [self.navigationController pushViewController:decv animated:YES];
+    }
+}
+
+
+#pragma mark - 
+//其他页面预约状态发生变化，通知本页面更新
+- (void)addNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefresh:) name:KCourseViewController_NeedRefresh object:nil];
+}
+
+- (void)needRefresh:(NSNotification *)notification
+{
+    if ([self.myNavController topViewController] == self.tabBarController) {
+        [self.courseSummaryTableView.refreshHeader beginRefreshing];
+    }else{
+        self.isNeedRefresh = YES;
     }
 }
 

@@ -43,7 +43,7 @@
 - (void)initUI
 {
     self.contentView.backgroundColor  = RGB_Color(247, 249, 251);
-    self.potraitView = [[PortraitView alloc] init];
+    self.potraitView = [[PortraitView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
     self.potraitView.layer.cornerRadius = 1.f;
     self.potraitView.layer.shouldRasterize = YES;
     self.potraitView.backgroundColor = [UIColor redColor];
@@ -184,7 +184,7 @@
     }
     _model = model;
     UIImage * defaultImage = [UIImage imageNamed:@"temp"];
-    NSString * imageStr = _model.studentInfo.porInfo.thumbnailpic;
+    NSString * imageStr = _model.studentInfo.porInfo.originalpic;
     if(imageStr)
         [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];
     
@@ -200,7 +200,7 @@
     self.statueLabel.text = [_model getStatueString];
 
     self.courseTimeLabel.text = _model.courseTime;
-    self.courseAddressLabel.text = [NSString stringWithFormat:@"训练场地: %@",_model.courseAddress];
+    self.courseAddressLabel.text = [NSString stringWithFormat:@"训练场地: %@",_model.courseTrainInfo.address];
     self.pickAddressLabel.text = [NSString stringWithFormat:@"接送地点: %@",_model.coursePikerAddres];
 }
 

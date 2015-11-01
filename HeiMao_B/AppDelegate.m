@@ -23,7 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-//    [MobClick startWithAppkey:@"55a4d82f67e58eeece0038be" reportPolicy:BATCH   channelId:@"蒲公英"];
+    [MobClick startWithAppkey:@"5635edcce0f55a2280003548" reportPolicy:BATCH   channelId:@"蒲公英"];
     
     AFNetworkReachabilityManager *  manager = [AFNetworkReachabilityManager sharedManager];
     [manager startMonitoring];

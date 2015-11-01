@@ -13,11 +13,12 @@
 
 typedef NS_ENUM(NSInteger, KCourseStatue){
     KCourseStatueInvalid =0,
-    KCourseStatueRequest,   //请求，等待教练通过
-    KCourseStatueUnderWay,  //进行中
+    KCourseStatueRequest = 1,   //请求，等待教练通过
+    KCourseStatueStudentReject = 2,
+    KCourseStatueUnderWay,  //教练确认
+    KCourseStatueCanceld,      //教练取消
     KCourseStatueWatingToDone, //等待教练确定课程完成
     KCourseStatueOnDone,    //教练确定完成，等待评论
     KCourseStatueOnCommended, //评论成功
-    KCourseStatueCanceld      //教练取消
 };
 

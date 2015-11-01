@@ -40,7 +40,7 @@
     
     self.contentView.backgroundColor = [UIColor whiteColor];
     
-    self.porTraitView = [[PortraitView alloc] init];
+    self.porTraitView = [[PortraitView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.width, 240)];
     self.porTraitView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.porTraitView];
     

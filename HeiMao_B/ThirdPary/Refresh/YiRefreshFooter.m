@@ -21,7 +21,6 @@
     BOOL isRefresh;
     
     
-    UIView *footerView;
     UILabel*headerLabel;
     UIActivityIndicatorView *activityView;
     
@@ -42,9 +41,9 @@
     float imageHeight=footerHeight;
     float labelHeight=footerHeight;
     
-    footerView=[[UIView alloc] init];
+    self.footerView=[[UIView alloc] init];
     headerLabel=[[UILabel alloc] initWithFrame:CGRectMake((scrollWidth-labelWidth)/2, 0, labelWidth, labelHeight)];
-    [footerView addSubview:headerLabel];
+    [self.self.footerView addSubview:headerLabel];
     headerLabel.textAlignment=NSTextAlignmentCenter;
     headerLabel.text=@"加载更多...";
     headerLabel.font=[UIFont systemFontOfSize:14];
@@ -52,7 +51,7 @@
     
     activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activityView.frame=CGRectMake(headerLabel.right - 5, 0, imageWidth, imageHeight);
-    [footerView addSubview:activityView];
+    [self.footerView addSubview:activityView];
     
     activityView.hidden=YES;
  
@@ -68,7 +67,7 @@
 {
    
     if ([keyPath isEqualToString:@"contentSize"]) {
-        [footerView setHidden:_scrollView.contentSize.height <= _scrollView.height];
+        [self.footerView setHidden:_scrollView.contentSize.height <= _scrollView.height];
         return;
     }
     
@@ -79,18 +78,18 @@
     if (!isAdd) {
         isAdd=YES;
         
-        footerView.frame=CGRectMake(0, contentHeight, scrollWidth, footerHeight);
-        [_scrollView addSubview:footerView];
+        self.footerView.frame=CGRectMake(0, contentHeight, scrollWidth, footerHeight);
+        [_scrollView addSubview:self.footerView];
     }
     
-    footerView.frame=CGRectMake(0, contentHeight, scrollWidth, footerHeight);
+    self.footerView.frame=CGRectMake(0, contentHeight, scrollWidth, footerHeight);
 //    activityView.frame=CGRectMake((scrollWidth-footerHeight)/2, 0, footerHeight, footerHeight);
 
     int currentPostion = _scrollView.contentOffset.y;
     
    
 //   进入刷新状态
-    if ((currentPostion>(contentHeight-scrollFrameHeight))&&(contentHeight>scrollFrameHeight) && !footerView.isHidden) {
+    if ((currentPostion>(contentHeight-scrollFrameHeight))&&(contentHeight>scrollFrameHeight) && !self.footerView.isHidden) {
         
         [self beginRefreshing];
     }
@@ -123,7 +122,7 @@
             [activityView stopAnimating];
             
             _scrollView.contentInset = UIEdgeInsetsMake(0 ,_scrollView.contentInset.left, 0, _scrollView.contentInset.right);
-            footerView.frame=CGRectMake(0, contentHeight, WScreen, footerHeight);
+            self.footerView.frame=CGRectMake(0, contentHeight, WScreen, footerHeight);
         }];
     });
 }

@@ -13,19 +13,14 @@
 + (HMSchoolInfoModel *)converJsonDicToModel:(NSDictionary *)dic
 {
     
-    HMSchoolInfoModel * classType = [[HMSchoolInfoModel alloc] init];
-    classType.schoolName = @"北京海淀驾校";
-    return classType;
     
-//    if (!dic || ![dic isKindOfClass:[NSDictionary class]] ||![dic allKeys].count) {
-//        return nil;
-//    }
-//    HMSchoolModel * classType = [[HMSchoolModel alloc] init];
-//    classType.schoolName = [dic objectStringForKey:@"id"];
-//    classType.schoolId = [dic objectStringForKey:@"name"];
-//    
-//    classType.schoolName = @"北京海淀驾校";
-//    return classType;
+    if (!dic || ![dic isKindOfClass:[NSDictionary class]] ||![dic allKeys].count) {
+        return nil;
+    }
+    HMSchoolInfoModel * schoolInfo = [[HMSchoolInfoModel alloc] init];
+    schoolInfo.schoolId = [dic objectStringForKey:@"id"];
+    schoolInfo.schoolName = [dic objectStringForKey:@"name"];
+    return schoolInfo;
 }
 
 @end

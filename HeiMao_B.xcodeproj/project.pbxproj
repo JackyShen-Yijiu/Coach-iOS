@@ -55,6 +55,10 @@
 		B8C458801BDB5B5C00901F71 /* ToastAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587F1BDB5B5C00901F71 /* ToastAlertView.m */; };
 		B8C458841BDB5B8E00901F71 /* UIViewController+Method.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458831BDB5B8E00901F71 /* UIViewController+Method.m */; };
 		B8C458881BDB5BAD00901F71 /* NetWorkEntiry.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C458871BDB5BAD00901F71 /* NetWorkEntiry.m */; };
+		B8DDB7B51BE47808008FE867 /* CourseDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDB7B41BE47808008FE867 /* CourseDetailViewCell.m */; };
+		B8DDB7B81BE47FDE008FE867 /* HMTrainaddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDB7B71BE47FDE008FE867 /* HMTrainaddressModel.m */; };
+		B8DDB7BB1BE4879C008FE867 /* HMCarLicenseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDB7BA1BE4879C008FE867 /* HMCarLicenseModel.m */; };
+		B8DDB7BE1BE49110008FE867 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDB7BD1BE49110008FE867 /* UserInfoModel.m */; };
 		B8FFDF691BDE78E6005BD535 /* FDCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFDF661BDE78E6005BD535 /* FDCalendar.m */; };
 		B8FFDF6A1BDE78E6005BD535 /* FDCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFDF681BDE78E6005BD535 /* FDCalendarItem.m */; };
 /* End PBXBuildFile section */
@@ -162,6 +166,14 @@
 		B8C458831BDB5B8E00901F71 /* UIViewController+Method.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Method.m"; sourceTree = "<group>"; };
 		B8C458861BDB5BAD00901F71 /* NetWorkEntiry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkEntiry.h; sourceTree = "<group>"; };
 		B8C458871BDB5BAD00901F71 /* NetWorkEntiry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkEntiry.m; sourceTree = "<group>"; };
+		B8DDB7B31BE47808008FE867 /* CourseDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailViewCell.h; sourceTree = "<group>"; };
+		B8DDB7B41BE47808008FE867 /* CourseDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseDetailViewCell.m; sourceTree = "<group>"; };
+		B8DDB7B61BE47FDE008FE867 /* HMTrainaddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMTrainaddressModel.h; sourceTree = "<group>"; };
+		B8DDB7B71BE47FDE008FE867 /* HMTrainaddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMTrainaddressModel.m; sourceTree = "<group>"; };
+		B8DDB7B91BE4879C008FE867 /* HMCarLicenseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMCarLicenseModel.h; sourceTree = "<group>"; };
+		B8DDB7BA1BE4879C008FE867 /* HMCarLicenseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMCarLicenseModel.m; sourceTree = "<group>"; };
+		B8DDB7BC1BE49110008FE867 /* UserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
+		B8DDB7BD1BE49110008FE867 /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
 		B8FFDF651BDE78E6005BD535 /* FDCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCalendar.h; sourceTree = "<group>"; };
 		B8FFDF661BDE78E6005BD535 /* FDCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendar.m; sourceTree = "<group>"; };
 		B8FFDF671BDE78E6005BD535 /* FDCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCalendarItem.h; sourceTree = "<group>"; };
@@ -202,6 +214,8 @@
 			children = (
 				B84479D01BDF74AA004E5E15 /* CourseDetailViewController.h */,
 				B84479D11BDF74AA004E5E15 /* CourseDetailViewController.m */,
+				B8DDB7B31BE47808008FE867 /* CourseDetailViewCell.h */,
+				B8DDB7B41BE47808008FE867 /* CourseDetailViewCell.m */,
 				B84479D31BDF7890004E5E15 /* CourseDetailView.h */,
 				B84479D41BDF7890004E5E15 /* CourseDetailView.m */,
 			);
@@ -262,10 +276,16 @@
 			isa = PBXGroup;
 			children = (
 				B865C1671BDC970700C1E681 /* ModelDefine.h */,
+				B8DDB7BC1BE49110008FE867 /* UserInfoModel.h */,
+				B8DDB7BD1BE49110008FE867 /* UserInfoModel.m */,
 				B865C1801BDD2DE800C1E681 /* BaseModelMethod.h */,
 				B865C1811BDD2DE800C1E681 /* BaseModelMethod.m */,
 				B865C1611BDC95B000C1E681 /* HMCourseModel.h */,
 				B865C1621BDC95B000C1E681 /* HMCourseModel.m */,
+				B8DDB7B91BE4879C008FE867 /* HMCarLicenseModel.h */,
+				B8DDB7BA1BE4879C008FE867 /* HMCarLicenseModel.m */,
+				B8DDB7B61BE47FDE008FE867 /* HMTrainaddressModel.h */,
+				B8DDB7B71BE47FDE008FE867 /* HMTrainaddressModel.m */,
 				B865C1641BDC969700C1E681 /* HMStudentModel.h */,
 				B865C1651BDC969700C1E681 /* HMStudentModel.m */,
 				B84479E01BE0765B004E5E15 /* HMRecomendModel.h */,
@@ -599,7 +619,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8DDB7B51BE47808008FE867 /* CourseDetailViewCell.m in Sources */,
 				B8C458571BDB592B00901F71 /* HMNagationController.m in Sources */,
+				B8DDB7BE1BE49110008FE867 /* UserInfoModel.m in Sources */,
 				B8447A221BE1CC25004E5E15 /* CWStarRateView.m in Sources */,
 				B8C458731BDB59AC00901F71 /* UIView+TKCategory.m in Sources */,
 				B84479DF1BE07129004E5E15 /* SutdentHomeController.m in Sources */,
@@ -635,6 +657,7 @@
 				B8447A141BE0DE09004E5E15 /* CourseDesInPutCell.m in Sources */,
 				B84479DB1BDFB35D004E5E15 /* HMButton.m in Sources */,
 				B865C17F1BDCA4D600C1E681 /* PortraitView.m in Sources */,
+				B8DDB7BB1BE4879C008FE867 /* HMCarLicenseModel.m in Sources */,
 				B8447A251BE1CC9E004E5E15 /* CourseRatingUserInfoCell.m in Sources */,
 				B8C458701BDB59AC00901F71 /* YiRefreshHeader.m in Sources */,
 				B865C1731BDC9F1C00C1E681 /* HMPortraitInfoModel.m in Sources */,
@@ -644,6 +667,7 @@
 				B8447A171BE0E456004E5E15 /* CoursePicListCell.m in Sources */,
 				B865C16A1BDC9ABB00C1E681 /* HMClassInfoModel.m in Sources */,
 				B8447A081BE0D2E3004E5E15 /* CourseCancelController.m in Sources */,
+				B8DDB7B81BE47FDE008FE867 /* HMTrainaddressModel.m in Sources */,
 				B86EB3561BDB50EB0014EBD7 /* main.m in Sources */,
 				B8AFED1D1BDB988000EF8726 /* TeacherCenterController.m in Sources */,
 				B8C458881BDB5BAD00901F71 /* NetWorkEntiry.m in Sources */,

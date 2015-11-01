@@ -13,7 +13,13 @@ typedef NS_ENUM(NSInteger,KControllType) {
     KControllTypeCancel
 };
 
+@class CourseCancelController;
+@protocol CourseCancelControllerDelegate <NSObject>
+- (void)courseCancelControllerDidOpeartionSucess:(CourseCancelController *)controller;
+@end
+
 @interface CourseCancelController : UIViewController
+@property(nonatomic,weak)id<CourseCancelControllerDelegate>delegate;
 @property(nonatomic,assign)KControllType controllerType;
 @property(nonatomic,strong)NSString * courseId;
 @end

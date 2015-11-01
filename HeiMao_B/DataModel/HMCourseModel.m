@@ -13,37 +13,40 @@
 + (HMCourseModel *)converJsonDicToModel:(NSDictionary *)dic
 {
     
+//    HMCourseModel *  model = [[HMCourseModel alloc] init];
+//    model.courseProgress = @"科目二路口第二学时";
+//    model.courseTime = @"2015年12月11 13:00-18:00";
+//    model.courseBeginTime = @"13:00";
+//    model.courseEndtime = @"18:00";
+//    model.courseAddress =  @"北京沙河训练场";
+//    model.coursePikerAddres = @"北京昌平区天通苑";
+//    model.isPickerUp = YES;
+//    model.courseStatue = [[dic objectForKey:@"reservationstate"] integerValue];
+//    model.studentInfo = [HMStudentModel converJsonDicToModel:[dic objectInfoForKey:@"userid"]];
+//    model.classType = [HMClassInfoModel converJsonDicToModel:[dic objectInfoForKey:@"subject"]];
+//    
+//    return model;
+    if (!dic || ![dic isKindOfClass:[NSDictionary class]] ||![dic allKeys].count) {
+        return nil;
+    }
     HMCourseModel *  model = [[HMCourseModel alloc] init];
-    model.courseProgress = @"科目二路口第二学时";
-    model.courseTime = @"2015年12月11 13:00-18:00";
-    model.courseBeginTime = @"13:00";
-    model.courseEndtime = @"18:00";
-    model.courseAddress =  @"北京沙河训练场";
-    model.coursePikerAddres = @"北京昌平区天通苑";
-    model.isPickerUp = YES;
+    model.courseId = [dic objectStringForKey:@"_id"];
+    model.courseProgress = [dic objectStringForKey:@"courseprocessdesc"];
+    model.courseTime = [dic objectStringForKey:@"classdatetimedesc"];
+    model.courseBeginTime = [dic objectStringForKey:@"begintime"];
+    model.courseEndtime = [dic objectStringForKey:@"endtime"];
+    
+    model.courseTrainInfo = [HMTrainaddressModel converJsonDicToModel:[dic objectInfoForKey:@"trainfieldlinfo"]];
+    
+    model.coursePikerAddres = [dic objectStringForKey:@"shuttleaddress"];
+    model.isPickerUp = [[dic objectForKey:@"is_shuttle"] boolValue];
+    
     model.courseStatue = [[dic objectForKey:@"reservationstate"] integerValue];
+    
     model.studentInfo = [HMStudentModel converJsonDicToModel:[dic objectInfoForKey:@"userid"]];
     model.classType = [HMClassInfoModel converJsonDicToModel:[dic objectInfoForKey:@"subject"]];
     
     return model;
-
-    
-//    if (!dic || ![dic isKindOfClass:[NSDictionary class]] ||![dic allKeys].count) {
-//        return nil;
-//    }
-//    HMOrderModel *  model = [[HMOrderModel alloc] init];
-//
-//    model.orderId = [dic objectStringForKey:@"_id"];
-//    model.orderCreateTime = [dic objectStringForKey:@"reservationcreatetime"];
-//    model.orderBeginTime = [dic objectStringForKey:@"begintime"];
-//    model.orderEndTime = [dic objectStringForKey:@"endtime"];
-//    model.orderPikerAddres = [dic objectStringForKey:@"shuttleaddress"];
-//    model.isPickerUp = [[dic objectForKey:@"is_shuttle"] boolValue];
-//    model.orderStatue = [[dic objectForKey:@"reservationstate"] integerValue];
-//    model.userInfo = [HMStudentModel converJsonDicToModel:[dic objectInfoForKey:@"userid"]];
-//    model.classType = [HMClassModel converJsonDicToModel:[dic objectInfoForKey:@"subject"]];
-//    
-//    return model;
 }
 
 - (NSString *)getStatueString
@@ -53,6 +56,9 @@
             
         case KCourseStatueInvalid:
             break;
+        case KCourseStatueStudentReject:
+            break;
+            
         case KCourseStatueRequest:
             str = @"待接受";
             break;
@@ -60,7 +66,7 @@
             str = @"";
             break;
         case KCourseStatueWatingToDone:
-            str = @"学确认学完";
+            str = @"确认学完";
             break;
         case KCourseStatueOnDone:
             str = @"待评论";

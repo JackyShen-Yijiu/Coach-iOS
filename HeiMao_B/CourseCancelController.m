@@ -19,7 +19,7 @@
 @implementation CourseCancelControllerModel
 @end
 
-@interface CourseCancelController()<UITableViewDataSource,UITableViewDelegate,CourseDesInPutCellDelegate,CourseEnsureCellDelegate>
+@interface CourseCancelController()<UITableViewDataSource,UITableViewDelegate,CourseDesInPutCellDelegate,CourseEnsureCellDelegate,UIAlertViewDelegate>
 {
     CGFloat _scrollViewOffset;
 }
@@ -236,7 +236,59 @@
 #pragma mark - Action
 - (void)courseCellDidEnstureClick:(CourseEnsureCell *)cell
 {
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //    if (self.controllerType == KControllTypeReject) {
+    [NetWorkEntiry postToDealRequestOfCoureseWithCoachid:[[UserInfoModel defaultUserInfo] userID] coureseID:self.courseId didReject:NO cancelreason:[self seletedReasion] cancelcontent:self.model.inputDes  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+        if (type == 1) {
+            [self showAlertView];
+        }else{
+            [self dealErrorResponseWithInfo:responseObject];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self showTotasViewWithMes:@"网络异常"];
+    }];
+}
+- (void)dealErrorResponseWithInfo:(NSDictionary *)dic
+{
+    [self showTotasViewWithMes:[dic objectForKey:@"msg"]];
+
+}
+
+#pragma mar - AlertView
+- (void)showAlertView
+{
+    if (NSClassFromString(@"UIAlertController")) {
+        UIAlertController * alertCont = [UIAlertController alertControllerWithTitle:nil message:@"操作成功" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * actionn = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self alertView:[UIAlertView new] clickedButtonAtIndex:0];
+        }];
+        [alertCont addAction:actionn];
+        [self presentViewController:alertCont animated:YES completion:nil];
+    }else{
+        UIAlertView * alerView = [[UIAlertView alloc] initWithTitle:nil message:@"操作成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alerView show];
+    }
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([_delegate respondsToSelector:@selector(courseCancelControllerDidOpeartionSucess:)]) {
+        [_delegate courseCancelControllerDidOpeartionSucess:self];
+    }
+}
+
+- (NSString *)seletedReasion
+{
+    NSString * str = nil;
+    for (PickerItemModel * itemModel in self.model.pickItemsDataList) {
+        if (itemModel.isSeleted) {
+            str = itemModel.title;
+        }
+    }
+    return str;
 }
 
 #pragma mark - TableView

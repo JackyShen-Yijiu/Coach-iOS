@@ -123,8 +123,7 @@
  
     
     self.schoolLabel.text = [NSString stringWithFormat:@"报考驾校：%@",[_model.schoolInfo schoolName]];
-    self.carLicenseTypeLabel.text = [NSString stringWithFormat:@"车       型： %@",[_model carLicenseType]];
-    
+    self.carLicenseTypeLabel.text = [NSString stringWithFormat:@"车       型： %@  %@",[_model carLicenseInfo].code, [_model carLicenseInfo].name];
     
     NSString * courseSchedu = [NSString stringWithFormat:@"学车进度： %@",[_model courseSchedule]];
     NSDictionary * attru = @{

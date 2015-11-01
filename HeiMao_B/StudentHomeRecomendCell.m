@@ -47,7 +47,7 @@
 
 - (void)initUI
 {
-    self.porView = [[PortraitView alloc] init];
+    self.porView = [[PortraitView alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
     self.porView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.porView];
     
@@ -117,8 +117,8 @@
     }
     _model = model;
     UIImage * defaultImage = [UIImage imageNamed:@"temp"];
-    if(_model.portrait.thumbnailpic)
-        [self.porView.imageView sd_setImageWithURL:[NSURL URLWithString:_model.portrait.thumbnailpic] placeholderImage:defaultImage];
+    if(_model.portrait.originalpic)
+        [self.porView.imageView sd_setImageWithURL:[NSURL URLWithString:_model.portrait.originalpic] placeholderImage:defaultImage];
     
     self.userName.text = _model.userName;
     self.recomendData.text = _model.recomendData;

@@ -35,7 +35,7 @@
 - (void)initUI
 {
     self.contentView.backgroundColor  = RGB_Color(247, 249, 251);
-    self.potraitView = [[PortraitView alloc] init];
+    self.potraitView = [[PortraitView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
     self.potraitView.layer.cornerRadius = 1.f;
     self.potraitView.layer.shouldRasterize = YES;
     self.potraitView.backgroundColor = [UIColor redColor];
@@ -117,12 +117,12 @@
     _model = model;
     _model = model;
     UIImage * defaultImage = [UIImage imageNamed:@"temp"];
-    NSString * imageStr = _model.porInfo.thumbnailpic;
+    NSString * imageStr = _model.porInfo.originalpic;
     if(imageStr)
         [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];
     
     self.mainTitle.text = _model.userName;
-    self.subTitle.text = [NSString stringWithFormat:@"ID %@",_model.userId];
+    self.subTitle.text = [NSString stringWithFormat:@"ID %@",_model.disPlayId];
     [self setNeedsUpdateConstraints];
 }
 

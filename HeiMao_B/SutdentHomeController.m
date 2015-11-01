@@ -20,7 +20,6 @@
 @property(nonatomic,strong)HMStudentModel * model;
 @property(nonatomic,strong)UIView * recomendTitle;
 @property(nonatomic,assign)BOOL isNeedRefresh;
-
 @end
 
 @implementation SutdentHomeController
@@ -29,7 +28,6 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.isNeedRefresh = YES;
 }
 
 #pragma mark Life Sycle
@@ -81,7 +79,7 @@
 #pragma mark Load Data
 - (void)dealErrorResponseWithTableView:(RefreshTableView *)tableview info:(NSDictionary *)dic
 {
-    [self showTotasViewWithMes:[dic objectForKey:@"result"]];
+    [self showTotasViewWithMes:[dic objectForKey:@"msg"]];
     [tableview.refreshHeader endRefreshing];
     [tableview.refreshFooter endRefreshing];
 }
@@ -98,15 +96,20 @@
     WS(ws);
     self.tableView.refreshHeader.beginRefreshingBlock = ^(){
         
-        ws.model = [HMStudentModel converJsonDicToModel:nil];
-        ws.model.recommendArrays = [[BaseModelMethod getRecomendListArrayFormDicInfo:nil] mutableCopy];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            sleep(1.f);
-            [ws.tableView.refreshHeader endRefreshing];
-            [ws.tableView reloadData];
-        });
-        return;
-        
+        [NetWorkEntiry getStudentAllInfoWithStudentId:ws.studentId success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+            if (type == 1) {
+                ws.model = [HMStudentModel converJsonDicToModel:[responseObject objectInfoForKey:@"data"]];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [ws.tableView.refreshHeader endRefreshing];
+                    [ws.tableView reloadData];
+                });
+            }else{
+                [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [ws netErrorWithTableView:ws.tableView];
+        }];
     };
 }
 
@@ -187,7 +190,7 @@
         if (!basicCell) {
             basicCell = [[StudentHomeUserBasicInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identiy];
         }
-        [basicCell setBgImageUrlStr:self.model.porInfo.thumbnailpic userName:self.model.userName userId:self.model.userId];
+        [basicCell setBgImageUrlStr:self.model.porInfo.originalpic userName:self.model.userName userId:self.model.disPlayId];
         return basicCell;
     }else if (indexPath.section == 1){
         identiy =  NSStringFromClass([StudentHomeUserCourseInfoCell class]);

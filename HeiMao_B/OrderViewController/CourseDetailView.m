@@ -56,7 +56,7 @@
 {
 
     self.backgroundColor = [UIColor clearColor];
-    self.potraitView = [[PortraitView alloc] init];
+    self.potraitView = [[PortraitView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
     self.potraitView.layer.cornerRadius = 1.f;
     self.potraitView.layer.shouldRasterize = YES;
     self.potraitView.backgroundColor = [UIColor redColor];
@@ -264,7 +264,7 @@
 - (void)refreshUI
 {
     UIImage * defaultImage = [UIImage imageNamed:@"temp"];
-    NSString * imageStr = _model.studentInfo.porInfo.thumbnailpic;
+    NSString * imageStr = _model.studentInfo.porInfo.originalpic;
     if(imageStr)
         [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];
     
@@ -277,8 +277,8 @@
     
     self.courseInfoTitle.text = @"课程信息";
     self.courseTimeLabel.text = _model.courseTime;
-    self.courseAddressLabel.text = _model.courseAddress;
-    self.pickAddressLabel.text = _model.coursePikerAddres;
+    self.courseAddressLabel.text = [NSString stringWithFormat:@"训练场地: %@",_model.courseTrainInfo.address];
+    self.pickAddressLabel.text = [NSString stringWithFormat:@"接送地点: %@",_model.coursePikerAddres];
     
     [self.leftButton setHidden:NO];
     [self.rightButton setHidden:YES];
@@ -287,6 +287,9 @@
             
         case KCourseStatueInvalid:
             break;
+        case KCourseStatueStudentReject:
+            break;
+            
         case KCourseStatueRequest:
         {
             [self.leftButton setTitle:@"拒绝" forState:UIControlStateNormal];
@@ -364,6 +367,9 @@
             
         case KCourseStatueInvalid:
             break;
+        case KCourseStatueStudentReject:
+            break;
+            
         case KCourseStatueRequest:
         {
             if (button.tag == 200) {

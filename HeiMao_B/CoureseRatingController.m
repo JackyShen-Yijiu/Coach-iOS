@@ -13,7 +13,7 @@
 #import "CourseDesInPutCell.h"
 #import "CourseEnsureCell.h"
 
-@interface CoureseRatingController()<UITableViewDelegate,UITableViewDataSource,CourseDesInPutCellDelegate,CourseEnsureCellDelegate>
+@interface CoureseRatingController()<UITableViewDelegate,UITableViewDataSource,CourseDesInPutCellDelegate,CourseEnsureCellDelegate,UIAlertViewDelegate>
 
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)CourseDesInPutCell * inputCell;
@@ -160,7 +160,54 @@
 
 - (void)courseCellDidEnstureClick:(CourseEnsureCell *)cell
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [NetWorkEntiry postRecomentWithCoachidId:[[UserInfoModel defaultUserInfo] userID]
+                               Reservationid:self.courseId
+                                   starlevel:[[self getRateModelByType:KRateTypeAll] rating]
+                                   timelevel:[[self getRateModelByType:KRateTypeTime] rating]
+                               attitudelevel:[[self getRateModelByType:KRateTypeAttitude] rating]
+                                abilitylevel:[[self getRateModelByType:KRateTypeAbility] rating]
+                              commentcontent:self.desStr success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+        if (type == 1) {
+            [self showAlertView];
+        }else{
+            [self dealErrorResponseWithInfo:responseObject];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+       
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self showTotasViewWithMes:@"网络异常"];
+    }];
+}
+- (void)dealErrorResponseWithInfo:(NSDictionary *)dic
+{
+    [self showTotasViewWithMes:[dic objectForKey:@"msg"]];
+    
+}
 
+#pragma mar - AlertView
+- (void)showAlertView
+{
+    if (NSClassFromString(@"UIAlertController")) {
+        UIAlertController * alertCont = [UIAlertController alertControllerWithTitle:nil message:@"操作成功" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * actionn = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self alertView:[UIAlertView new] clickedButtonAtIndex:0];
+        }];
+        [alertCont addAction:actionn];
+        [self presentViewController:alertCont animated:YES completion:nil];
+    }else{
+        UIAlertView * alerView = [[UIAlertView alloc] initWithTitle:nil message:@"操作成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alerView show];
+    }
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([_delegate respondsToSelector:@selector(coureseRatingControllerDidOpeartionSucess:)]) {
+        [_delegate coureseRatingControllerDidOpeartionSucess:self];
+    }
 }
 
 #pragma mark - KeyBoard
@@ -225,27 +272,41 @@
         CourseRatingModel * ratModel = nil;
         ratModel = [[CourseRatingModel alloc] init];
         ratModel.title = @"总体评价";
+        ratModel.type = KRateTypeAll;
         ratModel.rating = 5.f;
         [array addObject:ratModel];
         
         ratModel = [[CourseRatingModel alloc] init];
         ratModel.title = @"定时";
+        ratModel.type = KRateTypeTime;
         ratModel.rating = 5.f;
         [array addObject:ratModel];
         
         ratModel = [[CourseRatingModel alloc] init];
         ratModel.title = @"态度";
+        ratModel.type = KRateTypeAttitude;
         ratModel.rating = 5.f;
         [array addObject:ratModel];
         
         ratModel = [[CourseRatingModel alloc] init];
         ratModel.title = @"能力";
+        ratModel.type = KRateTypeAbility;
         ratModel.rating = 5.f;
         [array addObject:ratModel];
         _ratingListArray = [array copy];
         
     }
     return _ratingListArray;
+}
+
+- (CourseRatingModel *)getRateModelByType:(KRateType)type
+{
+    for (CourseRatingModel * rateModel in self.ratingListArray) {
+        if (rateModel.type == type) {
+            return rateModel;
+        }
+    }
+    return nil;
 }
 
 - (CGFloat)bottomViewHight

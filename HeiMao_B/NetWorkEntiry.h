@@ -100,9 +100,8 @@
  *  教练获取预约列表信息
  *
  *  @param userId   （req) 教练ID
- *  @param token    （req) 登陆Token
  */
-+ (void)getCourseinfoWithUserId:(NSString *)userId pageIndex:(NSInteger)pageIndex pageCount:(NSInteger)pageCount token:(NSString *)token
++ (void)getCourseinfoWithUserId:(NSString *)userId pageIndex:(NSInteger)pageIndex pageCount:(NSInteger)pageCount
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
@@ -112,11 +111,48 @@
  *
  *  @param userId （req）教练ID
  *  @param dayTime (req）如 2014-5-10格式 NSString 类型
- *  @param token   （req) 登陆Token
  */
-+ (void)getAllCourseInfoWithUserId:(NSString *)userId  DayTime:(NSString *)dayTime token:(NSString *)token
++ (void)getAllCourseInfoWithUserId:(NSString *)userId  DayTime:(NSString *)dayTime
                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
+ *  获取教练每天的预约数据
+ *
+ *  @param userId （req）预约课程ID
+ */
++ (void)getCoureDetailInfoWithCouresId:(NSString *)couresId
+                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
+ *  获取学员详情信息
+ *
+ *  @param userId （req）预约课程ID
+ */
++ (void)getStudentAllInfoWithStudentId:(NSString *)studentId
+                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
+ * 教练拒绝（取消）| 接受学员预约
+ */
++ (void)postToDealRequestOfCoureseWithCoachid:(NSString *)coachidId
+                                    coureseID:(NSString *)courseID
+                                    didReject:(BOOL)isRejced
+                                 cancelreason:(NSString *)cancelReason
+                                cancelcontent:(NSString *)cancelContent
+                                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+/**
+ * 教练确认学完课程
+ */
++ (void)postToEnstureDoneofCourseWithCoachid:(NSString *)coachidId
+                                   coureseID:(NSString *)courseID
+                             learningcontent:(NSString *)learningcontent
+                              contentremarks:(NSString *)contentremarks
+                                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  *  UGC模块
@@ -138,8 +174,13 @@
  *  @param starLevel     评论星级
  *  @param commentStr    评论内容
  */
-+ (void)postRecomentWithCoachidId:(NSString *)coachid Reservationid:(NSString *)reservationid
-                        starlevel:(CGFloat )starLevel commentcontent:(NSString *)commentStr
++ (void)postRecomentWithCoachidId:(NSString *)coachid
+                    Reservationid:(NSString *)reservationid
+                        starlevel:(CGFloat )starLevel
+                        timelevel:(CGFloat)timelevel
+                    attitudelevel:(CGFloat)attitudelevel
+                     abilitylevel:(CGFloat)abilitylevel
+                   commentcontent:(NSString *)commentStr
                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 

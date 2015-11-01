@@ -53,7 +53,7 @@
             break;
     }
     self.maskView.center = CGPointMake(self.width/2.f, self.height/2.f);
-    [self pointView].center = CGPointMake(self.width/2.f, self.height/2.f + 15);
+    [self pointView].center = CGPointMake(self.width/2.f, self.height/2.f + 12);
 }
 
 - (UIView*)lineView
@@ -116,9 +116,10 @@
         _pointView = [[UIView alloc] init];
         _pointView.backgroundColor =  RGB_Color(40, 121, 243);
         _pointView.center = CGPointMake(self.width/2.f, self.height/2.f + 10);
-        _pointView.size = CGSizeMake(2, 2);
+        _pointView.size = CGSizeMake(4, 4);
+        _pointView.layer.masksToBounds = YES;
         [_pointView setHidden:YES];
-        _pointView.layer.cornerRadius = _maskView.size.width/2.f;
+        _pointView.layer.cornerRadius = _pointView.size.width/2.f;
     }
     [self insertSubview:_pointView aboveSubview:self.dayLabel];
     return _pointView;

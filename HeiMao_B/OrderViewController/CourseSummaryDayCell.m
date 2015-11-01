@@ -37,7 +37,7 @@
 
 - (void)initUI
 {
-    self.potraitView = [[PortraitView alloc] init];
+    self.potraitView = [[PortraitView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
     self.potraitView.layer.cornerRadius = 1.f;
     self.potraitView.layer.shouldRasterize = YES;
     self.potraitView.backgroundColor = [UIColor redColor];
@@ -154,7 +154,7 @@
     _model = model;
     
     UIImage * defaultImage = [UIImage imageNamed:@"temp"];
-    NSString * imageStr = _model.studentInfo.porInfo.thumbnailpic;
+    NSString * imageStr = _model.studentInfo.porInfo.originalpic;
     if(imageStr)
         [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];
     

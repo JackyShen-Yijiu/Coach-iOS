@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface HMPortraitInfoModel : NSObject
-@property(nonatomic,strong)NSString * thumbnailpic;
+//@property(nonatomic,strong)NSString * thumbnailpic;
 @property(nonatomic,strong)NSString * originalpic;
 + (HMPortraitInfoModel *)converJsonDicToModel:(NSDictionary *)dic;
 @end

@@ -11,9 +11,13 @@
 #import "SutdentHomeController.h"
 #import "CourseCancelController.h"
 #import "CoureseRatingController.h"
+#import "RefreshTableView.h"
+#import "CourseDetailViewCell.h"
 
-@interface CourseDetailViewController()<CourseDetailViewDelegate>
-@property(nonatomic,strong)CourseDetailView* detailView;
+@interface CourseDetailViewController()<CourseDetailViewDelegate,UITableViewDataSource,UITableViewDelegate,CourseCancelControllerDelegate,CoureseRatingControllerDelegate>
+@property(nonatomic,strong)RefreshTableView * tableView;
+@property(nonatomic,strong)HMCourseModel * model;
+@property(nonatomic,assign)BOOL isNeedRefresh;
 @end
 @implementation CourseDetailViewController
 
@@ -21,57 +25,134 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.isNeedRefresh = YES;
+    [self initUI];
 }
 
 #pragma mark Life Sycle
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self initNavBar];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self initNavBar];
-}
-#pragma mark - initUI
+    if(self.isNeedRefresh){
+        [self.tableView.refreshHeader beginRefreshing];
+    }
+    self.isNeedRefresh = NO;
 
+   
+}
+
+#pragma mark - initUI
 - (void)initNavBar
 {
     [self resetNavBar];
     self.myNavigationItem.title = @"预约详情";
 }
 
--(void)setCouresID:(NSString *)couresID
+-(void)initUI
 {
-    _couresID = couresID;
-    [self refreshData];
+    UIView * view = [[UIView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:view];
+    
+    self.tableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 64) style:
+                      UITableViewStylePlain];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.refreshFooter = nil;
+    [self.view addSubview:self.tableView];
+    [self initRefreshView];
 }
 
-- (CourseDetailView *)detailView
+#pragma mark Load Data
+- (void)dealErrorResponseWithTableView:(RefreshTableView *)tableview info:(NSDictionary *)dic
 {
-    if (!_detailView) {
-        _detailView = [[CourseDetailView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, [CourseDetailView cellHeight])];
-        _detailView.delegate = self;
-        [self.view addSubview:_detailView];
-    }
-    return _detailView;
+    [self showTotasViewWithMes:[dic objectForKey:@"msg"]];
+    [tableview.refreshHeader endRefreshing];
+    [tableview.refreshFooter endRefreshing];
 }
-#pragma mark - LoadData
-- (void)refreshData
+
+- (void)netErrorWithTableView:(RefreshTableView*)tableView
 {
-    self.detailView.model = self.model;
+    [self showTotasViewWithMes:@"网络异常，稍后重试"];
+    [tableView.refreshHeader endRefreshing];
+    [tableView.refreshFooter endRefreshing];
+}
+
+- (void)initRefreshView
+{
+    WS(ws);
+    [self.tableView refreshHeader].beginRefreshingBlock = ^(){
+        [NetWorkEntiry getCoureDetailInfoWithCouresId:self.couresID success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+            if (type == 1) {
+                ws.model = [HMCourseModel converJsonDicToModel:[responseObject objectInfoForKey:@"data"]];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [ws.tableView.refreshHeader endRefreshing];
+                    [ws.tableView reloadData];
+                });
+            }else{
+                [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [ws netErrorWithTableView:ws.tableView];
+        }];
+    };
+}
+
+#pragma mark TableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.model ? 1 : 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [CourseDetailView cellHeight];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString * identify = NSStringFromClass([CourseDetailViewCell class]);
+    CourseDetailViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identify];
+    if (!cell) {
+        cell = [[CourseDetailViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+        cell.detailView.delegate = self;
+    }
+    cell.detailView.model = self.model;
+    [cell.detailView refreshUI];
+    return cell;
 }
 
 #pragma mark - Action
 - (void)courseDetailViewDidClickAgreeButton:(CourseDetailView *)view
 {
-    //同意
-    self.detailView.model.courseStatue = KCourseStatueUnderWay;
-    [self.detailView refreshUI];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [NetWorkEntiry postToDealRequestOfCoureseWithCoachid:[[UserInfoModel defaultUserInfo] userID] coureseID:self.model.courseId didReject:YES cancelreason:nil cancelcontent:nil  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+        if (type == 1) {
+            [self showTotasViewWithMes:@"操作成功"];
+            [[[self tableView] refreshHeader] beginRefreshing];
+        }else{
+            [self dealErrorResponseWithTableView:nil info:responseObject];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self showTotasViewWithMes:@"网络异常"];
+    }];
 }
 
 - (void)courseDetailViewDidClickDisAgreeButton:(CourseDetailView *)view
 {
     //拒绝
     CourseCancelController * cour = [[CourseCancelController alloc] init];
-    cour.controllerType = KControllTypeReject;
     cour.courseId = self.model.courseId;
+    cour.controllerType = KControllTypeReject;
     [self.navigationController pushViewController:cour animated:YES];
 }
 
@@ -79,14 +160,33 @@
 {
     //取消
     CourseCancelController * cour = [[CourseCancelController alloc] init];
+    cour.delegate = self;
     cour.courseId = self.model.courseId;
     cour.controllerType = KControllTypeCancel;
     [self.navigationController pushViewController:cour animated:YES];
 }
 
+
 - (void)courseDetailViewDidClickWatingToDone:(CourseDetailView *)view
 {
     //确定学完
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    WS(ws);
+    [NetWorkEntiry postToEnstureDoneofCourseWithCoachid:[[UserInfoModel defaultUserInfo] userID] coureseID:self.model.courseId learningcontent:nil contentremarks:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+        if (type == 1) {
+            [ws showTotasViewWithMes:@"操作成功"];
+            [[[ws tableView] refreshHeader] beginRefreshing];
+            [ws postNotificationMakeSummarRefreshUI];
+        }else{
+            [ws dealErrorResponseWithTableView:nil info:responseObject];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [ws showTotasViewWithMes:@"网络异常"];
+    }];
 }
 
 - (void)courseDetailViewDidClickRecommentButton:(CourseDetailView *)view
@@ -95,16 +195,35 @@
     CoureseRatingController * crc = [[CoureseRatingController alloc] init];
     crc.courseId = self.model.courseId;
     crc.studentModel = self.model.studentInfo;
+    crc.delegate = self;
     [self.navigationController pushViewController:crc animated:YES];
 }
 
 
 - (void)courseDetailViewDidClickStudentDetail:(CourseDetailView *)view
 {
-    //学员信息
     SutdentHomeController * sudH = [[SutdentHomeController alloc] init];
-    sudH.studentId = self.detailView.model.studentInfo.userId;
+    sudH.studentId = self.model.studentInfo.userId;
     [self.navigationController pushViewController:sudH animated:YES];
 }
 
+#pragma mark - delegate
+- (void)courseCancelControllerDidOpeartionSucess:(CourseCancelController *)controller
+{
+    self.isNeedRefresh = YES;
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self postNotificationMakeSummarRefreshUI];
+}
+
+- (void)coureseRatingControllerDidOpeartionSucess:(CoureseRatingController *)controller
+{
+    self.isNeedRefresh = YES;
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self postNotificationMakeSummarRefreshUI];
+}
+
+- (void)postNotificationMakeSummarRefreshUI
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:KCourseViewController_NeedRefresh object:nil];
+}
 @end

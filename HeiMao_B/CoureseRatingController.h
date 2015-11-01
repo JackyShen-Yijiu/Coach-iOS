@@ -9,7 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "HMStudentModel.h"
 
+
+@class CoureseRatingController;
+@protocol CoureseRatingControllerDelegate <NSObject>
+- (void)coureseRatingControllerDidOpeartionSucess:(CoureseRatingController *)controller;
+@end
+
 @interface CoureseRatingController : UIViewController
+@property(nonatomic,weak)id<CoureseRatingControllerDelegate>delegate;
 @property(nonatomic,strong)NSString * courseId;
 @property(nonatomic,assign)HMStudentModel * studentModel;
 @end

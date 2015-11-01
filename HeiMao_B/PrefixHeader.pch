@@ -19,6 +19,7 @@
 #import "JSONKit.h"
 #import "NSDictionary+StrDic.h"
 #import "Masonry.h"
+#import "UserInfoModel.h"
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
@@ -28,5 +29,7 @@
 #define HM_HIGHTCOLOR [UIColor colorWithWhite:0.9 alpha:1]
 #define HM_LINE_COLOR  RGB_Color(0xe6, 0xe6, 0xe6)
 #define HM_LINE_HEIGHT  0.5f
+
+#define KCourseViewController_NeedRefresh @"KCourseViewController_NeedRefresh"
 
 #endif
