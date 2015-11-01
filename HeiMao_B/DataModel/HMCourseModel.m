@@ -57,13 +57,14 @@
         case KCourseStatueInvalid:
             break;
         case KCourseStatueStudentReject:
+            return @"教练已取消";
             break;
             
         case KCourseStatueRequest:
             str = @"待接受";
             break;
         case KCourseStatueUnderWay:
-            str = @"";
+            str = @"进行中";
             break;
         case KCourseStatueWatingToDone:
             str = @"确认学完";
