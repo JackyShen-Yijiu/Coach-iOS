@@ -57,9 +57,8 @@
         case KCourseStatueInvalid:
             break;
         case KCourseStatueStudentReject:
-            return @"教练已取消";
+            return @"被拒绝";
             break;
-            
         case KCourseStatueRequest:
             str = @"待接受";
             break;
