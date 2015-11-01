@@ -30,7 +30,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        [self setUserInteractionEnabled:NO];
         self.clipsToBounds = YES;
         self.porContentModel = KPortraitViewContentModelScaleToFill;
         self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];

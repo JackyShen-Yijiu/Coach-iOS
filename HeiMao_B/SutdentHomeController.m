@@ -28,6 +28,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.isNeedRefresh = YES;
+
 }
 
 #pragma mark Life Sycle
