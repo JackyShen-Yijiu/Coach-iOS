@@ -150,6 +150,11 @@
     
     self.courseSummaryTableView.refreshFooter.beginRefreshingBlock = ^(){
       
+        if(ws.courseSummaryData.count % RELOADDATACOUNT){
+            [ws showTotasViewWithMes:@"已经加载所有数据"];
+            [ws.courseSummaryTableView.refreshFooter endRefreshing];
+            return ;
+        }
         [NetWorkEntiry getCourseinfoWithUserId:[[UserInfoModel defaultUserInfo] userID] pageIndex:ws.courseSummaryData.count / RELOADDATACOUNT pageCount:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
             if (type == 1) {
@@ -214,7 +219,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.courseSummaryTableView) {
-        return [CourseSummaryListCell cellHeight];
+        return [CourseSummaryListCell cellHeightWithModel:self.courseSummaryData[indexPath.row]];
     }else{
         return [CourseSummaryDayCell cellHeight];
     }

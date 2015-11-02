@@ -10,5 +10,6 @@
 #import "CourseDetailView.h"
 
 @interface CourseDetailViewCell : UITableViewCell
+@property(nonatomic,strong)HMCourseModel * model;
 @property(nonatomic,strong)CourseDetailView * detailView;
 @end

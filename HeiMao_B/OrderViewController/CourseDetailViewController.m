@@ -113,7 +113,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [CourseDetailView cellHeight];
+    return [CourseDetailView cellHeightWithModel:self.model];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -124,6 +124,7 @@
         cell = [[CourseDetailViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
         cell.detailView.delegate = self;
     }
+    cell.model = self.model;
     cell.detailView.model = self.model;
     [cell.detailView refreshUI];
     return cell;

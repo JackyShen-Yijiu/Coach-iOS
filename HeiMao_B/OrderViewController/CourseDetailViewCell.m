@@ -13,7 +13,7 @@
 - (CourseDetailView *)detailView
 {
     if (!_detailView) {
-        _detailView = [[CourseDetailView alloc] initWithFrame:CGRectMake(0, 0, self.width, [CourseDetailView cellHeight])];
+        _detailView = [[CourseDetailView alloc] initWithFrame:CGRectMake(0, 0, self.width, [CourseDetailView cellHeightWithModel:self.model])];
         [self.contentView addSubview:_detailView];
     }
     return _detailView;
@@ -22,7 +22,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.detailView.frame = CGRectMake(0, 0, self.contentView.width, [CourseDetailView cellHeight]);
+    self.detailView.frame = CGRectMake(0, 0, self.contentView.width, [CourseDetailView cellHeightWithModel:self.model]);
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated

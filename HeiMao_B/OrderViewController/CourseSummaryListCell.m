@@ -22,13 +22,18 @@
 @property(nonatomic,strong)UIView * topLine;
 @property(nonatomic,strong)UIView * midLine;
 @property(nonatomic,strong)UIView * bottomLine;
+@property(nonatomic,strong)UIView * rightLine;
 
 @end
 
 @implementation CourseSummaryListCell
-+ (CGFloat)cellHeight
++ (CGFloat)cellHeightWithModel:(HMCourseModel *)model
 {
-    return 180 + 10;
+    CGFloat hegith =  180 + 10;
+    if (!model.coursePikerAddres) {
+        hegith -=22;
+    }
+    return hegith;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -91,6 +96,10 @@
     
     self.bottomLine = [self getOnelineView];
     [self.bgView addSubview:self.bottomLine];
+
+    self.rightLine = [[UIView alloc] init];
+    [self.bgView addSubview:self.rightLine];
+    
     [self updateConstraints];
 }
 
@@ -151,7 +160,7 @@
     [self.courseTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView).offset(leftOffsetSpacing);
         make.right.equalTo(self.bgView).offset(-leftOffsetSpacing);
-        make.top.equalTo(self.midLine.mas_top).offset((90 - 14 * 3 - 8 * 2)/2.f);
+        make.top.equalTo(self.midLine.mas_top).offset(16.f);
         make.height.equalTo(@(14));
     }];
     
@@ -166,12 +175,19 @@
         make.top.equalTo(self.courseAddressLabel.mas_bottom).offset(8.f);
         make.centerX.equalTo(self.courseAddressLabel);
     }];
-    
+
     [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bgView.mas_bottom).offset(-HM_LINE_HEIGHT);
         make.size.equalTo(self.topLine);
         make.left.equalTo(self.topLine);
         make.height.equalTo(@(HM_LINE_HEIGHT));
+    }];
+    
+    [self.rightLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.bgView).offset(1);
+        make.bottom.equalTo(self.bgView).offset(-1);
+        make.width.equalTo(@(5));
+        make.height.equalTo(self.bgView);
     }];
     
 }
@@ -190,18 +206,63 @@
     
     self.mainTitle.text = _model.studentInfo.userName;
     self.subTitle.text = _model.courseProgress;
-    if (self.model.courseStatue == KCourseStatueRequest ||
-        self.model.courseStatue == KCourseStatueWatingToDone ||
-        self.model.courseStatue == KCourseStatueOnDone) {
-        self.statueLabel.textColor = RGB_Color(255, 197, 143);
-    }else{
-        self.statueLabel.textColor =  RGB_Color(0x99, 0x99, 0x99);;
+    
+    switch (self.model.courseStatue) {
+        case KCourseStatueRequest: //待接收
+            self.statueLabel.textColor = RGB_Color(0xff, 0x66, 0x33);
+            break;
+        case KCourseStatueOnDone: //待评论
+            self.statueLabel.textColor = RGB_Color(0xff, 0x93, 0x33);
+            break;
+        case KCourseStatueWatingToDone:  //等待教练确定课程完成
+            self.statueLabel.textColor = RGB_Color(0xff, 0x93, 0x33);
+            break;
+        case KCourseStatueStudentReject:
+        case KCourseStatueCanceld: //取消
+            self.statueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+            break;
+        case KCourseStatueOnCommended: //评论成功
+            self.statueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+            break;
+        case KCourseStatueUnderWay:
+            self.statueLabel.textColor =  RGB_Color(0x99, 0x99, 0x99);;
+            break;
+            
+        case KCourseStatueInvalid:
+            self.statueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+            break;
+
     }
+    self.rightLine.backgroundColor = self.statueLabel.textColor;
+    
     self.statueLabel.text = [_model getStatueString];
 
     self.courseTimeLabel.text = _model.courseTime;
     self.courseAddressLabel.text = [NSString stringWithFormat:@"训练场地: %@",_model.courseTrainInfo.address];
-    self.pickAddressLabel.text = [NSString stringWithFormat:@"接送地点: %@",_model.coursePikerAddres];
+    if (_model.coursePikerAddres) {
+        self.pickAddressLabel.text = [NSString stringWithFormat:@"接送地点: %@",_model.coursePikerAddres];
+    }else{
+        self.pickAddressLabel.text = nil;
+    }
+
+    [self showUnDealStatu:self.model.courseStatue == KCourseStatueRequest];
+}
+
+- (void)showUnDealStatu:(BOOL)isUnDeal
+{
+    if (isUnDeal) {
+        self.mainTitle.font = [UIFont boldSystemFontOfSize:16.f];
+        self.subTitle.font = [UIFont boldSystemFontOfSize:14.f];
+        self.courseTimeLabel.font = [UIFont boldSystemFontOfSize:14.f];
+        self.courseAddressLabel.font = [UIFont boldSystemFontOfSize:14.f];
+        self.pickAddressLabel.font = [UIFont boldSystemFontOfSize:14.f];
+    }else{
+        self.mainTitle.font = [UIFont boldSystemFontOfSize:16.f];
+        self.subTitle.font = [UIFont systemFontOfSize:14.f];
+        self.courseTimeLabel.font = [UIFont systemFontOfSize:14.f];
+        self.courseAddressLabel.font = [UIFont systemFontOfSize:14.f];
+        self.pickAddressLabel.font = [UIFont systemFontOfSize:14.f];
+    }
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated

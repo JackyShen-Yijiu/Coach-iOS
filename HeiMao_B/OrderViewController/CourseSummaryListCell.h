@@ -13,6 +13,6 @@
 @interface CourseSummaryListCell : UITableViewCell
 @property(nonatomic,strong)HMCourseModel * model;
 
-+ (CGFloat)cellHeight;
++ (CGFloat)cellHeightWithModel:(HMCourseModel *)model;
 
 @end

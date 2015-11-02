@@ -45,7 +45,7 @@
     
     model.studentInfo = [HMStudentModel converJsonDicToModel:[dic objectInfoForKey:@"userid"]];
     model.classType = [HMClassInfoModel converJsonDicToModel:[dic objectInfoForKey:@"subject"]];
-    
+
     return model;
 }
 
@@ -57,7 +57,7 @@
         case KCourseStatueInvalid:
             break;
         case KCourseStatueStudentReject:
-            return @"被拒绝";
+            return @"已拒绝";
             break;
         case KCourseStatueRequest:
             str = @"待接受";

@@ -23,6 +23,6 @@
 @interface CourseDetailView : UIView
 @property(nonatomic,strong)HMCourseModel * model;
 @property(nonatomic,weak)id<CourseDetailViewDelegate>delegate;
-+ (CGFloat)cellHeight;
++ (CGFloat)cellHeightWithModel:(HMCourseModel *)model;
 - (void)refreshUI;
 @end

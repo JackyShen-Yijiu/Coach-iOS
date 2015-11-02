@@ -126,7 +126,13 @@
     };
     
     [self.tableView refreshFooter].beginRefreshingBlock = ^(){
-        [NetWorkEntiry getAllRecomendWithUserID:ws.studentId WithIndex:1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if(ws.model.recommendArrays.count % RELOADDATACOUNT){
+            [ws showTotasViewWithMes:@"已经加载所有数据"];
+            [ws.tableView.refreshFooter endRefreshing];
+            return ;
+        }
+        
+        [NetWorkEntiry getAllRecomendWithUserID:ws.studentId WithIndex:ws.model.recommendArrays.count / RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
             if (type == 1) {
                 NSArray * listArray = [BaseModelMethod getRecomendListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]];

@@ -31,9 +31,9 @@
 
 
 @implementation CourseDetailView
-+ (CGFloat)cellHeight
++ (CGFloat)cellHeightWithModel:(HMCourseModel *)model
 {
-    return 90 //头像
+    CGFloat heigth =  90 //头像
             + 16 + 14 + 10 + 14 //学习进度
             + 18
             + 14 + 10
@@ -41,6 +41,10 @@
             + 14 + 10
             + 14
             + 15 + 45 + 20; //Button;
+    if (!model.coursePikerAddres) {
+        heigth-=24;
+    }
+    return heigth;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -269,7 +273,7 @@
         [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];
     
     self.mainTitle.text = _model.studentInfo.userName;
-    self.subTitle.text = _model.courseProgress;
+    self.subTitle.text = _model.studentInfo.disPlayId;
     self.statueLabel.text = [_model getStatueString];
     
     self.courseProgressTtile.text = @"学习进展";
@@ -278,7 +282,11 @@
     self.courseInfoTitle.text = @"课程信息";
     self.courseTimeLabel.text = _model.courseTime;
     self.courseAddressLabel.text = [NSString stringWithFormat:@"训练场地: %@",_model.courseTrainInfo.address];
-    self.pickAddressLabel.text = [NSString stringWithFormat:@"接送地点: %@",_model.coursePikerAddres];
+    if (_model.coursePikerAddres) {
+        self.pickAddressLabel.text = [NSString stringWithFormat:@"接送地点: %@",_model.coursePikerAddres];
+    }else{
+        self.pickAddressLabel.text = nil;
+    }
     
     [self.leftButton setHidden:NO];
     [self.rightButton setHidden:YES];
