@@ -128,7 +128,7 @@
 		B865C17E1BDCA4D600C1E681 /* PortraitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortraitView.m; sourceTree = "<group>"; };
 		B865C1801BDD2DE800C1E681 /* BaseModelMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModelMethod.h; sourceTree = "<group>"; };
 		B865C1811BDD2DE800C1E681 /* BaseModelMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModelMethod.m; sourceTree = "<group>"; };
-		B86EB3511BDB50EB0014EBD7 /* 黑猫驾校.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "黑猫驾校.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B86EB3511BDB50EB0014EBD7 /* 魔豆驾校.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "魔豆驾校.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86EB3551BDB50EB0014EBD7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B86EB3571BDB50EB0014EBD7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B86EB3581BDB50EB0014EBD7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -316,7 +316,7 @@
 		B86EB3521BDB50EB0014EBD7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B86EB3511BDB50EB0014EBD7 /* 黑猫驾校.app */,
+				B86EB3511BDB50EB0014EBD7 /* 魔豆驾校.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -520,7 +520,7 @@
 			);
 			name = HeiMao_B;
 			productName = HeiMao_B;
-			productReference = B86EB3511BDB50EB0014EBD7 /* 黑猫驾校.app */;
+			productReference = B86EB3511BDB50EB0014EBD7 /* 魔豆驾校.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -769,7 +769,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
-				PRODUCT_NAME = "黑猫驾校";
+				PRODUCT_NAME = "魔豆驾校";
 				PROVISIONING_PROFILE = "13104a99-ec36-48b4-8def-a313f94fdd29";
 			};
 			name = Debug;
@@ -786,7 +786,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
-				PRODUCT_NAME = "黑猫驾校";
+				PRODUCT_NAME = "魔豆驾校";
 				PROVISIONING_PROFILE = "c3b05263-a8f7-4665-b757-567e48cc61d7";
 			};
 			name = Release;
