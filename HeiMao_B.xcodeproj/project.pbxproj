@@ -768,7 +768,7 @@
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "heimao.HeiMao-B";
+				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "黑猫驾校";
 				PROVISIONING_PROFILE = "13104a99-ec36-48b4-8def-a313f94fdd29";
 			};
@@ -785,7 +785,7 @@
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "heimao.HeiMao-B";
+				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "黑猫驾校";
 				PROVISIONING_PROFILE = "c3b05263-a8f7-4665-b757-567e48cc61d7";
 			};
