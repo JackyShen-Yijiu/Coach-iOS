@@ -853,7 +853,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "魔豆驾校";
-				PROVISIONING_PROFILE = "c3b05263-a8f7-4665-b757-567e48cc61d7";
+				PROVISIONING_PROFILE = "e46908f7-6673-47de-ab33-cb01b7e0d9a0";
 			};
 			name = Release;
 		};
