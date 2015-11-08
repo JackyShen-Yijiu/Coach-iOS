@@ -12,7 +12,7 @@
 #import "HMNagationController.h"
 #import "CourseViewController.h"
 #import "TeacherCenterController.h"
-
+#import "APService.h"
 
 @interface AppDelegate ()
 @property(nonatomic,strong)HMNagationController * navController;
@@ -28,14 +28,22 @@
     AFNetworkReachabilityManager *  manager = [AFNetworkReachabilityManager sharedManager];
     [manager startMonitoring];
     [[AFNetworkActivityLogger sharedLogger] startLogging];
-
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
     self.window.rootViewController = [[HMNagationController alloc] initWithRootViewController:[self getMainTabBar]];
     
-
+    //categories
+    [APService
+     registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                         UIUserNotificationTypeSound |
+                                         UIUserNotificationTypeAlert)
+     categories:nil];
+    
+    [APService setupWithOption:launchOptions];
+    
     return YES;
 }
 
@@ -69,4 +77,14 @@
     return self.tabController;
 }
 
+#pragma mark - Nofitication
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Required
+    [APService registerDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    // Required
+    [APService handleRemoteNotification:userInfo];
+}
 @end

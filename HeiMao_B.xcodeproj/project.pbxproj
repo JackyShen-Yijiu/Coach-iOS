@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
+		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
+		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
+		B80003CC1BEFACA50099D194 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003CB1BEFACA50099D194 /* CoreFoundation.framework */; };
+		B80003CE1BEFACAC0099D194 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003CD1BEFACAC0099D194 /* CoreTelephony.framework */; };
+		B80003D01BEFACB10099D194 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003CF1BEFACB10099D194 /* SystemConfiguration.framework */; };
+		B80003D21BEFACB80099D194 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003D11BEFACB80099D194 /* CoreGraphics.framework */; };
+		B80003D41BEFACC10099D194 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003D31BEFACC10099D194 /* Foundation.framework */; };
+		B80003D61BEFACC60099D194 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003D51BEFACC60099D194 /* UIKit.framework */; };
+		B80003D81BEFACCD0099D194 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003D71BEFACCD0099D194 /* Security.framework */; };
+		B80003DA1BEFAD360099D194 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003D91BEFAD360099D194 /* libc++.tbd */; };
+		B80003DC1BEFAD3D0099D194 /* libc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003DB1BEFAD3D0099D194 /* libc.tbd */; };
+		B80003DE1BEFADB30099D194 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B80003DD1BEFADB30099D194 /* PushConfig.plist */; };
 		B80F1B701BE26785008D5843 /* UITabBar+RedHot.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F1B6F1BE26785008D5843 /* UITabBar+RedHot.m */; };
 		B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B811E4681BDD3CF90077EAF5 /* NGOSegmentControl.m */; };
 		B84479D21BDF74AA004E5E15 /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84479D11BDF74AA004E5E15 /* CourseDetailViewController.m */; };
@@ -67,6 +79,19 @@
 		1371250ABB78626F8329AC98 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2823AFD5ABA09767DD4F0623 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
+		B80003C91BEFAC9C0099D194 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		B80003CB1BEFACA50099D194 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		B80003CD1BEFACAC0099D194 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		B80003CF1BEFACB10099D194 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B80003D11BEFACB80099D194 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B80003D31BEFACC10099D194 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B80003D51BEFACC60099D194 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B80003D71BEFACCD0099D194 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		B80003D91BEFAD360099D194 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		B80003DB1BEFAD3D0099D194 /* libc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libc.tbd; path = usr/lib/libc.tbd; sourceTree = SDKROOT; };
+		B80003DD1BEFADB30099D194 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		B80F1B6E1BE26785008D5843 /* UITabBar+RedHot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+RedHot.h"; sourceTree = "<group>"; };
 		B80F1B6F1BE26785008D5843 /* UITabBar+RedHot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+RedHot.m"; sourceTree = "<group>"; };
 		B811E4671BDD3CF90077EAF5 /* NGOSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGOSegmentControl.h; sourceTree = "<group>"; };
@@ -185,6 +210,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B80003DC1BEFAD3D0099D194 /* libc.tbd in Frameworks */,
+				B80003DA1BEFAD360099D194 /* libc++.tbd in Frameworks */,
+				B80003D81BEFACCD0099D194 /* Security.framework in Frameworks */,
+				B80003D61BEFACC60099D194 /* UIKit.framework in Frameworks */,
+				B80003D41BEFACC10099D194 /* Foundation.framework in Frameworks */,
+				B80003D21BEFACB80099D194 /* CoreGraphics.framework in Frameworks */,
+				B80003D01BEFACB10099D194 /* SystemConfiguration.framework in Frameworks */,
+				B80003CE1BEFACAC0099D194 /* CoreTelephony.framework in Frameworks */,
+				B80003CC1BEFACA50099D194 /* CoreFoundation.framework in Frameworks */,
+				B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */,
+				B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */,
 				A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,9 +240,29 @@
 		B636E4EC57D3A22E3FC68559 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B80003DB1BEFAD3D0099D194 /* libc.tbd */,
+				B80003D91BEFAD360099D194 /* libc++.tbd */,
+				B80003D71BEFACCD0099D194 /* Security.framework */,
+				B80003D51BEFACC60099D194 /* UIKit.framework */,
+				B80003D31BEFACC10099D194 /* Foundation.framework */,
+				B80003D11BEFACB80099D194 /* CoreGraphics.framework */,
+				B80003CF1BEFACB10099D194 /* SystemConfiguration.framework */,
+				B80003CD1BEFACAC0099D194 /* CoreTelephony.framework */,
+				B80003CB1BEFACA50099D194 /* CoreFoundation.framework */,
+				B80003C91BEFAC9C0099D194 /* CFNetwork.framework */,
 				2823AFD5ABA09767DD4F0623 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B80003C51BEFAC720099D194 /* JGPush */ = {
+			isa = PBXGroup;
+			children = (
+				B80003DD1BEFADB30099D194 /* PushConfig.plist */,
+				B80003C61BEFAC720099D194 /* APService.h */,
+				B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */,
+			);
+			path = JGPush;
 			sourceTree = "<group>";
 		};
 		B84479CF1BDF745D004E5E15 /* CourseDetailViewController */ = {
@@ -389,6 +445,7 @@
 		B8C458581BDB59AC00901F71 /* ThirdPary */ = {
 			isa = PBXGroup;
 			children = (
+				B80003C51BEFAC720099D194 /* JGPush */,
 				B8FFDF641BDE78E6005BD535 /* FDCalendar */,
 				B8C4587D1BDB5B5C00901F71 /* ToastAlertView */,
 				B8C458791BDB5ABB00901F71 /* SafeDic */,
@@ -560,6 +617,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B80003DE1BEFADB30099D194 /* PushConfig.plist in Resources */,
 				B86EB3611BDB50EB0014EBD7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -768,6 +826,10 @@
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HeiMao_B/ThirdPary/JGPush",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "魔豆驾校";
 				PROVISIONING_PROFILE = "13104a99-ec36-48b4-8def-a313f94fdd29";
@@ -785,6 +847,10 @@
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HeiMao_B/ThirdPary/JGPush",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "魔豆驾校";
 				PROVISIONING_PROFILE = "c3b05263-a8f7-4665-b757-567e48cc61d7";
