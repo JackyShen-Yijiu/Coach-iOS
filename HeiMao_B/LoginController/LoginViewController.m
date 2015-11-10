@@ -390,6 +390,9 @@ static NSString *const kuserType = @"usertype";
     }];
     
 }
-
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [_phoneNumTextField resignFirstResponder];
+    [_passwordTextField resignFirstResponder];
+}
 
 @end

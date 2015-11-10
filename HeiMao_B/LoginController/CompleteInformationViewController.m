@@ -254,8 +254,67 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)clickSubmit:(UIButton *)sender {
+    NSString *urlstring = @"http://123.57.63.15:8181/api/v1/userinfo/applyverification";
+    NSMutableDictionary *mubDic = [[NSMutableDictionary alloc] init];
+    if (self.drivingId == nil || self.drivingId.length == 0) {
+        ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"挂靠驾校未选择" controller:self];
+        [alerview show];
+    }else {
+        [mubDic setObject:self.drivingId forKey:@"driveschoolid"];
+    }
+    if (self.idcarNumTextField.text == nil || self.idcarNumTextField.text.length == 0) {
+        ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"身份证为空" controller:self];
+        [alerview show];
+    }else {
+        [mubDic setObject:self.idcarNumTextField.text forKey:@"idcardnumber"];
+    }
     
+    if (self.drivingIdNumTextField.text == nil || self.drivingIdNumTextField.text.length == 0) {
+        ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"驾驶证为空" controller:self];
+        [alerview show];
+    }else {
+        [mubDic setObject:self.idcarNumTextField.text forKey:@"drivinglicensenumber"];
+    }
+    if (self.caochIdNumTextField.text == nil || self.caochIdNumTextField.text.length == 0) {
+        ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"教练证为空" controller:self];
+        [alerview show];
+    }else {
+        [mubDic setObject:self.caochIdNumTextField.text forKey:@"coachnumber"];
+    }
+    if ([UserInfoModel defaultUserInfo].userID) {
+        [mubDic setObject:[UserInfoModel defaultUserInfo].userID forKey:@"coachid"];
+    }
+    if ([UserInfoModel defaultUserInfo].name) {
+        [mubDic setObject:[UserInfoModel defaultUserInfo].userID forKey:@"name"];
+    }
+   
+
+    NSString *   token = [[UserInfoModel defaultUserInfo] token];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manager.requestSerializer setValue:token forHTTPHeaderField:@"authorization"];
     
+    [manager POST:urlstring parameters:mubDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSDictionary *param = responseObject;
+        NSNumber *type = param[@"type"];
+        NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
+        if (type.integerValue == 1) {
+            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"提交审核成功" controller:self];
+            [alerview show];
+        }else {
+            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
+            [alerview show];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        
+    }];
     
+}
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [_idcarNumTextField resignFirstResponder];
+    [_drivingIdNumTextField resignFirstResponder];
+    [_caochIdNumTextField resignFirstResponder];
+    [_invitationTextFild resignFirstResponder];
 }
 @end

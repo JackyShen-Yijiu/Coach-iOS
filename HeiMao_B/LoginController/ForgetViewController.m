@@ -241,5 +241,9 @@ static NSString *const kchangePassword = @"kchangePassword";
 - (void)dealGoBack:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [_phoneNumTextField resignFirstResponder];
+    [_confirmTextField resignFirstResponder];
+}
 @end
 

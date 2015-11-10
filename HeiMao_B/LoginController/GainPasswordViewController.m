@@ -175,6 +175,9 @@
 - (void)dealGoBack:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [_passWordTextFild resignFirstResponder];
+    [_affirmTextFild resignFirstResponder];
+}
 
 @end

@@ -334,8 +334,8 @@ static NSString *const kcodeGainUrl = @"code";
                 self.sendButton.backgroundColor = RGB_Color(204, 204, 204);
                 [self.sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 [self.sendButton setTitle:str forState:UIControlStateNormal];
-
-    
+                
+                
             });
             count--;
         }
@@ -368,7 +368,7 @@ static NSString *const kcodeGainUrl = @"code";
         ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"密码为空" controller:self];
         [alerview show];
         return;
-
+        
     }
     
     if (self.affirmTextFild.text == nil || self.affirmTextFild.text.length <= 0) {
@@ -395,7 +395,9 @@ static NSString *const kcodeGainUrl = @"code";
         NSNumber *type = param[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
         if (type.integerValue == 1) {
-            
+            [[UserInfoModel defaultUserInfo] loginViewDic:param[@"data"]];
+            CompleteInformationViewController *comInformation = [[CompleteInformationViewController alloc] init];
+            [self presentViewController:comInformation animated:YES completion:nil];
         }else {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
             [alerview show];
@@ -404,11 +406,16 @@ static NSString *const kcodeGainUrl = @"code";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
-   
-    CompleteInformationViewController *comInformation = [[CompleteInformationViewController alloc] init];
-    [self presentViewController:comInformation animated:YES completion:nil];
-}
 
+    
+}
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [_phoneTextField resignFirstResponder];
+    [_authCodeTextFild resignFirstResponder];
+    [_passWordTextFild resignFirstResponder];
+    [_affirmTextFild resignFirstResponder];
+    [_invitationTextFild resignFirstResponder];
+}
 
 
 @end
