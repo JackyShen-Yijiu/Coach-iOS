@@ -13,7 +13,7 @@
 #import "CourseViewController.h"
 #import "TeacherCenterController.h"
 #import "APService.h"
-
+#import "LoginViewController.h"
 @interface AppDelegate ()
 @property(nonatomic,strong)HMNagationController * navController;
 @end
@@ -34,7 +34,10 @@
     [self.window makeKeyAndVisible];
     
     self.window.rootViewController = [[HMNagationController alloc] initWithRootViewController:[self getMainTabBar]];
-    
+    if (![UserInfoModel isLogin]) {
+        LoginViewController *login = [[LoginViewController alloc] init];
+        [self.window.rootViewController presentViewController:login animated:YES completion:nil];
+    }
     //categories
     [APService
      registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
