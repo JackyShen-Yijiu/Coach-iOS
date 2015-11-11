@@ -14,6 +14,8 @@
 #import "TeacherCenterController.h"
 #import "APService.h"
 #import "LoginViewController.h"
+#import "EaseSDKHelper.h"
+
 @interface AppDelegate ()
 @property(nonatomic,strong)HMNagationController * navController;
 @end
@@ -23,11 +25,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [MobClick startWithAppkey:@"5635edcce0f55a2280003548" reportPolicy:BATCH   channelId:@"蒲公英"];
-    
-    AFNetworkReachabilityManager *  manager = [AFNetworkReachabilityManager sharedManager];
-    [manager startMonitoring];
-    [[AFNetworkActivityLogger sharedLogger] startLogging];
+    [self sysConfigWithApplication:application LaunchOptions:launchOptions];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -38,15 +36,7 @@
         LoginViewController *login = [[LoginViewController alloc] init];
         [self.window.rootViewController presentViewController:login animated:YES completion:nil];
     }
-    //categories
-    [APService
-     registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
-                                         UIUserNotificationTypeSound |
-                                         UIUserNotificationTypeAlert)
-     categories:nil];
-    
-    [APService setupWithOption:launchOptions];
-    
+ 
     return YES;
 }
 
@@ -80,12 +70,52 @@
     return self.tabController;
 }
 
-#pragma mark - Nofitication
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    // Required
-    [APService registerDeviceToken:deviceToken];
+#pragma mark - 系统配置
+- (void)sysConfigWithApplication:(UIApplication *)application LaunchOptions:(NSDictionary *)launchOptions
+{
+    //umeng统计
+    [MobClick startWithAppkey:@"5635edcce0f55a2280003548" reportPolicy:BATCH   channelId:@"蒲公英"];
+    
+    //AFNet log显示
+    AFNetworkReachabilityManager *  manager = [AFNetworkReachabilityManager sharedManager];
+    [manager startMonitoring];
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+    
+    //环信
+    NSString *apnsCertName = nil;
+#if DEBUG
+    apnsCertName = @"chatdemoui_dev";
+#else
+    apnsCertName = @"chatdemoui";
+#endif
+    [[EaseSDKHelper shareHelper] easemobApplication:application
+                      didFinishLaunchingWithOptions:launchOptions
+                                            appkey:@"easemob-demo#chatdemoui"
+                                       apnsCertName:apnsCertName
+                                        otherConfig:@{kSDKConfigEnableConsoleLogger:[NSNumber numberWithBool:YES]}];
+    
+    //极光推送
+    [APService
+     registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                         UIUserNotificationTypeSound |
+                                         UIUserNotificationTypeAlert)
+     categories:nil];
+    
+    [APService setupWithOption:launchOptions];
 }
 
+#pragma mark - Nofitication
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [APService registerDeviceToken:deviceToken];
+    [[EaseMob sharedInstance] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    [[EaseMob sharedInstance] application:application didFailToRegisterForRemoteNotificationsWithError:error];
+}
+
+//接受通知
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     // Required
     [APService handleRemoteNotification:userInfo];

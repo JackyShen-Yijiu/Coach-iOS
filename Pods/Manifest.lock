@@ -20,6 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.6.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - EaseMobSDKFull (2.1.7)
   - JSONKit (1.5pre)
   - Masonry (0.6.3)
   - MBProgressHUD (0.9.1)
@@ -31,6 +32,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.6.0)
+  - EaseMobSDKFull
   - JSONKit (~> 1.5pre)
   - Masonry (~> 0.6.1)
   - MBProgressHUD (~> 0.9.1)
@@ -40,6 +42,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
+  EaseMobSDKFull: 43858ca9a62bbe1fa4c7c006f944a3e52a4bff48
   JSONKit: bae313ce6a6c444f40489a6c0b023f399888871f
   Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
