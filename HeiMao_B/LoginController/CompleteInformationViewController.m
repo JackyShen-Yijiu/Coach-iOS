@@ -10,7 +10,8 @@
 #import <Masonry/Masonry.h>
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 #import "QueryViewController.h"
-
+#define testUrl @"http://101.200.204.240:8181/api/v1/userinfo/applyverification"
+#define url @"http://123.57.63.15:8181/api/v1/userinfo/applyverification"
 @interface CompleteInformationViewController ()<QueryViewControllerDelegate>
 @property (strong, nonatomic) UIView *navImage;
 @property (strong, nonatomic) UIButton *goBackButton;
@@ -19,7 +20,7 @@
 @property (strong, nonatomic) UITextField *drivingIdNumTextField;
 @property (strong, nonatomic) UITextField *caochIdNumTextField;
 @property (strong, nonatomic) UITextField *invitationTextFild;
-
+@property (strong, nonatomic) UITextField *nameTextField;
 @property (strong, nonatomic) UIButton *drivingDetail;
 @property (strong, nonatomic) UILabel *drivingLabel;
 @property (strong, nonatomic) UIImageView *indexImage;
@@ -98,7 +99,19 @@
     }
     return _goBackButton;
 }
-
+- (UITextField *)nameTextField{
+    if (_nameTextField == nil) {
+        _nameTextField = [[UITextField alloc]init];
+        _nameTextField.tag = 106;
+        _nameTextField.placeholder = @"    姓名";
+        _nameTextField.layer.borderColor = RGB_Color(204, 204, 204).CGColor;
+        _nameTextField.layer.borderWidth = 1;
+        _nameTextField.font  = [UIFont systemFontOfSize:15];
+        _nameTextField.textColor = RGB_Color(153, 153, 153);
+        
+    }
+    return _nameTextField;
+}
 - (UITextField *)idcarNumTextField{
     if (_idcarNumTextField == nil) {
         _idcarNumTextField = [[UITextField alloc]init];
@@ -108,7 +121,6 @@
         _idcarNumTextField.layer.borderWidth = 1;
         _idcarNumTextField.font  = [UIFont systemFontOfSize:15];
         _idcarNumTextField.textColor = RGB_Color(153, 153, 153);
-        _idcarNumTextField.secureTextEntry = YES;
         
     }
     return _idcarNumTextField;
@@ -122,7 +134,6 @@
         _drivingIdNumTextField.layer.borderWidth = 1;
         _drivingIdNumTextField.font  = [UIFont systemFontOfSize:15];
         _drivingIdNumTextField.textColor = RGB_Color(153, 153, 153);
-        _drivingIdNumTextField.secureTextEntry = YES;
         
     }
     return _drivingIdNumTextField;
@@ -136,7 +147,7 @@
         _caochIdNumTextField.layer.borderWidth = 1;
         _caochIdNumTextField.font  = [UIFont systemFontOfSize:15];
         _caochIdNumTextField.textColor = RGB_Color(153, 153, 153);
-        _caochIdNumTextField.secureTextEntry = YES;
+
         
     }
     return _caochIdNumTextField;
@@ -161,6 +172,7 @@
     [self.view addSubview:self.navImage];
     [self.view addSubview:self.topLabel];
     [self.view addSubview:self.goBackButton];
+    [self.view addSubview:self.nameTextField];
     [self.view addSubview:self.idcarNumTextField];
     [self.view addSubview:self.drivingIdNumTextField];
     [self.view addSubview:self.caochIdNumTextField];
@@ -185,10 +197,18 @@
         make.height.mas_equalTo(@50);
     }];
     
-    [self.idcarNumTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    [self.nameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view.mas_left).with.offset(15);
         make.right.mas_equalTo(self.view.mas_right).with.offset(-15);
         make.top.mas_equalTo(self.goBackButton.mas_bottom).with.offset(7);
+        make.height.mas_equalTo(@44);
+    }];
+    
+    [self.idcarNumTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view.mas_left).with.offset(15);
+        make.right.mas_equalTo(self.view.mas_right).with.offset(-15);
+        make.top.mas_equalTo(self.nameTextField.mas_bottom).with.offset(7);
         make.height.mas_equalTo(@44);
 
     }];
@@ -254,8 +274,16 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)clickSubmit:(UIButton *)sender {
-    NSString *urlstring = @"http://123.57.63.15:8181/api/v1/userinfo/applyverification";
+    NSString *urlstring = testUrl;
     NSMutableDictionary *mubDic = [[NSMutableDictionary alloc] init];
+    
+    if (self.nameTextField == nil || self.nameTextField.text.length == 0) {
+        ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"挂靠驾校未选择" controller:self];
+        [alerview show];
+    }else {
+        [mubDic setObject:self.nameTextField.text forKey:@"name"];
+    }
+    
     if (self.drivingId == nil || self.drivingId.length == 0) {
         ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"挂靠驾校未选择" controller:self];
         [alerview show];
@@ -284,9 +312,7 @@
     if ([UserInfoModel defaultUserInfo].userID) {
         [mubDic setObject:[UserInfoModel defaultUserInfo].userID forKey:@"coachid"];
     }
-    if ([UserInfoModel defaultUserInfo].name) {
-        [mubDic setObject:[UserInfoModel defaultUserInfo].userID forKey:@"name"];
-    }
+    
    
 
     NSString *   token = [[UserInfoModel defaultUserInfo] token];
@@ -302,6 +328,7 @@
         if (type.integerValue == 1) {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"提交审核成功" controller:self];
             [alerview show];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"submitSuccess" object:nil];
         }else {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
             [alerview show];

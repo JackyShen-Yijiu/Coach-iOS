@@ -187,7 +187,7 @@ static NSString *const kcodeGainUrl = @"code";
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dealSubmit) name:@"submitSuccess" object:nil];
     [self.view addSubview:self.navImage];
     
     [self.view addSubview:self.topLabel];
@@ -212,7 +212,9 @@ static NSString *const kcodeGainUrl = @"code";
     
 }
 
-
+- (void)dealSubmit {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 #pragma make :自动布局
@@ -376,28 +378,25 @@ static NSString *const kcodeGainUrl = @"code";
         [alerview show];
         return;
     }
-    NSString *passwordString = nil;
     if (![self.passWordTextFild.text isEqualToString:self.affirmTextFild.text]) {
         ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"两次密码不相同" controller:self];
         [alerview show];
         return;
     }
-    passwordString = self.passWordTextFild.text.DY_MD5;
     //网络请求
     
-    if (self.invitationTextFild.text.length >0 && self.invitationTextFild.text != nil) {
-        
-    }
     
-    
-    [NetWorkEntiry registereWithWithPhotoNumber:self.phoneTextField.text password:self.passWordTextFild.text.DY_MD5 smsCode:self.authCodeTextFild.text referrerCode:self.invitationTextFild.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry registereWithWithPhotoNumber:self.phoneTextField.text password:self.passWordTextFild.text smsCode:self.authCodeTextFild.text referrerCode:self.invitationTextFild.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *param = responseObject;
         NSNumber *type = param[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
         if (type.integerValue == 1) {
             [[UserInfoModel defaultUserInfo] loginViewDic:param[@"data"]];
+            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"注册成功" controller:self];
+            [alerview show];
             CompleteInformationViewController *comInformation = [[CompleteInformationViewController alloc] init];
             [self presentViewController:comInformation animated:YES completion:nil];
+           
         }else {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
             [alerview show];
@@ -406,7 +405,7 @@ static NSString *const kcodeGainUrl = @"code";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
-
+   
     
 }
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -416,6 +415,8 @@ static NSString *const kcodeGainUrl = @"code";
     [_affirmTextFild resignFirstResponder];
     [_invitationTextFild resignFirstResponder];
 }
-
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

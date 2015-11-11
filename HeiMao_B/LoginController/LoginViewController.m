@@ -198,7 +198,8 @@ static NSString *const kuserType = @"usertype";
     self.view.backgroundColor = [UIColor whiteColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(DYdealRegister) name:kregisterUser object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dealSubmit) name:@"submitSuccess" object:nil];
+
     [self.view addSubview:self.logoImageView];
     [self.view addSubview:self.loginButton];
     [self.view addSubview:self.backGroundView];
@@ -211,7 +212,9 @@ static NSString *const kuserType = @"usertype";
     [self.bottomButton addSubview:self.rightImageView];
     
 }
-
+- (void)dealSubmit {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 - (void)DYdealRegister {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -394,5 +397,7 @@ static NSString *const kuserType = @"usertype";
     [_phoneNumTextField resignFirstResponder];
     [_passwordTextField resignFirstResponder];
 }
-
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end
