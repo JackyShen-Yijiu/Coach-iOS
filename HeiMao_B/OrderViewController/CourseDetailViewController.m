@@ -13,6 +13,7 @@
 #import "CoureseRatingController.h"
 #import "RefreshTableView.h"
 #import "CourseDetailViewCell.h"
+#import "ChatViewController.h"
 
 @interface CourseDetailViewController()<CourseDetailViewDelegate,UITableViewDataSource,UITableViewDelegate,CourseCancelControllerDelegate,CoureseRatingControllerDelegate>
 @property(nonatomic,strong)RefreshTableView * tableView;
@@ -139,7 +140,7 @@
 #pragma mark Right
 - (void)rightButtonDidClick:(UIButton *)button
 {
-    
+    ChatViewController *chatController = [[ChatViewController alloc] initWithConversationChatter:@"5288" conversationType:eConversationTypeChat];
 }
 
 
