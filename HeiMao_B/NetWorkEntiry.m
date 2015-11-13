@@ -11,7 +11,11 @@
 #import "NSString+MD5.h"
 #define KNETBASEURL
 
+<<<<<<< HEAD
 #define  HOST_TEST_DAMIAN  @"http://101.200.204.240:8181/api/v1/test"
+=======
+#define  HOST_TEST_DAMIAN  @"http://101.200.204.240:8181/api/v1"
+>>>>>>> 3bd7161d272fc764379c40b1c6ec135a9e79ca9e
 #define  HOST_LINE_DOMAIN  @"http://123.57.63.15:8181/api/v1"
 
 #define QA_TEST
@@ -44,7 +48,8 @@
     }
     NSMutableDictionary * dic = [@{@"mobile":photoNumber,
                                    @"password":mdsPass,
-                                   @"usertype":@"2"
+                                   @"usertype":@"2",
+                                   @"smscode":smsCode
                                    } mutableCopy];
     if (referrerCode) {
         [dic setObject:referrerCode forKey:@"referrerCode"];

@@ -82,9 +82,9 @@
 - (BOOL)loginViewDic:(NSDictionary *)info
 {
     self.token = [info objectForKey:@"token"];
-    self.userID = [info objectForKey:@"user_id"];
-    self.name =  [info objectForKey:@"user_name"];
-    self.tel = [info objectForKey:@"phone"];
+    self.userID = [info objectForKey:@"coachid"];
+    self.name =  [info objectForKey:@"name"];
+    self.tel = [info objectForKey:@"mobile"];
     if (![[self class] isLogin]) {
         [[self class] storeData:info forKey:USERINFO_IDENTIFY];
     }
