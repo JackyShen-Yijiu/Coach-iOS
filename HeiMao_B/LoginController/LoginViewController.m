@@ -247,6 +247,7 @@ static NSString *const kuserType = @"usertype";
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"登录成功" controller:self];
             [alerview show];
             [[UserInfoModel defaultUserInfo] loginViewDic:param[@"data"]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"kLoginSuccess" object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
         }else {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
