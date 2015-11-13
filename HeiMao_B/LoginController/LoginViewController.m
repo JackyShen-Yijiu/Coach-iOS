@@ -96,7 +96,7 @@ static NSString *const kuserType = @"usertype";
 - (UIImageView *)logoImageView {
     if (_logoImageView == nil) {
         _logoImageView = [[UIImageView alloc] init];
-        _logoImageView.image = [UIImage imageNamed:@"登录logo"];
+        _logoImageView.image = [UIImage imageNamed:@"logoImage.png"];
     }
     return _logoImageView;
 }

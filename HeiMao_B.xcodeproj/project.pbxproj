@@ -73,6 +73,7 @@
 		B8DDB7BE1BE49110008FE867 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDB7BD1BE49110008FE867 /* UserInfoModel.m */; };
 		B8FFDF691BDE78E6005BD535 /* FDCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFDF661BDE78E6005BD535 /* FDCalendar.m */; };
 		B8FFDF6A1BDE78E6005BD535 /* FDCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFDF681BDE78E6005BD535 /* FDCalendarItem.m */; };
+		D5BCFEE21BF430DE0019402C /* logoImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5BCFEE11BF430DE0019402C /* logoImage@2x.png */; };
 		D5C240651BF108CF00832CF3 /* CompleteInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C240521BF108CF00832CF3 /* CompleteInformationViewController.m */; };
 		D5C240661BF108CF00832CF3 /* ForgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C240541BF108CF00832CF3 /* ForgetViewController.m */; };
 		D5C240671BF108CF00832CF3 /* GainPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C240561BF108CF00832CF3 /* GainPasswordViewController.m */; };
@@ -83,7 +84,6 @@
 		D5C2406C1BF108CF00832CF3 /* 右箭头.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C2405F1BF108CF00832CF3 /* 右箭头.png */; };
 		D5C2406D1BF108CF00832CF3 /* 密码.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C240601BF108CF00832CF3 /* 密码.png */; };
 		D5C2406E1BF108CF00832CF3 /* 电话.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C240611BF108CF00832CF3 /* 电话.png */; };
-		D5C2406F1BF108CF00832CF3 /* 登录logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C240621BF108CF00832CF3 /* 登录logo.png */; };
 		D5C240701BF108CF00832CF3 /* 返回.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C240631BF108CF00832CF3 /* 返回.png */; };
 		D5C240711BF108CF00832CF3 /* 返回_click.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C240641BF108CF00832CF3 /* 返回_click.png */; };
 /* End PBXBuildFile section */
@@ -216,6 +216,7 @@
 		B8FFDF661BDE78E6005BD535 /* FDCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendar.m; sourceTree = "<group>"; };
 		B8FFDF671BDE78E6005BD535 /* FDCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCalendarItem.h; sourceTree = "<group>"; };
 		B8FFDF681BDE78E6005BD535 /* FDCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendarItem.m; sourceTree = "<group>"; };
+		D5BCFEE11BF430DE0019402C /* logoImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoImage@2x.png"; sourceTree = "<group>"; };
 		D5C240511BF108CF00832CF3 /* CompleteInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompleteInformationViewController.h; sourceTree = "<group>"; };
 		D5C240521BF108CF00832CF3 /* CompleteInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompleteInformationViewController.m; sourceTree = "<group>"; };
 		D5C240531BF108CF00832CF3 /* ForgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetViewController.h; sourceTree = "<group>"; };
@@ -233,7 +234,6 @@
 		D5C2405F1BF108CF00832CF3 /* 右箭头.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右箭头.png"; sourceTree = "<group>"; };
 		D5C240601BF108CF00832CF3 /* 密码.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "密码.png"; sourceTree = "<group>"; };
 		D5C240611BF108CF00832CF3 /* 电话.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "电话.png"; sourceTree = "<group>"; };
-		D5C240621BF108CF00832CF3 /* 登录logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "登录logo.png"; sourceTree = "<group>"; };
 		D5C240631BF108CF00832CF3 /* 返回.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回.png"; sourceTree = "<group>"; };
 		D5C240641BF108CF00832CF3 /* 返回_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回_click.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -609,9 +609,9 @@
 				D5C2405D1BF108CF00832CF3 /* RegisterViewController.h */,
 				D5C2405E1BF108CF00832CF3 /* RegisterViewController.m */,
 				D5C2405F1BF108CF00832CF3 /* 右箭头.png */,
+				D5BCFEE11BF430DE0019402C /* logoImage@2x.png */,
 				D5C240601BF108CF00832CF3 /* 密码.png */,
 				D5C240611BF108CF00832CF3 /* 电话.png */,
-				D5C240621BF108CF00832CF3 /* 登录logo.png */,
 				D5C240631BF108CF00832CF3 /* 返回.png */,
 				D5C240641BF108CF00832CF3 /* 返回_click.png */,
 			);
@@ -679,9 +679,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5C2406E1BF108CF00832CF3 /* 电话.png in Resources */,
+				D5BCFEE21BF430DE0019402C /* logoImage@2x.png in Resources */,
 				D5C2406D1BF108CF00832CF3 /* 密码.png in Resources */,
 				D5C240701BF108CF00832CF3 /* 返回.png in Resources */,
-				D5C2406F1BF108CF00832CF3 /* 登录logo.png in Resources */,
 				D5C2406C1BF108CF00832CF3 /* 右箭头.png in Resources */,
 				B80003DE1BEFADB30099D194 /* PushConfig.plist in Resources */,
 				D5C240711BF108CF00832CF3 /* 返回_click.png in Resources */,
