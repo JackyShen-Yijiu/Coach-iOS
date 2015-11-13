@@ -34,10 +34,27 @@
 
 @implementation CourseViewController
 
+
+#pragma mark - LoingNotification
+- (void)didLoginSucess:(NSNotification *)notification
+{
+    [self.courseSummaryTableView.refreshHeader beginRefreshing];
+    [self fdCalendar:nil didSelectedDate:[NSDate date]];
+}
+
+- (void)didLoginoutSucess:(NSNotification *)notifcation
+{
+    [self.courseDayTableData removeAllObjects];
+    [[self courseDayTableData] removeAllObjects];
+    [self.courseSummaryTableView reloadData];
+    [self.courseDayTableView reloadData];
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -277,6 +294,8 @@
 - (void)addNotification
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefresh:) name:KCourseViewController_NeedRefresh object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginSucess:) name:@"kLoginSuccess" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginoutSucess:) name:@"kLoginoutSuccess" object:nil];
 }
 
 - (void)needRefresh:(NSNotification *)notification

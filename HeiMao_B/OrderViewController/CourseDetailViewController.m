@@ -43,8 +43,6 @@
         [self.tableView.refreshHeader beginRefreshing];
     }
     self.isNeedRefresh = NO;
-
-   
 }
 
 #pragma mark - initUI
@@ -52,6 +50,13 @@
 {
     [self resetNavBar];
     self.myNavigationItem.title = @"预约详情";
+    
+    UIButton *buttonRight = [self getBarButtonWithTitle:@""];
+    [buttonRight setImage:[UIImage imageNamed:@"conversation_normal"] forState:UIControlStateNormal];
+    [buttonRight setImage:[UIImage imageNamed:@"conversation_press"] forState:UIControlStateNormal];
+    [buttonRight addTarget:self action:@selector(rightButtonDidClick:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithCustomView:buttonRight];
+    self.myNavigationItem.rightBarButtonItems = @[[self barSpaingItem],item];
 }
 
 -(void)initUI
@@ -131,6 +136,13 @@
 }
 
 #pragma mark - Action
+#pragma mark Right
+- (void)rightButtonDidClick:(UIButton *)button
+{
+    
+}
+
+
 - (void)courseDetailViewDidClickAgreeButton:(CourseDetailView *)view
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];

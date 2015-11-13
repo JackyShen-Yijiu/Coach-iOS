@@ -74,9 +74,11 @@
 {
     return [[self class] dataForKey:USERINFO_IDENTIFY] != nil;
 }
+
 - (void)loginOut
 {
     [[self class] removeDataForKey:USERINFO_IDENTIFY];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kLoginoutSuccess" object:nil];
 }
 
 - (BOOL)loginViewDic:(NSDictionary *)info

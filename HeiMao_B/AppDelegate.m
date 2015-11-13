@@ -36,14 +36,10 @@
     
     [UserInfoModel defaultUserInfo];
     
-//    if (![UserInfoModel isLogin]) {
-//        LoginViewController *login = [[LoginViewController alloc] init];
-//        [self.window.rootViewController presentViewController:login animated:YES completion:nil];
-//    }
-    ConversationListController * cl = [[ConversationListController alloc] init];
-    [cl refreshDataSource];
-    
-    [(UINavigationController *)self.window.rootViewController pushViewController:cl animated:YES];
+    if (![UserInfoModel isLogin]) {
+        LoginViewController *login = [[LoginViewController alloc] init];
+        [self.window.rootViewController presentViewController:login animated:YES completion:nil];
+    }
     return YES;
     
     
