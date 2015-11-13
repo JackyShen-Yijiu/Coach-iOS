@@ -11,4 +11,4 @@ pod 'JSONKit','~>1.5pre'
 pod 'MBProgressHUD','~>0.9.1'
 pod 'UMengAnalytics'
 pod 'MD5Digest'
-
+pod 'EaseMobSDKFull'
