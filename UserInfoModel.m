@@ -7,6 +7,7 @@
 //
 
 #import "UserInfoModel.h"
+#import "EaseMob.h"
 
 #define USERINFO_IDENTIFY       @"USERINFO_IDENTIFY"
 
@@ -46,6 +47,13 @@
             userInfoModel = [[self alloc] init];
             userInfoModel.userID = @"5616352721ec29041a9af889";
             userInfoModel.token =  @" eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI1NjE2MzUyNzIxZWMyOTA0MWE5YWY4ODkiLCJ0aW1lc3RhbXAiOiIyMDE1LTEwLTA4VDA5OjIzOjQ4LjY5NloiLCJhdWQiOiJibGFja2NhdGUiLCJpYXQiOjE0NDQyOTYyMjh9.-iOZ5fIQjdmdHBthsCP7VQWRYYM68zWWHWWnIUxRSEg";
+            
+        }
+        //暂时添加，后期服务端测试
+        EMError *error = nil;
+        NSDictionary *loginInfo = [[EaseMob sharedInstance].chatManager loginWithUsername:@"123456" password:@"123456" error:&error];
+        if (!error && loginInfo) {
+            NSLog(@"登陆成功 %@",loginInfo);
         }
     });
     return userInfoModel;

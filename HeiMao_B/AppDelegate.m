@@ -15,6 +15,7 @@
 #import "APService.h"
 #import "LoginViewController.h"
 #import "EaseSDKHelper.h"
+#import "ConversationListController.h"
 
 @interface AppDelegate ()
 @property(nonatomic,strong)HMNagationController * navController;
@@ -32,12 +33,20 @@
     [self.window makeKeyAndVisible];
     
     self.window.rootViewController = [[HMNagationController alloc] initWithRootViewController:[self getMainTabBar]];
-    if (![UserInfoModel isLogin]) {
-        LoginViewController *login = [[LoginViewController alloc] init];
-        [self.window.rootViewController presentViewController:login animated:YES completion:nil];
-    }
- 
+    
+    [UserInfoModel defaultUserInfo];
+    
+//    if (![UserInfoModel isLogin]) {
+//        LoginViewController *login = [[LoginViewController alloc] init];
+//        [self.window.rootViewController presentViewController:login animated:YES completion:nil];
+//    }
+    ConversationListController * cl = [[ConversationListController alloc] init];
+    [cl refreshDataSource];
+    
+    [(UINavigationController *)self.window.rootViewController pushViewController:cl animated:YES];
     return YES;
+    
+    
 }
 
 - (UITabBarController *)getMainTabBar

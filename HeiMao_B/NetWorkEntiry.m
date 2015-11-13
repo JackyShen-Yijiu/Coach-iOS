@@ -11,10 +11,10 @@
 #import "NSString+MD5.h"
 #define KNETBASEURL
 
-#define  HOST_TEST_DAMIAN  @"http://101.200.204.240/api/v1/test"
+#define  HOST_TEST_DAMIAN  @"http://101.200.204.240:8181/api/v1/test"
 #define  HOST_LINE_DOMAIN  @"http://123.57.63.15:8181/api/v1"
 
-//#define QA_TEST
+#define QA_TEST
 
 
 @implementation NetWorkEntiry
@@ -53,7 +53,6 @@
     NSString * urlStr = [NSString stringWithFormat:@"%@//userinfo/signup",[self domain]];
     [self POST:urlStr parameters:dic success:success failure:failure];
 }
-
 
 
 + (void)loginWithPhotoNumber:(NSString *)photoNumber password:(NSString *)password

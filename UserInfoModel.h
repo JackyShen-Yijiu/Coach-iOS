@@ -16,6 +16,9 @@
 @property(nonatomic,strong)NSString * tel;
 @property(nonatomic,strong)NSString * token;
 
+@property(nonatomic,strong)NSString * jid;
+@property(nonatomic,strong)NSString * jToken;
+
 + (UserInfoModel *)defaultUserInfo;
 
 + (BOOL)isLogin;
