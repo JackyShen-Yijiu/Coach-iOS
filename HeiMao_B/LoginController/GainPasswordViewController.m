@@ -153,7 +153,7 @@
    
     
 //    NSDictionary *param = @{@"smscode":self.confirmString,@"password":[self.passWordTextFild.text DY_MD5],@"mobile":self.mobile};
-    [NetWorkEntiry mofifyWithPhotoNumber:self.mobile password:self.passWordTextFild.text.DY_MD5 smsCode:self.confirmString success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry mofifyWithPhotoNumber:self.mobile password:self.passWordTextFild.text smsCode:self.confirmString success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *param = responseObject;
         NSNumber *type = param[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
