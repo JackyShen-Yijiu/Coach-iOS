@@ -54,7 +54,7 @@
     
     UIButton *buttonRight = [self getBarButtonWithTitle:@""];
     [buttonRight setImage:[UIImage imageNamed:@"conversation_normal"] forState:UIControlStateNormal];
-    [buttonRight setImage:[UIImage imageNamed:@"conversation_press"] forState:UIControlStateNormal];
+    [buttonRight setImage:[UIImage imageNamed:@"conversation_press"] forState:UIControlStateHighlighted];
     [buttonRight addTarget:self action:@selector(rightButtonDidClick:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithCustomView:buttonRight];
     self.myNavigationItem.rightBarButtonItems = @[[self barSpaingItem],item];

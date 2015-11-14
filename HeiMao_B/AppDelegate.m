@@ -17,7 +17,7 @@
 #import "EaseSDKHelper.h"
 #import "ConversationListController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<LoginViewControllerDelegate>
 @property(nonatomic,strong)HMNagationController * navController;
 @end
 
@@ -30,19 +30,22 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+    LoginViewController * loginViewC = [[LoginViewController alloc] init];
+    loginViewC.delegate = self;
+    self.navController = [[HMNagationController alloc] initWithRootViewController:loginViewC];
+    self.window.rootViewController =  self.navController;
     [self.window makeKeyAndVisible];
-    
-    self.window.rootViewController = [[HMNagationController alloc] initWithRootViewController:[self getMainTabBar]];
-    
-    [UserInfoModel defaultUserInfo];
-    
-    if (![UserInfoModel isLogin]) {
-        LoginViewController *login = [[LoginViewController alloc] init];
-        [self.window.rootViewController presentViewController:login animated:YES completion:nil];
+    if ([UserInfoModel isLogin]) {
+        [self loginViewControllerdidLoginSucess:nil];
     }
     return YES;
-    
-    
+
+}
+
+- (void)loginViewControllerdidLoginSucess:(LoginViewController *)controller
+{
+    [self.navController.navigationBar setHidden:NO];
+    [self.navController pushViewController:[self getMainTabBar] animated:NO];
 }
 
 - (UITabBarController *)getMainTabBar

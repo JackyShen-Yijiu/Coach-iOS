@@ -16,8 +16,7 @@
 @property(nonatomic,strong)NSString * tel;
 @property(nonatomic,strong)NSString * token;
 
-@property(nonatomic,strong)NSString * jid;
-@property(nonatomic,strong)NSString * jToken;
+@property(nonatomic,strong)NSString * md5Pass;
 
 + (UserInfoModel *)defaultUserInfo;
 

@@ -45,6 +45,20 @@ static NSString *const kuserType = @"usertype";
 @implementation LoginViewController
 
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    [self.myNavController.navigationBar setHidden:YES];
+    [[self.myNavController navigationBar] setBarTintColor:[UIColor clearColor]];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+}
 
 - (NSMutableDictionary *)userParam {
     if (_userParam == nil) {
@@ -237,18 +251,23 @@ static NSString *const kuserType = @"usertype";
     [self.phoneNumTextField resignFirstResponder];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [NetWorkEntiry loginWithPhotoNumber:self.phoneNumTextField.text password:self.passwordTextField.text.DY_MD5 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry loginWithPhotoNumber:self.phoneNumTextField.text password:self.passwordTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
         NSDictionary *param = responseObject;
         NSNumber *type = param[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
         if (type.integerValue == 1) {
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"登录成功" controller:self];
-            [alerview show];
-            [[UserInfoModel defaultUserInfo] loginViewDic:param[@"data"]];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"kLoginSuccess" object:nil];
-            [self dismissViewControllerAnimated:YES completion:nil];
+//            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"登录成功" controller:self];
+//            [alerview show];
+            NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:param[@"data"]];
+            [dic setValue:[self.passwordTextField.text DY_MD5] forKey:@"md5Pass"];
+            [[UserInfoModel defaultUserInfo] loginViewDic:dic];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"kLoginSuccess" object:nil];
+//            [self dismissViewControllerAnimated:YES completion:nil];
+            if ([_delegate respondsToSelector:@selector(loginViewControllerdidLoginSucess:)]) {
+                [_delegate loginViewControllerdidLoginSucess:self];
+            }
         }else {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
             [alerview show];

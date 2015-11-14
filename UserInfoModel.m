@@ -45,15 +45,6 @@
     dispatch_once(&onceToken, ^{
         if (!userInfoModel) {
             userInfoModel = [[self alloc] init];
-            userInfoModel.userID = @"5616352721ec29041a9af889";
-            userInfoModel.token =  @" eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI1NjE2MzUyNzIxZWMyOTA0MWE5YWY4ODkiLCJ0aW1lc3RhbXAiOiIyMDE1LTEwLTA4VDA5OjIzOjQ4LjY5NloiLCJhdWQiOiJibGFja2NhdGUiLCJpYXQiOjE0NDQyOTYyMjh9.-iOZ5fIQjdmdHBthsCP7VQWRYYM68zWWHWWnIUxRSEg";
-            
-        }
-        //暂时添加，后期服务端测试
-        EMError *error = nil;
-        NSDictionary *loginInfo = [[EaseMob sharedInstance].chatManager loginWithUsername:@"123456" password:@"123456" error:&error];
-        if (!error && loginInfo) {
-            NSLog(@"登陆成功 %@",loginInfo);
         }
     });
     return userInfoModel;
@@ -87,6 +78,12 @@
     self.userID = [info objectForKey:@"coachid"];
     self.name =  [info objectForKey:@"name"];
     self.tel = [info objectForKey:@"mobile"];
+    self.md5Pass = [info objectForKey:@"md5Pass"];
+    EMError *error = nil;
+    NSDictionary *loginInfo = [[EaseMob sharedInstance].chatManager loginWithUsername:@"123456" password:@"123456" error:&error];
+    if (!error && loginInfo) {
+        NSLog(@"登陆成功 %@",loginInfo);
+    }
     if (![[self class] isLogin]) {
         [[self class] storeData:info forKey:USERINFO_IDENTIFY];
     }
