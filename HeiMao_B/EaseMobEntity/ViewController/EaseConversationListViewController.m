@@ -116,7 +116,6 @@
 }
 
 #pragma mark - data
-
 - (void)tableViewDidTriggerHeaderRefresh
 {
     NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
@@ -130,8 +129,6 @@
                                return(NSComparisonResult)NSOrderedDescending;
                            }
                        }];
-    
-    
     
     [self.dataArray removeAllObjects];
     for (EMConversation *converstion in sorted) {
