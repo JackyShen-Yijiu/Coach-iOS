@@ -7,7 +7,6 @@
 //
 
 #import "EaseConversationModel.h"
-
 #import "EMConversation.h"
 
 @implementation EaseConversationModel
@@ -17,15 +16,13 @@
     self = [super init];
     if (self) {
         _conversation = conversation;
-        _title = _conversation.chatter;
         if (conversation.conversationType == eConversationTypeChat) {
-            _avatarImage = [UIImage imageNamed:@"EaseUIResource.bundle/user"];
-        }
-        else{
-            _avatarImage = [UIImage imageNamed:@"EaseUIResource.bundle/group"];
+            self.avatarURLPath = [conversation.ext objectStringForKey:@"headUrl"];
+            self.title = [[conversation ext] objectStringForKey:@"nickName"];
+            self.type = [[conversation ext] objectStringForKey:@"userType"];
+            self.avatarImage = [UIImage imageNamed:@"user"];
         }
     }
-    
     return self;
 }
 

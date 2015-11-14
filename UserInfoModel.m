@@ -100,7 +100,7 @@
               @"userId":[[UserInfoModel defaultUserInfo] userID],
               @"nickName":[[UserInfoModel defaultUserInfo] name],
               @"headUrl":[[UserInfoModel defaultUserInfo] portrait],
-              @"userType":@(2)
+              @"userType":@"2"
               };
 }
 

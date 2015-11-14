@@ -162,12 +162,12 @@
 - (void)showMessCountInTabBar:(NSInteger)mesCount
 {
     AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [[appdelegate.tabController tabBar] showBadgeOnItemIndex:0 withMessageCount:mesCount];
+    [[appdelegate.tabController tabBar] showBadgeOnItemIndex:1 withMessageCount:mesCount];
 }
 
 - (void)hiddenMessCountInTabBar
 {
     AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [[appdelegate.tabController tabBar] hideBadgeOnItemIndex:0];
+    [[appdelegate.tabController tabBar] hideBadgeOnItemIndex:1];
 }
 @end

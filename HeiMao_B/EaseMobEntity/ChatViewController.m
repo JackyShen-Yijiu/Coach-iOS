@@ -247,12 +247,7 @@
     if ([fromId isEqualToString:[[UserInfoModel defaultUserInfo] userID]]) {
         model.avatarURLPath = [[UserInfoModel defaultUserInfo] portrait];
         model.nickname = [[UserInfoModel defaultUserInfo] name];
-        [model message].ext = @{
-                                @"userId":[[UserInfoModel defaultUserInfo] userID],
-                                @"nickName":[[UserInfoModel defaultUserInfo] name],
-                                @"headUrl":[[UserInfoModel defaultUserInfo] portrait],
-                                @"userType":@(2)
-                                };
+        [model message].ext = [[UserInfoModel defaultUserInfo] messageExt];
     }else{
         NSDictionary * dic = [[model message] ext];
         model.avatarURLPath = [dic objectStringForKey:@"headUrl"];

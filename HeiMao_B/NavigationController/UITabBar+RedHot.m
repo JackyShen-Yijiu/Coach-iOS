@@ -7,7 +7,7 @@
 //
 
 #import "UITabBar+RedHot.h"
-#define TabbarItemNums  2
+#define TabbarItemNums  3
 
 @implementation UITabBar (RedHot)
 

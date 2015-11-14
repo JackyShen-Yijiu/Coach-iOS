@@ -5,40 +5,15 @@
 //  Created by dhc on 15/6/25.
 //  Copyright (c) 2015年 easemob.com. All rights reserved.
 //
-
+#import <Foundation/Foundation.h>
 #import "ConversationListController.h"
 #import "EaseMob.h"
 #import "EaseConvertToCommonEmoticonsHelper.h"
 #import "NSDate+Category.h"
 #import "UIViewController+HUD.h"
-
-//#import "ChatViewController.h"
-//#import "EMSearchBar.h"
-//#import "EMSearchDisplayController.h"
-//#import "RobotManager.h"
-//#import "RobotChatViewController.h"
-//#import "UserProfileManager.h"
-//#import "RealtimeSearchUtil.h"
-
-//@implementation EMConversation (search)
-//
-////根据用户昵称,环信机器人名称,群名称进行搜索
-//- (NSString*)showName
-//{
-//    if (self.conversationType == eConversationTypeChat) {
-//        if ([[RobotManager sharedInstance] isRobotWithUsername:self.chatter]) {
-//            return [[RobotManager sharedInstance] getRobotNickWithUsername:self.chatter];
-//        }
-//        return [[UserProfileManager sharedInstance] getNickNameWithUsername:self.chatter];
-//    } else if (self.conversationType == eConversationTypeGroupChat) {
-//        if ([self.ext objectForKey:@"groupSubject"] || [self.ext objectForKey:@"isPublic"]) {
-//            return [self.ext objectForKey:@"groupSubject"];
-//        }
-//    }
-//    return self.chatter;
-//}
-//
-//@end
+#import "ChatViewController.h"
+#import "EMConversation.h"
+#import "EMConversation.h"
 
 @interface ConversationListController ()<EaseConversationListViewControllerDelegate, EaseConversationListViewControllerDataSource>
 
@@ -61,6 +36,22 @@
     [self networkStateView];
     
     [self removeEmptyConversationsFromDB];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self initNavBar];
+//    [self showMessCountInTabBar:10];
+}
+
+#pragma mark - initUI
+
+- (void)initNavBar
+{
+    [self resetNavBar];
+     self.myNavigationItem.title = @"消息";
 }
 
 - (void)removeEmptyConversationsFromDB
@@ -105,103 +96,48 @@
     
     return _networkStateView;
 }
-
-//- (UISearchBar *)searchBar
-//{
-//    if (!_searchBar) {
-//        _searchBar = [[EMSearchBar alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 44)];
-//        _searchBar.delegate = self;
-//        _searchBar.placeholder = NSLocalizedString(@"search", @"Search");
-//        _searchBar.backgroundColor = [UIColor colorWithRed:0.747 green:0.756 blue:0.751 alpha:1.000];
-//    }
-//    
-//    return _searchBar;
-//}
-
-//- (EMSearchDisplayController *)searchController
-//{
-//    if (_searchController == nil) {
-//        _searchController = [[EMSearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
-//        _searchController.delegate = self;
-//        _searchController.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-//        _searchController.searchResultsTableView.tableFooterView = [[UIView alloc] init];
-//        
-//        __weak ConversationListController *weakSelf = self;
-//        [_searchController setCellForRowAtIndexPathCompletion:^UITableViewCell *(UITableView *tableView, NSIndexPath *indexPath) {
-//            NSString *CellIdentifier = [EaseConversationCell cellIdentifierWithModel:nil];
-//            EaseConversationCell *cell = (EaseConversationCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//            
-//            // Configure the cell...
-//            if (cell == nil) {
-//                cell = [[EaseConversationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//            }
-//            
-//            id<IConversationModel> model = [weakSelf.searchController.resultsSource objectAtIndex:indexPath.row];
-//            cell.model = model;
-//            
-//            cell.detailLabel.text = [weakSelf conversationListViewController:weakSelf latestMessageTitleForConversationModel:model];
-//            cell.detailLabel.attributedText = [EaseEmotionEscape attStringFromTextForChatting:cell.detailLabel.text];
-//            cell.timeLabel.text = [weakSelf conversationListViewController:weakSelf latestMessageTimeForConversationModel:model];
-//            return cell;
-//        }];
-//        
-//        [_searchController setHeightForRowAtIndexPathCompletion:^CGFloat(UITableView *tableView, NSIndexPath *indexPath) {
-//            return [EaseConversationCell cellHeightWithModel:nil];
-//        }];
-//        
-//        [_searchController setDidSelectRowAtIndexPathCompletion:^(UITableView *tableView, NSIndexPath *indexPath) {
-//            [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//            [weakSelf.searchController.searchBar endEditing:YES];
-//            id<IConversationModel> model = [weakSelf.searchController.resultsSource objectAtIndex:indexPath.row];
-//            EMConversation *conversation = model.conversation;
-//            ChatViewController *chatController;
-//            if ([[RobotManager sharedInstance] isRobotWithUsername:conversation.chatter]) {
-//                chatController = [[RobotChatViewController alloc] initWithConversationChatter:conversation.chatter conversationType:conversation.conversationType];
-//                chatController.title = [[RobotManager sharedInstance] getRobotNickWithUsername:conversation.chatter];
-//            }else {
-//                chatController = [[ChatViewController alloc] initWithConversationChatter:conversation.chatter conversationType:conversation.conversationType];
-//                chatController.title = [conversation showName];
-//            }
-//            [weakSelf.navigationController pushViewController:chatController animated:YES];
-//        }];
-//    }
-//    
-//    return _searchController;
-//}
-
 #pragma mark - EaseConversationListViewControllerDelegate
-//
-//- (void)conversationListViewController:(EaseConversationListViewController *)conversationListViewController
-//            didSelectConversationModel:(id<IConversationModel>)conversationModel
-////{
-////    if (conversationModel) {
-////        EMConversation *conversation = conversationModel.conversation;
-////        if (conversation) {
-////            if ([[RobotManager sharedInstance] isRobotWithUsername:conversation.chatter]) {
-////                RobotChatViewController *chatController = [[RobotChatViewController alloc] initWithConversationChatter:conversation.chatter conversationType:conversation.conversationType];
-////                chatController.title = [[RobotManager sharedInstance] getRobotNickWithUsername:conversation.chatter];
-////                [self.navigationController pushViewController:chatController animated:YES];
-////            } else {
-////                ChatViewController *chatController = [[ChatViewController alloc] initWithConversationChatter:conversation.chatter conversationType:conversation.conversationType];
-////                chatController.title = conversationModel.title;
-////                [self.navigationController pushViewController:chatController animated:YES];
-////            }
-////        }
-////    }
-//}
+
+- (void)conversationListViewController:(EaseConversationListViewController *)conversationListViewController
+            didSelectConversationModel:(id<IConversationModel>)conversationModel
+{
+    if (conversationModel) {
+        EMConversation *conversation = conversationModel.conversation;
+        if (conversation) {
+            
+            ChatViewController *chatController = [[ChatViewController alloc] initWithConversationChatter:conversation.chatter conversationType:conversation.conversationType];
+            chatController.title = conversationModel.title;
+            [self.myNavController pushViewController:chatController animated:YES];
+            
+        }
+    }
+}
 
 #pragma mark - EaseConversationListViewControllerDataSource
 
-////读取回话列表后，通过代理处理回话
-//- (id<IConversationModel>)conversationListViewController:(EaseConversationListViewController *)conversationListViewController
-//                                    modelForConversation:(EMConversation *)conversation
-//{
-//    EaseConversationModel *model = [[EaseConversationModel alloc] initWithConversation:conversation];
-//    if (model.conversation.conversationType == eConversationTypeChat) {
-//        //单聊会话
-//    }
-//    return model;
-//}
+//读取回话列表后，通过代理处理回话
+- (id<IConversationModel>)conversationListViewController:(EaseConversationListViewController *)conversationListViewController
+                                    modelForConversation:(EMConversation *)conversation
+{
+    if (conversation.conversationType == eConversationTypeChat) {
+        //单聊会话
+        long long time = [[NSDate date] timeIntervalSince1970] * 1000;
+        EMMessage * moreMessage = [[conversation loadNumbersOfMessages:1 before:time] lastObject];
+        [self fixModelInfo:conversation MessageModelInfo:moreMessage];
+    }
+    EaseConversationModel *model = [[EaseConversationModel alloc] initWithConversation:conversation];
+    return model;
+}
+
+- (void)fixModelInfo:(EMConversation *)convModel MessageModelInfo:(EMMessage *)messModel
+{
+    NSString * fromId = [messModel from];
+    if ([fromId isEqualToString:[[UserInfoModel defaultUserInfo] userID]]) {
+        convModel.ext = [[UserInfoModel defaultUserInfo] messageExt];
+    }else{
+        convModel.ext = [[messModel ext] copy];
+    }
+}
 
 - (NSString *)conversationListViewController:(EaseConversationListViewController *)conversationListViewController
       latestMessageTitleForConversationModel:(id<IConversationModel>)conversationModel
@@ -253,49 +189,7 @@
     return latestMessageTime;
 }
 
-//#pragma mark - UISearchBarDelegate
-//
-//- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
-//{
-//    [searchBar setShowsCancelButton:YES animated:YES];
-//    
-//    return YES;
-//}
-//
-//- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-//{
-//    __weak typeof(self) weakSelf = self;
-//    [[RealtimeSearchUtil currentUtil] realtimeSearchWithSource:self.dataArray searchText:(NSString *)searchText collationStringSelector:@selector(title) resultBlock:^(NSArray *results) {
-//        if (results) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [weakSelf.searchController.resultsSource removeAllObjects];
-//                [weakSelf.searchController.resultsSource addObjectsFromArray:results];
-//                [weakSelf.searchController.searchResultsTableView reloadData];
-//            });
-//        }
-//    }];
-//}
-//
-//- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
-//{
-//    return YES;
-//}
-//
-//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-//{
-//    [searchBar resignFirstResponder];
-//}
-//
-//- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-//{
-//    searchBar.text = @"";
-//    [[RealtimeSearchUtil currentUtil] realtimeSearchStop];
-//    [searchBar resignFirstResponder];
-//    [searchBar setShowsCancelButton:NO animated:YES];
-//}
-
 #pragma mark - public
-
 -(void)refreshDataSource
 {
     [self tableViewDidTriggerHeaderRefresh];

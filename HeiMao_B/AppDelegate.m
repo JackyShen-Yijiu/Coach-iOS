@@ -52,11 +52,15 @@
 {
     UIImage * nCourse = [UIImage imageNamed:@"order_normal"];
     UIImage * hCourse = [UIImage imageNamed:@"order_seleted"];
+    UIImage * nMess = [UIImage imageNamed:@"user_normal"];
+    UIImage * HMess = [UIImage imageNamed:@"user_seleted"];
     UIImage * nUser = [UIImage imageNamed:@"user_normal"];
     UIImage * hUser = [UIImage imageNamed:@"user_seleted"];
+    
     CourseViewController * courseContro = [[CourseViewController alloc] init];
+    ConversationListController * courList = [[ConversationListController alloc] init];
     TeacherCenterController * userCentertro = [[TeacherCenterController alloc] init];
-    return [self getTabWithTitleArray:@[@"预约",@"我的"] nimagesArray:@[nCourse,nUser] himages:@[hCourse,hUser] andControllers:@[courseContro,userCentertro]];
+    return [self getTabWithTitleArray:@[@"预约",@"消息",@"我的"] nimagesArray:@[nCourse,nMess,nUser] himages:@[hCourse,HMess,hUser] andControllers:@[courseContro,courList,userCentertro]];
 }
 
 - (UITabBarController *)getTabWithTitleArray:(NSArray *)item nimagesArray:(NSArray *)nImages
