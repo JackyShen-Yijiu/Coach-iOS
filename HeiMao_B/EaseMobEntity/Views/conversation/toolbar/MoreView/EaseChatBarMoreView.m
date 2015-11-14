@@ -111,7 +111,7 @@
     [_scrollview addSubview:_takePicButton];
 
     CGRect frame = self.frame;
-    if (type == EMChatToolbarTypeChat) {
+    if (type == EMChatToolbarTypeChat && 0) {
         frame.size.height = 150;
         _audioCallButton =[UIButton buttonWithType:UIButtonTypeCustom];
         [_audioCallButton setFrame:CGRectMake(insets * 4 + CHAT_BUTTON_SIZE * 3, 10, CHAT_BUTTON_SIZE , CHAT_BUTTON_SIZE)];

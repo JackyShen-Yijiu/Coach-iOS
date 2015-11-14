@@ -24,7 +24,7 @@ static EaseLocationViewController *defaultLocation = nil;
 }
 
 @property (strong, nonatomic) NSString *addressString;
-
+@property (nonatomic,strong) UIButton * sendButton;
 @end
 
 @implementation EaseLocationViewController
@@ -68,11 +68,6 @@ static EaseLocationViewController *defaultLocation = nil;
     
     self.myNavigationItem.title = NSLocalizedString(@"location.messageType", @"location message");
     
-    UIButton *backButton = [self createBackButton];
-    [backButton addTarget:self action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem* someBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    self.myNavigationItem.leftBarButtonItems = @[[self barSpaingItem],someBarButtonItem];
-    
     _mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
     _mapView.delegate = self;
     _mapView.mapType = MKMapTypeStandard;
@@ -82,31 +77,17 @@ static EaseLocationViewController *defaultLocation = nil;
     if (_isSendLocation) {
         _mapView.showsUserLocation = YES;//显示当前位置
         
-        UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-        [sendButton setTitle:NSLocalizedString(@"send", @"Send") forState:UIControlStateNormal];
-        [sendButton setTitleColor:[UIColor colorWithRed:32 / 255.0 green:134 / 255.0 blue:158 / 255.0 alpha:1.0] forState:UIControlStateNormal];
-        [sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-        [sendButton addTarget:self action:@selector(sendLocation) forControlEvents:UIControlEventTouchUpInside];
-        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:sendButton]];
-        self.navigationItem.rightBarButtonItem.enabled = NO;
-        
-        
-        
+        self.sendButton = [self getBarButtonWithTitle:@"发送"];
+        [self.sendButton addTarget:self action:@selector(sendLocation) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithCustomView:self.sendButton];
+        self.myNavigationItem.rightBarButtonItems = @[[self barSpaingItem],item];
+        [self.sendButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [self.sendButton setUserInteractionEnabled:NO];
         [self startLocation];
     }
     else{
         [self removeToLocation:_currentLocationCoordinate];
     }
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
 }
 
 #pragma mark - MKMapViewDelegate
@@ -125,6 +106,8 @@ static EaseLocationViewController *defaultLocation = nil;
     }];
 }
 
+
+
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
 {
     [self hideHud];
@@ -138,6 +121,12 @@ static EaseLocationViewController *defaultLocation = nil;
     }
 }
 
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    
+}
+
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
     switch (status) {
@@ -145,6 +134,9 @@ static EaseLocationViewController *defaultLocation = nil;
             if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
             {
                 [_locationManager requestWhenInUseAuthorization];
+            }
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >=9){
+                _locationManager.allowsBackgroundLocationUpdates = YES;
             }
             break;
         case kCLAuthorizationStatusDenied:
@@ -160,18 +152,32 @@ static EaseLocationViewController *defaultLocation = nil;
 
 - (void)startLocation
 {
-    if([CLLocationManager locationServicesEnabled]){
+    if (!_locationManager) {
+        // 1. 实例化定位管理器
         _locationManager = [[CLLocationManager alloc] init];
+        // 2. 设置代理
         _locationManager.delegate = self;
-        _locationManager.distanceFilter = 5;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;//kCLLocationAccuracyBest;
-        if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-            [_locationManager requestWhenInUseAuthorization];
+        // 3. 定位精度
+        [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+        // 4.请求用户权限：分为：⓵只在前台开启定位⓶在后台也可定位，
+        //注意：建议只请求⓵和⓶中的一个，如果两个权限都需要，只请求⓶即可，
+        //⓵⓶这样的顺序，将导致bug：第一次启动程序后，系统将只请求⓵的权限，⓶的权限系统不会请求，只会在下一次启动应用时请求⓶
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8) {
+            //[_locationManager requestWhenInUseAuthorization];//⓵只在前台开启定位
+            [_locationManager requestAlwaysAuthorization];//⓶在后台也可定位
         }
+        // 5.iOS9新特性：将允许出现这种场景：同一app中多个location manager：一些只能在前台定位，另一些可在后台定位（并可随时禁止其后台定位）。
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9) {
+            _locationManager.allowsBackgroundLocationUpdates = YES;
+        }
+ 
     }
+    // 6. 更新用户位置
+    [_locationManager startUpdatingLocation];
     
     if (_isSendLocation) {
-        self.navigationItem.rightBarButtonItem.enabled = NO;
+        [self.sendButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [self.sendButton setUserInteractionEnabled:NO];
     }
     
     [self showHudInView:self.view hint:NSLocalizedString(@"location.ongoning", @"locating...")];
@@ -199,7 +205,8 @@ static EaseLocationViewController *defaultLocation = nil;
     [_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
     
     if (_isSendLocation) {
-        self.navigationItem.rightBarButtonItem.enabled = YES;
+        [self.sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.sendButton setUserInteractionEnabled:YES];
     }
     
     [self createAnnotationWithCoords:_currentLocationCoordinate];

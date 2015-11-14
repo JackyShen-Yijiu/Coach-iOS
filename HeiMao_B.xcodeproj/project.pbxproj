@@ -194,6 +194,7 @@
 		B8A0526A1BF6F6740058D27A /* titleBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8A052641BF6F6740058D27A /* titleBar@2x.png */; };
 		B8A0526C1BF702170058D27A /* user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8A0526B1BF702170058D27A /* user@2x.png */; };
 		B8A052731BF70DA90058D27A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B8A052751BF70DA90058D27A /* Localizable.strings */; };
+		B8A0527C1BF71D770058D27A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8A0527B1BF71D770058D27A /* MapKit.framework */; };
 		B8AFED191BDB96AC00EF8726 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8AFED181BDB96AC00EF8726 /* CourseViewController.m */; };
 		B8AFED1D1BDB988000EF8726 /* TeacherCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8AFED1C1BDB988000EF8726 /* TeacherCenterController.m */; };
 		B8BC50451BF38A390007B029 /* EMAudioPlayerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BC4F851BF38A390007B029 /* EMAudioPlayerUtil.m */; };
@@ -563,6 +564,7 @@
 		B8A0526B1BF702170058D27A /* user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user@2x.png"; path = "EaseUIResource.bundle/user@2x.png"; sourceTree = "<group>"; };
 		B8A052771BF70EAD0058D27A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B8A052781BF70EB30058D27A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B8A0527B1BF71D770058D27A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B8AFED171BDB96AC00EF8726 /* CourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseViewController.h; sourceTree = "<group>"; };
 		B8AFED181BDB96AC00EF8726 /* CourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseViewController.m; sourceTree = "<group>"; };
 		B8AFED1B1BDB988000EF8726 /* TeacherCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherCenterController.h; sourceTree = "<group>"; };
@@ -894,6 +896,7 @@
 				B80003D41BEFACC10099D194 /* Foundation.framework in Frameworks */,
 				B80003D21BEFACB80099D194 /* CoreGraphics.framework in Frameworks */,
 				B80003D01BEFACB10099D194 /* SystemConfiguration.framework in Frameworks */,
+				B8A0527C1BF71D770058D27A /* MapKit.framework in Frameworks */,
 				B80003CE1BEFACAC0099D194 /* CoreTelephony.framework in Frameworks */,
 				B80003CC1BEFACA50099D194 /* CoreFoundation.framework in Frameworks */,
 				B8BC504F1BF38A390007B029 /* libopencore-amrnb.a in Frameworks */,
@@ -919,6 +922,7 @@
 		B636E4EC57D3A22E3FC68559 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B8A0527B1BF71D770058D27A /* MapKit.framework */,
 				B80003DB1BEFAD3D0099D194 /* libc.tbd */,
 				B80003D91BEFAD360099D194 /* libc++.tbd */,
 				B80003D71BEFACCD0099D194 /* Security.framework */,
@@ -2101,6 +2105,11 @@
 					B86EB3501BDB50EB0014EBD7 = {
 						CreatedOnToolsVersion = 7.0.1;
 						DevelopmentTeam = MC3VUBEH8X;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
