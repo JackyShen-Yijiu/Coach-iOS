@@ -23,6 +23,7 @@
 @interface UIViewController(NavTab)
 - (UINavigationItem *)myNavigationItem;
 - (UINavigationController *)myNavController;
+- (UIButton*) createBackButton;
 - (void)resetNavBar;
 - (UIButton *)getBarButtonWithTitle:(NSString *)title;
 - (UIBarButtonItem*)barSpaingItem;

@@ -12,6 +12,7 @@
 
 @interface UserInfoModel : NSObject
 @property(nonatomic,strong)NSString * userID;
+@property(nonatomic,strong)NSString * portrait;
 @property(nonatomic,strong)NSString * name;
 @property(nonatomic,strong)NSString * tel;
 @property(nonatomic,strong)NSString * token;
@@ -24,4 +25,5 @@
 - (void)loginOut;
 - (BOOL)loginViewDic:(NSDictionary *)info;
 
+- (NSDictionary *)messageExt;
 @end

@@ -10,8 +10,8 @@
 
 #import "NSObject+EaseMob.h"
 #import "NSDate+Category.h"
-//#import "EaseUsersListViewController.h"
 #import "EaseMessageReadManager.h"
+#import "UserInfoModel.h"
 
 #define KHintAdjustY    50
 
@@ -63,7 +63,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithRed:248 / 255.0 green:248 / 255.0 blue:248 / 255.0 alpha:1.0];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -92,21 +91,13 @@
     [self registerEaseMobNotification];
     
     
-    if (self.conversation.conversationType == eConversationTypeChatRoom)
-    {
-        [self joinChatroom:self.conversation.chatter];
-    }
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didBecomeActive)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 - (void)dealloc
 {
@@ -116,15 +107,7 @@
     [EMCDDeviceManager sharedInstance].delegate = nil;
     [self unregisterEaseMobNotification];
     
-    if (_conversation.conversationType == eConversationTypeChatRoom && !_isKicked)
-    {
-        //退出聊天室，删除会话
-        NSString *chatter = [_conversation.chatter copy];
-        [[EaseMob sharedInstance].chatManager asyncLeaveChatroom:chatter completion:^(EMChatroom *chatroom, EMError *error){
-            [[EaseMob sharedInstance].chatManager removeConversationByChatter:chatter deleteMessages:YES append2Chat:YES];
-        }];
-    }
-    
+
     if (_imagePicker){
         [_imagePicker dismissViewControllerAnimated:NO completion:nil];
         _imagePicker = nil;
@@ -153,79 +136,7 @@
     [[EMCDDeviceManager sharedInstance] disableProximitySensor];
 }
 
-#pragma mark - chatroom
-
-- (void)saveChatroom:(EMChatroom *)chatroom
-{
-    NSString *chatroomName = chatroom.chatroomSubject ? chatroom.chatroomSubject : @"";
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSString *key = [NSString stringWithFormat:@"OnceJoinedChatrooms_%@", [[[EaseMob sharedInstance].chatManager loginInfo] objectForKey:@"username" ]];
-    NSMutableDictionary *chatRooms = [NSMutableDictionary dictionaryWithDictionary:[ud objectForKey:key]];
-    if (![chatRooms objectForKey:chatroom.chatroomId])
-    {
-        [chatRooms setObject:chatroomName forKey:chatroom.chatroomId];
-        [ud setObject:chatRooms forKey:key];
-        [ud synchronize];
-    }
-}
-
-- (void)joinChatroom:(NSString *)chatroomId
-{
-    [self showHudInView:self.view hint:NSLocalizedString(@"chatroom.joining",@"Joining the chatroom")];
-    __weak typeof(self) weakSelf = self;
-    [[EaseMob sharedInstance].chatManager asyncJoinChatroom:chatroomId completion:^(EMChatroom *chatroom, EMError *error){
-        if (weakSelf)
-        {
-            EaseMessageViewController *strongSelf = weakSelf;
-            [strongSelf hideHud];
-            if (error && (error.errorCode != EMErrorChatroomJoined))
-            {
-                [strongSelf showHint:[NSString stringWithFormat:NSLocalizedString(@"chatroom.joinFailed",@"join chatroom \'%@\' failed"), chatroomId]];
-            }
-            else
-            {
-                [strongSelf saveChatroom:chatroom];
-            }
-        }
-        else
-        {
-            if (!error || (error.errorCode == EMErrorChatroomJoined))
-            {
-                [[EaseMob sharedInstance].chatManager asyncLeaveChatroom:chatroomId completion:^(EMChatroom *chatroom, EMError *error){
-                    [[EaseMob sharedInstance].chatManager removeConversationByChatter:chatroomId deleteMessages:YES append2Chat:YES];
-                }];
-            }
-        }
-    }];
-}
-
-#pragma mark - EMChatManagerChatroomDelegate
-
-- (void)chatroom:(EMChatroom *)chatroom occupantDidJoin:(NSString *)username
-{
-    CGRect frame = self.chatToolbar.frame;
-    [self showHint:[NSString stringWithFormat:NSLocalizedString(@"chatroom.join", @"\'%@\'join chatroom\'%@\'"), username, chatroom.chatroomId] yOffset:-frame.size.height + KHintAdjustY];
-}
-
-- (void)chatroom:(EMChatroom *)chatroom occupantDidLeave:(NSString *)username
-{
-    CGRect frame = self.chatToolbar.frame;
-    [self showHint:[NSString stringWithFormat:NSLocalizedString(@"chatroom.leave", @"\'%@\'leave chatroom\'%@\'"), username, chatroom.chatroomId] yOffset:-frame.size.height + KHintAdjustY];
-}
-
-- (void)beKickedOutFromChatroom:(EMChatroom *)chatroom reason:(EMChatroomBeKickedReason)reason
-{
-    if ([_conversation.chatter isEqualToString:chatroom.chatroomId])
-    {
-        _isKicked = YES;
-        CGRect frame = self.chatToolbar.frame;
-        [self showHint:[NSString stringWithFormat:NSLocalizedString(@"chatroom.remove", @"be removed from chatroom\'%@\'"), chatroom.chatroomId] yOffset:-frame.size.height + KHintAdjustY];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
-
 #pragma mark - getter
-
 - (UIImagePickerController *)imagePicker
 {
     if (_imagePicker == nil) {
@@ -1632,7 +1543,7 @@
 
 - (void)sendTextMessage:(NSString *)text
 {
-    [self sendTextMessage:text withExt:nil];
+    [self sendTextMessage:text withExt:[[UserInfoModel defaultUserInfo] messageExt]];
 }
 
 - (void)sendTextMessage:(NSString *)text withExt:(NSDictionary*)ext
@@ -1656,7 +1567,7 @@
                                                                    to:self.conversation.chatter
                                                           messageType:[self _messageTypeFromConversationType]
                                                     requireEncryption:NO
-                                                           messageExt:nil];
+                                                           messageExt:[[UserInfoModel defaultUserInfo] messageExt]];
     [self addMessageToDataSource:message
                         progress:nil];
 }
@@ -1675,7 +1586,7 @@
                                                              to:self.conversation.chatter
                                                     messageType:[self _messageTypeFromConversationType]
                                               requireEncryption:NO
-                                                     messageExt:nil
+                                                     messageExt:[[UserInfoModel defaultUserInfo] messageExt]
                                                        progress:progress];
     [self addMessageToDataSource:message
                         progress:progress];
@@ -1697,7 +1608,7 @@
                                                                  to:self.conversation.chatter
                                                         messageType:[self _messageTypeFromConversationType]
                                                   requireEncryption:NO
-                                                         messageExt:nil
+                                                         messageExt:[[UserInfoModel defaultUserInfo] messageExt]
                                                            progress:progress];
     [self addMessageToDataSource:message
                         progress:progress];
@@ -1717,7 +1628,7 @@
                                                            to:self.conversation.chatter
                                                   messageType:[self _messageTypeFromConversationType]
                                             requireEncryption:NO
-                                                   messageExt:nil
+                                                   messageExt:[[UserInfoModel defaultUserInfo] messageExt]
                                                      progress:progress];
     [self addMessageToDataSource:message
                         progress:progress];

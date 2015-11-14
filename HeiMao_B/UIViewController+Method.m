@@ -137,6 +137,22 @@
     return backButton;
 }
 
+-(UIButton*) createBackButton
+{
+    
+    CGRect backframe= CGRectMake(0, 0, 40, 30);
+    
+    UIButton* backButton= [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    backButton.frame = backframe;
+    
+    [backButton setImage:[UIImage imageNamed:@"icon_back_page"] forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:@"icon_back_page"] forState:UIControlStateHighlighted];    
+    //定制自己的风格的  UIBarButtonItem
+//    UIBarButtonItem* someBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    return backButton;
+    
+}
 
 - (void)navigationBack:(id)sender
 {

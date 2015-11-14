@@ -78,9 +78,10 @@
     self.userID = [info objectForKey:@"coachid"];
     self.name =  [info objectForKey:@"name"];
     self.tel = [info objectForKey:@"mobile"];
+    self.portrait = [[info objectInfoForKey:@"headportrait"] objectStringForKey:@"originalpic"];
     self.md5Pass = [info objectForKey:@"md5Pass"];
     EMError *error = nil;
-    NSDictionary *loginInfo = [[EaseMob sharedInstance].chatManager loginWithUsername:@"123456" password:@"123456" error:&error];
+    NSDictionary *loginInfo = [[EaseMob sharedInstance].chatManager loginWithUsername:self.userID password:self.md5Pass error:&error];
     if (!error && loginInfo) {
         NSLog(@"登陆成功 %@",loginInfo);
     }
@@ -88,6 +89,19 @@
         [[self class] storeData:info forKey:USERINFO_IDENTIFY];
     }
     return YES;
+}
+
+- (NSDictionary *)messageExt
+{
+    if (![[self class] isLogin]) {
+        return nil;
+    }
+    return  @{
+              @"userId":[[UserInfoModel defaultUserInfo] userID],
+              @"nickName":[[UserInfoModel defaultUserInfo] name],
+              @"headUrl":[[UserInfoModel defaultUserInfo] portrait],
+              @"userType":@(2)
+              };
 }
 
 @end

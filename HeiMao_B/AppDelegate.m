@@ -98,7 +98,7 @@
 #endif
     [[EaseSDKHelper shareHelper] easemobApplication:application
                       didFinishLaunchingWithOptions:launchOptions
-                                            appkey:@"easemob-demo#chatdemoui"
+                                             appkey:@"black-cat#yibuxuechetest"
                                        apnsCertName:apnsCertName
                                         otherConfig:@{kSDKConfigEnableConsoleLogger:[NSNumber numberWithBool:YES]}];
     

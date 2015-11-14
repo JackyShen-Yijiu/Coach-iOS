@@ -210,6 +210,7 @@ shouldSendHasReadAckForMessage:(EMMessage *)message
  */
 - (void)sendTextMessage:(NSString *)text;
 
+
 /**
  *  发送图片消息
  */

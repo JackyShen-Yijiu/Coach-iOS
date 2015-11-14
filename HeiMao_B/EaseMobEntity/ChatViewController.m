@@ -11,10 +11,7 @@
 #import "CustomMessageCell.h"
 #import "EaseEmotionManager.h"
 #import "EaseEmoji.h"
-
-//#import "UserProfileViewController.h"
-//#import "UserProfileManager.h"
-//#import "ContactListSelectViewController.h"
+#import "SutdentHomeController.h"
 
 @interface ChatViewController ()<UIAlertViewDelegate, EaseMessageViewControllerDelegate, EaseMessageViewControllerDataSource>
 {
@@ -29,7 +26,8 @@
 
 @implementation ChatViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.showRefreshHeader = YES;
@@ -49,7 +47,6 @@
     
     [self _setupBarButtonItem];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteAllMessages:) name:KNOTIFICATIONNAME_DELETEALLMESSAGE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exitGroup) name:@"ExitGroup" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(insertCallMessage:) name:@"insertCallMessage" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCallNotification:) name:@"callOutWithChatter" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCallNotification:) name:@"callControllerClose" object:nil];
@@ -59,11 +56,6 @@
     
     EaseEmotionManager *manager= [[EaseEmotionManager alloc] initWithType:EMEmotionDefault emotionRow:3 emotionCol:7 emotions:[EaseEmoji allEmoji]];
     [self.faceView setEmotionManagers:@[manager]];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -81,12 +73,13 @@
 
 - (void)_setupBarButtonItem
 {
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-    [backButton setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+ 
+    UIButton *backButton = [self createBackButton];
     [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    [self.navigationItem setLeftBarButtonItem:backItem];
+    UIBarButtonItem* someBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    self.myNavigationItem.leftBarButtonItems = @[[self barSpaingItem],someBarButtonItem];
     
+    self.myNavigationItem.title = self.studentModel.userName;
     //单聊
     if (self.conversation.conversationType == eConversationTypeChat) {
         UIButton *clearButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
@@ -168,8 +161,14 @@
 - (void)messageViewController:(EaseMessageViewController *)viewController
    didSelectAvatarMessageModel:(id<IMessageModel>)messageModel
 {
-//    UserProfileViewController *userprofile = [[UserProfileViewController alloc] initWithUsername:messageModel.nickname];
-//    [self.navigationController pushViewController:userprofile animated:YES];
+    NSString * fromId = [[messageModel message] from];
+    if ([fromId isEqualToString:[[UserInfoModel defaultUserInfo] userID]]) {
+        return;
+    }else{
+        SutdentHomeController * stuH = [[SutdentHomeController alloc] init];
+        stuH.studentId = self.studentModel.userId;
+        [self.navigationController pushViewController:stuH animated:YES];
+    }
 }
 
 
@@ -235,14 +234,31 @@
 {
     id<IMessageModel> model = nil;
     model = [[EaseMessageModel alloc] initWithMessage:message];
-    model.avatarImage = [UIImage imageNamed:@"EaseUIResource.bundle/user"];
-//    UserProfileEntity *profileEntity = [[UserProfileManager sharedInstance] getUserProfileByUsername:model.nickname];
-//    if (profileEntity) {
-//        model.avatarURLPath = profileEntity.imageUrl;
-//    }
-    model.failImageName = @"imageDownloadFail";
+    [self fixMessageModelInfo:model];
     return model;
 }
+
+- (void)fixMessageModelInfo:(id<IMessageModel>)model
+{
+    NSString * fromId = [[model message] from];
+    if ([fromId isEqualToString:[[UserInfoModel defaultUserInfo] userID]]) {
+        model.avatarURLPath = [[UserInfoModel defaultUserInfo] portrait];
+        model.nickname = [[UserInfoModel defaultUserInfo] name];
+        [model message].ext = @{
+                                @"userId":[[UserInfoModel defaultUserInfo] userID],
+                                @"nickName":[[UserInfoModel defaultUserInfo] name],
+                                @"headUrl":[[UserInfoModel defaultUserInfo] portrait],
+                                @"userType":@(2)
+                                };
+    }else{
+        NSDictionary * dic = [[model message] ext];
+        model.avatarURLPath = [dic objectStringForKey:@"headUrl"];
+        model.nickname = [dic objectStringForKey:@"nickName"];
+    }
+    
+    model.failImageName = @"user";
+}
+
 
 #pragma mark - EaseMob
 
@@ -357,11 +373,6 @@
 }
 
 #pragma mark - notification
-- (void)exitGroup
-{
-    [self.navigationController popToViewController:self animated:NO];
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 - (void)insertCallMessage:(NSNotification *)notification
 {
