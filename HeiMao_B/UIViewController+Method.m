@@ -171,3 +171,16 @@
     [[appdelegate.tabController tabBar] hideBadgeOnItemIndex:1];
 }
 @end
+
+@implementation UIViewController(MesList)
+- (void)jumpToMessageList
+{
+    NSArray * controllers = [self.myNavController viewControllers];
+    if (controllers.count >= 2) {
+        UITabBarController * tabBarController = [controllers objectAtIndex:1];
+        if ([tabBarController isKindOfClass:[UITabBarController class]]) {
+            [tabBarController setSelectedIndex:1];
+        }
+    }
+}
+@end

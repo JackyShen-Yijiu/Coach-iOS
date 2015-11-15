@@ -38,6 +38,9 @@
     if ([UserInfoModel isLogin]) {
         [self loginViewControllerdidLoginSucess:nil];
     }
+    if([self isReciveFromHunaxin:launchOptions]){
+        [self.navController jumpToMessageList];
+    }
     return YES;
 
 }
@@ -95,11 +98,12 @@
     
     //环信
     NSString *apnsCertName = nil;
-#if DEBUG
-    apnsCertName = @"chatdemoui_dev";
-#else
-    apnsCertName = @"chatdemoui";
-#endif
+//#if DEBUG
+//    apnsCertName = @"modoujiaxiaoPushDev";
+//#else
+//    apnsCertName = @"modoujiaxiaoPushDis";
+//#endif
+    apnsCertName = @"modoujiaxiaoPushDev";
     [[EaseSDKHelper shareHelper] easemobApplication:application
                       didFinishLaunchingWithOptions:launchOptions
                                              appkey:@"black-cat#yibuxuechetest"
@@ -129,7 +133,18 @@
 
 //接受通知
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    // Required
-    [APService handleRemoteNotification:userInfo];
+    if ([self isReciveFromHunaxin:userInfo]) {
+        [self.navController jumpToMessageList];
+    }else{
+        [APService handleRemoteNotification:userInfo];
+    }
 }
+
+- (BOOL)isReciveFromHunaxin:(NSDictionary *)dic
+{
+    return  [dic objectStringForKey:@"f"] &&
+            [dic objectStringForKey:@"m"] &&
+            [dic objectStringForKey:@"t"];
+}
+
 @end

@@ -32,4 +32,8 @@
 @end
 
 
+@interface UIViewController(MesList)
+- (void)jumpToMessageList;
+@end
+
 
