@@ -16,8 +16,15 @@
 @property(nonatomic,strong)NSString * name;
 @property(nonatomic,strong)NSString * tel;
 @property(nonatomic,strong)NSString * token;
-
+@property(nonatomic,strong)NSString * displaycoachid;
+@property(nonatomic,strong)NSString * introduction;
+@property(nonatomic,strong)NSString * Gender;
+@property(nonatomic,strong)NSString * idcardnumber;
+//驾驶证号
+@property(nonatomic,strong)NSString * drivinglicensenumber;
+@property(nonatomic,strong)NSString * schoolId;
 @property(nonatomic,strong)NSString * md5Pass;
+@property(nonatomic,strong)NSString * invitationcode;
 
 + (UserInfoModel *)defaultUserInfo;
 

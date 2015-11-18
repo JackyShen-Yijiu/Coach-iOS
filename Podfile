@@ -12,3 +12,5 @@ pod 'MBProgressHUD','~>0.9.1'
 pod 'UMengAnalytics'
 pod 'MD5Digest'
 pod 'EaseMobSDKFull'
+pod "Qiniu", "~> 7.0"
+pod 'ChameleonFramework'

@@ -20,11 +20,18 @@ PODS:
   - AFNetworking/UIKit (2.6.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - ChameleonFramework (2.0.4):
+    - ChameleonFramework/Default (= 2.0.4)
+  - ChameleonFramework/Default (2.0.4)
   - EaseMobSDKFull (2.1.7)
+  - HappyDNS (0.2.3)
   - JSONKit (1.5pre)
   - Masonry (0.6.3)
   - MBProgressHUD (0.9.1)
   - MD5Digest (1.0.1)
+  - Qiniu (7.0.15):
+    - AFNetworking (~> 2.0)
+    - HappyDNS (~> 0.2)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
@@ -32,22 +39,27 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.6.0)
+  - ChameleonFramework
   - EaseMobSDKFull
   - JSONKit (~> 1.5pre)
   - Masonry (~> 0.6.1)
   - MBProgressHUD (~> 0.9.1)
   - MD5Digest
+  - Qiniu (~> 7.0)
   - SDWebImage (~> 3.7)
   - UMengAnalytics
 
 SPEC CHECKSUMS:
   AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
+  ChameleonFramework: 5abe69b1f2a6cc79c3c435fcd9d3d855748225ee
   EaseMobSDKFull: 43858ca9a62bbe1fa4c7c006f944a3e52a4bff48
+  HappyDNS: 6d85942e64c28b4fa61f8c76580398f52d6d1d11
   JSONKit: bae313ce6a6c444f40489a6c0b023f399888871f
   Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MD5Digest: 2757ae2ee239148912a42063135c6fab2fa082f9
+  Qiniu: ade34d722c8ce0eed7080fd268249e8402a2f535
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   UMengAnalytics: d24fb5200e13d2874f36b6337bc129b96511c54e
 
-COCOAPODS: 0.39.0
+COCOAPODS: 0.38.2

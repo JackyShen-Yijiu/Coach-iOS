@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" rowHeight="40" id="KGk-i7-Jjw" customClass="PrivateMessageCell">
+            <rect key="frame" x="0.0" y="0.0" width="461" height="99"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="461" height="98"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1I-9X-gps">
+                        <rect key="frame" x="38" y="9" width="40" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="Ly7-0E-UMM"/>
+                            <constraint firstAttribute="width" constant="40" id="ooq-19-mnW"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JeC-Bm-pwJ">
+                        <rect key="frame" x="98" y="9" width="345" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="5IQ-NJ-sp4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="j1I-9X-gps" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="7Fw-lx-gQb"/>
+                    <constraint firstItem="JeC-Bm-pwJ" firstAttribute="leading" secondItem="j1I-9X-gps" secondAttribute="trailing" constant="20" id="E8T-tw-2aQ"/>
+                    <constraint firstItem="j1I-9X-gps" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="30" id="Urf-uJ-0fJ"/>
+                    <constraint firstItem="JeC-Bm-pwJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="WQ5-Pv-OkQ"/>
+                    <constraint firstItem="JeC-Bm-pwJ" firstAttribute="leading" secondItem="j1I-9X-gps" secondAttribute="trailing" constant="20" id="lKa-mh-bzO"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="JeC-Bm-pwJ" secondAttribute="trailing" constant="10" id="pii-St-xTR"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="messageTextField" destination="JeC-Bm-pwJ" id="1rg-K1-7iN"/>
+            </connections>
+            <point key="canvasLocation" x="330.5" y="180.5"/>
+        </tableViewCell>
+    </objects>
+</document>

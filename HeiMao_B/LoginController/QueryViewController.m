@@ -79,6 +79,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"挂靠驾校";
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.navImage];
@@ -127,9 +128,10 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic = self.dataArray[indexPath.row];
-    if ([_delegate respondsToSelector:@selector(senderData:)]) {
-        [_delegate senderData:dic];
-    }
+//    if ([_delegate respondsToSelector:@selector(senderData:)]) {
+//        [_delegate senderData:dic];
+//    }
+    [UserInfoModel defaultUserInfo].schoolId = dic[@"schoolid"];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {

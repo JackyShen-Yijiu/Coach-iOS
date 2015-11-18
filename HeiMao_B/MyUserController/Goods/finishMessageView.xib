@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="dBM-C2-5f2">
+            <rect key="frame" x="0.0" y="0.0" width="602" height="601"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="商品_切片_03.png" translatesAutoresizingMaskIntoConstraints="NO" id="HEN-Y7-F6a">
+                    <rect key="frame" x="273" y="95" width="57" height="52"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="57" id="7i7-Nc-MF1"/>
+                        <constraint firstAttribute="height" constant="52" id="tuX-vX-Rjx"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我们已经收到了您的订单,我们将尽快把商品" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9C7-NT-Alv">
+                    <rect key="frame" x="40" y="275" width="523" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="UKE-eq-FR8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="送到您手中,祝您愉快!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ugu-OR-1Xt">
+                    <rect key="frame" x="231" y="297" width="180" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="fyc-Xl-6ez"/>
+                        <constraint firstAttribute="height" constant="15" id="yHe-rL-5GF"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfd-ET-1iR">
+                    <rect key="frame" x="243" y="414" width="117" height="29"/>
+                    <color key="backgroundColor" red="1" green="0.36510210749999999" blue="0.2063328844" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="117" id="SeL-bp-Jxd"/>
+                        <constraint firstAttribute="height" constant="29" id="hvP-XJ-Vby"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="再去逛逛">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交易成功" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTT-qs-qeM">
+                    <rect key="frame" x="191" y="188" width="220" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="220" id="IBC-Ed-OPT"/>
+                        <constraint firstAttribute="height" constant="44" id="q7H-co-YI2"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                    <color key="textColor" red="0.0" green="0.59999999999999998" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="gTT-qs-qeM" firstAttribute="top" secondItem="HEN-Y7-F6a" secondAttribute="bottom" constant="41" id="Dy2-3e-A0K"/>
+                <constraint firstItem="HEN-Y7-F6a" firstAttribute="centerX" secondItem="dBM-C2-5f2" secondAttribute="centerX" id="FFi-Yx-KgF"/>
+                <constraint firstItem="gTT-qs-qeM" firstAttribute="top" secondItem="HEN-Y7-F6a" secondAttribute="bottom" constant="41" id="KAH-h8-XqN"/>
+                <constraint firstItem="HEN-Y7-F6a" firstAttribute="top" secondItem="dBM-C2-5f2" secondAttribute="topMargin" constant="87" id="MgR-FJ-oOZ"/>
+                <constraint firstItem="Ugu-OR-1Xt" firstAttribute="top" secondItem="9C7-NT-Alv" secondAttribute="bottom" constant="1" id="Qe5-Tk-The"/>
+                <constraint firstItem="Tfd-ET-1iR" firstAttribute="centerX" secondItem="9C7-NT-Alv" secondAttribute="centerX" id="TLW-4Y-pnj"/>
+                <constraint firstItem="9C7-NT-Alv" firstAttribute="top" secondItem="gTT-qs-qeM" secondAttribute="bottom" constant="43" id="cCO-q2-Aev"/>
+                <constraint firstItem="9C7-NT-Alv" firstAttribute="centerX" secondItem="gTT-qs-qeM" secondAttribute="centerX" id="dFT-Qy-jwV"/>
+                <constraint firstItem="Ugu-OR-1Xt" firstAttribute="top" secondItem="9C7-NT-Alv" secondAttribute="bottom" constant="1" id="fav-8X-Pno"/>
+                <constraint firstItem="9C7-NT-Alv" firstAttribute="leading" secondItem="dBM-C2-5f2" secondAttribute="leading" constant="40" id="fyf-WV-qyN"/>
+                <constraint firstItem="gTT-qs-qeM" firstAttribute="centerX" secondItem="dBM-C2-5f2" secondAttribute="centerX" id="hWR-dO-bBn"/>
+                <constraint firstAttribute="bottomMargin" secondItem="Tfd-ET-1iR" secondAttribute="bottom" constant="150" id="lbE-XJ-oS6"/>
+                <constraint firstItem="Ugu-OR-1Xt" firstAttribute="trailing" secondItem="gTT-qs-qeM" secondAttribute="trailing" id="nl2-iS-v8R"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="210" y="628.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="商品_切片_03.png" width="115" height="105"/>
+    </resources>
+</document>
