@@ -86,6 +86,7 @@
 }
 - (void)clickQuit:(UIButton *)sender {
     [[UserInfoModel defaultUserInfo] loginOut];
+    [self.navigationController popToRootViewControllerAnimated:YES];
  
 }
 - (void)userCenterClick {
