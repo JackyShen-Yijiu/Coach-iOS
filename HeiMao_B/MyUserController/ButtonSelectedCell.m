@@ -33,9 +33,8 @@
 - (UIButton *)selectedButton {
     if (_selectedButton == nil) {
         _selectedButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_selectedButton setBackgroundImage:[UIImage imageNamed:@"cancelSelect"] forState:UIControlStateNormal];
-        [_selectedButton setBackgroundImage:[UIImage imageNamed:@"cancelSelect_click"] forState:UIControlStateSelected];
-        //    [button addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+        [_selectedButton setImage:[UIImage imageNamed:@"cancelSelect"] forState:UIControlStateNormal];
+        [_selectedButton setImage:[UIImage imageNamed:@"cancelSelect_click"] forState:UIControlStateSelected];
     }
     return _selectedButton;
 }

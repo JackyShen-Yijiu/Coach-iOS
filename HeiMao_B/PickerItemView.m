@@ -54,9 +54,8 @@
 {
     if (!_seletedButton) {
         _seletedButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_seletedButton setTitle:@"S" forState:UIControlStateNormal];
-        _seletedButton.backgroundColor = [UIColor redColor];
-        [_seletedButton setTitle:@"U" forState:UIControlStateSelected];
+        [_seletedButton setImage:[UIImage imageNamed:@"cancelSelect"] forState:UIControlStateNormal];
+        [_seletedButton setImage:[UIImage imageNamed:@"cancelSelect_click"] forState:UIControlStateSelected];
         [_seletedButton addTarget:self action:@selector(buttonDidClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_seletedButton];
     }
