@@ -55,7 +55,8 @@
     self = [super init];
     if (self) {
         if ([[self class] isLogin]) {
-            [self loginViewDic:[[self class] dataForKey:USERINFO_IDENTIFY]];
+            NSData * data = [[self class] dataForKey:USERINFO_IDENTIFY];
+            [self loginViewDic:[data objectFromJSONData]];
         }
     }
     return self;
@@ -74,11 +75,6 @@
 
 - (BOOL)loginViewDic:(NSDictionary *)info
 {
-    
-    if (![[self class] isLogin]) {
-        [[self class] storeData:[info JSONString] forKey:USERINFO_IDENTIFY];
-    }
-    
     self.token = [info objectForKey:@"token"];
     self.userID = [info objectForKey:@"coachid"];
     self.name =  [info objectForKey:@"name"];
@@ -92,10 +88,10 @@
     self.displaycoachid = [info objectForKey:@"displaycoachid"];
     self.invitationcode = [info objectForKey:@"invitationcode"];
     
-    EMError *error = nil;
-    NSDictionary *loginInfo = [[EaseMob sharedInstance].chatManager loginWithUsername:self.userID password:self.md5Pass error:&error];
-    if (!error && loginInfo) {
-        NSLog(@"登陆成功 %@",loginInfo);
+    
+    [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:self.userID password:self.md5Pass];
+    if (![[self class] isLogin]) {
+        [[self class] storeData:[info JSONData] forKey:USERINFO_IDENTIFY];
     }
     return YES;
 }
