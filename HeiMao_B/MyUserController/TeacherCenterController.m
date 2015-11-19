@@ -172,8 +172,8 @@
     self.userCenterView.userIdNum.text = [UserInfoModel defaultUserInfo].displaycoachid;
     self.userCenterView.userPhoneNum.text = [UserInfoModel defaultUserInfo].tel;
     [self initNavBar];
-
 }
+
 #pragma mark - initUI
 
 - (void)initNavBar

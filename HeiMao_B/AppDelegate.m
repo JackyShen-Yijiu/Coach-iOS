@@ -54,8 +54,8 @@
 {
     UIImage * nCourse = [UIImage imageNamed:@"order_normal"];
     UIImage * hCourse = [UIImage imageNamed:@"order_seleted"];
-    UIImage * nMess = [UIImage imageNamed:@"user_normal"];
-    UIImage * HMess = [UIImage imageNamed:@"user_seleted"];
+    UIImage * nMess = [UIImage imageNamed:@"im_normal"];
+    UIImage * HMess = [UIImage imageNamed:@"im_seleted"];
     UIImage * nUser = [UIImage imageNamed:@"user_normal"];
     UIImage * hUser = [UIImage imageNamed:@"user_seleted"];
     
