@@ -35,6 +35,7 @@
 @end
 @implementation TeacherCenterController
 
+
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
         _dataArray = @[@[@"挂靠驾校",@"训练场地",@"工作时间",@"可授科目",@"班型设置"],@[@"休假",@"学员列表",@"钱包"],@[@"设置"]];
@@ -170,5 +171,15 @@
     [self.userCenterView.userPortrait sd_setImageWithURL:[NSURL URLWithString:[UserInfoModel defaultUserInfo].portrait] placeholderImage:[UIImage imageNamed:@"littleImage.png"]];
     self.userCenterView.userIdNum.text = [UserInfoModel defaultUserInfo].displaycoachid;
     self.userCenterView.userPhoneNum.text = [UserInfoModel defaultUserInfo].tel;
+    [self initNavBar];
+
 }
+#pragma mark - initUI
+
+- (void)initNavBar
+{
+    [self resetNavBar];
+    self.myNavigationItem.title = @"我的";
+}
+
 @end
