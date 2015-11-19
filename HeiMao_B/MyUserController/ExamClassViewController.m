@@ -123,10 +123,9 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
         
         if (messege.intValue == 1) {
             NSArray *array = dataParam[@"data"];
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%ld",array.count] controller:self];
+            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",array] controller:self];
             [alerview show];
-            [UserInfoModel defaultUserInfo];
-
+//            [UserInfoModel defaultUserInfo];
         }else {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
             [alerview show];
