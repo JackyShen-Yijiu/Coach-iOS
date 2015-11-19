@@ -88,7 +88,7 @@
 - (void)sysConfigWithApplication:(UIApplication *)application LaunchOptions:(NSDictionary *)launchOptions
 {
     //umeng统计
-    [MobClick startWithAppkey:@"5635edcce0f55a2280003548" reportPolicy:BATCH   channelId:@"蒲公英"];
+    [MobClick startWithAppkey:@"564dc12967e58ee280001457" reportPolicy:BATCH   channelId:nil];
     
     //AFNet log显示
     AFNetworkReachabilityManager *  manager = [AFNetworkReachabilityManager sharedManager];
