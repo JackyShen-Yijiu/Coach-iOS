@@ -219,8 +219,8 @@ static NSString *const kMyInfotUrl = @"userinfo/getuserinfo?userid=%@&usertype=1
             [tableView registerNib:nib forCellReuseIdentifier:definition];
             nibsRegistered = YES;
         }
-        _cell = [tableView dequeueReusableCellWithIdentifier:definition];
-    _cell.messageTextField.text = infoArray[indexPath.row];
+    _cell = [tableView dequeueReusableCellWithIdentifier:definition];
+//    _cell.messageTextField.text = infoArray[indexPath.row];
     
     // 添加当开始输入通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectorCell:) name:UITextFieldTextDidBeginEditingNotification object:_cell.messageTextField];

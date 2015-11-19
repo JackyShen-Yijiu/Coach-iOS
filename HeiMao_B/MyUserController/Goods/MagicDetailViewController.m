@@ -206,7 +206,7 @@
         DetailIntroduceCell *cell = [tableView dequeueReusableCellWithIdentifier:definition];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSString *encoded = [_mainModel.detailsimg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:encoded] placeholderImage:[UIImage imageNamed:@"nav_bg"]];
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:encoded] placeholderImage:[UIImage imageNamed:@"nav_bg"]];
         return cell;
     }
 }
