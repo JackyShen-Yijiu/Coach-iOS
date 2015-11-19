@@ -105,7 +105,7 @@
     apnsCertName = @"dis_apns";
     [[EaseSDKHelper shareHelper] easemobApplication:application
                       didFinishLaunchingWithOptions:launchOptions
-                                             appkey:@"black-cat#yibuxuechejiaolianduan"
+                                             appkey:@"black-cat#yibuxuecheprod"
                                        apnsCertName:apnsCertName
                                         otherConfig:@{kSDKConfigEnableConsoleLogger:[NSNumber numberWithBool:YES]}];
     
