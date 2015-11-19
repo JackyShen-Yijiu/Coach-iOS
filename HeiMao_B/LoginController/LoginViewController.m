@@ -36,8 +36,8 @@ static NSString *const kuserType = @"usertype";
 @property (strong, nonatomic) UIImageView *logoImageView;
 @property (strong, nonatomic) UIView *backGroundView;
 @property (strong, nonatomic) UIView *lineView;
-@property (strong, nonatomic) UIButton *bottomButton;
-@property (strong, nonatomic) UIImageView *rightImageView;
+//@property (strong, nonatomic) UIButton *bottomButton;
+//@property (strong, nonatomic) UIImageView *rightImageView;
 @property (strong, nonatomic) NSMutableDictionary *userParam;
 
 @end
@@ -67,28 +67,28 @@ static NSString *const kuserType = @"usertype";
     return _userParam;
 }
 
-- (UIImageView *)rightImageView {
-    if (_rightImageView == nil) {
-        _rightImageView = [[UIImageView alloc] init];
-        _rightImageView.image = [UIImage imageNamed:@"随便看看"];
-    }
-    return _rightImageView;
-}
+//- (UIImageView *)rightImageView {
+//    if (_rightImageView == nil) {
+//        _rightImageView = [[UIImageView alloc] init];
+//        _rightImageView.image = [UIImage imageNamed:@"随便看看"];
+//    }
+//    return _rightImageView;
+//}
 
-- (UIButton *)bottomButton {
-    if (_bottomButton == nil) {
-        _bottomButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_bottomButton setTitle:@"先随便看看" forState:UIControlStateNormal];
-        _bottomButton.layer.borderColor = kDefaultTintColor.CGColor;
-        _bottomButton.layer.borderWidth = 1;
-        [_bottomButton setTitleColor:kDefaultTintColor forState:UIControlStateNormal];
-        _bottomButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_bottomButton addTarget:self action:@selector(dealBottom:) forControlEvents:UIControlEventTouchUpInside];
-        [_bottomButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-    }
-    return _bottomButton;
-    
-}
+//- (UIButton *)bottomButton {
+//    if (_bottomButton == nil) {
+//        _bottomButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [_bottomButton setTitle:@"先随便看看" forState:UIControlStateNormal];
+//        _bottomButton.layer.borderColor = kDefaultTintColor.CGColor;
+//        _bottomButton.layer.borderWidth = 1;
+//        [_bottomButton setTitleColor:kDefaultTintColor forState:UIControlStateNormal];
+//        _bottomButton.titleLabel.font = [UIFont systemFontOfSize:14];
+//        [_bottomButton addTarget:self action:@selector(dealBottom:) forControlEvents:UIControlEventTouchUpInside];
+//        [_bottomButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+//    }
+//    return _bottomButton;
+//    
+//}
 
 - (UIView *)backGroundView {
     if (_backGroundView == nil) {
@@ -222,8 +222,8 @@ static NSString *const kuserType = @"usertype";
     [self.backGroundView addSubview:self.passwordTextField];
     [self.view addSubview:self.forgetButton];
     [self.view addSubview:self.registerButton];
-    [self.view addSubview:self.bottomButton];
-    [self.bottomButton addSubview:self.rightImageView];
+//    [self.view addSubview:self.bottomButton];
+//    [self.bottomButton addSubview:self.rightImageView];
     
 }
 - (void)dealSubmit {
@@ -253,19 +253,13 @@ static NSString *const kuserType = @"usertype";
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [NetWorkEntiry loginWithPhotoNumber:self.phoneNumTextField.text password:self.passwordTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        NSLog(@"param = %@",responseObject);
-
         NSDictionary *param = responseObject;
         NSNumber *type = param[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
         if (type.integerValue == 1) {
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"登录成功" controller:self];
-            [alerview show];
             NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:param[@"data"]];
             [dic setValue:[self.passwordTextField.text DY_MD5] forKey:@"md5Pass"];
             [[UserInfoModel defaultUserInfo] loginViewDic:dic];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"kLoginSuccess" object:nil];
-//            [self dismissViewControllerAnimated:YES completion:nil];
             if ([_delegate respondsToSelector:@selector(loginViewControllerdidLoginSucess:)]) {
                 [_delegate loginViewControllerdidLoginSucess:self];
                 self.passwordTextField.text = @"";
@@ -280,7 +274,6 @@ static NSString *const kuserType = @"usertype";
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
     }];
-   
 
 }
 
@@ -288,15 +281,6 @@ static NSString *const kuserType = @"usertype";
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if (textField.tag == 100) {
-        NSString *phoneNum = textField.text;
-        NSString *regex = @"^((13[0-9])|(147)|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-        BOOL isMatch = [pred evaluateWithObject:phoneNum];
-        if (!isMatch) {
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"手机号不符" controller:self];
-            [alerview show];
-            return;
-        }
         [self.userParam setObject:textField.text forKey:kmobileNum];
     }else if (textField.tag == 101) {
         [self.userParam setObject:[textField.text DY_MD5] forKey:kpassword];
@@ -390,28 +374,12 @@ static NSString *const kuserType = @"usertype";
         make.width.mas_equalTo(@60);
         make.height.mas_equalTo(@25);
     }];
-
-
-    
-    [self.bottomButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.view.mas_bottom).with.offset(-32);
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.width.mas_equalTo(@122);
-        make.height.mas_equalTo(@34);
-    }];
     
     [self.registerButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.bottom.mas_equalTo(self.bottomButton.mas_top).offset(-50);
+        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-25);
         make.width.mas_equalTo(@60);
         make.height.mas_equalTo(@25);
-    }];
-    
-    [self.rightImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.bottomButton.mas_centerY);
-        make.right.mas_equalTo(self.bottomButton.mas_right).with.offset(-15);
-        make.height.mas_equalTo(@15);
-        make.width.mas_equalTo(@15);
     }];
     
 }
