@@ -74,7 +74,13 @@
     for (NSDictionary *dic in array) {
         [string appendString:dic[@"name"]];
     }
-    self.displayArray = @[[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"],[UserInfoModel defaultUserInfo].trainfieldlinfo[@"name"],[UserInfoModel defaultUserInfo].worktimedesc,string,[UserInfoModel defaultUserInfo].carmodel[@"name"]];
+    
+    self.displayArray = @[[self getStrin:@"name" FromDic:[UserInfoModel defaultUserInfo].driveschoolinfo],
+                          [self getStrin:@"name" FromDic:[UserInfoModel defaultUserInfo].trainfieldlinfo],
+                          [UserInfoModel defaultUserInfo].worktimedesc,
+                          string,
+                          [self getStrin:@"name" FromDic:[UserInfoModel defaultUserInfo].carmodel]
+                          ];
     
     
     self.tableView.tableFooterView = [self tableFootView];
@@ -82,6 +88,15 @@
     self.tableView.tableHeaderView = self.userCenterView;
     
 }
+- (NSString *)getStrin:(NSString *)key FromDic:(NSDictionary *)dic
+{
+    NSString * value = [dic objectForKey:key];
+    if (!value) {
+        value = @"";
+    }
+    return value;
+}
+
 - (UIButton *)tableFootView {
     UIButton *quit = [UIButton buttonWithType:UIButtonTypeCustom];
     quit.backgroundColor = [UIColor whiteColor];

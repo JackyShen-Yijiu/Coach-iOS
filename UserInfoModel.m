@@ -120,8 +120,11 @@
 
 #pragma makr - set
 - (void)setWorktimedesc:(NSString *)worktimedesc {
-
-    if (!worktimedesc) return;
+    if (!worktimedesc) {
+        _worktimedesc = @"";
+        return;
+    };
+    _worktimedesc = worktimedesc;
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
     [mdic setValue:worktimedesc forKey:@"worktimedesc"];
@@ -129,6 +132,7 @@
 }
 
 - (void)setCarmodel:(NSDictionary *)carmodel {
+    _carmodel = carmodel;
     if (carmodel) {
         NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
         NSMutableDictionary * mdic = [dic mutableCopy];
@@ -137,6 +141,7 @@
     }
 }
 - (void)setTrainfieldlinfo:(NSDictionary *)trainfieldlinfo {
+    _trainfieldlinfo = trainfieldlinfo;
     if (trainfieldlinfo) {
         NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
         NSMutableDictionary * mdic = [dic mutableCopy];
@@ -146,7 +151,7 @@
 }
 
 - (void)setPortrait:(NSString *)portrait {
-    
+    _portrait = portrait;
     if (!portrait)  return;
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
@@ -205,8 +210,11 @@
 }
 
 - (void)setIdcardnumber:(NSString *)idcardnumber {
-    idcardnumber = idcardnumber;
-    if (!idcardnumber) return;
+    
+    if (!idcardnumber) {
+        _idcardnumber = @"";
+    };
+    _idcardnumber = idcardnumber;
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
     [mdic setValue:idcardnumber forKey:@"idcardnumber"];

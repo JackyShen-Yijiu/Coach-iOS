@@ -43,7 +43,13 @@
 
 - (NSArray *)detailDataArray {
     
-    _detailDataArray = @[@[@"",[UserInfoModel defaultUserInfo].name],@[[UserInfoModel defaultUserInfo].idcardnumber,[UserInfoModel defaultUserInfo].tel,[UserInfoModel defaultUserInfo].drivinglicensenumber],@[[UserInfoModel defaultUserInfo].Gender,[UserInfoModel defaultUserInfo].introduction]];
+    _detailDataArray = @[@[@"",
+                           [UserInfoModel defaultUserInfo].name],
+                         @[[UserInfoModel defaultUserInfo].idcardnumber,
+                           [UserInfoModel defaultUserInfo].tel,
+                           [UserInfoModel defaultUserInfo].drivinglicensenumber],
+                            @[[UserInfoModel defaultUserInfo].Gender,
+                              [UserInfoModel defaultUserInfo].introduction]];
     return _detailDataArray;
 }
 - (UITableView *)tableView {
