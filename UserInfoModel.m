@@ -159,9 +159,8 @@
 }
 
 - (void)setSubject:(NSArray *)subject {
-    
+    _subject = subject;
     if (!subject || ![subject count]) return;
-    
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
     [mdic setValue:subject forKey:@"subject"];
@@ -170,9 +169,8 @@
 }
 
 - (void)setIntroduction:(NSString *)introduction {
-    
+    _introduction = introduction;
     if (!introduction) return;
-    
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
     [mdic setValue:introduction forKey:@"introduction"];
@@ -180,7 +178,7 @@
 //    [UserInfoModel storeData:introduction forKey:@"introduction"];
 }
 - (void)setGender:(NSString *)Gender {
-    
+    _Gender = Gender;
     if (!Gender) return;
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
@@ -189,7 +187,7 @@
 //    [UserInfoModel storeData:Gender forKey:@"Gender"];
 }
 - (void)setDrivinglicensenumber:(NSString *)drivinglicensenumber {
-    
+    _drivinglicensenumber = drivinglicensenumber;
     if (!drivinglicensenumber) return;
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
@@ -198,6 +196,7 @@
 //    [UserInfoModel storeData:drivinglicensenumber forKey:@"drivinglicensenumber"];
 }
 - (void)setTel:(NSString *)tel {
+    _tel = tel;
     if (!tel) return;
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
@@ -206,7 +205,7 @@
 }
 
 - (void)setIdcardnumber:(NSString *)idcardnumber {
-    
+    idcardnumber = idcardnumber;
     if (!idcardnumber) return;
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
@@ -215,6 +214,7 @@
 //    [UserInfoModel storeData:idcardnumber forKey:@"idcardnumber"];
 }
 - (void)setDriveschoolinfo:(NSDictionary *)driveschoolinfo {
+    _driveschoolinfo = driveschoolinfo;
     if (driveschoolinfo) {
         NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
         NSMutableDictionary * mdic = [dic mutableCopy];
@@ -225,6 +225,7 @@
 }
 - (void)setName:(NSString *)name
 {
+    _name = name;
     if (!name) return;
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
