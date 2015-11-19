@@ -102,10 +102,10 @@
 //#else
 //    apnsCertName = @"modoujiaxiaoPushDis";
 //#endif
-    apnsCertName = @"modoujiaxiaoPushDev";
+    apnsCertName = @"dis_apns";
     [[EaseSDKHelper shareHelper] easemobApplication:application
                       didFinishLaunchingWithOptions:launchOptions
-                                             appkey:@"black-cat#yibuxuechetest"
+                                             appkey:@"black-cat#yibuxuechejiaolianduan"
                                        apnsCertName:apnsCertName
                                         otherConfig:@{kSDKConfigEnableConsoleLogger:[NSNumber numberWithBool:YES]}];
     
