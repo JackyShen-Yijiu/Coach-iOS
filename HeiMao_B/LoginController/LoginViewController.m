@@ -268,6 +268,7 @@ static NSString *const kuserType = @"usertype";
 //            [self dismissViewControllerAnimated:YES completion:nil];
             if ([_delegate respondsToSelector:@selector(loginViewControllerdidLoginSucess:)]) {
                 [_delegate loginViewControllerdidLoginSucess:self];
+                self.passwordTextField.text = @"";
             }
         }else {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
