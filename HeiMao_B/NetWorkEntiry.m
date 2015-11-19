@@ -15,7 +15,7 @@
 
 #define  HOST_LINE_DOMAIN  @"http://123.57.63.15:8181/api/v1"
 
-#define QA_TEST
+//#define QA_TEST
 
 
 @implementation NetWorkEntiry
