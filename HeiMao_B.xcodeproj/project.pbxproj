@@ -373,6 +373,10 @@
 		D5D50FA41BFC135B00F54097 /* ShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D50F8F1BFC135B00F54097 /* ShopModel.m */; };
 		D5D50FA71BFC425B00F54097 /* SetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D50FA61BFC425B00F54097 /* SetupViewController.m */; };
 		D5D50FAA1BFC42CA00F54097 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D50FA91BFC42CA00F54097 /* FeedBackViewController.m */; };
+		D5D510231BFDF5E300F54097 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D510221BFDF5E300F54097 /* AboutUsViewController.m */; };
+		D5D510261BFDF99D00F54097 /* NSUserStoreTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D510251BFDF99D00F54097 /* NSUserStoreTool.m */; };
+		D5D510291BFDFFB100F54097 /* StudentListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D510281BFDFFB100F54097 /* StudentListModel.m */; };
+		D5D5102C1BFE1B6D00F54097 /* ProtocalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D5102B1BFE1B6D00F54097 /* ProtocalViewController.m */; };
 		D5F72BA81BF988E700B972B0 /* UserCenterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F72BA71BF988E700B972B0 /* UserCenterHeadView.m */; };
 		D5F72BAB1BF989C900B972B0 /* UIView+CalculateUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F72BAA1BF989C900B972B0 /* UIView+CalculateUIView.m */; };
 		D5F72BAE1BF9990300B972B0 /* UserCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F72BAD1BF9990300B972B0 /* UserCenterCell.m */; };
@@ -1001,6 +1005,14 @@
 		D5D50FA61BFC425B00F54097 /* SetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupViewController.m; sourceTree = "<group>"; };
 		D5D50FA81BFC42CA00F54097 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
 		D5D50FA91BFC42CA00F54097 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
+		D5D510211BFDF5E300F54097 /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
+		D5D510221BFDF5E300F54097 /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		D5D510241BFDF99D00F54097 /* NSUserStoreTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUserStoreTool.h; sourceTree = "<group>"; };
+		D5D510251BFDF99D00F54097 /* NSUserStoreTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUserStoreTool.m; sourceTree = "<group>"; };
+		D5D510271BFDFFB100F54097 /* StudentListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentListModel.h; sourceTree = "<group>"; };
+		D5D510281BFDFFB100F54097 /* StudentListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentListModel.m; sourceTree = "<group>"; };
+		D5D5102A1BFE1B6D00F54097 /* ProtocalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocalViewController.h; sourceTree = "<group>"; };
+		D5D5102B1BFE1B6D00F54097 /* ProtocalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocalViewController.m; sourceTree = "<group>"; };
 		D5F72BA61BF988E700B972B0 /* UserCenterHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterHeadView.h; sourceTree = "<group>"; };
 		D5F72BA71BF988E700B972B0 /* UserCenterHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterHeadView.m; sourceTree = "<group>"; };
 		D5F72BA91BF989C900B972B0 /* UIView+CalculateUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CalculateUIView.h"; sourceTree = "<group>"; };
@@ -1514,6 +1526,8 @@
 				D5F72BC01BF9A88C00B972B0 /* NSString+CurrentTimeDay.m */,
 				D5F72BBC1BF9A83900B972B0 /* JENetwoking.h */,
 				D5F72BBD1BF9A83900B972B0 /* JENetwoking.m */,
+				D5D510241BFDF99D00F54097 /* NSUserStoreTool.h */,
+				D5D510251BFDF99D00F54097 /* NSUserStoreTool.m */,
 				D5F72BAC1BF9990300B972B0 /* UserCenterCell.h */,
 				D5F72BAD1BF9990300B972B0 /* UserCenterCell.m */,
 				D5F72BA91BF989C900B972B0 /* UIView+CalculateUIView.h */,
@@ -1536,6 +1550,8 @@
 				D5D50E9A1BF9D92F00F54097 /* MyWalletViewController.m */,
 				D5D50E9C1BF9DDA600F54097 /* StudentListViewController.h */,
 				D5D50E9D1BF9DDA600F54097 /* StudentListViewController.m */,
+				D5D510271BFDFFB100F54097 /* StudentListModel.h */,
+				D5D510281BFDFFB100F54097 /* StudentListModel.m */,
 				D5D50EA21BF9FB9D00F54097 /* VacationViewController.h */,
 				D5D50EA31BF9FB9D00F54097 /* VacationViewController.m */,
 				D5D50EA51BFA108D00F54097 /* TeachSubjectViewController.h */,
@@ -1548,6 +1564,8 @@
 				D5D50F661BFB233200F54097 /* ExamClassCollectionViewCell.m */,
 				D5D50E9F1BF9DE8D00F54097 /* StudentListCell.h */,
 				D5D50EA01BF9DE8D00F54097 /* StudentListCell.m */,
+				D5D510211BFDF5E300F54097 /* AboutUsViewController.h */,
+				D5D510221BFDF5E300F54097 /* AboutUsViewController.m */,
 				D5D50EA81BFA177F00F54097 /* WorkTimeViewController.h */,
 				D5D50EA91BFA177F00F54097 /* WorkTimeViewController.m */,
 				D5D50EAB1BFA184800F54097 /* TrainingGroundViewController.h */,
@@ -2280,6 +2298,8 @@
 				D5C2405C1BF108CF00832CF3 /* QueryViewController.m */,
 				D5C2405D1BF108CF00832CF3 /* RegisterViewController.h */,
 				D5C2405E1BF108CF00832CF3 /* RegisterViewController.m */,
+				D5D5102A1BFE1B6D00F54097 /* ProtocalViewController.h */,
+				D5D5102B1BFE1B6D00F54097 /* ProtocalViewController.m */,
 				D5C2405F1BF108CF00832CF3 /* 右箭头.png */,
 				D5BCFEE11BF430DE0019402C /* logoImage@2x.png */,
 				D5C240601BF108CF00832CF3 /* 密码.png */,
@@ -2367,6 +2387,7 @@
 				TargetAttributes = {
 					B86EB3501BDB50EB0014EBD7 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 42NGBZ9G54;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -2717,6 +2738,7 @@
 				B865C1631BDC95B000C1E681 /* HMCourseModel.m in Sources */,
 				B8BC50531BF38A390007B029 /* MJRefreshComponent.m in Sources */,
 				D5C2406A1BF108CF00832CF3 /* QueryViewController.m in Sources */,
+				D5D510231BFDF5E300F54097 /* AboutUsViewController.m in Sources */,
 				D5F72BB41BF99C7F00B972B0 /* JEPhotoPickManger.m in Sources */,
 				B8BC50EB1BF393D00007B029 /* EaseChatToolbarItem.m in Sources */,
 				B8C458741BDB59AC00901F71 /* UIViewAdditions.m in Sources */,
@@ -2792,11 +2814,13 @@
 				B8BC50861BF38A390007B029 /* EaseConversationModel.m in Sources */,
 				D5F72BAE1BF9990300B972B0 /* UserCenterCell.m in Sources */,
 				B8BC50591BF38A390007B029 /* MJRefreshLegendFooter.m in Sources */,
+				D5D510261BFDF99D00F54097 /* NSUserStoreTool.m in Sources */,
 				B865C1731BDC9F1C00C1E681 /* HMPortraitInfoModel.m in Sources */,
 				D5C240661BF108CF00832CF3 /* ForgetViewController.m in Sources */,
 				B865C1761BDCA0B400C1E681 /* RefreshTableView.m in Sources */,
 				B8BC50EA1BF393D00007B029 /* EaseChatToolbar.m in Sources */,
 				B8BC50641BF38A390007B029 /* MWTapDetectingView.m in Sources */,
+				D5D510291BFDFFB100F54097 /* StudentListModel.m in Sources */,
 				B8FFDF6A1BDE78E6005BD535 /* FDCalendarItem.m in Sources */,
 				B8BC50721BF38A390007B029 /* UIImage+EMMultiFormat.m in Sources */,
 				B84479E21BE0765B004E5E15 /* HMRecomendModel.m in Sources */,
@@ -2811,6 +2835,7 @@
 				D5F72BB11BF9993A00B972B0 /* EditorUserViewController.m in Sources */,
 				B865C16A1BDC9ABB00C1E681 /* HMClassInfoModel.m in Sources */,
 				B8BC50E71BF393D00007B029 /* EaseBubbleView+Video.m in Sources */,
+				D5D5102C1BFE1B6D00F54097 /* ProtocalViewController.m in Sources */,
 				B8BC50871BF38A390007B029 /* EaseMessageModel.m in Sources */,
 				B8BC50731BF38A390007B029 /* UIImage+EMWebP.m in Sources */,
 				B8BC50571BF38A390007B029 /* MJRefreshGifHeader.m in Sources */,

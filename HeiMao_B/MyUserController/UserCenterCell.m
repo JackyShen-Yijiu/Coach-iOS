@@ -16,6 +16,13 @@
 @end
 @implementation UserCenterCell
 
+- (UILabel *)contentDetail {
+    if (_contentDetail == nil) {
+        _contentDetail = [WMUITool initWithTextColor:[UIColor blackColor] withFont:[UIFont systemFontOfSize:14]];
+    }
+    return _contentDetail;
+}
+
 - (UILabel *)contentLabel {
     if (_contentLabel == nil) {
         _contentLabel = [WMUITool initWithTextColor:[UIColor blackColor] withFont:[UIFont systemFontOfSize:14]];
@@ -49,6 +56,8 @@
     
     [self.backGroundView addSubview:self.contentLabel];
     
+    [self.backGroundView addSubview:self.contentDetail];
+    
     [self.leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.backGroundView.mas_left).offset(15);
         make.top.mas_equalTo(self.backGroundView.mas_top).offset(15);
@@ -60,6 +69,11 @@
         make.left.mas_equalTo(self.leftImageView.mas_right).offset(12);
         make.top.mas_equalTo(self.leftImageView.mas_top).offset(1);
 
+    }];
+    [self.contentDetail mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.backGroundView.mas_right).offset(-30);
+        make.top.mas_equalTo(self.leftImageView.mas_top).offset(1);
+        
     }];
     
 }

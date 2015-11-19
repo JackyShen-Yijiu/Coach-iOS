@@ -31,6 +31,8 @@ static NSString *const kMyWalletUrl = @"userinfo/getmywallet?userid=%@&usertype=
 @property (strong, nonatomic) UILabel *inviteNum;
 
 @property (strong, nonatomic) NSMutableArray *dataArray;
+@property (strong, nonatomic) UIView *groundView ;
+
 @end
 
 @implementation MyWalletViewController
@@ -75,6 +77,8 @@ static NSString *const kMyWalletUrl = @"userinfo/getmywallet?userid=%@&usertype=
         _inviteButton.layer.borderColor = [UIColor whiteColor].CGColor;
         _inviteButton.layer.borderWidth = 1;
         _inviteButton.layer.cornerRadius = 2;
+        [_inviteButton addTarget:self action:@selector(dealInvite:) forControlEvents:UIControlEventTouchUpInside];
+
     }
     return _inviteButton;
 }
@@ -154,6 +158,77 @@ static NSString *const kMyWalletUrl = @"userinfo/getmywallet?userid=%@&usertype=
     [self startDownLoad];
     
 }
+- (void)dealInvite:(UIButton *)sender {
+    
+    self.groundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSystemWide, kSystemHeight)];
+    self.groundView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
+    
+    
+    UIView *backImageView = [[UIView alloc] initWithFrame:CGRectMake(kSystemWide/2-250/2, kSystemHeight/2-250/2, 250, 250)];
+    backImageView.backgroundColor = [UIColor whiteColor];
+    UIImageView *backView = [[UIImageView alloc] initWithFrame:CGRectMake(-1, -1, 252, 200)];
+    backView.image = [UIImage imageNamed:@"red_background.png"];
+    
+    UIImageView *redImage = [[UIImageView alloc] initWithFrame:CGRectMake(250/2-75/2, 10, 75, 58)];
+    redImage.layer.masksToBounds = YES;
+    redImage.image = [UIImage imageNamed:@"red.png"];
+    [backView addSubview:redImage];
+    [backImageView addSubview:backView];
+    
+    UILabel *labelone = [[UILabel alloc] initWithFrame:CGRectMake(0, 80, 250, 20)];
+    labelone.textAlignment = NSTextAlignmentCenter;
+    labelone.text = @"一步学车设计了最先进的用户激励机制";
+    labelone.textColor = [UIColor whiteColor];
+    labelone.font = [UIFont systemFontOfSize:14];
+    UILabel *labeltwo = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 250, 20)];
+    labeltwo.font = [UIFont systemFontOfSize:13];
+    labeltwo.textColor = [UIColor whiteColor];
+    
+    
+    labeltwo.textAlignment = NSTextAlignmentCenter;
+    
+    labeltwo.text = @"推荐用户和学员可以长久的获利";
+    UILabel *labelthree = [[UILabel alloc] initWithFrame:CGRectMake(0, 120, 250, 20)];
+    labelthree.font = [UIFont systemFontOfSize:13];
+    labelthree.textColor = [UIColor whiteColor];
+    
+    
+    labelthree.textAlignment = NSTextAlignmentCenter;
+    
+    labelthree.text = @"赶快去邀请小伙伴来用吧";
+    UILabel *labelfour = [[UILabel alloc] initWithFrame:CGRectMake(0, 140, 250,20)];
+    labelfour.textAlignment = NSTextAlignmentCenter;
+    labelfour.font = [UIFont systemFontOfSize:13];
+    labelfour.textColor = [UIColor whiteColor];
+    
+    
+    labelfour.text = @"记得让他们注册的时候填写你的邀请码哟";
+    
+    [backView addSubview:labelone];
+    [backView addSubview:labeltwo];
+    [backView addSubview:labelthree];
+    [backView addSubview:labelfour];
+    
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.backgroundColor = RGBColor(241, 81, 27);
+    button.frame = CGRectMake(250/2-200/2, 205, 200, 40);
+    [button setTitle:@"我知道了" forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:14];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(clickDismiss:) forControlEvents:UIControlEventTouchUpInside];
+    [backImageView addSubview:button];
+    
+    [self.groundView addSubview:backImageView];
+    
+    [[UIApplication sharedApplication].keyWindow addSubview:self.groundView];
+    
+    
+    
+}
+- (void)clickDismiss:(UIButton *)sender {
+    [self.groundView removeFromSuperview];
+}
 - (void)clickExchange:(UIButton *)sender {
     MagicMainTableViewController *vc = [[MagicMainTableViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
@@ -168,7 +243,7 @@ static NSString *const kMyWalletUrl = @"userinfo/getmywallet?userid=%@&usertype=
         NSArray *list = [param objectForKey:@"list"];
         NSString *walletString = [NSString stringWithFormat:@"%@",param[@"wallet"]];
         if (!walletString && walletString.length != 0) {
-            _moneyDisplay.text =  [NSString stringWithFormat:@"%@",param[@"wallet"]];
+            _moneyDisplay.text =  [NSString stringWithFormat:@"%@",walletString];
         }
         for (NSDictionary *dic in list) {
             MyWallet *wallet = [[MyWallet alloc] init];

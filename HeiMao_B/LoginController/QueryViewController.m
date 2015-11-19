@@ -9,6 +9,7 @@
 #import "QueryViewController.h"
 #import <Masonry/Masonry.h>
 #import "UIView+Sizes.h"
+#import "ToolHeader.h"
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 @interface QueryViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) UIView *navImage;
@@ -136,7 +137,8 @@
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     searchText = [searchText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *urlstring = [NSString stringWithFormat:@"http://123.57.63.15:8181/api/v1/getschoolbyname?schoolname=%@",searchText];
+    NSString *url = [NSString stringWithFormat:@"getschoolbyname?schoolname=%@",searchText];
+    NSString *urlstring = [NSString stringWithFormat:BASEURL,url];
      
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:urlstring parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {

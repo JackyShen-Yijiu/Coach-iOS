@@ -23,6 +23,16 @@
 //驾驶证号
 @property(nonatomic,strong)NSString * drivinglicensenumber;
 @property(nonatomic,strong)NSString * schoolId;
+//挂靠驾校
+@property(nonatomic,strong)NSDictionary *driveschoolinfo;
+//训练场地
+@property(nonatomic,strong)NSDictionary *trainfieldlinfo;
+//班型设置
+@property(nonatomic,strong)NSDictionary *carmodel;
+//可授科目
+@property(nonatomic,strong)NSArray *subject;
+
+@property(nonatomic,strong)NSString *worktimedesc;
 @property(nonatomic,strong)NSString * md5Pass;
 @property(nonatomic,strong)NSString * invitationcode;
 

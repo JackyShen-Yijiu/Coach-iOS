@@ -10,8 +10,11 @@
 #import "ToolHeader.h"
 #import "UIDevice+JEsystemVersion.h"
 #import "FeedBackViewController.h"
-
+#import "AboutUsViewController.h"
+#import "NSUserStoreTool.h"
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
+
+static NSString *const kSettingUrl = @"userinfo/personalsetting";
 
 
 @interface SetupViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -85,14 +88,117 @@
         UISwitch *switchControl = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 45, 20)];
         switchControl.onTintColor = kDefaultTintColor;
         switchControl.tag = 100 + indexPath.row;
+        if (indexPath.row == 0) {
+            if ([NSUserStoreTool getObjectWithKey:@"reservationreminder"]) {
+                NSNumber *num = [NSUserStoreTool getObjectWithKey:@"reservationreminder"];
+                switchControl.on = num.intValue;
+            }else {
+                switchControl.on = YES;
+                
+            }
+        }else if (indexPath.row == 1) {
+            if ([NSUserStoreTool getObjectWithKey:@"newmessagereminder"]) {
+                NSNumber *num = [NSUserStoreTool getObjectWithKey:@"newmessagereminder"];
+                switchControl.on = num.intValue;
+            }else {
+                switchControl.on = YES;
+                
+            }
+        }else if (indexPath.row == 2) {
+            if ([NSUserStoreTool getObjectWithKey:@"classremind"]) {
+                NSNumber *num = [NSUserStoreTool getObjectWithKey:@"classremind"];
+                switchControl.on = num.intValue;
+            }else {
+                switchControl.on = YES;
+                
+            }
+        }
         cell.accessoryView = switchControl;
+        [switchControl addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+
     }
     return cell;
+}
+- (void)switchAction:(UISwitch *)sender {
+    ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
+    [alerview show];
+    NSMutableDictionary *mubdic = [[NSMutableDictionary alloc] initWithDictionary:@{@"userid":[UserInfoModel defaultUserInfo].userID,@"usertype":@"2"}];
+    NSString *url = [NSString stringWithFormat:BASEURL,kSettingUrl];
+    if (sender.tag - 100 == 0) {
+        if (sender.on == YES) {
+            DYNSLog(@"sender.on = %d",sender.on);
+            [mubdic setObject:@"1" forKey:@"reservationreminder"];
+            [NSUserStoreTool storeWithId:@1 WithKey:@"reservationreminder"];
+        }else if (sender.on == NO) {
+            [mubdic setObject:@"0" forKey:@"reservationreminder"];
+            [NSUserStoreTool storeWithId:@0 WithKey:@"reservationreminder"];
+            
+        }
+        
+        [JENetwoking startDownLoadWithUrl:url postParam:mubdic WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+            NSDictionary *dataParam = data;
+            NSNumber *messege = dataParam[@"type"];
+            if (messege.intValue == 1) {
+                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
+                [alerview show];
+            }else {
+                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改失败" controller:self];
+                [alerview show];
+            }
+        }];
+    }else if (sender.tag - 100 == 1) {
+        if (sender.on == YES) {
+            DYNSLog(@"sender.on = %d",sender.on);
+            [mubdic setObject:@"1" forKey:@"newmessagereminder"];
+            [NSUserStoreTool storeWithId:@1 WithKey:@"newmessagereminder"];
+            
+        }else if (sender.on == NO) {
+            [mubdic setObject:@"0" forKey:@"newmessagereminder"];
+            [NSUserStoreTool storeWithId:@0 WithKey:@"newmessagereminder"];
+            
+        }
+        [JENetwoking startDownLoadWithUrl:url postParam:mubdic WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+            NSDictionary *dataParam = data;
+            NSNumber *messege = dataParam[@"type"];
+            if (messege.intValue == 1) {
+                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
+                [alerview show];
+            }else {
+                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改失败" controller:self];
+                [alerview show];
+            }
+        }];
+    }else if (sender.tag - 100 == 2) {
+        if (sender.on == YES) {
+            DYNSLog(@"sender.on = %d",sender.on);
+            [mubdic setObject:@"1" forKey:@"classremind"];
+            [NSUserStoreTool storeWithId:@1 WithKey:@"classremind"];
+            
+        }else if (sender.on == NO) {
+            [mubdic setObject:@"0" forKey:@"classremind"];
+            [NSUserStoreTool storeWithId:@0 WithKey:@"classremind"];
+            
+        }
+        [JENetwoking startDownLoadWithUrl:url postParam:mubdic WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+            NSDictionary *dataParam = data;
+            NSNumber *messege = dataParam[@"type"];
+            if (messege.intValue == 1) {
+                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
+                [alerview show];
+            }else {
+                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改失败" controller:self];
+                [alerview show];
+            }
+        }];
+    }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1 && indexPath.row == 2) {
         FeedBackViewController *feedBack = [[FeedBackViewController alloc] init];
         [self.navigationController pushViewController:feedBack animated:YES];
+    }else if (indexPath.section == 1 && indexPath.row == 0) {
+        AboutUsViewController *about = [[AboutUsViewController alloc] init];
+        [self.navigationController pushViewController:about animated:YES];
     }
 }
 

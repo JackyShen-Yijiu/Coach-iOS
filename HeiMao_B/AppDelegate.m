@@ -25,7 +25,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [self sysConfigWithApplication:application LaunchOptions:launchOptions];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -40,6 +39,8 @@
     if([self isReciveFromHunaxin:launchOptions]){
         [self.navController jumpToMessageList];
     }
+    [self sysConfigWithApplication:application LaunchOptions:launchOptions];
+
     return YES;
 
 }

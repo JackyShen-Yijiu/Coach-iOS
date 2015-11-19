@@ -11,6 +11,7 @@
 #import "CompleteInformationViewController.h"
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 #import "UserInfoModel.h"
+#import "ProtocalViewController.h"
 static NSString *const kregisterUser = @"kregisterUser";
 
 static NSString *const kregisterUrl = @"userinfo/signup";
@@ -67,10 +68,17 @@ static NSString *const kcodeGainUrl = @"code";
         [_noteLabel setTextColor:RGB_Color(153, 153, 153)];
         [_noteLabel setText:@"点击注册则表示您同意《用户服务协议》"];
         _noteLabel.font = [UIFont systemFontOfSize:13];
+        _noteLabel.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dealTap:)];
+        [_noteLabel addGestureRecognizer:tap];
     }
     return _noteLabel;
 }
-
+- (void)dealTap:(UITapGestureRecognizer *)tap {
+    self.noteLabel.textColor = [UIColor blueColor];
+    ProtocalViewController *protocal = [[ProtocalViewController alloc] init];
+    [self presentViewController:protocal animated:YES completion:nil];
+}
 - (UIButton *)goBackButton{
     if (_goBackButton == nil) {
         _goBackButton = [UIButton buttonWithType:UIButtonTypeCustom];

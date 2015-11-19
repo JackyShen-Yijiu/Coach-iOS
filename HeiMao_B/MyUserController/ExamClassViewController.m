@@ -13,6 +13,9 @@
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 
 static NSString *const kExamClassType = @"userinfo/getcoachclasstype";
+
+static NSString *const kUpClassType = @"userinfo/coachsetclass";
+
 @interface ExamClassViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) UICollectionView *collectionView;
@@ -58,7 +61,7 @@ static NSString *const kExamClassType = @"userinfo/getcoachclasstype";
     // Do any additional setup after loading the view.
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"接送设置";
+    self.title = @"班型设置";
     self.collectionView.backgroundColor = RGBColor(247, 249, 251);
     [self.view addSubview:self.collectionView];
     
@@ -80,7 +83,7 @@ static NSString *const kExamClassType = @"userinfo/getcoachclasstype";
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
-        
+       
         if (messege.intValue == 1) {
             NSArray *array = dataParam[@"data"];
             for (NSDictionary *dic in array) {
@@ -104,7 +107,31 @@ static NSString *const kExamClassType = @"userinfo/getcoachclasstype";
 }
 #pragma mark - 完成
 - (void)clickRight:(UIButton *)sender {
+    if (self.examclassmodel == nil) {
+        ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"未选择班型" controller:self];
+        [alerview show];
+        return;
+    }
+    NSString *urlString = [NSString stringWithFormat:BASEURL,kUpClassType];
+    NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"classtypelist":self.examclassmodel.classid};
     
+    __weak ExamClassViewController *weakSelf = self;
+    [JENetwoking startDownLoadWithUrl:urlString postParam:param WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+        NSDictionary *dataParam = data;
+        NSNumber *messege = dataParam[@"type"];
+        NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
+        
+        if (messege.intValue == 1) {
+            NSArray *array = dataParam[@"data"];
+            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%ld",array.count] controller:self];
+            [alerview show];
+            [UserInfoModel defaultUserInfo];
+
+        }else {
+            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
+            [alerview show];
+        }
+    }];
 
 }
 

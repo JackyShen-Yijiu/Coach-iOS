@@ -1,14 +1,14 @@
 //
-//  ExamClassModel.m
+//  StudentListModel.m
 //  HeiMao_B
 //
-//  Created by bestseller on 15/11/17.
+//  Created by bestseller on 15/11/19.
 //  Copyright © 2015年 ke. All rights reserved.
 //
 
-#import "ExamClassModel.h"
+#import "StudentListModel.h"
 
-@implementation ExamClassModel
+@implementation StudentListModel
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
     

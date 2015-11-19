@@ -31,7 +31,7 @@
 @property (strong, nonatomic) UserCenterHeadView *userCenterView;
 @property (strong, nonatomic) NSArray *dataArray;
 @property (strong, nonatomic) NSArray *imageArray;
-
+@property (strong, nonatomic) NSArray *displayArray;
 @end
 @implementation TeacherCenterController
 
@@ -48,6 +48,7 @@
     }
     return _imageArray;
 }
+
 - (UserCenterHeadView *)userCenterView {
     if (_userCenterView == nil) {
         _userCenterView = [[UserCenterHeadView alloc] initWithFrame:CGRectMake(0, 0, kSystemWide, 80) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].tel withUserIdNum:[UserInfoModel defaultUserInfo].displaycoachid];
@@ -68,6 +69,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
+    NSArray *array = [UserInfoModel defaultUserInfo].subject;
+    NSMutableString *string = [[NSMutableString alloc] init];
+    for (NSDictionary *dic in array) {
+        [string appendString:dic[@"name"]];
+    }
+    self.displayArray = @[[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"],[UserInfoModel defaultUserInfo].trainfieldlinfo[@"name"],[UserInfoModel defaultUserInfo].worktimedesc,string,[UserInfoModel defaultUserInfo].carmodel[@"name"]];
+    
     
     self.tableView.tableFooterView = [self tableFootView];
     
@@ -129,7 +137,9 @@
     }
     cell.contentLabel.text = self.dataArray[indexPath.section][indexPath.row];
     cell.leftImageView.image = [UIImage imageNamed:self.imageArray[indexPath.section][indexPath.row]];
-
+    if (indexPath.section == 0) {
+        cell.contentDetail.text = self.displayArray[indexPath.row];
+    }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -172,6 +182,7 @@
     self.userCenterView.userIdNum.text = [UserInfoModel defaultUserInfo].displaycoachid;
     self.userCenterView.userPhoneNum.text = [UserInfoModel defaultUserInfo].tel;
     [self initNavBar];
+    [self.tableView reloadData];
 }
 
 #pragma mark - initUI
