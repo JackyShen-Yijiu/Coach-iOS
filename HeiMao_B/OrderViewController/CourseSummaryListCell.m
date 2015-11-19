@@ -195,9 +195,6 @@
 #pragma mark - Data
 - (void)setModel:(HMCourseModel *)model
 {
-    if (_model == model) {
-        return;
-    }
     _model = model;
     UIImage * defaultImage = [UIImage imageNamed:@"temp"];
     NSString * imageStr = _model.studentInfo.porInfo.originalpic;

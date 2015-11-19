@@ -33,6 +33,7 @@
 
 
 @interface UIViewController(MesList)
+- (UITabBarController *)myTabBarcontroller;
 - (void)jumpToMessageList;
 @end
 

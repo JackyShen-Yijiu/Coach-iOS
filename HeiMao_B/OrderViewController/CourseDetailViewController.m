@@ -149,7 +149,7 @@
 - (void)courseDetailViewDidClickAgreeButton:(CourseDetailView *)view
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [NetWorkEntiry postToDealRequestOfCoureseWithCoachid:[[UserInfoModel defaultUserInfo] userID] coureseID:self.model.courseId didReject:YES cancelreason:nil cancelcontent:nil  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry postToDealRequestOfCoureseWithCoachid:[[UserInfoModel defaultUserInfo] userID] coureseID:self.model.courseId didReject:NO cancelreason:nil cancelcontent:nil  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
         if (type == 1) {
@@ -226,13 +226,13 @@
 #pragma mark - delegate
 - (void)courseCancelControllerDidOpeartionSucess:(CourseCancelController *)controller
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     [[self.tableView refreshHeader] beginRefreshing];
 }
 
 - (void)coureseRatingControllerDidOpeartionSucess:(CoureseRatingController *)controller
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     [[self.tableView refreshHeader] beginRefreshing];
 }
 

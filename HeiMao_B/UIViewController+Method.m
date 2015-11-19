@@ -173,6 +173,19 @@
 @end
 
 @implementation UIViewController(MesList)
+
+- (UITabBarController *)myTabBarcontroller
+{
+    NSArray * controllers = [self.myNavController viewControllers];
+    if (controllers.count >= 2) {
+        UITabBarController * tabBarController = [controllers objectAtIndex:1];
+        if ([tabBarController isKindOfClass:[UITabBarController class]]) {
+            return tabBarController;
+        }
+    }
+    return nil;
+
+}
 - (void)jumpToMessageList
 {
     NSArray * controllers = [self.myNavController viewControllers];

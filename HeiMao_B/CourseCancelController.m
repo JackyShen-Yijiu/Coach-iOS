@@ -226,19 +226,13 @@
     if (velocityInView.y > 0) {
         [self.inputCell.textView resignFirstResponder];
     }
-    
-//    if (_scrollViewOffset > scrollView.contentOffset.y) {
-//        [self.inputCell.textView resignFirstResponder];
-//    }
-//    _scrollViewOffset = scrollView.contentOffset.y;
 }
 
 #pragma mark - Action
 - (void)courseCellDidEnstureClick:(CourseEnsureCell *)cell
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //    if (self.controllerType == KControllTypeReject) {
-    [NetWorkEntiry postToDealRequestOfCoureseWithCoachid:[[UserInfoModel defaultUserInfo] userID] coureseID:self.courseId didReject:NO cancelreason:[self seletedReasion] cancelcontent:self.model.inputDes  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry postToDealRequestOfCoureseWithCoachid:[[UserInfoModel defaultUserInfo] userID] coureseID:self.courseId didReject:YES cancelreason:[self seletedReasion] cancelcontent:self.model.inputDes  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
         if (type == 1) {
