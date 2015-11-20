@@ -73,6 +73,7 @@
     [self.contentDetail mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.backGroundView.mas_right).offset(-30);
         make.top.mas_equalTo(self.leftImageView.mas_top).offset(1);
+        make.width.mas_equalTo(@100);
         
     }];
     
