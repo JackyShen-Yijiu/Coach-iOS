@@ -10,4 +10,5 @@
 
 @interface MyWalletViewController : UIViewController
 
+- (void)refreshWalletData;
 @end

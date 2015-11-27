@@ -183,5 +183,16 @@
                    commentcontent:(NSString *)commentStr
                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+/**
+ *
+ * 点击购买调用的接口,
+ *
+ */
 
++ (void)postToDidClickButtonByPurchaseWithUseID:(NSString *)userid
+                                      productid:(NSString *)productid
+                                           name:(NSString *)name
+                                         mobile:(NSString *)mobile
+                                        address:(NSString *)address
+                                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

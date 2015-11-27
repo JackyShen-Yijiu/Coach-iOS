@@ -15,7 +15,7 @@
 
 #define  HOST_LINE_DOMAIN  @"http://123.57.63.15:8181/api/v1"
 
-//#define QA_TEST
+#define QA_TEST
 
 
 @implementation NetWorkEntiry
@@ -331,6 +331,34 @@
         [dicInfo setValue:@"" forKey:@"commentcontent"];
     }
     [self POST:strUrl parameters:dicInfo success:success failure:failure];
+}
+/**
+ *
+ * 点击购买调用的接口,
+ *
+ */
+
++ (void)postToDidClickButtonByPurchaseWithUseID:(NSString *)userid
+                                      productid:(NSString *)productid
+                                           name:(NSString *)name
+                                         mobile:(NSString *)mobile
+                                        address:(NSString *)address
+                                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    
+    NSString *urlStr = [NSString stringWithFormat:@"%@/userinfo/buyproduct",[self domain]];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setValue:@"2"forKey:@"usertype"];
+    [dic setValue:userid forKey:@"userid"];
+    [dic setValue:name forKey:@"name"];
+    [dic setValue:mobile forKey:@"mobile"];
+    [dic setValue:productid forKey:@"productid"];
+    [dic setValue:address forKey:@"address"];
+    
+    
+    
+    [self POST:urlStr parameters:dic success:success failure:failure];
+    
 }
 
 #pragma mark - Common Method
