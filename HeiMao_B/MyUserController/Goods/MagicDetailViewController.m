@@ -91,7 +91,7 @@
    _didClickBtn = [_bottomView viewWithTag:102];
     
     //// 判断按钮是否能点击
-    _didClickBtn.selected = [_walletstr intValue] >= _mainModel.productprice ? 0 : 1;
+    _didClickBtn.selected = [_walletstr intValue] >= _mainModel.productprice ? 1 : 0;
     if (_didClickBtn.selected) {
         [_didClickBtn setBackgroundColor:MAINCOLOR];
         [_didClickBtn addTarget:self action:@selector(didClick:) forControlEvents:UIControlEventTouchUpInside];}
