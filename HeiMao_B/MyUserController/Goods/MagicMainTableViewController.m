@@ -170,7 +170,7 @@ self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     int count =  _scrollNewList.contentOffset.x/k_Width;
     
-    detailVC.mainModel = _shopMainListArray[count];
+    detailVC.mainModel = _ShopListArray[count];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
@@ -275,7 +275,7 @@ self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
    MagicDetailViewController *detailVC = [[MagicDetailViewController alloc] init];
-    detailVC.mainModel = _ShopListArray[indexPath.row];
+    detailVC.mainModel = _shopMainListArray[indexPath.row];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 @end
