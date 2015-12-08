@@ -169,7 +169,16 @@ static NSString *const kchangePassword = @"kchangePassword";
     }else {
        
         [NetWorkEntiry postSmsCodeWithPhotNUmber:self.phoneNumTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
+            NSDictionary *param = responseObject;
+            NSNumber *type = param[@"type"];
+            NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
+            if (type.integerValue == 1) {
+                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
+                [alerview show];
+            }else {
+                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
+                [alerview show];
+            }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
         }];

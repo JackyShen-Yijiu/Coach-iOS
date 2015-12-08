@@ -10,12 +10,19 @@
 #import <Masonry/Masonry.h>
 #import "UIView+Sizes.h"
 #import "ToolHeader.h"
+#import <CoreLocation/CoreLocation.h>
+
+static NSString *const kDrivingUrl = @"driveschool/nearbydriveschool?%@";
+
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
-@interface QueryViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface QueryViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate>{
+    CLLocationManager *_locationManager;
+
+}
 @property (strong, nonatomic) UIView *navImage;
 @property (strong, nonatomic) UIButton *goBackButton;
 @property (strong, nonatomic) UILabel *topLabel;
-
+@property (assign, nonatomic) BOOL isLocation;
 @property (strong, nonatomic) UISearchBar *searchTextField;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -78,11 +85,72 @@
     }
     return _goBackButton;
 }
+
+- (void)startLocation
+{
+    if (!_locationManager) {
+        // 1. 实例化定位管理器
+        _locationManager = [[CLLocationManager alloc] init];
+        // 2. 设置代理
+        _locationManager.delegate = self;
+        // 3. 定位精度
+        [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+        // 4.请求用户权限：分为：⓵只在前台开启定位⓶在后台也可定位，
+        //注意：建议只请求⓵和⓶中的一个，如果两个权限都需要，只请求⓶即可，
+        //⓵⓶这样的顺序，将导致bug：第一次启动程序后，系统将只请求⓵的权限，⓶的权限系统不会请求，只会在下一次启动应用时请求⓶
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8) {
+            [_locationManager requestWhenInUseAuthorization];//⓵只在前台开启定位
+//            [_locationManager requestAlwaysAuthorization];//⓶在后台也可定位
+        }
+     
+    
+    }
+    
+    self.isLocation = NO;
+    
+    // 6. 更新用户位置
+    [_locationManager startUpdatingLocation];
+    
+   
+}
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    CLLocation *location = locations.lastObject;
+    NSString *locationContent =[NSString stringWithFormat:@"latitude=%f&longitude=%f&radius=10000",location.coordinate.latitude,location.coordinate.longitude];
+//    NSString *locationContent =@"latitude=40.096263&longitude=116.1270&radius=10000";
+    NSString *urlString = [NSString stringWithFormat:kDrivingUrl,locationContent];
+    NSString *url = [NSString stringWithFormat:BASEURL,urlString];
+    
+    [manager stopUpdatingLocation];
+    
+  
+    [self.dataArray removeAllObjects];
+        [JENetwoking startDownLoadWithUrl:url postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
+           
+            NSDictionary *param = data;
+            NSArray *array = param[@"data"];
+            
+            if (array.count >0 && array != nil && ![array isEqual:[NSNull null]]) {
+                 self.isLocation = YES;
+                for (NSDictionary *dic in array) {
+                    [self.dataArray addObject:dic];
+                }
+            }
+            [self.tableView reloadData];
+        }];
+    
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"挂靠驾校";
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self startLocation];
+    
     [self.view addSubview:self.navImage];
     [self.view addSubview:self.topLabel];
     [self.view addSubview:self.goBackButton];
@@ -129,9 +197,9 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic = self.dataArray[indexPath.row];
-//    if ([_delegate respondsToSelector:@selector(senderData:)]) {
-//        [_delegate senderData:dic];
-//    }
+    if ([_delegate respondsToSelector:@selector(senderData:)]) {
+        [_delegate senderData:dic];
+    }
     [UserInfoModel defaultUserInfo].schoolId = dic[@"schoolid"];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
