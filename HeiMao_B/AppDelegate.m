@@ -16,6 +16,7 @@
 #import "LoginViewController.h"
 #import "EaseSDKHelper.h"
 #import "ConversationListController.h"
+#import "ProjectGuideView.h"
 
 @interface AppDelegate ()<LoginViewControllerDelegate>
 @property(nonatomic,strong)HMNagationController * navController;
@@ -40,7 +41,7 @@
         [self.navController jumpToMessageList];
     }
     [self sysConfigWithApplication:application LaunchOptions:launchOptions];
-
+    [ProjectGuideView showViewWithDelegate:nil];
     return YES;
 
 }
