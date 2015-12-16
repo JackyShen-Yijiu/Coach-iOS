@@ -3033,9 +3033,9 @@
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrwb",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zyt.zyt.zyt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "91c35dec-9f64-4eb2-a29d-ba7e75c2f482";
 			};
 			name = Debug;
 		};
@@ -3046,7 +3046,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhubaotown Information Technology Co., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
@@ -3059,9 +3059,9 @@
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrwb",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zyt.zyt.zyt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "91c35dec-9f64-4eb2-a29d-ba7e75c2f482";
 			};
 			name = Release;
 		};
