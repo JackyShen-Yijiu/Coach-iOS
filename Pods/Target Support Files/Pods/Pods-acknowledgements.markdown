@@ -203,7 +203,7 @@ THE SOFTWARE.
 
 
 
-## UMengAnalytics
+## UMengAnalytics-NO-IDFA
 
 Copyright 2011 - 2015 UMeng.com. All rights reserved.
 

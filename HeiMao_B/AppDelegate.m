@@ -17,6 +17,8 @@
 #import "EaseSDKHelper.h"
 #import "ConversationListController.h"
 #import "ProjectGuideView.h"
+#import "UIDevice+JEsystemVersion.h"
+
 
 @interface AppDelegate ()<LoginViewControllerDelegate>
 @property(nonatomic,strong)HMNagationController * navController;
@@ -42,8 +44,19 @@
     }
     [self sysConfigWithApplication:application LaunchOptions:launchOptions];
     [ProjectGuideView showViewWithDelegate:nil];
-    return YES;
 
+    if (([UIDevice jeSystemVersion] > 7.99)&&
+        ([UIDevice jeSystemVersion] < 9.001)) {
+        
+        //IOS8 需要 设置
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings
+                                                settingsForTypes:UIUserNotificationTypeBadge categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
+    return YES;
+    
 }
 
 - (void)loginViewControllerdidLoginSucess:(LoginViewController *)controller

@@ -174,8 +174,11 @@
 }
 
 - (void)setIntroduction:(NSString *)introduction {
+    if (!introduction) {
+        introduction = @"";
+    };
+    
     _introduction = introduction;
-    if (!introduction) return;
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
     [mdic setValue:introduction forKey:@"introduction"];
@@ -183,8 +186,11 @@
 //    [UserInfoModel storeData:introduction forKey:@"introduction"];
 }
 - (void)setGender:(NSString *)Gender {
+    if (!Gender) {
+        Gender = @"";
+    };
     _Gender = Gender;
-    if (!Gender) return;
+
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
     [mdic setValue:Gender forKey:@"Gender"];
@@ -192,8 +198,11 @@
 //    [UserInfoModel storeData:Gender forKey:@"Gender"];
 }
 - (void)setDrivinglicensenumber:(NSString *)drivinglicensenumber {
+    if (!drivinglicensenumber) {
+        drivinglicensenumber = @"";
+    };
     _drivinglicensenumber = drivinglicensenumber;
-    if (!drivinglicensenumber) return;
+
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
     [mdic setValue:drivinglicensenumber forKey:@"drivinglicensenumber"];
@@ -201,8 +210,10 @@
 //    [UserInfoModel storeData:drivinglicensenumber forKey:@"drivinglicensenumber"];
 }
 - (void)setTel:(NSString *)tel {
+    if (!tel) {
+        tel = @"";
+    };
     _tel = tel;
-    if (!tel) return;
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
     [mdic setValue:tel forKey:@"mobile"];
@@ -233,8 +244,11 @@
 }
 - (void)setName:(NSString *)name
 {
+
+    if (!name){
+        name = @"";
+    };
     _name = name;
-    if (!name) return;
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
     [mdic setValue:name forKey:@"name"];

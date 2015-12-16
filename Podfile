@@ -9,7 +9,7 @@ pod 'AFNetworking','~>2.6.0'
 pod 'Masonry','~>0.6.1'
 pod 'JSONKit','~>1.5pre'
 pod 'MBProgressHUD','~>0.9.1'
-pod 'UMengAnalytics'
+pod 'UMengAnalytics-NO-IDFA'
 pod 'MD5Digest'
 pod 'EaseMobSDKFull'
 pod "Qiniu", "~> 7.0"
