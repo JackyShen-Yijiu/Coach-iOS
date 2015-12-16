@@ -47,9 +47,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" tag="103" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Dl-GR-PWJ">
-                    <rect key="frame" x="89" y="18" width="20" height="20"/>
+                    <rect key="frame" x="81" y="18" width="45" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="20" id="CSu-qw-U2P"/>
+                        <constraint firstAttribute="width" constant="45" id="CSu-qw-U2P"/>
                         <constraint firstAttribute="height" constant="20" id="oAY-2M-3fg"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
@@ -57,7 +57,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="积分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0M-xS-0Jc">
-                    <rect key="frame" x="111" y="18" width="38" height="20"/>
+                    <rect key="frame" x="136" y="18" width="38" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="OOS-d8-2FS"/>
                         <constraint firstAttribute="width" constant="38" id="iQ4-mC-1GB"/>
@@ -75,10 +75,10 @@
                 <constraint firstItem="F0M-xS-0Jc" firstAttribute="top" secondItem="nQ3-3A-poA" secondAttribute="topMargin" constant="10" id="KlA-NW-hUY"/>
                 <constraint firstItem="6Dl-GR-PWJ" firstAttribute="top" secondItem="nQ3-3A-poA" secondAttribute="topMargin" constant="10" id="M5y-Sc-BG2"/>
                 <constraint firstItem="BtK-q6-WIH" firstAttribute="top" secondItem="nQ3-3A-poA" secondAttribute="topMargin" constant="10" id="Q4G-SA-qrV"/>
-                <constraint firstItem="F0M-xS-0Jc" firstAttribute="leading" secondItem="6Dl-GR-PWJ" secondAttribute="trailing" constant="2" id="jgT-el-ewQ"/>
+                <constraint firstItem="F0M-xS-0Jc" firstAttribute="leading" secondItem="6Dl-GR-PWJ" secondAttribute="trailing" constant="10" id="jgT-el-ewQ"/>
                 <constraint firstAttribute="trailing" secondItem="LzW-Gi-o6W" secondAttribute="trailing" constant="20" id="kLt-Vd-16o"/>
                 <constraint firstItem="wwF-uK-9pq" firstAttribute="leading" secondItem="nQ3-3A-poA" secondAttribute="leading" constant="15" id="rVy-np-xa9"/>
-                <constraint firstItem="6Dl-GR-PWJ" firstAttribute="leading" secondItem="BtK-q6-WIH" secondAttribute="trailing" constant="18" id="sFt-o6-Lhb"/>
+                <constraint firstItem="6Dl-GR-PWJ" firstAttribute="leading" secondItem="BtK-q6-WIH" secondAttribute="trailing" constant="10" id="sFt-o6-Lhb"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="387" y="212"/>

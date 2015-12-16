@@ -12,8 +12,12 @@
 #import "ToolHeader.h"
 #import "MagicMainTableViewController.h"
 #import "InfoModel.h"
+#import "WalletAPI.h"
+#import "NetWorkEntiry.h"
+#import "MyWalletViewController.h"
 
 static NSString *const kMyInfotUrl = @"userinfo/getuserinfo?userid=%@&usertype=1";
+static NSString *const kBuyproduct =  @"userinfo/buyproduct";
 
 @interface PrivateMessageController ()
 
@@ -31,10 +35,6 @@ static NSString *const kMyInfotUrl = @"userinfo/getuserinfo?userid=%@&usertype=1
 {
     [self addBottomView];
 }
-
-
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 添加取消键盘的手势
@@ -48,31 +48,7 @@ static NSString *const kMyInfotUrl = @"userinfo/getuserinfo?userid=%@&usertype=1
     // 初始化数组
     self.cellArray = [NSMutableArray array];
     self.textFiledArray = [NSMutableArray array];
-    
-    
-    
-    
-    self.navigationItem.title = @"一步商城";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],
-                                                                      
-                                                                      NSForegroundColorAttributeName:MAINCOLOR}];
-
-    
-    // 用自定义Button代替
-    _backBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    
-    [_backBtn setFrame:CGRectMake(10, 10, 25, 30)];
-    
-    [_backBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [_backBtn setTitle:nil forState:UIControlStateNormal];
-    
-    [_backBtn setBackgroundImage:[UIImage imageNamed:@"bc"] forState:UIControlStateNormal];
-    
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithCustomView:_backBtn];
-    self.navigationItem.leftBarButtonItem = backItem;
-
-    
+    self.navigationItem.title = @"个人信息";
     // 创建头部试图
     CGFloat kwight = self.view.bounds.size.width;
     CGFloat khight = 50;
@@ -104,7 +80,6 @@ static NSString *const kMyInfotUrl = @"userinfo/getuserinfo?userid=%@&usertype=1
 - (void)startDownLoad {
     NSString *url = [NSString stringWithFormat:kMyInfotUrl,[UserInfoModel defaultUserInfo].userID];
     NSString *urlString = [NSString stringWithFormat:BASEURL,url];
-    NSLog(@"+++++++++++++++++++%@",urlString);
     [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
         DYNSLog(@"data = %@",data);
         
@@ -145,13 +120,14 @@ static NSString *const kMyInfotUrl = @"userinfo/getuserinfo?userid=%@&usertype=1
     
     // 取出积分的Label
     UILabel *numberLabel = [_bottomView viewWithTag:103];
-    numberLabel.text = [NSString stringWithFormat:@"%d",[MyWallet getInstance].amount];
+    NSUserDefaults *defaules = [NSUserDefaults standardUserDefaults];
+    
+    numberLabel.text = [defaules objectForKey:@"walletStr"];
 
     [_didClickBtn setTitle:@"确认购买" forState:UIControlStateNormal];
-    CGFloat kWight = self.tableView.bounds.size.width;
-    CGFloat kHight = self.tableView.bounds.size.height;
-    CGFloat kbottonViewh = 50;
-    _bottomView.frame = CGRectMake(0,kHight - 30 , kWight, kbottonViewh);
+    CGFloat kWight = [UIScreen mainScreen].bounds.size.width;
+    CGFloat kHight = [UIScreen mainScreen].bounds.size.height;    CGFloat kbottonViewh = 50;
+    _bottomView.frame = CGRectMake(0,kHight - 50 , kWight, kbottonViewh);
     NSArray *windows = [UIApplication sharedApplication].windows;
     _wid = [windows lastObject];
     _bottomView.tag = 200;
@@ -164,20 +140,13 @@ static NSString *const kMyInfotUrl = @"userinfo/getuserinfo?userid=%@&usertype=1
 - (void)backMainView:(UIButton *)btn
 {
     [_finishView removeFromSuperview];
-    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:3] animated:YES];
 }
 - (void)cleaExtraLine
 {
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor clearColor];
     [self.tableView setTableFooterView:view];
-}
-- (void)backAction:(UIButton *)btn
-{
-        self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        self.automaticallyAdjustsScrollViewInsets = YES;
-
-    [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -291,7 +260,36 @@ static NSString *const kMyInfotUrl = @"userinfo/getuserinfo?userid=%@&usertype=1
 }
 - (void)pushFinshView:(UIButton *)btn
 {
+    UITextField *textFiledOne = [_textFiledArray objectAtIndex:0];
+    UITextField *textFiledTwo = [_textFiledArray objectAtIndex:1];
+    UITextField *textFiledThree = [_textFiledArray objectAtIndex:2];
 
+    
+    NSString *urlString = [NSString stringWithFormat:BASEURL,kBuyproduct];
+    NSLog(@"urlString = %@",urlString);
+
+    NSString *  userId = [[UserInfoModel defaultUserInfo] userID];
+    
+    NSString *productid = _shopID;
+    
+    NSDictionary *dic = @{@"usertype":@"1",
+                          @"userid":userId,
+                          @"productid":productid,
+                          @"name":textFiledOne.text,
+                          @"mobile":textFiledTwo.text,
+                          @"address":textFiledThree.text};
+    
+    // 调用后台购买接口
+    
+    [NetWorkEntiry postToDidClickButtonByPurchaseWithUseID:userId productid:productid name:textFiledOne.text mobile:textFiledTwo.text address:textFiledThree.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"success = %@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error = %@",error);
+    }];
+    MyWalletViewController *walletVC = [self.navigationController.viewControllers objectAtIndex:2];
+    
+    [walletVC refreshWalletData];
+   
  _finishView =  [finishMessageView instanceBottomView];
     
     CGFloat kW = self.tableView.bounds.size.width;
@@ -300,7 +298,7 @@ static NSString *const kMyInfotUrl = @"userinfo/getuserinfo?userid=%@&usertype=1
     _finishView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.85];
   UIButton *button =   [_finishView viewWithTag:100];
     [button addTarget:self action:@selector(backMainView:) forControlEvents:UIControlEventTouchUpInside];
-    _backBtn.hidden = YES;
+    self.navigationController.navigationBarHidden = YES;
     [_wid addSubview:_finishView];
     
 }

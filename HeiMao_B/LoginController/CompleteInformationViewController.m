@@ -82,7 +82,7 @@
         _topLabel.textAlignment = NSTextAlignmentCenter;
         _topLabel.font = [UIFont boldSystemFontOfSize:18];
         _topLabel.textColor = [UIColor whiteColor];
-        _topLabel.text = @"找回密码";
+        _topLabel.text = @"提交审核";
     }
     return _topLabel;
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		060C23071C06AF2800310B66 /* WalletAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 060C23061C06AF2800310B66 /* WalletAPI.m */; };
+		06891F781C06D23800E9C131 /* WalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06891F771C06D23800E9C131 /* WalletModel.m */; };
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
@@ -397,6 +399,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		060C23051C06AF2800310B66 /* WalletAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAPI.h; sourceTree = "<group>"; };
+		060C23061C06AF2800310B66 /* WalletAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAPI.m; sourceTree = "<group>"; };
+		06891F761C06D23800E9C131 /* WalletModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletModel.h; sourceTree = "<group>"; };
+		06891F771C06D23800E9C131 /* WalletModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletModel.m; sourceTree = "<group>"; };
 		1371250ABB78626F8329AC98 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2823AFD5ABA09767DD4F0623 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -1076,6 +1082,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		060C23041C06AECB00310B66 /* CommonAPI */ = {
+			isa = PBXGroup;
+			children = (
+				060C23051C06AF2800310B66 /* WalletAPI.h */,
+				060C23061C06AF2800310B66 /* WalletAPI.m */,
+				06891F761C06D23800E9C131 /* WalletModel.h */,
+				06891F771C06D23800E9C131 /* WalletModel.m */,
+			);
+			name = CommonAPI;
+			sourceTree = "<group>";
+		};
 		B23983D2EE43E3BC88B5F3F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2313,6 +2330,7 @@
 		D5D50F6B1BFC135B00F54097 /* Goods */ = {
 			isa = PBXGroup;
 			children = (
+				060C23041C06AECB00310B66 /* CommonAPI */,
 				D5D50F6C1BFC135B00F54097 /* DetailIntroduceCell.h */,
 				D5D50F6D1BFC135B00F54097 /* DetailIntroduceCell.m */,
 				D5D50F6E1BFC135B00F54097 /* DetailIntroduceCell.xib */,
@@ -2365,7 +2383,6 @@
 				B86EB34E1BDB50EB0014EBD7 /* Frameworks */,
 				B86EB34F1BDB50EB0014EBD7 /* Resources */,
 				A30143097D6A7E2D3F024558 /* Copy Pods Resources */,
-				C6668908E527D2CA14E17361 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2387,7 +2404,7 @@
 				TargetAttributes = {
 					B86EB3501BDB50EB0014EBD7 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = 42NGBZ9G54;
+						DevelopmentTeam = 45D2HNDKK9;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2615,21 +2632,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C6668908E527D2CA14E17361 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -2653,6 +2655,7 @@
 				B8447A221BE1CC25004E5E15 /* CWStarRateView.m in Sources */,
 				B8C458731BDB59AC00901F71 /* UIView+TKCategory.m in Sources */,
 				D5D50F611BFB168900F54097 /* AffiliatedSchoolViewController.m in Sources */,
+				060C23071C06AF2800310B66 /* WalletAPI.m in Sources */,
 				B84479DF1BE07129004E5E15 /* SutdentHomeController.m in Sources */,
 				B8BFA2731BF64CE2002D7F22 /* EMGifImage.m in Sources */,
 				B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */,
@@ -2770,6 +2773,7 @@
 				B8BC50E41BF393D00007B029 /* EaseBubbleView+Image.m in Sources */,
 				B8BC508A1BF38A390007B029 /* NSDateFormatter+Category.m in Sources */,
 				B8447A1A1BE1BEC2004E5E15 /* CourseEnsureCell.m in Sources */,
+				06891F781C06D23800E9C131 /* WalletModel.m in Sources */,
 				B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */,
 				B8BC50771BF38A390007B029 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				D5C240671BF108CF00832CF3 /* GainPasswordViewController.m in Sources */,
@@ -2910,7 +2914,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "21e997b0-9b03-4023-9c7d-ef9fadb73f5e";
+				PROVISIONING_PROFILE = "45dfb975-8bf3-4e42-9072-84ea8462f2c6";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2947,7 +2951,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "21e997b0-9b03-4023-9c7d-ef9fadb73f5e";
+				PROVISIONING_PROFILE = "45dfb975-8bf3-4e42-9072-84ea8462f2c6";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2965,7 +2969,7 @@
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2973,7 +2977,7 @@
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrwb",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zyt.zyt.zyt;
 				PRODUCT_NAME = "一步学车教练端";
 				PROVISIONING_PROFILE = "";
 			};
@@ -2986,12 +2990,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2999,9 +3003,9 @@
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrwb",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zyt.zyt.zyt;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "c278427e-af59-4286-9377-e2a464f4cd75";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

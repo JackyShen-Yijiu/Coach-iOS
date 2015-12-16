@@ -13,6 +13,7 @@
 #import "ToolHeader.h"
 #import "MagicMainTableViewController.h"
 #import "MyWallet.h"
+#import "WalletAPI.h"
 
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 
@@ -235,6 +236,7 @@ static NSString *const kMyWalletUrl = @"userinfo/getmywallet?userid=%@&usertype=
 }
 - (void)startDownLoad {
     [self.dataArray removeAllObjects];
+    
     NSString *url = [NSString stringWithFormat:kMyWalletUrl,[UserInfoModel defaultUserInfo].userID,@"0"];
     NSString *urlString = [NSString stringWithFormat:BASEURL,url];
     [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
@@ -242,8 +244,15 @@ static NSString *const kMyWalletUrl = @"userinfo/getmywallet?userid=%@&usertype=
         NSDictionary *param = [data objectForKey:@"data"];
         NSArray *list = [param objectForKey:@"list"];
         NSString *walletString = [NSString stringWithFormat:@"%@",param[@"wallet"]];
-        if (!walletString && walletString.length != 0) {
-            _moneyDisplay.text =  [NSString stringWithFormat:@"%@",walletString];
+        if (walletString && walletString.length != 0) {
+            if ([walletString isEqualToString:@"(null)"]) {
+                walletString = @"0";
+            }
+            _moneyDisplay.text =  walletString;
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:walletString forKey:@"walletStr"];
+            
+            
         }
         for (NSDictionary *dic in list) {
             MyWallet *wallet = [[MyWallet alloc] init];
@@ -312,5 +321,8 @@ static NSString *const kMyWalletUrl = @"userinfo/getmywallet?userid=%@&usertype=
     return cell;
 }
 
-
+- (void)refreshWalletData
+{
+    [self startDownLoad];
+}
 @end

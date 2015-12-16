@@ -318,7 +318,15 @@ static NSString *const kcodeGainUrl = @"code";
     }else {
         
         [NetWorkEntiry postSmsCodeWithPhotNUmber:self.phoneTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
+            NSDictionary *param = responseObject;
+            NSNumber *type = param[@"type"];
+            NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
+            if (type.integerValue == 1) {
+              
+            }else {
+                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
+                [alerview show];
+            }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
         }];
@@ -364,9 +372,9 @@ static NSString *const kcodeGainUrl = @"code";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     BOOL isMatch = [pred evaluateWithObject:phoneNum];
     if (!isMatch) {
-        ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"手机号不符" controller:self];
-        [alerview show];
-        return;
+//        ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"手机号不符" controller:self];
+//        [alerview show];
+//        return;
     }
     if (self.authCodeTextFild.text.length <= 0 || self.authCodeTextFild.text == nil) {
         ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"验证码为空" controller:self];
@@ -404,6 +412,7 @@ static NSString *const kcodeGainUrl = @"code";
             [alerview show];
             CompleteInformationViewController *comInformation = [[CompleteInformationViewController alloc] init];
             [self presentViewController:comInformation animated:YES completion:nil];
+
            
         }else {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
@@ -413,7 +422,7 @@ static NSString *const kcodeGainUrl = @"code";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
-   
+    
     
 }
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
