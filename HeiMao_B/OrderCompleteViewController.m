@@ -13,11 +13,14 @@
 #import "CourseDesInPutCell.h"
 #import "CourseEnsureCell.h"
 #import "HMCourseModel.h"
+#import "SutdentHomeController.h"
+
+#define GOTORECOMENDTAG     1000
 
 @interface OrderCompleteViewModel : NSObject
-@property(nonatomic,strong)HMCourseModel * userInfo;
 @property(nonatomic,strong)NSString * title;
-@property(nonatomic,strong)NSArray * pickItemsDataList;
+@property(nonatomic,strong)NSArray * pickItemsDataListTwo;
+@property(nonatomic,strong)NSArray * pickItemsDataListThree;
 @property(nonatomic,strong)NSString * inputDes;
 @end
 @implementation OrderCompleteViewModel
@@ -42,6 +45,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = RGB_Color(247, 249, 251);
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.isNeedRefresh = YES;
     [self addKeyBoradNotificaiton];
     [self initUI];
 }
@@ -52,6 +56,15 @@
 {
     [super viewWillAppear:animated];
     [self initNavBar];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if(self.isNeedRefresh){
+        [self.tableView.refreshHeader beginRefreshing];
+    }
+    self.isNeedRefresh = NO;
 }
 
 #pragma mark - initUI
@@ -81,86 +94,135 @@
 
 - (void)initRefreshView
 {
-//    WS(ws);
-//    [self.tableView refreshHeader].beginRefreshingBlock = ^(){
-//        [NetWorkEntiry getCoureDetailInfoWithCouresId:self.couresID success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//            NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
-//            if (type == 1) {
-//                ws.model = [HMCourseModel converJsonDicToModel:[responseObject objectInfoForKey:@"data"]];
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    [ws.tableView.refreshHeader endRefreshing];
-//                    [ws.tableView reloadData];
-//                    [ws postNotificationMakeSummarRefreshUI];
-//                });
-//            }else{
-//                [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
-//            }
-//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            [ws netErrorWithTableView:ws.tableView];
-//        }];
-//    };
+    WS(ws);
+    [self.tableView refreshHeader].beginRefreshingBlock = ^(){
+        [NetWorkEntiry getTrainContentSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+            if (type == 1) {
+                NSDictionary * dataInfo = [responseObject objectInfoForKey:@"data"];
+                NSArray * subTwo = [dataInfo objectArrayForKey:@"subjecttwo"];
+                NSArray * subTree = [dataInfo objectArrayForKey:@"subjectthree"];
+                ws.model.pickItemsDataListTwo = [ws trainpickListWithArray:subTwo];
+                ws.model.pickItemsDataListThree = [ws trainpickListWithArray:subTree];
+                [ws.tableView.refreshHeader endRefreshing];
+                [ws.tableView reloadData];
+            }else{
+                [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
+                [[self myNavController] popViewControllerAnimated:YES];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [self showTotasViewWithMes:@"网络错误"];
+            [[self myNavController] popViewControllerAnimated:YES];
+        }];
+    };
+}
+
+- (void)dealErrorResponseWithTableView:(RefreshTableView *)tableview info:(NSDictionary *)dic
+{
+    [self showTotasViewWithMes:[dic objectForKey:@"msg"]];
+    [tableview.refreshHeader endRefreshing];
+    [tableview.refreshFooter endRefreshing];
 }
 
 
-#pragma mark - Data
-- (void)refreshModel
+- (NSArray *)trainpickListWithArray:(NSArray *)array
 {
-    
+    NSMutableArray * pickList = [NSMutableArray arrayWithCapacity:0];
+    for (NSString * str in array) {
+        PickerItemModel * pickerModel = [[PickerItemModel alloc] init];
+        if ([str isKindOfClass:[NSString class]] && str.length) {
+            pickerModel.title = str;
+            [pickList addObject:pickerModel];
+        }
+    }
+    return pickList;
 }
 
 #pragma mark - TableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return [self pickList] ? 4 : 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        return [CoursePicListCell cellHight:[[self model] pickItemsDataList].count couleNumber:1];
-    }else if (indexPath.row == 1){
-        return [CourseDesInPutCell cellHeight];
-    }else if (indexPath.row == 2){
-        return [CourseEnsureCell cellHeigthWithTitle:YES];
+    switch (indexPath.row) {
+        case 0:
+            return [CourseRatingUserInfoCell cellHeigth];
+            break;
+        case 1:
+            return [CoursePicListCell cellHight:[self pickList].count couleNumber:2];
+            break;
+        case 2:
+            return [CourseDesInPutCell cellHeight];
+            break;
+        case 3:
+            return [CourseEnsureCell cellHeigthWithTitle:YES];
+            break;
+        default:
+            break;
     }
     return 0;
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        CoursePicListCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CoursePicListCell class])];
-        if (!cell) {
-            cell = [[CoursePicListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([CoursePicListCell class])];
-        }
-        [cell.pickListView setTitle:self.model.title];
-        cell.pickListView.pickItemArray = self.model.pickItemsDataList;
-        return cell;
-    }else if (indexPath.row == 1){
-        
-        CourseDesInPutCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CourseDesInPutCell class])];
-        if (!cell) {
-            cell = [[CourseDesInPutCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([CourseDesInPutCell class])];
-            cell.delegate = self;
-        }
-        self.inputCell = cell;
-        cell.placeLabel.text =  @"其他教学内容说明";
-        return cell;
-        
-    }else if (indexPath.row == 2){
-        CourseEnsureCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CourseEnsureCell class])];
-        
-        if (!cell) {
-            cell = [[CourseEnsureCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([CourseEnsureCell class])];
-            cell.delegate = self;
-            [cell.ensurebutton setTitle:@"提交并去评价" forState:UIControlStateNormal];
-            [cell.ensurebutton setTitle:@"提交并去评价" forState:UIControlStateHighlighted];
-            [cell setTitle:@"评价有积分奖励。越用心的评价奖励约高哦"];
-        }
-        return cell;
-        
-    }
     
+    switch (indexPath.row) {
+        case 0:
+        {
+            CourseRatingUserInfoCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CourseRatingUserInfoCell class])];
+            if (!cell) {
+                cell = [[CourseRatingUserInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([CourseRatingUserInfoCell class])];
+            }
+            cell.contentView.backgroundColor = [UIColor whiteColor];
+            cell.model = self.courseModel.studentInfo;
+            [cell.bottomView setHidden:NO];
+            return cell;
+        }
+            break;
+        case 1:
+        {
+            CoursePicListCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CoursePicListCell class])];
+            if (!cell) {
+                cell = [[CoursePicListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([CoursePicListCell class])];
+                cell.pickListView.couleNumber = 2;
+            }
+            [cell.pickListView setTitle:[NSString stringWithFormat:@"%@教学内容",self.courseModel.classType.classTypeName]];
+            cell.pickListView.pickItemArray = [self pickList];
+            return cell;
+        }
+            break;
+        case 2:
+        {
+            CourseDesInPutCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CourseDesInPutCell class])];
+            if (!cell) {
+                cell = [[CourseDesInPutCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([CourseDesInPutCell class])];
+                cell.delegate = self;
+            }
+            self.inputCell = cell;
+            cell.placeLabel.text =  @"其他教学内容说明";
+            return cell;
+
+        }
+            break;
+        case 3:
+        {
+            CourseEnsureCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CourseEnsureCell class])];
+            
+            if (!cell) {
+                cell = [[CourseEnsureCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([CourseEnsureCell class])];
+                cell.delegate = self;
+                [cell.ensurebutton setTitle:@"提交并去评价" forState:UIControlStateNormal];
+                [cell.ensurebutton setTitle:@"提交并去评价" forState:UIControlStateHighlighted];
+                [cell setTitle:@"评价有积分奖励。越用心的评价奖励约高哦"];
+            }
+            return cell;
+        }
+            break;
+        default:
+            break;
+    }    
     return [UITableViewCell new];
 }
 
@@ -169,6 +231,7 @@
 - (void)rightButtonDidClick:(UIButton *)button
 {
     //确定
+    [self enstureThenGotoRecomend:NO];
 }
 
 #pragma mark input
@@ -181,7 +244,35 @@
 - (void)courseCellDidEnstureClick:(CourseEnsureCell *)cell
 {
     //提交并去评价
-    
+    [self enstureThenGotoRecomend:YES];
+}
+
+- (void)enstureThenGotoRecomend:(BOOL)isGoTorecomed
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    WS(ws);
+    [NetWorkEntiry postToEnstureDoneofCourseWithCoachid:[[UserInfoModel defaultUserInfo] userID] coureseID:self.courseModel.courseId learningcontent:[self seletedReasion] contentremarks:self.model.inputDes success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+        if (type == 1) {
+            [self showAlertView:isGoTorecomed];
+        }else{
+            [ws dealErrorResponseWithTableView:nil info:responseObject];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [ws showTotasViewWithMes:@"网络异常"];
+    }];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        SutdentHomeController * sudH = [[SutdentHomeController alloc] init];
+        sudH.studentId = self.courseModel.studentInfo.userId;
+        [self.navigationController pushViewController:sudH animated:YES];
+    }
 }
 
 #pragma mark - KeyBoard
@@ -221,33 +312,36 @@
 }
 
 #pragma mar - AlertView
-- (void)showAlertView
+- (void)showAlertView:(BOOL)isGoToRecomend
 {
     if (NSClassFromString(@"UIAlertController")) {
         UIAlertController * alertCont = [UIAlertController alertControllerWithTitle:nil message:@"操作成功" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * actionn = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            [self alertView:[UIAlertView new] clickedButtonAtIndex:0];
+            UIAlertView * alertView = [UIAlertView new];
+            alertView.tag = isGoToRecomend ? GOTORECOMENDTAG : 0;
+            [self alertView:alertView clickedButtonAtIndex:0];
         }];
         [alertCont addAction:actionn];
         [self presentViewController:alertCont animated:YES completion:nil];
     }else{
         UIAlertView * alerView = [[UIAlertView alloc] initWithTitle:nil message:@"操作成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        alerView.tag = isGoToRecomend ? GOTORECOMENDTAG : 0;
         [alerView show];
+
     }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-//    if ([_delegate respondsToSelector:@selector(courseCancelControllerDidOpeartionSucess:)]) {
-//        [_delegate courseCancelControllerDidOpeartionSucess:self];
-//    }
+    if ([_delegate respondsToSelector:@selector(orderCompleteViewControllerDidEnsutreSucess::)]) {
+        [_delegate orderCompleteViewControllerDidEnsutreSucess:self :alertView.tag == GOTORECOMENDTAG];
+    }
 }
 
 - (NSString *)seletedReasion
 {
     NSString * str = nil;
-    for (PickerItemModel * itemModel in self.model.pickItemsDataList) {
+    for (PickerItemModel * itemModel in [self pickList]) {
         if (itemModel.isSeleted) {
             str = itemModel.title;
         }
@@ -255,6 +349,26 @@
     return str;
 }
 
+
+#pragma mark - Get
+
+- (NSArray *)pickList
+{
+    if ([self.courseModel.classType.classTypeName isEqualToString:@"科目二"]) {
+        return [[self model] pickItemsDataListTwo];
+    }else if ([self.courseModel.classType.classTypeName isEqualToString:@"科目三"]) {
+        return [[self model] pickItemsDataListThree];
+    }
+    return nil;
+}
+
+- (OrderCompleteViewModel*)model
+{
+    if (!_model) {
+        _model = [[OrderCompleteViewModel alloc] init];
+    }
+    return _model;
+}
 @end
 
 

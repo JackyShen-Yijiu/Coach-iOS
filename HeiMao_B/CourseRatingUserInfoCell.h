@@ -13,6 +13,7 @@
 @interface CourseRatingUserInfoCell : UITableViewCell
 
 @property(nonatomic,strong)HMStudentModel * model;
+@property(nonatomic,strong)UIView * bottomView;
 
 + (CGFloat)cellHeigth;
 

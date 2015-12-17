@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "cancelSelect_click.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "cancelSelect_click.png",
       "scale" : "2x"
     },
     {

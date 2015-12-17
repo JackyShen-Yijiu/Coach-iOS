@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HMCourseModel.h"
 
+@class OrderCompleteViewController;
+@protocol OrderCompleteViewControllerDelegate <NSObject>
+- (void)orderCompleteViewControllerDidEnsutreSucess:(OrderCompleteViewController *)controller :(BOOL)isGotoRecomend;
+@end
 @interface OrderCompleteViewController : UIViewController
-@property(nonatomic,strong)NSString * couresID;
+@property(nonatomic,strong)HMCourseModel * courseModel;
+@property(nonatomic,weak)id<OrderCompleteViewControllerDelegate>delegate;
 @end

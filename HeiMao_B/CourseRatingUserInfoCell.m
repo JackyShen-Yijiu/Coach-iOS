@@ -13,7 +13,6 @@
 @property(nonatomic,strong)PortraitView * potraitView;
 @property(nonatomic,strong)UILabel * mainTitle;
 @property(nonatomic,strong)UILabel * subTitle;
-//@property(nonatomic,strong)UIView * bottomView;
 @end
 
 @implementation CourseRatingUserInfoCell
@@ -57,6 +56,8 @@
     self.subTitle.backgroundColor = [UIColor clearColor];
     self.subTitle.numberOfLines = 1;
     [self.contentView addSubview:self.subTitle];
+    
+    [self.bottomView setHidden:YES];
 }
 
 
@@ -87,26 +88,26 @@
         make.height.equalTo(@(16.f));
     }];
     
-//    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(self.contentView).offset(-2);
-//        make.right.equalTo(self.contentView).offset(2);
-//        make.bottom.equalTo(self.contentView);
-//        make.height.equalTo(@(10));
-//    }];
+    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView);
+        make.right.equalTo(self.contentView);
+        make.bottom.equalTo(self.contentView);
+        make.height.equalTo(@(1));
+    }];
 }
 
 
-//- (UIView *)bottomView
-//{
-//    if (!_bottomView) {
-//        _bottomView = [[UIView alloc] init];
-//        _bottomView.backgroundColor = RGB_Color(247, 249, 251);
+- (UIView *)bottomView
+{
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] init];
+        _bottomView.backgroundColor = RGB_Color(0xe6, 0xe6, 0xe6);
 //        _bottomView.layer.borderColor = RGB_Color(230, 230, 230).CGColor;
 //        _bottomView.layer.borderWidth = 1;
-//        [self.contentView addSubview:_bottomView];
-//    }
-//    return _bottomView;
-//}
+        [self.contentView addSubview:_bottomView];
+    }
+    return _bottomView;
+}
 
 #pragma mark - Data
 - (void)setModel:(HMStudentModel *)model

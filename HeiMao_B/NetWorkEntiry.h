@@ -126,6 +126,12 @@
                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
+ *  获取科目训练内容
+ */
++ (void)getTrainContentSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
  *  获取学员详情信息
  *
  *  @param userId （req）预约课程ID

@@ -221,6 +221,16 @@
     [self GET:urlStr parameters:nil success:success failure:failure];
 }
 
+/**
+ *  获取科目训练内容
+ */
++ (void)getTrainContentSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSString * urlStr = [NSString stringWithFormat:@"%@/trainingcontent",[self domain]];
+    [self GET:urlStr parameters:nil success:success failure:failure];
+}
+
 + (void)getStudentAllInfoWithStudentId:(NSString *)studentId
                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure

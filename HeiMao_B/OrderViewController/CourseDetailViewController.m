@@ -16,7 +16,7 @@
 #import "ChatViewController.h"
 #import "OrderCompleteViewController.h"
 
-@interface CourseDetailViewController()<CourseDetailViewDelegate,UITableViewDataSource,UITableViewDelegate,CourseCancelControllerDelegate,CoureseRatingControllerDelegate>
+@interface CourseDetailViewController()<CourseDetailViewDelegate,UITableViewDataSource,UITableViewDelegate,CourseCancelControllerDelegate,CoureseRatingControllerDelegate,OrderCompleteViewControllerDelegate>
 @property(nonatomic,strong)RefreshTableView * tableView;
 @property(nonatomic,strong)HMCourseModel * model;
 @property(nonatomic,assign)BOOL isNeedRefresh;
@@ -188,23 +188,23 @@
 - (void)courseDetailViewDidClickWatingToDone:(CourseDetailView *)view
 {
     OrderCompleteViewController * completeController = [[OrderCompleteViewController alloc] init];
-//    //确定学完
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    WS(ws);
-//    [NetWorkEntiry postToEnstureDoneofCourseWithCoachid:[[UserInfoModel defaultUserInfo] userID] coureseID:self.model.courseId learningcontent:nil contentremarks:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
-//        if (type == 1) {
-//            [ws showTotasViewWithMes:@"操作成功"];
-//            [[[ws tableView] refreshHeader] beginRefreshing];
-//        }else{
-//            [ws dealErrorResponseWithTableView:nil info:responseObject];
-//        }
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//        [ws showTotasViewWithMes:@"网络异常"];
-//    }];
+    completeController.courseModel = view.model;
+    completeController.delegate = self;
+    [self.navigationController pushViewController:completeController animated:YES];
+}
+
+- (void)orderCompleteViewControllerDidEnsutreSucess:(OrderCompleteViewController *)controller :(BOOL)isGotoRecomend
+{
+    [[self myNavController] popViewControllerAnimated:!isGotoRecomend];
+    if (isGotoRecomend) {
+        //评论
+        CoureseRatingController * crc = [[CoureseRatingController alloc] init];
+        crc.courseId = self.model.courseId;
+        crc.studentModel = self.model.studentInfo;
+        crc.delegate = self;
+        [self.navigationController pushViewController:crc animated:YES];
+    }
+    self.isNeedRefresh = YES;
 }
 
 - (void)courseDetailViewDidClickRecommentButton:(CourseDetailView *)view

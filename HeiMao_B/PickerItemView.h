@@ -20,4 +20,5 @@
 @interface PickerItemView : UIView
 @property(nonatomic,weak)id<PickerItemViewDelegate>delegate;
 @property(nonatomic,strong)PickerItemModel * model;
+- (void)setSeleted:(BOOL)seleted;
 @end

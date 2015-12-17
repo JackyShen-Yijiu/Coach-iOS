@@ -306,6 +306,8 @@
             if ([sumModel.courseId isEqualToString:model.courseId]) {
                 sumModel.courseStatue = model.courseStatue;
                 [self.courseDayTableView reloadData];
+                [self.courseSummaryTableView reloadData];
+                
                 break;
             }
         }

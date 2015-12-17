@@ -77,8 +77,19 @@
 #pragma mark Action
 - (void)pickerItemDidValueChange:(PickerItemView *)pickerView
 {
+    if (self.couleNumber == 2) {
+        [self cancelAllSeleted];
+        [pickerView setSeleted:YES];
+    }
     if ([_delegate respondsToSelector:@selector(pickerListViewDidValueChange:)]) {
         [_delegate pickerListViewDidValueChange:self];
+    }
+}
+
+- (void)cancelAllSeleted
+{
+    for (PickerItemView * view in self.picListViewArray) {
+        [view setSeleted:NO];
     }
 }
 
@@ -99,7 +110,11 @@
                 if (view.tag % 2 == 0) {  //左边
                     view.frame = CGRectMake(self.titleLabel.left, top, view.width, heigth);
                 }else{ //右边
-                    view.frame = CGRectMake(self.titleLabel.right - view.width, top, view.width, heigth);
+                    
+                    view.frame = CGRectMake(self.titleLabel.width/2.f + 30, top, view.width, heigth);
+                    if (view.right > self.titleLabel.right) {
+                        view.right = self.titleLabel.right;
+                    }
                     top = view.bottom + 20.f;
                 }
             }

@@ -38,7 +38,7 @@
 - (void)sizeToFit
 {
     [super sizeToFit];
-    self.seletedButton.frame = CGRectMake(0, self.height /2.f - 7.5, 15, 15.f);
+    self.seletedButton.frame = CGRectMake(0, self.height /2.f - 9, 18, 18);
     CGSize size = [self.contentLabel sizeThatFits:CGSizeMake(320, 20)];
     self.contentLabel.frame = CGRectMake(self.seletedButton.right + 15.f, self.height/2.f - size.height/2.f, size.width, size.height);
     self.frame = CGRectMake(0, 0, self.contentLabel.right, size.height);
@@ -67,6 +67,7 @@
         [_seletedButton setImage:[UIImage imageNamed:@"cancelSelect"] forState:UIControlStateNormal];
         [_seletedButton setImage:[UIImage imageNamed:@"cancelSelect_click"] forState:UIControlStateSelected];
         [_seletedButton addTarget:self action:@selector(buttonDidClick:) forControlEvents:UIControlEventTouchUpInside];
+//        _seletedButton.backgroundColor = [UIColor redColor];
         [self addSubview:_seletedButton];
     }
     return _seletedButton;
@@ -84,14 +85,16 @@
 {
     button.selected = !button.selected;
     [self setSeleted:button.selected];
+    if ([_delegate respondsToSelector:@selector(pickerItemDidValueChange:)]) {
+        [_delegate pickerItemDidValueChange:self];
+    }
 }
 
 - (void)setSeleted:(BOOL)seleted
 {
     self.model.seleted = seleted;
-    if ([_delegate respondsToSelector:@selector(pickerItemDidValueChange:)]) {
-        [_delegate pickerItemDidValueChange:self];
-    }
+    [self.seletedButton setSelected:seleted];
+   
 }
 
 
