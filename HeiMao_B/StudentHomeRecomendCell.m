@@ -116,7 +116,7 @@
         return;
     }
     _model = model;
-    UIImage * defaultImage = [UIImage imageNamed:@"temp"];
+    UIImage * defaultImage = [UIImage imageNamed:@"defoult_por"];
     if(_model.portrait.originalpic)
         [self.porView.imageView sd_setImageWithURL:[NSURL URLWithString:_model.portrait.originalpic] placeholderImage:defaultImage];
     

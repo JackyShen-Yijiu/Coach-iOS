@@ -102,7 +102,7 @@
 - (void)setBgImageUrlStr:(NSString *)bgImageUrlStr userName:(NSString *)userName userId:(NSString *)userId
 {
     _bgImageUrlStr = bgImageUrlStr;
-    UIImage * defaultImage = [UIImage imageNamed:@"temp"];
+    UIImage * defaultImage = [UIImage imageNamed:@"defoult_por"];
     if(_bgImageUrlStr)
         [self.porTraitView.imageView sd_setImageWithURL:[NSURL URLWithString:_bgImageUrlStr] placeholderImage:defaultImage];
     

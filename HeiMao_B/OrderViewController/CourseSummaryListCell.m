@@ -51,7 +51,7 @@
     self.potraitView = [[PortraitView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
     self.potraitView.layer.cornerRadius = 1.f;
     self.potraitView.layer.shouldRasterize = YES;
-    self.potraitView.backgroundColor = [UIColor redColor];
+    self.potraitView.backgroundColor = [UIColor clearColor];
     [self.bgView addSubview:self.potraitView];
     
     self.mainTitle = [[UILabel alloc] init];
@@ -196,7 +196,7 @@
 - (void)setModel:(HMCourseModel *)model
 {
     _model = model;
-    UIImage * defaultImage = [UIImage imageNamed:@"temp"];
+    UIImage * defaultImage = [UIImage imageNamed:@"defoult_por"];
     NSString * imageStr = _model.studentInfo.porInfo.originalpic;
     if(imageStr)
         [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];
