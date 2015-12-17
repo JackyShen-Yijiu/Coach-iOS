@@ -21,6 +21,8 @@
 #import "AffiliatedSchoolViewController.h"
 #import "ExamClassViewController.h"
 #import "SetupViewController.h"
+#import "JSONKit.h"
+
 #define kSystemWide [UIScreen mainScreen].bounds.size.width
 
 #define kSystemHeight [UIScreen mainScreen].bounds.size.height
@@ -69,44 +71,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
-    NSArray *array = [UserInfoModel defaultUserInfo].subject;
-    NSMutableString *string = [[NSMutableString alloc] init];
-    for (NSDictionary *dic in array) {
-        [string appendString:dic[@"name"]];
-    }
-    NSString * driveSname = [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
-    NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
-    NSString * workTimeDes = [UserInfoModel defaultUserInfo].worktimedesc;    
-    NSString * carName =  [[UserInfoModel defaultUserInfo].carmodel objectStringForKey:@"name"];
-
-    self.displayArray = @[[self strTolerance:driveSname],
-                          [self strTolerance:trainName],
-                          [self strTolerance:workTimeDes],
-                          [self strTolerance:string],
-                          [self strTolerance:carName]
-                          ];
-    
-    
     self.tableView.tableFooterView = [self tableFootView];
     
     self.tableView.tableHeaderView = self.userCenterView;
     
 }
+
 - (NSString *)strTolerance:(NSString *)str
 {
     if (![str isKindOfClass:[NSString class]] || !str.length) {
         return @"";
     }
     return str;
-}
-
-- (NSString *)getStrin:(NSString *)key FromDic:(NSDictionary *)dic
-{
-    NSString * value = [dic objectForKey:key];
-    if (!value) {
-        value = @"";
-    }
-    return value;
 }
 
 - (UIButton *)tableFootView {
@@ -209,6 +185,30 @@
     self.userCenterView.userIdNum.text = [UserInfoModel defaultUserInfo].displaycoachid;
     self.userCenterView.userPhoneNum.text = [UserInfoModel defaultUserInfo].tel;
     [self initNavBar];
+    
+    NSArray *array = [UserInfoModel defaultUserInfo].subject;
+    NSMutableString *string = [[NSMutableString alloc] init];
+    for (NSDictionary *dic in array) {
+        [string appendString:dic[@"name"]];
+    }
+    NSString * driveSname = [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
+    NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
+    NSString * workTimeStr = [UserInfoModel defaultUserInfo].worktimedesc;
+    NSDictionary * workDes = [workTimeStr objectFromJSONString];
+    NSString * workSetDes = @"未设置";
+    NSArray * list = [workDes objectArrayForKey:@"weekList"];
+    if (list.count) {
+        workSetDes = @"已设置";
+    }
+    NSString * carName =  [[UserInfoModel defaultUserInfo].carmodel objectStringForKey:@"name"];
+    
+    self.displayArray = @[[self strTolerance:driveSname],
+                          [self strTolerance:trainName],
+                          [self strTolerance:workSetDes],
+                          [self strTolerance:string],
+                          [self strTolerance:carName]
+                          ];
+    
     [self.tableView reloadData];
 }
 

@@ -21,7 +21,9 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
 @property (strong, nonatomic) NSMutableArray *buttonArray;
 @property (strong, nonatomic) NSMutableArray *upDateArray;
 @property (strong, nonatomic) UITextField *beginTextField;
+@property (strong, nonatomic) UILabel * beginLabel;
 @property (strong, nonatomic) UITextField *endTextField;
+@property (nonatomic,strong ) UILabel * endLabel;
 @property (strong, nonatomic) UIDatePicker *timePicker;
 @property (strong, nonatomic) UIDatePicker *timeTwoPicker;
 
@@ -54,21 +56,40 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
 
 - (UITextField *)beginTextField {
     if (_beginTextField == nil) {
-        _beginTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, kSystemWide, 44)];
-        _beginTextField.placeholder = @"  开始";
+        _beginTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 0, 40, 44)];
+        _beginTextField.placeholder = @"开始";
         _beginTextField.font = [UIFont systemFontOfSize:14];
         _beginTextField.delegate = self;
     }
     return _beginTextField;
 }
+- (UILabel *)beginLabel
+{
+    if (_beginLabel == nil) {
+        _beginLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 0, 40, 44)];
+        _beginLabel.text = @"点";
+        _beginLabel.font = [UIFont systemFontOfSize:14];
+    }
+    return _beginLabel;
+}
+
 - (UITextField *)endTextField {
     if (_endTextField == nil) {
-        _endTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 44, kSystemWide, 44)];
-        _endTextField.placeholder = @"  结束";
+        _endTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 44, 40, 44)];
+        _endTextField.placeholder = @"结束";
         _endTextField.font = [UIFont systemFontOfSize:14];
         _endTextField.delegate = self;
     }
     return _endTextField;
+}
+- (UILabel *)endLabel
+{
+    if (_endLabel == nil) {
+        _endLabel = [[UILabel alloc] initWithFrame:CGRectMake(55,44, 40, 44)];
+        _endLabel.text = @"点";
+        _endLabel.font = [UIFont systemFontOfSize:14];
+    }
+    return _endLabel;
 }
 
 - (NSMutableArray *)upDateArray {
@@ -122,6 +143,21 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
 
 
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    NSString * workDes = [[UserInfoModel defaultUserInfo] worktimedesc];
+    NSDictionary * dic = [workDes objectFromJSONString];
+    NSArray * list = [dic objectArrayForKey:@"weekList"];
+    if (list)
+        [self.upDateArray addObjectsFromArray:list];
+    
+    self.beginTextField.text = [[UserInfoModel defaultUserInfo] beginTime];
+    self.endTextField.text = [[UserInfoModel defaultUserInfo] endTime];
+    [self.tableView reloadData];
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self.endTextField resignFirstResponder];
     [self.beginTextField resignFirstResponder];
@@ -139,13 +175,14 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
 - (UIView *)tableViewFootView {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSystemWide, 88)];
     
-    
     self.beginTextField.inputView = self.timePicker;
     self.beginTextField.inputView.tag = 100;
     self.endTextField.inputView = self.timeTwoPicker;
     self.endTextField.inputView.tag = 101;
     [view addSubview:self.beginTextField];
+    [view addSubview:self.beginLabel];
     [view addSubview:self.endTextField];
+    [view addSubview:self.endLabel];
     return view;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -169,7 +206,7 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     [button setBackgroundImage:[UIImage imageNamed:@"cancelSelect"] forState:UIControlStateNormal];
     button.tag = 100 + indexPath.row;
     [button setBackgroundImage:[UIImage imageNamed:@"cancelSelect_click"] forState:UIControlStateSelected];
-//    [button addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+    [button setSelected:[self hasSeleted:indexPath.row]];
     if (indexPath.row != 0) {
         cell.accessoryView = button;
         cell.userInteractionEnabled = YES;
@@ -181,28 +218,53 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     
     return cell;
 }
+
+- (BOOL)hasSeleted:(NSInteger)indexRow
+{
+    for (NSNumber * value in self.upDateArray) {
+        if ([value integerValue] == indexRow) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 - (void)clickRight:(UIButton *)sender {
+    
+    
+    if (self.endTextField.text.length != 0 && self.beginTextField.text.length == 0){
+        [self showTotasViewWithMes:@"起始时间不能为空"];
+        return;
+    }
+    if (self.beginTextField.text.length != 0 && self.endTextField.text.length == 0) {
+        //时间不能一个为空
+        [self showTotasViewWithMes:@"结束时间不能为空"];
+        return;
+    }
+ 
     NSString *urlString = [NSString stringWithFormat:BASEURL,kchangeWorkTime];
     NSMutableString *workweek = [[NSMutableString alloc] init];
-    NSMutableString *worktimedesc = [[NSMutableString alloc] init];
     for (NSInteger i = 0; i<self.upDateArray.count; i++) {
         NSNumber *num = self.upDateArray[i];
         if (i == self.upDateArray.count - 1 ) {
            [workweek appendFormat:@"%@",num ];
-            [worktimedesc appendFormat:@"周%@,",num];
-
         }else {
             [workweek appendFormat:@"%@,",num];
-            [worktimedesc appendFormat:@"周%@",num];
-
         }
     }
-    [worktimedesc appendFormat:@"%@--%@",self.beginTextField.text,self.endTextField.text];
-//    ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:worktimedesc controller:self];
-//    [alerview show];
+    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:0];
+    if (self.upDateArray.count) {
+        [dic setValue:self.upDateArray forKey:@"weekList"];
+    }
+    NSString * workDes = [dic JSONString];
+    if (!workDes) {
+        workDes = @"";
+    }
+
     NSArray *first = [self.beginTextField.text componentsSeparatedByString:@":"];
     NSArray *second = [self.endTextField.text componentsSeparatedByString:@":"];
-    NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"workweek":workweek,@"worktimedesc":worktimedesc,@"begintimeint":first.firstObject,@"endtimeint":second.firstObject};
+    
+    NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"workweek":workweek,@"worktimedesc":workDes,@"begintimeint":first.firstObject,@"endtimeint":second.firstObject};
     [JENetwoking startDownLoadWithUrl:urlString postParam:param WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
@@ -211,6 +273,9 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
         if (messege.intValue == 1) {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
             [alerview show];
+            [UserInfoModel defaultUserInfo].worktimedesc = workDes;
+            [UserInfoModel defaultUserInfo].beginTime = [first firstObject];
+            [UserInfoModel defaultUserInfo].endTime = [second firstObject];
             [self.navigationController popViewControllerAnimated:YES];
         }else {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
@@ -223,8 +288,7 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     NSDate *date = picker.date;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     // 为日期格式器设置格式字符串
-    [dateFormatter setDateFormat:@"H:00"];
-    DYNSLog(@"tag = %ld",picker.tag);
+    [dateFormatter setDateFormat:@"H"];
     
     NSString *destDateString = [dateFormatter stringFromDate:date];
     if (picker.tag == 100) {
@@ -241,15 +305,15 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
         if (b.tag == indexPath.row + 100) {
             if (b.selected == YES) {
                 b.selected = NO;
-                UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-                cell.textLabel.textColor = [UIColor blackColor];
+//                UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//                cell.textLabel.textColor = [UIColor blackColor];
                 NSNumber *num = [NSNumber numberWithInteger:indexPath.row];
                 [self.upDateArray removeObject:num];
 
             }else if (b.selected == NO) {
                 b.selected = YES;
-                UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-                cell.textLabel.textColor = kDefaultTintColor;
+//                UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//                cell.textLabel.textColor = kDefaultTintColor;
                 NSNumber *num = [NSNumber numberWithInteger:indexPath.row];
                 [self.upDateArray addObject:num];
 

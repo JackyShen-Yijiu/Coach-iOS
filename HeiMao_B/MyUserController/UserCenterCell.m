@@ -19,6 +19,8 @@
 - (UILabel *)contentDetail {
     if (_contentDetail == nil) {
         _contentDetail = [WMUITool initWithTextColor:[UIColor blackColor] withFont:[UIFont systemFontOfSize:14]];
+        _contentDetail.textAlignment = NSTextAlignmentRight;
+
     }
     return _contentDetail;
 }

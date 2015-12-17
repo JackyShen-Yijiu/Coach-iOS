@@ -33,6 +33,8 @@
 @property(nonatomic,strong)NSArray *subject;
 
 @property(nonatomic,strong)NSString *worktimedesc;
+@property(nonatomic,strong)NSString *beginTime;
+@property(nonatomic,strong)NSString *endTime;
 @property(nonatomic,strong)NSString * md5Pass;
 @property(nonatomic,strong)NSString * invitationcode;
 

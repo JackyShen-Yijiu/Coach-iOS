@@ -100,7 +100,10 @@
     self.displaycoachid = [info objectForKey:@"displaycoachid"];
     self.invitationcode = [info objectForKey:@"invitationcode"];
     
-    self.worktimedesc = [info objectForKey:@"setWorktimedesc"];
+    self.worktimedesc = [info objectForKey:@"worktimedesc"];
+    self.beginTime = [[info objectInfoForKey:@"worktimespace"] objectStringForKey:@"begintimeint"];
+    self.endTime = [[info objectInfoForKey:@"worktimespace"] objectStringForKey:@"endtimeint"];
+    
     self.subject = [info objectForKey:@"subject"];
     self.carmodel = [info  objectForKey:@"carmodel"];
     self.trainfieldlinfo = [info objectForKey:@"trainfieldlinfo"];
@@ -121,13 +124,13 @@
 #pragma makr - set
 - (void)setWorktimedesc:(NSString *)worktimedesc {
     if (!worktimedesc) {
-        _worktimedesc = @"";
+        worktimedesc = @"";
     };
     _worktimedesc = worktimedesc;
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
     [mdic setValue:worktimedesc forKey:@"worktimedesc"];
-    [[self class] storeData:[dic JSONData] forKey:USERINFO_IDENTIFY];
+    [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
 }
 
 - (void)setCarmodel:(NSDictionary *)carmodel {
@@ -139,6 +142,41 @@
         [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
     }
 }
+
+- (void)setBeginTime:(NSString *)beginTime
+{
+    if (!beginTime) {
+        beginTime =  @"";
+    }
+    _beginTime = beginTime;
+    NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
+    NSMutableDictionary * mdic = [dic mutableCopy];
+    NSMutableDictionary * workTime = [[dic objectInfoForKey:@"worktimespace"] mutableCopy];
+    if (!workTime) {
+        workTime = [NSMutableDictionary dictionaryWithCapacity:0];
+    }
+    [workTime setValue:beginTime forKey:@"begintimeint"];
+    [mdic setValue:workTime forKey:@"worktimespace"];
+    [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
+}
+
+- (void)setEndTime:(NSString *)endTime
+{
+    if (!endTime) {
+        endTime = @"";
+    }
+    _endTime = endTime;
+    NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
+    NSMutableDictionary * mdic = [dic mutableCopy];
+    NSMutableDictionary * workTime = [[dic objectInfoForKey:@"worktimespace"] mutableCopy];
+    if (!workTime) {
+        workTime = [NSMutableDictionary dictionaryWithCapacity:0];
+    }
+    [workTime setValue:endTime forKey:@"begintimeint"];
+    [mdic setValue:workTime forKey:@"worktimespace"];
+    [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
+}
+
 - (void)setTrainfieldlinfo:(NSDictionary *)trainfieldlinfo {
     _trainfieldlinfo = trainfieldlinfo;
     if (trainfieldlinfo) {

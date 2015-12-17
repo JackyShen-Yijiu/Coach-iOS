@@ -27,7 +27,7 @@ static NSString * staticImage6[3] ={@"guide_6_1",@"guide_6_2",@"guide_6_3"};
 {
     self = [super init];
     if (self) {
-//        if (![self shouldShowGuide]) return nil;
+        if (![self shouldShowGuide]) return nil;
         delegate = Adelegate;
         self.frame = [[UIScreen mainScreen] bounds];
         _scrollView  = [[UIScrollView alloc] initWithFrame:self.bounds];
