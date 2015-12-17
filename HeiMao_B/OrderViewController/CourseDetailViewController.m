@@ -14,6 +14,7 @@
 #import "RefreshTableView.h"
 #import "CourseDetailViewCell.h"
 #import "ChatViewController.h"
+#import "OrderCompleteViewController.h"
 
 @interface CourseDetailViewController()<CourseDetailViewDelegate,UITableViewDataSource,UITableViewDelegate,CourseCancelControllerDelegate,CoureseRatingControllerDelegate>
 @property(nonatomic,strong)RefreshTableView * tableView;
@@ -186,23 +187,24 @@
 
 - (void)courseDetailViewDidClickWatingToDone:(CourseDetailView *)view
 {
-    //确定学完
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    WS(ws);
-    [NetWorkEntiry postToEnstureDoneofCourseWithCoachid:[[UserInfoModel defaultUserInfo] userID] coureseID:self.model.courseId learningcontent:nil contentremarks:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
-        if (type == 1) {
-            [ws showTotasViewWithMes:@"操作成功"];
-            [[[ws tableView] refreshHeader] beginRefreshing];
-        }else{
-            [ws dealErrorResponseWithTableView:nil info:responseObject];
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        [ws showTotasViewWithMes:@"网络异常"];
-    }];
+    OrderCompleteViewController * completeController = [[OrderCompleteViewController alloc] init];
+//    //确定学完
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    WS(ws);
+//    [NetWorkEntiry postToEnstureDoneofCourseWithCoachid:[[UserInfoModel defaultUserInfo] userID] coureseID:self.model.courseId learningcontent:nil contentremarks:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+//        if (type == 1) {
+//            [ws showTotasViewWithMes:@"操作成功"];
+//            [[[ws tableView] refreshHeader] beginRefreshing];
+//        }else{
+//            [ws dealErrorResponseWithTableView:nil info:responseObject];
+//        }
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        [ws showTotasViewWithMes:@"网络异常"];
+//    }];
 }
 
 - (void)courseDetailViewDidClickRecommentButton:(CourseDetailView *)view

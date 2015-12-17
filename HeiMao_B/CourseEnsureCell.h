@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HMButton.h"
 
 @class CourseEnsureCell;
 @protocol CourseEnsureCellDelegate <NSObject>
@@ -15,6 +16,7 @@
 
 @interface CourseEnsureCell : UITableViewCell
 @property(nonatomic,weak)id<CourseEnsureCellDelegate>delegate;
+@property(nonatomic,strong)HMButton * ensurebutton;
 
 + (CGFloat)cellHeigthWithTitle:(BOOL)isShowTitle;
 

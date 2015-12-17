@@ -7,11 +7,9 @@
 //
 
 #import "CourseEnsureCell.h"
-#import "HMButton.h"
 
 @interface CourseEnsureCell()
 @property(nonatomic,strong)UILabel * titleLabel;
-@property(nonatomic,strong)HMButton * ensurebutton;
 @end
 
 @implementation CourseEnsureCell

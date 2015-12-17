@@ -17,12 +17,24 @@
 @end
 
 @implementation PickListView
-+ (CGFloat)pickListViewHeigthWithPickerCount:(NSInteger)count
+
+
++ (CGFloat)pickListViewHeigthWithPickerCount:(NSInteger)count couleNumber:(NSInteger)couleNumber
 {
+    NSAssert(couleNumber == 1 || couleNumber == 2, @"目前就支持1和2两种方式");
     CGFloat heigth = 15 + 14.f;
-    heigth += (20 + 14) * count;
+    heigth += (20 + 14) * ceil(count/(CGFloat)couleNumber);
     heigth += 20.f; //底边界
     return heigth;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.couleNumber = 1;
+    }
+    return self;
 }
 
 #pragma mark - Data
@@ -33,6 +45,8 @@
 
 - (void)setPickItemArray:(NSArray *)pickItemArray
 {
+    NSAssert(self.couleNumber == 1 || self.couleNumber == 2, @"目前就支持1和2两种方式");
+
     _pickItemArray = pickItemArray;
     
     for (NSInteger i = 0; i < pickItemArray.count; i++) {
@@ -50,6 +64,7 @@
         }
         view.model = piceModel;
     }
+  
     if (pickItemArray.count < self.picListViewArray.count) {
         for (NSInteger i = pickItemArray.count; i < self.picListViewArray.count; i++) {
             PickerItemView * view = self.picListViewArray[i];
@@ -72,14 +87,22 @@
 {
     [super layoutSubviews];
     self.titleLabel.frame = CGRectMake(15, 19, self.width - 30, 14);
-    
-    CGFloat width = self.titleLabel.width;
     CGFloat heigth  = self.titleLabel.height;
     CGFloat top = self.titleLabel.bottom + 19;
     for (PickerItemView * view in self.picListViewArray) {
+        [view sizeToFit];
         if (!view.isHidden){
-            view.frame = CGRectMake(self.titleLabel.left, top, width, heigth);
-            top = view.bottom + 20.f;
+            if (self.couleNumber == 1) {
+                view.frame = CGRectMake(self.titleLabel.left, top, view.width, heigth);
+                top = view.bottom + 20.f;
+            }else{
+                if (view.tag % 2 == 0) {  //左边
+                    view.frame = CGRectMake(self.titleLabel.left, top, view.width, heigth);
+                }else{ //右边
+                    view.frame = CGRectMake(self.titleLabel.right - view.width, top, view.width, heigth);
+                    top = view.bottom + 20.f;
+                }
+            }
         }
     }
 }

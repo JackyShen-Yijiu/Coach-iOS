@@ -11,5 +11,5 @@
 
 @interface CoursePicListCell : UITableViewCell
 @property(nonatomic,strong)PickListView * pickListView;
-+ (CGFloat)cellHight:(NSInteger)listCount;
++ (CGFloat)cellHight:(NSInteger)listCount couleNumber:(NSInteger)couleNumber;
 @end

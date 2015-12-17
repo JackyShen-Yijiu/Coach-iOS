@@ -147,7 +147,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        return [CoursePicListCell cellHight:[[self model] pickItemsDataList].count];
+        return [CoursePicListCell cellHight:[[self model] pickItemsDataList].count couleNumber:1];
     }else if (indexPath.row == 1){
         return [CourseDesInPutCell cellHeight];
     }else if (indexPath.row == 2){

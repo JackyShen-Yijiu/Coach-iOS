@@ -197,7 +197,7 @@
 {
     _model = model;
     UIImage * defaultImage = [UIImage imageNamed:@"defoult_por"];
-    self.potraitView.imageView = defaultImage;
+    self.potraitView.imageView.image = defaultImage;
     NSString * imageStr = _model.studentInfo.porInfo.originalpic;
     if(imageStr)
         [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];

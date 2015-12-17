@@ -13,9 +13,9 @@
 @end
 @implementation CoursePicListCell
 
-+ (CGFloat)cellHight:(NSInteger)listCount
++ (CGFloat)cellHight:(NSInteger)listCount couleNumber:(NSInteger)couleNumber
 {
-    CGFloat height = [PickListView pickListViewHeigthWithPickerCount:listCount];
+    CGFloat height = [PickListView pickListViewHeigthWithPickerCount:listCount couleNumber:couleNumber];
     return height += 10.f;
 }
 
@@ -33,6 +33,7 @@
 {
     if (!_pickListView) {
         _pickListView  = [[PickListView alloc] init];
+        _pickListView.couleNumber = 1;
         [self.contentView addSubview:_pickListView];
     }
     return _pickListView;

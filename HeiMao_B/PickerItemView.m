@@ -20,19 +20,29 @@
 @implementation PickerItemView
 
 
-- (void)updateConstraints
+//- (void)updateConstraints
+//{
+//    [super updateConstraints];
+//    [self.seletedButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(self);
+//        make.size.mas_equalTo(CGSizeMake(15, 15));
+//        make.left.equalTo(self).offset(0);
+//    }];
+//    [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(self);
+//        make.left.equalTo(self.seletedButton.mas_right).offset(15.f);
+//        make.right.equalTo(self).offset(0);
+//    }];
+//}
+
+- (void)sizeToFit
 {
-    [super updateConstraints];
-    [self.seletedButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self);
-        make.size.mas_equalTo(CGSizeMake(15, 15));
-        make.left.equalTo(self).offset(0);
-    }];
-    [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self);
-        make.left.equalTo(self.seletedButton.mas_right).offset(15.f);
-        make.right.equalTo(self).offset(0);
-    }];
+    [super sizeToFit];
+    self.seletedButton.frame = CGRectMake(0, self.height /2.f - 7.5, 15, 15.f);
+    CGSize size = [self.contentLabel sizeThatFits:CGSizeMake(320, 20)];
+    self.contentLabel.frame = CGRectMake(self.seletedButton.right + 15.f, self.height/2.f - size.height/2.f, size.width, size.height);
+    self.frame = CGRectMake(0, 0, self.contentLabel.right, size.height);
+    [self setNeedsLayout];
 }
 
 #pragma mark - 
