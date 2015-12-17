@@ -10,7 +10,7 @@
 #import <Masonry/Masonry.h>
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 #import "QueryViewController.h"
-#define testUrl @"http://101.200.204.240:8181/api/v1/userinfo/applyverification"
+//#define testUrl @"http://101.200.204.240:8181/api/v1/userinfo/applyverification"
 #define url @"http://123.57.63.15:8181/api/v1/userinfo/applyverification"
 @interface CompleteInformationViewController ()<QueryViewControllerDelegate>
 @property (strong, nonatomic) UIView *navImage;
@@ -274,7 +274,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)clickSubmit:(UIButton *)sender {
-    NSString *urlstring = testUrl;
+    NSString *urlstring = url;
     NSMutableDictionary *mubDic = [[NSMutableDictionary alloc] init];
     
     if (self.nameTextField == nil || self.nameTextField.text.length == 0) {

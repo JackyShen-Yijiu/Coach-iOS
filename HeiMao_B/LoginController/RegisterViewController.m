@@ -65,9 +65,10 @@ static NSString *const kcodeGainUrl = @"code";
     if (_noteLabel == nil) {
         _noteLabel = [[UILabel alloc]init];
         _noteLabel.backgroundColor = [UIColor whiteColor];
-        [_noteLabel setTextColor:RGB_Color(153, 153, 153)];
+//        [_noteLabel setTextColor:RGB_Color(153, 153, 153)];
         [_noteLabel setText:@"点击注册则表示您同意《用户服务协议》"];
         _noteLabel.font = [UIFont systemFontOfSize:13];
+        _noteLabel.textColor =  RGB_Color(0x28, 0x79, 0xF3);
         _noteLabel.userInteractionEnabled = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dealTap:)];
         [_noteLabel addGestureRecognizer:tap];
@@ -75,7 +76,7 @@ static NSString *const kcodeGainUrl = @"code";
     return _noteLabel;
 }
 - (void)dealTap:(UITapGestureRecognizer *)tap {
-    self.noteLabel.textColor = [UIColor blueColor];
+//    self.noteLabel.textColor = [UIColor blueColor];
     ProtocalViewController *protocal = [[ProtocalViewController alloc] init];
     [self presentViewController:protocal animated:YES completion:nil];
 }

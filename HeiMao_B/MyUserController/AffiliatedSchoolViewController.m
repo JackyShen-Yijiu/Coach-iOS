@@ -160,11 +160,12 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
         NSDictionary *param = responseObject;
         NSArray *array = param[@"data"];
         if (array.count >0 && array != nil && ![array isEqual:[NSNull null]]) {
+            [self.dataArray removeAllObjects];
             for (NSDictionary *dic in array) {
                 [self.dataArray addObject:dic];
             }
+            [self.tableView reloadData];
         }
-        [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         
     }];

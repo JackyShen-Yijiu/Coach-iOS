@@ -142,10 +142,11 @@
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
         if (messege.intValue == 1) {
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
+            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"反馈成功" controller:self];
             [alerview show];
+            [self.myNavController popViewControllerAnimated:YES];
         }else {
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改失败" controller:self];
+            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"反馈失败" controller:self];
             [alerview show];
         }
     }];

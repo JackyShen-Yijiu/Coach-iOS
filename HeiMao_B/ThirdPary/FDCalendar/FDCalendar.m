@@ -51,7 +51,7 @@ static NSDateFormatter *dateFormattor;
 - (NSString *)stringFromDate:(NSDate *)date {
     if (!dateFormattor) {
         dateFormattor = [[NSDateFormatter alloc] init];
-        [dateFormattor setDateFormat:@"yyyy年M月d日"];
+        [dateFormattor setDateFormat:@"yyyy年M月"];
     }
     return [dateFormattor stringFromDate:date];
 }

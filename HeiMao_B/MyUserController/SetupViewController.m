@@ -192,6 +192,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
         }];
     }
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1 && indexPath.row == 2) {
         FeedBackViewController *feedBack = [[FeedBackViewController alloc] init];
@@ -199,6 +200,13 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
     }else if (indexPath.section == 1 && indexPath.row == 0) {
         AboutUsViewController *about = [[AboutUsViewController alloc] init];
         [self.navigationController pushViewController:about animated:YES];
+    }else if (indexPath.section == 1 && indexPath.row == 1){
+        //评分
+        NSString *str = [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=1060635200" ];
+        if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)){
+            str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/1060635200"];
+        }
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     }
 }
 

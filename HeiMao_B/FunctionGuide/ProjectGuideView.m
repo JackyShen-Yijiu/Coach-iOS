@@ -27,17 +27,18 @@ static NSString * staticImage6[3] ={@"guide_6_1",@"guide_6_2",@"guide_6_3"};
 {
     self = [super init];
     if (self) {
-        if (![self shouldShowGuide]) return nil;
+//        if (![self shouldShowGuide]) return nil;
         delegate = Adelegate;
         self.frame = [[UIScreen mainScreen] bounds];
         _scrollView  = [[UIScrollView alloc] initWithFrame:self.bounds];
         _scrollView.pagingEnabled = YES;
+        _scrollView.bounces = NO;
         [self addSubview:_scrollView];
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.delegate = self;
 //        _scrollView.bounces = NO;
         [self addScrollviewContent];
-//        [self addStartButton];
+        [self addStartButton];
 //        [self addPageControll];
     }
     return self;
@@ -81,6 +82,7 @@ static NSString * staticImage6[3] ={@"guide_6_1",@"guide_6_2",@"guide_6_3"};
     }else{
         button.frame = CGRectMake(80, self.frame.size.height - 80 - 44, 160, 44);
     }
+    button.frame = imageView.bounds;
     [button addTarget:self action:@selector(beginUseButtonClick:) forControlEvents:UIControlEventTouchDown];
     [imageView addSubview:button];
 }
@@ -116,6 +118,9 @@ static NSString * staticImage6[3] ={@"guide_6_1",@"guide_6_2",@"guide_6_3"};
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    if (scrollView.contentOffset.x < 0) {
+        scrollView.contentOffset = CGPointZero;
+    }
     if ([scrollView isEqual:_scrollView]) {
         NSInteger curPage = floorf(([_scrollView contentOffset].x+ 161) / _scrollView.bounds.size.width);
         _pageControll.currentPage = curPage;
@@ -123,7 +128,7 @@ static NSString * staticImage6[3] ={@"guide_6_1",@"guide_6_2",@"guide_6_3"};
             [self beginUseButtonClick:nil];
         }
     }
-    
+    NSLog(@"%f",scrollView.contentOffset.x);
 }
 
 - (BOOL)shouldShowGuide

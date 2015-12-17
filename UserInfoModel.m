@@ -122,7 +122,6 @@
 - (void)setWorktimedesc:(NSString *)worktimedesc {
     if (!worktimedesc) {
         _worktimedesc = @"";
-        return;
     };
     _worktimedesc = worktimedesc;
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
@@ -151,8 +150,11 @@
 }
 
 - (void)setPortrait:(NSString *)portrait {
+
+    if (!portrait)  {
+        portrait = @"";
+    };
     _portrait = portrait;
-    if (!portrait)  return;
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
     NSDictionary * headdic = @{

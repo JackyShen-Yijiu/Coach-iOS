@@ -74,12 +74,16 @@
     for (NSDictionary *dic in array) {
         [string appendString:dic[@"name"]];
     }
-    
-    self.displayArray = @[[self getStrin:@"name" FromDic:[UserInfoModel defaultUserInfo].driveschoolinfo],
-                          [self getStrin:@"name" FromDic:[UserInfoModel defaultUserInfo].trainfieldlinfo],
-                          [UserInfoModel defaultUserInfo].worktimedesc,
-                          string,
-                          [self getStrin:@"name" FromDic:[UserInfoModel defaultUserInfo].carmodel]
+    NSString * driveSname = [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
+    NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
+    NSString * workTimeDes = [UserInfoModel defaultUserInfo].worktimedesc;    
+    NSString * carName =  [[UserInfoModel defaultUserInfo].carmodel objectStringForKey:@"name"];
+
+    self.displayArray = @[[self strTolerance:driveSname],
+                          [self strTolerance:trainName],
+                          [self strTolerance:workTimeDes],
+                          [self strTolerance:string],
+                          [self strTolerance:carName]
                           ];
     
     
@@ -88,6 +92,14 @@
     self.tableView.tableHeaderView = self.userCenterView;
     
 }
+- (NSString *)strTolerance:(NSString *)str
+{
+    if (![str isKindOfClass:[NSString class]] || !str.length) {
+        return @"";
+    }
+    return str;
+}
+
 - (NSString *)getStrin:(NSString *)key FromDic:(NSDictionary *)dic
 {
     NSString * value = [dic objectForKey:key];

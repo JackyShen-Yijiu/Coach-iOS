@@ -172,10 +172,7 @@ static NSString *const kchangePassword = @"kchangePassword";
             NSDictionary *param = responseObject;
             NSNumber *type = param[@"type"];
             NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
-            if (type.integerValue == 1) {
-                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
-                [alerview show];
-            }else {
+            if (type.integerValue != 1) {
                 ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
                 [alerview show];
             }
