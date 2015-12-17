@@ -11,8 +11,8 @@
 
 #define PAGENUM 3
 
-static NSString * staticImage[3] = {@"1.jpg",@"2.jpg",@"3.jpg"};
-static NSString * staticImage6[3] ={@"1.jpg",@"2.jpg",@"3.jpg"};
+static NSString * staticImage[3] = {@"guide_4_1",@"guide_4_1",@"guide_4_1"};
+static NSString * staticImage6[3] ={@"guide_6_1",@"guide_6_2",@"guide_6_3"};
 
 @implementation ProjectGuideView
 
