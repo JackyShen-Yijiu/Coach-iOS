@@ -103,6 +103,8 @@
 {
     _bgImageUrlStr = bgImageUrlStr;
     UIImage * defaultImage = [UIImage imageNamed:@"defoult_por"];
+    self.porTraitView.imageView = defaultImage;
+    self.porTraitView.imageView.image = defaultImage;
     if(_bgImageUrlStr)
         [self.porTraitView.imageView sd_setImageWithURL:[NSURL URLWithString:_bgImageUrlStr] placeholderImage:defaultImage];
     
