@@ -176,6 +176,7 @@ static NSString *const kuserType = @"usertype";
         _phoneNumTextField.placeholder        = @" 请填写手机号";
         
         _phoneNumTextField.leftViewMode = UITextFieldViewModeAlways;
+        _phoneNumTextField.keyboardType = UIKeyboardTypeNumberPad;
         
         UIImageView *leftView = [[UIImageView alloc] initWithFrame:CGRectMake(14, 0, 20, 20)];
         leftView.image = [UIImage imageNamed:@"电话"];
@@ -249,7 +250,7 @@ static NSString *const kuserType = @"usertype";
     //网络请求
     [self.passwordTextField resignFirstResponder];
     [self.phoneNumTextField resignFirstResponder];
-    
+    WS(ws);
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [NetWorkEntiry loginWithPhotoNumber:self.phoneNumTextField.text password:self.passwordTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -265,14 +266,15 @@ static NSString *const kuserType = @"usertype";
                 self.passwordTextField.text = @"";
             }
         }else {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
             [alerview show];
+            [ws.passwordTextField becomeFirstResponder];
         }
 
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-
     }];
 
 }

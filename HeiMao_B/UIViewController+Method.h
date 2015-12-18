@@ -38,3 +38,10 @@
 @end
 
 
+@interface UIViewController(AlertView)
+
+@end
+
+@interface UIViewController(Tolerance)
+- (NSString *)strTolerance:(NSString *)str;
+@end

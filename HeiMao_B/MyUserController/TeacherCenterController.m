@@ -77,14 +77,6 @@
     
 }
 
-- (NSString *)strTolerance:(NSString *)str
-{
-    if (![str isKindOfClass:[NSString class]] || !str.length) {
-        return @"";
-    }
-    return str;
-}
-
 - (UIButton *)tableFootView {
     UIButton *quit = [UIButton buttonWithType:UIButtonTypeCustom];
     quit.backgroundColor = [UIColor whiteColor];
@@ -97,10 +89,48 @@
     
 }
 - (void)clickQuit:(UIButton *)sender {
-    [[UserInfoModel defaultUserInfo] loginOut];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    
  
+    
+    if (NSClassFromString(@"UIAlertController")) {
+        UIAlertController *  alerContr = [UIAlertController alertControllerWithTitle:nil message:@"确定退出登录" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertView * view = [[UIAlertView alloc] init];
+        view.tag = 200;
+        UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self alertView:view clickedButtonAtIndex:0];
+        }];
+        
+        [alerContr addAction:cancelAction];
+        
+        UIAlertAction * ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self alertView:view clickedButtonAtIndex:1];
+        }];
+        
+        [alerContr addAction:ensureAction];
+        [self presentViewController:alerContr animated:YES completion:nil];
+        
+    }else{
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定退出登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alertView.tag = 200;
+        alertView.delegate = self;
+        [alertView show];
+        
+    }
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  
+    if(alertView.tag == 200 && buttonIndex == 1){
+        //退出登陆
+        [[UserInfoModel defaultUserInfo] loginOut];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
+
 - (void)userCenterClick {
     EditorUserViewController *editor = [[EditorUserViewController alloc] init];
     [self.navigationController pushViewController:editor animated:YES];

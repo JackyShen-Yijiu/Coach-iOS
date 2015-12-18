@@ -197,3 +197,18 @@
     }
 }
 @end
+
+@implementation UIViewController(AlertView)
+@end
+
+@implementation UIViewController(Tolerance)
+
+- (NSString *)strTolerance:(NSString *)str
+{
+    if (![str isKindOfClass:[NSString class]] || !str.length) {
+        return @"";
+    }
+    return str;
+}
+
+@end

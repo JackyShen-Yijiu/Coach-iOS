@@ -125,6 +125,7 @@ static NSString *const kcodeGainUrl = @"code";
         _phoneTextField.delegate = self;
         _phoneTextField.tag = 102;
         _phoneTextField.placeholder = @"    手机号";
+        _phoneTextField.keyboardType = UIKeyboardTypeNumberPad;
         _phoneTextField.layer.borderColor =RGB_Color(204, 204, 204).CGColor;
         _phoneTextField.layer.borderWidth = 1;
         _phoneTextField.font  = [UIFont systemFontOfSize:15];
@@ -317,13 +318,14 @@ static NSString *const kcodeGainUrl = @"code";
         [alerview show];
         return;
     }else {
-        
+        WS(ws);
         [NetWorkEntiry postSmsCodeWithPhotNUmber:self.phoneTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *param = responseObject;
             NSNumber *type = param[@"type"];
             NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
             if (type.integerValue == 1) {
-              
+                [ws.phoneTextField resignFirstResponder];
+                [ws.authCodeTextFild becomeFirstResponder];
             }else {
                 ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
                 [alerview show];

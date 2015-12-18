@@ -56,6 +56,8 @@ static NSString *const kchangePassword = @"kchangePassword";
         //        _phoneNumTextField.delegate = self;
         _phoneNumTextField.tag = 102;
         _phoneNumTextField.placeholder = @"  手机号";
+        _phoneNumTextField.keyboardType = UIKeyboardTypeNumberPad;
+
         _phoneNumTextField.font = [UIFont systemFontOfSize:15];
         _phoneNumTextField.textColor = RGB_Color(153, 153, 153);
         _phoneNumTextField.layer.borderWidth = 1;
@@ -167,14 +169,18 @@ static NSString *const kchangePassword = @"kchangePassword";
         [alerview show];
         return;
     }else {
-       
+        WS(ws);
         [NetWorkEntiry postSmsCodeWithPhotNUmber:self.phoneNumTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *param = responseObject;
             NSNumber *type = param[@"type"];
             NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
+            
             if (type.integerValue != 1) {
                 ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
                 [alerview show];
+            }else{
+                [ws.phoneNumTextField resignFirstResponder];
+                [ws.confirmTextField becomeFirstResponder];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
