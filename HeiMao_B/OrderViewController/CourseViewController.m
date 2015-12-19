@@ -116,6 +116,7 @@
     
     //日程
     self.courseDayTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.scrollView.width, 0, self.scrollView.width, self.scrollView.height) style:UITableViewStylePlain];
+    self.courseDayTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.courseDayTableView.delegate = self;
     self.courseDayTableView.dataSource = self;
     

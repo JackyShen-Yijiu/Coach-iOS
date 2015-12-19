@@ -141,6 +141,7 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
         [UserInfoModel defaultUserInfo].setClassMode  =  YES;
         if (messege.intValue == 1) {
             [self showTotasViewWithMes:@"设置成功"];
+            [self.myNavController popViewControllerAnimated:YES];
         }else {
             [self showTotasViewWithMes:msg];
         }
