@@ -83,7 +83,7 @@
        
         
         if (!data) {
-            [self showTotasViewWithMes:@"网络连接错误，请稍后重测"];
+            [self showTotasViewWithMes:@"网络连接错误，请稍后再试"];
             return ;
         }
 
