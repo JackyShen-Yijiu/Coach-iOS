@@ -247,7 +247,7 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
     NSString *end = [NSString stringWithFormat:@"%@ %@",self.finalStart.text,self.finalEnd.text];
     
     NSDateFormatter *dateFormatter =  [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy年MM月dd日 HH:00"];
+    [dateFormatter setDateFormat:@"yyyy年MM月dd日 HH:mm"];
     NSDate *beginDate = [dateFormatter dateFromString:begin];
     NSDate *endDate = [dateFormatter dateFromString:end];
     
@@ -255,6 +255,10 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
     NSString *endString = [NSString stringWithFormat:@"%lld", (long long)[endDate timeIntervalSince1970]];
 //    ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:beginString controller:self];
 //    [alerview show];
+    if ([beginDate timeIntervalSince1970] >= [endDate timeIntervalSince1970]) {
+        [self showTotasViewWithMes:@"结束时间必须大于开始时间"];
+        return;
+    }
     NSString *urlstring = [NSString stringWithFormat:BASEURL,kVacationUrl];
     
     NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"begintime":beginString,@"endtime":endString};
