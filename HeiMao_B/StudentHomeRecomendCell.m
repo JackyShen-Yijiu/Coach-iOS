@@ -24,7 +24,11 @@
     CGFloat heigth = 0;
     heigth += 13.f;
     heigth += 24.f;
-    if (model.recomedContent) {
+    
+    NSString * str = [model recomedContent];
+    str = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+    if (str) {
         heigth += 10.f;
         CGRect bounds = [model.recomedContent boundingRectWithSize:
                        CGSizeMake([[UIScreen mainScreen] bounds].size.width - 30, 10000) options:
@@ -93,7 +97,7 @@
     
     [self.recomendContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.porView.mas_bottom).offset(10.f);
-        make.bottom.equalTo(self.contentView).offset(-13.f);
+        make.bottom.equalTo(self.contentView).offset(-13.f).priorityLow();
         make.left.equalTo(self.userName);
         make.right.equalTo(self.contentView).offset(-15);
         
@@ -123,7 +127,16 @@
     
     self.userName.text = _model.coachName;
     self.recomendData.text = _model.recomendData;
-    self.recomendContent.text = _model.recomedContent;
+    
+    NSString * str = [model recomedContent];
+    str = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    self.recomendContent.text = str;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
 }
 
 #pragma mark - HightStatu
