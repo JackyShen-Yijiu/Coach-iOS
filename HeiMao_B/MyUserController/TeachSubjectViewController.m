@@ -83,22 +83,40 @@
 
 - (void)clickRight:(UIButton *)sender {
     NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    BOOL isCotainNum2 = NO;
+    BOOL isContainNum3 = NO;
     for (NSNumber *num in self.upDateArray) {
         if (num.integerValue == 2) {
-            NSDictionary *dic = @{@"subjectid":@"2",@"name":@"科目二"};
-
-            [dataArray addObject:dic];
+            isCotainNum2 = YES;
+          
         }else if (num.integerValue == 3) {
-            NSDictionary *dic = @{@"subjectid":@"3",@"name":@"科目三"};
-            [dataArray addObject:dic];
+            isContainNum3 = YES;
+         
         }
     }
+    if (isCotainNum2) {
+        NSDictionary *dic = @{@"subjectid":@"2",@"name":@"科目二"};
+        [dataArray addObject:dic];
+    }
+    if (isContainNum3) {
+        NSDictionary *dic = @{@"subjectid":@"3",@"name":@"科目三"};
+        [dataArray addObject:dic];
+    }
+    
     NSString *url = [NSString stringWithFormat:BASEURL,kupdateUserInfo];
     NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"subject":[dataArray JSONString]};
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [JENetwoking startDownLoadWithUrl:url postParam:param WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+        
+        if (!data) {
+            [self showTotasViewWithMes:@"网络异常，请稍后再试"];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
+            return ;
+        }
+        
         
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
@@ -109,13 +127,11 @@
             [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
             
             NSArray * subject = [dataParam objectArrayForKey:@"subject"];
-//            if (subject){
+
                 [[UserInfoModel defaultUserInfo] setSubject:subject];
                 [self showTotasViewWithMes:@"设置成功"];
                 [self.navigationController popViewControllerAnimated:YES];
-//            }else{
-//                [self showTotasViewWithMes:@"设置失败，请稍后重试"];
-//            }
+
             
         }else {
             [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
@@ -187,7 +203,7 @@
 - (BOOL)hasSeleted:(NSInteger)indexRow
 {
     for (NSNumber * value in self.upDateArray) {
-        if ([value integerValue] == indexRow) {
+        if ([value integerValue] - 1 == indexRow) {
             return YES;
         }
     }

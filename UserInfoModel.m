@@ -88,12 +88,13 @@
     _introduction = [info objectForKey:@"introduction"];
     _drivinglicensenumber = [info objectForKey:@"drivinglicensenumber"];
     _driveschoolinfo = [info objectForKey:@"driveschoolinfo"];
+    _schoolId = [[info objectForKey:@"driveschoolinfo"] objectForKey:@"id"];
     _trainfieldlinfo = [info objectForKey:@"trainfieldlinfo"];
     _carmodel = [info objectForKey:@"carmodel"];
     
     _subject = [info objectForKey:@"subject"];
     _setClassMode = [[info objectForKey:@"serverclass"] boolValue];
-    
+
     _token = [info objectForKey:@"token"];
     _userID = [info objectForKey:@"coachid"];
     _tel = [info objectForKey:@"mobile"];
@@ -108,7 +109,6 @@
     _subject = [info objectForKey:@"subject"];
     _carmodel = [info  objectForKey:@"carmodel"];
     _trainfieldlinfo = [info objectForKey:@"trainfieldlinfo"];
-    _driveschoolinfo = [info objectForKey:@"driveschoolinfo"];
     _idcardnumber = [info objectForKey:@"idcardnumber"];
     _drivinglicensenumber = [info objectForKey:@"drivinglicensenumber"];
     _Gender = [info objectForKey:@"Gender"];
@@ -305,6 +305,21 @@
 //        [UserInfoModel storeData:driveschoolinfo forKey:@"driveschoolinfo"];
     }
 }
+- (void)setSchoolId:(NSString *)schoolId
+{
+    if (!schoolId) {
+        schoolId = @"";
+    }
+    _schoolId = schoolId;
+    NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
+    NSMutableDictionary * mdic = [dic mutableCopy];
+    NSMutableDictionary * sInfo = [[mdic objectForKey:@"driveschoolinfo"] mutableCopy];
+    [sInfo setValue:_schoolId forKey:@"id"];
+    [mdic setValue:sInfo forKey:@"driveschoolinfo"];
+    [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
+    
+}
+
 - (void)setName:(NSString *)name
 {
 

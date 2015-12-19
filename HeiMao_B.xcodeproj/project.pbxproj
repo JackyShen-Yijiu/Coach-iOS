@@ -3099,7 +3099,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "91c35dec-9f64-4eb2-a29d-ba7e75c2f482";
+				PROVISIONING_PROFILE = "c278427e-af59-4286-9377-e2a464f4cd75";
 			};
 			name = Release;
 		};

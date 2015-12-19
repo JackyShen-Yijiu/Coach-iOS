@@ -218,24 +218,26 @@
                 
                 NSDictionary *dicParam = @{@"headportrait":headPortrait,@"coachid":[UserInfoModel defaultUserInfo].userID};
                 [JENetwoking startDownLoadWithUrl:updateUserInfoUrl postParam:dicParam WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+                    if (!data) {
+                        [self showTotasViewWithMes:@"网络异常，请稍后再试"];
+                        return ;
+                    }
+                    
                     NSDictionary *dataParam = data;
                     NSNumber *messege = dataParam[@"type"];
                     NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
                     DYNSLog(@"msg = %@ %@",data,dataParam[@"msg"]);
                     if (messege.intValue == 1) {
                         
-                            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
-                            [alerview show];
-                        
+                        [self showTotasViewWithMes:@"修改成功"];
                         
                         [UserInfoModel defaultUserInfo].portrait =  upImageUrl;
 
                         [weakself.userHeadImage sd_setImageWithURL:[NSURL URLWithString:[UserInfoModel defaultUserInfo].portrait] placeholderImage:[UIImage imageWithData:gcdPhotoData]];
 
                     }else {
-                
-                        ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
-                        [alerview show];
+                        if (msg)
+                            [self showTotasViewWithMes:msg];
                     }
                 }];
             }

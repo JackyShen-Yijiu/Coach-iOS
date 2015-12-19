@@ -60,13 +60,14 @@
     Completion _completion = [completion copy];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer.cachePolicy = NSURLRequestUseProtocolCachePolicy;
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer.timeoutInterval = 30.0f;
     if (method == JENetworkingRequestMethodGet) {
         if ([UserInfoModel defaultUserInfo].token) {
             [manager.requestSerializer setValue:[UserInfoModel defaultUserInfo].token forHTTPHeaderField:@"authorization"];
         }
-        [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        [manager GET:urlString parameters:param success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
          
             if (_completion) {
                 _completion(responseObject);
