@@ -102,7 +102,7 @@
 }
 - (UITextView *)textView {
     if (_textView == nil) {
-        _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 20, kSystemWide, 90)];
+        _textView = [[UITextView alloc] initWithFrame:CGRectMake(20, 20, kSystemWide - 40, 90)];
         _textView.backgroundColor = [UIColor whiteColor];
     }
     return _textView;
@@ -134,18 +134,22 @@
         [alerview show];
         return;
     }
-    
+
     NSDictionary *param = @{@"userid":[UserInfoModel defaultUserInfo].userID ,@"feedbackmessage":self.textView.text,@"mobileversion":[self getAppversion],@"resolution":[self getResolution]};
     NSString *url = [NSString stringWithFormat:BASEURL,@"userfeedback"];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [JENetwoking startDownLoadWithUrl:url postParam:param WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
         if (messege.intValue == 1) {
+            [MBProgressHUD showHUDAddedTo:self.view animated:NO];
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"反馈成功" controller:self];
             [alerview show];
             [self.myNavController popViewControllerAnimated:YES];
         }else {
+            [MBProgressHUD showHUDAddedTo:self.view animated:NO];
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"反馈失败" controller:self];
             [alerview show];
         }
