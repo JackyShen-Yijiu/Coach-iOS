@@ -129,7 +129,11 @@
     }];
 }
 - (void)clickSubmit:(UIButton *)sender {
-    if (self.textView.text == nil || self.textView.text.length == 0) {
+    
+    NSString * str = [[self textView] text];
+    str = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+    if (str.length == 0) {
         ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"反馈信息不能为空" controller:self];
         [alerview show];
         return;

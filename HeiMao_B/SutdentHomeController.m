@@ -106,6 +106,7 @@
                     if (type == 1) {
                         ws.model.recommendArrays = [[BaseModelMethod getRecomendListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
                         dispatch_async(dispatch_get_main_queue(), ^{
+                            ws.tableView.refreshFooter.scrollView = ws.tableView;
                             [ws.tableView.refreshHeader endRefreshing];
                             [ws.tableView reloadData];
                         });
@@ -129,6 +130,7 @@
         if(ws.model.recommendArrays.count % RELOADDATACOUNT){
             [ws showTotasViewWithMes:@"已经加载所有数据"];
             [ws.tableView.refreshFooter endRefreshing];
+            ws.tableView.refreshFooter.scrollView = nil;
             return ;
         }
         

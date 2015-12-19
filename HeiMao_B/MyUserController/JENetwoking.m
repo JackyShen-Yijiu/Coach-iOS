@@ -67,14 +67,15 @@
             [manager.requestSerializer setValue:[UserInfoModel defaultUserInfo].token forHTTPHeaderField:@"authorization"];
         }
         [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-            if (responseObject == nil) {
-                return ;
-            }
+         
             if (_completion) {
                 _completion(responseObject);
             }
         } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
             DYNSLog(@"error = %@",error);
+            if (_completion) {
+                _completion(nil);
+            }
         }];
     }else if (method == JENetworkingRequestMethodPost) {
         NSAssert(param != nil, @"param 不能为空");
@@ -84,16 +85,14 @@
         DYNSLog(@"token = %@",manager.requestSerializer.HTTPRequestHeaders);
 
         [manager POST:urlString parameters:param success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-            DYNSLog(@"responseObject = %@",responseObject);
-            if (responseObject == nil) {
-                return ;
-            }
             if (_completion) {
                 _completion(responseObject);
             }
         } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
             DYNSLog(@"error = %@",error);
-
+            if (_completion) {
+                _completion(nil);
+            }
         }];
         
     }else if (method == JENetworkingRequestMethodPut) {
@@ -103,16 +102,15 @@
         DYNSLog(@"token = %@",manager.requestSerializer.HTTPRequestHeaders);
         
         [manager PUT:urlString parameters:param success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-            DYNSLog(@"responseObject = %@",responseObject);
-            if (responseObject == nil) {
-                return ;
-            }
             if (_completion) {
                 _completion(responseObject);
             }
         } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
             DYNSLog(@"error = %@",error);
-            
+            if (_completion) {
+                _completion(nil);
+            }
+
         }];
     }else if (method == JENetworkingRequestMethodDelete) {
         if ([UserInfoModel defaultUserInfo].token) {
@@ -121,16 +119,15 @@
         DYNSLog(@"token = %@",manager.requestSerializer.HTTPRequestHeaders);
         
         [manager DELETE:urlString parameters:param success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-            DYNSLog(@"responseObject = %@",responseObject);
-            if (responseObject == nil) {
-                return ;
-            }
+         
             if (_completion) {
                 _completion(responseObject);
             }
         } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-            DYNSLog(@"error = %@",error);
-            
+            if (_completion) {
+                _completion(nil);
+            }
+
         }];
     }
 }

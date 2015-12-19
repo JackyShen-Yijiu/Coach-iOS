@@ -15,7 +15,7 @@
 #import "FDCalendar.h"
 #import "CourseSummaryDayCell.h"
 #import "CourseDetailViewController.h"
-
+#import "NoContentTipView.h"
 
 @interface CourseViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate,FDCalendarDelegate>
 
@@ -30,6 +30,8 @@
 
 @property(nonatomic,assign)BOOL isNeedRefresh;
 @property(nonatomic,strong)NSDateFormatter *dateFormattor;
+@property(nonatomic,strong)NoContentTipView * tipView1;
+@property(nonatomic,strong)NoContentTipView * tipView2;
 @end
 
 @implementation CourseViewController
@@ -123,6 +125,15 @@
     self.courseDayTableView.sectionHeaderHeight = self.calendarHeadView.height;
     [self.scrollView addSubview:self.courseDayTableView];
 
+    self.tipView1 = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有预约"];
+    [self.tipView1 setHidden:YES];
+    [self.courseSummaryTableView addSubview:self.tipView1];
+    self.tipView1.center = CGPointMake(self.courseSummaryTableView .width/2.f, self.courseSummaryTableView.height/2.f);
+    
+    self.tipView2 = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有预约"];
+    [self.tipView2 setHidden:YES];
+    [self.courseDayTableView addSubview:self.tipView2];
+    self.tipView2.center = CGPointMake(self.courseDayTableView .width/2.f, self.courseDayTableView.height/2.f + 120);
 }
 
 
@@ -155,6 +166,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [ws.courseSummaryTableView.refreshHeader endRefreshing];
                     [ws.courseSummaryTableView reloadData];
+                    ws.courseSummaryTableView.refreshFooter.scrollView = ws.courseSummaryTableView;
                 });
             }else{
                 [ws dealErrorResponseWithTableView:ws.courseSummaryTableView info:responseObject];
@@ -170,6 +182,7 @@
         if(ws.courseSummaryData.count % RELOADDATACOUNT){
             [ws showTotasViewWithMes:@"已经加载所有数据"];
             [ws.courseSummaryTableView.refreshFooter endRefreshing];
+            ws.courseSummaryTableView.refreshFooter.scrollView = nil;
             return ;
         }
         [NetWorkEntiry getCourseinfoWithUserId:[[UserInfoModel defaultUserInfo] userID] pageIndex:ws.courseSummaryData.count / RELOADDATACOUNT pageCount:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -225,12 +238,17 @@
 #pragma mark - DataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSInteger count = 0;
     if (tableView == self.courseSummaryTableView) {
-        return self.courseSummaryData.count;
+        count =  self.courseSummaryData.count;
+        if (!self.isNeedRefresh)
+            [self.tipView1 setHidden:count];
     }else{
-        return self.courseDayTableData.count;
+        count =  self.courseDayTableData.count;
+        if (!self.isNeedRefresh)
+            [self.tipView2 setHidden:count];
     }
-    return 0;
+    return count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

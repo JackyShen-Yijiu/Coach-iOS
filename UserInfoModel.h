@@ -32,7 +32,10 @@
 //可授科目
 @property(nonatomic,strong)NSArray *subject;
 
+@property(nonatomic,assign)BOOL setClassMode;
+
 @property(nonatomic,strong)NSString *worktimedesc;
+@property(nonatomic,strong)NSArray * workweek;
 @property(nonatomic,strong)NSString *beginTime;
 @property(nonatomic,strong)NSString *endTime;
 @property(nonatomic,strong)NSString * md5Pass;

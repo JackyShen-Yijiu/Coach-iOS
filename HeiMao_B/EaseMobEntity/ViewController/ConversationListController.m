@@ -16,7 +16,6 @@
 #import "EMConversation.h"
 #import "EMCDDeviceManager.h"
 
-
 //两次提示的默认间隔
 static const CGFloat kDefaultPlaySoundInterval = 3.0;
 static NSString *kMessageType = @"MessageType";
@@ -29,7 +28,6 @@ static NSString *kGroupName = @"GroupName";
 
 @property (nonatomic, strong) UIView *networkStateView;
 @property (strong, nonatomic) NSDate *lastPlaySoundDate;
-
 @end
 
 @implementation ConversationListController
@@ -52,6 +50,7 @@ static NSString *kGroupName = @"GroupName";
     [self networkStateView];
     [self removeEmptyConversationsFromDB];
 
+    
 }
 
 

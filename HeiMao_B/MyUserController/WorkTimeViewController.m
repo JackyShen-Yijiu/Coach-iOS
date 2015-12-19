@@ -48,8 +48,6 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
         _timePicker = [[UIDatePicker alloc] init];
         _timePicker.datePickerMode = UIDatePickerModeTime;
         [_timePicker addTarget:self action:@selector(timeChange:) forControlEvents:UIControlEventValueChanged];
-        
-        
     }
     return _timePicker;
 }
@@ -147,11 +145,9 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    NSString * workDes = [[UserInfoModel defaultUserInfo] worktimedesc];
-    NSDictionary * dic = [workDes objectFromJSONString];
-    NSArray * list = [dic objectArrayForKey:@"weekList"];
-    if (list)
-        [self.upDateArray addObjectsFromArray:list];
+    NSArray * workWook = [[UserInfoModel defaultUserInfo] workweek];
+    if (workWook.count)
+        [self.upDateArray addObjectsFromArray:workWook];
     
     self.beginTextField.text = [[UserInfoModel defaultUserInfo] beginTime];
     self.endTextField.text = [[UserInfoModel defaultUserInfo] endTime];
@@ -265,21 +261,24 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     NSArray *second = [self.endTextField.text componentsSeparatedByString:@":"];
     
     NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"workweek":workweek,@"worktimedesc":workDes,@"begintimeint":first.firstObject,@"endtimeint":second.firstObject};
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
     [JENetwoking startDownLoadWithUrl:urlString postParam:param WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
         
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
         if (messege.intValue == 1) {
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
-            [alerview show];
+            [self showTotasViewWithMes:@"设置成功"];
             [UserInfoModel defaultUserInfo].worktimedesc = workDes;
             [UserInfoModel defaultUserInfo].beginTime = [first firstObject];
             [UserInfoModel defaultUserInfo].endTime = [second firstObject];
             [self.navigationController popViewControllerAnimated:YES];
         }else {
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
-            [alerview show];
+            [self showTotasViewWithMes:msg];
         }
     }];
 }

@@ -54,8 +54,6 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
     return _collectionView;
 }
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -78,8 +76,11 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
 
     
     NSString *urlString = [NSString stringWithFormat:BASEURL,kExamClassType];
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
@@ -98,8 +99,7 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
                 [self.dataArray addObject:model];
             }
         }else {
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
-            [alerview show];
+            [self showTotasViewWithMes:msg];
         }
         
         [self.collectionView reloadData];
@@ -107,28 +107,42 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
 }
 #pragma mark - 完成
 - (void)clickRight:(UIButton *)sender {
-    if (self.examclassmodel == nil) {
-        ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"未选择班型" controller:self];
-        [alerview show];
+    
+    BOOL isSeleted = NO;
+    for (ExamClassModel * model in self.dataArray) {
+        isSeleted = model.is_choose;
+        if (isSeleted) {
+            break;
+        }
+    }
+    
+    if (isSeleted == NO) {
+        [self showTotasViewWithMes:@"未选择班型"];
         return;
     }
-    NSString *urlString = [NSString stringWithFormat:BASEURL,kUpClassType];
-    NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"classtypelist":self.examclassmodel.classid};
     
-    __weak ExamClassViewController *weakSelf = self;
+    NSString *urlString = [NSString stringWithFormat:BASEURL,kUpClassType];
+    NSMutableString * str = [NSMutableString stringWithCapacity:0];
+    
+    for (ExamClassModel * model in self.dataArray) {
+        [str appendFormat:@"%@,",model.classid];
+    }
+    NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"classtypelist":str};
+    
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
     [JENetwoking startDownLoadWithUrl:urlString postParam:param WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
-        
+        [UserInfoModel defaultUserInfo].setClassMode  =  YES;
         if (messege.intValue == 1) {
-            NSArray *array = dataParam[@"data"];
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",array] controller:self];
-            [alerview show];
-//            [UserInfoModel defaultUserInfo];
+            [self showTotasViewWithMes:@"设置成功"];
         }else {
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
-            [alerview show];
+            [self showTotasViewWithMes:msg];
         }
     }];
 
@@ -155,7 +169,7 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
     ExamClassModel *model = self.dataArray[indexPath.row];
     cell.drivingName.text = model.classname;
     cell.drivingAdress.text = model.address;
-    
+    [cell setSelectedState:model.is_choose];
     return cell;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -166,9 +180,9 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
     return UIEdgeInsetsMake(10, 10, 0, 10);
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.examclassmodel = self.dataArray[indexPath.row];
-    
-    
+    ExamClassModel *  model =  self.dataArray[indexPath.row];
+    model.is_choose = !model.is_choose;
+    [collectionView reloadData];
 }
 
 @end

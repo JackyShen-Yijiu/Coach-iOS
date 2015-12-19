@@ -353,7 +353,8 @@
             break;
         case KCourseStatueOnCommended:
         {
-            
+            [self.leftButton setHidden:YES];
+            [self.rightButton setHidden:YES];
         }
             break;
     }

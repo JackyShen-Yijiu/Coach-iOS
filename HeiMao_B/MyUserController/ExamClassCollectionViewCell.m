@@ -12,7 +12,7 @@
 
 @interface ExamClassCollectionViewCell ()
 @property (strong, nonatomic) UIView *WMSelectedbackGroundView;
-
+@property (nonatomic,strong)UIImageView * selectedImage;
 
 @end
 @implementation ExamClassCollectionViewCell
@@ -23,10 +23,10 @@
         _WMSelectedbackGroundView.backgroundColor = [UIColor whiteColor];
         _WMSelectedbackGroundView.layer.borderColor = kDefaultTintColor.CGColor;
         _WMSelectedbackGroundView.layer.borderWidth = 2;
-        UIImageView *selectedImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellSelected.png"]];
-        [_WMSelectedbackGroundView addSubview:selectedImage];
+        self.selectedImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellSelected.png"]];
+        [_WMSelectedbackGroundView addSubview:self.selectedImage];
         
-        [selectedImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.selectedImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(_WMSelectedbackGroundView.mas_right).offset(0);
             make.top.mas_equalTo(_WMSelectedbackGroundView.mas_top).offset(0);
             make.height.mas_equalTo(@30);
@@ -75,11 +75,17 @@
     return self;
 }
 - (void)setUp {
+    [self addSubview: self.WMSelectedbackGroundView];
     [self addSubview:self.drivingName];
     [self addSubview:self.drivingAdress];
     [self addSubview:self.moneyLabel];
     self.backgroundColor = [UIColor whiteColor];
-    self.selectedBackgroundView = self.WMSelectedbackGroundView;
+    
+    [_WMSelectedbackGroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(self);
+        make.top.left.equalTo(self);
+    }];
+    
     [self.drivingName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.mas_left).offset(20);
         make.top.mas_equalTo(self.mas_top).offset(18);
@@ -97,4 +103,16 @@
         make.right.mas_equalTo(self.mas_right).offset(-20);
     }];
 }
+
+- (void)setSelectedState:(BOOL)selectedState
+{
+    _selectedState = selectedState;
+    [self.WMSelectedbackGroundView setHidden:!_selectedState];
+}
+
+- (void)setSelected:(BOOL)selected
+{
+}
+
+
 @end

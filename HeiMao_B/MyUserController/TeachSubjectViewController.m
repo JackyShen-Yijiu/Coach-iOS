@@ -66,6 +66,21 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSArray * subject = [[UserInfoModel defaultUserInfo] subject];
+    [self.upDateArray removeAllObjects];
+    for (NSDictionary * info in subject) {
+        NSNumber * number = [info objectForKey:@"subjectid"];
+        if (number)
+            [self.upDateArray addObject:number];
+    }
+    [self.tableView reloadData];
+
+}
+
 - (void)clickRight:(UIButton *)sender {
     NSMutableArray *dataArray = [[NSMutableArray alloc] init];
     for (NSNumber *num in self.upDateArray) {
@@ -80,18 +95,33 @@
     }
     NSString *url = [NSString stringWithFormat:BASEURL,kupdateUserInfo];
     NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"subject":dataArray};
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [JENetwoking startDownLoadWithUrl:url postParam:param WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+        
+        
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
-        
+
         if (messege.intValue == 1) {
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
-            [alerview show];
-            [self.navigationController popViewControllerAnimated:YES];
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+            
+            NSArray * subject = [dataParam objectArrayForKey:@"subject"];
+            if (subject){
+                [[UserInfoModel defaultUserInfo] setSubject:subject];
+                [self showTotasViewWithMes:@"设置成功"];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [self showTotasViewWithMes:@"设置失败，请稍后重试"];
+            }
+            
         }else {
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
-            [alerview show];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+            if (msg.length)
+                [self showTotasViewWithMes:msg];
         }
     }];
     
@@ -127,6 +157,7 @@
     }else {
         cell.textLabel.textColor = [UIColor blackColor];
     }
+    [button setSelected:[self hasSeleted:indexPath.row]];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -150,6 +181,17 @@
     
     
 }
+
+- (BOOL)hasSeleted:(NSInteger)indexRow
+{
+    for (NSNumber * value in self.upDateArray) {
+        if ([value integerValue] == indexRow) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 - (void)clickButton:(UIButton *)sender {
 
 }

@@ -12,4 +12,5 @@
 @property (strong, nonatomic) UILabel *drivingName;
 @property (strong, nonatomic) UILabel *drivingAdress;
 @property (strong, nonatomic) UILabel *moneyLabel;
+@property (assign, nonatomic, getter=isSelectedState) BOOL selectedState;
 @end

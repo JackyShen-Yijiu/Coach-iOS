@@ -216,21 +216,29 @@
     self.userCenterView.userPhoneNum.text = [UserInfoModel defaultUserInfo].tel;
     [self initNavBar];
     
-    NSArray *array = [UserInfoModel defaultUserInfo].subject;
-    NSMutableString *string = [[NSMutableString alloc] init];
-    for (NSDictionary *dic in array) {
-        [string appendString:dic[@"name"]];
-    }
+   
     NSString * driveSname = [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
     NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
-    NSString * workTimeStr = [UserInfoModel defaultUserInfo].worktimedesc;
-    NSDictionary * workDes = [workTimeStr objectFromJSONString];
+    NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
     NSString * workSetDes = @"未设置";
-    NSArray * list = [workDes objectArrayForKey:@"weekList"];
-    if (list.count) {
+    if (weekArray.count) {
         workSetDes = @"已设置";
     }
-    NSString * carName =  [[UserInfoModel defaultUserInfo].carmodel objectStringForKey:@"name"];
+    
+    //可授科目
+    NSArray *array = [UserInfoModel defaultUserInfo].subject;
+    NSMutableString *string = [[NSMutableString alloc] init];
+    if (array.count == 0) {
+        [string appendString:@"未设置"];
+    }else if(array.count == 1){
+        [string appendString:[[array firstObject] objectForKey:@"name"]];
+    }else{
+        [string appendString:@"已设置"];
+    }
+
+    
+    //班型设置
+    NSString * carName =  [[UserInfoModel defaultUserInfo] setClassMode] ? @"已设置" : @"未设置";
     
     self.displayArray = @[[self strTolerance:driveSname],
                           [self strTolerance:trainName],

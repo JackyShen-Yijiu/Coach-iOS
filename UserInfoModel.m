@@ -81,38 +81,39 @@
 - (BOOL)loginViewDic:(NSDictionary *)info
 {
   
-    self.name =  [info objectForKey:@"name"];
-    self.portrait = [[info objectInfoForKey:@"headportrait"] objectStringForKey:@"originalpic"];
-    self.Gender = [info objectForKey:@"Gender"];
-    self.idcardnumber = [info objectForKey:@"idcardnumber"];
-    self.introduction = [info objectForKey:@"introduction"];
-    self.drivinglicensenumber = [info objectForKey:@"drivinglicensenumber"];
-    self.driveschoolinfo = [info objectForKey:@"driveschoolinfo"];
-    self.trainfieldlinfo = [info objectForKey:@"trainfieldlinfo"];
-    self.carmodel = [info objectForKey:@"carmodel"];
+    _name =  [info objectForKey:@"name"];
+    _portrait = [[info objectInfoForKey:@"headportrait"] objectStringForKey:@"originalpic"];
+    _Gender = [info objectForKey:@"Gender"];
+    _idcardnumber = [info objectForKey:@"idcardnumber"];
+    _introduction = [info objectForKey:@"introduction"];
+    _drivinglicensenumber = [info objectForKey:@"drivinglicensenumber"];
+    _driveschoolinfo = [info objectForKey:@"driveschoolinfo"];
+    _trainfieldlinfo = [info objectForKey:@"trainfieldlinfo"];
+    _carmodel = [info objectForKey:@"carmodel"];
     
-    self.subject = [info objectForKey:@"subject"];
+    _subject = [info objectForKey:@"subject"];
+    _setClassMode = [[info objectForKey:@"serverclass"] boolValue];
     
-    self.token = [info objectForKey:@"token"];
-    self.userID = [info objectForKey:@"coachid"];
-    self.tel = [info objectForKey:@"mobile"];
-    self.md5Pass = [info objectForKey:@"md5Pass"];
-    self.displaycoachid = [info objectForKey:@"displaycoachid"];
-    self.invitationcode = [info objectForKey:@"invitationcode"];
+    _token = [info objectForKey:@"token"];
+    _userID = [info objectForKey:@"coachid"];
+    _tel = [info objectForKey:@"mobile"];
+    _md5Pass = [info objectForKey:@"md5Pass"];
+    _displaycoachid = [info objectForKey:@"displaycoachid"];
+    _invitationcode = [info objectForKey:@"invitationcode"];
     
-    self.worktimedesc = [info objectForKey:@"worktimedesc"];
-    self.beginTime = [[info objectInfoForKey:@"worktimespace"] objectStringForKey:@"begintimeint"];
-    self.endTime = [[info objectInfoForKey:@"worktimespace"] objectStringForKey:@"endtimeint"];
+    _worktimedesc = [info objectForKey:@"worktimedesc"];
+    _beginTime = [[info objectInfoForKey:@"worktimespace"] objectStringForKey:@"begintimeint"];
+    _endTime = [[info objectInfoForKey:@"worktimespace"] objectStringForKey:@"endtimeint"];
     
-    self.subject = [info objectForKey:@"subject"];
-    self.carmodel = [info  objectForKey:@"carmodel"];
-    self.trainfieldlinfo = [info objectForKey:@"trainfieldlinfo"];
-    self.driveschoolinfo = [info objectForKey:@"driveschoolinfo"];
-    self.idcardnumber = [info objectForKey:@"idcardnumber"];
-    self.drivinglicensenumber = [info objectForKey:@"drivinglicensenumber"];
-    self.Gender = [info objectForKey:@"Gender"];
-    self.introduction = [info objectForKey:@"introduction"];
-    
+    _subject = [info objectForKey:@"subject"];
+    _carmodel = [info  objectForKey:@"carmodel"];
+    _trainfieldlinfo = [info objectForKey:@"trainfieldlinfo"];
+    _driveschoolinfo = [info objectForKey:@"driveschoolinfo"];
+    _idcardnumber = [info objectForKey:@"idcardnumber"];
+    _drivinglicensenumber = [info objectForKey:@"drivinglicensenumber"];
+    _Gender = [info objectForKey:@"Gender"];
+    _introduction = [info objectForKey:@"introduction"];
+    _workweek = [info objectArrayForKey:@"workweek"];
     [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:self.userID password:self.md5Pass];
   
     if (![[self class] isLogin]) {
@@ -177,6 +178,24 @@
     [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
 }
 
+- (void)setSetClassMode:(BOOL)setClassMode
+{
+    NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
+    NSMutableDictionary * mdic = [dic mutableCopy];
+    [mdic setValue:@(setClassMode) forKey:@"serverclass"];
+    [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
+}
+
+- (void)setWorkweek:(NSArray *)workweek
+{
+    if (workweek) {
+        NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
+        NSMutableDictionary * mdic = [dic mutableCopy];
+        [mdic setValue:workweek forKey:@"workweek"];
+        [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
+    }
+}
+
 - (void)setTrainfieldlinfo:(NSDictionary *)trainfieldlinfo {
     _trainfieldlinfo = trainfieldlinfo;
     if (trainfieldlinfo) {
@@ -204,13 +223,14 @@
 }
 
 - (void)setSubject:(NSArray *)subject {
+    
+    if (!subject) return;
     _subject = subject;
-    if (!subject || ![subject count]) return;
+    
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
     [mdic setValue:subject forKey:@"subject"];
     [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
-//    [UserInfoModel storeData:subject forKey:@"subject"];
 }
 
 - (void)setIntroduction:(NSString *)introduction {

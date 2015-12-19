@@ -14,9 +14,10 @@
 #import "EaseConversationCell.h"
 #import "EaseConvertToCommonEmoticonsHelper.h"
 #import "NSDate+Category.h"
+#import "NoContentTipView.h"
 
 @interface EaseConversationListViewController () <IChatManagerDelegate>
-
+@property (nonatomic,strong)NoContentTipView * tipView;
 @end
 
 @implementation EaseConversationListViewController
@@ -29,6 +30,11 @@
     [self registerNotifications];
     [self initNavBar];
 
+    
+    self.tipView = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有消息"];
+    [self.view addSubview:self.tipView];
+    self.tipView.center = CGPointMake(self.view.width/2.f, self.view.height/2.f + 32);
+    [self.tipView setHidden:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -53,6 +59,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    [self.tipView setHidden:self.dataArray.count];
     return [self.dataArray count];
 }
 

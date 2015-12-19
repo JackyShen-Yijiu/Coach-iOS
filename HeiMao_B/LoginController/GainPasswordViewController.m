@@ -160,7 +160,7 @@
         if (type.integerValue == 1) {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改密码成功" controller:self];
             [alerview show];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         }else {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
             [alerview show];

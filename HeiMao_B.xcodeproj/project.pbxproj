@@ -22,6 +22,7 @@
 		B80003DA1BEFAD360099D194 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003D91BEFAD360099D194 /* libc++.tbd */; };
 		B80003DC1BEFAD3D0099D194 /* libc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003DB1BEFAD3D0099D194 /* libc.tbd */; };
 		B80003DE1BEFADB30099D194 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B80003DD1BEFADB30099D194 /* PushConfig.plist */; };
+		B801DDA91C25056C0086F8AB /* NoContentTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = B801DDA81C25056C0086F8AB /* NoContentTipView.m */; };
 		B80F1B701BE26785008D5843 /* UITabBar+RedHot.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F1B6F1BE26785008D5843 /* UITabBar+RedHot.m */; };
 		B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B811E4681BDD3CF90077EAF5 /* NGOSegmentControl.m */; };
 		B84479D21BDF74AA004E5E15 /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84479D11BDF74AA004E5E15 /* CourseDetailViewController.m */; };
@@ -429,6 +430,8 @@
 		B80003D91BEFAD360099D194 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		B80003DB1BEFAD3D0099D194 /* libc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libc.tbd; path = usr/lib/libc.tbd; sourceTree = SDKROOT; };
 		B80003DD1BEFADB30099D194 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		B801DDA71C25056C0086F8AB /* NoContentTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoContentTipView.h; sourceTree = "<group>"; };
+		B801DDA81C25056C0086F8AB /* NoContentTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoContentTipView.m; sourceTree = "<group>"; };
 		B80F1B6E1BE26785008D5843 /* UITabBar+RedHot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+RedHot.h"; sourceTree = "<group>"; };
 		B80F1B6F1BE26785008D5843 /* UITabBar+RedHot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+RedHot.m"; sourceTree = "<group>"; };
 		B811E4671BDD3CF90077EAF5 /* NGOSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGOSegmentControl.h; sourceTree = "<group>"; };
@@ -2336,6 +2339,8 @@
 				B8C458831BDB5B8E00901F71 /* UIViewController+Method.m */,
 				B84479D91BDFB35D004E5E15 /* HMButton.h */,
 				B84479DA1BDFB35D004E5E15 /* HMButton.m */,
+				B801DDA71C25056C0086F8AB /* NoContentTipView.h */,
+				B801DDA81C25056C0086F8AB /* NoContentTipView.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -2844,6 +2849,7 @@
 				B8C458711BDB59AC00901F71 /* RFSegmentView.m in Sources */,
 				B8BC507C1BF38A390007B029 /* PSTCollectionViewFlowLayout.m in Sources */,
 				B8AFED191BDB96AC00EF8726 /* CourseViewController.m in Sources */,
+				B801DDA91C25056C0086F8AB /* NoContentTipView.m in Sources */,
 				B8BA98BF1C22963C009DB449 /* OrderCompleteViewController.m in Sources */,
 				D5F72BD61BF9BE9700B972B0 /* PhoneNumViewController.m in Sources */,
 				B8BC507B1BF38A390007B029 /* PSTCollectionViewData.m in Sources */,
