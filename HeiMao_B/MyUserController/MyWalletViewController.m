@@ -18,7 +18,7 @@
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 
 
-static NSString *const kMyWalletUrl = @"userinfo/getmywallet?userid=%@&usertype=1&seqindex=%@&count=10";
+static NSString *const kMyWalletUrl = @"userinfo/getmywallet?userid=%@&usertype=2&seqindex=%@&count=10";
 
 @interface MyWalletViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
