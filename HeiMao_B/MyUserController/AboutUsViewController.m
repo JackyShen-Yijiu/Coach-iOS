@@ -14,6 +14,7 @@
 @property (strong, nonatomic) UILabel *topLabelOne;
 @property (strong, nonatomic) UILabel *topLabelTwo;
 
+@property (strong, nonatomic) UIWebView * webView;
 @end
 
 @implementation AboutUsViewController
@@ -51,6 +52,16 @@
     }
     return _topLabelTwo;
 }
+
+- (UIWebView * )webView
+{
+    if (!_webView) {
+        _webView = [[UIWebView alloc] init];
+        [self.view addSubview:_webView];
+    }
+    return _webView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -58,36 +69,40 @@
     self.title = @"关于我们";
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self.view addSubview:self.logoImageView];
-    
-    [self.view addSubview:self.topLabel];
-    
-    [self.view addSubview:self.topLabelOne];
-    
-    [self.view addSubview:self.topLabelTwo];
-    
-    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.top.mas_equalTo(self.view.mas_top).with.offset(100);
-        make.height.mas_equalTo(@90);
-        make.width.mas_equalTo(@90);
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.yibuxueche.com/about.html"]]];
+    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(self);
+        make.left.top.equalTo(self);
     }];
-    [self.topLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.top.mas_equalTo(self.logoImageView.mas_bottom).with.offset(0);
-        make.height.mas_equalTo(@30);
-    }];
-    [self.topLabelOne mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.top.mas_equalTo(self.topLabel.mas_bottom).with.offset(0);
-        make.height.mas_equalTo(@30);
-    }];
-    [self.topLabelTwo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.top.mas_equalTo(self.topLabelOne.mas_bottom).with.offset(0);
-        make.height.mas_equalTo(@30);
-    }];
+//    [self.view addSubview:self.logoImageView];
+//    
+//    [self.view addSubview:self.topLabel];
+//    
+//    [self.view addSubview:self.topLabelOne];
+//    
+//    [self.view addSubview:self.topLabelTwo];
+//    
+//    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.mas_equalTo(self.view.mas_centerX);
+//        make.top.mas_equalTo(self.view.mas_top).with.offset(100);
+//        make.height.mas_equalTo(@90);
+//        make.width.mas_equalTo(@90);
+//    }];
+//    [self.topLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.mas_equalTo(self.view.mas_centerX);
+//        make.top.mas_equalTo(self.logoImageView.mas_bottom).with.offset(0);
+//        make.height.mas_equalTo(@30);
+//    }];
+//    [self.topLabelOne mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.mas_equalTo(self.view.mas_centerX);
+//        make.top.mas_equalTo(self.topLabel.mas_bottom).with.offset(0);
+//        make.height.mas_equalTo(@30);
+//    }];
+//    [self.topLabelTwo mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.mas_equalTo(self.view.mas_centerX);
+//        make.top.mas_equalTo(self.topLabelOne.mas_bottom).with.offset(0);
+//        make.height.mas_equalTo(@30);
+//    }];
 }
 
 

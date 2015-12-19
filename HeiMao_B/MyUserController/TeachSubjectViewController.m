@@ -87,19 +87,18 @@
         if (num.integerValue == 2) {
             NSDictionary *dic = @{@"subjectid":@"2",@"name":@"科目二"};
 
-            [dataArray addObject:[JsonTransformManager dictionaryTransformJsonWith:dic]];
+            [dataArray addObject:dic];
         }else if (num.integerValue == 3) {
             NSDictionary *dic = @{@"subjectid":@"3",@"name":@"科目三"};
-            [dataArray addObject:[JsonTransformManager dictionaryTransformJsonWith:dic]];
+            [dataArray addObject:dic];
         }
     }
     NSString *url = [NSString stringWithFormat:BASEURL,kupdateUserInfo];
-    NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"subject":dataArray};
+    NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"subject":[dataArray JSONString]};
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [JENetwoking startDownLoadWithUrl:url postParam:param WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
-        
         
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
@@ -110,13 +109,13 @@
             [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
             
             NSArray * subject = [dataParam objectArrayForKey:@"subject"];
-            if (subject){
+//            if (subject){
                 [[UserInfoModel defaultUserInfo] setSubject:subject];
                 [self showTotasViewWithMes:@"设置成功"];
                 [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                [self showTotasViewWithMes:@"设置失败，请稍后重试"];
-            }
+//            }else{
+//                [self showTotasViewWithMes:@"设置失败，请稍后重试"];
+//            }
             
         }else {
             [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
@@ -134,11 +133,11 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellId = @"cell";
-    UITableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+//    UITableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:cellId];
+//    if (cell == nil) {
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
+//    }
     cell.textLabel.text = self.dataArray[indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     cell.userInteractionEnabled = YES;
@@ -153,8 +152,9 @@
     [self.buttonArray addObject:button];
     if (indexPath.row == 0 || indexPath.row == 3) {
         cell.textLabel.textColor = TEXTGRAYCOLOR;
-        button.userInteractionEnabled = NO;
+        [button setHidden:YES];
     }else {
+        [button setHidden:NO];
         cell.textLabel.textColor = [UIColor blackColor];
     }
     [button setSelected:[self hasSeleted:indexPath.row]];
@@ -162,6 +162,9 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
    
+    if (indexPath.row == 0 || indexPath.row == 3) {
+        return;
+    }
     for (UIButton *b in self.buttonArray) {
         if (b.tag == indexPath.row + 100) {
             if (b.selected == YES) {
@@ -179,13 +182,12 @@
         }
     }
     
-    
 }
 
 - (BOOL)hasSeleted:(NSInteger)indexRow
 {
     for (NSNumber * value in self.upDateArray) {
-        if ([value integerValue] == indexRow) {
+        if ([value integerValue] - 1 == indexRow) {
             return YES;
         }
     }

@@ -224,7 +224,9 @@
 
 - (void)setSubject:(NSArray *)subject {
     
-    if (!subject) return;
+    if (!subject) {
+        subject = @[];
+    };
     _subject = subject;
     
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
