@@ -55,8 +55,7 @@ static NSString *const kupdateUserInfo = @"userinfo/updatecoachinfo";
 #define BACKGROUNDCOLOR [UIColor colorWithRed:247/255.0f green:249/255.0f blue:251/255.0f alpha:1]
 
 #define BASEURL @"http://123.57.63.15:8181/api/v1/%@"
-// 正式
-//http://101.200.204.240:8181/api/v1/ 测试
+
 #define kSystemWide [UIScreen mainScreen].bounds.size.width
 
 #define kSystemHeight [UIScreen mainScreen].bounds.size.height

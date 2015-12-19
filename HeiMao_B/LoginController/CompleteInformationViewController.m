@@ -10,8 +10,9 @@
 #import <Masonry/Masonry.h>
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 #import "QueryViewController.h"
-//#define testUrl @"http://101.200.204.240:8181/api/v1/userinfo/applyverification"
+
 #define url @"http://123.57.63.15:8181/api/v1/userinfo/applyverification"
+
 @interface CompleteInformationViewController ()<QueryViewControllerDelegate>
 @property (strong, nonatomic) UIView *navImage;
 @property (strong, nonatomic) UIButton *goBackButton;

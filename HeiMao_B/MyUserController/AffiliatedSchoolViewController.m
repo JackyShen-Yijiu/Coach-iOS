@@ -168,16 +168,4 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
         
     }];
 }
-//- (void)dealChange:(UITextField *)text {
-//    [self.dataArray removeAllObjects];
-//    NSString *urlstring = [NSString stringWithFormat:@"http://123.57.63.15:8181/api/v1/getschoolbyname?schoolname=%@",text.text];
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    [manager GET:urlstring parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        NSLog(@"id = %@",responseObject);
-//    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-//
-//    }];
-//}
-
-
 @end
