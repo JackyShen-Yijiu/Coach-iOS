@@ -48,7 +48,7 @@
                         [self strTolerance:name]
                         ];
     
-    NSString * idcardnumber = [UserInfoModel defaultUserInfo].name;
+    NSString * idcardnumber = [UserInfoModel defaultUserInfo].idcardnumber;
     NSString * tel = [UserInfoModel defaultUserInfo].tel;
     NSString * dirving = [UserInfoModel defaultUserInfo].drivinglicensenumber;
     NSArray * item2 = @[

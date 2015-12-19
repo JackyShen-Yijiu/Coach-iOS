@@ -21,6 +21,7 @@
 - (UITextField *)modifyNameTextField {
     if (_modifyNameTextField == nil) {
         _modifyNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 20, kSystemWide, 44)];
+        _modifyNameTextField.keyboardType = UIKeyboardTypeNumberPad;
         _modifyNameTextField.backgroundColor = [UIColor whiteColor];
         if ([UserInfoModel defaultUserInfo].name) {
             _modifyNameTextField.text = [UserInfoModel defaultUserInfo].idcardnumber;
