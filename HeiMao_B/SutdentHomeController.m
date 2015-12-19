@@ -18,6 +18,7 @@
 @interface SutdentHomeController()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)RefreshTableView * tableView;
 @property(nonatomic,strong)HMStudentModel * model;
+@property(nonatomic,strong)UIButton * buttonRight;
 @property(nonatomic,strong)UIView * recomendTitle;
 @property(nonatomic,assign)BOOL isNeedRefresh;
 @end
@@ -57,11 +58,12 @@
 {
     [self resetNavBar];
     self.title = @"学员详情";
-    UIButton * buttonRight = [self getBarButtonWithTitle:@""];
-    [buttonRight setImage:[UIImage imageNamed:@"tel_normal"] forState:UIControlStateNormal];
-    [buttonRight setImage:[UIImage imageNamed:@"tel_click"] forState:UIControlStateHighlighted];
-    [buttonRight addTarget:self action:@selector(telButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithCustomView:buttonRight];
+    self.buttonRight = [self getBarButtonWithTitle:@""];
+    [self.buttonRight setImage:[UIImage imageNamed:@"tel_normal"] forState:UIControlStateNormal];
+    [self.buttonRight setImage:[UIImage imageNamed:@"tel_click"] forState:UIControlStateHighlighted];
+    [self.buttonRight addTarget:self action:@selector(telButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.buttonRight setHidden:YES];
+    UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithCustomView:self.buttonRight];
     self.myNavigationItem.rightBarButtonItems = @[[self barSpaingItem],item];
 }
 
@@ -110,15 +112,20 @@
                             [ws.tableView.refreshHeader endRefreshing];
                             [ws.tableView reloadData];
                         });
+                        
+                        [ws.buttonRight setHidden:![ws.model.telPhoto length]];
                     }else{
+                        [ws.buttonRight setHidden:YES];
                         [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
                     }
+                    
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     [ws netErrorWithTableView:ws.tableView];
-                    
+                    [ws.buttonRight setHidden:YES];
                 }];
                 
             }else{
+                [ws.buttonRight setHidden:YES];
                 [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -266,7 +273,7 @@
         NSString * telPhoto = [NSString stringWithFormat:@"telprompt://%@",self.model.telPhoto];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telPhoto]];
     }else{
-        [self showTotasViewWithMes:@"用户无手机号码：测试"];
+//        [self showTotasViewWithMes:@"用户无手机号码：测试"];
     }
 }
 
