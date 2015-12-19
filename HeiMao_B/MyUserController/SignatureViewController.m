@@ -73,14 +73,20 @@
 - (void)clickRight:(UIButton *)sender {
     DYNSLog(@"上传");
     //
-    DYNSLog(@"userid = %@",self.signatureTextField.text);
+    DYNSLog(@"userid = %@",self.signatureTextField.text)
+    ;
     NSString *updateUserInfoUrl = [NSString stringWithFormat:BASEURL,kupdateUserInfo];
     
     NSDictionary *dicParam = @{@"introduction":self.signatureTextField.text,@"coachid":[UserInfoModel defaultUserInfo].userID};
     
-    
     [JENetwoking startDownLoadWithUrl:updateUserInfoUrl postParam:dicParam WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
        
+        
+        if (!data) {
+            [self showTotasViewWithMes:@"网络连接错误，请稍后重测"];
+            return ;
+        }
+
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
@@ -92,8 +98,11 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:kSignatureChange object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }else {
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
-            [alerview show];
+            if(msg){
+                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
+                [alerview show];
+            }
+          
         }
 
         
