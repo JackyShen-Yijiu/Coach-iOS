@@ -43,6 +43,8 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
     if (_datePicker == nil) {
         _datePicker = [[UIDatePicker alloc] init];
         _datePicker.datePickerMode = UIDatePickerModeDate;
+        _datePicker.minuteInterval = 30.f;
+        _datePicker.minimumDate = [NSDate date];
         [_datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
     }
     return _datePicker;
@@ -51,6 +53,8 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
     if (_dateTwoPicker == nil) {
         _dateTwoPicker = [[UIDatePicker alloc] init];
         _dateTwoPicker.datePickerMode = UIDatePickerModeDate;
+        _dateTwoPicker.minuteInterval = 30.f;
+        _dateTwoPicker.minimumDate = [NSDate date];
         [_dateTwoPicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
     }
     return _dateTwoPicker;
@@ -58,6 +62,8 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
 - (UIDatePicker *)timeTwoPicker {
     if (_timeTwoPicker == nil) {
         _timeTwoPicker = [[UIDatePicker alloc] init];
+//        _timeTwoPicker.minuteInterval = 30.f;
+//        _dateTwoPicker.minimumDate = [NSDate date];
         _timeTwoPicker.datePickerMode = UIDatePickerModeTime;
         [_timeTwoPicker addTarget:self action:@selector(timeChange:) forControlEvents:UIControlEventValueChanged];
 
@@ -68,6 +74,8 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
     if (_timePicker == nil) {
         _timePicker = [[UIDatePicker alloc] init];
         _timePicker.datePickerMode = UIDatePickerModeTime;
+//        _timePicker.minuteInterval = 30.f;
+//        _timePicker.minimumDate = [NSDate date];
         [_timePicker addTarget:self action:@selector(timeChange:) forControlEvents:UIControlEventValueChanged];
         
     }
@@ -211,7 +219,7 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
     NSDate *date = picker.date;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     // 为日期格式器设置格式字符串
-    [dateFormatter setDateFormat:@"HH:00"];
+    [dateFormatter setDateFormat:@"HH:mm"];
     DYNSLog(@"tag = %ld",picker.tag);
 
     NSString *destDateString = [dateFormatter stringFromDate:date];

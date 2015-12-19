@@ -132,7 +132,7 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.naviBarRightButton];
     self.navigationItem.rightBarButtonItem = rightItem;
     
-    self.dataArray = @[@"工作日",@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六",@"星期日"];
+    self.dataArray = @[@"工作日",@"星期日",@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六"];
     [self.view addSubview:self.tableView];
     
     
@@ -218,7 +218,7 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
 - (BOOL)hasSeleted:(NSInteger)indexRow
 {
     for (NSNumber * value in self.upDateArray) {
-        if ([value integerValue] == indexRow) {
+        if ([value integerValue] + 1  == indexRow) {
             return YES;
         }
     }
@@ -263,7 +263,8 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"workweek":workweek,@"worktimedesc":workDes,@"begintimeint":first.firstObject,@"endtimeint":second.firstObject};
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
+    
+    WS(ws);
     [JENetwoking startDownLoadWithUrl:urlString postParam:param WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
@@ -273,7 +274,7 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
 
         if (messege.intValue == 1) {
             [self showTotasViewWithMes:@"设置成功"];
-            [UserInfoModel defaultUserInfo].worktimedesc = workDes;
+            [UserInfoModel defaultUserInfo].workweek = [ws upDateArray];
             [UserInfoModel defaultUserInfo].beginTime = [first firstObject];
             [UserInfoModel defaultUserInfo].endTime = [second firstObject];
             [self.navigationController popViewControllerAnimated:YES];
@@ -306,21 +307,19 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
                 b.selected = NO;
 //                UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 //                cell.textLabel.textColor = [UIColor blackColor];
-                NSNumber *num = [NSNumber numberWithInteger:indexPath.row];
+                NSNumber *num = [NSNumber numberWithInteger:indexPath.row - 1];
                 [self.upDateArray removeObject:num];
 
             }else if (b.selected == NO) {
                 b.selected = YES;
 //                UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 //                cell.textLabel.textColor = kDefaultTintColor;
-                NSNumber *num = [NSNumber numberWithInteger:indexPath.row];
+                NSNumber *num = [NSNumber numberWithInteger:indexPath.row - 1];
                 [self.upDateArray addObject:num];
 
             }
         }
     }
-
-   
 }
 
 

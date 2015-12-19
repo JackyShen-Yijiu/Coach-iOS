@@ -189,6 +189,7 @@
 - (void)setWorkweek:(NSArray *)workweek
 {
     if (workweek) {
+        _workweek = workweek;
         NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
         NSMutableDictionary * mdic = [dic mutableCopy];
         [mdic setValue:workweek forKey:@"workweek"];

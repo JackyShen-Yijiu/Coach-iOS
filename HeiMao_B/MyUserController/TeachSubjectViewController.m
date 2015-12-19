@@ -187,7 +187,7 @@
 - (BOOL)hasSeleted:(NSInteger)indexRow
 {
     for (NSNumber * value in self.upDateArray) {
-        if ([value integerValue] - 1 == indexRow) {
+        if ([value integerValue] == indexRow) {
             return YES;
         }
     }
