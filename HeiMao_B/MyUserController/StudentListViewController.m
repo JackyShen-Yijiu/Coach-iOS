@@ -13,6 +13,8 @@
 #import "ToolHeader.h"
 #import "StudentListCell.h"
 #import "StudentListModel.h"
+#import "SutdentHomeController.h"
+
 static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&index=1";
 
 @interface StudentListViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -90,5 +92,15 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
     cell.contentLabel.text = model.name;
     cell.detailContentLabel.text = model.subjectprocess;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    SutdentHomeController * stuH = [[SutdentHomeController alloc] init];
+    StudentListModel *model = self.dataArray[indexPath.row];
+    stuH.studentId = model.infoId;
+    [self.navigationController pushViewController:stuH animated:YES];
+
 }
 @end
