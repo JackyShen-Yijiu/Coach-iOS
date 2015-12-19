@@ -17,7 +17,7 @@
 #if kUrlEnabled 
       #define shopListAPI @"getmailproduct"
 #else
-#define  shopListAPI @"http://101.200.204.240:8181/api/v1/getmailproduct"
+//#define  shopListAPI @"http://101.200.204.240:8181/api/v1/getmailproduct"
 #endif
 
 #endif /* MagicAPIUrl_h */
