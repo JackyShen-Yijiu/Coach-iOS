@@ -22,6 +22,16 @@
 
 @implementation EaseConversationListViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.tipView = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有消息"];
+    [self.view addSubview:self.tipView];
+    self.tipView.center = CGPointMake(self.view.width/2.f, self.view.height/2.f + 32);
+    [self.tipView setHidden:YES];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -30,11 +40,6 @@
     [self registerNotifications];
     [self initNavBar];
 
-    
-    self.tipView = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有消息"];
-    [self.view addSubview:self.tipView];
-    self.tipView.center = CGPointMake(self.view.width/2.f, self.view.height/2.f + 32);
-    [self.tipView setHidden:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -59,7 +64,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [self.tipView setHidden:self.dataArray.count];
+    [self.tipView setHidden:self.dataArray.count ? YES : NO];
     return [self.dataArray count];
 }
 

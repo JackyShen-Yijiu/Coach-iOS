@@ -104,13 +104,11 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
         make.top.mas_equalTo(self.navImage.mas_bottom).offset(0);
     }];
     [self.view addSubview:self.tableView];
-    
+    [self searchBar:nil textDidChange:@""];
 }
+
 - (void)clickRight:(UIButton *)sender {
     //
-   
-    
- 
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -159,7 +157,7 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
     [manager GET:urlstring parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *param = responseObject;
         NSArray *array = param[@"data"];
-        if (array.count >0 && array != nil && ![array isEqual:[NSNull null]]) {
+        if (array != nil && ![array isEqual:[NSNull null]]) {
             [self.dataArray removeAllObjects];
             for (NSDictionary *dic in array) {
                 [self.dataArray addObject:dic];
