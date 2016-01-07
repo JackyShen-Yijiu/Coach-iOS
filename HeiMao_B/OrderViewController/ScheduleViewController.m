@@ -1,12 +1,12 @@
 //
-//  courseViewController.m
+//  ScheduleViewController.m
 //  HeiMao_B
 //
 //  Created by kequ on 15/10/24.
 //  Copyright © 2015年 ke. All rights reserved.
 //
 
-#import "CourseViewController.h"
+#import "ScheduleViewController.h"
 #import "RFSegmentView.h"
 #import "RefreshTableView.h"
 #import "HMCourseModel.h"
@@ -17,7 +17,7 @@
 #import "CourseDetailViewController.h"
 #import "NoContentTipView.h"
 
-@interface CourseViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate,FDCalendarDelegate>
+@interface ScheduleViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate,FDCalendarDelegate>
 
 @property(nonatomic,strong)UISegmentedControl * segController;
 @property(nonatomic,strong)UIScrollView * scrollView;
@@ -34,8 +34,7 @@
 @property(nonatomic,strong)NoContentTipView * tipView2;
 @end
 
-@implementation CourseViewController
-
+@implementation ScheduleViewController
 
 #pragma mark - LoingNotification
 - (void)didLoginSucess:(NSNotification *)notification
@@ -61,6 +60,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self resetNavBar];
+    self.myNavigationItem.title = @"日程";
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.isNeedRefresh = YES;
@@ -75,12 +77,12 @@
     [super viewWillAppear:animated];
     
     [self resetNavBar];
-    
-    self.myNavigationItem.title = @"预约";
-    
-    [self.scrollView setContentOffset:CGPointMake(0 * self.scrollView.width, self.scrollView.contentOffset.y) animated:YES];
-    
-    [self setUpTableViewHead];
+    self.myNavigationItem.title = @"日程";
+
+    [self.scrollView setContentOffset:CGPointMake(1 * self.scrollView.width, self.scrollView.contentOffset.y) animated:YES];
+
+    //[self initNavBar];
+    //    [self showMessCountInTabBar:10];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -95,23 +97,13 @@
 
 #pragma mark - initUI
 
-- (void)setUpTableViewHead
+- (void)initNavBar
 {
-    RFSegmentView * segController = [[RFSegmentView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40) items:@[@"待确认",@"待评价",@"已拒绝",@"已完成"]];
-    segController.backgroundColor = RGB_Color(196, 196, 196);
+    [self resetNavBar];
+    RFSegmentView * segController = [[RFSegmentView alloc] initWithFrame:CGRectMake(0, 0, 180, 30.f) items:@[@"预约",@"日程"]];
     segController.delegate = self;
-    segController.tintColor = [UIColor whiteColor];
     [segController setSeltedIndex:self.scrollView.contentOffset.x / self.scrollView.width];
-    self.courseSummaryTableView.tableHeaderView = segController;
-    
-}
-
-#pragma mark - Action
-- (void)segmentViewSelectIndex:(NSInteger)index
-{
-    //    [self.scrollView setContentOffset:CGPointMake(index * self.scrollView.width, self.scrollView.contentOffset.y) animated:YES];
-    NSLog(@"刷新数据segmentViewSelectIndex:%ld",(long)index);
-    
+    self.myNavigationItem.titleView = segController;
 }
 
 -(void)initUI
@@ -125,12 +117,10 @@
     self.scrollView.scrollEnabled = NO;
     [self.view addSubview:self.scrollView];
     
-    // 预约
     self.courseSummaryTableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.width, self.scrollView.height) style:UITableViewStylePlain];
     self.courseSummaryTableView.delegate = self;
     self.courseSummaryTableView.dataSource = self;
     [self.scrollView addSubview:self.courseSummaryTableView];
-    
     [self initRefreshView];
     
     //日程
@@ -155,6 +145,7 @@
     [self.courseDayTableView addSubview:self.tipView2];
     self.tipView2.center = CGPointMake(self.courseDayTableView .width/2.f, self.courseDayTableView.height/2.f + 120);
 }
+
 
 #pragma mark Load Data
 - (void)dealErrorResponseWithTableView:(RefreshTableView *)tableview info:(NSDictionary *)dic
@@ -301,6 +292,12 @@
         return dayCell;
     }
     return [UITableViewCell new];
+}
+
+#pragma mark - Action
+- (void)segmentViewSelectIndex:(NSInteger)index
+{
+    [self.scrollView setContentOffset:CGPointMake(index * self.scrollView.width, self.scrollView.contentOffset.y) animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

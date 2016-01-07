@@ -18,7 +18,7 @@
 #import "ConversationListController.h"
 #import "ProjectGuideView.h"
 #import "UIDevice+JEsystemVersion.h"
-
+#import "ScheduleViewController.h"
 
 @interface AppDelegate ()<LoginViewControllerDelegate>
 @property(nonatomic,strong)HMNagationController * navController;
@@ -44,7 +44,7 @@
     }
     [self sysConfigWithApplication:application LaunchOptions:launchOptions];
     [ProjectGuideView showViewWithDelegate:nil];
-
+    
     if (([UIDevice jeSystemVersion] > 7.99)&&
         ([UIDevice jeSystemVersion] < 9.001)) {
         
@@ -62,22 +62,42 @@
 - (void)loginViewControllerdidLoginSucess:(LoginViewController *)controller
 {
     [self.navController.navigationBar setHidden:NO];
+    
     [self.navController pushViewController:[self getMainTabBar] animated:NO];
+    
 }
 
 - (UITabBarController *)getMainTabBar
 {
+    // 预约
     UIImage * nCourse = [UIImage imageNamed:@"order_normal"];
     UIImage * hCourse = [UIImage imageNamed:@"order_seleted"];
+    
+    // 日程
+    UIImage * tCourse = [UIImage imageNamed:@"order_normal"];
+    UIImage * HtCourse = [UIImage imageNamed:@"order_seleted"];
+    
+    // 消息
     UIImage * nMess = [UIImage imageNamed:@"im_normal"];
     UIImage * HMess = [UIImage imageNamed:@"im_seleted"];
+    
+    // 我
     UIImage * nUser = [UIImage imageNamed:@"user_normal"];
     UIImage * hUser = [UIImage imageNamed:@"user_seleted"];
     
+    // 预约
     CourseViewController * courseContro = [[CourseViewController alloc] init];
+    
+    // 日程
+    ScheduleViewController * ScheduleVc = [[ScheduleViewController alloc] init];
+    
+    // 消息
     ConversationListController * courList = [[ConversationListController alloc] init];
+    
+    // 我
     TeacherCenterController * userCentertro = [[TeacherCenterController alloc] init];
-    return [self getTabWithTitleArray:@[@"预约",@"消息",@"我的"] nimagesArray:@[nCourse,nMess,nUser] himages:@[hCourse,HMess,hUser] andControllers:@[courseContro,courList,userCentertro]];
+    
+    return [self getTabWithTitleArray:@[@"预约",@"日程",@"消息",@"我的"] nimagesArray:@[nCourse,tCourse,nMess,nUser] himages:@[hCourse,HtCourse,HMess,hUser] andControllers:@[courseContro,ScheduleVc,courList,userCentertro]];
 }
 
 - (UITabBarController *)getTabWithTitleArray:(NSArray *)item nimagesArray:(NSArray *)nImages
@@ -85,17 +105,24 @@
                               andControllers:(NSArray*)controllers
 {
     self.tabController = [[UITabBarController alloc] init];
+    
     self.tabController.tabBar.selectedImageTintColor = [UIColor colorWithRed:0x28/255.f green:0x79/255.f blue:0xf3/255.f alpha:1];
+    
     for (int i =0; i < controllers.count;i++) {
+        
         UIViewController * controller = [controllers objectAtIndex:i];
         UIImage * nimage = [nImages[i] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UIImage * himage = [himages[i] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UITabBarItem * tabItem = [[UITabBarItem alloc] initWithTitle:item[i] image:nimage selectedImage:himage];
         tabItem.tag = i;
         controller.tabBarItem = tabItem;
+        
     }
+    
     [self.tabController setViewControllers:controllers];
+    
     [self.tabController setHidesBottomBarWhenPushed:YES];
+    
     return self.tabController;
 }
 
@@ -112,11 +139,11 @@
     
     //环信
     NSString *apnsCertName = nil;
-//#if DEBUG
-//    apnsCertName = @"modoujiaxiaoPushDev";
-//#else
-//    apnsCertName = @"modoujiaxiaoPushDis";
-//#endif
+    //#if DEBUG
+    //    apnsCertName = @"modoujiaxiaoPushDev";
+    //#else
+    //    apnsCertName = @"modoujiaxiaoPushDis";
+    //#endif
     apnsCertName = @"dis_apns";
     [[EaseSDKHelper shareHelper] easemobApplication:application
                       didFinishLaunchingWithOptions:launchOptions
@@ -157,8 +184,8 @@
 - (BOOL)isReciveFromHunaxin:(NSDictionary *)dic
 {
     return  [dic objectStringForKey:@"f"] &&
-            [dic objectStringForKey:@"m"] &&
-            [dic objectStringForKey:@"t"];
+    [dic objectStringForKey:@"m"] &&
+    [dic objectStringForKey:@"t"];
 }
 
 @end
