@@ -7,7 +7,6 @@
 //
 
 #import "ScheduleViewController.h"
-#import "RFSegmentView.h"
 #import "RefreshTableView.h"
 #import "HMCourseModel.h"
 #import "CourseSummaryListCell.h"
@@ -17,7 +16,7 @@
 #import "CourseDetailViewController.h"
 #import "NoContentTipView.h"
 
-@interface ScheduleViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate,FDCalendarDelegate>
+@interface ScheduleViewController () <UITableViewDataSource,UITableViewDelegate,FDCalendarDelegate>
 
 @property(nonatomic,strong)UISegmentedControl * segController;
 @property(nonatomic,strong)UIScrollView * scrollView;
@@ -100,10 +99,7 @@
 - (void)initNavBar
 {
     [self resetNavBar];
-    RFSegmentView * segController = [[RFSegmentView alloc] initWithFrame:CGRectMake(0, 0, 180, 30.f) items:@[@"预约",@"日程"]];
-    segController.delegate = self;
-    [segController setSeltedIndex:self.scrollView.contentOffset.x / self.scrollView.width];
-    self.myNavigationItem.titleView = segController;
+
 }
 
 -(void)initUI
@@ -292,12 +288,6 @@
         return dayCell;
     }
     return [UITableViewCell new];
-}
-
-#pragma mark - Action
-- (void)segmentViewSelectIndex:(NSInteger)index
-{
-    [self.scrollView setContentOffset:CGPointMake(index * self.scrollView.width, self.scrollView.contentOffset.y) animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

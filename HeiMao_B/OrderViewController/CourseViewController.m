@@ -12,20 +12,17 @@
 #import "HMCourseModel.h"
 #import "CourseSummaryListCell.h"
 
-#import "FDCalendar.h"
 #import "CourseSummaryDayCell.h"
 #import "CourseDetailViewController.h"
 #import "NoContentTipView.h"
 
-@interface CourseViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate,FDCalendarDelegate>
+@interface CourseViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate>
 
 @property(nonatomic,strong)UISegmentedControl * segController;
 @property(nonatomic,strong)UIScrollView * scrollView;
 @property(nonatomic,strong)RefreshTableView * courseSummaryTableView;
 @property(nonatomic,strong)NSMutableArray * courseSummaryData;
 
-@property(nonatomic,strong)UITableView * courseDayTableView;
-@property(nonatomic,strong)FDCalendar *calendarHeadView;
 @property(nonatomic,strong)NSMutableArray * courseDayTableData;
 
 @property(nonatomic,assign)BOOL isNeedRefresh;
@@ -41,7 +38,6 @@
 - (void)didLoginSucess:(NSNotification *)notification
 {
     [self.courseSummaryTableView.refreshHeader beginRefreshing];
-    [self fdCalendar:nil didSelectedDate:[NSDate date]];
 }
 
 - (void)didLoginoutSucess:(NSNotification *)notifcation
@@ -49,7 +45,6 @@
     [self.courseDayTableData removeAllObjects];
     [[self courseDayTableData] removeAllObjects];
     [self.courseSummaryTableView reloadData];
-    [self.courseDayTableView reloadData];
 }
 
 - (void)dealloc
@@ -88,7 +83,6 @@
     [super viewDidAppear:animated];
     if(self.isNeedRefresh){
         [self.courseSummaryTableView.refreshHeader beginRefreshing];
-        [self fdCalendar:nil didSelectedDate:[NSDate date]];
     }
     self.isNeedRefresh = NO;
 }
@@ -98,9 +92,8 @@
 - (void)setUpTableViewHead
 {
     RFSegmentView * segController = [[RFSegmentView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40) items:@[@"待确认",@"待评价",@"已拒绝",@"已完成"]];
-    segController.backgroundColor = RGB_Color(196, 196, 196);
+    segController.backgroundColor = [UIColor whiteColor];
     segController.delegate = self;
-    segController.tintColor = [UIColor whiteColor];
     [segController setSeltedIndex:self.scrollView.contentOffset.x / self.scrollView.width];
     self.courseSummaryTableView.tableHeaderView = segController;
     
@@ -134,17 +127,6 @@
     [self initRefreshView];
     
     //日程
-    self.courseDayTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.scrollView.width, 0, self.scrollView.width, self.scrollView.height) style:UITableViewStylePlain];
-    self.courseDayTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.courseDayTableView.delegate = self;
-    self.courseDayTableView.dataSource = self;
-    
-    self.calendarHeadView = [[FDCalendar alloc] initWithCurrentDate:[NSDate date]];
-    self.calendarHeadView.delegate = self;
-    self.courseDayTableView.tableHeaderView = self.calendarHeadView;
-    self.courseDayTableView.sectionHeaderHeight = self.calendarHeadView.height;
-    [self.scrollView addSubview:self.courseDayTableView];
-    
     self.tipView1 = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有预约"];
     [self.tipView1 setHidden:YES];
     [self.courseSummaryTableView addSubview:self.tipView1];
@@ -152,8 +134,6 @@
     
     self.tipView2 = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有预约"];
     [self.tipView2 setHidden:YES];
-    [self.courseDayTableView addSubview:self.tipView2];
-    self.tipView2.center = CGPointMake(self.courseDayTableView .width/2.f, self.courseDayTableView.height/2.f + 120);
 }
 
 #pragma mark Load Data
@@ -224,35 +204,6 @@
         }];
     };
 }
-
-#pragma mark LoadDayData
-- (void)fdCalendar:(FDCalendar *)calendar didSelectedDate:(NSDate *)date
-{
-    if (!self.dateFormattor) {
-        self.dateFormattor = [[NSDateFormatter alloc] init];
-        [self.dateFormattor setDateFormat:@"yyyy-M-d"];
-    }
-    NSString * dataStr = [self.dateFormattor stringFromDate:date];
-    NSString *  userId = [[UserInfoModel defaultUserInfo] userID];
-    
-    WS(ws);
-    [NetWorkEntiry getAllCourseInfoWithUserId:userId DayTime:dataStr  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
-        
-        if (type == 1) {
-            ws.courseDayTableData = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [ws.courseDayTableView reloadData];
-            });
-        }else{
-            [ws dealErrorResponseWithTableView:nil info:responseObject];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [ws netErrorWithTableView:nil];
-        
-    }];
-}
-
 
 #pragma mark - DataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -336,7 +287,7 @@
         for (HMCourseModel * sumModel in self.courseSummaryData) {
             if ([sumModel.courseId isEqualToString:model.courseId]) {
                 sumModel.courseStatue = model.courseStatue;
-                [self.courseDayTableView reloadData];
+
                 [self.courseSummaryTableView reloadData];
                 
                 break;

@@ -12,6 +12,7 @@
 #define kLeftMargin         15
 #define kItemHeight         30
 #define kBorderLineWidth    0.5
+
 @class RFSegmentItem;
 @protocol RFSegmentItemDelegate
 - (void)ItemStateChanged:(RFSegmentItem *)item index:(NSInteger)index isSelected:(BOOL)isSelected;
@@ -21,6 +22,7 @@
 @property(nonatomic ,strong) UIColor *norColor;
 @property(nonatomic ,strong) UIColor *selColor;
 @property(nonatomic ,strong) UILabel *titleLabel;
+
 @property(nonatomic)         NSInteger index;
 @property(nonatomic)         BOOL isSelected;
 @property(nonatomic)         id   delegate;
@@ -32,10 +34,12 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         _titleLabel.textAlignment   = NSTextAlignmentCenter;
-        _titleLabel.backgroundColor = [UIColor clearColor];
-        _titleLabel.font = [UIFont systemFontOfSize:14.f];
+        _titleLabel.backgroundColor = [UIColor whiteColor];
+        _titleLabel.font = [UIFont boldSystemFontOfSize:14.f];
+        _titleLabel.alpha = 0.7;
         [self addSubview:_titleLabel];
         
         self.norColor        = norColor;
@@ -53,13 +57,13 @@
         _selColor = selColor;
         
         if (_isSelected) {
-            self.titleLabel.textColor = self.norColor;
-            self.backgroundColor = self.selColor;
+            self.titleLabel.textColor = [UIColor blackColor];
+            self.backgroundColor = [UIColor whiteColor];
         }
         else
         {
             self.titleLabel.textColor = self.selColor;
-            self.backgroundColor = self.norColor;
+            self.backgroundColor = [UIColor whiteColor];
         }
 
     }
@@ -70,12 +74,12 @@
     _isSelected = isSelected;
     if (_isSelected) {
         self.titleLabel.textColor = self.norColor;
-        self.backgroundColor = self.selColor;
+        self.backgroundColor = [UIColor whiteColor];
     }
     else
     {
-        self.titleLabel.textColor = self.selColor;
-        self.backgroundColor = self.norColor;
+        self.titleLabel.textColor = [UIColor blackColor];
+        self.backgroundColor = [UIColor whiteColor];
     }
     
 }
@@ -123,10 +127,14 @@
         
         init_x = 0;
         init_y = 0;
+        
         float itemWidth = CGRectGetWidth(self.bgView.frame)/items.count;
         float itemHeight = CGRectGetHeight(self.bgView.frame);
+        
         if (items.count >= 2) {
+            
             for (NSInteger i =0; i<items.count; i++) {
+                
                 RFSegmentItem *item = [[RFSegmentItem alloc] initWithFrame:CGRectMake(init_x, init_y, itemWidth, itemHeight)
                                                                      index:i title:items[i]
                                                                   norColor:kDefaultTintColor
@@ -140,15 +148,23 @@
                 if (!self.itemsArray) {
                     self.itemsArray = [[NSMutableArray alloc] initWithCapacity:items.count];
                 }
+                
                 [self.itemsArray addObject:item];
+                
+                // 分割线
+                UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, itemHeight-1, itemWidth, 1)];
+                lineLabel.backgroundColor = kDefaultTintColor;
+                [self.bgView addSubview:lineLabel];
+                
             }
             
             //add Ver lines
             init_x = 0;
             for (NSInteger i = 0; i<items.count-1; i++) {
+                
                 init_x += itemWidth;
                 UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(init_x, 0, kBorderLineWidth, itemHeight)];
-                lineView.backgroundColor = kDefaultTintColor;
+                lineView.backgroundColor = [UIColor whiteColor];
                 [self.bgView addSubview:lineView];
                 
                 //save all lines
@@ -156,6 +172,7 @@
                     self.linesArray = [[NSMutableArray alloc] initWithCapacity:items.count];
                 }
                 [self.linesArray addObject:lineView];
+                
             }
             
         }
