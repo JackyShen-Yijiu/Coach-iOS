@@ -11,7 +11,6 @@
 
 #define Weekdays @[@"日", @"一", @"二", @"三", @"四", @"五", @"六"]
 
-
 static NSDateFormatter *dateFormattor;
 
 @interface FDCalendar () <UIScrollViewDelegate, FDCalendarItemDelegate>
@@ -118,7 +117,7 @@ static NSDateFormatter *dateFormattor;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
-    [self.scrollView setFrame:CGRectMake(0, ITEMHEIGTH * 2, DeviceWidth, self.centerCalendarItem.frame.size.height)];
+    [self.scrollView setFrame:CGRectMake(0, ITEMHEIGTH + 30, DeviceWidth, self.centerCalendarItem.frame.size.height)];
     self.scrollView.contentSize = CGSizeMake(3 * self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     self.scrollView.contentOffset = CGPointMake(self.scrollView.frame.size.width, 0);
     [self addSubview:self.scrollView];
@@ -126,6 +125,7 @@ static NSDateFormatter *dateFormattor;
 
 // 设置3个日历的item
 - (void)setupCalendarItems {
+    
     self.scrollView = [[UIScrollView alloc] init];
     
     self.leftCalendarItem = [[FDCalendarItem alloc] init];
@@ -142,20 +142,45 @@ static NSDateFormatter *dateFormattor;
     self.rightCalendarItem = [[FDCalendarItem alloc] init];
     self.rightCalendarItem.frame = itemFrame;
     [self.scrollView addSubview:self.rightCalendarItem];
+    
 }
 
 // 设置当前日期，初始化
-- (void)setCurrentDate:(NSDate *)date {
+- (void)setCurrentDate:(NSDate *)date
+{
+    NSLog(@"设置当前日期，初始化");
+    
     self.centerCalendarItem.date = date;
+    
     self.leftCalendarItem.date = [self.centerCalendarItem previousMonthDate];
+    
     self.rightCalendarItem.date = [self.centerCalendarItem nextMonthDate];
     
+    // 设置顶部标题
     [self.titleLabel setText:[self stringFromDate:self.centerCalendarItem.date]];
+   
+    // 设置当前月份的预约、休假
+    [self loadCurrentCalendarData:date];
+    
+}
+
+- (void)loadCurrentCalendarData:(NSDate *)date
+{
+    NSLog(@"网络请求date.description:%@",date.description);
+#warning 此处网络请求，然后传递数据
+    
+    self.centerCalendarItem.restStr = @"15";
+    
+    NSArray *bookArray = [NSArray arrayWithObjects:@"15",@"18",@"23",nil];
+    self.centerCalendarItem.bookArray = bookArray;
+    
+    [self.centerCalendarItem reloadData];
     
 }
 
 // 重新加载日历items的数据
-- (void)reloadCalendarItems {
+- (void)reloadCalendarItems
+{
     CGPoint offset = self.scrollView.contentOffset;
     
     if (offset.x > self.scrollView.frame.size.width) {
@@ -163,12 +188,14 @@ static NSDateFormatter *dateFormattor;
     } else {
         [self setPreviousMonthDate];
     }
+    
 }
 
 #pragma mark - SEL
 
 // 跳到上一个月
-- (void)setPreviousMonthDate {
+- (void)setPreviousMonthDate
+{
     [self setCurrentDate:[self.centerCalendarItem previousMonthDate]];
 }
 
@@ -178,14 +205,21 @@ static NSDateFormatter *dateFormattor;
 }
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
     [self reloadCalendarItems];
+    
     self.scrollView.contentOffset = CGPointMake(self.scrollView.frame.size.width, 0);
+    
 }
 
 #pragma mark - FDCalendarItemDelegate
 
-- (void)calendarItem:(FDCalendarItem *)item didSelectedDate:(NSDate *)date {
+- (void)calendarItem:(FDCalendarItem *)item didSelectedDate:(NSDate *)date
+{
+    
+    NSLog(@"%s",__func__);
+    
     self.date = date;
     self.centerCalendarItem.seletedDate = date;
     self.leftCalendarItem.seletedDate = date;
@@ -194,6 +228,7 @@ static NSDateFormatter *dateFormattor;
     if ([_delegate respondsToSelector:@selector(fdCalendar:didSelectedDate:)]) {
         [_delegate fdCalendar:self didSelectedDate:self.date];
     }
+    
 }
 
 @end

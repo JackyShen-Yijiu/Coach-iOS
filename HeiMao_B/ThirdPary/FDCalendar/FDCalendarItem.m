@@ -6,54 +6,64 @@
 //  Copyright (c) 2015年 fergusding. All rights reserved.
 //
 
-
 #import "FDCalendarItem.h"
 
 @interface FDCalendarCell : UICollectionViewCell
-@property(nonatomic,assign)KCellStation station;
+
+@property(nonatomic,assign) KCellStation station;
 
 - (UILabel *)dayLabel;
-//- (UILabel *)chineseDayLabel;
+- (UILabel *)chineseDayLabel;
+- (UILabel *)pointView;
+- (UILabel *)restLabel;
 - (UIView *)lineView;
-
 
 @end
 
-@implementation FDCalendarCell {
+@implementation FDCalendarCell
+
+{
     UILabel *_dayLabel;
+    UILabel *_chineseDayLabel;
+    UIView *_pointView;
     UIView * _lineView;
-    UIView * _maskView;
-    UIView * _pointView;
+    UILabel *_restLabel;
+
 }
 
 - (UILabel *)dayLabel {
     if (!_dayLabel) {
-        _dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        _dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width/2-10, 10, 20, 15)];
         _dayLabel.textAlignment = NSTextAlignmentCenter;
-        _dayLabel.backgroundColor = [UIColor clearColor];
         _dayLabel.font = [UIFont systemFontOfSize:15];
         [self addSubview:_dayLabel];
     }
     return _dayLabel;
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    self.dayLabel.frame = self.bounds;
-    switch (self.station) {
-        case KCellStationCenter:
-            self.lineView.frame = CGRectMake(0, self.frame.size.height - 0.5, self.frame.size.width, 0.5f);
-            break;
-        case KCellStationLeft:
-           self.lineView.frame = CGRectMake(-20, self.frame.size.height - 0.5, self.frame.size.width + 20, 0.5f);
-            break;
-        case KCellStationRight:
-           self.lineView.frame = CGRectMake(0, self.frame.size.height - 0.5, self.frame.size.width + 20, 0.5f);
-            break;
+- (UILabel *)restLabel {
+    
+    if (!_restLabel) {
+        _restLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width-18, 3, 15, 15)];
+        _restLabel.textAlignment = NSTextAlignmentCenter;
+        _restLabel.font = [UIFont systemFontOfSize:10];
+        _restLabel.backgroundColor = [UIColor clearColor];
+        _restLabel.textColor = RGB_Color(31, 124, 235);
+        _restLabel.hidden = YES;
+        [self addSubview:_restLabel];
     }
-    self.maskView.center = CGPointMake(self.width/2.f, self.height/2.f);
-    [self pointView].center = CGPointMake(self.width/2.f, self.height/2.f + 12);
+    return _restLabel;
+}
+
+- (UILabel *)chineseDayLabel {
+    if (!_chineseDayLabel) {
+        _chineseDayLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width/2-10, CGRectGetMaxY(_dayLabel.frame)+2, 20, 10)];
+        _chineseDayLabel.textAlignment = NSTextAlignmentCenter;
+        _chineseDayLabel.font = [UIFont boldSystemFontOfSize:9];
+        
+        [self addSubview:_chineseDayLabel];
+    }
+    return _chineseDayLabel;
 }
 
 - (UIView*)lineView
@@ -66,69 +76,75 @@
     return _lineView;
 }
 
-- (void)setIsSeletedDay:(BOOL)isSeletedDay curDay:(BOOL)isCurDay
-{
-    
-    [[self pointView] setHidden:isCurDay];
-    if (isCurDay) {
-        self.dayLabel.textColor = isCurDay ? RGB_Color(40, 121, 243) : [UIColor colorWithRed:51/255.f green:51/255.f blue:51/255.f alpha:1.f];
-        if (isSeletedDay) {
-            [self.maskView setHidden:NO];
-            [[self pointView] setHidden:YES];
-            self.dayLabel.textColor = [UIColor whiteColor];
-        }else{
-            [self.maskView setHidden:YES];
-            [[self pointView] setHidden:NO];
-            self.dayLabel.textColor = RGB_Color(40, 121, 243);
-        }
-    }else{
-        if (isSeletedDay) {
-            [self.maskView setHidden:NO];
-            [[self pointView] setHidden:YES];
-            self.dayLabel.textColor = [UIColor whiteColor];
-        }else{
-            [self.maskView setHidden:YES];
-            [[self pointView] setHidden:YES];
-            self.dayLabel.textColor = [UIColor colorWithRed:51/255.f green:51/255.f blue:51/255.f alpha:1.f];
-        }
-        
-    }
-}
-
-- (UIView *)maskView
-{
-    if (!_maskView) {
-        _maskView = [[UIView alloc] init];
-        _maskView.backgroundColor =  RGB_Color(40, 121, 243);
-        _maskView.center = CGPointMake(self.width/2.f, self.height/2.f);
-        _maskView.size = CGSizeMake(30, 30);
-        [_maskView setHidden:YES];
-        _maskView.layer.cornerRadius = _maskView.size.width/2.f;
-        [self addSubview:_maskView];
-    }
-    [self sendSubviewToBack:_maskView];
-    return _maskView;
-}
-
 - (UIView *)pointView
 {
     if (!_pointView) {
         _pointView = [[UIView alloc] init];
-        _pointView.backgroundColor =  RGB_Color(40, 121, 243);
-        _pointView.center = CGPointMake(self.width/2.f, self.height/2.f + 10);
-        _pointView.size = CGSizeMake(4, 4);
+        _pointView.backgroundColor =  [UIColor grayColor];
+        _pointView.frame = CGRectMake(_chineseDayLabel.center.x-2,self.height-2, 4, 4);
         _pointView.layer.masksToBounds = YES;
         [_pointView setHidden:YES];
         _pointView.layer.cornerRadius = _pointView.size.width/2.f;
+        [self addSubview:_pointView];
     }
-    [self insertSubview:_pointView aboveSubview:self.dayLabel];
     return _pointView;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    switch (self.station) {
+        case KCellStationCenter:
+            self.lineView.frame = CGRectMake(0, self.frame.size.height - 0.5, self.frame.size.width, 0.5f);
+            break;
+        case KCellStationLeft:
+            self.lineView.frame = CGRectMake(-20, self.frame.size.height - 0.5, self.frame.size.width + 20, 0.5f);
+            break;
+        case KCellStationRight:
+            self.lineView.frame = CGRectMake(0, self.frame.size.height - 0.5, self.frame.size.width + 20, 0.5f);
+            break;
+    }
+   // self.maskView.center = CGPointMake(self.width/2.f, self.height/2.f);
+    [self pointView].center = CGPointMake(self.width/2.f, self.height-3);
+}
+
+- (void)setIsSeletedDay:(BOOL)isSeletedDay curDay:(BOOL)isCurDay
+{
+    
+    // 在此处判断是否需要显示红点
+    // 如果是预约的就显示红点
+    [[self pointView] setHidden:isCurDay];
+    
+    if (isCurDay) {
+//        self.dayLabel.textColor = isCurDay ? RGB_Color(40, 121, 243) : [UIColor colorWithRed:51/255.f green:51/255.f blue:51/255.f alpha:1.f];
+//        if (isSeletedDay) {
+//            [self.maskView setHidden:NO];
+//            [[self pointView] setHidden:YES];
+//            self.dayLabel.textColor = [UIColor whiteColor];
+//        }else{
+//            [self.maskView setHidden:YES];
+//            [[self pointView] setHidden:NO];
+//            self.dayLabel.textColor = RGB_Color(40, 121, 243);
+//        }
+    }else{
+//        if (isSeletedDay) {
+//            [self.maskView setHidden:NO];
+//            [[self pointView] setHidden:YES];
+//            self.dayLabel.textColor = [UIColor whiteColor];
+//        }else{
+//            [self.maskView setHidden:YES];
+//            [[self pointView] setHidden:YES];
+//            self.dayLabel.textColor = [UIColor colorWithRed:51/255.f green:51/255.f blue:51/255.f alpha:1.f];
+//        }
+        
+    }
 }
 
 @end
 
-#define CollectionViewHorizonMargin 0
-#define CollectionViewVerticalMargin 0
+#define CollectionViewHorizonMargin 5
+#define CollectionViewVerticalMargin 5
 
 #define ChineseMonths @[@"正月", @"二月", @"三月", @"四月", @"五月", @"六月", @"七月", @"八月",@"九月", @"十月", @"冬月", @"腊月"]
 #define ChineseDays @[@"初一", @"初二", @"初三", @"初四", @"初五", @"初六", @"初七", @"初八", @"初九", @"初十",@"十一", @"十二", @"十三", @"十四", @"十五", @"十六", @"十七", @"十八", @"十九", @"二十", @"廿一", @"廿二", @"廿三", @"廿四", @"廿五", @"廿六", @"廿七", @"廿八", @"廿九", @"三十"]
@@ -140,7 +156,6 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
 };
 
 @interface FDCalendarItem () <UICollectionViewDataSource, UICollectionViewDelegate>
-
 
 @end
 
@@ -157,12 +172,23 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
 
 #pragma mark - Custom Accessors
 
-- (void)setDate:(NSDate *)date {
+- (void)setDate:(NSDate *)date
+{
     _date = date;
+    
+    [self.collectionView reloadData];
+    
+}
+
+- (void)reloadData
+{
+    NSLog(@"reloadData.restStr:%@",self.restStr);
+    NSLog(@"reloadData.bookArray:%@",self.bookArray);
+    
     [self.collectionView reloadData];
 }
 
-#pragma mark - Public 
+#pragma mark - Public
 
 // 获取date的下个月日期
 - (NSDate *)nextMonthDate {
@@ -183,9 +209,10 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
 #pragma mark - Private
 
 // collectionView显示日期单元，设置其属性
-- (void)setupCollectionView {
-    CGFloat itemWidth = (DeviceWidth - 40.f) / 7;
-    CGFloat itemHeight = 40.f;
+- (void)setupCollectionView
+{
+    CGFloat itemWidth = (DeviceWidth - CollectionViewHorizonMargin * 2) / 7;
+    CGFloat itemHeight = itemWidth;
     
     UICollectionViewFlowLayout *flowLayot = [[UICollectionViewFlowLayout alloc] init];
     flowLayot.sectionInset = UIEdgeInsetsZero;
@@ -193,15 +220,14 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     flowLayot.minimumLineSpacing = 0;
     flowLayot.minimumInteritemSpacing = 0;
     
-    CGRect collectionViewFrame = CGRectMake(CollectionViewHorizonMargin, CollectionViewVerticalMargin, DeviceWidth, itemHeight * 6);
+    CGRect collectionViewFrame = CGRectMake(CollectionViewHorizonMargin, CollectionViewVerticalMargin, DeviceWidth - CollectionViewHorizonMargin * 2, itemHeight * 6);
     self.collectionView = [[UICollectionView alloc] initWithFrame:collectionViewFrame collectionViewLayout:flowLayot];
-    self.collectionView.contentInset  = UIEdgeInsetsMake(0, 20, 0, 20);
     [self addSubview:self.collectionView];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.scrollEnabled = NO;
     self.collectionView.backgroundColor = [UIColor clearColor];
     [self.collectionView registerClass:[FDCalendarCell class] forCellWithReuseIdentifier:@"CalendarCell"];
+    
 }
 
 // 获取date当前月的第一天是星期几
@@ -258,7 +284,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     } else {
         day = ChineseDays[components.day - 1];
     }
-
+    
     return day;
 }
 
@@ -268,48 +294,101 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     return 46;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *identifier = @"CalendarCell";
     FDCalendarCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
     cell.backgroundColor = [UIColor clearColor];
     cell.dayLabel.textColor = [UIColor blackColor];
-//    cell.chineseDayLabel.textColor = [UIColor grayColor];
+    cell.chineseDayLabel.textColor = [UIColor grayColor];
+    
     NSInteger firstWeekday = [self weekdayOfFirstDayInDate];
     NSInteger totalDaysOfMonth = [self totalDaysInMonthOfDate:self.date];
-//    NSInteger totalDaysOfLastMonth = [self totalDaysInMonthOfDate:[self previousMonthDate]];
+    NSInteger totalDaysOfLastMonth = [self totalDaysInMonthOfDate:[self previousMonthDate]];
     
+    // cell点击变色
+    UIView* selectedBGView = [[UIView alloc] initWithFrame:cell.bounds];
+    selectedBGView.layer.masksToBounds = YES;
+    selectedBGView.layer.cornerRadius = cell.frame.size.height / 2;
+    selectedBGView.backgroundColor = [UIColor lightGrayColor];
+    cell.selectedBackgroundView = selectedBGView;
     
-    NSDate * curDate = nil;
-    if (indexPath.row < firstWeekday) {    // 小于这个月的第一天
+    if (indexPath.row < firstWeekday) {// 小于这个月的第一天
+        
         cell.dayLabel.text = nil;
-        [cell setIsSeletedDay:NO curDay:NO];
-//        NSInteger day = totalDaysOfLastMonth - firstWeekday + indexPath.row + 1;
-//        cell.dayLabel.text = [NSString stringWithFormat:@"%ld", day];
-//        cell.dayLabel.textColor = [UIColor grayColor];
-//        curDate = [self dateOfMonth:FDCalendarMonthPrevious WithDay:day];
+        cell.pointView.hidden = YES;
+        cell.chineseDayLabel.hidden = YES;
+        cell.restLabel.text = nil;
+        cell.restLabel.hidden = YES;
+
+        //NSInteger day = totalDaysOfLastMonth - firstWeekday + indexPath.row + 1;
+        //cell.dayLabel.text = [NSString stringWithFormat:@"%ld", day];
+        //cell.dayLabel.textColor = [UIColor grayColor];
+        //cell.chineseDayLabel.text = [self chineseCalendarOfDate:[self dateOfMonth:FDCalendarMonthPrevious WithDay:day]];
+        
     } else if (indexPath.row >= totalDaysOfMonth + firstWeekday) {    // 大于这个月的最后一天
-//        [cell setIsCurDay:NO];
+        
 //        NSInteger day = indexPath.row - totalDaysOfMonth - firstWeekday + 1;
 //        cell.dayLabel.text = [NSString stringWithFormat:@"%ld", day];
 //        cell.dayLabel.textColor = [UIColor grayColor];
-//        curDate = [self dateOfMonth:FDCalendarMonthNext WithDay:day];
-//        if ([curDate isEqualToDate:[NSDate date]]) {
-//            [cell setIsCurDay:YES];
-//        }
+//        cell.chineseDayLabel.text = [self chineseCalendarOfDate:[self dateOfMonth:FDCalendarMonthNext WithDay:day]];
+//
+        
         cell.dayLabel.text = nil;
-        [cell setIsSeletedDay:NO curDay:NO];
-    } else {    // 属于这个月
+        cell.pointView.hidden = YES;
+        cell.chineseDayLabel.hidden = YES;
+        cell.restLabel.hidden = YES;
+        cell.restLabel.text = nil;
+
+    } else {// 属于这个月
+        
         NSInteger day = indexPath.row - firstWeekday + 1;
         cell.dayLabel.text= [NSString stringWithFormat:@"%ld", day];
-        
+        cell.chineseDayLabel.hidden = NO;
+
         if (day == [[NSCalendar currentCalendar] component:NSCalendarUnitDay fromDate:self.date]) {
-            cell.backgroundColor = [UIColor clearColor];
+            cell.backgroundColor = [UIColor redColor];
             cell.layer.cornerRadius = cell.frame.size.height / 2;
-            cell.dayLabel.textColor = [UIColor colorWithRed:51/255.f green:51/255.f blue:51/255.f alpha:1.f];
+            cell.dayLabel.textColor = [UIColor whiteColor];
+            cell.chineseDayLabel.textColor = [UIColor whiteColor];
+
         }
-        curDate = [self dateOfMonth:FDCalendarMonthCurrent WithDay:day];
-        BOOL isSeletedDaya = [self isEnqual:curDate : self.seletedDate];
-        [cell setIsSeletedDay:isSeletedDaya curDay:[self isEnqual:curDate :[NSDate date]]];
+        
+        // 如果日期和当期日期同年同月不同天, 注：第一个判断中的方法是iOS8的新API, 会比较传入单元以及比传入单元大得单元上数据是否相等，亲测同时传入Year和Month结果错误
+        if ([[NSCalendar currentCalendar] isDate:[NSDate date] equalToDate:self.date toUnitGranularity:NSCalendarUnitMonth] && ![[NSCalendar currentCalendar] isDateInToday:self.date]) {
+            
+            // 将当前日期的那天高亮显示
+            if (day == [[NSCalendar currentCalendar] component:NSCalendarUnitDay fromDate:[NSDate date]]) {
+                
+                cell.backgroundColor = [UIColor clearColor];
+                cell.layer.cornerRadius = cell.height/2;
+                
+                cell.dayLabel.textColor = [UIColor blueColor];
+                cell.chineseDayLabel.textColor = [UIColor blueColor];
+                
+            }
+            
+            NSDate *curDate = [self dateOfMonth:FDCalendarMonthCurrent WithDay:day];
+            BOOL isSelectedData = [self isEnqual:curDate :self.seletedDate];
+            [cell setIsSeletedDay:isSelectedData curDay:[self isEnqual:curDate :[NSDate date]]];
+            
+        }
+        
+        cell.chineseDayLabel.text = [self chineseCalendarOfDate:[self dateOfMonth:FDCalendarMonthCurrent WithDay:day]];
+        
+        // 根据服务器返回数据判断是否休假
+        if (self.restStr && [self.restStr length] != 0 && [cell.dayLabel.text isEqualToString:self.restStr]) {
+            cell.restLabel.hidden = NO;
+            cell.restLabel.text = @"休";
+        }else{
+            cell.restLabel.hidden = YES;
+            cell.restLabel.text = nil;
+        }
+        
+        // 根据服务器返回数据判断是否预约
+        cell.pointView.hidden = ![self isBook:self.bookArray day:cell.dayLabel.text];
+        
     }
     
     if (indexPath.row % 7 == 0) {
@@ -323,6 +402,21 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     return cell;
 }
 
+- (BOOL)isBook:(NSArray *)bookArray day:(NSString *)day
+{
+    
+    if (bookArray && bookArray.count>0) {// 有预约
+        
+       return [bookArray containsObject:day];
+        
+    }else{// 没有预约
+        
+        return NO;
+        
+    }
+    
+}
+
 - (BOOL)isEnqual:(NSDate *)date1 :(NSDate *)date2
 {
     if(!date1 || !date2) return NO;
@@ -333,12 +427,8 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
 
 #pragma mark - UICollectionViewDelegate
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    FDCalendarCell * cell = (FDCalendarCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    if (!cell.dayLabel.text) {
-        return;
-    }
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
     
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:self.date];
     NSInteger firstWeekday = [self weekdayOfFirstDayInDate];
@@ -347,6 +437,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     if (self.delegate && [self.delegate respondsToSelector:@selector(calendarItem:didSelectedDate:)]) {
         [self.delegate calendarItem:self didSelectedDate:selectedDate];
     }
+    
 }
 
 

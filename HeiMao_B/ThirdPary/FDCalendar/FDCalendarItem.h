@@ -29,6 +29,19 @@ typedef NS_ENUM(NSInteger,KCellStation){
 - (NSDate *)nextMonthDate;
 - (NSDate *)previousMonthDate;
 
+/*
+ *  当月预约时间
+ */
+@property (nonatomic , strong) NSArray *bookArray;
+/*
+ *  当月请假日期
+ */
+@property (nonatomic , copy) NSString *restStr;
+/*
+ *  刷新界面
+ */
+- (void)reloadData;
+
 @end
 
 @protocol FDCalendarItemDelegate <NSObject>
