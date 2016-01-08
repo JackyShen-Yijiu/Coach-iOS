@@ -28,7 +28,8 @@ static NSString *kGroupName = @"GroupName";
 
 @property (strong, nonatomic) NSDate *lastPlaySoundDate;
 
-@property (nonatomic,copy)NSString *badgeStr;
+@property (nonatomic,copy)NSString *systemBadgeStr;
+@property (nonatomic,copy)NSString *zixunBadgeStr;
 
 @end
 
@@ -37,8 +38,10 @@ static NSString *kGroupName = @"GroupName";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.badgeStr = @"10";
+
+#warning 网络请求来获取最新数据
+    self.systemBadgeStr = @"100";
+    self.zixunBadgeStr = @"8";
     
     [self registerNotifications];
 
@@ -96,7 +99,7 @@ static NSString *kGroupName = @"GroupName";
         cell = [[EaseConversationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    if (indexPath.row==0) {
+    if (indexPath.row<2) {
 
         EaseConversationModel *topModal = self.dataArray[indexPath.row];
         
@@ -136,13 +139,21 @@ static NSString *kGroupName = @"GroupName";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row==0) {
+    if (indexPath.row<2) {
         
-        self.badgeStr = nil;
+        if (indexPath.row==0) {
+            
+            self.systemBadgeStr = nil;
+            // 系统消息界面跳转
+
+        }else if (indexPath.row==1){
+            
+            self.zixunBadgeStr = nil;
+            // 咨询消息界面跳转
+        }
+        
         [self setupUnreadMessageCount];
-        
-        // 系统消息界面跳转
-        
+
     }else{
         
         if (_delegate && [_delegate respondsToSelector:@selector(conversationListViewController:didSelectConversationModel:)]) {
@@ -154,6 +165,9 @@ static NSString *kGroupName = @"GroupName";
 }
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row<2) {
+        return NO;
+    }
     return YES;
 }
 
@@ -189,9 +203,17 @@ static NSString *kGroupName = @"GroupName";
     topData1.title = @"系统消息";
     topData1.detailsTitle = @"今天获得100积分，请查收!";
     topData1.time = @"2015-01-08";
-    topData1.avatarPic = @"dependSchool.png";
-    topData1.badgeStr = self.badgeStr;
+    topData1.avatarPic = @"systemImg.png";
+    topData1.badgeStr = self.systemBadgeStr;
     [self.dataArray addObject:topData1];
+    
+    EaseConversationModel *topData2 = [[EaseConversationModel alloc] init];
+    topData2.title = @"咨询消息";
+    topData2.detailsTitle = @"今天获得100积分，请查收!";
+    topData2.time = @"2015-01-08";
+    topData2.avatarPic = @"systemImg.png";
+    topData2.badgeStr = self.zixunBadgeStr;
+    [self.dataArray addObject:topData2];
     
     for (EMConversation *converstion in sorted) {
         
@@ -249,7 +271,7 @@ static NSString *kGroupName = @"GroupName";
 -(void)setupUnreadMessageCount
 {
     NSArray *conversations = [[[EaseMob sharedInstance] chatManager] conversations];
-    NSInteger unreadCount = [self.badgeStr integerValue];
+    NSInteger unreadCount = [self.systemBadgeStr integerValue] + [self.zixunBadgeStr integerValue];
     for (EMConversation *conversation in conversations) {
         unreadCount += conversation.unreadMessagesCount;
     }
@@ -264,6 +286,8 @@ static NSString *kGroupName = @"GroupName";
     }
     UIApplication *application = [UIApplication sharedApplication];
     [application setApplicationIconBadgeNumber:unreadCount];
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - IChatMangerDelegate
