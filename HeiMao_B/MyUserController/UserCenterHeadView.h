@@ -17,7 +17,10 @@
 @property ( strong, nonatomic) UIImageView *userPortrait;
 @property ( strong, nonatomic) UILabel *userPhoneNum;
 @property ( strong, nonatomic) UILabel *userIdNum;
+@property ( strong, nonatomic) UILabel *yNum;
+@property ( strong, nonatomic) UIButton *arrowBtn;
+
 @property ( weak, nonatomic) id<UserCenterHeadViewDelegte>delegate;
-- (id)initWithFrame:(CGRect)frame withUserPortrait:(NSString *)image withUserPhoneNum:(NSString *)userPhoneNum withUserIdNum:(NSString *)userIdNum;
+- (id)initWithFrame:(CGRect)frame withUserPortrait:(NSString *)image withUserPhoneNum:(NSString *)userPhoneNum withUserIdNum:(NSString *)userIdNum yNum:(NSString *)yNum;
 
 @end

@@ -15,6 +15,7 @@
 #import "CourseSummaryDayCell.h"
 #import "CourseDetailViewController.h"
 #import "NoContentTipView.h"
+#import "WMUITool.h"
 
 @interface CourseViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate>
 
@@ -23,16 +24,14 @@
 @property(nonatomic,strong)RefreshTableView * courseSummaryTableView;
 @property(nonatomic,strong)NSMutableArray * courseSummaryData;
 
-@property(nonatomic,strong)NSMutableArray * courseDayTableData;
-
 @property(nonatomic,assign)BOOL isNeedRefresh;
 @property(nonatomic,strong)NSDateFormatter *dateFormattor;
 @property(nonatomic,strong)NoContentTipView * tipView1;
 @property(nonatomic,strong)NoContentTipView * tipView2;
+
 @end
 
 @implementation CourseViewController
-
 
 #pragma mark - LoingNotification
 - (void)didLoginSucess:(NSNotification *)notification
@@ -42,9 +41,7 @@
 
 - (void)didLoginoutSucess:(NSNotification *)notifcation
 {
-    [self.courseDayTableData removeAllObjects];
-    [[self courseDayTableData] removeAllObjects];
-    [self.courseSummaryTableView reloadData];
+  [self.courseSummaryTableView reloadData];
 }
 
 - (void)dealloc
@@ -71,7 +68,7 @@
     
     [self resetNavBar];
     
-    self.myNavigationItem.title = @"预约";
+    self.myNavigationItem.title = @"约车";
     
     [self.scrollView setContentOffset:CGPointMake(0 * self.scrollView.width, self.scrollView.contentOffset.y) animated:YES];
     
@@ -91,7 +88,7 @@
 
 - (void)setUpTableViewHead
 {
-    RFSegmentView * segController = [[RFSegmentView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40) items:@[@"待确认",@"待评价",@"已拒绝",@"已完成"]];
+    RFSegmentView * segController = [[RFSegmentView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40) items:@[@"新订单",@"待评价",@"已取消",@"已完成"]];
     segController.backgroundColor = [UIColor whiteColor];
     segController.delegate = self;
     [segController setSeltedIndex:self.scrollView.contentOffset.x / self.scrollView.width];
@@ -102,9 +99,26 @@
 #pragma mark - Action
 - (void)segmentViewSelectIndex:(NSInteger)index
 {
-    //    [self.scrollView setContentOffset:CGPointMake(index * self.scrollView.width, self.scrollView.contentOffset.y) animated:YES];
     NSLog(@"刷新数据segmentViewSelectIndex:%ld",(long)index);
+    if (index==0) {// 签到
+
+        self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"signBtnImg" highIcon:@"signBtnImg" target:self action:@selector(rightBarBtnWithQianDaoDidClick)];
+        
+    }else{// 搜索
+        
+        self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"iconfont-chazhao-2" highIcon:@"iconfont-chazhao-2" target:self action:@selector(rightBarBtnWithSearchDidClick)];
+
+    }
     
+}
+
+- (void)rightBarBtnWithQianDaoDidClick
+{
+    NSLog(@"签到");
+}
+- (void)rightBarBtnWithSearchDidClick
+{
+    NSLog(@"搜索");
 }
 
 -(void)initUI
@@ -158,15 +172,24 @@
         
         [NetWorkEntiry getCourseinfoWithUserId:[[UserInfoModel defaultUserInfo] userID] pageIndex:1 pageCount:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
+            NSLog(@"responseObject:%@",responseObject);
+            
             NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
             
             if (type == 1) {
+                
                 ws.courseSummaryData = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    
                     [ws.courseSummaryTableView.refreshHeader endRefreshing];
+                    
                     [ws.courseSummaryTableView reloadData];
+                    
                     ws.courseSummaryTableView.refreshFooter.scrollView = ws.courseSummaryTableView;
+                    
                 });
+                
             }else{
                 [ws dealErrorResponseWithTableView:ws.courseSummaryTableView info:responseObject];
             }
@@ -213,10 +236,6 @@
         count =  self.courseSummaryData.count;
         if (!self.isNeedRefresh)
             [self.tipView1 setHidden:count];
-    }else{
-        count =  self.courseDayTableData.count;
-        if (!self.isNeedRefresh)
-            [self.tipView2 setHidden:count];
     }
     return count;
 }
@@ -241,15 +260,6 @@
         if (indexPath.row < self.courseSummaryData.count)
             [sumCell setModel:self.courseSummaryData[indexPath.row]];
         return sumCell;
-    }else{
-        CourseSummaryDayCell * dayCell = [tableView dequeueReusableCellWithIdentifier:@"dayCell"];
-        if (!dayCell) {
-            dayCell = [[CourseSummaryDayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dayCell"];
-        }
-        if (indexPath.row < self.courseDayTableData.count)
-            [dayCell setModel:self.courseDayTableData[indexPath.row]];
-        
-        return dayCell;
     }
     return [UITableViewCell new];
 }
@@ -260,8 +270,6 @@
     HMCourseModel  * courseModel = nil;
     if (tableView == self.courseSummaryTableView) {
         courseModel = [[self courseSummaryData] objectAtIndex:indexPath.row];
-    }else{
-        courseModel = [[self courseDayTableData] objectAtIndex:indexPath.row];
     }
     if (courseModel) {
         CourseDetailViewController * decv = [[CourseDetailViewController alloc] init];

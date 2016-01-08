@@ -38,6 +38,61 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
     }
     return _tableView;
 }
+
+- (UIButton *)tableFootView {
+    UIButton *quit = [UIButton buttonWithType:UIButtonTypeCustom];
+    quit.backgroundColor = [UIColor whiteColor];
+    [quit setTitle:@"退出" forState:UIControlStateNormal];
+    quit.titleLabel.font = [UIFont systemFontOfSize:14];
+    [quit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    quit.frame = CGRectMake(0, 0, kSystemWide, 44);
+    [quit addTarget:self action:@selector(clickQuit:) forControlEvents:UIControlEventTouchUpInside];
+    return quit;
+    
+}
+
+- (void)clickQuit:(UIButton *)sender {
+    
+    if (NSClassFromString(@"UIAlertController")) {
+        UIAlertController *  alerContr = [UIAlertController alertControllerWithTitle:nil message:@"确定退出登录" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertView * view = [[UIAlertView alloc] init];
+        view.tag = 200;
+        UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self alertView:view clickedButtonAtIndex:0];
+        }];
+        
+        [alerContr addAction:cancelAction];
+        
+        UIAlertAction * ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self alertView:view clickedButtonAtIndex:1];
+        }];
+        
+        [alerContr addAction:ensureAction];
+        [self presentViewController:alerContr animated:YES completion:nil];
+        
+    }else{
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定退出登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alertView.tag = 200;
+        alertView.delegate = self;
+        [alertView show];
+        
+    }
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    if(alertView.tag == 200 && buttonIndex == 1){
+        //退出登陆
+        [[UserInfoModel defaultUserInfo] loginOut];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -48,6 +103,9 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     [self.view addSubview:self.tableView];
+    
+    self.tableView.tableFooterView = [self tableFootView];
+
 }
 
 - (void)didReceiveMemoryWarning {

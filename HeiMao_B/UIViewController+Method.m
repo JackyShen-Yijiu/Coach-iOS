@@ -15,6 +15,7 @@
 #import "UITabBar+RedHot.h"
 
 @implementation UIViewController(Tips)
+
 - (MBProgressHUD *)waitForMomentsWithTitle:(NSString*)str withView:(UIView *)view
 {
     if (!view) {
@@ -27,6 +28,7 @@
     [progressView show:YES];
     return progressView;
 }
+
 -(void)stopWaitProgressView:(MBProgressHUD *)view
 {
     if (view){

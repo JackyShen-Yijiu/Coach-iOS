@@ -10,6 +10,7 @@
 		060C23071C06AF2800310B66 /* WalletAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 060C23061C06AF2800310B66 /* WalletAPI.m */; };
 		06891F781C06D23800E9C131 /* WalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06891F771C06D23800E9C131 /* WalletModel.m */; };
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
+		B253C2BB1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BA1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m */; };
 		B2AC20371C3E2CBD0033803C /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
@@ -418,6 +419,8 @@
 		1371250ABB78626F8329AC98 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2823AFD5ABA09767DD4F0623 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B253C2B91C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+JGBarButtonItem.h"; sourceTree = "<group>"; };
+		B253C2BA1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+JGBarButtonItem.m"; sourceTree = "<group>"; };
 		B2AC20351C3E2CBD0033803C /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
 		B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
@@ -2334,6 +2337,8 @@
 		B8C458811BDB5B7600901F71 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B253C2B91C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.h */,
+				B253C2BA1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m */,
 				B865C17D1BDCA4D600C1E681 /* PortraitView.h */,
 				B865C17E1BDCA4D600C1E681 /* PortraitView.m */,
 				B811E4671BDD3CF90077EAF5 /* NGOSegmentControl.h */,
@@ -2915,6 +2920,7 @@
 				B8BC50541BF38A390007B029 /* MJRefreshConst.m in Sources */,
 				B8BC50931BF38A390007B029 /* EaseEmojiEmoticons.m in Sources */,
 				B8BC508E1BF38A390007B029 /* UIViewController+HUD.m in Sources */,
+				B253C2BB1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m in Sources */,
 				B8BC50861BF38A390007B029 /* EaseConversationModel.m in Sources */,
 				D5F72BAE1BF9990300B972B0 /* UserCenterCell.m in Sources */,
 				B8BC50591BF38A390007B029 /* MJRefreshLegendFooter.m in Sources */,

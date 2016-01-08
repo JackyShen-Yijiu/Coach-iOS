@@ -40,20 +40,26 @@
 
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = @[@[@"挂靠驾校",@"训练场地",@"工作时间",@"可授科目",@"班型设置"],@[@"休假",@"学员列表",@"钱包"],@[@"设置"]];
+       
+        //_dataArray = @[@[@"挂靠驾校",@"训练场地",@"工作时间",@"可授科目",@"班型设置"],@[@"休假",@"学员列表",@"钱包"],@[@"设置"]];
+        
+        _dataArray = @[@[@"挂靠驾校",@"工作性质",@"训练场地",@"工作时间",@"可授科目",@"授课班型"],@[@"休假",@"学员列表",@"设置"],@[@"钱包"]];
+
     }
     return _dataArray;
 }
+
+#warning 等待更改图片
 - (NSArray *)imageArray {
     if (_imageArray == nil) {
-        _imageArray = @[@[@"dependSchool.png",@"studyGround.png",@"workTime.png",@"teachSubject.png",@"sendMeet.png"],@[@"rest.png",@"studentList.png",@"wallet.png"],@[@"setting.png"]];
+        _imageArray = @[@[@"dependSchool.png",@"dependSchool.png",@"studyGround.png",@"workTime.png",@"teachSubject.png",@"sendMeet.png"],@[@"rest.png",@"studentList.png",@"setting.png"],@[@"wallet.png"]];
     }
     return _imageArray;
 }
 
 - (UserCenterHeadView *)userCenterView {
     if (_userCenterView == nil) {
-        _userCenterView = [[UserCenterHeadView alloc] initWithFrame:CGRectMake(0, 0, kSystemWide, 80) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].tel withUserIdNum:[UserInfoModel defaultUserInfo].displaycoachid];
+        _userCenterView = [[UserCenterHeadView alloc] initWithFrame:CGRectMake(0, 0, kSystemWide, 80) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].tel withUserIdNum:[UserInfoModel defaultUserInfo].displaycoachid yNum:@"Y码:22222222"];
         _userCenterView.delegate = self;
     }
     return _userCenterView;
@@ -71,64 +77,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
-    self.tableView.tableFooterView = [self tableFootView];
     
     self.tableView.tableHeaderView = self.userCenterView;
     
-}
-
-- (UIButton *)tableFootView {
-    UIButton *quit = [UIButton buttonWithType:UIButtonTypeCustom];
-    quit.backgroundColor = [UIColor whiteColor];
-    [quit setTitle:@"退出" forState:UIControlStateNormal];
-    quit.titleLabel.font = [UIFont systemFontOfSize:14];
-    [quit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    quit.frame = CGRectMake(0, 0, kSystemWide, 44);
-    [quit addTarget:self action:@selector(clickQuit:) forControlEvents:UIControlEventTouchUpInside];
-    return quit;
-    
-}
-- (void)clickQuit:(UIButton *)sender {
-    
- 
-    
-    if (NSClassFromString(@"UIAlertController")) {
-        UIAlertController *  alerContr = [UIAlertController alertControllerWithTitle:nil message:@"确定退出登录" preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertView * view = [[UIAlertView alloc] init];
-        view.tag = 200;
-        UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            [self alertView:view clickedButtonAtIndex:0];
-        }];
-        
-        [alerContr addAction:cancelAction];
-        
-        UIAlertAction * ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            [self alertView:view clickedButtonAtIndex:1];
-        }];
-        
-        [alerContr addAction:ensureAction];
-        [self presentViewController:alerContr animated:YES completion:nil];
-        
-    }else{
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定退出登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        alertView.tag = 200;
-        alertView.delegate = self;
-        [alertView show];
-        
-    }
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-  
-    if(alertView.tag == 200 && buttonIndex == 1){
-        //退出登陆
-        [[UserInfoModel defaultUserInfo] loginOut];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
 }
 
 - (void)userCenterClick {
@@ -140,8 +91,10 @@
     view.backgroundColor = RGB_Color(245, 247, 250);
     return view;
 }
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -150,17 +103,15 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 5;
-    }else if (section == 1) {
-        return 3;
-    }else if (section == 2) {
-        return 1;
-    }
-    return 0;
+    
+    NSArray *dictArray = self.dataArray[section];
+    
+    return dictArray.count;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *cellId = @"cell";
     UserCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
@@ -169,44 +120,54 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.contentLabel.text = self.dataArray[indexPath.section][indexPath.row];
+    
     cell.leftImageView.image = [UIImage imageNamed:self.imageArray[indexPath.section][indexPath.row]];
-    if (indexPath.section == 0) {
-        cell.contentDetail.text = self.displayArray[indexPath.row];
-    }
+    
+    cell.contentDetail.text = self.displayArray[indexPath.section][indexPath.row];
+
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-     if (indexPath.section == 1 && indexPath.row == 2 ) {
+    if (indexPath.section == 0 && indexPath.row == 0) {// @"挂靠驾校"
+        AffiliatedSchoolViewController *query = [[AffiliatedSchoolViewController alloc] init];
+        [self.navigationController pushViewController:query animated:YES];
+    }else if (indexPath.section == 0 && indexPath.row == 1){//// new @"工作性质"
+        NSLog(@"工作性质");
+    }else if (indexPath.section == 0 && indexPath.row == 2) {// @"训练场地"
+        if ([UserInfoModel defaultUserInfo].schoolId) {
+            TrainingGroundViewController *training = [[TrainingGroundViewController alloc] init];
+            [self.navigationController pushViewController:training animated:YES];
+        }
+    }else if (indexPath.section == 0 && indexPath.row == 3) {// @"工作时间"
+        WorkTimeViewController *workTime = [[WorkTimeViewController alloc] init];
+        [self.navigationController pushViewController:workTime animated:YES];
+    }else if (indexPath.section == 0 && indexPath.row == 4) {// @"可授科目"
+        TeachSubjectViewController *teach = [[TeachSubjectViewController alloc] init];
+        [self.navigationController pushViewController:teach animated:YES];
+    }else if (indexPath.section == 0 && indexPath.row == 5) {// @"授课班型"
+        ExamClassViewController *examClass = [[ExamClassViewController alloc] init];
+        [self.navigationController pushViewController:examClass animated:YES];
+    }
+    
+    else if (indexPath.section == 1 && indexPath.row == 0) {// @"休假"
+        VacationViewController *vacation = [[VacationViewController alloc] init];
+        [self.navigationController pushViewController:vacation animated:YES];
+    }else if (indexPath.section == 1 && indexPath.row == 1) {// @"学员列表"
+        StudentListViewController *student = [[StudentListViewController alloc] init];
+        [self.navigationController pushViewController:student animated:YES];
+    }else if (indexPath.section == 1 && indexPath.row == 2) {// @"设置"
+        SetupViewController *setUp = [[SetupViewController alloc] init];
+        [self.navigationController pushViewController:setUp animated:YES];
+    }
+    
+    else if (indexPath.section == 2 && indexPath.row == 0) {// @"钱包"
         MyWalletViewController *myWallet = [[MyWalletViewController alloc] init];
         [self.navigationController pushViewController:myWallet animated:YES];
-     }else if (indexPath.section == 1 && indexPath.row == 1) {
-         StudentListViewController *student = [[StudentListViewController alloc] init];
-         [self.navigationController pushViewController:student animated:YES];
-     }else if (indexPath.section == 1 && indexPath.row == 0) {
-         VacationViewController *vacation = [[VacationViewController alloc] init];
-         [self.navigationController pushViewController:vacation animated:YES];
-     }else if (indexPath.section == 0 && indexPath.row == 3) {
-         TeachSubjectViewController *teach = [[TeachSubjectViewController alloc] init];
-         [self.navigationController pushViewController:teach animated:YES];
-     }else if (indexPath.section == 0 && indexPath.row == 0) {
-         AffiliatedSchoolViewController *query = [[AffiliatedSchoolViewController alloc] init];
-         [self.navigationController pushViewController:query animated:YES];
-     }else if (indexPath.section == 0 && indexPath.row == 2) {
-         WorkTimeViewController *workTime = [[WorkTimeViewController alloc] init];
-         [self.navigationController pushViewController:workTime animated:YES];
-     }else if (indexPath.section == 0 && indexPath.row == 1) {
-         if ([UserInfoModel defaultUserInfo].schoolId) {
-             TrainingGroundViewController *training = [[TrainingGroundViewController alloc] init];
-             [self.navigationController pushViewController:training animated:YES];
-         }
-     }else if (indexPath.section == 0 && indexPath.row == 4) {
-         ExamClassViewController *examClass = [[ExamClassViewController alloc] init];
-         [self.navigationController pushViewController:examClass animated:YES];
-     }else if (indexPath.section == 2 && indexPath.row == 0) {
-         SetupViewController *setUp = [[SetupViewController alloc] init];
-         [self.navigationController pushViewController:setUp animated:YES];
-     }
+    }
+    
+    
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -217,7 +178,12 @@
     [self initNavBar];
     
    
+    // "挂靠驾校"
     NSString * driveSname = [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
+    // "工作性质"
+#warning 通过接口调用
+    NSString * workProperty = [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
+
     NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
     NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
     NSString * workSetDes = @"未设置";
@@ -235,18 +201,30 @@
     }else{
         [string appendString:@"已设置"];
     }
-
     
     //班型设置
     NSString * carName =  [[UserInfoModel defaultUserInfo] setClassMode] ? @"已设置" : @"未设置";
     
-    self.displayArray = @[[self strTolerance:driveSname],
-                          [self strTolerance:trainName],
-                          [self strTolerance:workSetDes],
-                          [self strTolerance:string],
-                          [self strTolerance:carName]
-                          ];
+    // "休假"
+#warning 通过接口调用
+    NSString * vacationStr =  [[UserInfoModel defaultUserInfo] setClassMode] ? @"已设置" : @"未设置";
     
+    self.displayArray = @[@[
+                            [self strTolerance:driveSname],//"挂靠驾校"
+                            [self strTolerance:workProperty],//new - "工作性质"
+                            [self strTolerance:trainName],//"训练场地"
+                            [self strTolerance:workSetDes],//"工作时间"
+                            [self strTolerance:string],//"可授科目"
+                            [self strTolerance:carName]//"班型设置"
+                          ],
+                          @[
+                            [self strTolerance:vacationStr],//new - "休假"
+                            [self strTolerance:@""],// 学员列表
+                            [self strTolerance:@""]// 设置
+                            ],
+                          @[[self strTolerance:@""]]//钱包
+                          ];
+  
     [self.tableView reloadData];
 }
 

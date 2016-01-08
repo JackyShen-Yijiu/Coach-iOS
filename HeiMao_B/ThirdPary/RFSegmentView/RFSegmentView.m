@@ -47,6 +47,7 @@
         self.titleLabel.text = title;
         self.index           = index;
         self.isSelected      = isSelected;
+        
     }
     return self;
 }
@@ -102,6 +103,8 @@
 @property(nonatomic ,strong) NSMutableArray *titlesArray;
 @property(nonatomic ,strong) NSMutableArray *itemsArray;
 @property(nonatomic ,strong) NSMutableArray *linesArray;
+@property(nonatomic ,strong) NSMutableArray *deliveArray;
+
 @end
 @implementation RFSegmentView
 
@@ -151,27 +154,40 @@
                 
                 [self.itemsArray addObject:item];
                 
-                // 分割线
-                UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, itemHeight-1, itemWidth, 1)];
-                lineLabel.backgroundColor = kDefaultTintColor;
-                [self.bgView addSubview:lineLabel];
-                
             }
             
             //add Ver lines
             init_x = 0;
             for (NSInteger i = 0; i<items.count-1; i++) {
                 
+                // 竖分割线
                 init_x += itemWidth;
                 UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(init_x, 0, kBorderLineWidth, itemHeight)];
-                lineView.backgroundColor = [UIColor whiteColor];
-                [self.bgView addSubview:lineView];
+                lineView.backgroundColor = [UIColor redColor];
+//                [self.bgView addSubview:lineView];
                 
                 //save all lines
                 if (!self.linesArray) {
                     self.linesArray = [[NSMutableArray alloc] initWithCapacity:items.count];
                 }
                 [self.linesArray addObject:lineView];
+                
+            }
+            
+            for (NSInteger i = 0; i<items.count; i++) {
+                
+                RFSegmentItem *item = self.itemsArray[i];
+
+                // 横分割线
+                UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(item.origin.x+20, self.height-1, itemWidth-10, 1)];
+                lineLabel.backgroundColor = [UIColor whiteColor];
+                [self addSubview:lineLabel];
+                
+                //save all lines
+                if (!self.deliveArray) {
+                    self.deliveArray = [[NSMutableArray alloc] initWithCapacity:items.count];
+                }
+                [self.deliveArray addObject:lineLabel];
                 
             }
             
@@ -209,12 +225,16 @@
             UIView *lineView = self.linesArray[i];
             lineView.backgroundColor = tintColor;
         }
+        
     }
     
 }
 #pragma mark - Selete
 - (void)setSeltedIndex:(NSInteger)index
 {
+    
+    NSLog(@"%s index:%ld",__func__,(long)index);
+    
     if (self.itemsArray.count <2 || index >= self.itemsArray.count) {
         return;
     }
@@ -222,6 +242,11 @@
         RFSegmentItem *item = self.itemsArray[i];
         item.isSelected = NO;
     }
+    
+    // 底部分割线
+    UILabel *deliveLabel = self.deliveArray[index];
+    deliveLabel.backgroundColor = kDefaultTintColor;
+    
     RFSegmentItem * currentItem = [self.itemsArray objectAtIndex:index];
     currentItem.isSelected = YES;
     if (_delegate && [_delegate respondsToSelector:@selector(segmentViewSelectIndex:)])
@@ -233,6 +258,16 @@
 #pragma mark - RFSegmentItemDelegate
 - (void)ItemStateChanged:(RFSegmentItem *)currentItem index:(NSInteger)index isSelected:(BOOL)isSelected
 {
+    NSLog(@"%s index:%ld",__func__,(long)index);
+    
+    for (int i = 0; i < self.deliveArray.count; i++) {
+        UILabel *deliveLabel = self.deliveArray[i];
+        deliveLabel.backgroundColor = [UIColor whiteColor];
+    }
+    // 底部分割线
+    UILabel *deliveLabel = self.deliveArray[index];
+    deliveLabel.backgroundColor = kDefaultTintColor;
+    
     if (self.itemsArray.count <2) {
         return;
     }

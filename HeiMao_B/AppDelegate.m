@@ -85,9 +85,9 @@
     UIImage * nUser = [UIImage imageNamed:@"user_normal"];
     UIImage * hUser = [UIImage imageNamed:@"user_seleted"];
     
-    // 预约
+    // 约车
     CourseViewController * courseContro = [[CourseViewController alloc] init];
-    
+
     // 日程
     ScheduleViewController * ScheduleVc = [[ScheduleViewController alloc] init];
     
@@ -97,7 +97,7 @@
     // 我
     TeacherCenterController * userCentertro = [[TeacherCenterController alloc] init];
     
-    return [self getTabWithTitleArray:@[@"预约",@"日程",@"消息",@"我的"] nimagesArray:@[nCourse,tCourse,nMess,nUser] himages:@[hCourse,HtCourse,HMess,hUser] andControllers:@[courseContro,ScheduleVc,courList,userCentertro]];
+    return [self getTabWithTitleArray:@[@"约车",@"日程",@"消息",@"我的"] nimagesArray:@[nCourse,tCourse,nMess,nUser] himages:@[hCourse,HtCourse,HMess,hUser] andControllers:@[courseContro,ScheduleVc,courList,userCentertro]];
 }
 
 - (UITabBarController *)getTabWithTitleArray:(NSArray *)item nimagesArray:(NSArray *)nImages
