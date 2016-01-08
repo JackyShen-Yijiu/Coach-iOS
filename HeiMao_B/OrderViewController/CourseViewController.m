@@ -17,11 +17,11 @@
 #import "NoContentTipView.h"
 #import "WMUITool.h"
 #import "ScanViewController.h"
+#import "UINavigationBar+JGNavigationBar.h"
 
 @interface CourseViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate>
 
-@property(nonatomic,strong)UISegmentedControl * segController;
-@property(nonatomic,strong)UIScrollView * scrollView;
+@property(nonatomic,strong) RFSegmentView * segController;
 @property(nonatomic,strong)RefreshTableView * courseSummaryTableView;
 @property(nonatomic,strong)NSMutableArray * courseSummaryData;
 
@@ -50,17 +50,20 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+        
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.isNeedRefresh = YES;
+    
     [self initUI];
+    
     [self addNotification];
+    
 }
-
 
 #pragma mark Life Sycle
 - (void)viewWillAppear:(BOOL)animated
@@ -68,38 +71,77 @@
     [super viewWillAppear:animated];
    
     [self resetNavBar];
-    
+    self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"signBtnImg" highIcon:@"signBtnImg" target:self action:@selector(rightBarBtnWithQianDaoDidClick)];
+
     self.myNavigationItem.title = @"约车";
     
-    [self.scrollView setContentOffset:CGPointMake(0 * self.scrollView.width, self.scrollView.contentOffset.y) animated:YES];
-    
-    [self setUpTableViewHead];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
     if(self.isNeedRefresh){
         [self.courseSummaryTableView.refreshHeader beginRefreshing];
     }
     self.isNeedRefresh = NO;
+    
 }
 
-#pragma mark - initUI
-
-- (void)setUpTableViewHead
+- (void)viewWillDisappear:(BOOL)animated
 {
-    RFSegmentView * segController = [[RFSegmentView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40) items:@[@"新订单",@"待评价",@"已取消",@"已完成"]];
-    segController.backgroundColor = [UIColor whiteColor];
-    segController.delegate = self;
-    [segController setSeltedIndex:self.scrollView.contentOffset.x / self.scrollView.width];
-    self.courseSummaryTableView.tableHeaderView = segController;
+    [super viewWillDisappear:animated];
+    
+    // 规置导航
+    [self.myNavController.navigationBar lt_reset];
+    self.view.transform = CGAffineTransformMakeTranslation(0, 0);
+    [self setNavgationBarTransformProess:0];
+    self.myNavController.navigationBar.backIndicatorImage = [UIImage new];
+    
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat offsetY = scrollView.contentOffset.y;
+    NSLog(@"offsetY:%f",offsetY);
+    
+    if (offsetY>0) {
+        
+        if (offsetY>=44) {
+        
+            [self setNavgationBarTransformProess:1];
+            
+        }else{
+            
+            [self setNavgationBarTransformProess:(offsetY/44)];
+        }
+        
+    }else{
+        
+        self.view.transform = CGAffineTransformMakeTranslation(0, 0);
+        
+        [self setNavgationBarTransformProess:0];
+        self.myNavController.navigationBar.backIndicatorImage = [UIImage new];
+        
+    }
+  
+}
+
+- (void)setNavgationBarTransformProess:(CGFloat)progress
+{
+    self.view.transform = CGAffineTransformMakeTranslation(0, (-44*progress));
+    
+    [self.myNavController.navigationBar lt_setTranslationY:(-44*progress)];
+    [self.myNavController.navigationBar lt_setContentAlpha:(1-progress)];
     
 }
 
 #pragma mark - Action
 - (void)segmentViewSelectIndex:(NSInteger)index
 {
+    
+    self.segController.selIndex = index;
+    
     NSLog(@"刷新数据segmentViewSelectIndex:%ld",(long)index);
     if (index==0) {// 签到
 
@@ -128,20 +170,19 @@
 
 -(void)initUI
 {
-    UIView * view = [[UIView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:view];
-    
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 64 - 48)];
-    self.scrollView.contentSize = CGSizeMake(self.view.width * 2, 0);
-    self.scrollView.pagingEnabled = YES;
-    self.scrollView.scrollEnabled = NO;
-    [self.view addSubview:self.scrollView];
-    
+    // 头部tab
+    self.segController = [[RFSegmentView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 40) items:@[@"新订单",@"待评价",@"已取消",@"已完成"]];
+    self.segController.backgroundColor = [UIColor whiteColor];
+    self.segController.delegate = self;
+    [self.segController setSeltedIndex:0];
+    [self.view addSubview:self.segController];
+
     // 预约
-    self.courseSummaryTableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.width, self.scrollView.height) style:UITableViewStylePlain];
+    self.courseSummaryTableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.segController.frame), self.view.width, self.view.height-40) style:UITableViewStylePlain];
+    self.courseSummaryTableView.backgroundColor = RGB_Color(251, 251, 251);
     self.courseSummaryTableView.delegate = self;
     self.courseSummaryTableView.dataSource = self;
-    [self.scrollView addSubview:self.courseSummaryTableView];
+    [self.view addSubview:self.courseSummaryTableView];
     
     [self initRefreshView];
     

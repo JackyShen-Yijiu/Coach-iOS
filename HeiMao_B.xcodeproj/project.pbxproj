@@ -21,6 +21,7 @@
 		B253C2D41C3FA742001AF771 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2CB1C3FA742001AF771 /* split.c */; };
 		B253C2DA1C3FA901001AF771 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2D91C3FA901001AF771 /* UIView+SDExtension.m */; };
 		B253C2DD1C3FAA84001AF771 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2DC1C3FAA84001AF771 /* ScanViewController.m */; };
+		B253C2E31C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2E21C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.m */; };
 		B2AC20371C3E2CBD0033803C /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
@@ -451,6 +452,8 @@
 		B253C2D91C3FA901001AF771 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
 		B253C2DB1C3FAA84001AF771 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
 		B253C2DC1C3FAA84001AF771 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
+		B253C2E11C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+JGNavigationBar.h"; sourceTree = "<group>"; };
+		B253C2E21C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+JGNavigationBar.m"; sourceTree = "<group>"; };
 		B2AC20351C3E2CBD0033803C /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
 		B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
@@ -2395,6 +2398,8 @@
 		B8C458811BDB5B7600901F71 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B253C2E11C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.h */,
+				B253C2E21C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.m */,
 				B253C2B91C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.h */,
 				B253C2BA1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m */,
 				B865C17D1BDCA4D600C1E681 /* PortraitView.h */,
@@ -2944,6 +2949,7 @@
 				B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */,
 				B8BC50771BF38A390007B029 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				D5C240671BF108CF00832CF3 /* GainPasswordViewController.m in Sources */,
+				B253C2E31C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.m in Sources */,
 				D5C240691BF108CF00832CF3 /* NSString+DY_MD5.m in Sources */,
 				B253C2D01C3FA742001AF771 /* qrencode.c in Sources */,
 				D5D50F9B1BFC135B00F54097 /* MagicDetailViewController.m in Sources */,

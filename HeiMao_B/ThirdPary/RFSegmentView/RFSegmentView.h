@@ -29,4 +29,6 @@
 
 - (void)setSeltedIndex:(NSInteger)index;
 
+@property (nonatomic , assign) NSInteger selIndex;
+
 @end

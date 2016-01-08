@@ -105,6 +105,7 @@
                                       NSForegroundColorAttributeName: [UIColor whiteColor]
                                       };    
     [[[self myNavController] navigationBar]  setTitleTextAttributes:textAttributes1];
+    
 }
 
 
