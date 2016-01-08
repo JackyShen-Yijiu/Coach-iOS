@@ -11,6 +11,16 @@
 		06891F781C06D23800E9C131 /* WalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06891F771C06D23800E9C131 /* WalletModel.m */; };
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
 		B253C2BB1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BA1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m */; };
+		B253C2CD1C3FA742001AF771 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BD1C3FA742001AF771 /* bitstream.c */; };
+		B253C2CE1C3FA742001AF771 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BF1C3FA742001AF771 /* mask.c */; };
+		B253C2CF1C3FA742001AF771 /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2C21C3FA742001AF771 /* QRCodeGenerator.m */; };
+		B253C2D01C3FA742001AF771 /* qrencode.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2C31C3FA742001AF771 /* qrencode.c */; };
+		B253C2D11C3FA742001AF771 /* qrinput.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2C51C3FA742001AF771 /* qrinput.c */; };
+		B253C2D21C3FA742001AF771 /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2C71C3FA742001AF771 /* qrspec.c */; };
+		B253C2D31C3FA742001AF771 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2C91C3FA742001AF771 /* rscode.c */; };
+		B253C2D41C3FA742001AF771 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2CB1C3FA742001AF771 /* split.c */; };
+		B253C2DA1C3FA901001AF771 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2D91C3FA901001AF771 /* UIView+SDExtension.m */; };
+		B253C2DD1C3FAA84001AF771 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2DC1C3FAA84001AF771 /* ScanViewController.m */; };
 		B2AC20371C3E2CBD0033803C /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
@@ -421,6 +431,26 @@
 		61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B253C2B91C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+JGBarButtonItem.h"; sourceTree = "<group>"; };
 		B253C2BA1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+JGBarButtonItem.m"; sourceTree = "<group>"; };
+		B253C2BD1C3FA742001AF771 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
+		B253C2BE1C3FA742001AF771 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
+		B253C2BF1C3FA742001AF771 /* mask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mask.c; sourceTree = "<group>"; };
+		B253C2C01C3FA742001AF771 /* mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mask.h; sourceTree = "<group>"; };
+		B253C2C11C3FA742001AF771 /* QRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeGenerator.h; sourceTree = "<group>"; };
+		B253C2C21C3FA742001AF771 /* QRCodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeGenerator.m; sourceTree = "<group>"; };
+		B253C2C31C3FA742001AF771 /* qrencode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrencode.c; sourceTree = "<group>"; };
+		B253C2C41C3FA742001AF771 /* qrencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrencode.h; sourceTree = "<group>"; };
+		B253C2C51C3FA742001AF771 /* qrinput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrinput.c; sourceTree = "<group>"; };
+		B253C2C61C3FA742001AF771 /* qrinput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrinput.h; sourceTree = "<group>"; };
+		B253C2C71C3FA742001AF771 /* qrspec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrspec.c; sourceTree = "<group>"; };
+		B253C2C81C3FA742001AF771 /* qrspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrspec.h; sourceTree = "<group>"; };
+		B253C2C91C3FA742001AF771 /* rscode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rscode.c; sourceTree = "<group>"; };
+		B253C2CA1C3FA742001AF771 /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
+		B253C2CB1C3FA742001AF771 /* split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = split.c; sourceTree = "<group>"; };
+		B253C2CC1C3FA742001AF771 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
+		B253C2D81C3FA901001AF771 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
+		B253C2D91C3FA901001AF771 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
+		B253C2DB1C3FAA84001AF771 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
+		B253C2DC1C3FAA84001AF771 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
 		B2AC20351C3E2CBD0033803C /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
 		B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
@@ -1135,6 +1165,29 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B253C2BC1C3FA742001AF771 /* libqrencode */ = {
+			isa = PBXGroup;
+			children = (
+				B253C2BD1C3FA742001AF771 /* bitstream.c */,
+				B253C2BE1C3FA742001AF771 /* bitstream.h */,
+				B253C2BF1C3FA742001AF771 /* mask.c */,
+				B253C2C01C3FA742001AF771 /* mask.h */,
+				B253C2C11C3FA742001AF771 /* QRCodeGenerator.h */,
+				B253C2C21C3FA742001AF771 /* QRCodeGenerator.m */,
+				B253C2C31C3FA742001AF771 /* qrencode.c */,
+				B253C2C41C3FA742001AF771 /* qrencode.h */,
+				B253C2C51C3FA742001AF771 /* qrinput.c */,
+				B253C2C61C3FA742001AF771 /* qrinput.h */,
+				B253C2C71C3FA742001AF771 /* qrspec.c */,
+				B253C2C81C3FA742001AF771 /* qrspec.h */,
+				B253C2C91C3FA742001AF771 /* rscode.c */,
+				B253C2CA1C3FA742001AF771 /* rscode.h */,
+				B253C2CB1C3FA742001AF771 /* split.c */,
+				B253C2CC1C3FA742001AF771 /* split.h */,
+			);
+			path = libqrencode;
+			sourceTree = "<group>";
+		};
 		B636E4EC57D3A22E3FC68559 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1576,6 +1629,8 @@
 		B8AFED161BDB96A000EF8726 /* CourseSummaryController */ = {
 			isa = PBXGroup;
 			children = (
+				B253C2DB1C3FAA84001AF771 /* ScanViewController.h */,
+				B253C2DC1C3FAA84001AF771 /* ScanViewController.m */,
 				B8AFED171BDB96AC00EF8726 /* CourseViewController.h */,
 				B8AFED181BDB96AC00EF8726 /* CourseViewController.m */,
 				B2AC20351C3E2CBD0033803C /* ScheduleViewController.h */,
@@ -2259,6 +2314,9 @@
 		B8C458581BDB59AC00901F71 /* ThirdPary */ = {
 			isa = PBXGroup;
 			children = (
+				B253C2D81C3FA901001AF771 /* UIView+SDExtension.h */,
+				B253C2D91C3FA901001AF771 /* UIView+SDExtension.m */,
+				B253C2BC1C3FA742001AF771 /* libqrencode */,
 				B80003C51BEFAC720099D194 /* JGPush */,
 				B8FFDF641BDE78E6005BD535 /* FDCalendar */,
 				B8C4587D1BDB5B5C00901F71 /* ToastAlertView */,
@@ -2482,7 +2540,7 @@
 				TargetAttributes = {
 					B86EB3501BDB50EB0014EBD7 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = 45D2HNDKK9;
+						DevelopmentTeam = MC3VUBEH8X;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -2742,6 +2800,7 @@
 				B8DDB7B51BE47808008FE867 /* CourseDetailViewCell.m in Sources */,
 				B8BC50831BF38A390007B029 /* PSTGridLayoutSection.m in Sources */,
 				B8BC50891BF38A390007B029 /* NSDate+Category.m in Sources */,
+				B253C2D21C3FA742001AF771 /* qrspec.c in Sources */,
 				B8C458571BDB592B00901F71 /* HMNagationController.m in Sources */,
 				B8DDB7BE1BE49110008FE867 /* UserInfoModel.m in Sources */,
 				B8BC50E51BF393D00007B029 /* EaseBubbleView+Location.m in Sources */,
@@ -2807,6 +2866,7 @@
 				B865C1701BDC9D8E00C1E681 /* HMSchoolInfoModel.m in Sources */,
 				B8BC50741BF38A390007B029 /* UIImageView+EMHighlightedWebCache.m in Sources */,
 				B8BC50631BF38A390007B029 /* MWTapDetectingImageView.m in Sources */,
+				B253C2CE1C3FA742001AF771 /* mask.c in Sources */,
 				D5F72BC71BF9AB0D00B972B0 /* ModifyNameViewController.m in Sources */,
 				B873EEFF1C21C2C5000579CB /* ProjectGuideView.m in Sources */,
 				B8BC508F1BF38A390007B029 /* EaseChineseToPinyin.m in Sources */,
@@ -2846,10 +2906,12 @@
 				D5D510231BFDF5E300F54097 /* AboutUsViewController.m in Sources */,
 				D5F72BB41BF99C7F00B972B0 /* JEPhotoPickManger.m in Sources */,
 				B8BC50EB1BF393D00007B029 /* EaseChatToolbarItem.m in Sources */,
+				B253C2D41C3FA742001AF771 /* split.c in Sources */,
 				B8C458741BDB59AC00901F71 /* UIViewAdditions.m in Sources */,
 				B8BC50951BF38A390007B029 /* EaseEmotionManager.m in Sources */,
 				D5D50FA41BFC135B00F54097 /* ShopModel.m in Sources */,
 				B8BFA2581BF64C20002D7F22 /* CustomMessageCell.m in Sources */,
+				B253C2CF1C3FA742001AF771 /* QRCodeGenerator.m in Sources */,
 				B8447A1F1BE1CC0D004E5E15 /* CoureseRatingController.m in Sources */,
 				B8BC50901BF38A390007B029 /* EaseConvertToCommonEmoticonsHelper.m in Sources */,
 				B8BC506F1BF38A390007B029 /* NSData+EMImageContentType.m in Sources */,
@@ -2876,12 +2938,14 @@
 				B865C1791BDCA49400C1E681 /* CourseSummaryListCell.m in Sources */,
 				B8BC50E41BF393D00007B029 /* EaseBubbleView+Image.m in Sources */,
 				B8BC508A1BF38A390007B029 /* NSDateFormatter+Category.m in Sources */,
+				B253C2DA1C3FA901001AF771 /* UIView+SDExtension.m in Sources */,
 				B8447A1A1BE1BEC2004E5E15 /* CourseEnsureCell.m in Sources */,
 				06891F781C06D23800E9C131 /* WalletModel.m in Sources */,
 				B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */,
 				B8BC50771BF38A390007B029 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				D5C240671BF108CF00832CF3 /* GainPasswordViewController.m in Sources */,
 				D5C240691BF108CF00832CF3 /* NSString+DY_MD5.m in Sources */,
+				B253C2D01C3FA742001AF771 /* qrencode.c in Sources */,
 				D5D50F9B1BFC135B00F54097 /* MagicDetailViewController.m in Sources */,
 				B8447A141BE0DE09004E5E15 /* CourseDesInPutCell.m in Sources */,
 				D5D50FA31BFC135B00F54097 /* ShopMainModel.m in Sources */,
@@ -2897,6 +2961,7 @@
 				D5D50EA41BF9FB9D00F54097 /* VacationViewController.m in Sources */,
 				B8BC508B1BF38A390007B029 /* NSObject+EaseMob.m in Sources */,
 				D5D50F9F1BFC135B00F54097 /* MyWallet.m in Sources */,
+				B253C2CD1C3FA742001AF771 /* bitstream.c in Sources */,
 				B2AC20371C3E2CBD0033803C /* ScheduleViewController.m in Sources */,
 				D5F72BBA1BF99D3900B972B0 /* PFActionSheetView.m in Sources */,
 				B8BC505D1BF38A390007B029 /* UIView+MJExtension.m in Sources */,
@@ -2911,11 +2976,13 @@
 				D5D50F921BFC135B00F54097 /* DetailPriceCell.m in Sources */,
 				B8C458701BDB59AC00901F71 /* YiRefreshHeader.m in Sources */,
 				D5F72BAB1BF989C900B972B0 /* UIView+CalculateUIView.m in Sources */,
+				B253C2D11C3FA742001AF771 /* qrinput.c in Sources */,
 				B8BC508C1BF38A390007B029 /* NSString+Valid.m in Sources */,
 				B8BC50821BF38A390007B029 /* PSTGridLayoutRow.m in Sources */,
 				B8BC505C1BF38A390007B029 /* UIScrollView+MJRefresh.m in Sources */,
 				D5D50EA71BFA108D00F54097 /* TeachSubjectViewController.m in Sources */,
 				B8BC506C1BF38A390007B029 /* EMSDWebImageManager.m in Sources */,
+				B253C2DD1C3FAA84001AF771 /* ScanViewController.m in Sources */,
 				B8BC50E11BF393D00007B029 /* EaseMessageCell.m in Sources */,
 				B8BC50541BF38A390007B029 /* MJRefreshConst.m in Sources */,
 				B8BC50931BF38A390007B029 /* EaseEmojiEmoticons.m in Sources */,
@@ -2941,6 +3008,7 @@
 				B8447A171BE0E456004E5E15 /* CoursePicListCell.m in Sources */,
 				B8BC504E1BF38A390007B029 /* EMVoiceConverter.mm in Sources */,
 				D5C2406B1BF108CF00832CF3 /* RegisterViewController.m in Sources */,
+				B253C2D31C3FA742001AF771 /* rscode.c in Sources */,
 				B8BC504C1BF38A390007B029 /* amrFileCodec.mm in Sources */,
 				D5F72BB11BF9993A00B972B0 /* EditorUserViewController.m in Sources */,
 				B865C16A1BDC9ABB00C1E681 /* HMClassInfoModel.m in Sources */,
@@ -3070,7 +3138,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Guobin Shen (69F6W58BNP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
@@ -3085,7 +3153,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "248d2f63-d414-42ec-8509-412ca4fee618";
+				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
 			};
 			name = Debug;
 		};
@@ -3096,7 +3164,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhubaotown Information Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
@@ -3111,7 +3179,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "c278427e-af59-4286-9377-e2a464f4cd75";
+				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
 			};
 			name = Release;
 		};

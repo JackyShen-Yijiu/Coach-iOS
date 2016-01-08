@@ -6,6 +6,8 @@
 //  Copyright (c) 2015年 jewelry. All rights reserved.
 //
 
+#ifdef __OBJC__
+
 #ifndef JewelryApp_PrefixHeader_pch
 #define JewelryApp_PrefixHeader_pch
 #import "UIView+Sizes.h"
@@ -21,6 +23,8 @@
 #import "Masonry.h"
 #import "UserInfoModel.h"
 #import "UIBarButtonItem+JGBarButtonItem.h"
+
+#endif
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.

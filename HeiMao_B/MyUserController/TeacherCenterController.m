@@ -37,13 +37,12 @@
 @end
 @implementation TeacherCenterController
 
-
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
        
-        //_dataArray = @[@[@"挂靠驾校",@"训练场地",@"工作时间",@"可授科目",@"班型设置"],@[@"休假",@"学员列表",@"钱包"],@[@"设置"]];
+        //_dataArray = @[@[@"所属驾校",@"训练场地",@"工作时间",@"可授科目",@"班型设置"],@[@"休假",@"学员列表",@"钱包"],@[@"设置"]];
         
-        _dataArray = @[@[@"挂靠驾校",@"工作性质",@"训练场地",@"工作时间",@"可授科目",@"授课班型"],@[@"休假",@"学员列表",@"设置"],@[@"钱包"]];
+        _dataArray = @[@[@"所属驾校",@"工作性质",@"训练场地",@"工作时间",@"可授科目",@"授课班型"],@[@"休假",@"学员列表",@"设置"],@[@"钱包"]];
 
     }
     return _dataArray;
@@ -52,7 +51,7 @@
 #warning 等待更改图片
 - (NSArray *)imageArray {
     if (_imageArray == nil) {
-        _imageArray = @[@[@"dependSchool.png",@"dependSchool.png",@"studyGround.png",@"workTime.png",@"teachSubject.png",@"sendMeet.png"],@[@"rest.png",@"studentList.png",@"setting.png"],@[@"wallet.png"]];
+        _imageArray = @[@[@"dependSchool.png",@"workPropertyImg.png",@"studyGround.png",@"workTime.png",@"teachSubject.png",@"sendMeet.png"],@[@"rest.png",@"studentList.png",@"setting.png"],@[@"wallet.png"]];
     }
     return _imageArray;
 }
@@ -130,7 +129,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (indexPath.section == 0 && indexPath.row == 0) {// @"挂靠驾校"
+    if (indexPath.section == 0 && indexPath.row == 0) {// @"所属驾校"
         AffiliatedSchoolViewController *query = [[AffiliatedSchoolViewController alloc] init];
         [self.navigationController pushViewController:query animated:YES];
     }else if (indexPath.section == 0 && indexPath.row == 1){//// new @"工作性质"
@@ -178,7 +177,7 @@
     [self initNavBar];
     
    
-    // "挂靠驾校"
+    // "所属驾校"
     NSString * driveSname = [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
     // "工作性质"
 #warning 通过接口调用
@@ -210,7 +209,7 @@
     NSString * vacationStr =  [[UserInfoModel defaultUserInfo] setClassMode] ? @"已设置" : @"未设置";
     
     self.displayArray = @[@[
-                            [self strTolerance:driveSname],//"挂靠驾校"
+                            [self strTolerance:driveSname],//"所属驾校"
                             [self strTolerance:workProperty],//new - "工作性质"
                             [self strTolerance:trainName],//"训练场地"
                             [self strTolerance:workSetDes],//"工作时间"

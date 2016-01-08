@@ -16,6 +16,7 @@
 #import "CourseDetailViewController.h"
 #import "NoContentTipView.h"
 #import "WMUITool.h"
+#import "ScanViewController.h"
 
 @interface CourseViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate>
 
@@ -53,7 +54,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.isNeedRefresh = YES;
     [self initUI];
@@ -65,7 +66,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+   
     [self resetNavBar];
     
     self.myNavigationItem.title = @"约车";
@@ -115,7 +116,11 @@
 - (void)rightBarBtnWithQianDaoDidClick
 {
     NSLog(@"签到");
+    ScanViewController *vc = [[ScanViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
+
 - (void)rightBarBtnWithSearchDidClick
 {
     NSLog(@"搜索");
