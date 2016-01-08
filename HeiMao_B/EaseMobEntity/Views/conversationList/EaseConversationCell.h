@@ -12,6 +12,8 @@
 #import "IModelCell.h"
 #import "EaseImageView.h"
 
+@class EaseConversationModel;
+
 static CGFloat EaseConversationCellMinHeight = 60;
 
 @interface EaseConversationCell : UITableViewCell<IModelCell>
@@ -39,5 +41,7 @@ static CGFloat EaseConversationCellMinHeight = 60;
 @property (nonatomic) UIFont *timeLabelFont UI_APPEARANCE_SELECTOR;
 
 @property (nonatomic) UIColor *timeLabelColor UI_APPEARANCE_SELECTOR;
+
+@property (strong, nonatomic) EaseConversationModel *topModel;
 
 @end

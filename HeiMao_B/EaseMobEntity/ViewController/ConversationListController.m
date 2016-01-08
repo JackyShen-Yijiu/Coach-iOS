@@ -14,33 +14,22 @@
 #import "ChatViewController.h"
 #import "EMConversation.h"
 #import "EMConversation.h"
-#import "EMCDDeviceManager.h"
 
-//两次提示的默认间隔
-static const CGFloat kDefaultPlaySoundInterval = 3.0;
-static NSString *kMessageType = @"MessageType";
-static NSString *kConversationChatter = @"ConversationChatter";
-static NSString *kGroupName = @"GroupName";
 
 @interface ConversationListController ()<EaseConversationListViewControllerDelegate,
                                         EaseConversationListViewControllerDataSource,
                                         EMChatManagerDelegate>
 
 @property (nonatomic, strong) UIView *networkStateView;
-@property (strong, nonatomic) NSDate *lastPlaySoundDate;
 @end
 
 @implementation ConversationListController
 
--(void)dealloc
-{
-    [self unregisterNotifications];
-}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self registerNotifications];
     [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:NO];
     self.showRefreshHeader = YES;
     self.delegate = self;
@@ -129,7 +118,7 @@ static NSString *kGroupName = @"GroupName";
 
 #pragma mark - EaseConversationListViewControllerDataSource
 
-//读取回话列表后，通过代理处理回话
+// 读取回话列表后，通过代理处理回话
 - (id<IConversationModel>)conversationListViewController:(EaseConversationListViewController *)conversationListViewController
                                     modelForConversation:(EMConversation *)conversation
 {
@@ -229,171 +218,7 @@ static NSString *kGroupName = @"GroupName";
     }
 }
 
-#pragma mark 消息通道
--(void)registerNotifications
-{
-    [self unregisterNotifications];
-    
-    [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
-    [[EaseMob sharedInstance].callManager addDelegate:self delegateQueue:nil];
-}
 
--(void)unregisterNotifications
-{
-    [[EaseMob sharedInstance].chatManager removeDelegate:self];
-    [[EaseMob sharedInstance].callManager removeDelegate:self];
-}
-
-#pragma mark - Delegate
-#pragma mark - IChatManagerDelegate 消息变化
-
-- (void)didUpdateConversationList:(NSArray *)conversationList
-{
-    [self setupUnreadMessageCount];
-    [self refreshDataSource];
-}
-
-// 未读消息数量变化回调
--(void)didUnreadMessagesCountChanged
-{
-    [self setupUnreadMessageCount];
-    [[self tableView] reloadData];
-}
-
-- (void)didFinishedReceiveOfflineMessages
-{
-    [self setupUnreadMessageCount];
-    [[self tableView] reloadData];
-
-}
-
-#pragma mark - 小红点逻辑 Tab小红点 + App小红点
--(void)setupUnreadMessageCount
-{
-    NSArray *conversations = [[[EaseMob sharedInstance] chatManager] conversations];
-    NSInteger unreadCount = 0;
-    for (EMConversation *conversation in conversations) {
-        unreadCount += conversation.unreadMessagesCount;
-    }
-    if (unreadCount > 0) {
-        [self showMessCountInTabBar:unreadCount];
-    }else{
-        [self hiddenMessCountInTabBar];
-    }
-    UIApplication *application = [UIApplication sharedApplication];
-    [application setApplicationIconBadgeNumber:unreadCount];
-}
-
-// 收到消息回调
--(void)didReceiveMessage:(EMMessage *)message
-{
-    BOOL needShowNotification = YES;
-    if (needShowNotification) {
-#if !TARGET_IPHONE_SIMULATOR
-        
-        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
-        switch (state) {
-            case UIApplicationStateActive:
-                [self playSoundAndVibration];
-                break;
-            case UIApplicationStateInactive:
-                [self playSoundAndVibration];
-                break;
-            case UIApplicationStateBackground:
-                [self showNotificationWithMessage:message];
-                break;
-            default:
-                break;
-        }
-#endif
-    }
-}
-
-- (void)playSoundAndVibration{
-    NSTimeInterval timeInterval = [[NSDate date]
-                                   timeIntervalSinceDate:self.lastPlaySoundDate];
-    if (timeInterval < kDefaultPlaySoundInterval) {
-        //如果距离上次响铃和震动时间太短, 则跳过响铃
-        NSLog(@"skip ringing & vibration %@, %@", [NSDate date], self.lastPlaySoundDate);
-        return;
-    }
-    
-    //保存最后一次响铃时间
-    self.lastPlaySoundDate = [NSDate date];
-    
-    // 收到消息时，播放音频
-    [[EMCDDeviceManager sharedInstance] playNewMessageSound];
-    // 收到消息时，震动
-    [[EMCDDeviceManager sharedInstance] playVibration];
-}
-
-- (void)showNotificationWithMessage:(EMMessage *)message
-{
-    EMPushNotificationOptions *options = [[EaseMob sharedInstance].chatManager pushNotificationOptions];
-    //发送本地推送
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.fireDate = [NSDate date]; //触发通知的时间
-    
-    if (options.displayStyle == ePushNotificationDisplayStyle_messageSummary) {
-        id<IEMMessageBody> messageBody = [message.messageBodies firstObject];
-        NSString *messageStr = nil;
-        switch (messageBody.messageBodyType) {
-            case eMessageBodyType_Text:
-            {
-                messageStr = ((EMTextMessageBody *)messageBody).text;
-            }
-                break;
-            case eMessageBodyType_Image:
-            {
-                messageStr = NSLocalizedString(@"message.image", @"Image");
-            }
-                break;
-            case eMessageBodyType_Location:
-            {
-                messageStr = NSLocalizedString(@"message.location", @"Location");
-            }
-                break;
-            case eMessageBodyType_Voice:
-            {
-                messageStr = NSLocalizedString(@"message.voice", @"Voice");
-            }
-                break;
-            case eMessageBodyType_Video:{
-                messageStr = NSLocalizedString(@"message.video", @"Video");
-            }
-                break;
-            default:
-                break;
-        }
-        
-        NSString *title = [message.ext objectStringForKey:@"nickName"];
-    
-        notification.alertBody = [NSString stringWithFormat:@"%@:%@", title, messageStr];
-    }
-    else{
-        notification.alertBody = NSLocalizedString(@"receiveMessage", @"you have a new message");
-    }
-    
-#warning 去掉注释会显示[本地]开头, 方便在开发中区分是否为本地推送
-    //notification.alertBody = [[NSString alloc] initWithFormat:@"[本地]%@", notification.alertBody];
-    
-    notification.alertAction = NSLocalizedString(@"open", @"Open");
-    notification.timeZone = [NSTimeZone defaultTimeZone];
-    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:self.lastPlaySoundDate];
-    if (timeInterval < kDefaultPlaySoundInterval) {
-        NSLog(@"skip ringing & vibration %@, %@", [NSDate date], self.lastPlaySoundDate);
-    } else {
-        notification.soundName = UILocalNotificationDefaultSoundName;
-        self.lastPlaySoundDate = [NSDate date];
-    }
-    
-    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-    [userInfo setObject:[NSNumber numberWithInt:message.messageType] forKey:kMessageType];
-    [userInfo setObject:message.conversationChatter forKey:kConversationChatter];
-    notification.userInfo = userInfo;
-    //发送通知
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-}
 
 
 

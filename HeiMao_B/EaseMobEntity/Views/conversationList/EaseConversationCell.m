@@ -10,6 +10,7 @@
 
 #import "EMConversation.h"
 #import "UIImageView+EMWebCache.h"
+#import "EaseConversationModel.h"
 
 CGFloat const EaseConversationCellPadding = 10;
 
@@ -149,6 +150,29 @@ CGFloat const EaseConversationCellPadding = 10;
             [self addConstraint:self.detailWithoutAvatarLeftConstraint];
         }
     }
+}
+
+- (void)setTopModel:(EaseConversationModel *)topModel
+{
+    _topModel = topModel;
+    
+    self.titleLabel.text = _topModel.title;
+    
+    self.detailLabel.text = _topModel.detailsTitle;
+    
+    self.timeLabel.text = _topModel.time;
+    
+    self.avatarView.image = [UIImage imageNamed:_topModel.avatarPic];
+    
+    if (_topModel.badgeStr && [_topModel.badgeStr length]!=0) {
+        _avatarView.showBadge = NO;
+        _avatarView.badge = [_topModel.badgeStr integerValue];
+    }
+    else{
+        _avatarView.showBadge = YES;
+        _avatarView.badge = 0;
+    }
+    
 }
 
 - (void)setModel:(id<IConversationModel>)model
