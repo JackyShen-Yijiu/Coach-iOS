@@ -14,6 +14,7 @@
 #import "CourseEnsureCell.h"
 #import "HMCourseModel.h"
 #import "SutdentHomeController.h"
+#import "CourseRatingCell.h"
 
 #define GOTORECOMENDTAG     1000
 
@@ -27,10 +28,11 @@
 @end
 
 
-@interface OrderCompleteViewController()<UITableViewDelegate,UITableViewDataSource,CourseDesInPutCellDelegate,CourseEnsureCellDelegate>
+@interface OrderCompleteViewController()<UITableViewDelegate,UITableViewDataSource,CourseDesInPutCellDelegate,CourseEnsureCellDelegate,CourseRatingCellDelegate>
 @property(nonatomic,strong)RefreshTableView * tableView;
 @property(nonatomic,strong)CourseDesInPutCell * inputCell;
 @property(nonatomic,strong)OrderCompleteViewModel * model;
+@property(nonatomic,strong)CourseRatingModel * ratModel;
 @property(nonatomic,assign)BOOL isNeedRefresh;
 @end
 
@@ -106,6 +108,7 @@
                 ws.model.pickItemsDataListThree = [ws trainpickListWithArray:subTree];
                 [ws.tableView.refreshHeader endRefreshing];
                 [ws.tableView reloadData];
+                
             }else{
                 [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
                 [[self myNavController] popViewControllerAnimated:YES];
@@ -139,9 +142,10 @@
 }
 
 #pragma mark - TableViewDelegate
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self pickList] ? 4 : 0;
+    return [self pickList] ? 5 : 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
@@ -154,9 +158,12 @@
             return [CoursePicListCell cellHight:[self pickList].count couleNumber:2];
             break;
         case 2:
-            return [CourseDesInPutCell cellHeight];
+            return [CourseRatingCell cellHigthWithBottomView:YES];
             break;
         case 3:
+            return [CourseDesInPutCell cellHeight];
+            break;
+        case 4:
             return [CourseEnsureCell cellHeigthWithTitle:YES];
             break;
         default:
@@ -165,6 +172,7 @@
     return 0;
     
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -193,7 +201,24 @@
             return cell;
         }
             break;
+            
         case 2:
+            
+        {
+            CourseRatingCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CourseRatingCell class])];
+            if (!cell) {
+                cell = [[CourseRatingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([CourseRatingCell class])];
+                [cell.bottonLineView setHidden:YES];
+                [cell.bottomView setHidden:NO];
+            }
+            [cell setModel:self.ratModel];
+            
+            return cell;
+
+        }
+            break;
+
+        case 3:
         {
             CourseDesInPutCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CourseDesInPutCell class])];
             if (!cell) {
@@ -201,20 +226,21 @@
                 cell.delegate = self;
             }
             self.inputCell = cell;
-            cell.placeLabel.text =  @"其他教学内容说明";
+            cell.placeLabel.text =  @"写点评论吧，对其他小伙伴有很大帮助哦";
             return cell;
 
         }
             break;
-        case 3:
+            
+        case 4:
         {
             CourseEnsureCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CourseEnsureCell class])];
             
             if (!cell) {
                 cell = [[CourseEnsureCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([CourseEnsureCell class])];
                 cell.delegate = self;
-                [cell.ensurebutton setTitle:@"提交并去评价" forState:UIControlStateNormal];
-                [cell.ensurebutton setTitle:@"提交并去评价" forState:UIControlStateHighlighted];
+                [cell.ensurebutton setTitle:@"提交" forState:UIControlStateNormal];
+                [cell.ensurebutton setTitle:@"提交" forState:UIControlStateHighlighted];
                 [cell setTitle:@"评价有积分奖励。越用心的评价奖励约高哦"];
             }
             return cell;
@@ -249,6 +275,9 @@
 
 - (void)enstureThenGotoRecomend:(BOOL)isGoTorecomed
 {
+    
+    [self showTotasViewWithMes:@"等待服务端接口"];
+    return;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     WS(ws);
     [NetWorkEntiry postToEnstureDoneofCourseWithCoachid:[[UserInfoModel defaultUserInfo] userID] coureseID:self.courseModel.courseId learningcontent:[self seletedReasion] contentremarks:self.model.inputDes success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -369,6 +398,17 @@
     }
     return _model;
 }
+- (CourseRatingModel *)ratModel
+{
+    if (!_ratModel) {
+        _ratModel = [[CourseRatingModel alloc] init];
+        _ratModel.title = @"总体评价";
+        _ratModel.type = KRateTypeAll;
+        _ratModel.rating = 5.f;
+    }
+    return _ratModel;
+}
+
 @end
 
 

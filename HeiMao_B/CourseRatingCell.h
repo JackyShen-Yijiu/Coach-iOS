@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger,KRateType) {
 @property(nonatomic,strong)CourseRatingModel * model;
 @property(nonatomic,assign)id<CourseRatingCellDelegate> delegate;
 @property(nonatomic,assign)BOOL makeLineAligent;
+@property(nonatomic,strong)UIView * bottomView;
 @property(nonatomic,strong)UIView * bottonLineView;
-+ (CGFloat)cellHigth;
++ (CGFloat)cellHigthWithBottomView:(BOOL)bottomView;
 @end

@@ -89,7 +89,7 @@
             return [CourseRatingUserInfoCell cellHeigth];
             break;
         case 1:
-            return [CourseRatingCell cellHigth];
+            return [CourseRatingCell cellHigthWithBottomView:NO];
             break;
         case 2:
             return [CourseDesInPutCell cellHeight];

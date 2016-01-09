@@ -187,6 +187,7 @@
 
 - (void)courseDetailViewDidClickWatingToDone:(CourseDetailView *)view
 {
+    //确认学完
     OrderCompleteViewController * completeController = [[OrderCompleteViewController alloc] init];
     completeController.courseModel = view.model;
     completeController.delegate = self;

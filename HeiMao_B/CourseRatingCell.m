@@ -19,9 +19,10 @@
 
 @implementation CourseRatingCell
 
-+ (CGFloat)cellHigth
++ (CGFloat)cellHigthWithBottomView:(BOOL)bottomView
 {
-    return 75;
+    
+    return 75 + (bottomView ? 10.f : 0);
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -56,6 +57,7 @@
     [self setNeedsUpdateConstraints];
 }
 
+
 #pragma mark Layout
 - (void)updateConstraints
 {
@@ -74,6 +76,12 @@
         make.height.equalTo(@(24.f));
     }];
     
+    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView).offset(-2);
+        make.right.equalTo(self.contentView).offset(2);
+        make.height.equalTo(@(10));
+        make.bottom.equalTo(self.contentView);
+    }];
 }
 
 - (void)layoutSubviews
@@ -84,7 +92,10 @@
     }else{
         self.bottonLineView.frame = CGRectMake(15, self.height - 1, self.width, 1);
     }
+    
 }
+
+
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
@@ -99,6 +110,7 @@
     _makeLineAligent = makeLineAligent;
     [self setNeedsLayout];
 }
+
 
 #pragma mark -  data
 - (void)setModel:(CourseRatingModel *)model
@@ -121,5 +133,20 @@
     view.backgroundColor = HM_LINE_COLOR;
     return view;
 }
+
+- (UIView *)bottomView
+{
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] init];
+        _bottomView.backgroundColor = RGB_Color(247, 249, 251);
+        _bottomView.layer.borderColor = RGB_Color(230, 230, 230).CGColor;
+        _bottomView.layer.borderWidth = 1;
+        [_bottomView setHidden:YES];
+        [self.contentView addSubview:_bottomView];
+    }
+    return _bottomView;
+}
+
+
 
 @end
