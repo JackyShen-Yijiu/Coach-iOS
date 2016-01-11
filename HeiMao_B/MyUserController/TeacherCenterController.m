@@ -21,6 +21,7 @@
 #import "AffiliatedSchoolViewController.h"
 #import "ExamClassViewController.h"
 #import "SetupViewController.h"
+#import "WorkNatureController.h"
 #import "JSONKit.h"
 
 #define kSystemWide [UIScreen mainScreen].bounds.size.width
@@ -133,6 +134,8 @@
         AffiliatedSchoolViewController *query = [[AffiliatedSchoolViewController alloc] init];
         [self.navigationController pushViewController:query animated:YES];
     }else if (indexPath.section == 0 && indexPath.row == 1){//// new @"工作性质"
+        WorkNatureController * workNatureVC = [[WorkNatureController alloc] init];
+        [self.navigationController pushViewController:workNatureVC animated:YES];
         NSLog(@"工作性质");
     }else if (indexPath.section == 0 && indexPath.row == 2) {// @"训练场地"
         if ([UserInfoModel defaultUserInfo].schoolId) {
