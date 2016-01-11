@@ -10,21 +10,24 @@
 #import <Masonry/Masonry.h>
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 #import "QueryViewController.h"
+#import "WorkTypeListController.h"
 
-#define url @"http://123.57.63.15:8181/api/v1/userinfo/applyverification"
+#define url [NSString stringWithFormat:@"%@/userinfo/applyverification",[NetWorkEntiry domain]]
 
-@interface CompleteInformationViewController ()<QueryViewControllerDelegate>
+@interface CompleteInformationViewController ()<QueryViewControllerDelegate,WorkTypeListControllerDelegate>
 @property (strong, nonatomic) UIView *navImage;
 @property (strong, nonatomic) UIButton *goBackButton;
 @property (strong, nonatomic) UILabel *topLabel;
 @property (strong, nonatomic) UITextField *idcarNumTextField;
-@property (strong, nonatomic) UITextField *drivingIdNumTextField;
 @property (strong, nonatomic) UITextField *caochIdNumTextField;
 @property (strong, nonatomic) UITextField *invitationTextFild;
 @property (strong, nonatomic) UITextField *nameTextField;
-@property (strong, nonatomic) UIButton *drivingDetail;
-@property (strong, nonatomic) UILabel *drivingLabel;
-@property (strong, nonatomic) UIImageView *indexImage;
+@property (strong, nonatomic) UIButton    * drivingDetail;
+@property (strong, nonatomic) UILabel     * drivingLabel;
+@property (strong, nonatomic) UIImageView * indexImage;
+@property (strong, nonatomic) UIButton    * workDetailButton;
+@property (strong, nonatomic) UILabel     * workTypeLabel;
+@property (strong, nonatomic) UIImageView * workTypeArrow;
 @property (strong, nonatomic) UIButton *submitButton;
 @property (copy, nonatomic) NSString *drivingId;
 @end
@@ -32,6 +35,7 @@
 @implementation CompleteInformationViewController
 
 - (UIButton *)submitButton {
+    
     if (_submitButton == nil) {
         _submitButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_submitButton setTitle:@"提交审核" forState:UIControlStateNormal];
@@ -47,7 +51,7 @@
 - (UILabel *)drivingLabel {
     if (_drivingLabel == nil) {
         _drivingLabel = [[UILabel alloc] init];
-        _drivingLabel.text = @"挂靠驾校";
+        _drivingLabel.text = @"所在驾校";
         _drivingLabel.textColor = RGB_Color(194, 194, 200);
         _drivingLabel.font = [UIFont systemFontOfSize:15];
     }
@@ -60,6 +64,7 @@
     }
     return _indexImage;
 }
+
 - (UIButton *)drivingDetail {
     if (_drivingDetail == nil) {
         _drivingDetail = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -69,6 +74,40 @@
     }
     return _drivingDetail;
 }
+
+- (UILabel *)workTypeLabel
+{
+    if (_workTypeLabel == nil) {
+        _workTypeLabel = [[UILabel alloc] init];
+        _workTypeLabel.text = @"工作性质";
+        _workTypeLabel.textColor = RGB_Color(194, 194, 200);
+        _workTypeLabel.font = [UIFont systemFontOfSize:15];
+    }
+    return _workTypeLabel;
+}
+
+- (UIImageView *)workTypeArrow
+{
+    if (_workTypeArrow == nil) {
+        _workTypeArrow = [[UIImageView alloc] init];
+        _workTypeArrow.image = [UIImage imageNamed:@"右箭头.png"];
+    }
+    return _workTypeArrow;
+}
+
+
+- (UIButton *)workDetailButton
+{
+    if (_workDetailButton == nil) {
+        _workDetailButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _workDetailButton.layer.borderColor = RGB_Color(204, 204, 204).CGColor;
+        _workDetailButton.layer.borderWidth = 1;
+        [_workDetailButton addTarget:self action:@selector(workTypeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _workDetailButton;
+
+}
+
 
 - (UIView *)navImage {
     if (_navImage == nil) {
@@ -126,19 +165,7 @@
     }
     return _idcarNumTextField;
 }
-- (UITextField *)drivingIdNumTextField{
-    if (_drivingIdNumTextField == nil) {
-        _drivingIdNumTextField = [[UITextField alloc]init];
-        _drivingIdNumTextField.tag = 106;
-        _drivingIdNumTextField.placeholder = @"    驾驶证";
-        _drivingIdNumTextField.layer.borderColor = RGB_Color(204, 204, 204).CGColor;
-        _drivingIdNumTextField.layer.borderWidth = 1;
-        _drivingIdNumTextField.font  = [UIFont systemFontOfSize:15];
-        _drivingIdNumTextField.textColor = RGB_Color(153, 153, 153);
-        
-    }
-    return _drivingIdNumTextField;
-}
+
 - (UITextField *)caochIdNumTextField{
     if (_caochIdNumTextField == nil) {
         _caochIdNumTextField = [[UITextField alloc]init];
@@ -156,7 +183,6 @@
 - (UITextField *)invitationTextFild{
     if (_invitationTextFild == nil) {
         _invitationTextFild = [[UITextField alloc]init];
-//        _invitationTextFild.delegate = self;
         _invitationTextFild.tag = 106;
         _invitationTextFild.placeholder = @"    输入邀请码获得奖励";
         _invitationTextFild.layer.borderColor = RGB_Color(204, 204, 204).CGColor;
@@ -175,15 +201,18 @@
     [self.view addSubview:self.goBackButton];
     [self.view addSubview:self.nameTextField];
     [self.view addSubview:self.idcarNumTextField];
-    [self.view addSubview:self.drivingIdNumTextField];
+//    [self.view addSubview:self.drivingIdNumTextField];
     [self.view addSubview:self.caochIdNumTextField];
     [self.view addSubview:self.invitationTextFild];
     [self.view addSubview:self.drivingDetail];
+    [self.view addSubview:self.workDetailButton];
     [self.view addSubview:self.submitButton];
     
     [self.drivingDetail addSubview:self.drivingLabel];
     [self.drivingDetail addSubview:self.indexImage];
     
+    [self.workDetailButton addSubview:self.workTypeLabel];
+    [self.workDetailButton addSubview:self.workTypeArrow];
     
     [self.topLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view.mas_centerX);
@@ -213,17 +242,10 @@
         make.height.mas_equalTo(@44);
 
     }];
-    
-    [self.drivingIdNumTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view.mas_left).with.offset(15);
-        make.right.mas_equalTo(self.view.mas_right).with.offset(-15);
-        make.top.mas_equalTo(self.idcarNumTextField.mas_bottom).with.offset(7);
-        make.height.mas_equalTo(@44);
-    }];
     [self.caochIdNumTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view.mas_left).with.offset(15);
         make.right.mas_equalTo(self.view.mas_right).with.offset(-15);
-        make.top.mas_equalTo(self.drivingIdNumTextField.mas_bottom).with.offset(7);
+        make.top.mas_equalTo(self.idcarNumTextField.mas_bottom).with.offset(7);
         make.height.mas_equalTo(@44);
     }];
     
@@ -253,24 +275,64 @@
         make.width.mas_equalTo(@25);
     }];
     
+    [self.workDetailButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view.mas_left).with.offset(15);
+        make.right.mas_equalTo(self.view.mas_right).with.offset(-15);
+        make.top.mas_equalTo(self.drivingDetail.mas_bottom).with.offset(7);
+        make.height.mas_equalTo(@44);
+    }];
+
+    
+    [self.workTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.workDetailButton.mas_left).offset(15);
+        make.centerY.mas_equalTo(self.workDetailButton.mas_centerY);
+    }];
+    
+    [self.workTypeArrow mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.workDetailButton.mas_right).offset(-15);
+        make.centerY.mas_equalTo(self.workDetailButton.mas_centerY);
+        make.height.mas_equalTo(@25);
+        make.width.mas_equalTo(@25);
+    }];
+
+    
     [self.submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view.mas_left).offset(15);
         make.right.mas_equalTo(self.view.mas_right).offset(-15);
-        make.top.mas_equalTo(self.drivingDetail.mas_bottom).offset(7);
+        make.top.mas_equalTo(self.workDetailButton.mas_bottom).offset(7);
         make.height.mas_equalTo(@44);
     }];
     
-    
 }
+
 - (void)dealDriving:(UIButton *)sender {
     QueryViewController *query = [[QueryViewController alloc] init];
     query.delegate = self;
     [self presentViewController:query animated:YES completion:nil];
 }
+
+
 - (void)senderData:(NSDictionary *)dic {
     self.drivingLabel.text = dic[@"name"];
     self.drivingId = dic[@"id"];
 }
+
+- (void)workTypeButtonClick:(UIButton *)button
+{
+    WorkTypeListController * listController = [[WorkTypeListController alloc] init];
+    listController.delegate = self;
+    [self presentViewController:listController animated:YES completion:nil];
+}
+
+- (void)workTypeListController:(WorkTypeListController *)controller didSeletedWorkType:(KCourseWorkType)type workName:(NSString *)name
+{
+    [controller dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+    
+    self.workTypeLabel.text = name;
+}
+
 - (void)dealGoBack:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -298,11 +360,11 @@
         [mubDic setObject:self.idcarNumTextField.text forKey:@"idcardnumber"];
     }
     
-    if (self.drivingIdNumTextField.text == nil || self.drivingIdNumTextField.text.length == 0) {
-        ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"驾驶证为空" controller:self];
+    if (self.workTypeLabel.text == nil || self.workTypeLabel.text.length == 0) {
+        ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"工作性质为空" controller:self];
         [alerview show];
     }else {
-        [mubDic setObject:self.idcarNumTextField.text forKey:@"drivinglicensenumber"];
+        [mubDic setObject:@([WorkTypeModel converStringToType:self.workTypeLabel.text]) forKey:@"coachtype"];
     }
     if (self.caochIdNumTextField.text == nil || self.caochIdNumTextField.text.length == 0) {
         ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"教练证为空" controller:self];
@@ -314,8 +376,6 @@
         [mubDic setObject:[UserInfoModel defaultUserInfo].userID forKey:@"coachid"];
     }
     
-   
-
     NSString *   token = [[UserInfoModel defaultUserInfo] token];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -341,7 +401,7 @@
 }
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [_idcarNumTextField resignFirstResponder];
-    [_drivingIdNumTextField resignFirstResponder];
+//    [_drivingIdNumTextField resignFirstResponder];
     [_caochIdNumTextField resignFirstResponder];
     [_invitationTextFild resignFirstResponder];
 }
