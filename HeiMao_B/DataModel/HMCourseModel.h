@@ -29,6 +29,10 @@
 @property(nonatomic,strong)HMClassInfoModel * classType;
 @property(nonatomic,strong)HMStudentModel * studentInfo;
 
+@property(nonatomic,strong)NSString * comment;
+@property(nonatomic,strong)NSString * coachcomment;
+@property(nonatomic,strong)NSString * cancelreason;
+
 + (HMCourseModel *)converJsonDicToModel:(NSDictionary *)dic;
 
 - (NSString *)getStatueString;

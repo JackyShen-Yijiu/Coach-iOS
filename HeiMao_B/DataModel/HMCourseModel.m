@@ -36,6 +36,10 @@
     model.courseBeginTime = [dic objectStringForKey:@"begintime"];
     model.courseEndtime = [dic objectStringForKey:@"endtime"];
     
+    model.comment = [dic objectStringForKey:@"comment"];
+    model.coachcomment = [dic objectStringForKey:@"coachcomment"];
+    model.cancelreason = [dic objectStringForKey:@"cancelreason"];
+    
     model.courseTrainInfo = [HMTrainaddressModel converJsonDicToModel:[dic objectInfoForKey:@"trainfieldlinfo"]];
     
     model.coursePikerAddres = [dic objectStringForKey:@"shuttleaddress"];
@@ -53,30 +57,43 @@
 {
     NSString * str = @"";
     switch (self.courseStatue) {
-            
-        case KCourseStatueInvalid:
+          
+        case  KCourseStatueInvalid :
+             break;
+        case  KCourseStatueapplying :   // 预约中
+            return @"预约中";
             break;
-        case KCourseStatueStudentReject:
-            return @"已拒绝";
+        case  KCourseStatueapplycancel :// 学生取消
+            return @"学生取消";
             break;
-        case KCourseStatueRequest:
-            str = @"待接受";
+        case  KCourseStatueapplyconfirm:  // 已确定
+            return @"已确定";
             break;
-        case KCourseStatueUnderWay:
-            str = @"进行中";
+        case  KCourseStatueapplyrefuse:      // 教练（拒绝或者取消）
+            return @"教练拒绝或取消";
             break;
-        case KCourseStatueWatingToDone:
-            str = @"确认学完";
+        case  KCourseStatueunconfirmfinish: //  待确认完成  (v1.1 中没有该字段)
+            return @"待确认完成";
             break;
-        case KCourseStatueOnDone:
-            str = @"待评论";
+        case  KCourseStatueucomments:    // 待评论
+            return @"待评论";
             break;
-        case KCourseStatueCanceld:
-            str = @"已取消";
+        case  KCourseStatueOnCommended: // 评论成功
+            return @"评论成功";
             break;
-        case KCourseStatueOnCommended:
-            str = @"已完成";
+        case  KCourseStatuefinish: // 订单完成
+            return @"订单完成";
             break;
+        case  KCourseStatuesystemcancel: // 系统取消
+            return @"系统取消";
+            break;
+        case  KCourseStatuesignin: // 已签到
+            return @"已签到";
+            break;
+        case  KCourseStatuenosignin: // 未签到
+            return @"未签到";
+            break;
+        
     }
     return str;
 }

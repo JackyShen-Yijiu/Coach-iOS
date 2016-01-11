@@ -20,8 +20,6 @@
 
 @property(nonatomic,strong)UISegmentedControl * segController;
 @property(nonatomic,strong)UIScrollView * scrollView;
-@property(nonatomic,strong)RefreshTableView * courseSummaryTableView;
-@property(nonatomic,strong)NSMutableArray * courseSummaryData;
 
 @property(nonatomic,strong)UITableView * courseDayTableView;
 @property(nonatomic,strong)FDCalendar *calendarHeadView;
@@ -29,7 +27,6 @@
 
 @property(nonatomic,assign)BOOL isNeedRefresh;
 @property(nonatomic,strong)NSDateFormatter *dateFormattor;
-@property(nonatomic,strong)NoContentTipView * tipView1;
 @property(nonatomic,strong)NoContentTipView * tipView2;
 @end
 
@@ -38,7 +35,6 @@
 #pragma mark - LoingNotification
 - (void)didLoginSucess:(NSNotification *)notification
 {
-    [self.courseSummaryTableView.refreshHeader beginRefreshing];
     [self fdCalendar:nil didSelectedDate:[NSDate date]];
 }
 
@@ -46,7 +42,6 @@
 {
     [self.courseDayTableData removeAllObjects];
     [[self courseDayTableData] removeAllObjects];
-    [self.courseSummaryTableView reloadData];
     [self.courseDayTableView reloadData];
 }
 
@@ -88,7 +83,6 @@
 {
     [super viewDidAppear:animated];
     if(self.isNeedRefresh){
-        [self.courseSummaryTableView.refreshHeader beginRefreshing];
         [self fdCalendar:nil didSelectedDate:[NSDate date]];
     }
     self.isNeedRefresh = NO;
@@ -113,12 +107,6 @@
     self.scrollView.scrollEnabled = NO;
     [self.view addSubview:self.scrollView];
     
-    self.courseSummaryTableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.width, self.scrollView.height) style:UITableViewStylePlain];
-    self.courseSummaryTableView.delegate = self;
-    self.courseSummaryTableView.dataSource = self;
-    [self.scrollView addSubview:self.courseSummaryTableView];
-    [self initRefreshView];
-    
     //日程
     self.courseDayTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.scrollView.width, 0, self.scrollView.width, self.scrollView.height) style:UITableViewStylePlain];
     self.courseDayTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -130,11 +118,6 @@
     self.courseDayTableView.tableHeaderView = self.calendarHeadView;
     self.courseDayTableView.sectionHeaderHeight = self.calendarHeadView.height;
     [self.scrollView addSubview:self.courseDayTableView];
-    
-    self.tipView1 = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有预约"];
-    [self.tipView1 setHidden:YES];
-    [self.courseSummaryTableView addSubview:self.tipView1];
-    self.tipView1.center = CGPointMake(self.courseSummaryTableView .width/2.f, self.courseSummaryTableView.height/2.f);
     
     self.tipView2 = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有预约"];
     [self.tipView2 setHidden:YES];
@@ -156,60 +139,6 @@
     [self showTotasViewWithMes:@"网络异常，稍后重试"];
     [tableView.refreshHeader endRefreshing];
     [tableView.refreshFooter endRefreshing];
-}
-
-- (void)initRefreshView
-{
-    WS(ws);
-    self.courseSummaryTableView.refreshHeader.beginRefreshingBlock = ^(){
-        
-        [NetWorkEntiry getCourseinfoWithUserId:[[UserInfoModel defaultUserInfo] userID] pageIndex:1 pageCount:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
-            NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
-            
-            if (type == 1) {
-                ws.courseSummaryData = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [ws.courseSummaryTableView.refreshHeader endRefreshing];
-                    [ws.courseSummaryTableView reloadData];
-                    ws.courseSummaryTableView.refreshFooter.scrollView = ws.courseSummaryTableView;
-                });
-            }else{
-                [ws dealErrorResponseWithTableView:ws.courseSummaryTableView info:responseObject];
-            }
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [ws netErrorWithTableView:ws.courseSummaryTableView];
-        }];
-    };
-    
-    self.courseSummaryTableView.refreshFooter.beginRefreshingBlock = ^(){
-        
-        if(ws.courseSummaryData.count % RELOADDATACOUNT){
-            [ws showTotasViewWithMes:@"已经加载所有数据"];
-            [ws.courseSummaryTableView.refreshFooter endRefreshing];
-            ws.courseSummaryTableView.refreshFooter.scrollView = nil;
-            return ;
-        }
-        [NetWorkEntiry getCourseinfoWithUserId:[[UserInfoModel defaultUserInfo] userID] pageIndex:ws.courseSummaryData.count / RELOADDATACOUNT pageCount:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
-            if (type == 1) {
-                NSArray * listArray = [BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]];
-                if (listArray.count) {
-                    [ws.courseSummaryData addObjectsFromArray:listArray];
-                    [ws.courseSummaryTableView reloadData];
-                }else{
-                    [ws showTotasViewWithMes:@"已经加载所有数据"];
-                }
-                [ws.courseSummaryTableView.refreshFooter endRefreshing];
-            }else{
-                [ws dealErrorResponseWithTableView:ws.courseSummaryTableView info:responseObject];
-            }
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [ws netErrorWithTableView:ws.courseSummaryTableView];
-        }];
-    };
 }
 
 #pragma mark LoadDayData
@@ -245,60 +174,39 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger count = 0;
-    if (tableView == self.courseSummaryTableView) {
-        count =  self.courseSummaryData.count;
-        if (!self.isNeedRefresh)
-            [self.tipView1 setHidden:count];
-    }else{
-        count =  self.courseDayTableData.count;
-        if (!self.isNeedRefresh)
-            [self.tipView2 setHidden:count];
-    }
+    count =  self.courseDayTableData.count;
+    if (!self.isNeedRefresh)
+        [self.tipView2 setHidden:count];
     return count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == self.courseSummaryTableView) {
-        return [CourseSummaryListCell cellHeightWithModel:self.courseSummaryData[indexPath.row]];
-    }else{
-        return [CourseSummaryDayCell cellHeight];
-    }
-    return 0;
+    return [CourseSummaryDayCell cellHeight];
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == self.courseSummaryTableView) {
-        CourseSummaryListCell * sumCell = [tableView dequeueReusableCellWithIdentifier:@"SumCell"];
-        if (!sumCell) {
-            sumCell = [[CourseSummaryListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SumCell"];
-        }
-        if (indexPath.row < self.courseSummaryData.count)
-            [sumCell setModel:self.courseSummaryData[indexPath.row]];
-        return sumCell;
-    }else{
-        CourseSummaryDayCell * dayCell = [tableView dequeueReusableCellWithIdentifier:@"dayCell"];
-        if (!dayCell) {
-            dayCell = [[CourseSummaryDayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dayCell"];
-        }
-        if (indexPath.row < self.courseDayTableData.count)
-            [dayCell setModel:self.courseDayTableData[indexPath.row]];
-        
-        return dayCell;
+
+    CourseSummaryDayCell * dayCell = [tableView dequeueReusableCellWithIdentifier:@"dayCell"];
+    if (!dayCell) {
+        dayCell = [[CourseSummaryDayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dayCell"];
     }
+    if (indexPath.row < self.courseDayTableData.count)
+        [dayCell setModel:self.courseDayTableData[indexPath.row]];
+    
+    return dayCell;
+
     return [UITableViewCell new];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     HMCourseModel  * courseModel = nil;
-    if (tableView == self.courseSummaryTableView) {
-        courseModel = [[self courseSummaryData] objectAtIndex:indexPath.row];
-    }else{
-        courseModel = [[self courseDayTableData] objectAtIndex:indexPath.row];
-    }
+    courseModel = [[self courseDayTableData] objectAtIndex:indexPath.row];
     if (courseModel) {
         CourseDetailViewController * decv = [[CourseDetailViewController alloc] init];
         decv.couresID = courseModel.courseId;
@@ -318,18 +226,7 @@
 
 - (void)needRefresh:(NSNotification *)notification
 {
-    HMCourseModel * model = [notification object];
-    if (model) {
-        for (HMCourseModel * sumModel in self.courseSummaryData) {
-            if ([sumModel.courseId isEqualToString:model.courseId]) {
-                sumModel.courseStatue = model.courseStatue;
-                [self.courseDayTableView reloadData];
-                [self.courseSummaryTableView reloadData];
-                
-                break;
-            }
-        }
-    }
+    [self.courseDayTableView reloadData];
 }
 
 @end

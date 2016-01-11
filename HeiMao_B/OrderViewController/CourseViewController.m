@@ -23,12 +23,30 @@
 
 @property(nonatomic,strong) RFSegmentView * segController;
 @property(nonatomic,strong)RefreshTableView * courseSummaryTableView;
+
+/*
+ *  新订单
+ */
 @property(nonatomic,strong)NSMutableArray * courseSummaryData;
+/*
+ *  待评价
+ */
+@property(nonatomic,strong)NSMutableArray * courseSummaryDataWaitEvaluate;
+/*
+ *  已取消
+ */
+@property(nonatomic,strong)NSMutableArray * courseSummaryDataCancled;
+/*
+ *  已完成
+ */
+@property(nonatomic,strong)NSMutableArray * courseSummaryDataCompleted;
 
 @property(nonatomic,assign)BOOL isNeedRefresh;
 @property(nonatomic,strong)NSDateFormatter *dateFormattor;
 @property(nonatomic,strong)NoContentTipView * tipView1;
 @property(nonatomic,strong)NoContentTipView * tipView2;
+
+@property (nonatomic,assign)NSInteger reservationstate;
 
 @end
 
@@ -52,7 +70,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -71,10 +89,21 @@
     [super viewWillAppear:animated];
    
     [self resetNavBar];
-    self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"signBtnImg" highIcon:@"signBtnImg" target:self action:@selector(rightBarBtnWithQianDaoDidClick)];
-
+    
+    [self setUpRightNavBar];
+    
     self.myNavigationItem.title = @"约车";
     
+}
+
+- (void)setUpRightNavBar
+{
+    if (self.segController.selIndex==0) {// 签到
+        self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"signBtnImg" highIcon:@"signBtnImg" target:self action:@selector(rightBarBtnWithQianDaoDidClick)];
+    }else{// 搜索
+        self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"iconfont-chazhao-2" highIcon:@"iconfont-chazhao-2" target:self action:@selector(rightBarBtnWithSearchDidClick)];
+    }
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -103,7 +132,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat offsetY = scrollView.contentOffset.y;
-    NSLog(@"offsetY:%f",offsetY);
+   // NSLog(@"offsetY:%f",offsetY);
     
     if (offsetY>0) {
         
@@ -143,16 +172,22 @@
     self.segController.selIndex = index;
     
     NSLog(@"刷新数据segmentViewSelectIndex:%ld",(long)index);
-    if (index==0) {// 签到
+    [self setUpRightNavBar];
 
-        self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"signBtnImg" highIcon:@"signBtnImg" target:self action:@selector(rightBarBtnWithQianDaoDidClick)];
-        
-    }else{// 搜索
-        
-        self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"iconfont-chazhao-2" highIcon:@"iconfont-chazhao-2" target:self action:@selector(rightBarBtnWithSearchDidClick)];
-
+    if (index==0) {
+        self.reservationstate = 3;
+    }else if (index==1){
+        self.reservationstate = 6;
+    }else if (index==2){
+        self.reservationstate = 2;
+    }else if (index==3){
+        self.reservationstate = 7;
     }
     
+    [self.courseSummaryTableView reloadData];
+    
+    [self.courseSummaryTableView.refreshHeader beginRefreshing];
+
 }
 
 - (void)rightBarBtnWithQianDaoDidClick
@@ -178,7 +213,7 @@
     [self.view addSubview:self.segController];
 
     // 预约
-    self.courseSummaryTableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.segController.frame), self.view.width, self.view.height-40) style:UITableViewStylePlain];
+    self.courseSummaryTableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.segController.frame), self.view.width, self.view.height-64) style:UITableViewStylePlain];
     self.courseSummaryTableView.backgroundColor = RGB_Color(251, 251, 251);
     self.courseSummaryTableView.delegate = self;
     self.courseSummaryTableView.dataSource = self;
@@ -213,10 +248,11 @@
 
 - (void)initRefreshView
 {
+    
     WS(ws);
     self.courseSummaryTableView.refreshHeader.beginRefreshingBlock = ^(){
         
-        [NetWorkEntiry getCourseinfoWithUserId:[[UserInfoModel defaultUserInfo] userID] pageIndex:1 pageCount:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [NetWorkEntiry getCourseinfoWithUserId:[[UserInfoModel defaultUserInfo] userID] reservationstate:ws.reservationstate pageIndex:1 pageCount:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSLog(@"responseObject:%@",responseObject);
             
@@ -224,7 +260,15 @@
             
             if (type == 1) {
                 
-                ws.courseSummaryData = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+                if (ws.segController.selIndex==0) {
+                    ws.courseSummaryData = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+                }else if (ws.segController.selIndex==1){
+                    ws.courseSummaryDataWaitEvaluate = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+                }else if (ws.segController.selIndex==2){
+                    ws.courseSummaryDataCancled = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+                }else if (ws.segController.selIndex==3){
+                    ws.courseSummaryDataCompleted = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+                }
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
@@ -247,22 +291,58 @@
     
     self.courseSummaryTableView.refreshFooter.beginRefreshingBlock = ^(){
         
-        if(ws.courseSummaryData.count % RELOADDATACOUNT){
+        NSArray *dataArray = [NSArray array];
+        
+        if (ws.segController.selIndex==0) {
+            dataArray = ws.courseSummaryData;
+        }else if (ws.segController.selIndex==1){
+            dataArray = ws.courseSummaryDataWaitEvaluate;
+        }else if (ws.segController.selIndex==2){
+            dataArray = ws.courseSummaryDataCancled;
+        }else if (ws.segController.selIndex==3){
+            dataArray = ws.courseSummaryDataCompleted;
+        }
+        
+        if(dataArray.count % RELOADDATACOUNT){
             [ws showTotasViewWithMes:@"已经加载所有数据"];
             [ws.courseSummaryTableView.refreshFooter endRefreshing];
             ws.courseSummaryTableView.refreshFooter.scrollView = nil;
             return ;
         }
-        [NetWorkEntiry getCourseinfoWithUserId:[[UserInfoModel defaultUserInfo] userID] pageIndex:ws.courseSummaryData.count / RELOADDATACOUNT pageCount:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [NetWorkEntiry getCourseinfoWithUserId:[[UserInfoModel defaultUserInfo] userID]  reservationstate:ws.reservationstate pageIndex:dataArray.count / RELOADDATACOUNT pageCount:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
             NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
             if (type == 1) {
+                
                 NSArray * listArray = [BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]];
+
                 if (listArray.count) {
-                    [ws.courseSummaryData addObjectsFromArray:listArray];
+                    
+                    if (ws.segController.selIndex==0) {
+                        
+                        [ws.courseSummaryData addObjectsFromArray:listArray];
+                        
+                    }else if (ws.segController.selIndex==1){
+                        
+                        [ws.courseSummaryDataWaitEvaluate addObjectsFromArray:listArray];
+                        
+                    }else if (ws.segController.selIndex==2){
+                        
+                        [ws.courseSummaryDataCancled addObjectsFromArray:listArray];
+                        
+                    }else if (ws.segController.selIndex==3){
+                        
+                        [ws.courseSummaryDataCompleted addObjectsFromArray:listArray];
+                        
+                    }
+                    
                     [ws.courseSummaryTableView reloadData];
+
                 }else{
                     [ws showTotasViewWithMes:@"已经加载所有数据"];
                 }
+                
                 [ws.courseSummaryTableView.refreshFooter endRefreshing];
             }else{
                 [ws dealErrorResponseWithTableView:ws.courseSummaryTableView info:responseObject];
@@ -279,7 +359,24 @@
 {
     NSInteger count = 0;
     if (tableView == self.courseSummaryTableView) {
-        count =  self.courseSummaryData.count;
+        if (self.segController.selIndex==0) {
+            
+            count =  self.courseSummaryData.count;
+            
+        }else if (self.segController.selIndex==1){
+            
+            count =  self.courseSummaryDataWaitEvaluate.count;
+            
+        }else if (self.segController.selIndex==2){
+            
+            count =  self.courseSummaryDataCancled.count;
+            
+        }else if (self.segController.selIndex==3){
+            
+            count =  self.courseSummaryDataCompleted.count;
+            
+        }
+        
         if (!self.isNeedRefresh)
             [self.tipView1 setHidden:count];
     }
@@ -289,7 +386,23 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.courseSummaryTableView) {
-        return [CourseSummaryListCell cellHeightWithModel:self.courseSummaryData[indexPath.row]];
+        if (self.segController.selIndex==0) {
+            
+            return [CourseSummaryListCell cellHeightWithModel:self.courseSummaryData[indexPath.row]];
+
+        }else if (self.segController.selIndex==1){
+            
+            return [CourseSummaryListCell cellHeightWithModel:self.courseSummaryDataWaitEvaluate[indexPath.row]];
+
+        }else if (self.segController.selIndex==2){
+            
+            return [CourseSummaryListCell cellHeightWithModel:self.courseSummaryDataCancled[indexPath.row]];
+
+        }else if (self.segController.selIndex==3){
+            
+            return [CourseSummaryListCell cellHeightWithModel:self.courseSummaryDataCompleted[indexPath.row]];
+
+        }
     }else{
         return [CourseSummaryDayCell cellHeight];
     }
@@ -303,8 +416,20 @@
         if (!sumCell) {
             sumCell = [[CourseSummaryListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SumCell"];
         }
-        if (indexPath.row < self.courseSummaryData.count)
-            [sumCell setModel:self.courseSummaryData[indexPath.row]];
+        if (self.segController.selIndex==0) {
+            if (indexPath.row < self.courseSummaryData.count)
+                [sumCell setModel:self.courseSummaryData[indexPath.row]];
+        }else if (self.segController.selIndex==1){
+            if (indexPath.row < self.courseSummaryDataWaitEvaluate.count)
+                [sumCell setModel:self.courseSummaryDataWaitEvaluate[indexPath.row]];
+        }else if (self.segController.selIndex==2){
+            if (indexPath.row < self.courseSummaryDataCancled.count)
+                [sumCell setModel:self.courseSummaryDataCancled[indexPath.row]];
+        }else if (self.segController.selIndex==3){
+            if (indexPath.row < self.courseSummaryDataCompleted.count)
+                [sumCell setModel:self.courseSummaryDataCompleted[indexPath.row]];
+        }
+        
         return sumCell;
     }
     return [UITableViewCell new];
@@ -315,7 +440,23 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HMCourseModel  * courseModel = nil;
     if (tableView == self.courseSummaryTableView) {
-        courseModel = [[self courseSummaryData] objectAtIndex:indexPath.row];
+        if (self.segController.selIndex==0) {
+           
+            courseModel = [[self courseSummaryData] objectAtIndex:indexPath.row];
+
+        }else if (self.segController.selIndex==1){
+            
+            courseModel = [[self courseSummaryDataWaitEvaluate] objectAtIndex:indexPath.row];
+
+        }else if (self.segController.selIndex==2){
+            
+            courseModel = [[self courseSummaryDataCancled] objectAtIndex:indexPath.row];
+
+        }else if (self.segController.selIndex==3){
+            
+            courseModel = [[self courseSummaryDataCompleted] objectAtIndex:indexPath.row];
+
+        }
     }
     if (courseModel) {
         CourseDetailViewController * decv = [[CourseDetailViewController alloc] init];
@@ -338,7 +479,27 @@
 {
     HMCourseModel * model = [notification object];
     if (model) {
-        for (HMCourseModel * sumModel in self.courseSummaryData) {
+        
+        NSArray *dataArray = [NSArray array];
+        
+        if (self.segController.selIndex==0) {
+            
+            dataArray = self.courseSummaryData;
+            
+        }else if (self.segController.selIndex==1){
+            
+            dataArray = self.courseSummaryDataWaitEvaluate;
+            
+        }else if (self.segController.selIndex==2){
+            
+            dataArray = self.courseSummaryDataCancled;
+            
+        }else if (self.segController.selIndex==3){
+            
+            dataArray = self.courseSummaryDataCompleted;
+            
+        }
+        for (HMCourseModel * sumModel in dataArray) {
             if ([sumModel.courseId isEqualToString:model.courseId]) {
                 sumModel.courseStatue = model.courseStatue;
 

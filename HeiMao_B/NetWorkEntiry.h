@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
-
+#import "ModelDefine.h"
 
 
 @interface NetWorkEntiry : NSObject
@@ -104,7 +104,7 @@
  *
  *  @param userId   （req) 教练ID
  */
-+ (void)getCourseinfoWithUserId:(NSString *)userId pageIndex:(NSInteger)pageIndex pageCount:(NSInteger)pageCount
++ (void)getCourseinfoWithUserId:(NSString *)userId reservationstate:(KCourseStatue)reservationstate pageIndex:(NSInteger)pageIndex pageCount:(NSInteger)pageCount
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 

@@ -34,6 +34,7 @@
     model.courseSchedule = [dic objectStringForKey:@"subjectprocess"];
     model.telPhoto = [dic objectStringForKey:@"mobile"];
     model.commmonAddress = [dic objectStringForKey:@"address"];
+
     return model;
 }
 @end

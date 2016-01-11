@@ -24,6 +24,7 @@
 @property(nonatomic,strong)HMCarLicenseModel * carLicenseInfo;       //车型    C1本
 @property(nonatomic,strong)NSString * courseSchedule;       //课程进度 科目二第16学时
 @property(nonatomic,strong)NSString * commmonAddress;       //常用地址 北京市昌平区天通苑
+
 //评论信息
 @property(nonatomic,strong)NSMutableArray * recommendArrays;
 

@@ -206,31 +206,54 @@
     self.subTitle.text = _model.courseProgress;
     
     switch (self.model.courseStatue) {
-        case KCourseStatueRequest: //待接收
+            
+        case  KCourseStatueInvalid :
+            break;
+        case  KCourseStatueapplying :   // 预约中(新订单)
             self.statueLabel.textColor = RGB_Color(0xff, 0x66, 0x33);
+
             break;
-        case KCourseStatueOnDone: //待评论
-            self.statueLabel.textColor = RGB_Color(0xff, 0x93, 0x33);
-            break;
-        case KCourseStatueWatingToDone:  //等待教练确定课程完成
-            self.statueLabel.textColor = RGB_Color(0xff, 0x93, 0x33);
-            break;
-        case KCourseStatueStudentReject:
-        case KCourseStatueCanceld: //取消
+        case  KCourseStatueapplycancel :// 学生取消（已取消）
             self.statueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+
             break;
-        case KCourseStatueOnCommended: //评论成功
+        case  KCourseStatueapplyconfirm:  // 已确定(新订单)
+        
+            break;
+        case  KCourseStatueapplyrefuse:      // 教练拒绝或者取消（已取消）
             self.statueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+            
             break;
-        case KCourseStatueUnderWay:
+        case  KCourseStatueunconfirmfinish: //  待确认完成------------无此状态
+            self.statueLabel.textColor = RGB_Color(0xff, 0x93, 0x33);
+
+            break;
+        case  KCourseStatueucomments:    // 待评论(待评论)
+            self.statueLabel.textColor = RGB_Color(0xff, 0x93, 0x33);
+
+            break;
+        case  KCourseStatueOnCommended: // 评论成功（已完成）
+            self.statueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+
+            break;
+        case  KCourseStatuefinish: // 订单完成（已完成）
+            
+            break;
+        case  KCourseStatuesystemcancel: // 系统取消（已取消）
+            self.statueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+
+            break;
+        case  KCourseStatuesignin: // 已签到(新订单)
             self.statueLabel.textColor =  RGB_Color(0x99, 0x99, 0x99);;
+
+            break;
+        case  KCourseStatuenosignin: // 未签到(已完成)
+            self.statueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+ 
             break;
             
-        case KCourseStatueInvalid:
-            self.statueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
-            break;
-
     }
+    
     self.rightLine.backgroundColor = self.statueLabel.textColor;
     
     self.statueLabel.text = [_model getStatueString];
@@ -243,7 +266,8 @@
         self.pickAddressLabel.text = nil;
     }
 
-    [self showUnDealStatu:self.model.courseStatue == KCourseStatueRequest];
+    [self showUnDealStatu:self.model.courseStatue == KCourseStatueapplying];
+    
 }
 
 - (void)showUnDealStatu:(BOOL)isUnDeal

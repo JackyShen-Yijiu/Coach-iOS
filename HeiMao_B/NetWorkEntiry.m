@@ -178,7 +178,7 @@
  *  预约模块
  *  ====================================================================================================================================
  */
-+ (void)getCourseinfoWithUserId:(NSString *)userId pageIndex:(NSInteger)pageIndex pageCount:(NSInteger)pageCount
++ (void)getCourseinfoWithUserId:(NSString *)userId reservationstate:(KCourseStatue)reservationstate pageIndex:(NSInteger)pageIndex pageCount:(NSInteger)pageCount
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -189,6 +189,7 @@
     NSDictionary * dic = @{
                             @"coachid":userId,
                             @"index":@(pageIndex),
+                            @"reservationstate":@(reservationstate),
                             };
     [self GET:urlStr parameters:dic success:success failure:failure];
 }
