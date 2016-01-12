@@ -12,12 +12,13 @@
 #import "HMCourseModel.h"
 #import "CourseSummaryListCell.h"
 
-#import "CourseSummaryDayCell.h"
+
 #import "CourseDetailViewController.h"
 #import "NoContentTipView.h"
 #import "WMUITool.h"
 #import "ScanViewController.h"
 #import "UINavigationBar+JGNavigationBar.h"
+#import "SearchCourseViewController.h"
 
 @interface CourseViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate>
 
@@ -201,6 +202,18 @@
 - (void)rightBarBtnWithSearchDidClick
 {
     NSLog(@"搜索");
+    SearchCourseViewController *vc = [[SearchCourseViewController alloc] init];
+
+    if (self.segController.selIndex==0) {
+        vc.dataArray = self.courseSummaryData;
+    }else if (self.segController.selIndex==1){
+        vc.dataArray = self.courseSummaryDataWaitEvaluate;
+    }else if (self.segController.selIndex==2){
+        vc.dataArray = self.courseSummaryDataCancled;
+    }else if (self.segController.selIndex==3){
+        vc.dataArray = self.courseSummaryDataCompleted;
+    }
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)initUI
@@ -403,8 +416,6 @@
             return [CourseSummaryListCell cellHeightWithModel:self.courseSummaryDataCompleted[indexPath.row]];
 
         }
-    }else{
-        return [CourseSummaryDayCell cellHeight];
     }
     return 0;
 }

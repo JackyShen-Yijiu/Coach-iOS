@@ -23,6 +23,12 @@
 		B253C2DA1C3FA901001AF771 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2D91C3FA901001AF771 /* UIView+SDExtension.m */; };
 		B253C2DD1C3FAA84001AF771 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2DC1C3FAA84001AF771 /* ScanViewController.m */; };
 		B253C2E31C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2E21C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.m */; };
+		B253C2E61C43B0FF001AF771 /* SearchCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2E51C43B0FF001AF771 /* SearchCourseViewController.m */; };
+		B253C2F21C43C960001AF771 /* PermissiveAlignementMethods.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2E81C43C960001AF771 /* PermissiveAlignementMethods.c */; };
+		B253C2F31C43C960001AF771 /* PermissiveObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2EB1C43C960001AF771 /* PermissiveObject.m */; };
+		B253C2F41C43C960001AF771 /* PermissiveOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2ED1C43C960001AF771 /* PermissiveOperations.m */; };
+		B253C2F51C43C960001AF771 /* PermissiveResearchDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2EF1C43C960001AF771 /* PermissiveResearchDatabase.m */; };
+		B253C2F61C43C960001AF771 /* PermissiveScoringMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2F11C43C960001AF771 /* PermissiveScoringMatrix.m */; };
 		B2AC20371C3E2CBD0033803C /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
@@ -457,6 +463,18 @@
 		B253C2DC1C3FAA84001AF771 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
 		B253C2E11C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+JGNavigationBar.h"; sourceTree = "<group>"; };
 		B253C2E21C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+JGNavigationBar.m"; sourceTree = "<group>"; };
+		B253C2E41C43B0FF001AF771 /* SearchCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCourseViewController.h; sourceTree = "<group>"; };
+		B253C2E51C43B0FF001AF771 /* SearchCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCourseViewController.m; sourceTree = "<group>"; };
+		B253C2E81C43C960001AF771 /* PermissiveAlignementMethods.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PermissiveAlignementMethods.c; sourceTree = "<group>"; };
+		B253C2E91C43C960001AF771 /* PermissiveAlignementMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissiveAlignementMethods.h; sourceTree = "<group>"; };
+		B253C2EA1C43C960001AF771 /* PermissiveObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissiveObject.h; sourceTree = "<group>"; };
+		B253C2EB1C43C960001AF771 /* PermissiveObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissiveObject.m; sourceTree = "<group>"; };
+		B253C2EC1C43C960001AF771 /* PermissiveOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissiveOperations.h; sourceTree = "<group>"; };
+		B253C2ED1C43C960001AF771 /* PermissiveOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissiveOperations.m; sourceTree = "<group>"; };
+		B253C2EE1C43C960001AF771 /* PermissiveResearchDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissiveResearchDatabase.h; sourceTree = "<group>"; };
+		B253C2EF1C43C960001AF771 /* PermissiveResearchDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissiveResearchDatabase.m; sourceTree = "<group>"; };
+		B253C2F01C43C960001AF771 /* PermissiveScoringMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissiveScoringMatrix.h; sourceTree = "<group>"; };
+		B253C2F11C43C960001AF771 /* PermissiveScoringMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissiveScoringMatrix.m; sourceTree = "<group>"; };
 		B2AC20351C3E2CBD0033803C /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
 		B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
@@ -1194,6 +1212,23 @@
 			path = libqrencode;
 			sourceTree = "<group>";
 		};
+		B253C2E71C43C960001AF771 /* QCSearch */ = {
+			isa = PBXGroup;
+			children = (
+				B253C2E81C43C960001AF771 /* PermissiveAlignementMethods.c */,
+				B253C2E91C43C960001AF771 /* PermissiveAlignementMethods.h */,
+				B253C2EA1C43C960001AF771 /* PermissiveObject.h */,
+				B253C2EB1C43C960001AF771 /* PermissiveObject.m */,
+				B253C2EC1C43C960001AF771 /* PermissiveOperations.h */,
+				B253C2ED1C43C960001AF771 /* PermissiveOperations.m */,
+				B253C2EE1C43C960001AF771 /* PermissiveResearchDatabase.h */,
+				B253C2EF1C43C960001AF771 /* PermissiveResearchDatabase.m */,
+				B253C2F01C43C960001AF771 /* PermissiveScoringMatrix.h */,
+				B253C2F11C43C960001AF771 /* PermissiveScoringMatrix.m */,
+			);
+			path = QCSearch;
+			sourceTree = "<group>";
+		};
 		B636E4EC57D3A22E3FC68559 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1639,6 +1674,8 @@
 				B253C2DC1C3FAA84001AF771 /* ScanViewController.m */,
 				B8AFED171BDB96AC00EF8726 /* CourseViewController.h */,
 				B8AFED181BDB96AC00EF8726 /* CourseViewController.m */,
+				B253C2E41C43B0FF001AF771 /* SearchCourseViewController.h */,
+				B253C2E51C43B0FF001AF771 /* SearchCourseViewController.m */,
 				B2AC20351C3E2CBD0033803C /* ScheduleViewController.h */,
 				B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */,
 				B865C1771BDCA49400C1E681 /* CourseSummaryListCell.h */,
@@ -2322,6 +2359,7 @@
 		B8C458581BDB59AC00901F71 /* ThirdPary */ = {
 			isa = PBXGroup;
 			children = (
+				B253C2E71C43C960001AF771 /* QCSearch */,
 				B253C2D81C3FA901001AF771 /* UIView+SDExtension.h */,
 				B253C2D91C3FA901001AF771 /* UIView+SDExtension.m */,
 				B253C2BC1C3FA742001AF771 /* libqrencode */,
@@ -2828,6 +2866,7 @@
 				B8BFA2731BF64CE2002D7F22 /* EMGifImage.m in Sources */,
 				B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */,
 				D5D50F941BFC135B00F54097 /* finishMessageView.m in Sources */,
+				B253C2F51C43C960001AF771 /* PermissiveResearchDatabase.m in Sources */,
 				B8447A0B1BE0D394004E5E15 /* PickerItemView.m in Sources */,
 				D5F72BD01BF9BC9400B972B0 /* GenderViewController.m in Sources */,
 				B8BC50801BF38A390007B029 /* PSTGridLayoutInfo.m in Sources */,
@@ -2850,6 +2889,7 @@
 				D5D50E9E1BF9DDA600F54097 /* StudentListViewController.m in Sources */,
 				B8BC50EF1BF393D00007B029 /* EaseFacialView.m in Sources */,
 				B8BC50561BF38A390007B029 /* MJRefreshGifFooter.m in Sources */,
+				B253C2F41C43C960001AF771 /* PermissiveOperations.m in Sources */,
 				B8BC507E1BF38A390007B029 /* PSTCollectionViewLayout.m in Sources */,
 				B865C1821BDD2DE800C1E681 /* BaseModelMethod.m in Sources */,
 				B873EF001C21C2C5000579CB /* SMPageControl.m in Sources */,
@@ -2857,7 +2897,9 @@
 				D5D50F5E1BFAD6E800F54097 /* buttonSelectedModel.m in Sources */,
 				B8BC505E1BF38A390007B029 /* MWCaptionView.m in Sources */,
 				B8BC50DF1BF393D00007B029 /* EaseUserCell.m in Sources */,
+				B253C2E61C43B0FF001AF771 /* SearchCourseViewController.m in Sources */,
 				B84479E51BE07A46004E5E15 /* StudentHomeUserBasicInfoCell.m in Sources */,
+				B253C2F21C43C960001AF771 /* PermissiveAlignementMethods.c in Sources */,
 				B8C458721BDB59AC00901F71 /* UIView+Sizes.m in Sources */,
 				D5F72BD31BF9BD8700B972B0 /* IDCardNumViewController.m in Sources */,
 				B84479D51BDF7890004E5E15 /* CourseDetailView.m in Sources */,
@@ -2890,6 +2932,7 @@
 				B8BC50881BF38A390007B029 /* EaseUserModel.m in Sources */,
 				B8BC50811BF38A390007B029 /* PSTGridLayoutItem.m in Sources */,
 				D5F72BCA1BF9AB6700B972B0 /* UIDevice+JEsystemVersion.m in Sources */,
+				B253C2F61C43C960001AF771 /* PermissiveScoringMatrix.m in Sources */,
 				B86EB3591BDB50EB0014EBD7 /* AppDelegate.m in Sources */,
 				B8BFA2411BF645E4002D7F22 /* EaseRecordView.m in Sources */,
 				B8BC50D91BF393D00007B029 /* EaseConversationListViewController.m in Sources */,
@@ -3039,6 +3082,7 @@
 				B8BC50481BF38A390007B029 /* EMCDDeviceManager+Microphone.m in Sources */,
 				B8BC507F1BF38A390007B029 /* PSTCollectionViewUpdateItem.m in Sources */,
 				B8AFED1D1BDB988000EF8726 /* TeacherCenterController.m in Sources */,
+				B253C2F31C43C960001AF771 /* PermissiveObject.m in Sources */,
 				B8BC50751BF38A390007B029 /* UIImageView+EMWebCache.m in Sources */,
 				B8C458881BDB5BAD00901F71 /* NetWorkEntiry.m in Sources */,
 				B8BC50ED1BF393D00007B029 /* EaseTextView.m in Sources */,
