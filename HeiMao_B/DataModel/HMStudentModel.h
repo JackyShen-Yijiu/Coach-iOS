@@ -11,6 +11,7 @@
 #import "HMClassInfoModel.h"
 #import "HMPortraitInfoModel.h"
 #import "HMCarLicenseModel.h"
+#import "HMSubjectModel.h"
 
 @interface HMStudentModel : NSObject
 //用户信息
@@ -28,8 +29,13 @@
 //评论信息
 @property(nonatomic,strong)NSMutableArray * recommendArrays;
 
-//@property(nonatomic,strong)HMClassModel * classInfo;
 
+/*
+ * v1.1.0添加剩余多少课时，漏课统计
+ */
+@property(nonatomic,assign)NSInteger leavecoursecount;
+@property(nonatomic,assign)NSInteger missingcoursecount;
+@property(nonatomic,strong)HMSubjectModel* subjectInfo;
 + (HMStudentModel *)converJsonDicToModel:(NSDictionary *)dic;
 
 @end

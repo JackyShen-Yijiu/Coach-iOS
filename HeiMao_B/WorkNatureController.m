@@ -108,7 +108,7 @@
         [dataArray addObject:dic];
     }
     
-    NSString *url = [NSString stringWithFormat:BASEURL,kupdateUserInfo];
+    NSString *url = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
     NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"subject":[dataArray JSONString]};
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];

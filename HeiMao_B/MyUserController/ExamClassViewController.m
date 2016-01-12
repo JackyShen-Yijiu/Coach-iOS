@@ -75,7 +75,7 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
     [self.dataArray removeAllObjects];
 
     
-    NSString *urlString = [NSString stringWithFormat:BASEURL,kExamClassType];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kExamClassType];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
         
@@ -121,7 +121,7 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
         return;
     }
     
-    NSString *urlString = [NSString stringWithFormat:BASEURL,kUpClassType];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kUpClassType];
     NSMutableString * str = [NSMutableString stringWithCapacity:0];
     
     for (ExamClassModel * model in self.dataArray) {

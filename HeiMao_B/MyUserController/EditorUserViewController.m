@@ -201,7 +201,7 @@
     
     __weak EditorUserViewController *weakself = self;
     __block NSData *gcdPhotoData = photeoData;
-    NSString *qiniuUrl = [NSString stringWithFormat:BASEURL,kQiniuUpdateUrl];
+    NSString *qiniuUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kQiniuUpdateUrl];
     [JENetwoking startDownLoadWithUrl:qiniuUrl postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
         
         NSDictionary *dataDic = data;
@@ -213,7 +213,7 @@
             if (info) {
                 NSLog(@"key = %@",key);
                 NSString *upImageUrl = [NSString stringWithFormat:kQiniuImageUrl,key];
-                NSString *updateUserInfoUrl = [NSString stringWithFormat:BASEURL,kupdateUserInfo];
+                NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
                 NSDictionary *headPortrait  = @{@"originalpic":upImageUrl,@"thumbnailpic":@"",@"width":@"",@"height":@""};
                 
                 NSDictionary *dicParam = @{@"headportrait":headPortrait,@"coachid":[UserInfoModel defaultUserInfo].userID};

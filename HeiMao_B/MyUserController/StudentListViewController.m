@@ -12,8 +12,9 @@
 #import <Chameleon.h>
 #import "ToolHeader.h"
 #import "StudentListCell.h"
-#import "StudentListModel.h"
+#import "HMStudentModel.h"
 #import "SutdentHomeController.h"
+
 
 static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&index=1";
 
@@ -54,21 +55,14 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
 }
 - (void)startDownLoad {
     NSString *url = [NSString stringWithFormat:kstudentList,[UserInfoModel defaultUserInfo].userID];
-    NSString *urlString = [NSString stringWithFormat:BASEURL,url];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],url];
     
     [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
-        DYNSLog(@"data = %@",data);
         NSArray *param = [data objectForKey:@"data"];
         if (param != nil && ![param isEqual:[NSNull null]] && param.count > 0) {
             for (NSDictionary *dic in param) {
-                StudentListModel *wallet = [[StudentListModel alloc] init];
-                wallet.infoId = dic[@"_id"];
-                wallet.mobile = dic[@"mobile"];
-                wallet.name = dic[@"name"];
-                wallet.headportrait = dic[@"headportrait"];
-                wallet.subject = dic[@"subject"];
-                wallet.subjectprocess = dic[@"subjectprocess"];
-                [self.dataArray addObject:wallet];
+                HMStudentModel *stuModel = [HMStudentModel converJsonDicToModel:dic];
+                [self.dataArray addObject:stuModel];
             }
         }
         
@@ -87,10 +81,8 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
     if (cell == nil) {
         cell = [[StudentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    StudentListModel *model = self.dataArray[indexPath.row];
-    [cell.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.headportrait[@"originalpic"]] placeholderImage:[UIImage imageNamed:@"littleImage.png"]];
-    cell.contentLabel.text = model.name;
-    cell.detailContentLabel.text = model.subjectprocess;
+    HMStudentModel *model = self.dataArray[indexPath.row];
+    cell.stuModel = model;
     return cell;
 }
 
@@ -98,8 +90,8 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     SutdentHomeController * stuH = [[SutdentHomeController alloc] init];
-    StudentListModel *model = self.dataArray[indexPath.row];
-    stuH.studentId = model.infoId;
+    HMStudentModel *model = self.dataArray[indexPath.row];
+    stuH.studentId = model.userId;
     [self.navigationController pushViewController:stuH animated:YES];
 
 }

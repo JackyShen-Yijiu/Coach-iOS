@@ -21,6 +21,7 @@
 @property(nonatomic,strong)UIButton * buttonRight;
 @property(nonatomic,strong)UIView * recomendTitle;
 @property(nonatomic,assign)BOOL isNeedRefresh;
+@property(nonatomic,strong)UIView * nextView;
 @end
 
 @implementation SutdentHomeController
@@ -168,7 +169,7 @@
 #pragma mark - TableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.model ? 4 : 0;
+    return self.model ? 5 : 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -187,6 +188,10 @@
     if(section == 2) {
         return [self recomendTitle].height;
     }
+    if(section == 4){
+        //最后一行
+        return 65.f;
+    }
     return 0;
 }
 
@@ -195,19 +200,25 @@
     if(section == 2){
         return self.recomendTitle;
     }
+    
+    if(section == 4 && self.model.leavecoursecount == 0){
+        //最后一行
+        [self setNExtViewTitle:[NSString stringWithFormat:@"报考%@",self.model.subjectInfo.subJectName]];
+        return self.nextView;
+    }
     return [UIView new];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 3) {
-        return 20.f;
+        return 20;
     }
     return 0.f;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    return [[UIView alloc] init];
+    return [[UIView alloc] init];;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -277,6 +288,34 @@
     }
 }
 
+
+- (UIView *)nextView
+{
+    if (!_nextView){
+        _nextView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 65)];
+        UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(15, 10, self.view.width - 30, 45)];
+        button.backgroundColor = RGB_Color(33, 124, 236);
+        button.tag = 100;
+        [button setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor]  forState:UIControlStateHighlighted];
+        [[button titleLabel] setFont:[UIFont systemFontOfSize:12.f]];
+        [button addTarget:self action:@selector(buttonDidClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_nextView addSubview:button];
+    }
+    return _nextView;
+}
+
+- (void)setNExtViewTitle:(NSString *)title
+{
+    UIButton * button = (UIButton *)[[self nextView] viewWithTag:100];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitle:title forState:UIControlStateHighlighted];
+}
+
+- (void)buttonDidClick:(UIButton *)button
+{
+    [self showTotasViewWithMes:@"等待服务接口"];
+}
 
 #pragma mark - GetMethod
 - (UIView *)recomendTitle

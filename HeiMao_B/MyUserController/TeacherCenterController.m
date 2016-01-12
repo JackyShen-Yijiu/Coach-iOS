@@ -185,10 +185,10 @@
     NSString * driveSname = [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
     
     // "工作性质"
-    NSString * type = [[UserInfoModel defaultUserInfo].coachtype objectStringForKey:@"type"];
-    NSString *workProperty = [WorkTypeModel converTypeToString:(KCourseWorkType)type];
-    NSLog(@"type:%@-workProperty:%@",type,workProperty);
-    
+//    NSString * type = [[UserInfoModel defaultUserInfo].coachtype objectStringForKey:@"type"];
+//    NSString *workProperty = [WorkTypeModel converTypeToString:(KCourseWorkType)type];
+//    NSLog(@"type:%@-workProperty:%@",type,workProperty);
+    NSString * workProperty = @"";
     NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
     NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
     NSString * workSetDes = @"未设置";

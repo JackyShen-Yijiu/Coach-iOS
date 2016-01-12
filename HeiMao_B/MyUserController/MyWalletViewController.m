@@ -238,7 +238,7 @@ static NSString *const kMyWalletUrl = @"userinfo/getmywallet?userid=%@&usertype=
     [self.dataArray removeAllObjects];
     
     NSString *url = [NSString stringWithFormat:kMyWalletUrl,[UserInfoModel defaultUserInfo].userID,@"0"];
-    NSString *urlString = [NSString stringWithFormat:BASEURL,url];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],url];
     [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
         DYNSLog(@"data = %@",data);
         NSDictionary *param = [data objectForKey:@"data"];

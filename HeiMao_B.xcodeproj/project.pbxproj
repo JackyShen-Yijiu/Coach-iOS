@@ -357,6 +357,7 @@
 		B8DDB7B81BE47FDE008FE867 /* HMTrainaddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDB7B71BE47FDE008FE867 /* HMTrainaddressModel.m */; };
 		B8DDB7BB1BE4879C008FE867 /* HMCarLicenseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDB7BA1BE4879C008FE867 /* HMCarLicenseModel.m */; };
 		B8DDB7BE1BE49110008FE867 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDB7BD1BE49110008FE867 /* UserInfoModel.m */; };
+		B8E328FD1C453C3400F682D1 /* HMSubjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E328FC1C453C3400F682D1 /* HMSubjectModel.m */; };
 		B8FFDF691BDE78E6005BD535 /* FDCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFDF661BDE78E6005BD535 /* FDCalendar.m */; };
 		B8FFDF6A1BDE78E6005BD535 /* FDCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFDF681BDE78E6005BD535 /* FDCalendarItem.m */; };
 		D5BCFEE21BF430DE0019402C /* logoImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5BCFEE11BF430DE0019402C /* logoImage@2x.png */; };
@@ -1014,6 +1015,8 @@
 		B8DDB7BA1BE4879C008FE867 /* HMCarLicenseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMCarLicenseModel.m; sourceTree = "<group>"; };
 		B8DDB7BC1BE49110008FE867 /* UserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
 		B8DDB7BD1BE49110008FE867 /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
+		B8E328FB1C453C3400F682D1 /* HMSubjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSubjectModel.h; sourceTree = "<group>"; };
+		B8E328FC1C453C3400F682D1 /* HMSubjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSubjectModel.m; sourceTree = "<group>"; };
 		B8FFDF651BDE78E6005BD535 /* FDCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCalendar.h; sourceTree = "<group>"; };
 		B8FFDF661BDE78E6005BD535 /* FDCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendar.m; sourceTree = "<group>"; };
 		B8FFDF671BDE78E6005BD535 /* FDCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCalendarItem.h; sourceTree = "<group>"; };
@@ -1343,6 +1346,8 @@
 				B8DDB7B71BE47FDE008FE867 /* HMTrainaddressModel.m */,
 				B865C1641BDC969700C1E681 /* HMStudentModel.h */,
 				B865C1651BDC969700C1E681 /* HMStudentModel.m */,
+				B8E328FB1C453C3400F682D1 /* HMSubjectModel.h */,
+				B8E328FC1C453C3400F682D1 /* HMSubjectModel.m */,
 				B84479E01BE0765B004E5E15 /* HMRecomendModel.h */,
 				B84479E11BE0765B004E5E15 /* HMRecomendModel.m */,
 				B865C1711BDC9F1C00C1E681 /* HMPortraitInfoModel.h */,
@@ -2957,6 +2962,7 @@
 				B8C458801BDB5B5C00901F71 /* ToastAlertView.m in Sources */,
 				B8BC50DC1BF393D00007B029 /* EaseRefreshTableViewController.m in Sources */,
 				D5F72BB71BF99CFA00B972B0 /* WMUITool.m in Sources */,
+				B8E328FD1C453C3400F682D1 /* HMSubjectModel.m in Sources */,
 				B8BC50F51BF394B20007B029 /* ConversationListController.m in Sources */,
 				B865C17C1BDCA4A300C1E681 /* CourseSummaryDayCell.m in Sources */,
 				D5F72BCD1BF9BAED00B972B0 /* SignatureViewController.m in Sources */,

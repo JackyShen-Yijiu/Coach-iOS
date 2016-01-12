@@ -17,7 +17,7 @@
 @property(nonatomic,strong)UILabel * courseEndTime;
 @property(nonatomic,strong)UIView * midLine;
 @property(nonatomic,strong)UIView * bottomLine;
-
+@property(nonatomic,strong)UILabel * couresProDesLabel;
 @end
 
 @implementation CourseSummaryDayCell
@@ -71,6 +71,14 @@
     [self.contentView addSubview:self.courseEndTime];
     
     
+    self.couresProDesLabel = [[UILabel alloc] init];
+    self.couresProDesLabel.textAlignment = NSTextAlignmentLeft;
+    self.couresProDesLabel.font = [UIFont systemFontOfSize:14.f];
+    self.couresProDesLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+    self.couresProDesLabel.backgroundColor = [UIColor clearColor];
+    self.couresProDesLabel.numberOfLines = 1;
+    [self.contentView addSubview:self.couresProDesLabel];
+    
     self.midLine = [self getOnelineView];
     self.midLine.backgroundColor = RGB_Color(40, 121, 243);
     [self.contentView addSubview:self.midLine];
@@ -117,6 +125,11 @@
         make.top.equalTo(@(([[self class] cellHeight] - 16 - 10 - 14)/2.f));
     }];
     
+    [self.couresProDesLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.contentView).offset(12.f);
+        
+        
+    }];
     
     [self.subTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mainTitle);

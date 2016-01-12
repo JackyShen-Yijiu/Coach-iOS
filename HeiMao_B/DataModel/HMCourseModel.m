@@ -50,6 +50,8 @@
     model.studentInfo = [HMStudentModel converJsonDicToModel:[dic objectInfoForKey:@"userid"]];
     model.classType = [HMClassInfoModel converJsonDicToModel:[dic objectInfoForKey:@"subject"]];
 
+    model.leavecoursecount = [[dic objectForKey:@"leavecoursecount"] intValue];
+    model.missingcoursecount = [[dic objectForKey:@"missingcoursecount"] intValue];
     return model;
 }
 

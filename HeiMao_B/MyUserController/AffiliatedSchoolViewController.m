@@ -128,7 +128,7 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
     NSDictionary *dic = self.dataArray[indexPath.row];
 
     [UserInfoModel defaultUserInfo].schoolId = dic[@"schoolid"];
-    NSString *updateUserInfoUrl = [NSString stringWithFormat:BASEURL,kupdateUserInfo];
+    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
     
     NSDictionary *dicParam = @{@"driveschoolid":dic[@"schoolid"],@"coachid":[UserInfoModel defaultUserInfo].userID};
     
@@ -151,7 +151,7 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     searchText = [searchText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *url = [NSString stringWithFormat:kAffiliatedSchool,searchText];
-    NSString *urlstring = [NSString stringWithFormat:BASEURL,url];
+    NSString *urlstring = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:urlstring parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {

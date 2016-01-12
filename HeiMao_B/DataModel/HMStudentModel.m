@@ -34,7 +34,10 @@
     model.courseSchedule = [dic objectStringForKey:@"subjectprocess"];
     model.telPhoto = [dic objectStringForKey:@"mobile"];
     model.commmonAddress = [dic objectStringForKey:@"address"];
-
+    model.subjectInfo = [HMSubjectModel converJsonDicToModel:[dic objectInfoForKey:@"subject"]];
+    model.leavecoursecount = [[dic objectForKey:@"leavecoursecount"] intValue];
+    model.missingcoursecount = [[dic objectForKey:@"missingcoursecount"] intValue];
+    
     return model;
 }
 @end

@@ -73,7 +73,7 @@
 - (void)clickRight:(UIButton *)sender {
     //
     DYNSLog(@"userid = %@",self.modifyNameTextField.text);
-    NSString *updateUserInfoUrl = [NSString stringWithFormat:BASEURL,kupdateUserInfo];
+    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
     
     NSDictionary *dicParam = @{@"drivinglicensenumber":self.modifyNameTextField.text,@"coachid":[UserInfoModel defaultUserInfo].userID};
     

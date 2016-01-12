@@ -97,7 +97,7 @@ self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
 - (void)startDownLoad {
     
-    NSString *urlString = [NSString stringWithFormat:BASEURL,shopListAPI];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],shopListAPI];
     [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
         DYNSLog(@"data = %@",data);
         
