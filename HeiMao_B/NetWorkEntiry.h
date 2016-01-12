@@ -118,6 +118,16 @@
 + (void)getAllCourseInfoWithUserId:(NSString *)userId  DayTime:(NSString *)dayTime
                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+/**
+ *  获取教练每个月的日程安排
+ *
+ *  @param userId （req）教练ID
+ *  @param yearTime 年
+ *  @param monthTime 月
+ */
++ (void)getAllCourseInfoWithUserId:(NSString *)userId  yearTime:(NSString *)yearTime monthTime:(NSString *)monthTime
+                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  *  获取教练每天的预约数据

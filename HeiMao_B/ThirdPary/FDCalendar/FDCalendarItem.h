@@ -36,7 +36,7 @@ typedef NS_ENUM(NSInteger,KCellStation){
 /*
  *  当月请假日期
  */
-@property (nonatomic , copy) NSString *restStr;
+@property (nonatomic , strong) NSArray *restArray;
 /*
  *  刷新界面
  */

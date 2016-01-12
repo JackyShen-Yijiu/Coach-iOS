@@ -144,6 +144,8 @@
 #pragma mark LoadDayData
 - (void)fdCalendar:(FDCalendar *)calendar didSelectedDate:(NSDate *)date
 {
+    NSLog(@"切换日历代理方法 %s",__func__);
+    
     if (!self.dateFormattor) {
         self.dateFormattor = [[NSDateFormatter alloc] init];
         [self.dateFormattor setDateFormat:@"yyyy-M-d"];
@@ -153,16 +155,24 @@
     
     WS(ws);
     [NetWorkEntiry getAllCourseInfoWithUserId:userId DayTime:dataStr  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"%s responseObject:%@",__func__,responseObject);
+        
         NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
         
         if (type == 1) {
+            
             ws.courseDayTableData = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [ws.courseDayTableView reloadData];
             });
+            
         }else{
+            
             [ws dealErrorResponseWithTableView:nil info:responseObject];
         }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [ws netErrorWithTableView:nil];
         

@@ -49,6 +49,7 @@
         _restLabel.font = [UIFont systemFontOfSize:10];
         _restLabel.backgroundColor = [UIColor clearColor];
         _restLabel.textColor = RGB_Color(31, 124, 235);
+        _restLabel.text = @"休";
         _restLabel.hidden = YES;
         [self addSubview:_restLabel];
     }
@@ -182,7 +183,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
 
 - (void)reloadData
 {
-    NSLog(@"reloadData.restStr:%@",self.restStr);
+    NSLog(@"reloadData.restArray:%@",self.restArray);
     NSLog(@"reloadData.bookArray:%@",self.bookArray);
     
     [self.collectionView reloadData];
@@ -378,13 +379,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
         cell.chineseDayLabel.text = [self chineseCalendarOfDate:[self dateOfMonth:FDCalendarMonthCurrent WithDay:day]];
         
         // 根据服务器返回数据判断是否休假
-        if (self.restStr && [self.restStr length] != 0 && [cell.dayLabel.text isEqualToString:self.restStr]) {
-            cell.restLabel.hidden = NO;
-            cell.restLabel.text = @"休";
-        }else{
-            cell.restLabel.hidden = YES;
-            cell.restLabel.text = nil;
-        }
+        cell.restLabel.hidden = ![self isRest:self.restArray day:cell.dayLabel.text];
         
         // 根据服务器返回数据判断是否预约
         cell.pointView.hidden = ![self isBook:self.bookArray day:cell.dayLabel.text];
@@ -400,6 +395,21 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     }
     
     return cell;
+}
+
+- (BOOL)isRest:(NSArray *)restArray day:(NSString *)day
+{
+    
+    if (restArray && restArray.count>0) {// 休假
+        
+        return [restArray containsObject:day];
+        
+    }else{// 未休假
+        
+        return NO;
+        
+    }
+    
 }
 
 - (BOOL)isBook:(NSArray *)bookArray day:(NSString *)day

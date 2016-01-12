@@ -11,7 +11,7 @@
 #import "NSString+MD5.h"
 #define KNETBASEURL
 
-#define  HOST_TEST_DAMIAN  @"http://101.200.204.240:8181/api/v1"
+#define  HOST_TEST_DAMIAN  @"http://101.200.204.240:8181/api/v1/"
 
 #define  HOST_LINE_DOMAIN  @"http://123.57.63.15:8181/api/v1"
 
@@ -193,6 +193,30 @@
     [self GET:urlStr parameters:dic success:success failure:failure];
 }
 
+
+/**
+ *  获取教练每个月的日程安排
+ *
+ *  @param userId （req）教练ID
+ *  @param yearTime 年
+ *  @param monthTime 月
+ */
++ (void)getAllCourseInfoWithUserId:(NSString *)userId  yearTime:(NSString *)yearTime monthTime:(NSString *)monthTime
+                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if (!userId || !yearTime || !monthTime) {
+        return [self missParagramercallBackFailure:failure];
+    }
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmonthapplydata",[self domain]];
+    NSDictionary * dic = @{
+                           @"coachid":userId,
+                           @"year":yearTime,
+                           @"month":monthTime,
+                           };
+    [self GET:urlStr parameters:dic success:success failure:failure];
+    
+}
 
 + (void)getAllCourseInfoWithUserId:(NSString *)userId  DayTime:(NSString *)dayTime
                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
