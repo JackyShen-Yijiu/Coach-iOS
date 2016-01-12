@@ -11,7 +11,7 @@
 #import "NSString+MD5.h"
 #define KNETBASEURL
 
-#define  HOST_TEST_DAMIAN  @"http://101.200.204.240:8181/api/v1/"
+#define  HOST_TEST_DAMIAN  @"http://123.57.63.15:8181/api/v1"
 
 #define  HOST_LINE_DOMAIN  @"http://123.57.63.15:8181/api/v1"
 

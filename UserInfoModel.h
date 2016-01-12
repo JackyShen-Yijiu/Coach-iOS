@@ -34,12 +34,20 @@
 
 @property(nonatomic,assign)BOOL setClassMode;
 
+//请假开始时间
+@property(nonatomic,strong)NSString *leavebegintime;
+//请假结束时间
+@property(nonatomic,strong)NSString * leaveendtime;
+
 @property(nonatomic,strong)NSString *worktimedesc;
 @property(nonatomic,strong)NSArray * workweek;
 @property(nonatomic,strong)NSString *beginTime;
 @property(nonatomic,strong)NSString *endTime;
 @property(nonatomic,strong)NSString * md5Pass;
 @property(nonatomic,strong)NSString * invitationcode;
+
+//工作性质
+@property(nonatomic,strong)NSDictionary * coachtype;
 
 + (UserInfoModel *)defaultUserInfo;
 

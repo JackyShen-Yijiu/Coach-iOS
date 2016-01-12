@@ -114,6 +114,12 @@
     _Gender = [info objectForKey:@"Gender"];
     _introduction = [info objectForKey:@"introduction"];
     _workweek = [info objectArrayForKey:@"workweek"];
+    
+    _coachtype = [info objectForKey:@"coachtype"];
+    
+    _leavebegintime = [info objectForKey:@"leavebegintime"];
+    _leaveendtime = [info objectForKey:@"leaveendtime"];
+
     [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:self.userID password:self.md5Pass];
   
     if (![[self class] isLogin]) {
@@ -303,6 +309,15 @@
         [mdic setValue:driveschoolinfo forKey:@"driveschoolinfo"];
         [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
 //        [UserInfoModel storeData:driveschoolinfo forKey:@"driveschoolinfo"];
+    }
+}
+- (void)setCoachtype:(NSDictionary *)coachtype {
+    _coachtype = coachtype;
+    if (coachtype) {
+        NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
+        NSMutableDictionary * mdic = [dic mutableCopy];
+        [mdic setValue:coachtype forKey:@"coachtype"];
+        [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
     }
 }
 - (void)setSchoolId:(NSString *)schoolId
