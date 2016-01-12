@@ -27,8 +27,8 @@
 		B253C2F21C43C960001AF771 /* PermissiveAlignementMethods.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2E81C43C960001AF771 /* PermissiveAlignementMethods.c */; };
 		B253C2F31C43C960001AF771 /* PermissiveObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2EB1C43C960001AF771 /* PermissiveObject.m */; };
 		B253C2F41C43C960001AF771 /* PermissiveOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2ED1C43C960001AF771 /* PermissiveOperations.m */; };
-		B253C2F51C43C960001AF771 /* PermissiveResearchDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2EF1C43C960001AF771 /* PermissiveResearchDatabase.m */; };
 		B253C2F61C43C960001AF771 /* PermissiveScoringMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2F11C43C960001AF771 /* PermissiveScoringMatrix.m */; };
+		B253C2FE1C45203F001AF771 /* PermissiveResearchDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2FD1C45203F001AF771 /* PermissiveResearchDatabase.m */; };
 		B2AC20371C3E2CBD0033803C /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
@@ -474,9 +474,9 @@
 		B253C2EC1C43C960001AF771 /* PermissiveOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissiveOperations.h; sourceTree = "<group>"; };
 		B253C2ED1C43C960001AF771 /* PermissiveOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissiveOperations.m; sourceTree = "<group>"; };
 		B253C2EE1C43C960001AF771 /* PermissiveResearchDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissiveResearchDatabase.h; sourceTree = "<group>"; };
-		B253C2EF1C43C960001AF771 /* PermissiveResearchDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissiveResearchDatabase.m; sourceTree = "<group>"; };
 		B253C2F01C43C960001AF771 /* PermissiveScoringMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissiveScoringMatrix.h; sourceTree = "<group>"; };
 		B253C2F11C43C960001AF771 /* PermissiveScoringMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissiveScoringMatrix.m; sourceTree = "<group>"; };
+		B253C2FD1C45203F001AF771 /* PermissiveResearchDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissiveResearchDatabase.m; sourceTree = "<group>"; };
 		B2AC20351C3E2CBD0033803C /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
 		B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
@@ -1228,7 +1228,7 @@
 				B253C2EC1C43C960001AF771 /* PermissiveOperations.h */,
 				B253C2ED1C43C960001AF771 /* PermissiveOperations.m */,
 				B253C2EE1C43C960001AF771 /* PermissiveResearchDatabase.h */,
-				B253C2EF1C43C960001AF771 /* PermissiveResearchDatabase.m */,
+				B253C2FD1C45203F001AF771 /* PermissiveResearchDatabase.m */,
 				B253C2F01C43C960001AF771 /* PermissiveScoringMatrix.h */,
 				B253C2F11C43C960001AF771 /* PermissiveScoringMatrix.m */,
 			);
@@ -2884,7 +2884,6 @@
 				B8BFA2731BF64CE2002D7F22 /* EMGifImage.m in Sources */,
 				B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */,
 				D5D50F941BFC135B00F54097 /* finishMessageView.m in Sources */,
-				B253C2F51C43C960001AF771 /* PermissiveResearchDatabase.m in Sources */,
 				B8447A0B1BE0D394004E5E15 /* PickerItemView.m in Sources */,
 				D5F72BD01BF9BC9400B972B0 /* GenderViewController.m in Sources */,
 				B8BC50801BF38A390007B029 /* PSTGridLayoutInfo.m in Sources */,
@@ -2972,6 +2971,7 @@
 				D5D50F9E1BFC135B00F54097 /* MagicMainTableViewController.m in Sources */,
 				B8BC50451BF38A390007B029 /* EMAudioPlayerUtil.m in Sources */,
 				B8C4586E1BDB59AC00901F71 /* AFNetworkActivityLogger.m in Sources */,
+				B253C2FE1C45203F001AF771 /* PermissiveResearchDatabase.m in Sources */,
 				B8BC50E01BF393D00007B029 /* EaseBaseMessageCell.m in Sources */,
 				B865C1631BDC95B000C1E681 /* HMCourseModel.m in Sources */,
 				B8BC50531BF38A390007B029 /* MJRefreshComponent.m in Sources */,
