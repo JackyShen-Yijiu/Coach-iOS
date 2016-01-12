@@ -25,7 +25,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 @implementation SetupViewController
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = @[@[@"预约提醒",@"新消息通知",@"开课提醒"],@[@"关于我们",@"去评分",@"反馈"]];
+        _dataArray = @[@[@"预约提醒",@"新消息通知",@"自动接收预约"],@[@"关于我们",@"去评分",@"反馈"]];
     }
     return _dataArray;
 }
@@ -226,7 +226,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
                 [alerview show];
             }
         }];
-    }else if (sender.tag - 100 == 2) {
+    }else if (sender.tag - 100 == 2) {// 自动接收预约
         if (sender.on == YES) {
             DYNSLog(@"sender.on = %d",sender.on);
             [mubdic setObject:@"1" forKey:@"classremind"];
