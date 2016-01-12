@@ -50,6 +50,12 @@
     model.studentInfo = [HMStudentModel converJsonDicToModel:[dic objectInfoForKey:@"userid"]];
     model.classType = [HMClassInfoModel converJsonDicToModel:[dic objectInfoForKey:@"subject"]];
 
+    // 剩余课时
+    model.leavecoursecount = [dic objectStringForKey:@"leavecoursecount"];
+
+    // 倒车入科(学习内容)
+    model.learningcontent = [dic objectStringForKey:@"learningcontent"];
+
     return model;
 }
 

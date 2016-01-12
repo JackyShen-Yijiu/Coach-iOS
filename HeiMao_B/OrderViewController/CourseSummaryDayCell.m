@@ -18,6 +18,11 @@
 @property(nonatomic,strong)UIView * midLine;
 @property(nonatomic,strong)UIView * bottomLine;
 
+// 剩余课时
+@property(nonatomic,strong)UILabel * surplusClassLabel;
+// 侧方停车等科目
+@property(nonatomic,strong)UILabel * subjectLabel;
+
 @end
 
 @implementation CourseSummaryDayCell
@@ -55,12 +60,26 @@
     self.subTitle = [[UILabel alloc] init];
     self.subTitle.textAlignment = NSTextAlignmentLeft;
     self.subTitle.font = [UIFont systemFontOfSize:14.f];
-    self.subTitle.textColor = RGB_Color(0x99, 0x99, 0x99);
+    self.subTitle.textColor = RGB_Color(0x33, 0x33, 0x33);
     self.subTitle.backgroundColor = [UIColor clearColor];
     self.subTitle.numberOfLines = 1;
     [self.contentView addSubview:self.subTitle];
     
-   
+    self.surplusClassLabel = [[UILabel alloc] init];
+    self.surplusClassLabel.textAlignment = NSTextAlignmentLeft;
+    self.surplusClassLabel.font = [UIFont systemFontOfSize:13.f];
+    self.surplusClassLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+    self.surplusClassLabel.backgroundColor = [UIColor clearColor];
+    self.surplusClassLabel.numberOfLines = 1;
+    [self.contentView addSubview:self.surplusClassLabel];
+    
+    self.subjectLabel = [[UILabel alloc] init];
+    self.subjectLabel.textAlignment = NSTextAlignmentLeft;
+    self.subjectLabel.font = [UIFont systemFontOfSize:13.f];
+    self.subjectLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+    self.subjectLabel.backgroundColor = [UIColor clearColor];
+    self.subjectLabel.numberOfLines = 1;
+    [self.contentView addSubview:self.subjectLabel];
     
     self.courseBeginTime = [self getOnePropertyLabel];
     self.courseBeginTime.textColor = RGB_Color(30, 31, 34);
@@ -117,12 +136,27 @@
         make.top.equalTo(@(([[self class] cellHeight] - 16 - 10 - 14)/2.f));
     }];
     
+    // 剩余课时
+    [self.surplusClassLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mainTitle.mas_right).offset(5.f);
+        make.top.equalTo(self.mainTitle);
+        make.height.equalTo(@(16.f));
+        make.right.equalTo(@(-10));
+    }];
     
     [self.subTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mainTitle);
         make.width.equalTo(self.mainTitle);
         make.top.equalTo(self.mainTitle.mas_bottom).offset(10.f);
         make.height.equalTo(@(16.f));
+    }];
+    
+    // 侧方停车等科目
+    [self.subjectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.subTitle.mas_right).offset(5.f);
+        make.top.equalTo(self.subTitle);
+        make.height.equalTo(@(16.f));
+        make.right.equalTo(@(-10));
     }];
     
     [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -163,6 +197,10 @@
     self.subTitle.text = _model.courseProgress;
     self.courseBeginTime.text = _model.courseBeginTime;
     self.courseEndTime.text = _model.courseEndtime;
+    
+    self.surplusClassLabel.text = _model.leavecoursecount;
+    self.subjectLabel.text = _model.learningcontent;
+    
 }
 
 #pragma mark - Common

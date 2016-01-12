@@ -29,6 +29,12 @@
 @property(nonatomic,strong)HMClassInfoModel * classType;
 @property(nonatomic,strong)HMStudentModel * studentInfo;
 
+// 剩余课时
+@property(nonatomic,strong)NSString * leavecoursecount;
+// 倒车入科(学习内容)
+@property(nonatomic,strong)NSString * learningcontent;
+
+
 @property(nonatomic,strong)NSString * comment;
 @property(nonatomic,strong)NSString * coachcomment;
 @property(nonatomic,strong)NSString * cancelreason;
