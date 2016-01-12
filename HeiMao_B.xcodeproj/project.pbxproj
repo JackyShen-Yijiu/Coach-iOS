@@ -78,6 +78,8 @@
 		B86EB3611BDB50EB0014EBD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B86EB3601BDB50EB0014EBD7 /* Assets.xcassets */; };
 		B873EEFF1C21C2C5000579CB /* ProjectGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = B873EEFC1C21C2C5000579CB /* ProjectGuideView.m */; };
 		B873EF001C21C2C5000579CB /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B873EEFE1C21C2C5000579CB /* SMPageControl.m */; };
+		B89534731C43C9B5009F5E9B /* WorkTypeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = B89534721C43C9B5009F5E9B /* WorkTypeListController.m */; };
+		B89534761C43CB59009F5E9B /* WorkTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B89534751C43CB59009F5E9B /* WorkTypeModel.m */; };
 		B8A051D81BF6F32F0058D27A /* VoiceSearchFeedback001.png in Resources */ = {isa = PBXBuildFile; fileRef = B8A0514D1BF6F32F0058D27A /* VoiceSearchFeedback001.png */; };
 		B8A051D91BF6F32F0058D27A /* VoiceSearchFeedback001@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8A0514E1BF6F32F0058D27A /* VoiceSearchFeedback001@2x.png */; };
 		B8A051DA1BF6F32F0058D27A /* VoiceSearchFeedback002.png in Resources */ = {isa = PBXBuildFile; fileRef = B8A0514F1BF6F32F0058D27A /* VoiceSearchFeedback002.png */; };
@@ -563,6 +565,10 @@
 		B873EEFC1C21C2C5000579CB /* ProjectGuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectGuideView.m; sourceTree = "<group>"; };
 		B873EEFD1C21C2C5000579CB /* SMPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPageControl.h; sourceTree = "<group>"; };
 		B873EEFE1C21C2C5000579CB /* SMPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMPageControl.m; sourceTree = "<group>"; };
+		B89534711C43C9B5009F5E9B /* WorkTypeListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkTypeListController.h; sourceTree = "<group>"; };
+		B89534721C43C9B5009F5E9B /* WorkTypeListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkTypeListController.m; sourceTree = "<group>"; };
+		B89534741C43CB59009F5E9B /* WorkTypeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkTypeModel.h; sourceTree = "<group>"; };
+		B89534751C43CB59009F5E9B /* WorkTypeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkTypeModel.m; sourceTree = "<group>"; };
 		B8A0514D1BF6F32F0058D27A /* VoiceSearchFeedback001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VoiceSearchFeedback001.png; sourceTree = "<group>"; };
 		B8A0514E1BF6F32F0058D27A /* VoiceSearchFeedback001@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VoiceSearchFeedback001@2x.png"; sourceTree = "<group>"; };
 		B8A0514F1BF6F32F0058D27A /* VoiceSearchFeedback002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VoiceSearchFeedback002.png; sourceTree = "<group>"; };
@@ -1345,6 +1351,8 @@
 				B865C1691BDC9ABB00C1E681 /* HMClassInfoModel.m */,
 				B865C16E1BDC9D8E00C1E681 /* HMSchoolInfoModel.h */,
 				B865C16F1BDC9D8E00C1E681 /* HMSchoolInfoModel.m */,
+				B89534741C43CB59009F5E9B /* WorkTypeModel.h */,
+				B89534751C43CB59009F5E9B /* WorkTypeModel.m */,
 			);
 			name = DataModel;
 			path = ..;
@@ -1374,6 +1382,7 @@
 		B86EB3531BDB50EB0014EBD7 /* HeiMao_B */ = {
 			isa = PBXGroup;
 			children = (
+				B89534701C43C968009F5E9B /* CompleteViewController */,
 				B86EB3571BDB50EB0014EBD7 /* AppDelegate.h */,
 				B86EB3581BDB50EB0014EBD7 /* AppDelegate.m */,
 				B8C4584C1BDB571A00901F71 /* PrefixHeader.pch */,
@@ -1428,6 +1437,13 @@
 				B8A9308D1C22808700AD0BE8 /* guide_6_3@2x.png */,
 			);
 			name = resoure;
+			sourceTree = "<group>";
+		};
+		B89534701C43C968009F5E9B /* CompleteViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CompleteViewController;
 			sourceTree = "<group>";
 		};
 		B8A0514B1BF6F32F0058D27A /* ChatViewSource */ = {
@@ -2484,8 +2500,6 @@
 		D5C240501BF108CF00832CF3 /* LoginController */ = {
 			isa = PBXGroup;
 			children = (
-				D5C240511BF108CF00832CF3 /* CompleteInformationViewController.h */,
-				D5C240521BF108CF00832CF3 /* CompleteInformationViewController.m */,
 				D5C240531BF108CF00832CF3 /* ForgetViewController.h */,
 				D5C240541BF108CF00832CF3 /* ForgetViewController.m */,
 				D5C240551BF108CF00832CF3 /* GainPasswordViewController.h */,
@@ -2498,6 +2512,10 @@
 				D5C2405C1BF108CF00832CF3 /* QueryViewController.m */,
 				D5C2405D1BF108CF00832CF3 /* RegisterViewController.h */,
 				D5C2405E1BF108CF00832CF3 /* RegisterViewController.m */,
+				B89534711C43C9B5009F5E9B /* WorkTypeListController.h */,
+				B89534721C43C9B5009F5E9B /* WorkTypeListController.m */,
+				D5C240511BF108CF00832CF3 /* CompleteInformationViewController.h */,
+				D5C240521BF108CF00832CF3 /* CompleteInformationViewController.m */,
 				D5D5102A1BFE1B6D00F54097 /* ProtocalViewController.h */,
 				D5D5102B1BFE1B6D00F54097 /* ProtocalViewController.m */,
 				D5C2405F1BF108CF00832CF3 /* 右箭头.png */,
@@ -2909,6 +2927,7 @@
 				D5C240651BF108CF00832CF3 /* CompleteInformationViewController.m in Sources */,
 				B8BC50681BF38A390007B029 /* EMSDWebImageCompat.m in Sources */,
 				B8BC50EE1BF393D00007B029 /* EaseFaceView.m in Sources */,
+				B89534761C43CB59009F5E9B /* WorkTypeModel.m in Sources */,
 				B8BC50601BF38A390007B029 /* MWGridViewController.m in Sources */,
 				D5D50F991BFC135B00F54097 /* LTNavigationView.m in Sources */,
 				D5D50EAD1BFA184800F54097 /* TrainingGroundViewController.m in Sources */,
@@ -3015,6 +3034,7 @@
 				D5F72BBE1BF9A83900B972B0 /* JENetwoking.m in Sources */,
 				D5D50EA41BF9FB9D00F54097 /* VacationViewController.m in Sources */,
 				B8BC508B1BF38A390007B029 /* NSObject+EaseMob.m in Sources */,
+				B89534731C43C9B5009F5E9B /* WorkTypeListController.m in Sources */,
 				D5D50F9F1BFC135B00F54097 /* MyWallet.m in Sources */,
 				B253C2CD1C3FA742001AF771 /* bitstream.c in Sources */,
 				B2AC20371C3E2CBD0033803C /* ScheduleViewController.m in Sources */,

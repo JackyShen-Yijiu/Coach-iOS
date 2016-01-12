@@ -15,8 +15,7 @@
 
 #define  HOST_LINE_DOMAIN  @"http://123.57.63.15:8181/api/v1"
 
-//#define QA_TEST
-
+#define QA_TEST
 
 @implementation NetWorkEntiry
 
@@ -278,23 +277,25 @@
 + (void)postToEnstureDoneofCourseWithCoachid:(NSString *)coachidId
                                    coureseID:(NSString *)courseID
                              learningcontent:(NSString *)learningcontent
-                              contentremarks:(NSString *)contentremarks
+                              contentremarks:(NSString *)contentr
+                                  startLevel:(NSInteger)levet
                                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     if(!coachidId || !courseID){
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coachfinishreservation",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@//courseinfo/coachcommentv2",[self domain]];
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:0];
     [dic setValue:coachidId forKey:@"coachid"];
     [dic setValue:courseID forKey:@"reservationid"];
     if (learningcontent) {
         [dic setValue:learningcontent forKey:@"learningcontent"];
     }
-    if (contentremarks) {
-        [dic setValue:contentremarks forKey:@"contentremarks"];
+    if (contentr) {
+        [dic setValue:contentr forKey:@"commentcontent"];
     }
+    [dic setValue:@(levet) forKey:@"starlevel"];
     [self POST:urlStr parameters:dic success:success failure:failure];
 }
 
