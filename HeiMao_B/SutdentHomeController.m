@@ -314,7 +314,21 @@
 
 - (void)buttonDidClick:(UIButton *)button
 {
-    [self showTotasViewWithMes:@"等待服务接口"];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [NetWorkEntiry postToEnstureExamfCourseWithCoachid:[[UserInfoModel defaultUserInfo] userID] userid:self.model.userId success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+        if (type == 1) {
+            [self showTotasViewWithMes:@"通知成功"];
+        }else{
+            [self showTotasViewWithMes:[responseObject objectForKey:@"msg"]];
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self showTotasViewWithMes:@"网络异常"];
+
+    }];
 }
 
 #pragma mark - GetMethod

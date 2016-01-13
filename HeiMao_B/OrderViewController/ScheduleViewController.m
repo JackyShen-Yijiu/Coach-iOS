@@ -122,7 +122,7 @@
     self.tipView2 = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有预约"];
     [self.tipView2 setHidden:YES];
     [self.courseDayTableView addSubview:self.tipView2];
-    self.tipView2.center = CGPointMake(self.courseDayTableView .width/2.f, self.courseDayTableView.height/2.f + 120);
+    self.tipView2.center = CGPointMake(self.courseDayTableView .width/2.f, self.courseDayTableView.height/2.f + 190);
 }
 
 

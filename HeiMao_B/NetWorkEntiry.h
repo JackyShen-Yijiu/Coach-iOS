@@ -175,6 +175,18 @@
                                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
+ *  教练提醒学员报考
+ *
+ *  @param coachidId 教练id
+ *  @param userid  学员id
+ */
+
++ (void)postToEnstureExamfCourseWithCoachid:(NSString *)coachidId
+                                   userid:(NSString *)userid
+                                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
  *  UGC模块
  *  ====================================================================================================================================
  */
