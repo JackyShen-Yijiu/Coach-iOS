@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		060C23071C06AF2800310B66 /* WalletAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 060C23061C06AF2800310B66 /* WalletAPI.m */; };
+		0613DE681C45E466004A1A2E /* SystemMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE671C45E466004A1A2E /* SystemMessageDetailController.m */; };
+		0613DE6C1C45F06B004A1A2E /* SystemMessageDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE6B1C45F06B004A1A2E /* SystemMessageDetailCell.m */; };
 		06891F781C06D23800E9C131 /* WalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06891F771C06D23800E9C131 /* WalletModel.m */; };
 		06C1252E1C4351560033DCDE /* WorkNatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C1252D1C4351560033DCDE /* WorkNatureController.m */; };
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
@@ -435,6 +437,10 @@
 /* Begin PBXFileReference section */
 		060C23051C06AF2800310B66 /* WalletAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAPI.h; sourceTree = "<group>"; };
 		060C23061C06AF2800310B66 /* WalletAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAPI.m; sourceTree = "<group>"; };
+		0613DE661C45E466004A1A2E /* SystemMessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemMessageDetailController.h; path = HeiMao_B/OrderViewController/SystemMessageDetailController.h; sourceTree = SOURCE_ROOT; };
+		0613DE671C45E466004A1A2E /* SystemMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemMessageDetailController.m; path = HeiMao_B/OrderViewController/SystemMessageDetailController.m; sourceTree = SOURCE_ROOT; };
+		0613DE6A1C45F06B004A1A2E /* SystemMessageDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMessageDetailCell.h; sourceTree = "<group>"; };
+		0613DE6B1C45F06B004A1A2E /* SystemMessageDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMessageDetailCell.m; sourceTree = "<group>"; };
 		06891F761C06D23800E9C131 /* WalletModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletModel.h; sourceTree = "<group>"; };
 		06891F771C06D23800E9C131 /* WalletModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletModel.m; sourceTree = "<group>"; };
 		06C1252C1C4351560033DCDE /* WorkNatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkNatureController.h; path = ../WorkNatureController.h; sourceTree = "<group>"; };
@@ -1189,6 +1195,17 @@
 			name = CommonAPI;
 			sourceTree = "<group>";
 		};
+		0613DE691C45E5D0004A1A2E /* SystemMessage */ = {
+			isa = PBXGroup;
+			children = (
+				0613DE661C45E466004A1A2E /* SystemMessageDetailController.h */,
+				0613DE671C45E466004A1A2E /* SystemMessageDetailController.m */,
+				0613DE6A1C45F06B004A1A2E /* SystemMessageDetailCell.h */,
+				0613DE6B1C45F06B004A1A2E /* SystemMessageDetailCell.m */,
+			);
+			path = SystemMessage;
+			sourceTree = "<group>";
+		};
 		B23983D2EE43E3BC88B5F3F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1691,6 +1708,7 @@
 		B8AFED161BDB96A000EF8726 /* CourseSummaryController */ = {
 			isa = PBXGroup;
 			children = (
+				0613DE691C45E5D0004A1A2E /* SystemMessage */,
 				B253C2DB1C3FAA84001AF771 /* ScanViewController.h */,
 				B253C2DC1C3FAA84001AF771 /* ScanViewController.m */,
 				B8AFED171BDB96AC00EF8726 /* CourseViewController.h */,
@@ -2868,6 +2886,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8A0525D1BF6F6140058D27A /* EaseUIResource.bundle in Sources */,
+				0613DE6C1C45F06B004A1A2E /* SystemMessageDetailCell.m in Sources */,
 				B8DDB7B51BE47808008FE867 /* CourseDetailViewCell.m in Sources */,
 				B8BC50831BF38A390007B029 /* PSTGridLayoutSection.m in Sources */,
 				B8BC50891BF38A390007B029 /* NSDate+Category.m in Sources */,
@@ -3085,6 +3104,7 @@
 				B8BC50791BF38A390007B029 /* PSTCollectionViewCell.m in Sources */,
 				B8BC506B1BF38A390007B029 /* EMSDWebImageDownloaderOperation.m in Sources */,
 				D5D50EAA1BFA177F00F54097 /* WorkTimeViewController.m in Sources */,
+				0613DE681C45E466004A1A2E /* SystemMessageDetailController.m in Sources */,
 				D5D50FA21BFC135B00F54097 /* PrivateMessageController.m in Sources */,
 				B8447A171BE0E456004E5E15 /* CoursePicListCell.m in Sources */,
 				B8BC504E1BF38A390007B029 /* EMVoiceConverter.mm in Sources */,
