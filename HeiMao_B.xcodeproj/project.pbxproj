@@ -10,6 +10,8 @@
 		060C23071C06AF2800310B66 /* WalletAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 060C23061C06AF2800310B66 /* WalletAPI.m */; };
 		0613DE681C45E466004A1A2E /* SystemMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE671C45E466004A1A2E /* SystemMessageDetailController.m */; };
 		0613DE6C1C45F06B004A1A2E /* SystemMessageDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE6B1C45F06B004A1A2E /* SystemMessageDetailCell.m */; };
+		0613DE701C462785004A1A2E /* InformationMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE6F1C462785004A1A2E /* InformationMessageController.m */; };
+		0613DE731C462890004A1A2E /* InformationMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE721C462890004A1A2E /* InformationMessageCell.m */; };
 		06891F781C06D23800E9C131 /* WalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06891F771C06D23800E9C131 /* WalletModel.m */; };
 		06C1252E1C4351560033DCDE /* WorkNatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C1252D1C4351560033DCDE /* WorkNatureController.m */; };
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
@@ -441,6 +443,10 @@
 		0613DE671C45E466004A1A2E /* SystemMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemMessageDetailController.m; path = HeiMao_B/OrderViewController/SystemMessageDetailController.m; sourceTree = SOURCE_ROOT; };
 		0613DE6A1C45F06B004A1A2E /* SystemMessageDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMessageDetailCell.h; sourceTree = "<group>"; };
 		0613DE6B1C45F06B004A1A2E /* SystemMessageDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMessageDetailCell.m; sourceTree = "<group>"; };
+		0613DE6E1C462785004A1A2E /* InformationMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationMessageController.h; sourceTree = "<group>"; };
+		0613DE6F1C462785004A1A2E /* InformationMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationMessageController.m; sourceTree = "<group>"; };
+		0613DE711C462890004A1A2E /* InformationMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationMessageCell.h; sourceTree = "<group>"; };
+		0613DE721C462890004A1A2E /* InformationMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationMessageCell.m; sourceTree = "<group>"; };
 		06891F761C06D23800E9C131 /* WalletModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletModel.h; sourceTree = "<group>"; };
 		06891F771C06D23800E9C131 /* WalletModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletModel.m; sourceTree = "<group>"; };
 		06C1252C1C4351560033DCDE /* WorkNatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkNatureController.h; path = ../WorkNatureController.h; sourceTree = "<group>"; };
@@ -1206,6 +1212,17 @@
 			path = SystemMessage;
 			sourceTree = "<group>";
 		};
+		0613DE6D1C46273E004A1A2E /* InformationMessage */ = {
+			isa = PBXGroup;
+			children = (
+				0613DE6E1C462785004A1A2E /* InformationMessageController.h */,
+				0613DE6F1C462785004A1A2E /* InformationMessageController.m */,
+				0613DE711C462890004A1A2E /* InformationMessageCell.h */,
+				0613DE721C462890004A1A2E /* InformationMessageCell.m */,
+			);
+			path = InformationMessage;
+			sourceTree = "<group>";
+		};
 		B23983D2EE43E3BC88B5F3F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1708,6 +1725,7 @@
 		B8AFED161BDB96A000EF8726 /* CourseSummaryController */ = {
 			isa = PBXGroup;
 			children = (
+				0613DE6D1C46273E004A1A2E /* InformationMessage */,
 				0613DE691C45E5D0004A1A2E /* SystemMessage */,
 				B253C2DB1C3FAA84001AF771 /* ScanViewController.h */,
 				B253C2DC1C3FAA84001AF771 /* ScanViewController.m */,
@@ -3081,6 +3099,7 @@
 				B8BC50821BF38A390007B029 /* PSTGridLayoutRow.m in Sources */,
 				B8BC505C1BF38A390007B029 /* UIScrollView+MJRefresh.m in Sources */,
 				D5D50EA71BFA108D00F54097 /* TeachSubjectViewController.m in Sources */,
+				0613DE701C462785004A1A2E /* InformationMessageController.m in Sources */,
 				B8BC506C1BF38A390007B029 /* EMSDWebImageManager.m in Sources */,
 				B253C2DD1C3FAA84001AF771 /* ScanViewController.m in Sources */,
 				B8BC50E11BF393D00007B029 /* EaseMessageCell.m in Sources */,
@@ -3116,6 +3135,7 @@
 				B8BC50E71BF393D00007B029 /* EaseBubbleView+Video.m in Sources */,
 				D5D5102C1BFE1B6D00F54097 /* ProtocalViewController.m in Sources */,
 				B8BC50871BF38A390007B029 /* EaseMessageModel.m in Sources */,
+				0613DE731C462890004A1A2E /* InformationMessageCell.m in Sources */,
 				B8BC50731BF38A390007B029 /* UIImage+EMWebP.m in Sources */,
 				B8BC50571BF38A390007B029 /* MJRefreshGifHeader.m in Sources */,
 				B8447A081BE0D2E3004E5E15 /* CourseCancelController.m in Sources */,

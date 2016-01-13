@@ -1,37 +1,26 @@
 //
-//  SystemMessageDetailCell.m
+//  InformationMessageCell.m
 //  HeiMao_B
 //
 //  Created by ytzhang on 16/1/13.
 //  Copyright © 2016年 ke. All rights reserved.
 //
 
-#import "SystemMessageDetailCell.h"
+#import "InformationMessageCell.h"
 
-@interface SystemMessageDetailCell ()
+@interface InformationMessageCell ()
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) UIView *detailBackView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *dataLabel;
 @property (nonatomic, strong) UIImageView *imgView;
+@property (nonatomic, strong) UILabel *contentTitleLabel;
 @property (nonatomic, strong) UILabel *detailLabel;
-@property (nonatomic, strong) UIView *topLineView;
-@property (nonatomic, strong) UILabel *didClickLabel;
-@property (nonatomic, strong) UIImageView *arrowImageView;
-@property (nonatomic, strong) UIView *bottomLineView;
-
-
-
-
 
 @end
+@implementation InformationMessageCell
 
-@implementation SystemMessageDetailCell
-
-- (void)awakeFromNib {
-    
-}
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -47,19 +36,22 @@
     [self.detailBackView addSubview:self.titleLabel];
     [self.detailBackView addSubview:self.imgView];
     [self.detailBackView addSubview:self.dataLabel];
+    [self.detailBackView addSubview:self.contentTitleLabel];
     [self.detailBackView addSubview:self.detailLabel];
-    [self.detailBackView addSubview:self.topLineView];
-    [self.detailBackView addSubview:self.didClickLabel];
-    [self.detailBackView addSubview:self.arrowImageView];
-//    [self.detailBackView addSubview:self.bottomLineView];
+    
     
     
     
 }
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    
+    // Configure the view for the selected state
 }
 - (void)layoutSubviews{
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -104,38 +96,21 @@
         make.height.equalTo(@20);
         
     }];
+    [self.contentTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.dataLabel.mas_bottom).offset(10);
+        make.left.equalTo(self.detailBackView.mas_left).offset(20);
+        make.right.equalTo(self.detailBackView.mas_right).offset(0);
+        make.height.equalTo(@40);
+        
+    }];
+
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.dataLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.contentTitleLabel.mas_bottom).offset(15);
         make.left.equalTo(self.detailBackView.mas_left).offset(20);
         make.right.equalTo(self.detailBackView.mas_right).offset(0);
         make.height.equalTo(@40);
         
     }];
-    [self.topLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.detailLabel.mas_bottom).offset(10);
-        make.left.equalTo(self.detailBackView.mas_left).offset(0);
-        make.right.equalTo(self.detailBackView.mas_right).offset(0);
-        make.height.equalTo(@1);
-       
-        
-    }];
-    [self.didClickLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topLineView.mas_bottom).offset(10);
-        make.left.equalTo(self.detailBackView.mas_left).offset(20);
-        make.width.equalTo(@100);
-        make.height.equalTo(@20);
-        
-    }];
-    [self.arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.dataLabel.mas_bottom).offset(10);
-        make.right.equalTo(self.detailBackView.mas_right).offset(-20);
-        make.width.equalTo(@40);
-        make.height.equalTo(@40);
-        
-    }];
-
-
-    
     
 }
 #pragma mark --- Lazy 加载
@@ -183,6 +158,16 @@
     }
     return _imgView;
 }
+- (UILabel *)contentTitleLabel{
+    if (_contentTitleLabel == nil) {
+        _contentTitleLabel = [[UILabel alloc] init];
+        _contentTitleLabel.text = @"荷兰教练荷兰驾校老师授课可要求性回报";
+        _contentTitleLabel.backgroundColor = [UIColor cyanColor];
+        _contentTitleLabel.textColor = [UIColor blackColor];
+        _contentTitleLabel.font = [UIFont systemFontOfSize:20];
+    }
+    return _contentTitleLabel;
+}
 - (UILabel *)dataLabel{
     if (_dataLabel == nil) {
         _dataLabel = [[UILabel alloc] init];
@@ -203,37 +188,6 @@
         _detailLabel.font = [UIFont systemFontOfSize:16];
     }
     return _detailLabel;
-}
-- (UIView *)topLineView{
-    if (_topLineView == nil) {
-        _topLineView = [[UIView alloc] init];
-        _topLineView.backgroundColor = [UIColor grayColor];
-    }
-    return _topLineView;
-}
-- (UILabel *)didClickLabel{
-    if (_didClickLabel == nil) {
-        _didClickLabel = [[UILabel alloc] init];
-        _didClickLabel.text = @"立即查看";
-        _didClickLabel.textColor = [UIColor grayColor];
-        _didClickLabel.font = [UIFont systemFontOfSize:17];
-    }
-    return _didClickLabel;
-}
-- (UIImageView *)arrowImageView{
-    if (_arrowImageView == nil) {
-        _arrowImageView = [[UIImageView alloc] init];
-        _arrowImageView.image = [UIImage imageNamed:@""];
-    }
-    return _arrowImageView;
-}
-
-- (UIView *)bottomLineView{
-    if (_bottomLineView == nil) {
-        _bottomLineView = [[UIView alloc] init];
-        _bottomLineView.backgroundColor = [UIColor grayColor];
-    }
-    return _bottomLineView;
 }
 
 @end

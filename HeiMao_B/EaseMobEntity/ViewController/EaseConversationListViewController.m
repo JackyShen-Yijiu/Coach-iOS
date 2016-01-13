@@ -17,6 +17,7 @@
 #import "NoContentTipView.h"
 #import "EMCDDeviceManager.h"
 #import "SystemMessageDetailController.h"
+#import "InformationMessageController.h"
 
 //两次提示的默认间隔
 static const CGFloat kDefaultPlaySoundInterval = 3.0;
@@ -153,6 +154,8 @@ static NSString *kGroupName = @"GroupName";
             
             self.zixunBadgeStr = nil;
             // 咨询消息界面跳转
+            InformationMessageController *informationMessageVC = [[InformationMessageController alloc] init];
+            [self.navigationController pushViewController:informationMessageVC animated:YES];
         }
         
         [self setupUnreadMessageCount];
