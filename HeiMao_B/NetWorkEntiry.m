@@ -396,6 +396,22 @@
     [self POST:urlStr parameters:dic success:success failure:failure];
     
 }
+/**
+ *
+ * 行业资讯调用的接口,
+ *
+ */
++ (void)getInformationMessageSeqindex:(NSInteger)seqindex withCount:(NSInteger)count
+                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if (count < 0 || seqindex < 0) {
+        return [self missParagramercallBackFailure:failure];
+    }
+    NSString * urlStr = [NSString stringWithFormat:@"http://101.200.204.240:8181/api/headmaster/info/getnews?seqindex=%li&count=%ld",seqindex,count];
+    
+    [self GET:urlStr parameters:nil success:success failure:failure];
+}
 
 #pragma mark - Common Method
 

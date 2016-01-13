@@ -12,6 +12,9 @@
 		0613DE6C1C45F06B004A1A2E /* SystemMessageDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE6B1C45F06B004A1A2E /* SystemMessageDetailCell.m */; };
 		0613DE701C462785004A1A2E /* InformationMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE6F1C462785004A1A2E /* InformationMessageController.m */; };
 		0613DE731C462890004A1A2E /* InformationMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE721C462890004A1A2E /* InformationMessageCell.m */; };
+		0613DE761C46404C004A1A2E /* InformationMessageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE751C46404C004A1A2E /* InformationMessageViewModel.m */; };
+		0613DE791C4641AE004A1A2E /* InformationMessageModelRootClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE781C4641AE004A1A2E /* InformationMessageModelRootClass.m */; };
+		0613DE7C1C4642BB004A1A2E /* InformationMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE7B1C4642BB004A1A2E /* InformationMessageModel.m */; };
 		06891F781C06D23800E9C131 /* WalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06891F771C06D23800E9C131 /* WalletModel.m */; };
 		06C1252E1C4351560033DCDE /* WorkNatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C1252D1C4351560033DCDE /* WorkNatureController.m */; };
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
@@ -447,6 +450,12 @@
 		0613DE6F1C462785004A1A2E /* InformationMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationMessageController.m; sourceTree = "<group>"; };
 		0613DE711C462890004A1A2E /* InformationMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationMessageCell.h; sourceTree = "<group>"; };
 		0613DE721C462890004A1A2E /* InformationMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationMessageCell.m; sourceTree = "<group>"; };
+		0613DE741C46404C004A1A2E /* InformationMessageViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationMessageViewModel.h; sourceTree = "<group>"; };
+		0613DE751C46404C004A1A2E /* InformationMessageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationMessageViewModel.m; sourceTree = "<group>"; };
+		0613DE771C4641AE004A1A2E /* InformationMessageModelRootClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationMessageModelRootClass.h; sourceTree = "<group>"; };
+		0613DE781C4641AE004A1A2E /* InformationMessageModelRootClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationMessageModelRootClass.m; sourceTree = "<group>"; };
+		0613DE7A1C4642BB004A1A2E /* InformationMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationMessageModel.h; sourceTree = "<group>"; };
+		0613DE7B1C4642BB004A1A2E /* InformationMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationMessageModel.m; sourceTree = "<group>"; };
 		06891F761C06D23800E9C131 /* WalletModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletModel.h; sourceTree = "<group>"; };
 		06891F771C06D23800E9C131 /* WalletModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletModel.m; sourceTree = "<group>"; };
 		06C1252C1C4351560033DCDE /* WorkNatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkNatureController.h; path = ../WorkNatureController.h; sourceTree = "<group>"; };
@@ -1217,6 +1226,12 @@
 			children = (
 				0613DE6E1C462785004A1A2E /* InformationMessageController.h */,
 				0613DE6F1C462785004A1A2E /* InformationMessageController.m */,
+				0613DE741C46404C004A1A2E /* InformationMessageViewModel.h */,
+				0613DE751C46404C004A1A2E /* InformationMessageViewModel.m */,
+				0613DE771C4641AE004A1A2E /* InformationMessageModelRootClass.h */,
+				0613DE781C4641AE004A1A2E /* InformationMessageModelRootClass.m */,
+				0613DE7A1C4642BB004A1A2E /* InformationMessageModel.h */,
+				0613DE7B1C4642BB004A1A2E /* InformationMessageModel.m */,
 				0613DE711C462890004A1A2E /* InformationMessageCell.h */,
 				0613DE721C462890004A1A2E /* InformationMessageCell.m */,
 			);
@@ -2983,6 +2998,7 @@
 				D5F72BC71BF9AB0D00B972B0 /* ModifyNameViewController.m in Sources */,
 				B873EEFF1C21C2C5000579CB /* ProjectGuideView.m in Sources */,
 				B8BC508F1BF38A390007B029 /* EaseChineseToPinyin.m in Sources */,
+				0613DE7C1C4642BB004A1A2E /* InformationMessageModel.m in Sources */,
 				B8BA98C51C229C3D009DB449 /* CourEnsureItemView.m in Sources */,
 				B8BC50461BF38A390007B029 /* EMAudioRecorderUtil.m in Sources */,
 				B84479E81BE07B7A004E5E15 /* StudentHomeUserCourseInfoCell.m in Sources */,
@@ -3009,6 +3025,7 @@
 				B8BC504A1BF38A390007B029 /* EMCDDeviceManager+Remind.m in Sources */,
 				B8BC50EC1BF393D00007B029 /* EaseImageView.m in Sources */,
 				B8BC50701BF38A390007B029 /* UIButton+EMWebCache.m in Sources */,
+				0613DE761C46404C004A1A2E /* InformationMessageViewModel.m in Sources */,
 				D5F72BD91BF9BF6900B972B0 /* DrivingNumViewController.m in Sources */,
 				D5F72BA81BF988E700B972B0 /* UserCenterHeadView.m in Sources */,
 				D5D50F9E1BFC135B00F54097 /* MagicMainTableViewController.m in Sources */,
@@ -3053,6 +3070,7 @@
 				B8BC506D1BF38A390007B029 /* EMSDWebImagePrefetcher.m in Sources */,
 				B865C1791BDCA49400C1E681 /* CourseSummaryListCell.m in Sources */,
 				B8BC50E41BF393D00007B029 /* EaseBubbleView+Image.m in Sources */,
+				0613DE791C4641AE004A1A2E /* InformationMessageModelRootClass.m in Sources */,
 				B8BC508A1BF38A390007B029 /* NSDateFormatter+Category.m in Sources */,
 				B253C2DA1C3FA901001AF771 /* UIView+SDExtension.m in Sources */,
 				B8447A1A1BE1BEC2004E5E15 /* CourseEnsureCell.m in Sources */,

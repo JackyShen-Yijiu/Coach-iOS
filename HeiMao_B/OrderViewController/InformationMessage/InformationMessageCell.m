@@ -8,17 +8,6 @@
 
 #import "InformationMessageCell.h"
 
-@interface InformationMessageCell ()
-@property (nonatomic, strong) UILabel *timeLabel;
-@property (nonatomic, strong) UIView *backView;
-@property (nonatomic, strong) UIView *detailBackView;
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *dataLabel;
-@property (nonatomic, strong) UIImageView *imgView;
-@property (nonatomic, strong) UILabel *contentTitleLabel;
-@property (nonatomic, strong) UILabel *detailLabel;
-
-@end
 @implementation InformationMessageCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -189,5 +178,7 @@
     }
     return _detailLabel;
 }
-
+- (void)setInformationMessageModel:(InformationMessageModel *)informationMessageModel{
+    self.detailLabel.text = informationMessageModel.descriptionString;
+}
 @end
