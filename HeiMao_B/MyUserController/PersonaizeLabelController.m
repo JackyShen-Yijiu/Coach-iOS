@@ -13,7 +13,9 @@
 #import "ToolHeader.h"
 #import "NoContentTipView.h"
 
-@interface PersonaizeLabelController () <UITableViewDataSource,UITableViewDelegate>
+@interface PersonaizeLabelController () <UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate> {
+    NSInteger _tag;
+}
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -86,7 +88,8 @@
 #pragma mark -   action
 
 - (void)dealRefer:(UIButton *)btn {
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    [self showTotasViewWithMes:@"没写"];
 }
 
 - (void)viewDidLoad {
@@ -168,11 +171,29 @@
             [_systemTagColorArray replaceObjectAtIndex:tag withObject:@(num.integerValue==0?1:0)];
             [self.tableView reloadData];
         }else {
-            
+            _tag = tag;
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确认删除此标签吗!" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            [alert show];
         }
     };
     [cell initUIWithNoTitleWithArray:self.dataArray[indexPath.section] WithTextFieldIsExist:indexPath.section>0?YES:NO withLabelColorArray:indexPath.section?_customTagColorArray:_systemTagColorArray];
     return cell;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        NSLog(@"cancal");
+    }else {
+        PersonlizeModel *model = self.customTagArray[_tag];
+        NSString *delegateCoachTags = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kdelegateTag];
+        [JENetwoking startDownLoadWithUrl:delegateCoachTags postParam:@{@"coachid":[UserInfoModel defaultUserInfo].userID,@"tagid":model._id} WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+            NSDictionary *dic = data;
+            if ([[dic objectForKey:@"type"] integerValue] == 1) {
+                [_customTagArr removeObjectAtIndex:_tag];
+                [self.tableView reloadData];
+            }
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
