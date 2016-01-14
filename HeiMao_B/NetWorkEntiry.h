@@ -175,6 +175,18 @@
                                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
+ *  教练提醒学员报考
+ *
+ *  @param coachidId 教练id
+ *  @param userid  学员id
+ */
+
++ (void)postToEnstureExamfCourseWithCoachid:(NSString *)coachidId
+                                   userid:(NSString *)userid
+                                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
  *  UGC模块
  *  ====================================================================================================================================
  */
@@ -215,4 +227,20 @@
                                          mobile:(NSString *)mobile
                                         address:(NSString *)address
                                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+/**
+ *
+ * 行业资讯调用的接口,
+ *
+ */
++ (void)getInformationMessageSeqindex:(NSInteger)seqindex withCount:(NSInteger)count
+                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+/**
+ *
+ * 系统消息调用接口,
+ *
+ */
++ (void)getSystemMessageCoachid:(NSString *)coachid withSeqindex:(NSInteger)seqindex withCount:(NSInteger)count
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

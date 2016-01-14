@@ -47,7 +47,7 @@
 @property(nonatomic,strong)NSString * invitationcode;
 
 //工作性质
-@property(nonatomic,strong)NSDictionary * coachtype;
+@property(nonatomic,assign)NSInteger coachtype;
 
 + (UserInfoModel *)defaultUserInfo;
 

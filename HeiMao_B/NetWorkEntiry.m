@@ -309,7 +309,7 @@
     if(!coachidId || !courseID){
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@//courseinfo/coachcommentv2",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coachcommentv2",[self domain]];
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:0];
     [dic setValue:coachidId forKey:@"coachid"];
     [dic setValue:courseID forKey:@"reservationid"];
@@ -320,6 +320,28 @@
         [dic setValue:contentr forKey:@"commentcontent"];
     }
     [dic setValue:@(levet) forKey:@"starlevel"];
+    [self POST:urlStr parameters:dic success:success failure:failure];
+}
+
+/**
+ *  教练提醒学员报考
+ *
+ *  @param coachidId 教练id
+ *  @param userid  学员id
+ */
+
++ (void)postToEnstureExamfCourseWithCoachid:(NSString *)coachidId
+                                     userid:(NSString *)userid
+                                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if(!coachidId || !userid){
+        return [self missParagramercallBackFailure:failure];
+    }
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/remindexam",[self domain]];
+    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:0];
+    [dic setValue:coachidId forKey:@"coachid"];
+    [dic setValue:userid forKey:@"userid"];
     [self POST:urlStr parameters:dic success:success failure:failure];
 }
 
@@ -395,6 +417,41 @@
     
     [self POST:urlStr parameters:dic success:success failure:failure];
     
+}
+/**
+ *
+ * 行业资讯调用的接口,
+ *
+ */
++ (void)getInformationMessageSeqindex:(NSInteger)seqindex withCount:(NSInteger)count
+                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if (count < 0 || seqindex < 0) {
+        return [self missParagramercallBackFailure:failure];
+    }
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getnews?seqindex=%li&count=%ld",[self domain],seqindex,count];
+    
+    [self GET:urlStr parameters:nil success:success failure:failure];
+}
+/**
+ *
+ * 系统消息调用接口
+ *
+ */
++ (void)getSystemMessageCoachid:(NSString *)coachid withSeqindex:(NSInteger)seqindex withCount:(NSInteger)count
+                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if (count <= 0 || seqindex <= 0) {
+        return [self missParagramercallBackFailure:failure];
+    }
+    
+//    http://101.200.204.240:8181/api/v1/userinfo/getsysteminfo?coachid=5616352721ec29041a9af889&index=1&count=10
+    
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getsysteminfo?coachid=%@&index=%lu&count=%lu",[self domain],coachid,seqindex,count];
+    
+    [self GET:urlStr parameters:nil success:success failure:failure];
 }
 
 #pragma mark - Common Method

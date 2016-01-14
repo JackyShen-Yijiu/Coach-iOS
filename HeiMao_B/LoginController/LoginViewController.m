@@ -257,6 +257,7 @@ static NSString *const kuserType = @"usertype";
         NSLog(@"登陆responseObject:%@",responseObject);
         
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+       
         NSDictionary *param = responseObject;
         NSNumber *type = param[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];

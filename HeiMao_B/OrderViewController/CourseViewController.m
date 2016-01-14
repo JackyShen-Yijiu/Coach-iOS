@@ -226,7 +226,7 @@
     [self.view addSubview:self.segController];
 
     // 预约
-    self.courseSummaryTableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.segController.frame), self.view.width, self.view.height-64) style:UITableViewStylePlain];
+    self.courseSummaryTableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.segController.frame), self.view.width, self.view.height-64-40) style:UITableViewStylePlain];
     self.courseSummaryTableView.backgroundColor = RGB_Color(251, 251, 251);
     self.courseSummaryTableView.delegate = self;
     self.courseSummaryTableView.dataSource = self;
@@ -270,17 +270,18 @@
             NSLog(@"responseObject:%@",responseObject);
             
             NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+            NSArray *data = [responseObject objectArrayForKey:@"data"];
             
             if (type == 1) {
                 
                 if (ws.segController.selIndex==0) {
-                    ws.courseSummaryData = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+                    ws.courseSummaryData = [[BaseModelMethod getCourseListArrayFormDicInfo:data] mutableCopy];
                 }else if (ws.segController.selIndex==1){
-                    ws.courseSummaryDataWaitEvaluate = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+                    ws.courseSummaryDataWaitEvaluate = [[BaseModelMethod getCourseListArrayFormDicInfo:data] mutableCopy];
                 }else if (ws.segController.selIndex==2){
-                    ws.courseSummaryDataCancled = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+                    ws.courseSummaryDataCancled = [[BaseModelMethod getCourseListArrayFormDicInfo:data] mutableCopy];
                 }else if (ws.segController.selIndex==3){
-                    ws.courseSummaryDataCompleted = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+                    ws.courseSummaryDataCompleted = [[BaseModelMethod getCourseListArrayFormDicInfo:data] mutableCopy];
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -289,7 +290,11 @@
                     
                     [ws.courseSummaryTableView reloadData];
                     
-                    ws.courseSummaryTableView.refreshFooter.scrollView = ws.courseSummaryTableView;
+                    if (data.count>=10) {
+                        ws.courseSummaryTableView.refreshFooter.scrollView = ws.courseSummaryTableView;
+                    }else{
+                        ws.courseSummaryTableView.refreshFooter.scrollView = nil;
+                    }
                     
                 });
                 
@@ -318,8 +323,10 @@
         
         if(dataArray.count % RELOADDATACOUNT){
             [ws showTotasViewWithMes:@"已经加载所有数据"];
-            [ws.courseSummaryTableView.refreshFooter endRefreshing];
-            ws.courseSummaryTableView.refreshFooter.scrollView = nil;
+            if (ws.courseSummaryTableView.refreshFooter) {
+                [ws.courseSummaryTableView.refreshFooter endRefreshing];
+                ws.courseSummaryTableView.refreshFooter.scrollView = nil;
+            }
             return ;
         }
         
