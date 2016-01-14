@@ -22,8 +22,8 @@
 + (CGFloat)cellHigthWithModel:(HMRecomendModel *)model
 {
     CGFloat heigth = 0;
-    heigth += 13.f;
-    heigth += 24.f;
+    heigth += 10.f;
+    heigth += 60.f;
     
     NSString * str = [model recomedContent];
     str = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -51,7 +51,7 @@
 
 - (void)initUI
 {
-    self.porView = [[PortraitView alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
+    self.porView = [[PortraitView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
     self.porView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.porView];
     
@@ -78,27 +78,27 @@
 {
     [self.porView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.contentView).offset(13.f);
+        make.top.equalTo(self.contentView).offset(10.f);
         make.left.equalTo(self.contentView).offset(15.f);
-        make.height.equalTo(@(24.f));
-        make.width.equalTo(@(24.f));
+        make.height.equalTo(@(60.f));
+        make.width.equalTo(@(60.f));
     }];
     
     [self.userName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.porView.mas_right).offset(10.f);
-        make.centerY.equalTo(self.porView);
+        make.top.equalTo(self.contentView.mas_top).offset(15.f);
         make.right.equalTo(self.recomendData.mas_left).offset(-10);
     }];
     
     [self.recomendData mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView).offset(-15);
-        make.centerY.equalTo(self.porView);
+        make.centerY.equalTo(self.userName);
     }];
     
     [self.recomendContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.porView.mas_bottom).offset(10.f);
         make.bottom.equalTo(self.contentView).offset(-13.f).priorityLow();
-        make.left.equalTo(self.userName);
+        make.left.equalTo(self.porView);
         make.right.equalTo(self.contentView).offset(-15);
         
     }];

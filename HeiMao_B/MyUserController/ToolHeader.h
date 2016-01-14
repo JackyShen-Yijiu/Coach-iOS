@@ -39,6 +39,12 @@ static NSString *const kQiniuImageUrl = @"http://7xnjg0.com1.z0.glb.clouddn.com/
 
 static NSString *const kupdateUserInfo = @"userinfo/updatecoachinfo";
 
+static NSString *const kcoachTags = @"userinfo/getallcoachtags";  //获取教练标签
+
+static NSString *const kaddTag = @"userinfo/coachaddtag";     //添加自定义标签
+
+static NSString *const kdelegateTag = @"userinfo/coachdeletetag";     //删除自定义标签
+
 #define kShowSuccess(msg) [SVProgressHUD showSuccessWithStatus:msg];
 
 #define kShowDismiss     [SVProgressHUD dismiss];

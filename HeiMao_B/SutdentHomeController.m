@@ -252,15 +252,14 @@
         if (!basicCell) {
             basicCell = [[StudentHomeUserBasicInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identiy];
         }
-        [basicCell setBgImageUrlStr:self.model.porInfo.originalpic userName:self.model.userName userId:self.model.disPlayId];
+        [basicCell setBgImageUrlStr:self.model.porInfo.originalpic userName:self.model.userName userId:self.model.telPhoto];
         return basicCell;
     }else if (indexPath.section == 1){
         identiy =  NSStringFromClass([StudentHomeUserCourseInfoCell class]);
         StudentHomeUserCourseInfoCell * infoCell = [tableView dequeueReusableCellWithIdentifier:identiy];
         if (!infoCell) {
             infoCell = [[StudentHomeUserCourseInfoCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                                            reuseIdentifier:identiy];
-        }
+                                                            reuseIdentifier:identiy];        }
         [infoCell setModel:self.model];
         return infoCell;
     }else if(indexPath.section == 3){
