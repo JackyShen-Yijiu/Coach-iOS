@@ -101,7 +101,7 @@
         make.top.equalTo(self.titleLabel.mas_bottom).offset(8);
         make.left.equalTo(self.detailBackView.mas_left).offset(20);
         make.width.equalTo(@100);
-        make.height.equalTo(@20);
+        make.height.equalTo(@10);
         
     }];
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
