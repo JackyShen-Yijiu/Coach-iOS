@@ -24,12 +24,13 @@
 #import "WorkNatureController.h"
 #import "JSONKit.h"
 #import "WorkTypeModel.h"
+#import "WorkTypeListController.h"
 
 #define kSystemWide [UIScreen mainScreen].bounds.size.width
 
 #define kSystemHeight [UIScreen mainScreen].bounds.size.height
 
-@interface TeacherCenterController ()<UITableViewDataSource,UITableViewDelegate,UserCenterHeadViewDelegte>
+@interface TeacherCenterController ()<UITableViewDataSource,UITableViewDelegate,UserCenterHeadViewDelegte,WorkTypeListControllerDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *tableHeadView;
 @property (strong, nonatomic) UserCenterHeadView *userCenterView;
@@ -134,8 +135,7 @@
         AffiliatedSchoolViewController *query = [[AffiliatedSchoolViewController alloc] init];
         [self.navigationController pushViewController:query animated:YES];
     }else if (indexPath.section == 0 && indexPath.row == 1){//// new @"工作性质"
-        WorkNatureController * workNatureVC = [[WorkNatureController alloc] init];
-        [self.navigationController pushViewController:workNatureVC animated:YES];
+        [self workTypeButtonClick];
         NSLog(@"工作性质");
     }else if (indexPath.section == 0 && indexPath.row == 2) {// @"训练场地"
         if ([UserInfoModel defaultUserInfo].schoolId) {
@@ -171,6 +171,24 @@
     
     
 }
+
+- (void)workTypeButtonClick
+{
+    WorkTypeListController * listController = [[WorkTypeListController alloc] init];
+    listController.delegate = self;
+    listController.isPush = YES;
+    [self.navigationController pushViewController:listController animated:YES];
+}
+
+- (void)workTypeListController:(WorkTypeListController *)controller didSeletedWorkType:(KCourseWorkType)type workName:(NSString *)name
+{
+    [controller.navigationController popViewControllerAnimated:YES];
+    
+    NSLog(@"更改工作性质name:%@",name);
+    [UserInfoModel defaultUserInfo].coachtype = [WorkTypeModel converStringToType:name];
+
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -185,10 +203,12 @@
     NSString * driveSname = [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
     
     // "工作性质"
-//    NSString * type = [[UserInfoModel defaultUserInfo].coachtype objectStringForKey:@"type"];
-//    NSString *workProperty = [WorkTypeModel converTypeToString:(KCourseWorkType)type];
-//    NSLog(@"type:%@-workProperty:%@",type,workProperty);
-    NSString * workProperty = @"";
+    NSInteger coachtype = [UserInfoModel defaultUserInfo].coachtype;
+    NSLog(@"coachtype:%zd",coachtype);
+    NSString *workProperty = [WorkTypeModel converTypeToString:coachtype];
+    NSLog(@"workProperty:%@",workProperty);
+    
+    // 训练场地
     NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
     NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
     NSString * workSetDes = @"未设置";

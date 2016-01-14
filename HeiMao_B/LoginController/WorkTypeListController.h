@@ -15,4 +15,7 @@
 @end
 @interface WorkTypeListController : UIViewController
 @property(nonatomic,weak)id<WorkTypeListControllerDelegate>delegate;
+
+@property (nonatomic,assign)BOOL isPush;
+
 @end
