@@ -14,6 +14,11 @@
 - (void)networkRequestRefresh{
     [NetWorkEntiry getInformationMessageSeqindex:0 withCount:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        NSArray *resultArray = [responseObject objectForKey:@"data"];
+        if (resultArray.count == 0) {
+            [self showMsg:@"还没有数据哦!"];
+            return ;
+        }
         // 检测是否有数据
         if ([self checkErrorWithData:responseObject]) {
             [self.informationArray removeAllObjects];

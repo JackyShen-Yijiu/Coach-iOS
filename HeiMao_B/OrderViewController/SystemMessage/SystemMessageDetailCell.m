@@ -65,7 +65,7 @@
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView.mas_centerX);
         make.top.equalTo(self.contentView.mas_top).offset(10);
-        make.width.equalTo(@100);
+        make.width.equalTo(@80);
         make.height.equalTo(@20);
         
     }];
@@ -91,21 +91,21 @@
         
     }];
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.detailBackView.mas_top).offset(50);
+        make.top.equalTo(self.detailBackView.mas_top).offset(10);
         make.right.equalTo(self.detailBackView.mas_right).offset(-20);
-        make.width.equalTo(@400);
-        make.height.equalTo(@40);
+        make.width.equalTo(@37);
+        make.height.equalTo(@30);
         
     }];
     [self.dataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(8);
         make.left.equalTo(self.detailBackView.mas_left).offset(20);
         make.width.equalTo(@100);
         make.height.equalTo(@20);
         
     }];
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.dataLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.dataLabel.mas_bottom).offset(0);
         make.left.equalTo(self.detailBackView.mas_left).offset(20);
         make.right.equalTo(self.detailBackView.mas_right).offset(0);
         make.height.equalTo(@40);
@@ -172,9 +172,8 @@
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.text = @"金额增加通知";
-        _titleLabel.backgroundColor = [UIColor cyanColor];
         _titleLabel.textColor = [UIColor blackColor];
-        _titleLabel.font = [UIFont systemFontOfSize:20];
+        _titleLabel.font = [UIFont systemFontOfSize:16];
         
     }
     return _titleLabel;
@@ -191,8 +190,6 @@
     if (_dataLabel == nil) {
         _dataLabel = [[UILabel alloc] init];
         _dataLabel.text = @"2016-1-1";
-        _dataLabel.textColor = [UIColor grayColor];
-        _dataLabel.backgroundColor = [UIColor cyanColor];
         _dataLabel.font = [UIFont systemFontOfSize:12];
     }
     return _dataLabel;
@@ -200,11 +197,9 @@
 - (UILabel *)detailLabel{
     if (_detailLabel == nil) {
         _detailLabel = [[UILabel alloc] init];
-        _detailLabel.text = @"您已经完成学员签到流程,恭喜您能获得1元钱,继续加油哦!";
         _detailLabel.textColor = [UIColor grayColor];
-        _detailLabel.backgroundColor = [UIColor cyanColor];
         _detailLabel.numberOfLines = 0;
-        _detailLabel.font = [UIFont systemFontOfSize:16];
+        _detailLabel.font = [UIFont systemFontOfSize:14];
     }
     return _detailLabel;
 }
@@ -219,7 +214,6 @@
     if (_didClickLabel == nil) {
         _didClickLabel = [[UILabel alloc] init];
         _didClickLabel.text = @"立即查看";
-        _didClickLabel.textColor = [UIColor grayColor];
         _didClickLabel.font = [UIFont systemFontOfSize:17];
     }
     return _didClickLabel;
@@ -241,8 +235,64 @@
 }
 - (void)setSystemModel:(SystemMessageModel *)systemModel{
     self.titleLabel.text = systemModel.title;
-    self.imageView.image = [UIImage imageNamed:@"money"];
+    self.imgView.image = [UIImage imageNamed:@"money"];
     self.detailLabel.text = systemModel.detial;
+    NSString *formatYYYYMM = @"yyyy-MM";
+    NSString *todayYYYYMM = [self dateFromLocalWithFormatString:formatYYYYMM];
+    
+    NSString *testYYYYMM = [self getLocalDateFormateUTCDate:systemModel.createtime format:formatYYYYMM];
+    
+    // 比较年和月是否一样
+    if ([todayYYYYMM isEqualToString:testYYYYMM]) {
+        // 判断天数
+        NSString *formatDD = @"dd";
+        NSString *today = [self dateFromLocalWithFormatString:formatDD];
+        NSString *testDay = [self getLocalDateFormateUTCDate:systemModel.createtime format:formatDD];
+        
+        if (1 == [today integerValue] - [testDay integerValue]) {
+            NSString *formatHHMM = @"HH:mm";
+            NSString *testHHMM = [self getLocalDateFormateUTCDate:systemModel.createtime format:formatHHMM];
+            self.timeLabel.text = [NSString stringWithFormat:@"昨天 %@",testHHMM];
+            
+        }else if (0 == [today integerValue] - [testDay integerValue]){
+            NSString *formatHHMM = @"HH:mm";
+            NSString *testHHMM = [self getLocalDateFormateUTCDate:systemModel.createtime format:formatHHMM];
+            self.timeLabel.text = [NSString stringWithFormat:@"今天 %@",testHHMM];
+
+        }
+    }
+    // 显示日期
+    NSString *formatyyyyMMdd = @"yyyy-MM-dd";
+    NSString *testyyyyMMdd = [self getLocalDateFormateUTCDate:systemModel.createtime format:formatyyyyMMdd];
+    self.dataLabel.text = testyyyyMMdd;
+    
     
 }
+- (NSString *)dateFromLocalWithFormatString:(NSString *)formatString {
+    
+    NSDate *localDate = [NSDate new];
+    
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:formatString];
+    return [dateFormatter stringFromDate:localDate];
+}
+
+//将UTC日期字符串转为本地时间字符串
+//输入的UTC日期格式2013-08-03T04:53:51+0000
+- (NSString *)getLocalDateFormateUTCDate:(NSString *)utcDate format:(NSString *)formatString {
+    //    NSLog(@"utc = %@",utcDate);
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //输入格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
+    [dateFormatter setTimeZone:localTimeZone];
+    
+    NSDate *dateFormatted = [dateFormatter dateFromString:utcDate];
+    //输出格式
+    [dateFormatter setDateFormat:formatString];
+    //    [dateFormatter setDateFormat:@"HH:mm"];
+    NSString *dateString = [dateFormatter stringFromDate:dateFormatted];
+    return dateString;
+}
+
 @end

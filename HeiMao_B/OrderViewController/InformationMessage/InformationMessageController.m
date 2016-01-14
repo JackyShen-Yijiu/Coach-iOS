@@ -28,6 +28,8 @@
     self.tableView.delegate = self;
     self.view.backgroundColor = RGB_Color(247,249,251);
     [self.view addSubview:self.tableView];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self initData];
     
 
@@ -84,7 +86,7 @@
 #pragma mark --- Lazy加载
 - (UITableView *)tableView{
     if (_tableView == nil) {
-        _tableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64) style:UITableViewStylePlain];
+        _tableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     

@@ -104,7 +104,7 @@
     if (_timeLabel == nil) {
         _timeLabel = [[ UILabel alloc] init];
         _timeLabel.backgroundColor = [UIColor grayColor];
-        _timeLabel.text = @"昨天  10:00";
+        _timeLabel.text = @" ";
         _timeLabel.textColor = [UIColor whiteColor];
         _timeLabel.textAlignment = UITextAlignmentCenter;
         _timeLabel.font = [UIFont systemFontOfSize:12];
@@ -133,7 +133,7 @@
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textColor = [UIColor blackColor];
-        _titleLabel.font = [UIFont systemFontOfSize:20];
+        _titleLabel.font = [UIFont systemFontOfSize:16];
         
     }
     return _titleLabel;
@@ -151,7 +151,7 @@
         _contentTitleLabel = [[UILabel alloc] init];
         _contentTitleLabel.textColor = [UIColor blackColor];
         _contentTitleLabel.numberOfLines = 0;
-        _contentTitleLabel.font = [UIFont systemFontOfSize:20];
+        _contentTitleLabel.font = [UIFont systemFontOfSize:16];
     }
     return _contentTitleLabel;
 }
@@ -169,7 +169,7 @@
         _detailLabel = [[UILabel alloc] init];
         _detailLabel.textColor = [UIColor grayColor];
         _detailLabel.numberOfLines = 0;
-        _detailLabel.font = [UIFont systemFontOfSize:16];
+        _detailLabel.font = [UIFont systemFontOfSize:14];
     }
     return _detailLabel;
 }
@@ -191,6 +191,7 @@
     
     self.detailLabel.text = informationMessageModel.descriptionString;
     self.contentTitleLabel.text = informationMessageModel.title;
+    
     NSString *type = informationMessageModel.newstype;
     if ([type isEqualToString:@"0"]) {
         self.titleLabel.text = @"行业资讯";
@@ -199,5 +200,67 @@
         self.titleLabel.text = @"笑话大全";
         self.imageView.image = [UIImage imageNamed:@"gaoxiao"];
     }
+    
+    NSString *formatYYYYMM = @"yyyy-MM";
+    NSString *todayYYYYMM = [self dateFromLocalWithFormatString:formatYYYYMM];
+    
+    NSString *testYYYYMM = [self getLocalDateFormateUTCDate:informationMessageModel.createtime format:formatYYYYMM];
+    
+    // 比较年和月是否一样
+    if ([todayYYYYMM isEqualToString:testYYYYMM]) {
+        // 判断天数
+        NSString *formatDD = @"dd";
+        NSString *today = [self dateFromLocalWithFormatString:formatDD];
+        NSString *testDay = [self getLocalDateFormateUTCDate:informationMessageModel.createtime format:formatDD];
+        
+        if (1 == [today integerValue] - [testDay integerValue]) {
+            NSString *formatHHMM = @"HH:mm";
+            NSString *testHHMM = [self getLocalDateFormateUTCDate:informationMessageModel.createtime format:formatHHMM];
+            self.timeLabel.text = [NSString stringWithFormat:@"昨天 %@",testHHMM];
+            
+        }else if (0 == [today integerValue] - [testDay integerValue]){
+            NSString *formatHHMM = @"HH:mm";
+            NSString *testHHMM = [self getLocalDateFormateUTCDate:informationMessageModel.createtime format:formatHHMM];
+            self.timeLabel.text = [NSString stringWithFormat:@"今天 %@",testHHMM];
+            
+        }
+    }else {
+        NSString *formatHHMM = @"HH:mm";
+        NSString *testHHMM = [self getLocalDateFormateUTCDate:informationMessageModel.createtime format:formatHHMM];
+        self.timeLabel.text = [NSString stringWithFormat:@"%@",testHHMM];
+    }
+
+    // 显示日期
+    NSString *formatyyyyMMdd = @"yyyy-MM-dd";
+    NSString *testyyyyMMdd = [self getLocalDateFormateUTCDate:informationMessageModel.createtime format:formatyyyyMMdd];
+    self.dataLabel.text = testyyyyMMdd;
+
 }
+- (NSString *)dateFromLocalWithFormatString:(NSString *)formatString {
+    
+    NSDate *localDate = [NSDate new];
+    
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:formatString];
+    return [dateFormatter stringFromDate:localDate];
+}
+
+//将UTC日期字符串转为本地时间字符串
+//输入的UTC日期格式2013-08-03T04:53:51+0000
+- (NSString *)getLocalDateFormateUTCDate:(NSString *)utcDate format:(NSString *)formatString {
+    //    NSLog(@"utc = %@",utcDate);
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //输入格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
+    [dateFormatter setTimeZone:localTimeZone];
+    
+    NSDate *dateFormatted = [dateFormatter dateFromString:utcDate];
+    //输出格式
+    [dateFormatter setDateFormat:formatString];
+    //    [dateFormatter setDateFormat:@"HH:mm"];
+    NSString *dateString = [dateFormatter stringFromDate:dateFormatted];
+    return dateString;
+}
+
 @end
