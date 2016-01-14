@@ -25,6 +25,8 @@
     self.tableView.delegate = self;
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self initData];
 }
 
@@ -80,6 +82,6 @@
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 230;
+    return 210;
 }
 @end
