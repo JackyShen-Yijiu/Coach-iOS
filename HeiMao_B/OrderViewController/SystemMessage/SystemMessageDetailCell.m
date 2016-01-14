@@ -115,7 +115,7 @@
         make.top.equalTo(self.detailLabel.mas_bottom).offset(10);
         make.left.equalTo(self.detailBackView.mas_left).offset(0);
         make.right.equalTo(self.detailBackView.mas_right).offset(0);
-        make.height.equalTo(@1);
+        make.height.equalTo(@2);
        
         
     }];
@@ -127,10 +127,10 @@
         
     }];
     [self.arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.dataLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.topLineView.mas_bottom).offset(10);
         make.right.equalTo(self.detailBackView.mas_right).offset(-20);
-        make.width.equalTo(@40);
-        make.height.equalTo(@40);
+        make.width.equalTo(@13);
+        make.height.equalTo(@22);
         
     }];
 
@@ -154,6 +154,10 @@
     if (_backView == nil) {
         _backView = [[UIView alloc] init];
         _backView.backgroundColor = RGB_Color(31, 124, 235);
+        [_backView.layer setShadowColor:[UIColor blackColor].CGColor];
+        [_backView.layer setShadowOpacity:0.2f];
+        [_backView.layer setOpacity:1.f];
+        [_backView.layer setShadowOffset:CGSizeMake(0, 1.5)];
     }
     return _backView;
 }
@@ -207,7 +211,7 @@
 - (UIView *)topLineView{
     if (_topLineView == nil) {
         _topLineView = [[UIView alloc] init];
-        _topLineView.backgroundColor = [UIColor grayColor];
+        _topLineView.backgroundColor = RGB_Color(230, 230, 230);
     }
     return _topLineView;
 }
@@ -223,7 +227,7 @@
 - (UIImageView *)arrowImageView{
     if (_arrowImageView == nil) {
         _arrowImageView = [[UIImageView alloc] init];
-        _arrowImageView.image = [UIImage imageNamed:@""];
+        _arrowImageView.image = [UIImage imageNamed:@"arrow"];
     }
     return _arrowImageView;
 }
