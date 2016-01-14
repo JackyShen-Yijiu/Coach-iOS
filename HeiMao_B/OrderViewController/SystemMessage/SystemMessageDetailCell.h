@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SystemMessageModel.h"
 
 @interface SystemMessageDetailCell : UITableViewCell
-
+@property (nonatomic, strong) SystemMessageModel *systemModel;
 @end

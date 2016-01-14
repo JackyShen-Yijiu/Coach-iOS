@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UIImageView *imgView;
 @property (nonatomic, strong) UILabel *contentTitleLabel;
 @property (nonatomic, strong) UILabel *detailLabel;
+@property (nonatomic, assign) CGFloat weight;
 
 
 - (CGFloat)heightWithcell:(InformationMessageModel *)tableView;

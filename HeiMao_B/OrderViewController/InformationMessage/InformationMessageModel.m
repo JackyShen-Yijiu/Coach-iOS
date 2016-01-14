@@ -20,6 +20,7 @@
         _contenturl = [dictionary objectStringForKey:@"contenturl"];
         _createtime = [dictionary objectStringForKey:@"createtime"];
         _seqindex = [NSString stringWithFormat:@"%@",[dictionary objectForKey:@"seqindex"]];
+        _newstype = [NSString stringWithFormat:@"%@",[dictionary objectForKey:@"newstype"]];
     }
     return self;
 }

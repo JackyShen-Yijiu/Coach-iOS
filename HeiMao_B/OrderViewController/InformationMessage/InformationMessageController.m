@@ -66,6 +66,7 @@
     InformationMessageCell *informationCell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (!informationCell) {
         informationCell = [[InformationMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        informationCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     informationCell.informationMessageModel = _informationMessageViewModel.informationArray[indexPath.row];
     return informationCell;

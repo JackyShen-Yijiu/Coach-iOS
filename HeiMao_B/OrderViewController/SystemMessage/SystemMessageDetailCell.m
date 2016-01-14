@@ -239,5 +239,10 @@
     }
     return _bottomLineView;
 }
-
+- (void)setSystemModel:(SystemMessageModel *)systemModel{
+    self.titleLabel.text = systemModel.title;
+    self.imageView.image = [UIImage imageNamed:@"money"];
+    self.detailLabel.text = systemModel.detial;
+    
+}
 @end

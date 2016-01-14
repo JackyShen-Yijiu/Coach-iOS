@@ -28,10 +28,6 @@
     [self.detailBackView addSubview:self.dataLabel];
     [self.detailBackView addSubview:self.contentTitleLabel];
     [self.detailBackView addSubview:self.detailLabel];
-    
-    
-    
-    
 }
 
 - (void)awakeFromNib {
@@ -47,7 +43,7 @@
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView.mas_centerX);
         make.top.equalTo(self.contentView.mas_top).offset(10);
-        make.width.equalTo(@100);
+        make.width.equalTo(@80);
         make.height.equalTo(@20);
         
     }];
@@ -90,7 +86,7 @@
         make.top.equalTo(self.dataLabel.mas_bottom).offset(-10);
         make.left.equalTo(self.detailBackView.mas_left).offset(20);
         make.right.equalTo(self.detailBackView.mas_right).offset(0);
-        make.height.equalTo(@40);
+        make.height.equalTo(@80);
         
     }];
 
@@ -136,8 +132,6 @@
 - (UILabel *)titleLabel{
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"金额增加通知";
-//        _titleLabel.backgroundColor = [UIColor cyanColor];
         _titleLabel.textColor = [UIColor blackColor];
         _titleLabel.font = [UIFont systemFontOfSize:20];
         
@@ -155,8 +149,6 @@
 - (UILabel *)contentTitleLabel{
     if (_contentTitleLabel == nil) {
         _contentTitleLabel = [[UILabel alloc] init];
-        _contentTitleLabel.text = @"荷兰教练荷兰驾校老师授课可要求性回报";
-//        _contentTitleLabel.backgroundColor = [UIColor cyanColor];
         _contentTitleLabel.textColor = [UIColor blackColor];
         _contentTitleLabel.numberOfLines = 0;
         _contentTitleLabel.font = [UIFont systemFontOfSize:20];
@@ -168,7 +160,6 @@
         _dataLabel = [[UILabel alloc] init];
         _dataLabel.text = @"2016-1-1";
         _dataLabel.textColor = [UIColor grayColor];
-//        _dataLabel.backgroundColor = [UIColor cyanColor];
         _dataLabel.font = [UIFont systemFontOfSize:12];
     }
     return _dataLabel;
@@ -176,9 +167,7 @@
 - (UILabel *)detailLabel{
     if (_detailLabel == nil) {
         _detailLabel = [[UILabel alloc] init];
-        _detailLabel.text = @"您已经完成学员签到流程,恭喜您能获得1元钱,继续加油哦!";
         _detailLabel.textColor = [UIColor grayColor];
-//        _detailLabel.backgroundColor = [UIColor cyanColor];
         _detailLabel.numberOfLines = 0;
         _detailLabel.font = [UIFont systemFontOfSize:16];
     }
@@ -196,9 +185,19 @@
     CGRect bounds = [string boundingRectWithSize:
                      CGSizeMake([[UIScreen mainScreen] bounds].size.width - 30, 10000) options:
                      NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20.f]} context:nil];
-    return bounds.size.height + 100;
+    return bounds.size.height + 140;
 }
 - (void)setInformationMessageModel:(InformationMessageModel *)informationMessageModel{
+    
     self.detailLabel.text = informationMessageModel.descriptionString;
+    self.contentTitleLabel.text = informationMessageModel.title;
+    NSString *type = informationMessageModel.newstype;
+    if ([type isEqualToString:@"0"]) {
+        self.titleLabel.text = @"行业资讯";
+        self.imageView.image = [UIImage imageNamed:@"xixun"];
+    }else{
+        self.titleLabel.text = @"笑话大全";
+        self.imageView.image = [UIImage imageNamed:@"gaoxiao"];
+    }
 }
 @end

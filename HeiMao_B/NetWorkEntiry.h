@@ -235,4 +235,12 @@
 + (void)getInformationMessageSeqindex:(NSInteger)seqindex withCount:(NSInteger)count
                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+/**
+ *
+ * 系统消息调用接口,
+ *
+ */
++ (void)getSystemMessageCoachid:(NSString *)coachid withSeqindex:(NSInteger)seqindex withCount:(NSInteger)count
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

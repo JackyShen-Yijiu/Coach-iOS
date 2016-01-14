@@ -430,7 +430,26 @@
     if (count < 0 || seqindex < 0) {
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"http://101.200.204.240:8181/api/headmaster/info/getnews?seqindex=%li&count=%ld",seqindex,count];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getnews?seqindex=%li&count=%ld",[self domain],seqindex,count];
+    
+    [self GET:urlStr parameters:nil success:success failure:failure];
+}
+/**
+ *
+ * 系统消息调用接口
+ *
+ */
++ (void)getSystemMessageCoachid:(NSString *)coachid withSeqindex:(NSInteger)seqindex withCount:(NSInteger)count
+                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if (count <= 0 || seqindex <= 0) {
+        return [self missParagramercallBackFailure:failure];
+    }
+    
+//    http://101.200.204.240:8181/api/v1/userinfo/getsysteminfo?coachid=5616352721ec29041a9af889&index=1&count=10
+    
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getsysteminfo?coachid=%@&index=%lu&count=%lu",[self domain],coachid,seqindex,count];
     
     [self GET:urlStr parameters:nil success:success failure:failure];
 }
