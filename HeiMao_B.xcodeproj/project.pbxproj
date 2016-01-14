@@ -20,6 +20,9 @@
 		0643007E1C47921E008B5A74 /* SystemMessageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0643007D1C47921E008B5A74 /* SystemMessageViewModel.m */; };
 		06891F781C06D23800E9C131 /* WalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06891F771C06D23800E9C131 /* WalletModel.m */; };
 		06C1252E1C4351560033DCDE /* WorkNatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C1252D1C4351560033DCDE /* WorkNatureController.m */; };
+		555B0D6D1C463FEF008C5B17 /* PersonalizeLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 555B0D6C1C463FEF008C5B17 /* PersonalizeLabelCell.m */; };
+		556256251C472FEE00D132F4 /* PersonaizeLabelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556256241C472FEE00D132F4 /* PersonaizeLabelController.m */; };
+		556256281C47798C00D132F4 /* PersonlizeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 556256271C47798C00D132F4 /* PersonlizeModel.m */; };
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
 		B253C2BB1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BA1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m */; };
 		B253C2CD1C3FA742001AF771 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BD1C3FA742001AF771 /* bitstream.c */; };
@@ -471,6 +474,12 @@
 		06C1252D1C4351560033DCDE /* WorkNatureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkNatureController.m; path = ../WorkNatureController.m; sourceTree = "<group>"; };
 		1371250ABB78626F8329AC98 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2823AFD5ABA09767DD4F0623 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		555B0D6B1C463FEF008C5B17 /* PersonalizeLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalizeLabelCell.h; sourceTree = "<group>"; };
+		555B0D6C1C463FEF008C5B17 /* PersonalizeLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalizeLabelCell.m; sourceTree = "<group>"; };
+		556256231C472FEE00D132F4 /* PersonaizeLabelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonaizeLabelController.h; sourceTree = "<group>"; };
+		556256241C472FEE00D132F4 /* PersonaizeLabelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonaizeLabelController.m; sourceTree = "<group>"; };
+		556256261C47798C00D132F4 /* PersonlizeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonlizeModel.h; sourceTree = "<group>"; };
+		556256271C47798C00D132F4 /* PersonlizeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonlizeModel.m; sourceTree = "<group>"; };
 		61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B253C2B91C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+JGBarButtonItem.h"; sourceTree = "<group>"; };
 		B253C2BA1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+JGBarButtonItem.m"; sourceTree = "<group>"; };
@@ -1799,6 +1808,12 @@
 				D5F72BB31BF99C7F00B972B0 /* JEPhotoPickManger.m */,
 				D5F72BAF1BF9993A00B972B0 /* EditorUserViewController.h */,
 				D5F72BB01BF9993A00B972B0 /* EditorUserViewController.m */,
+				555B0D6B1C463FEF008C5B17 /* PersonalizeLabelCell.h */,
+				555B0D6C1C463FEF008C5B17 /* PersonalizeLabelCell.m */,
+				556256261C47798C00D132F4 /* PersonlizeModel.h */,
+				556256271C47798C00D132F4 /* PersonlizeModel.m */,
+				556256231C472FEE00D132F4 /* PersonaizeLabelController.h */,
+				556256241C472FEE00D132F4 /* PersonaizeLabelController.m */,
 				D5F72BBF1BF9A88C00B972B0 /* NSString+CurrentTimeDay.h */,
 				D5F72BC01BF9A88C00B972B0 /* NSString+CurrentTimeDay.m */,
 				D5F72BBC1BF9A83900B972B0 /* JENetwoking.h */,
@@ -2958,6 +2973,7 @@
 				B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */,
 				D5D50F941BFC135B00F54097 /* finishMessageView.m in Sources */,
 				B8447A0B1BE0D394004E5E15 /* PickerItemView.m in Sources */,
+				555B0D6D1C463FEF008C5B17 /* PersonalizeLabelCell.m in Sources */,
 				D5F72BD01BF9BC9400B972B0 /* GenderViewController.m in Sources */,
 				B8BC50801BF38A390007B029 /* PSTGridLayoutInfo.m in Sources */,
 				D5D50F5B1BFAD4FE00F54097 /* ButtonSelectedCell.m in Sources */,
@@ -3024,6 +3040,7 @@
 				B8BC50881BF38A390007B029 /* EaseUserModel.m in Sources */,
 				B8BC50811BF38A390007B029 /* PSTGridLayoutItem.m in Sources */,
 				D5F72BCA1BF9AB6700B972B0 /* UIDevice+JEsystemVersion.m in Sources */,
+				556256281C47798C00D132F4 /* PersonlizeModel.m in Sources */,
 				B253C2F61C43C960001AF771 /* PermissiveScoringMatrix.m in Sources */,
 				B86EB3591BDB50EB0014EBD7 /* AppDelegate.m in Sources */,
 				B8BFA2411BF645E4002D7F22 /* EaseRecordView.m in Sources */,
@@ -3076,6 +3093,7 @@
 				B8BA98BF1C22963C009DB449 /* OrderCompleteViewController.m in Sources */,
 				D5F72BD61BF9BE9700B972B0 /* PhoneNumViewController.m in Sources */,
 				B8BC507B1BF38A390007B029 /* PSTCollectionViewData.m in Sources */,
+				556256251C472FEE00D132F4 /* PersonaizeLabelController.m in Sources */,
 				B8C458841BDB5B8E00901F71 /* UIViewController+Method.m in Sources */,
 				B8BFA2481BF64AB1002D7F22 /* EaseMessageViewController.m in Sources */,
 				D5D50E9B1BF9D92F00F54097 /* MyWalletViewController.m in Sources */,

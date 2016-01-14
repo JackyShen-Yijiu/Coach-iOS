@@ -19,8 +19,12 @@
 #import "PhoneNumViewController.h"
 #import "JsonTransformManager.h"
 #import "DrivingNumViewController.h"
+#import "PersonalizeLabelCell.h"
+#import "PersonaizeLabelController.h"
+#import "PersonlizeModel.h"
 
 //static NSString *const kupdateUserInfo = @"userinfo/updateuserinfo";
+static NSString *const ktagArrChange = @"ktagArrChange";
 
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 
@@ -31,36 +35,55 @@
 @property (strong, nonatomic) UIImageView *userHeadImage;
 @property (strong, nonatomic) NSArray *detailDataArray;
 @property (strong, nonatomic) NSString *qiniuToken;
+
+@property (strong, nonatomic) NSMutableArray *systemTagArray;
+@property (strong, nonatomic) NSMutableArray *customTagArray;
+
 @end
 
 @implementation EditorUserViewController
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = @[@[@"头像",@"用户名"],@[@"身份证",@"联系电话",@"驾驶证"],@[@"性别",@"自我介绍"]];
+        _dataArray = @[@[@"",@"姓名"],@[@"身份证",@"联系电话",@"教练证",@"驾龄",@"性别"],@[@"个性标签",@"个人说明"]];
     }
     return _dataArray;
+}
+
+- (NSMutableArray *)systemTagArray {
+    if (!_systemTagArray) {
+        _systemTagArray = [[NSMutableArray alloc] init];
+    }
+    return _systemTagArray;
+}
+
+- (NSMutableArray *)customTagArray {
+    if (!_customTagArray) {
+        _customTagArray = [[NSMutableArray alloc] init];
+    }
+    return _customTagArray;
 }
 
 - (NSArray *)detailDataArray {
     
     NSString * name = [UserInfoModel defaultUserInfo].name;
-    NSArray * item1 = @[@"",
-                        [self strTolerance:name]
+    NSArray * item1 = @[@"",[self strTolerance:name]
                         ];
     
     NSString * idcardnumber = [UserInfoModel defaultUserInfo].idcardnumber;
     NSString * tel = [UserInfoModel defaultUserInfo].tel;
     NSString * dirving = [UserInfoModel defaultUserInfo].drivinglicensenumber;
+    NSString * gender = [UserInfoModel defaultUserInfo].Gender;
     NSArray * item2 = @[
                         [self strTolerance:idcardnumber],
                         [self strTolerance:tel],
-                        [self strTolerance:dirving]
+                        [self strTolerance:dirving],
+                        @"",
+                        [self strTolerance:gender],
                         ];
     
-    NSString * Gender = [UserInfoModel defaultUserInfo].Gender;
     NSString * intruduce = [UserInfoModel defaultUserInfo].introduction;    
     NSArray * item3 = @[
-                         [self strTolerance:Gender],
+                         @"",
                          [self strTolerance:intruduce]
                          ];
     
@@ -78,6 +101,10 @@
     return _tableView;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self startNetWork];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -91,11 +118,45 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signatureChange) name:kSignatureChange object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nameChange) name:kmodifyNameChange object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nickNameChange) name:kIDCardChange object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addAddressChange) name:kPhoneNumChange object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addAddressChange) name:kPhoneNumChange object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(drivingNumChange) name:kDrivingNumChange object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagArrayChange) name:ktagArrChange object:nil];
+    
 }
-- (void)drivingNumChange {
+
+- (void)startNetWork {
+    
+    NSString *coachTags = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kcoachTags];
+    [JENetwoking startDownLoadWithUrl:coachTags postParam:@{@"coachid":[UserInfoModel defaultUserInfo].userID} WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
+        [self.systemTagArray removeAllObjects];
+        [self.customTagArray removeAllObjects];
+        NSLog(@"%@",data);
+        NSDictionary *dic = data;
+        if ([[dic objectForKey:@"type"] integerValue] == 1) {
+            NSArray *systemTagArr = [[data objectForKey:@"data"] objectForKey:@"systemtag"];
+            NSArray *customTagArr = [[data objectForKey:@"data"] objectForKey:@"selft"];
+            for (NSDictionary *subSystemTagDic in systemTagArr) {
+                [self.systemTagArray addObject:[PersonlizeModel converJsonDicToModel:subSystemTagDic]];
+            }
+            for (NSDictionary *subCustomTagDic in customTagArr) {
+                [self.customTagArray addObject:[PersonlizeModel converJsonDicToModel:subCustomTagDic]];
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:ktagArrChange object:nil];
+        }
+    }];
+}
+
+- (void)nameChange {          //名字改变
+    NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)nickNameChange {      //身份证改变
+    NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:1];
+    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)drivingNumChange {    //驾驶证改变
     NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:1];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 }
@@ -103,20 +164,19 @@
     NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:1];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 }
-- (void)nickNameChange {
-    NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:1];
+
+
+- (void)genderChange {        //性别改变
+    NSIndexPath *path = [NSIndexPath indexPathForRow:4 inSection:1];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 }
-- (void)nameChange {
-    NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:0];
-    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
-}
-- (void)genderChange {
-    NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:2];
-    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
-}
-- (void)signatureChange {
+- (void)signatureChange {     //个人说明改变
     NSIndexPath *path = [NSIndexPath indexPathForItem:1 inSection:2];
+    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)tagArrayChange {     //标签数组改变
+    NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:2];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -124,11 +184,32 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0 && indexPath.row == 0) {
-        return 80;
+        return 240;
+    }
+    if (indexPath.section == 2 && indexPath.row == 0) {
+        NSArray *arr = @[];
+        if (self.systemTagArray) {
+            NSMutableArray *tagArr = [[NSMutableArray alloc] init];
+            for (PersonlizeModel *model in self.systemTagArray) {
+                if (model.is_audit.integerValue == 0) {
+                    [tagArr addObject:model.tagname];
+                }
+            }
+            for (PersonlizeModel *model in self.customTagArray) {
+                if (model.is_audit.integerValue == 0) {
+                    [tagArr addObject:model.tagname];
+                }
+            }
+            arr = [tagArr copy];
+        }
+        return [PersonalizeLabelCell cellHeightWithArray:arr];
     }
     return 44;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 0) {
+        return 0;
+    }
     return 20;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -136,24 +217,53 @@
     return array.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0 && indexPath.section == 2) {
+        PersonalizeLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"yy"];
+        for (UIView *view in cell.contentView.subviews) {
+            UILabel *label = (UILabel *)view;
+            if (![label.text isEqualToString:@"个性标签"]) {
+                [view removeFromSuperview];
+            }
+        }
+        if (!cell) {
+            cell = [[PersonalizeLabelCell alloc] initWithStyle:0 reuseIdentifier:@"yy"];
+        }
+        NSArray *arr = @[];
+        if (self.systemTagArray.count >0) {
+            NSMutableArray *tagArr = [[NSMutableArray alloc] init];
+            for (PersonlizeModel *model in self.systemTagArray) {
+                if (model.is_audit.integerValue == 0) {
+                    [tagArr addObject:model.tagname];
+                }
+            }
+            for (PersonlizeModel *model in self.customTagArray) {
+                if (model.is_audit.integerValue == 0) {
+                    [tagArr addObject:model.tagname];
+                }
+            }
+            arr = [tagArr copy];
+        }
+        [cell initUIWithArray:arr withLabel:self.dataArray[indexPath.section][indexPath.row]];
+        return cell;
+    }
     static NSString *cellId = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
-    cell.textLabel.textColor = [UIColor blackColor];
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
     if (indexPath.row == 0 && indexPath.section == 0) {
-        self.userHeadImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+        self.userHeadImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 240)];
         self.userHeadImage.image = [UIImage imageNamed:@"littleImage.png"];
-        cell.accessoryView = self.userHeadImage;
+        [cell.contentView addSubview:self.userHeadImage];
         if ([UserInfoModel defaultUserInfo].portrait) {
             [self.userHeadImage sd_setImageWithURL:[NSURL URLWithString:[UserInfoModel defaultUserInfo].portrait] placeholderImage:[UIImage imageNamed:@"littleImage.png"]];
         }
     }else {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
+        cell.textLabel.textColor = [UIColor blackColor];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.detailTextLabel.text = self.detailDataArray[indexPath.section][indexPath.row];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
 
@@ -169,7 +279,7 @@
     ModifyNameViewController *modifyName = [[ModifyNameViewController alloc] init];
     [self.navigationController pushViewController:modifyName animated:YES];
     }
-    else if (indexPath.section == 2 && indexPath.row == 0) {
+    else if (indexPath.section == 1 && indexPath.row == 4) {
         GenderViewController *gender = [[GenderViewController alloc] init];
         [self.navigationController pushViewController:gender animated:YES];
     }
@@ -186,6 +296,11 @@
     }else if (indexPath.section == 1 && indexPath.row == 2) {
         DrivingNumViewController *driving = [[DrivingNumViewController alloc] init];
         [self.navigationController pushViewController:driving animated:YES];
+    }else if (indexPath.section == 2 && indexPath.row == 0) {
+        PersonaizeLabelController *plc = [[PersonaizeLabelController alloc] init];
+        plc.systemTagArray = self.systemTagArray;
+        plc.customTagArray = self.customTagArray;
+        [self.navigationController pushViewController:plc animated:YES];
     }
 }
 
