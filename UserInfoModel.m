@@ -115,8 +115,8 @@
     _introduction = [info objectForKey:@"introduction"];
     _workweek = [info objectArrayForKey:@"workweek"];
     
-    _coachtype = [info objectForKey:@"coachtype"];
-    
+    _coachtype = [[info objectForKey:@"coachtype"] integerValue];
+
     _leavebegintime = [info objectForKey:@"leavebegintime"];
     _leaveendtime = [info objectForKey:@"leaveendtime"];
 
@@ -311,12 +311,12 @@
 //        [UserInfoModel storeData:driveschoolinfo forKey:@"driveschoolinfo"];
     }
 }
-- (void)setCoachtype:(NSDictionary *)coachtype {
+- (void)setCoachtype:(NSInteger)coachtype {
     _coachtype = coachtype;
     if (coachtype) {
         NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
         NSMutableDictionary * mdic = [dic mutableCopy];
-        [mdic setValue:coachtype forKey:@"coachtype"];
+        [mdic setValue:@(coachtype) forKey:@"coachtype"];
         [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
     }
 }

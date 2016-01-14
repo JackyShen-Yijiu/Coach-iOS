@@ -102,6 +102,10 @@
 
 - (void)goBack:(UIButton *)button
 {
+    if (self.isPush) {
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
