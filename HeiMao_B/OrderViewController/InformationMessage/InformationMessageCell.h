@@ -21,4 +21,7 @@
 @property (nonatomic, strong) UILabel *contentTitleLabel;
 @property (nonatomic, strong) UILabel *detailLabel;
 
+
+- (CGFloat)heightWithcell:(InformationMessageModel *)tableView;
+
 @end

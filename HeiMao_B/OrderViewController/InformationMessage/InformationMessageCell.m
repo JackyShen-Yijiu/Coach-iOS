@@ -8,6 +8,7 @@
 
 #import "InformationMessageCell.h"
 
+
 @implementation InformationMessageCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -72,21 +73,21 @@
         
     }];
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.detailBackView.mas_top).offset(50);
+        make.top.equalTo(self.detailBackView.mas_top).offset(10);
         make.right.equalTo(self.detailBackView.mas_right).offset(-20);
-        make.width.equalTo(@400);
-        make.height.equalTo(@40);
+        make.width.equalTo(@23);
+        make.height.equalTo(@29);
         
     }];
     [self.dataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(2);
         make.left.equalTo(self.detailBackView.mas_left).offset(20);
         make.width.equalTo(@100);
         make.height.equalTo(@20);
         
     }];
     [self.contentTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.dataLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.dataLabel.mas_bottom).offset(-10);
         make.left.equalTo(self.detailBackView.mas_left).offset(20);
         make.right.equalTo(self.detailBackView.mas_right).offset(0);
         make.height.equalTo(@40);
@@ -94,10 +95,10 @@
     }];
 
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentTitleLabel.mas_bottom).offset(15);
+        make.top.equalTo(self.contentTitleLabel.mas_bottom).offset(5);
         make.left.equalTo(self.detailBackView.mas_left).offset(20);
         make.right.equalTo(self.detailBackView.mas_right).offset(0);
-        make.height.equalTo(@40);
+        make.bottom.equalTo(self.detailBackView.mas_bottom).offset(-10);
         
     }];
     
@@ -124,7 +125,11 @@
 - (UIView *)detailBackView{
     if (_detailBackView == nil) {
         _detailBackView = [[UIView alloc] init];
-        _detailBackView.backgroundColor = [UIColor whiteColor];
+        _detailBackView.backgroundColor = RGB_Color(255,255,255);
+        [_detailBackView.layer setShadowColor:[UIColor blackColor].CGColor];
+        [_detailBackView.layer setShadowOpacity:0.2f];
+        [_detailBackView.layer setOpacity:1.f];
+        [_detailBackView.layer setShadowOffset:CGSizeMake(0, 1.5)];
     }
     return _detailBackView;
 }
@@ -132,7 +137,7 @@
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.text = @"金额增加通知";
-        _titleLabel.backgroundColor = [UIColor cyanColor];
+//        _titleLabel.backgroundColor = [UIColor cyanColor];
         _titleLabel.textColor = [UIColor blackColor];
         _titleLabel.font = [UIFont systemFontOfSize:20];
         
@@ -143,7 +148,7 @@
 - (UIImageView *)imgView{
     if (_imgView == nil) {
         _imgView = [[UIImageView alloc] init];
-        _imgView.image = [UIImage imageNamed:@""];
+        _imgView.image = [UIImage imageNamed:@"zixun"];
     }
     return _imgView;
 }
@@ -151,8 +156,9 @@
     if (_contentTitleLabel == nil) {
         _contentTitleLabel = [[UILabel alloc] init];
         _contentTitleLabel.text = @"荷兰教练荷兰驾校老师授课可要求性回报";
-        _contentTitleLabel.backgroundColor = [UIColor cyanColor];
+//        _contentTitleLabel.backgroundColor = [UIColor cyanColor];
         _contentTitleLabel.textColor = [UIColor blackColor];
+        _contentTitleLabel.numberOfLines = 0;
         _contentTitleLabel.font = [UIFont systemFontOfSize:20];
     }
     return _contentTitleLabel;
@@ -162,7 +168,7 @@
         _dataLabel = [[UILabel alloc] init];
         _dataLabel.text = @"2016-1-1";
         _dataLabel.textColor = [UIColor grayColor];
-        _dataLabel.backgroundColor = [UIColor cyanColor];
+//        _dataLabel.backgroundColor = [UIColor cyanColor];
         _dataLabel.font = [UIFont systemFontOfSize:12];
     }
     return _dataLabel;
@@ -172,11 +178,25 @@
         _detailLabel = [[UILabel alloc] init];
         _detailLabel.text = @"您已经完成学员签到流程,恭喜您能获得1元钱,继续加油哦!";
         _detailLabel.textColor = [UIColor grayColor];
-        _detailLabel.backgroundColor = [UIColor cyanColor];
+//        _detailLabel.backgroundColor = [UIColor cyanColor];
         _detailLabel.numberOfLines = 0;
         _detailLabel.font = [UIFont systemFontOfSize:16];
     }
     return _detailLabel;
+}
+
+- (CGFloat)heightWithcell:(InformationMessageModel *)model
+{
+    NSString *str = model.descriptionString;
+    return   [self getLabelWidthWithString:str];
+    
+}
+
+- (CGFloat)getLabelWidthWithString:(NSString *)string {
+    CGRect bounds = [string boundingRectWithSize:
+                     CGSizeMake([[UIScreen mainScreen] bounds].size.width - 30, 10000) options:
+                     NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20.f]} context:nil];
+    return bounds.size.height + 100;
 }
 - (void)setInformationMessageModel:(InformationMessageModel *)informationMessageModel{
     self.detailLabel.text = informationMessageModel.descriptionString;

@@ -44,12 +44,25 @@
     
     [NetWorkEntiry getInformationMessageSeqindex:_index withCount:10 success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        InformationMessageModelRootClass *informationMessageModel = [[InformationMessageModelRootClass alloc] initWithJsonDict:responseObject];
+        NSArray *array = [responseObject objectForKey:@"data"];
+        NSDictionary *dictionary = [array firstObject];
+        NSInteger index = [[dictionary objectForKey:@"seqindex"] integerValue];
+        if (_index == index + 1) {
+           ToastAlertView *toast = [[ToastAlertView alloc] initWithTitle:@"没有更多数据"];
+             [toast show];
+            if (_tableViewNeedReLoad) {
+                _tableViewNeedReLoad();
+            }
+            return ;
+        }else{
+            InformationMessageModelRootClass *informationMessageModel = [[InformationMessageModelRootClass alloc] initWithJsonDict:responseObject];
             _informationArray = [[NSMutableArray alloc] initWithArray:informationMessageModel.data];
-        if (_tableViewNeedReLoad) {
-            _tableViewNeedReLoad();
-        }
+            if (_tableViewNeedReLoad) {
+                _tableViewNeedReLoad();
+            }
 
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
