@@ -1789,13 +1789,10 @@
 		B8AFED161BDB96A000EF8726 /* CourseSummaryController */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-=======
 				0613DE6D1C46273E004A1A2E /* InformationMessage */,
 				0613DE691C45E5D0004A1A2E /* SystemMessage */,
 				B253C2DB1C3FAA84001AF771 /* ScanViewController.h */,
 				B253C2DC1C3FAA84001AF771 /* ScanViewController.m */,
->>>>>>> 4734fe416d1d6329ca81c18375a3b0178a5efe25
 				B8AFED171BDB96AC00EF8726 /* CourseViewController.h */,
 				B8AFED181BDB96AC00EF8726 /* CourseViewController.m */,
 				B253C2E41C43B0FF001AF771 /* SearchCourseViewController.h */,
@@ -2499,13 +2496,10 @@
 		B8C458581BDB59AC00901F71 /* ThirdPary */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				D978ACD31C47B38A00D633B4 /* DVVLocationStatus.h */,
 				D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */,
 				D964C7EB1C43CA970009FE7A /* YYModel */,
-=======
 				B253C2E71C43C960001AF771 /* QCSearch */,
->>>>>>> 4734fe416d1d6329ca81c18375a3b0178a5efe25
 				B253C2D81C3FA901001AF771 /* UIView+SDExtension.h */,
 				B253C2D91C3FA901001AF771 /* UIView+SDExtension.m */,
 				B253C2BC1C3FA742001AF771 /* libqrencode */,

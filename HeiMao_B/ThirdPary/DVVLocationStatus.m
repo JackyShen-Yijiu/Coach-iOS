@@ -20,11 +20,8 @@
 
 - (void)remindUser {
     
-    if (![self checkLocationStatus]) {
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"使用此功能需要您在设置中开启定位！" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"设置", nil];
-        [alertView show];
-    }
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"使用此功能需要您在设置中开启定位！" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"设置", nil];
+    [alertView show];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (0 == buttonIndex) {

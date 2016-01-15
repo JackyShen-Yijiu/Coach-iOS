@@ -248,6 +248,8 @@
                   userLongitude:(NSString *)userLongitude
                   coachLatitude:(NSString *)coachLatitude
                  coachLongitude:(NSString *)coachLongitude
+                        success:(void (^)(AFHTTPRequestOperation *, id))success
+                        failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure;
 
 /**
  *

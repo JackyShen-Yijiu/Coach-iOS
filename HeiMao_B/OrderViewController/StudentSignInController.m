@@ -69,7 +69,7 @@
     [_dvvLocationStatus setSelectOkButtonBlock:^{
         [ws.navigationController popViewControllerAnimated:YES];
     }];
-    if ([_dvvLocationStatus checkLocationStatus]) {
+    if (![_dvvLocationStatus checkLocationStatus]) {
         [_dvvLocationStatus remindUser];
         return ;
     }
