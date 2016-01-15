@@ -204,4 +204,27 @@
                                          mobile:(NSString *)mobile
                                         address:(NSString *)address
                                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
+ *  学员签到
+ *
+ *  @param userId         学员id
+ *  @param coachId        教练id
+ *  @param reservationId  预约id
+ *  @param codeCreateTime 二维码生成时间戳
+ *  @param userlatitude   学员纬度
+ *  @param userLongitude  学员经度
+ *  @param coachLatitude  教练纬度
+ *  @param coachLongitude 教练经度
+ */
++ (void)studentSignInWithUserId:(NSString *)userId
+                        coachId:(NSString *)coachId
+                  reservationId:(NSString *)reservationId
+                 codeCreateTime:(NSString *)codeCreateTime
+                   userlatitude:(NSString *)userlatitude
+                  userLongitude:(NSString *)userLongitude
+                  coachLatitude:(NSString *)coachLatitude
+                 coachLongitude:(NSString *)coachLongitude
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

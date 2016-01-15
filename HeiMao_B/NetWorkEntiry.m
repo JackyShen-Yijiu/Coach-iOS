@@ -371,6 +371,42 @@
     
 }
 
+#pragma mark 学员签到
++ (void)studentSignInWithUserId:(NSString *)userId
+                        coachId:(NSString *)coachId
+                  reservationId:(NSString *)reservationId
+                 codeCreateTime:(NSString *)codeCreateTime
+                   userlatitude:(NSString *)userlatitude
+                  userLongitude:(NSString *)userLongitude
+                  coachLatitude:(NSString *)coachLatitude
+                 coachLongitude:(NSString *)coachLongitude
+                        success:(void (^)(AFHTTPRequestOperation *, id))success
+                        failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
+    
+    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/coursesignin",[self domain]];
+    
+    //    {
+    //        "userid": "String,学员id",
+    //        "coachid": "String,教练id",
+    //        "reservationid": "string,预约id",
+    //        "codecreatetime": "String,二维码生成时间戳",
+    //        "userlatitude": "Number,学员纬度",
+    //        "userlongitude": "Number,学员精度",
+    //        "coachlatitude": "Number,教练纬度",
+    //        "coachlongitude": "Number,教练经度"
+    //    }
+    NSDictionary *paramtersDict = @{ @"userid": userId,
+                                     @"coachid": coachId,
+                                     @"reservationid": reservationId,
+                                     @"codecreatetime": codeCreateTime,
+                                     @"userlatitude": userlatitude,
+                                     @"userlongitude": userLongitude,
+                                     @"coachlatitude": coachLatitude,
+                                     @"coachlongitude": coachLongitude };
+    
+    [self POST:urlStr parameters:paramtersDict success:success failure:failure];
+}
+
 #pragma mark - Common Method
 
 + (NSString *)domain
@@ -417,4 +453,5 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager.requestSerializer setValue:token forHTTPHeaderField:@"authorization"];
 }
+
 @end

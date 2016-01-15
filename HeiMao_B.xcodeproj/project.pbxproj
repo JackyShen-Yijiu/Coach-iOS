@@ -421,6 +421,14 @@
 		D5F72BD31BF9BD8700B972B0 /* IDCardNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F72BD21BF9BD8700B972B0 /* IDCardNumViewController.m */; };
 		D5F72BD61BF9BE9700B972B0 /* PhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F72BD51BF9BE9700B972B0 /* PhoneNumViewController.m */; };
 		D5F72BD91BF9BF6900B972B0 /* DrivingNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F72BD81BF9BF6900B972B0 /* DrivingNumViewController.m */; };
+		D964C7E11C43A7B00009FE7A /* StudentSignInController.m in Sources */ = {isa = PBXBuildFile; fileRef = D964C7E01C43A7B00009FE7A /* StudentSignInController.m */; };
+		D964C7E41C43B5BD0009FE7A /* DVVBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D964C7E31C43B5BD0009FE7A /* DVVBaseViewModel.m */; };
+		D964C7EA1C43C52E0009FE7A /* StudentSignInDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D964C7E91C43C52E0009FE7A /* StudentSignInDataModel.m */; };
+		D964C7F11C43CA970009FE7A /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D964C7ED1C43CA970009FE7A /* NSObject+YYModel.m */; };
+		D964C7F21C43CA970009FE7A /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D964C7EF1C43CA970009FE7A /* YYClassInfo.m */; };
+		D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */; };
+		D98655411C46080C0040B719 /* StudentSignInStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = D98655401C46080C0040B719 /* StudentSignInStatusView.m */; };
+		D98B906F1C44E4B300271B7B /* StudentSignInViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D98B906E1C44E4B300271B7B /* StudentSignInViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1123,6 +1131,23 @@
 		D5F72BD51BF9BE9700B972B0 /* PhoneNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumViewController.m; sourceTree = "<group>"; };
 		D5F72BD71BF9BF6900B972B0 /* DrivingNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrivingNumViewController.h; sourceTree = "<group>"; };
 		D5F72BD81BF9BF6900B972B0 /* DrivingNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrivingNumViewController.m; sourceTree = "<group>"; };
+		D964C7DF1C43A7B00009FE7A /* StudentSignInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentSignInController.h; sourceTree = "<group>"; };
+		D964C7E01C43A7B00009FE7A /* StudentSignInController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentSignInController.m; sourceTree = "<group>"; };
+		D964C7E21C43B5BD0009FE7A /* DVVBaseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVBaseViewModel.h; sourceTree = "<group>"; };
+		D964C7E31C43B5BD0009FE7A /* DVVBaseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVBaseViewModel.m; sourceTree = "<group>"; };
+		D964C7E81C43C52E0009FE7A /* StudentSignInDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentSignInDataModel.h; sourceTree = "<group>"; };
+		D964C7E91C43C52E0009FE7A /* StudentSignInDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentSignInDataModel.m; sourceTree = "<group>"; };
+		D964C7EC1C43CA970009FE7A /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
+		D964C7ED1C43CA970009FE7A /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
+		D964C7EE1C43CA970009FE7A /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
+		D964C7EF1C43CA970009FE7A /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
+		D964C7F01C43CA970009FE7A /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
+		D978ACD31C47B38A00D633B4 /* DVVLocationStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVLocationStatus.h; sourceTree = "<group>"; };
+		D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVLocationStatus.m; sourceTree = "<group>"; };
+		D986553F1C46080C0040B719 /* StudentSignInStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentSignInStatusView.h; sourceTree = "<group>"; };
+		D98655401C46080C0040B719 /* StudentSignInStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentSignInStatusView.m; sourceTree = "<group>"; };
+		D98B906D1C44E4B300271B7B /* StudentSignInViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentSignInViewModel.h; sourceTree = "<group>"; };
+		D98B906E1C44E4B300271B7B /* StudentSignInViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentSignInViewModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1635,8 +1660,6 @@
 		B8AFED161BDB96A000EF8726 /* CourseSummaryController */ = {
 			isa = PBXGroup;
 			children = (
-				B253C2DB1C3FAA84001AF771 /* ScanViewController.h */,
-				B253C2DC1C3FAA84001AF771 /* ScanViewController.m */,
 				B8AFED171BDB96AC00EF8726 /* CourseViewController.h */,
 				B8AFED181BDB96AC00EF8726 /* CourseViewController.m */,
 				B2AC20351C3E2CBD0033803C /* ScheduleViewController.h */,
@@ -1645,6 +1668,16 @@
 				B865C1781BDCA49400C1E681 /* CourseSummaryListCell.m */,
 				B865C17A1BDCA4A300C1E681 /* CourseSummaryDayCell.h */,
 				B865C17B1BDCA4A300C1E681 /* CourseSummaryDayCell.m */,
+				B253C2DB1C3FAA84001AF771 /* ScanViewController.h */,
+				B253C2DC1C3FAA84001AF771 /* ScanViewController.m */,
+				D964C7DF1C43A7B00009FE7A /* StudentSignInController.h */,
+				D964C7E01C43A7B00009FE7A /* StudentSignInController.m */,
+				D98B906D1C44E4B300271B7B /* StudentSignInViewModel.h */,
+				D98B906E1C44E4B300271B7B /* StudentSignInViewModel.m */,
+				D964C7E81C43C52E0009FE7A /* StudentSignInDataModel.h */,
+				D964C7E91C43C52E0009FE7A /* StudentSignInDataModel.m */,
+				D986553F1C46080C0040B719 /* StudentSignInStatusView.h */,
+				D98655401C46080C0040B719 /* StudentSignInStatusView.m */,
 			);
 			name = CourseSummaryController;
 			path = OrderViewController;
@@ -2322,6 +2355,9 @@
 		B8C458581BDB59AC00901F71 /* ThirdPary */ = {
 			isa = PBXGroup;
 			children = (
+				D978ACD31C47B38A00D633B4 /* DVVLocationStatus.h */,
+				D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */,
+				D964C7EB1C43CA970009FE7A /* YYModel */,
 				B253C2D81C3FA901001AF771 /* UIView+SDExtension.h */,
 				B253C2D91C3FA901001AF771 /* UIView+SDExtension.m */,
 				B253C2BC1C3FA742001AF771 /* libqrencode */,
@@ -2403,6 +2439,8 @@
 		B8C458811BDB5B7600901F71 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D964C7E21C43B5BD0009FE7A /* DVVBaseViewModel.h */,
+				D964C7E31C43B5BD0009FE7A /* DVVBaseViewModel.m */,
 				B253C2E11C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.h */,
 				B253C2E21C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.m */,
 				B253C2B91C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.h */,
@@ -2516,6 +2554,18 @@
 			path = Goods;
 			sourceTree = "<group>";
 		};
+		D964C7EB1C43CA970009FE7A /* YYModel */ = {
+			isa = PBXGroup;
+			children = (
+				D964C7EC1C43CA970009FE7A /* NSObject+YYModel.h */,
+				D964C7ED1C43CA970009FE7A /* NSObject+YYModel.m */,
+				D964C7EE1C43CA970009FE7A /* YYClassInfo.h */,
+				D964C7EF1C43CA970009FE7A /* YYClassInfo.m */,
+				D964C7F01C43CA970009FE7A /* YYModel.h */,
+			);
+			path = YYModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2550,7 +2600,7 @@
 				TargetAttributes = {
 					B86EB3501BDB50EB0014EBD7 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = MC3VUBEH8X;
+						DevelopmentTeam = F2PW74LLJK;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -2827,6 +2877,7 @@
 				B84479DF1BE07129004E5E15 /* SutdentHomeController.m in Sources */,
 				B8BFA2731BF64CE2002D7F22 /* EMGifImage.m in Sources */,
 				B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */,
+				D964C7E11C43A7B00009FE7A /* StudentSignInController.m in Sources */,
 				D5D50F941BFC135B00F54097 /* finishMessageView.m in Sources */,
 				B8447A0B1BE0D394004E5E15 /* PickerItemView.m in Sources */,
 				D5F72BD01BF9BC9400B972B0 /* GenderViewController.m in Sources */,
@@ -2861,6 +2912,7 @@
 				B8C458721BDB59AC00901F71 /* UIView+Sizes.m in Sources */,
 				D5F72BD31BF9BD8700B972B0 /* IDCardNumViewController.m in Sources */,
 				B84479D51BDF7890004E5E15 /* CourseDetailView.m in Sources */,
+				D98B906F1C44E4B300271B7B /* StudentSignInViewModel.m in Sources */,
 				B8BC50671BF38A390007B029 /* EMSDImageCache.m in Sources */,
 				B8BC50761BF38A390007B029 /* UIView+EMWebCacheOperation.m in Sources */,
 				D5D50F641BFB230900F54097 /* ExamClassViewController.m in Sources */,
@@ -2930,6 +2982,7 @@
 				B8BC50921BF38A390007B029 /* EaseEmoji.m in Sources */,
 				B8BC50611BF38A390007B029 /* MWPhoto.m in Sources */,
 				B8C458711BDB59AC00901F71 /* RFSegmentView.m in Sources */,
+				D964C7EA1C43C52E0009FE7A /* StudentSignInDataModel.m in Sources */,
 				B8BC507C1BF38A390007B029 /* PSTCollectionViewFlowLayout.m in Sources */,
 				B8AFED191BDB96AC00EF8726 /* CourseViewController.m in Sources */,
 				B801DDA91C25056C0086F8AB /* NoContentTipView.m in Sources */,
@@ -2945,6 +2998,7 @@
 				B8BC50E61BF393D00007B029 /* EaseBubbleView+Text.m in Sources */,
 				B8BC50E91BF393D00007B029 /* EaseBubbleView.m in Sources */,
 				B8447A281BE1E150004E5E15 /* CourseRatingCell.m in Sources */,
+				D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */,
 				B8BC506D1BF38A390007B029 /* EMSDWebImagePrefetcher.m in Sources */,
 				B865C1791BDCA49400C1E681 /* CourseSummaryListCell.m in Sources */,
 				B8BC50E41BF393D00007B029 /* EaseBubbleView+Image.m in Sources */,
@@ -2977,6 +3031,7 @@
 				B2AC20371C3E2CBD0033803C /* ScheduleViewController.m in Sources */,
 				D5F72BBA1BF99D3900B972B0 /* PFActionSheetView.m in Sources */,
 				B8BC505D1BF38A390007B029 /* UIView+MJExtension.m in Sources */,
+				D964C7E41C43B5BD0009FE7A /* DVVBaseViewModel.m in Sources */,
 				B84479DB1BDFB35D004E5E15 /* HMButton.m in Sources */,
 				B865C17F1BDCA4D600C1E681 /* PortraitView.m in Sources */,
 				B8BC505F1BF38A390007B029 /* MWGridCell.m in Sources */,
@@ -3029,11 +3084,14 @@
 				B8BC50871BF38A390007B029 /* EaseMessageModel.m in Sources */,
 				B8BC50731BF38A390007B029 /* UIImage+EMWebP.m in Sources */,
 				B8BC50571BF38A390007B029 /* MJRefreshGifHeader.m in Sources */,
+				D964C7F11C43CA970009FE7A /* NSObject+YYModel.m in Sources */,
 				B8447A081BE0D2E3004E5E15 /* CourseCancelController.m in Sources */,
 				B8DDB7B81BE47FDE008FE867 /* HMTrainaddressModel.m in Sources */,
 				B8BC50941BF38A390007B029 /* EaseEmotionEscape.m in Sources */,
 				B86EB3561BDB50EB0014EBD7 /* main.m in Sources */,
 				B8BC50491BF38A390007B029 /* EMCDDeviceManager+ProximitySensor.m in Sources */,
+				D964C7F21C43CA970009FE7A /* YYClassInfo.m in Sources */,
+				D98655411C46080C0040B719 /* StudentSignInStatusView.m in Sources */,
 				B8BFA2451BF64A84002D7F22 /* ChatViewController.m in Sources */,
 				D5D50FA71BFC425B00F54097 /* SetupViewController.m in Sources */,
 				B8BC50481BF38A390007B029 /* EMCDDeviceManager+Microphone.m in Sources */,
@@ -3151,7 +3209,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
@@ -3163,9 +3221,9 @@
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrwb",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dawei.TestOne;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -3189,9 +3247,9 @@
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrwb",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dawei.TestOne;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
