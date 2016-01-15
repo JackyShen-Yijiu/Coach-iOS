@@ -10,6 +10,7 @@
 #import "SystemMessageDetailCell.h"
 #import "RefreshTableView.h"
 #import "SystemMessageViewModel.h"
+#import "MyWalletViewController.h"
 
 @interface SystemMessageDetailController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong)  RefreshTableView *tableView;
@@ -66,6 +67,7 @@
         systemCell = [[SystemMessageDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     systemCell.systemModel = _systemViewModel.systemMessageArray[indexPath.row];
+    systemCell.selectionStyle = UITableViewCellSelectionStyleNone;
     return systemCell;
 }
 #pragma mark --- Lazy加载
@@ -83,5 +85,9 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 210;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    MyWalletViewController *myWallerVC = [[MyWalletViewController alloc] init];
+    [self.navigationController pushViewController:myWallerVC animated:YES];
 }
 @end
