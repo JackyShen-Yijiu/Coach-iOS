@@ -23,12 +23,14 @@
 #import "SetupViewController.h"
 #import "WorkNatureController.h"
 #import "JSONKit.h"
+#import "WorkTypeModel.h"
+#import "WorkTypeListController.h"
 
 #define kSystemWide [UIScreen mainScreen].bounds.size.width
 
 #define kSystemHeight [UIScreen mainScreen].bounds.size.height
 
-@interface TeacherCenterController ()<UITableViewDataSource,UITableViewDelegate,UserCenterHeadViewDelegte>
+@interface TeacherCenterController ()<UITableViewDataSource,UITableViewDelegate,UserCenterHeadViewDelegte,WorkTypeListControllerDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *tableHeadView;
 @property (strong, nonatomic) UserCenterHeadView *userCenterView;
@@ -49,7 +51,6 @@
     return _dataArray;
 }
 
-#warning 等待更改图片
 - (NSArray *)imageArray {
     if (_imageArray == nil) {
         _imageArray = @[@[@"dependSchool.png",@"workPropertyImg.png",@"studyGround.png",@"workTime.png",@"teachSubject.png",@"sendMeet.png"],@[@"rest.png",@"studentList.png",@"setting.png"],@[@"wallet.png"]];
@@ -134,8 +135,7 @@
         AffiliatedSchoolViewController *query = [[AffiliatedSchoolViewController alloc] init];
         [self.navigationController pushViewController:query animated:YES];
     }else if (indexPath.section == 0 && indexPath.row == 1){//// new @"工作性质"
-        WorkNatureController * workNatureVC = [[WorkNatureController alloc] init];
-        [self.navigationController pushViewController:workNatureVC animated:YES];
+        [self workTypeButtonClick];
         NSLog(@"工作性质");
     }else if (indexPath.section == 0 && indexPath.row == 2) {// @"训练场地"
         if ([UserInfoModel defaultUserInfo].schoolId) {
@@ -171,8 +171,27 @@
     
     
 }
+
+- (void)workTypeButtonClick
+{
+    WorkTypeListController * listController = [[WorkTypeListController alloc] init];
+    listController.delegate = self;
+    listController.isPush = YES;
+    [self.navigationController pushViewController:listController animated:YES];
+}
+
+- (void)workTypeListController:(WorkTypeListController *)controller didSeletedWorkType:(KCourseWorkType)type workName:(NSString *)name
+{
+    [controller.navigationController popViewControllerAnimated:YES];
+    
+    NSLog(@"更改工作性质name:%@",name);
+    [UserInfoModel defaultUserInfo].coachtype = [WorkTypeModel converStringToType:name];
+
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
 #pragma mark - 更新头像
     [self.userCenterView.userPortrait sd_setImageWithURL:[NSURL URLWithString:[UserInfoModel defaultUserInfo].portrait] placeholderImage:[UIImage imageNamed:@"littleImage.png"]];
     self.userCenterView.userIdNum.text = [UserInfoModel defaultUserInfo].displaycoachid;
@@ -182,10 +201,14 @@
    
     // "所属驾校"
     NSString * driveSname = [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
+    
     // "工作性质"
-#warning 通过接口调用
-    NSString * workProperty = [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
-
+    NSInteger coachtype = [UserInfoModel defaultUserInfo].coachtype;
+    NSLog(@"coachtype:%zd",coachtype);
+    NSString *workProperty = [WorkTypeModel converTypeToString:coachtype];
+    NSLog(@"workProperty:%@",workProperty);
+    
+    // 训练场地
     NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
     NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
     NSString * workSetDes = @"未设置";
@@ -208,8 +231,12 @@
     NSString * carName =  [[UserInfoModel defaultUserInfo] setClassMode] ? @"已设置" : @"未设置";
     
     // "休假"
-#warning 通过接口调用
-    NSString * vacationStr =  [[UserInfoModel defaultUserInfo] setClassMode] ? @"已设置" : @"未设置";
+    NSString *leavebegintime = [UserInfoModel defaultUserInfo].leavebegintime;
+    NSString *leaveendtime = [UserInfoModel defaultUserInfo].leaveendtime;
+    NSString * vacationStr;
+    if (leavebegintime && leaveendtime) {
+        vacationStr =  [NSString stringWithFormat:@"%@-%@",[self strTolerance:leavebegintime],[self strTolerance:leaveendtime]];
+    }
     
     self.displayArray = @[@[
                             [self strTolerance:driveSname],//"所属驾校"

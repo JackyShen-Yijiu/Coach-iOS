@@ -29,6 +29,19 @@
 @property(nonatomic,strong)HMClassInfoModel * classType;
 @property(nonatomic,strong)HMStudentModel * studentInfo;
 
+// 倒车入科(学习内容)
+@property(nonatomic,strong)NSString * learningcontent;
+
+@property(nonatomic,strong)NSString * comment;
+@property(nonatomic,strong)NSString * coachcomment;
+@property(nonatomic,strong)NSString * cancelreason;
+
+/*
+ * v1.1.0添加剩余多少课时，漏课统计
+ */
+@property(nonatomic,assign)NSInteger leavecoursecount;
+@property(nonatomic,assign)NSInteger missingcoursecount;
+
 + (HMCourseModel *)converJsonDicToModel:(NSDictionary *)dic;
 
 - (NSString *)getStatueString;

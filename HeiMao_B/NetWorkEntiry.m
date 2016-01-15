@@ -15,8 +15,7 @@
 
 #define  HOST_LINE_DOMAIN  @"http://123.57.63.15:8181/api/v1"
 
-//#define QA_TEST
-
+#define QA_TEST
 
 @implementation NetWorkEntiry
 
@@ -178,7 +177,7 @@
  *  预约模块
  *  ====================================================================================================================================
  */
-+ (void)getCourseinfoWithUserId:(NSString *)userId pageIndex:(NSInteger)pageIndex pageCount:(NSInteger)pageCount
++ (void)getCourseinfoWithUserId:(NSString *)userId reservationstate:(KCourseStatue)reservationstate pageIndex:(NSInteger)pageIndex pageCount:(NSInteger)pageCount
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -189,10 +188,35 @@
     NSDictionary * dic = @{
                             @"coachid":userId,
                             @"index":@(pageIndex),
+                            @"reservationstate":@(reservationstate),
                             };
     [self GET:urlStr parameters:dic success:success failure:failure];
 }
 
+
+/**
+ *  获取教练每个月的日程安排
+ *
+ *  @param userId （req）教练ID
+ *  @param yearTime 年
+ *  @param monthTime 月
+ */
++ (void)getAllCourseInfoWithUserId:(NSString *)userId  yearTime:(NSString *)yearTime monthTime:(NSString *)monthTime
+                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if (!userId || !yearTime || !monthTime) {
+        return [self missParagramercallBackFailure:failure];
+    }
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmonthapplydata",[self domain]];
+    NSDictionary * dic = @{
+                           @"coachid":userId,
+                           @"year":yearTime,
+                           @"month":monthTime,
+                           };
+    [self GET:urlStr parameters:dic success:success failure:failure];
+    
+}
 
 + (void)getAllCourseInfoWithUserId:(NSString *)userId  DayTime:(NSString *)dayTime
                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
@@ -277,23 +301,47 @@
 + (void)postToEnstureDoneofCourseWithCoachid:(NSString *)coachidId
                                    coureseID:(NSString *)courseID
                              learningcontent:(NSString *)learningcontent
-                              contentremarks:(NSString *)contentremarks
+                              contentremarks:(NSString *)contentr
+                                  startLevel:(NSInteger)levet
                                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     if(!coachidId || !courseID){
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coachfinishreservation",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coachcommentv2",[self domain]];
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:0];
     [dic setValue:coachidId forKey:@"coachid"];
     [dic setValue:courseID forKey:@"reservationid"];
     if (learningcontent) {
         [dic setValue:learningcontent forKey:@"learningcontent"];
     }
-    if (contentremarks) {
-        [dic setValue:contentremarks forKey:@"contentremarks"];
+    if (contentr) {
+        [dic setValue:contentr forKey:@"commentcontent"];
     }
+    [dic setValue:@(levet) forKey:@"starlevel"];
+    [self POST:urlStr parameters:dic success:success failure:failure];
+}
+
+/**
+ *  教练提醒学员报考
+ *
+ *  @param coachidId 教练id
+ *  @param userid  学员id
+ */
+
++ (void)postToEnstureExamfCourseWithCoachid:(NSString *)coachidId
+                                     userid:(NSString *)userid
+                                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if(!coachidId || !userid){
+        return [self missParagramercallBackFailure:failure];
+    }
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/remindexam",[self domain]];
+    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:0];
+    [dic setValue:coachidId forKey:@"coachid"];
+    [dic setValue:userid forKey:@"userid"];
     [self POST:urlStr parameters:dic success:success failure:failure];
 }
 
@@ -369,6 +417,41 @@
     
     [self POST:urlStr parameters:dic success:success failure:failure];
     
+}
+/**
+ *
+ * 行业资讯调用的接口,
+ *
+ */
++ (void)getInformationMessageSeqindex:(NSInteger)seqindex withCount:(NSInteger)count
+                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if (count < 0 || seqindex < 0) {
+        return [self missParagramercallBackFailure:failure];
+    }
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getnews?seqindex=%li&count=%ld",[self domain],seqindex,count];
+    
+    [self GET:urlStr parameters:nil success:success failure:failure];
+}
+/**
+ *
+ * 系统消息调用接口
+ *
+ */
++ (void)getSystemMessageCoachid:(NSString *)coachid withSeqindex:(NSInteger)seqindex withCount:(NSInteger)count
+                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if (count <= 0 || seqindex <= 0) {
+        return [self missParagramercallBackFailure:failure];
+    }
+    
+//    http://101.200.204.240:8181/api/v1/userinfo/getsysteminfo?coachid=5616352721ec29041a9af889&index=1&count=10
+    
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getsysteminfo?coachid=%@&index=%lu&count=%lu",[self domain],coachid,seqindex,count];
+    
+    [self GET:urlStr parameters:nil success:success failure:failure];
 }
 
 #pragma mark 学员签到

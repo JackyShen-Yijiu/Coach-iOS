@@ -27,6 +27,11 @@
 @property(nonatomic,strong)UIView * midLine;
 @property(nonatomic,strong)HMButton * leftButton;
 @property(nonatomic,strong)HMButton * rightButton;
+
+
+@property(nonatomic,strong)UILabel * commentTtile;
+@property(nonatomic,strong)UILabel * commentInfo;
+
 @end
 
 
@@ -98,6 +103,12 @@
     self.courseProgressInfo = [self getOnePropertyLabel];
     [self addSubview:self.courseProgressInfo];
     
+    self.commentTtile = [self getOnePropertyLabel];
+    self.commentTtile.font = [UIFont boldSystemFontOfSize:14.f];
+    [self addSubview:self.commentTtile];
+    self.commentInfo = [self getOnePropertyLabel];
+    self.commentInfo.numberOfLines = 0;
+    [self addSubview:self.commentInfo];
     
     self.courseInfoTitle = [self getOnePropertyLabel];
     self.courseInfoTitle.font = [UIFont boldSystemFontOfSize:14.f];
@@ -215,6 +226,17 @@
         make.centerX.equalTo(self.courseAddressLabel);
     }];
 
+    [self.commentTtile mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(leftOffsetSpacing);
+        make.right.equalTo(self).offset(-leftOffsetSpacing);
+        make.top.equalTo(self.pickAddressLabel.mas_top).offset(25.f);
+        make.height.equalTo(@(14.f));
+    }];
+    [self.commentInfo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.commentTtile.mas_bottom).offset(10.f);
+        make.left.equalTo(self.commentTtile);
+        make.width.equalTo(self.commentTtile.mas_width);
+    }];
     
 //    [self.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
 //        make.left.equalTo(self).offset(leftOffsetSpacing);
@@ -274,7 +296,8 @@
         [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];
     
     self.mainTitle.text = _model.studentInfo.userName;
-    self.subTitle.text = _model.studentInfo.disPlayId;
+    NSLog(@"_model.studentInfo.courseProgress:%@",_model.courseProgress);
+    self.subTitle.text = _model.courseProgress;
     self.statueLabel.text = [_model getStatueString];
     
     self.courseProgressTtile.text = @"学习进展";
@@ -289,9 +312,109 @@
         self.pickAddressLabel.text = nil;
     }
     
+    if ((_model.coachcomment && [_model.coachcomment length]!=0) || (_model.comment && [_model.comment length]!=0)) {
+        
+        self.commentTtile.text = @"评价记录";
+        self.commentInfo.text = _model.coachcomment ? _model.cancelreason : _model.comment;
+        
+    }else if (_model.cancelreason && [_model.cancelreason length]!= 0) {
+        
+        self.commentInfo.text = @"拒绝理由";
+        self.commentInfo.text = _model.cancelreason;
+        
+    }else{
+        
+        self.commentTtile.hidden = YES;
+        self.commentInfo.hidden = YES;
+        
+    }
+    
     [self.leftButton setHidden:NO];
     [self.rightButton setHidden:YES];
     
+    switch (_model.courseStatue) {
+            
+        case  KCourseStatueInvalid :
+            break;
+        case  KCourseStatueapplying :   // 预约中(新订单)
+        {
+            [self.leftButton setTitle:@"拒绝" forState:UIControlStateNormal];
+            [self.leftButton setTitle:@"拒绝" forState:UIControlStateHighlighted];
+            [self.leftButton setTitleColor:RGB_Color(0x33, 0x33, 0x33) forState:UIControlStateNormal];
+            [self.leftButton setNBackColor:[UIColor whiteColor]];
+            [self.leftButton setHBackColor:RGB_Color(0xe5, 0xe5, 0xe5)];
+            self.leftButton.layer.borderColor = RGB_Color(201, 201, 201).CGColor;
+            self.leftButton.layer.borderWidth = 1.f;
+            
+            [self.rightButton setHidden:NO];
+            [self.rightButton setTitle:@"接受" forState:UIControlStateNormal];
+            [self.rightButton setTitle:@"接受" forState:UIControlStateHighlighted];
+            [self.rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [self.rightButton setNBackColor:RGB_Color(31, 124, 235)];
+            [self.rightButton setHBackColor:RGB_Color(0x24, 0x6d, 0xd0)];
+        }
+            
+            break;
+        case  KCourseStatueapplycancel :// 学生取消（已取消）
+
+            
+            break;
+        case  KCourseStatueapplyconfirm:  // 已确定(新订单)
+            
+            break;
+        case  KCourseStatueapplyrefuse:      // 教练拒绝或者取消（已取消）
+
+            break;
+        case  KCourseStatueunconfirmfinish: //  待确认完成------------无此状态
+
+            break;
+        case  KCourseStatueucomments:    // 待评论(待评论)
+        {
+            [self.leftButton setTitle:@"评论" forState:UIControlStateNormal];
+            [self.leftButton setTitle:@"评论" forState:UIControlStateHighlighted];
+            [self.leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [self.leftButton setNBackColor:RGB_Color(31, 124, 235)];
+            [self.leftButton setHBackColor:RGB_Color(0x24, 0x6d, 0xd0)];
+        }
+            break;
+        case  KCourseStatueOnCommended: // 评论成功（已完成）
+
+            [self.leftButton setHidden:YES];
+            [self.rightButton setHidden:YES];
+            
+            break;
+        case  KCourseStatuefinish: // 订单完成（已完成）
+        
+            break;
+        case  KCourseStatuesystemcancel: // 系统取消（已取消）
+
+            
+            break;
+        case  KCourseStatuesignin: // 已签到(新订单)
+        {
+            [self.leftButton setTitle:@"确定学完" forState:UIControlStateNormal];
+            [self.leftButton setTitle:@"确定学完" forState:UIControlStateHighlighted];
+            [self.leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [self.leftButton setNBackColor:RGB_Color(31, 124, 235)];
+            [self.leftButton setHBackColor:RGB_Color(0x24, 0x6d, 0xd0)];
+        }
+            
+            break;
+        case  KCourseStatuenosignin: // 未签到(已完成)
+        {
+            [self.rightButton setHighlighted:YES];
+            [self.leftButton setTitle:@"取消课程" forState:UIControlStateNormal];
+            [self.leftButton setTitle:@"取消课程" forState:UIControlStateHighlighted];
+            [self.leftButton setNBackColor:RGB_Color(205, 212, 217)];
+            [self.leftButton setHBackColor:HM_HIGHTCOLOR];
+            
+        }
+            break;
+            
+    }
+    
+    
+    /*
     switch (_model.courseStatue) {
             
         case KCourseStatueInvalid:
@@ -358,6 +481,7 @@
         }
             break;
     }
+     */
     
     //    [self setNeedsUpdateConstraints];
     [self setNeedsLayout];
@@ -373,6 +497,78 @@
 
 - (void)buttonClick:(UIButton *)button
 {
+    
+    switch (_model.courseStatue) {
+            
+        case  KCourseStatueInvalid :
+            break;
+        case  KCourseStatueapplying :   // 预约中(新订单)
+        {
+            if (button.tag == 200) {
+                if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickAgreeButton:)]) {
+                    [_delegate courseDetailViewDidClickAgreeButton:self];
+                }
+            }else{
+                if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickDisAgreeButton:)]) {
+                    [_delegate courseDetailViewDidClickDisAgreeButton:self];
+                }
+            }
+        }
+            
+            break;
+        case  KCourseStatueapplycancel :// 学生取消（已取消）
+            
+            
+            break;
+        case  KCourseStatueapplyconfirm:  // 已确定(新订单)
+            
+            break;
+        case  KCourseStatueapplyrefuse:      // 教练拒绝或者取消（已取消）
+            
+            break;
+        case  KCourseStatueunconfirmfinish: //  待确认完成------------无此状态
+            
+            break;
+        case  KCourseStatueucomments:    // 待评论(待评论)
+        {
+            if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickRecommentButton:)]) {
+                [_delegate courseDetailViewDidClickRecommentButton:self];
+            }
+        }
+            break;
+        case  KCourseStatueOnCommended: // 评论成功（已完成）
+            
+            [self.leftButton setHidden:YES];
+            [self.rightButton setHidden:YES];
+            
+            break;
+        case  KCourseStatuefinish: // 订单完成（已完成）
+            
+            break;
+        case  KCourseStatuesystemcancel: // 系统取消（已取消）
+            
+            
+            break;
+        case  KCourseStatuesignin: // 已签到(新订单)
+        {
+            if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickWatingToDone:)]) {
+                [_delegate courseDetailViewDidClickWatingToDone:self];
+            }
+        }
+            
+            break;
+        case  KCourseStatuenosignin: // 未签到(已完成)
+        {
+            if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickCanCelButton:)]) {
+                [_delegate courseDetailViewDidClickCanCelButton:self];
+            }
+            
+        }
+            break;
+            
+    }
+    
+    /*
     switch (_model.courseStatue) {
             
         case KCourseStatueInvalid:
@@ -427,6 +623,7 @@
         }
             break;
     }
+     */
 
 }
 

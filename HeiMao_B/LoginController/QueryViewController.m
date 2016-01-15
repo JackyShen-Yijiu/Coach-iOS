@@ -120,7 +120,7 @@ static NSString *const kDrivingUrl = @"driveschool/nearbydriveschool?%@";
     NSString *locationContent =[NSString stringWithFormat:@"latitude=%f&longitude=%f&radius=10000",location.coordinate.latitude,location.coordinate.longitude];
 //    NSString *locationContent =@"latitude=40.096263&longitude=116.1270&radius=10000";
     NSString *urlString = [NSString stringWithFormat:kDrivingUrl,locationContent];
-    NSString *url = [NSString stringWithFormat:BASEURL,urlString];
+    NSString *url = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],urlString];
     
     [manager stopUpdatingLocation];
     
@@ -206,7 +206,7 @@ static NSString *const kDrivingUrl = @"driveschool/nearbydriveschool?%@";
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     searchText = [searchText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *url = [NSString stringWithFormat:@"getschoolbyname?schoolname=%@",searchText];
-    NSString *urlstring = [NSString stringWithFormat:BASEURL,url];
+    NSString *urlstring = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],url];
      
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:urlstring parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {

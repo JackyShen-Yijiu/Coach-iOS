@@ -28,7 +28,7 @@
 @end
 
 
-@interface OrderCompleteViewController()<UITableViewDelegate,UITableViewDataSource,CourseDesInPutCellDelegate,CourseEnsureCellDelegate,CourseRatingCellDelegate>
+@interface OrderCompleteViewController()<UITableViewDelegate,UITableViewDataSource,CourseDesInPutCellDelegate,CourseEnsureCellDelegate>
 @property(nonatomic,strong)RefreshTableView * tableView;
 @property(nonatomic,strong)CourseDesInPutCell * inputCell;
 @property(nonatomic,strong)OrderCompleteViewModel * model;
@@ -276,11 +276,14 @@
 - (void)enstureThenGotoRecomend:(BOOL)isGoTorecomed
 {
     
-    [self showTotasViewWithMes:@"等待服务端接口"];
-    return;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     WS(ws);
-    [NetWorkEntiry postToEnstureDoneofCourseWithCoachid:[[UserInfoModel defaultUserInfo] userID] coureseID:self.courseModel.courseId learningcontent:[self seletedReasion] contentremarks:self.model.inputDes success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry postToEnstureDoneofCourseWithCoachid:[[UserInfoModel defaultUserInfo] userID]
+                                              coureseID:self.courseModel.courseId
+                                        learningcontent:[self seletedReasion]
+                                         contentremarks:self.model.inputDes
+                                             startLevel:self.ratModel.rating
+                                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
         if (type == 1) {

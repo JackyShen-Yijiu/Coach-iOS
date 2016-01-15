@@ -23,7 +23,7 @@
 @implementation StudentHomeUserBasicInfoCell
 + (CGFloat)cellHeigth
 {
-    return 240.f + 73;
+    return 100;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -40,7 +40,7 @@
     
     self.contentView.backgroundColor = [UIColor whiteColor];
     
-    self.porTraitView = [[PortraitView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.width, 240)];
+    self.porTraitView = [[PortraitView alloc] initWithFrame:CGRectMake(15, 15, 60, 60)];
     self.porTraitView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.porTraitView];
     
@@ -66,18 +66,18 @@
 
 - (void)updateConstraints
 {
-    [self.porTraitView mas_makeConstraints:^(MASConstraintMaker *make) {
-
-
-        make.left.equalTo(self.contentView);
-        make.width.equalTo(self.contentView);
-        make.height.equalTo(@(240));
-        make.top.equalTo(@(0));
-    }];
+//    [self.porTraitView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//
+//        make.left.equalTo(self.contentView);
+//        make.width.equalTo(self.contentView);
+//        make.height.equalTo(@(240));
+//        make.top.equalTo(@(0));
+//    }];
     
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@(15.f));
-        make.top.equalTo(self.porTraitView.mas_bottom).offset(20.f);
+        make.top.equalTo(self.contentView.mas_top).offset(25);
+        make.left.equalTo(self.porTraitView.mas_right).offset(20.f);
         make.right.equalTo(self.contentView).offset(-15);
         make.height.equalTo(@(16.f));
     }];
@@ -85,16 +85,16 @@
     [self.userIdLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.userNameLabel);
         make.width.equalTo(self.userNameLabel);
-        make.top.equalTo(self.userNameLabel.mas_bottom).offset(7);
-        make.height.equalTo(@(12.f));
+        make.top.equalTo(self.userNameLabel.mas_bottom).offset(8);
+        make.height.equalTo(@(16.f));
     }];
     
     
     [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.userNameLabel);
+//        make.left.equalTo(self.userNameLabel);
         make.width.equalTo(self.contentView);
         make.bottom.equalTo(self.contentView).offset(-HM_LINE_HEIGHT);
-        make.height.equalTo(@(HM_LINE_HEIGHT));
+        make.height.equalTo(@(10));
     }];
     [super updateConstraints];
 }
@@ -108,7 +108,7 @@
         [self.porTraitView.imageView sd_setImageWithURL:[NSURL URLWithString:_bgImageUrlStr] placeholderImage:defaultImage];
     
     self.userNameLabel.text = userName;
-    self.userIdLabel.text = [NSString stringWithFormat:@"ID %@",userId];
+    self.userIdLabel.text = [NSString stringWithFormat:@"%@",userId];
 }
 
 #pragma mark - HightStatu

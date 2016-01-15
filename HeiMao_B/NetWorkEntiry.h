@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
-
+#import "ModelDefine.h"
 
 
 @interface NetWorkEntiry : NSObject
@@ -104,7 +104,7 @@
  *
  *  @param userId   （req) 教练ID
  */
-+ (void)getCourseinfoWithUserId:(NSString *)userId pageIndex:(NSInteger)pageIndex pageCount:(NSInteger)pageCount
++ (void)getCourseinfoWithUserId:(NSString *)userId reservationstate:(KCourseStatue)reservationstate pageIndex:(NSInteger)pageIndex pageCount:(NSInteger)pageCount
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
@@ -116,6 +116,16 @@
  *  @param dayTime (req）如 2014-5-10格式 NSString 类型
  */
 + (void)getAllCourseInfoWithUserId:(NSString *)userId  DayTime:(NSString *)dayTime
+                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+/**
+ *  获取教练每个月的日程安排
+ *
+ *  @param userId （req）教练ID
+ *  @param yearTime 年
+ *  @param monthTime 月
+ */
++ (void)getAllCourseInfoWithUserId:(NSString *)userId  yearTime:(NSString *)yearTime monthTime:(NSString *)monthTime
                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
@@ -159,7 +169,20 @@
 + (void)postToEnstureDoneofCourseWithCoachid:(NSString *)coachidId
                                    coureseID:(NSString *)courseID
                              learningcontent:(NSString *)learningcontent
-                              contentremarks:(NSString *)contentremarks
+                              contentremarks:(NSString *)contentr
+                                  startLevel:(NSInteger)levet
+                                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
+ *  教练提醒学员报考
+ *
+ *  @param coachidId 教练id
+ *  @param userid  学员id
+ */
+
++ (void)postToEnstureExamfCourseWithCoachid:(NSString *)coachidId
+                                   userid:(NSString *)userid
                                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
@@ -225,6 +248,21 @@
                   userLongitude:(NSString *)userLongitude
                   coachLatitude:(NSString *)coachLatitude
                  coachLongitude:(NSString *)coachLongitude
+
+/**
+ *
+ * 行业资讯调用的接口,
+ *
+ */
++ (void)getInformationMessageSeqindex:(NSInteger)seqindex withCount:(NSInteger)count
+                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+/**
+ *
+ * 系统消息调用接口,
+ *
+ */
++ (void)getSystemMessageCoachid:(NSString *)coachid withSeqindex:(NSInteger)seqindex withCount:(NSInteger)count
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

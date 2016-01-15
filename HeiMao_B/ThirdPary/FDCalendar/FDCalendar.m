@@ -8,6 +8,8 @@
 
 #import "FDCalendar.h"
 #import "FDCalendarItem.h"
+#import "BaseModelMethod.h"
+#import "UIViewController+Method.h"
 
 #define Weekdays @[@"日", @"一", @"二", @"三", @"四", @"五", @"六"]
 
@@ -23,6 +25,8 @@ static NSDateFormatter *dateFormattor;
 @property (strong, nonatomic) FDCalendarItem *centerCalendarItem;
 @property (strong, nonatomic) FDCalendarItem *rightCalendarItem;
 @property (strong, nonatomic) UIDatePicker *datePicker;
+
+@property(nonatomic,strong)NSDateFormatter *dateFormattor;
 
 @end
 
@@ -166,15 +170,55 @@ static NSDateFormatter *dateFormattor;
 
 - (void)loadCurrentCalendarData:(NSDate *)date
 {
-    NSLog(@"网络请求date.description:%@",date.description);
-#warning 此处网络请求，然后传递数据
+    NSLog(@"设置当前月份的预约、休假 网络请求 date.description:%@",date.description);
     
-    self.centerCalendarItem.restStr = @"15";
+    if (!self.dateFormattor) {
+        self.dateFormattor = [[NSDateFormatter alloc] init];
+    }
+    // 年
+    [self.dateFormattor setDateFormat:@"yyyy"];
+    NSString * yearStr = [self.dateFormattor stringFromDate:date];
+    // 月
+    [self.dateFormattor setDateFormat:@"M"];
+    NSString * monthStr = [self.dateFormattor stringFromDate:date];
+
+    NSString *  userId = [[UserInfoModel defaultUserInfo] userID];
     
-    NSArray *bookArray = [NSArray arrayWithObjects:@"15",@"18",@"23",nil];
-    self.centerCalendarItem.bookArray = bookArray;
-    
-    [self.centerCalendarItem reloadData];
+    WS(ws);
+    [NetWorkEntiry getAllCourseInfoWithUserId:userId yearTime:yearStr monthTime:monthStr success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"刷新日历：responseObject:%@",responseObject);
+        
+        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+        
+        if (type == 1) {
+            
+            NSDictionary *array = responseObject[@"data"];
+            
+            // 休假
+            NSArray *leaveoff = [array objectForKey:@"leaveoff"];
+            // 预约
+            NSArray *reservationapply = [array objectForKey:@"reservationapply"];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+
+                ws.centerCalendarItem.restArray = leaveoff;
+                
+                ws.centerCalendarItem.bookArray = reservationapply;
+                
+                [ws.centerCalendarItem reloadData];
+                
+            });
+           
+        }else{
+            
+            NSLog(@"%@",responseObject[@"msg"]);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
     
 }
 

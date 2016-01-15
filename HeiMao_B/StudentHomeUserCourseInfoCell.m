@@ -135,7 +135,7 @@
     
     [self.courseScheduleLabel setAttributedText:atr];
     
-    self.commmonAddressLabel.text = [NSString stringWithFormat:@"常用地址： %@",[_model commmonAddress]];
+    self.commmonAddressLabel.text = [NSString stringWithFormat:@"接送地址： %@",[_model commmonAddress]];
     
 }
 

@@ -234,15 +234,19 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
     if (self.beginStart.text == nil || self.beginStart.text.length == 0) {
         return;
     }
+    
     if (self.beginEnd.text == nil || self.beginEnd.text.length == 0) {
         return;
     }
+    
     if (self.finalStart.text == nil || self.finalStart.text.length == 0) {
         return;
     }
+    
     if (self.finalEnd.text == nil || self.finalEnd.text.length == 0) {
         return;
     }
+    
     NSString *begin = [NSString stringWithFormat:@"%@ %@",self.beginStart.text,self.beginEnd.text];
     NSString *end = [NSString stringWithFormat:@"%@ %@",self.finalStart.text,self.finalEnd.text];
     
@@ -259,7 +263,7 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
         [self showTotasViewWithMes:@"结束时间必须大于开始时间"];
         return;
     }
-    NSString *urlstring = [NSString stringWithFormat:BASEURL,kVacationUrl];
+    NSString *urlstring = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kVacationUrl];
     
     NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"begintime":beginString,@"endtime":endString};
     

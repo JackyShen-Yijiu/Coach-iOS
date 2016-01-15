@@ -94,18 +94,27 @@
 {
     WS(ws);
     [self.tableView refreshHeader].beginRefreshingBlock = ^(){
+        
         [NetWorkEntiry getCoureDetailInfoWithCouresId:self.couresID success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSLog(@"responseObject:%@",responseObject);
+            
             NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+            
             if (type == 1) {
+                
                 ws.model = [HMCourseModel converJsonDicToModel:[responseObject objectInfoForKey:@"data"]];
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [ws.tableView.refreshHeader endRefreshing];
                     [ws.tableView reloadData];
                     [ws postNotificationMakeSummarRefreshUI];
                 });
+                
             }else{
                 [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
             }
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [ws netErrorWithTableView:ws.tableView];
         }];

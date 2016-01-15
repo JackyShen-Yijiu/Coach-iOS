@@ -39,6 +39,14 @@ static NSString *const kQiniuImageUrl = @"http://7xnjg0.com1.z0.glb.clouddn.com/
 
 static NSString *const kupdateUserInfo = @"userinfo/updatecoachinfo";
 
+static NSString *const kcoachTags = @"userinfo/getallcoachtags";      //获取教练标签
+
+static NSString *const kaddTag = @"userinfo/coachaddtag";             //添加自定义标签
+
+static NSString *const kdelegateTag = @"userinfo/coachdeletetag";     //删除自定义标签
+
+static NSString *const kchooseTag = @"userinfo/coachsetselftags";     //选择自己的标签
+
 #define kShowSuccess(msg) [SVProgressHUD showSuccessWithStatus:msg];
 
 #define kShowDismiss     [SVProgressHUD dismiss];
@@ -54,7 +62,6 @@ static NSString *const kupdateUserInfo = @"userinfo/updatecoachinfo";
 
 #define BACKGROUNDCOLOR [UIColor colorWithRed:247/255.0f green:249/255.0f blue:251/255.0f alpha:1]
 
-#define BASEURL @"http://123.57.63.15:8181/api/v1/%@"
 
 #define kSystemWide [UIScreen mainScreen].bounds.size.width
 

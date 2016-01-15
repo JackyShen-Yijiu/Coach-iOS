@@ -25,7 +25,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 @implementation SetupViewController
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = @[@[@"预约提醒",@"新消息通知",@"开课提醒"],@[@"关于我们",@"去评分",@"反馈"]];
+        _dataArray = @[@[@"预约提醒",@"新消息通知",@"自动接收预约"],@[@"关于我们",@"去评分",@"反馈"]];
     }
     return _dataArray;
 }
@@ -181,7 +181,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
     ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
     [alerview show];
     NSMutableDictionary *mubdic = [[NSMutableDictionary alloc] initWithDictionary:@{@"userid":[UserInfoModel defaultUserInfo].userID,@"usertype":@"2"}];
-    NSString *url = [NSString stringWithFormat:BASEURL,kSettingUrl];
+    NSString *url =[NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kSettingUrl];
     if (sender.tag - 100 == 0) {
         if (sender.on == YES) {
             DYNSLog(@"sender.on = %d",sender.on);
@@ -226,7 +226,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
                 [alerview show];
             }
         }];
-    }else if (sender.tag - 100 == 2) {
+    }else if (sender.tag - 100 == 2) {// 自动接收预约
         if (sender.on == YES) {
             DYNSLog(@"sender.on = %d",sender.on);
             [mubdic setObject:@"1" forKey:@"classremind"];

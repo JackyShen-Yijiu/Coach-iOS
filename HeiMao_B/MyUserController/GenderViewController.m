@@ -90,7 +90,7 @@
 }
 - (void)clickRight:(UIButton *)sender {
     DYNSLog(@"userid = %@",self.genderTextField.text);
-    NSString *updateUserInfoUrl = [NSString stringWithFormat:BASEURL,kupdateUserInfo];
+    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
     
     NSDictionary *dicParam = @{@"Gender":self.genderTextField.text,@"coachid":[UserInfoModel defaultUserInfo].userID};
     

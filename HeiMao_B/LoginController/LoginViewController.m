@@ -253,18 +253,28 @@ static NSString *const kuserType = @"usertype";
     WS(ws);
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [NetWorkEntiry loginWithPhotoNumber:self.phoneNumTextField.text password:self.passwordTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"登陆responseObject:%@",responseObject);
+        
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+       
         NSDictionary *param = responseObject;
         NSNumber *type = param[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
+        
         if (type.integerValue == 1) {
+            
             NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:param[@"data"]];
+            
             [dic setValue:[self.passwordTextField.text DY_MD5] forKey:@"md5Pass"];
+            
             [[UserInfoModel defaultUserInfo] loginViewDic:dic];
+            
             if ([_delegate respondsToSelector:@selector(loginViewControllerdidLoginSucess:)]) {
                 [_delegate loginViewControllerdidLoginSucess:self];
                 self.passwordTextField.text = @"";
             }
+            
         }else {
             [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];

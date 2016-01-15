@@ -71,7 +71,7 @@ static NSString *const kTrainingGround = @"getschooltrainingfield?schoolid=%@";
 }
 - (void)startDownLoad {
     NSString *urlString = [NSString stringWithFormat:kTrainingGround,[UserInfoModel defaultUserInfo].schoolId];
-    NSString *url = [NSString stringWithFormat:BASEURL,urlString];
+    NSString *url = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],urlString];
     [JENetwoking startDownLoadWithUrl:url postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
         NSDictionary *param = data;
         NSArray *array = param[@"data"];
@@ -88,7 +88,7 @@ static NSString *const kTrainingGround = @"getschooltrainingfield?schoolid=%@";
     }];
 }
 - (void)clickRight:(UIButton *)sender {
-    NSString *updateUserInfoUrl = [NSString stringWithFormat:BASEURL,kupdateUserInfo];
+    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
    
     
     
