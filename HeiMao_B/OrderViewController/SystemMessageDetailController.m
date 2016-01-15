@@ -19,6 +19,20 @@
 
 @implementation SystemMessageDetailController
 
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if ([self.delegate respondsToSelector:@selector(SystemMessageDetailControllerGetMessagelastmessage:)]) {
+        
+        NSLog(@"((SystemMessageModel *)[_systemViewModel.systemMessageArray lastObject]).ID:%@",((SystemMessageModel *)[_systemViewModel.systemMessageArray lastObject]).ID);
+        
+        [self.delegate SystemMessageDetailControllerGetMessagelastmessage:((SystemMessageModel *)[_systemViewModel.systemMessageArray lastObject]).ID];
+    }
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"系统消息";

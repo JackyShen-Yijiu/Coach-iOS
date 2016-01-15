@@ -20,6 +20,19 @@
 
 @implementation InformationMessageController
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if ([self.delegate respondsToSelector:@selector(InformationMessageControllerGetMessageLastnews:)]) {
+        
+        NSLog(@"((InformationMessageModel *)[_informationMessageViewModel.informationArray lastObject]).newsid:%@",((InformationMessageModel *)[_informationMessageViewModel.informationArray lastObject]).newsid);
+        
+        [self.delegate InformationMessageControllerGetMessageLastnews:((InformationMessageModel *)[_informationMessageViewModel.informationArray lastObject]).newsid];
+    }
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];

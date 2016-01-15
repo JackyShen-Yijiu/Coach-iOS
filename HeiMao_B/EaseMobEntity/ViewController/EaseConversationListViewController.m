@@ -25,13 +25,24 @@ static NSString *kMessageType = @"MessageType";
 static NSString *kConversationChatter = @"ConversationChatter";
 static NSString *kGroupName = @"GroupName";
 
-@interface EaseConversationListViewController () <IChatManagerDelegate,EMChatManagerDelegate>
+@interface EaseConversationListViewController () <IChatManagerDelegate,EMChatManagerDelegate,SystemMessageDetailControllerDelegate,InformationMessageControllerDelegate>
+
 @property (nonatomic,strong)NoContentTipView * tipView;
 
 @property (strong, nonatomic) NSDate *lastPlaySoundDate;
 
 @property (nonatomic,copy)NSString *systemBadgeStr;
+@property (nonatomic,copy)NSString *systemDetailsStr;
+@property (nonatomic,copy)NSString *systemTimeStr;
+
 @property (nonatomic,copy)NSString *zixunBadgeStr;
+@property (nonatomic,copy)NSString *zixunDetailsStr;
+@property (nonatomic,copy)NSString *zixunTimeStr;
+
+// 最后一条咨询消息ID
+@property (nonatomic,copy)NSString *lastnews;
+// 最后一条系统消息ID
+@property (nonatomic,copy)NSString *lastmessage;
 
 @end
 
@@ -40,10 +51,6 @@ static NSString *kGroupName = @"GroupName";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-#warning 网络请求来获取最新数据
-    self.systemBadgeStr = @"100";
-    self.zixunBadgeStr = @"8";
     
     [self registerNotifications];
 
@@ -54,12 +61,65 @@ static NSString *kGroupName = @"GroupName";
     
 }
 
+- (void)InformationMessageControllerGetMessageLastnews:(NSString *)lastnews
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setObject:lastnews forKey:@"lastnews"];
+    [user synchronize];
+}
+- (void)SystemMessageDetailControllerGetMessagelastmessage:(NSString *)lastmessage
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setObject:lastmessage forKey:@"lastmessage"];
+    [user synchronize];
+}
+
+// 获取未读消息
+- (void)getUnReadCount
+{
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    self.lastmessage = [user objectForKey:@"lastmessage"];
+    self.lastnews = [user objectForKey:@"lastnews"];
+    
+    WS(ws);
+    [NetWorkEntiry getMessageUnReadCountlastmessage:self.lastmessage lastnews:self.lastnews success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"responseObject:%@",responseObject);
+        
+        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+        NSArray *data = [responseObject objectArrayForKey:@"data"];
+        
+        if (type == 1) {
+            
+            ws.systemBadgeStr = [NSString stringWithFormat:@"%@",data[0][@"messagecount"]];
+            ws.systemDetailsStr = [NSString stringWithFormat:@"%@",data[0][@"message"]];
+            ws.systemTimeStr = [NSString stringWithFormat:@"%@",data[0][@"messagetime"]];
+
+            ws.zixunBadgeStr = [NSString stringWithFormat:@"%@",data[1][@"messagecount"]];
+            ws.zixunDetailsStr = [NSString stringWithFormat:@"%@",data[1][@"message"]];
+            ws.zixunTimeStr = [NSString stringWithFormat:@"%@",data[1][@"messagetime"]];
+
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@",error.debugDescription);
+        
+    }];
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
+    [self getUnReadCount];
+
     [self tableViewDidTriggerHeaderRefresh];
+    
     [self registerNotifications];
+    
     [self initNavBar];
 
 }
@@ -67,6 +127,7 @@ static NSString *kGroupName = @"GroupName";
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
     [self unregisterNotifications];
 }
 
@@ -148,6 +209,7 @@ static NSString *kGroupName = @"GroupName";
             self.systemBadgeStr = nil;
             // 系统消息界面跳转
             SystemMessageDetailController *systemMessageView = [[SystemMessageDetailController alloc] init];
+            systemMessageView.delegate = self;
             [self.navigationController pushViewController:systemMessageView animated:YES];
 
         }else if (indexPath.row==1){
@@ -155,6 +217,7 @@ static NSString *kGroupName = @"GroupName";
             self.zixunBadgeStr = nil;
             // 咨询消息界面跳转
             InformationMessageController *informationMessageVC = [[InformationMessageController alloc] init];
+            informationMessageVC.delegate = self;
             [self.navigationController pushViewController:informationMessageVC animated:YES];
         }
         
@@ -207,18 +270,18 @@ static NSString *kGroupName = @"GroupName";
     // 添加顶部数据
     EaseConversationModel *topData1 = [[EaseConversationModel alloc] init];
     topData1.title = @"系统消息";
-    topData1.detailsTitle = @"今天获得100积分，请查收!";
-    topData1.time = @"2015-01-08";
+    topData1.detailsTitle = [self strTolerance:self.systemDetailsStr];
+    topData1.time = [self strTolerance:self.systemTimeStr];
     topData1.avatarPic = @"systemImg.png";
-    topData1.badgeStr = self.systemBadgeStr;
+    topData1.badgeStr = [self strTolerance:self.systemBadgeStr];
     [self.dataArray addObject:topData1];
     
     EaseConversationModel *topData2 = [[EaseConversationModel alloc] init];
     topData2.title = @"咨询消息";
-    topData2.detailsTitle = @"今天获得100积分，请查收!";
-    topData2.time = @"2015-01-08";
+    topData2.detailsTitle = [self strTolerance:self.zixunDetailsStr];
+    topData2.time = [self strTolerance:self.zixunTimeStr];
     topData2.avatarPic = @"systemImg.png";
-    topData2.badgeStr = self.zixunBadgeStr;
+    topData2.badgeStr = [self strTolerance:self.zixunBadgeStr];
     [self.dataArray addObject:topData2];
     
     for (EMConversation *converstion in sorted) {

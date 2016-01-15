@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol InformationMessageControllerDelegate <NSObject>
+
+- (void)InformationMessageControllerGetMessageLastnews:(NSString *)lastnews;
+
+@end
+
 @interface InformationMessageController : UIViewController
+
+@property (nonatomic,weak)id<InformationMessageControllerDelegate>delegate;
 
 @end

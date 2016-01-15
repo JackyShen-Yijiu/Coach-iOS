@@ -11,8 +11,9 @@
 @interface SearchCourseViewController : UIViewController
 
 /*
- *  待搜索的数据
+ *  分类
  */
-@property (nonatomic , strong) NSArray *dataArray;
+@property (nonatomic,assign)NSInteger reservationstate;
+
 
 @end
