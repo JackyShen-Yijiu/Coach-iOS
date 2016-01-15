@@ -86,7 +86,7 @@
         make.top.equalTo(self.dataLabel.mas_bottom).offset(-10);
         make.left.equalTo(self.detailBackView.mas_left).offset(20);
         make.right.equalTo(self.detailBackView.mas_right).offset(0);
-        make.height.equalTo(@80);
+        make.height.equalTo(@50);
         
     }];
 
@@ -185,7 +185,7 @@
     CGRect bounds = [string boundingRectWithSize:
                      CGSizeMake([[UIScreen mainScreen] bounds].size.width - 30, 10000) options:
                      NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20.f]} context:nil];
-    return bounds.size.height + 140;
+    return bounds.size.height + 110;
 }
 - (void)setInformationMessageModel:(InformationMessageModel *)informationMessageModel{
     
