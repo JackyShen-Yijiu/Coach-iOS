@@ -8,6 +8,7 @@
 #import "ScanViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "UIView+SDExtension.h"
+#import "StudentSignInController.h"
 
 static const CGFloat kBorderW = 100;
 static const CGFloat kMargin = 30;
@@ -71,6 +72,13 @@ static const CGFloat kMargin = 30;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resumeAnimation) name:@"EnterForeground" object:nil];
    
 }
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    //开始捕获
+    [_session startRunning];
+}
+
 -(void)setupTipTitleView{
     
     //1.补充遮罩
@@ -110,7 +118,7 @@ static const CGFloat kMargin = 30;
     [albumBtn setBackgroundImage:[UIImage imageNamed:@"qrcode_scan_btn_photo_down"] forState:UIControlStateNormal];
     albumBtn.contentMode=UIViewContentModeScaleAspectFit;
     [albumBtn addTarget:self action:@selector(myAlbum) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:albumBtn];
+//    [self.view addSubview:albumBtn];
     
     //3.闪光灯
     
@@ -131,7 +139,7 @@ static const CGFloat kMargin = 30;
     mask.layer.borderColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7].CGColor;
     mask.layer.borderWidth = kBorderW;
     
-    mask.bounds = CGRectMake(0, 0, self.view.sd_width + kBorderW + kMargin , self.view.sd_width + kBorderW + kMargin);
+    mask.bounds = CGRectMake(0, 0, self.view.sd_width + kBorderW + kMargin , self.view.sd_width + kBorderW + kMargin + 8);
     mask.center = CGPointMake(self.view.sd_width * 0.5, self.view.sd_height * 0.5);
     mask.sd_y = 0;
     
@@ -142,8 +150,9 @@ static const CGFloat kMargin = 30;
 
 {
     //1.下边栏
-    UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.sd_height * 0.9, self.view.sd_width, self.view.sd_height * 0.1)];
+    UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.sd_height * 0.9 + 12, self.view.sd_width, self.view.sd_height * 0.1 - 12)];
     bottomBar.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
+//    bottomBar.backgroundColor = [UIColor orangeColor];
     
     [self.view addSubview:bottomBar];
     
@@ -162,8 +171,8 @@ static const CGFloat kMargin = 30;
 }
 - (void)setupScanWindowView
 {
-    CGFloat scanWindowH = self.view.sd_width - kMargin * 2;
-    CGFloat scanWindowW = self.view.sd_width - kMargin * 2;
+    CGFloat scanWindowH = self.view.sd_width - kMargin * 2.f;
+    CGFloat scanWindowW = self.view.sd_width - kMargin * 2.f;
     _scanWindow = [[UIView alloc] initWithFrame:CGRectMake(kMargin, kBorderW, scanWindowW, scanWindowH)];
     _scanWindow.clipsToBounds = YES;
     [self.view addSubview:_scanWindow];
@@ -216,10 +225,9 @@ static const CGFloat kMargin = 30;
     layer.videoGravity=AVLayerVideoGravityResizeAspectFill;
     layer.frame=self.view.layer.bounds;
     [self.view.layer insertSublayer:layer atIndex:0];
-    //开始捕获
-    [_session startRunning];
+    
 }
-
+#pragma mark 二维码的扫描结果
 -(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection{
     
     if (metadataObjects.count>0) {
@@ -230,8 +238,43 @@ static const CGFloat kMargin = 30;
         
         NSLog(@"metadataObject.stringValue:%@",metadataObject.stringValue);
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"扫描结果" message:metadataObject.stringValue delegate:self cancelButtonTitle:@"退出" otherButtonTitles:@"再次扫描", nil];
-        [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"扫描结果" message:metadataObject.stringValue delegate:self cancelButtonTitle:@"退出" otherButtonTitles:@"再次扫描", nil];
+//        [alert show];
+        
+//        // 用户id
+//        NSString *userId = @"userId";
+//        // 用户名
+//        NSString *userName = @"userName";
+//        // 详细地址
+//        NSString *locationAddress = @"北京市海淀区";
+//        // 当前的时间
+//        NSString *currentTime = @"20150312130412";
+//        NSString *orderId = @"reservationId";
+//        NSString *coachName = @"coachName";
+//        NSString *courseProcessDesc = @"科目3-9";
+//        
+//        NSDictionary *testDict = @{ @"studentId": userId,
+//                                    @"studentName": userName,
+//                                    @"reservationId": orderId,
+//                                    @"createTime": currentTime,
+//                                    @"locationAddress": locationAddress,
+//                                    @"coachName": coachName,
+//                                    @"courseProcessDesc": courseProcessDesc };
+//        
+//        NSData *data = [NSJSONSerialization dataWithJSONObject:testDict options:NSJSONWritingPrettyPrinted error:nil];
+//        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+//        NSData *changeData = [string dataUsingEncoding:NSUTF8StringEncoding];
+//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:changeData options:NSJSONReadingMutableContainers error:nil];
+//        NSLog(@"dict:%@", dict);
+        
+        StudentSignInController *vc = [StudentSignInController new];
+        
+        NSData *changeData = [metadataObject.stringValue dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:changeData options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"dict:%@", dict);
+        vc.dataModel = [StudentSignInDataModel yy_modelWithDictionary:dict];
+        [self.navigationController pushViewController:vc animated:YES];
         
     }
 }

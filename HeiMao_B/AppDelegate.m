@@ -29,6 +29,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    // 配置百度地图
+    _mapManager = [BMKMapManager new];
+    [_mapManager start:@"AsrX0h3VNsqQOkYPXXrslrY8" generalDelegate:nil];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     LoginViewController * loginViewC = [[LoginViewController alloc] init];

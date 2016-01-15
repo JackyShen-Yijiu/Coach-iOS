@@ -88,8 +88,28 @@
 #pragma mark -   action
 
 - (void)dealRefer:(UIButton *)btn {
-//    [self.navigationController popViewControllerAnimated:YES];
-    [self showTotasViewWithMes:@"没写"];
+    NSString *coachTags = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kchooseTag];
+    NSString *tagslist = @"";
+    NSMutableArray *strArray = [[NSMutableArray alloc] init];
+    for (int i = 0;i<self.systemTagColorArray.count;i++) {
+        NSNumber *num = self.systemTagColorArray[i];
+        if (num.integerValue == 1) {
+            PersonlizeModel *model = self.systemTagArray[i];
+            [strArray addObject:model._id];
+        }
+    }
+    for (PersonlizeModel *model in self.customTagArray) {
+        [strArray addObject:model._id];
+    }
+    tagslist = [strArray componentsJoinedByString:@","];
+    NSLog(@"tagslist:%@",tagslist);
+    
+    [JENetwoking startDownLoadWithUrl:coachTags postParam:@{@"coachid":[UserInfoModel defaultUserInfo].userID,@"tagslist":tagslist} WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+        NSDictionary *dic = data;
+        if ([[dic objectForKey:@"type"] integerValue] == 1) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
 }
 
 - (void)viewDidLoad {
