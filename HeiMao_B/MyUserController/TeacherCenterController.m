@@ -185,8 +185,19 @@
     [controller.navigationController popViewControllerAnimated:YES];
     
     NSLog(@"更改工作性质name:%@",name);
-    [UserInfoModel defaultUserInfo].coachtype = [WorkTypeModel converStringToType:name];
+    //[UserInfoModel defaultUserInfo].coachtype = [WorkTypeModel converStringToType:name];
 
+    [[UserInfoModel defaultUserInfo] setCoachtype:[WorkTypeModel converStringToType:name]];
+    
+    [NetWorkEntiry modifyWorkPropertyCoachid:[UserInfoModel defaultUserInfo].userID type:[WorkTypeModel converStringToType:name] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"更改工作性质 responseObject:%@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -237,6 +248,7 @@
     if (leavebegintime && leaveendtime) {
         vacationStr =  [NSString stringWithFormat:@"%@-%@",[self strTolerance:leavebegintime],[self strTolerance:leaveendtime]];
     }
+    vacationStr = vacationStr ? @"已设置" : @"未设置";
     
     self.displayArray = @[@[
                             [self strTolerance:driveSname],//"所属驾校"

@@ -15,10 +15,10 @@
 @property (nonatomic, copy) void (^addTag)(NSString *str);
 @property (nonatomic, copy) void (^tapTagLabel)(NSInteger tag);
 
-- (void)initUIWithArray:(NSArray *)arr withLabel:(NSString *)string;   //带标题的cell
+- (void)initUIWithArray:(NSArray *)arr withLabel:(NSString *)string withBackGroundColorArr:(NSArray *)colorArr;   //带标题的cell
 + (CGFloat)cellHeightWithArray:(NSArray *)arr;
 
-- (void)initUIWithNoTitleWithArray:(NSArray *)arr WithTextFieldIsExist:(BOOL)isExist withLabelColorArray:(NSArray *)colorArr;                     //不带标题的cell
+- (void)initUIWithNoTitleWithArray:(NSArray *)arr WithTextFieldIsExist:(BOOL)isExist withLabelColorArray:(NSArray *)colorArr withBackGroundColorArr:(NSArray *)bgcolorArr;                     //不带标题的cell
 + (CGFloat)cellHeightWithNoTitleWithArray:(NSArray *)arr WithTextFieldIsExist:(BOOL)isExist;
 
 @end
