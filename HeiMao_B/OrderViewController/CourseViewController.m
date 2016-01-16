@@ -80,7 +80,6 @@
     [self initUI];
     
     [self addNotification];
-    
 }
 
 #pragma mark Life Sycle
