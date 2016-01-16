@@ -250,12 +250,12 @@
                         coachId:(NSString *)coachId
                   reservationId:(NSString *)reservationId
                  codeCreateTime:(NSString *)codeCreateTime
-                   userlatitude:(NSString *)userlatitude
+                   userLatitude:(NSString *)userlatitude
                   userLongitude:(NSString *)userLongitude
                   coachLatitude:(NSString *)coachLatitude
                  coachLongitude:(NSString *)coachLongitude
-                        success:(void (^)(AFHTTPRequestOperation *, id))success
-                        failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure;
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  *

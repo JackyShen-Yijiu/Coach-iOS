@@ -124,7 +124,7 @@
     _viewModel.coachId = [UserInfoModel defaultUserInfo].userID;
     _viewModel.reservationId = _dataModel.reservationId;
     _viewModel.codeCreateTime = _dataModel.createTime;
-    _viewModel.userlatitude = _dataModel.latitude;
+    _viewModel.userLatitude = _dataModel.latitude;
     _viewModel.userLongitude = _dataModel.longitude;
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];

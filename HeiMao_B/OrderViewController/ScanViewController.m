@@ -252,15 +252,18 @@ static const CGFloat kMargin = 30;
 //        NSString *orderId = @"reservationId";
 //        NSString *coachName = @"coachName";
 //        NSString *courseProcessDesc = @"科目3-9";
-//        
+
+//
 //        NSDictionary *testDict = @{ @"studentId": userId,
 //                                    @"studentName": userName,
-//                                    @"reservationId": orderId,
-//                                    @"createTime": currentTime,
+//                                    @"reservationId": reservationId,
+//                                    @"createTime": nowTimeStamp,
 //                                    @"locationAddress": locationAddress,
+//                                    @"latitude": latitude,
+//                                    @"longitude": longitude,
 //                                    @"coachName": coachName,
 //                                    @"courseProcessDesc": courseProcessDesc };
-//        
+        
 //        NSData *data = [NSJSONSerialization dataWithJSONObject:testDict options:NSJSONWritingPrettyPrinted error:nil];
 //        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         
@@ -275,7 +278,6 @@ static const CGFloat kMargin = 30;
         NSLog(@"dict:%@", dict);
         vc.dataModel = [StudentSignInDataModel yy_modelWithDictionary:dict];
         [self.navigationController pushViewController:vc animated:YES];
-        
     }
 }
 #pragma mark-> 我的相册
