@@ -107,7 +107,13 @@
 + (void)getCourseinfoWithUserId:(NSString *)userId reservationstate:(KCourseStatue)reservationstate pageIndex:(NSInteger)pageIndex pageCount:(NSInteger)pageCount
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-
+/**
+ *  预约模块搜索
+ *  ====================================================================================================================================
+ */
++ (void)getCourseinfoWithUserId:(NSString *)userId reservationstate:(KCourseStatue)reservationstate pageIndex:(NSInteger)pageIndex pageCount:(NSInteger)pageCount searchname:(NSString *)searchname
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  *  获取教练每天的预约数据
@@ -251,6 +257,14 @@
                         success:(void (^)(AFHTTPRequestOperation *, id))success
                         failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure;
 
+/**
+ *
+ * 获取系统消息和咨询消息数量
+ *
+ */
++ (void)getMessageUnReadCountlastmessage:(NSString *)lastmessage lastnews:(NSString*)lastnews
+                                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 /**
  *
  * 行业资讯调用的接口,

@@ -203,15 +203,8 @@
     NSLog(@"搜索");
     SearchCourseViewController *vc = [[SearchCourseViewController alloc] init];
 
-    if (self.segController.selIndex==0) {
-        vc.dataArray = self.courseSummaryData;
-    }else if (self.segController.selIndex==1){
-        vc.dataArray = self.courseSummaryDataWaitEvaluate;
-    }else if (self.segController.selIndex==2){
-        vc.dataArray = self.courseSummaryDataCancled;
-    }else if (self.segController.selIndex==3){
-        vc.dataArray = self.courseSummaryDataCompleted;
-    }
+    vc.reservationstate = self.reservationstate;
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
