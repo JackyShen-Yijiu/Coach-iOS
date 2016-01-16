@@ -29,9 +29,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    // 配置百度地图
-    _mapManager = [BMKMapManager new];
-    [_mapManager start:@"AsrX0h3VNsqQOkYPXXrslrY8" generalDelegate:nil];
+    [self configBaiduMap];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -61,6 +59,19 @@
     
     return YES;
     
+}
+
+#pragma mark 配置百度地图
+- (void)configBaiduMap {
+    
+    // 配置百度地图
+    _mapManager = [BMKMapManager new];
+    BOOL mapManagerStatus = [_mapManager start:@"AsrX0h3VNsqQOkYPXXrslrY8" generalDelegate:nil];
+    if (mapManagerStatus) {
+        NSLog(@"mapManager OK");
+    }else {
+        NSLog(@"mapManager failed！");
+    }
 }
 
 - (void)loginViewControllerdidLoginSucess:(LoginViewController *)controller
