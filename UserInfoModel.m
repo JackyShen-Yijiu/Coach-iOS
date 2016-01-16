@@ -312,14 +312,18 @@
     }
 }
 - (void)setCoachtype:(NSInteger)coachtype {
+    
     _coachtype = coachtype;
+    
     if (coachtype) {
         NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
         NSMutableDictionary * mdic = [dic mutableCopy];
         [mdic setValue:@(coachtype) forKey:@"coachtype"];
         [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
     }
+    
 }
+
 - (void)setSchoolId:(NSString *)schoolId
 {
     if (!schoolId) {

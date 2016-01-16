@@ -491,6 +491,24 @@
     [self GET:urlStr parameters:nil success:success failure:failure];
 }
 
+/**
+ *
+ * 修改教练工作性质
+ *
+ */
++ (void)modifyWorkPropertyCoachid:(NSString *)coachid type:(NSInteger)coachtype
+                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/updatecoachinfo",[self domain]];
+   
+    NSMutableDictionary*dict = [NSMutableDictionary dictionary];
+    dict[@"coachid"] = coachid;
+    dict[@"coachtype"] = @(coachtype);
+    
+    [self POST:urlStr parameters:dict success:success failure:failure];
+}
 #pragma mark 学员签到
 + (void)studentSignInWithUserId:(NSString *)userId
                         coachId:(NSString *)coachId
