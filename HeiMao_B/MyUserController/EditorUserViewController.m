@@ -314,8 +314,8 @@ static NSString *const ktagArrChange = @"ktagArrChange";
         IDCardNumViewController *idcar = [[IDCardNumViewController alloc] init];
         [self.navigationController pushViewController:idcar animated:YES];
     }else if (indexPath.section == 1 && indexPath.row == 1) {
-//        PhoneNumViewController *phoneNum = [[PhoneNumViewController alloc] init];
-//        [self.navigationController pushViewController:phoneNum animated:YES];
+        PhoneNumViewController *phoneNum = [[PhoneNumViewController alloc] init];
+        [self.navigationController pushViewController:phoneNum animated:YES];
     }else if (indexPath.section == 1 && indexPath.row == 2) {
         DrivingNumViewController *driving = [[DrivingNumViewController alloc] init];
         [self.navigationController pushViewController:driving animated:YES];
