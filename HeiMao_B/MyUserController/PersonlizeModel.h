@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *tagname;
 @property (nonatomic, strong) NSString *is_audit;
 @property (nonatomic, strong) NSString *is_choose;
+@property (nonatomic, strong) NSString *color;
 
 + (PersonlizeModel *)converJsonDicToModel:(NSDictionary *)dic;
 

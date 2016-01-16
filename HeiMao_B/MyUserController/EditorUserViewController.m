@@ -190,8 +190,9 @@ static NSString *const ktagArrChange = @"ktagArrChange";
         NSArray *arr = @[];
         if (self.systemTagArray) {
             NSMutableArray *tagArr = [[NSMutableArray alloc] init];
+           
             for (PersonlizeModel *model in self.systemTagArray) {
-                if (model.is_audit.integerValue == 0) {
+                if (model.is_audit.integerValue == 0 && model.is_choose.integerValue == 1) {
                     [tagArr addObject:model.tagname];
                 }
             }
@@ -203,6 +204,13 @@ static NSString *const ktagArrChange = @"ktagArrChange";
             arr = [tagArr copy];
         }
         return [PersonalizeLabelCell cellHeightWithArray:arr];
+    }
+    if (indexPath.section == 2 && indexPath.row == 1) {
+        NSString *string = self.detailDataArray[indexPath.section][indexPath.row];
+        CGRect bounds = [string boundingRectWithSize:
+                         CGSizeMake([[UIScreen mainScreen] bounds].size.width - 30, 10000) options:
+                         NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.f]} context:nil];
+        return 20+bounds.size.height+10;
     }
     return 44;
 }
@@ -217,6 +225,18 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     return array.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2 && indexPath.row == 1) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"yy_1"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"yy_1"];
+        }
+        cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.detailTextLabel.text = self.detailDataArray[indexPath.section][indexPath.row];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+        cell.detailTextLabel.numberOfLines = 0;
+        return cell;
+    }
     if (indexPath.row == 0 && indexPath.section == 2) {
         PersonalizeLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"yy"];
         for (UIView *view in cell.contentView.subviews) {
@@ -229,21 +249,24 @@ static NSString *const ktagArrChange = @"ktagArrChange";
             cell = [[PersonalizeLabelCell alloc] initWithStyle:0 reuseIdentifier:@"yy"];
         }
         NSArray *arr = @[];
+        NSMutableArray *tagBackgroundColorArr = [[NSMutableArray alloc] init];
         if (self.systemTagArray.count >0) {
             NSMutableArray *tagArr = [[NSMutableArray alloc] init];
             for (PersonlizeModel *model in self.systemTagArray) {
-                if (model.is_audit.integerValue == 0) {
+                if (model.is_audit.integerValue == 0 && model.is_choose.integerValue == 1) {
                     [tagArr addObject:model.tagname];
+                    [tagBackgroundColorArr addObject:model.color];
                 }
             }
             for (PersonlizeModel *model in self.customTagArray) {
                 if (model.is_audit.integerValue == 0) {
                     [tagArr addObject:model.tagname];
+                    [tagBackgroundColorArr addObject:model.color];
                 }
             }
             arr = [tagArr copy];
         }
-        [cell initUIWithArray:arr withLabel:self.dataArray[indexPath.section][indexPath.row]];
+        [cell initUIWithArray:arr withLabel:self.dataArray[indexPath.section][indexPath.row] withBackGroundColorArr:[tagBackgroundColorArr copy]];
         return cell;
     }
     static NSString *cellId = @"cell";
