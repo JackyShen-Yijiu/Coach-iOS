@@ -331,6 +331,17 @@
     [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
     
 }
+
+- (void)setSeniority:(NSInteger)Seniority
+{
+    _Seniority = Seniority;
+    
+    NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
+    NSMutableDictionary * mdic = [dic mutableCopy];
+    [mdic setValue:@(Seniority) forKey:@"Seniority"];
+    [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
+    
+}
 - (void)setSchoolId:(NSString *)schoolId
 {
     if (!schoolId) {

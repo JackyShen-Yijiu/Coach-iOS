@@ -22,6 +22,7 @@
 #import "PersonalizeLabelCell.h"
 #import "PersonaizeLabelController.h"
 #import "PersonlizeModel.h"
+#import "modifyjialinViewController.h"
 
 //static NSString *const kupdateUserInfo = @"userinfo/updateuserinfo";
 static NSString *const ktagArrChange = @"ktagArrChange";
@@ -77,7 +78,7 @@ static NSString *const ktagArrChange = @"ktagArrChange";
                         [self strTolerance:idcardnumber],
                         [self strTolerance:tel],
                         [self strTolerance:dirving],
-                        @"",
+                        [self strTolerance:[NSString stringWithFormat:@"%lu",[UserInfoModel defaultUserInfo].Seniority]],
                         [self strTolerance:gender],
                         ];
     
@@ -118,10 +119,12 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signatureChange) name:kSignatureChange object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nameChange) name:kmodifyNameChange object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nickNameChange) name:kIDCardChange object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addAddressChange) name:kPhoneNumChange object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addAddressChange) name:kPhoneNumChange object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(drivingNumChange) name:kDrivingNumChange object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagArrayChange) name:ktagArrChange object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modifyjialinKey) name:modifyjialinKey object:nil];
+
 }
 
 - (void)startNetWork {
@@ -158,6 +161,11 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 
 - (void)drivingNumChange {    //驾驶证改变
     NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:1];
+    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+}
+-(void)modifyjialinKey
+{    //驾龄
+    NSIndexPath *path = [NSIndexPath indexPathForRow:3 inSection:1];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 }
 - (void)addAddressChange {
@@ -295,12 +303,13 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (indexPath.section == 0 && indexPath.row == 0) {
         [JEPhotoPickManger pickPhotofromController:self];
     }
     else if (indexPath.section == 0 && indexPath.row == 1) {
-    ModifyNameViewController *modifyName = [[ModifyNameViewController alloc] init];
-    [self.navigationController pushViewController:modifyName animated:YES];
+      ModifyNameViewController *modifyName = [[ModifyNameViewController alloc] init];
+      [self.navigationController pushViewController:modifyName animated:YES];
     }
     else if (indexPath.section == 1 && indexPath.row == 4) {
         GenderViewController *gender = [[GenderViewController alloc] init];
@@ -324,6 +333,9 @@ static NSString *const ktagArrChange = @"ktagArrChange";
         plc.systemTagArray = self.systemTagArray;
         plc.customTagArray = self.customTagArray;
         [self.navigationController pushViewController:plc animated:YES];
+    }else if (indexPath.section==1&&indexPath.row==3){
+        modifyjialinViewController *vc = [[modifyjialinViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
