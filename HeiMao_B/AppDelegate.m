@@ -19,17 +19,17 @@
 #import "ProjectGuideView.h"
 #import "UIDevice+JEsystemVersion.h"
 #import "ScheduleViewController.h"
+#import <BaiduMapAPI_Location/BMKLocationService.h>
 
 @interface AppDelegate ()<LoginViewControllerDelegate>
 @property(nonatomic,strong)HMNagationController * navController;
+@property (nonatomic, strong) BMKLocationService *locationService;
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    [self configBaiduMap];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -69,6 +69,8 @@
     BOOL mapManagerStatus = [_mapManager start:@"AsrX0h3VNsqQOkYPXXrslrY8" generalDelegate:nil];
     if (mapManagerStatus) {
         NSLog(@"mapManager OK");
+        _locationService = [BMKLocationService new];
+        [_locationService startUserLocationService];
     }else {
         NSLog(@"mapManager failed！");
     }
@@ -144,6 +146,9 @@
 #pragma mark - 系统配置
 - (void)sysConfigWithApplication:(UIApplication *)application LaunchOptions:(NSDictionary *)launchOptions
 {
+    // 百度地图
+    [self configBaiduMap];
+    
     //umeng统计
     [MobClick startWithAppkey:@"564dc12967e58ee280001457" reportPolicy:BATCH   channelId:nil];
     
