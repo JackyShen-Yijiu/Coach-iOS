@@ -514,12 +514,12 @@
                         coachId:(NSString *)coachId
                   reservationId:(NSString *)reservationId
                  codeCreateTime:(NSString *)codeCreateTime
-                   userlatitude:(NSString *)userlatitude
+                   userLatitude:(NSString *)userLatitude
                   userLongitude:(NSString *)userLongitude
                   coachLatitude:(NSString *)coachLatitude
                  coachLongitude:(NSString *)coachLongitude
-                        success:(void (^)(AFHTTPRequestOperation *, id))success
-                        failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     
     NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/coursesignin",[self domain]];
     
@@ -537,7 +537,7 @@
                                      @"coachid": coachId,
                                      @"reservationid": reservationId,
                                      @"codecreatetime": codeCreateTime,
-                                     @"userlatitude": userlatitude,
+                                     @"userlatitude": userLatitude,
                                      @"userlongitude": userLongitude,
                                      @"coachlatitude": coachLatitude,
                                      @"coachlongitude": coachLongitude };

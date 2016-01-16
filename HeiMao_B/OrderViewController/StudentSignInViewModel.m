@@ -13,25 +13,15 @@
 
 - (void)dvvNetworkRequestRefresh {
     
-    [NetWorkEntiry studentSignInWithUserId:_userId
-                                   coachId:_coachId
-                             reservationId:_reservationId
-                            codeCreateTime:_codeCreateTime
-                              userlatitude:_userlatitude
-                             userLongitude:_userLongitude
-                             coachLatitude:_coachLatitude
-                            coachLongitude:_coachLongitude
-                                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                       
-                                       if ([self dvvCheckErrorWithResponseObject:responseObject]) {
-                                           // 调用失败回调
-                                           [self dvvRefreshError];
-                                           return ;
-                                       }
-                                       // 调用成功回调
-                                       [self dvvRefreshSuccess];
-                                       
+    [NetWorkEntiry studentSignInWithUserId:_userId coachId:_coachId reservationId:_reservationId codeCreateTime:_codeCreateTime userLatitude:_userLatitude userLongitude:_userLongitude coachLatitude:_coachLatitude coachLongitude:_coachLongitude success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        if ([self dvvCheckErrorWithResponseObject:responseObject]) {
+            // 调用失败回调
+            [self dvvRefreshError];
+            return ;
+        }
+        // 调用成功回调
+        [self dvvRefreshSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         // 调用失败回调
         [self dvvNetworkError];

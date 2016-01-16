@@ -17,7 +17,7 @@
  *  @param coachId        教练id
  *  @param reservationId  预约id
  *  @param codeCreateTime 二维码生成时间戳
- *  @param userlatitude   学员纬度
+ *  @param userLatitude   学员纬度
  *  @param userLongitude  学员经度
  *  @param coachLatitude  教练纬度
  *  @param coachLongitude 教练经度
@@ -27,7 +27,7 @@
 @property (nonatomic, copy) NSString *coachId;
 @property (nonatomic, copy) NSString *reservationId;
 @property (nonatomic, copy) NSString *codeCreateTime;
-@property (nonatomic, copy) NSString *userlatitude;
+@property (nonatomic, copy) NSString *userLatitude;
 @property (nonatomic, copy) NSString *userLongitude;
 @property (nonatomic, copy) NSString *coachLatitude;
 @property (nonatomic, copy) NSString *coachLongitude;
