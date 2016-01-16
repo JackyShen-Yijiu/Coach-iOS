@@ -14,13 +14,16 @@
 #import "StudentListCell.h"
 #import "HMStudentModel.h"
 #import "SutdentHomeController.h"
-
+#import "NoContentTipView.h"
 
 static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&index=1";
 
 @interface StudentListViewController ()<UITableViewDataSource,UITableViewDelegate>
+
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
+
+@property(nonatomic,strong)NoContentTipView * tipView1;
 
 @end
 
@@ -41,7 +44,9 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
     return _tableView;
 }
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     self.title = @"学员列表";
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -51,8 +56,15 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
     [self.view addSubview:self.tableView];
     self.tableView.tableFooterView = [[UIView alloc] init];
     
+    // 日程
+    self.tipView1 = [[NoContentTipView alloc] initWithContetntTip:@"无内容"];
+    [self.tipView1 setHidden:YES];
+    [self.tableView addSubview:self.tipView1];
+    self.tipView1.center = CGPointMake(self.tableView .width/2.f, self.tableView.height/2.f);
+
     [self startDownLoad];
 }
+
 - (void)startDownLoad {
     NSString *url = [NSString stringWithFormat:kstudentList,[UserInfoModel defaultUserInfo].userID];
     NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],url];
@@ -64,6 +76,11 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
                 HMStudentModel *stuModel = [HMStudentModel converJsonDicToModel:dic];
                 [self.dataArray addObject:stuModel];
             }
+        }
+        if (self.dataArray.count==0) {
+            self.tipView1.hidden = NO;
+        }else{
+            self.tipView1.hidden = YES;
         }
         
         [self.tableView reloadData];

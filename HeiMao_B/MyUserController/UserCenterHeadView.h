@@ -15,9 +15,9 @@
 @end
 @interface UserCenterHeadView : UIView
 @property ( strong, nonatomic) UIImageView *userPortrait;
-@property ( strong, nonatomic) UILabel *userPhoneNum;
-@property ( strong, nonatomic) UILabel *userIdNum;
-@property ( strong, nonatomic) UILabel *yNum;
+@property ( strong, nonatomic) UILabel *userPhoneNum;// 姓名
+@property ( strong, nonatomic) UILabel *userIdNum;// 电话
+@property ( strong, nonatomic) UILabel *yNum;// Y码
 @property ( strong, nonatomic) UIButton *arrowBtn;
 
 @property ( weak, nonatomic) id<UserCenterHeadViewDelegte>delegate;

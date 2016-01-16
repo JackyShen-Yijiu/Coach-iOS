@@ -52,9 +52,17 @@
     // 开始定位
     [self startLocation];
     
-    _studentNameLabel.text = [NSString stringWithFormat:@"学员姓名:%@", _dataModel.studentName];
-    _courseProcessDescLabel.text = [NSString stringWithFormat:@"预约课时:%@", _dataModel.courseProcessDesc];
-    _studentLocationAddressLabel.text = [NSString stringWithFormat:@"当前姓名:%@", _dataModel.locationAddress];
+    if (_dataModel) {
+        if (_dataModel.studentName) {
+            _studentNameLabel.text = [NSString stringWithFormat:@"学员姓名:%@", _dataModel.studentName];
+        }
+        if (_dataModel.courseProcessDesc) {
+            _courseProcessDescLabel.text = [NSString stringWithFormat:@"预约课时:%@", _dataModel.courseProcessDesc];
+        }
+        if (_dataModel.locationAddress) {
+            _studentLocationAddressLabel.text = [NSString stringWithFormat:@"当前位置:%@", _dataModel.locationAddress];
+        }
+    }
 }
 
 #pragma mark 开始定位
@@ -219,6 +227,7 @@
 - (UILabel *)studentNameLabel {
     if (!_studentNameLabel) {
         _studentNameLabel = [UILabel new];
+        _studentNameLabel.text = @"学员姓名:";
         _studentNameLabel.font = [UIFont systemFontOfSize:14];
     }
     return _studentNameLabel;
@@ -226,6 +235,7 @@
 - (UILabel *)courseProcessDescLabel {
     if (!_courseProcessDescLabel) {
         _courseProcessDescLabel = [UILabel new];
+        _courseProcessDescLabel.text = @"预约课时:";
         _courseProcessDescLabel.font = [UIFont systemFontOfSize:14];
     }
     return _courseProcessDescLabel;
@@ -233,6 +243,7 @@
 - (UILabel *)studentLocationAddressLabel {
     if (!_studentLocationAddressLabel) {
         _studentLocationAddressLabel = [UILabel new];
+        _studentLocationAddressLabel.text = @"当前位置:";
         _studentLocationAddressLabel.font = [UIFont systemFontOfSize:14];
     }
     return _studentLocationAddressLabel;
