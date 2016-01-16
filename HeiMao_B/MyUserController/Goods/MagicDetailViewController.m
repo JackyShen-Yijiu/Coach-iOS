@@ -48,6 +48,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.title = @"商品详情";
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.webView];
     self.webView.delegate = self;
