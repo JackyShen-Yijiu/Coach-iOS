@@ -237,6 +237,7 @@
     if (leavebegintime && leaveendtime) {
         vacationStr =  [NSString stringWithFormat:@"%@-%@",[self strTolerance:leavebegintime],[self strTolerance:leaveendtime]];
     }
+    vacationStr = vacationStr ? @"已设置" : @"未设置";
     
     self.displayArray = @[@[
                             [self strTolerance:driveSname],//"所属驾校"
