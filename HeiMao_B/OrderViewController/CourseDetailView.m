@@ -489,9 +489,10 @@
 #pragma marl - Action
 - (void)userInfoButtonClick:(UIButton *)button
 {
-    if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickStudentDetail:)]) {
-        [_delegate courseDetailViewDidClickStudentDetail:self];
-    }
+    NSLog(@"%s",__func__);
+//    if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickStudentDetail:)]) {
+//        [_delegate courseDetailViewDidClickStudentDetail:self];
+//    }
 }
 
 - (void)buttonClick:(UIButton *)button
