@@ -188,8 +188,11 @@
             NSDictionary *dic = data;
             if ([[dic objectForKey:@"type"] integerValue] == 1) {
                 [_customTagArr addObject:str];
+                [_customTagColorArray addObject:@(0)];
+                [_customTagBGColorArray addObject:@""];
                 [self.tableView reloadData];
                 [self.customTagArray addObject:[PersonlizeModel converJsonDicToModel:[dic objectForKey:@"data"]]];
+                
             }
         }];
     };
@@ -204,10 +207,6 @@
             [alert show];
         }
     };
-    NSLog(@"%@",_systemTagColorArray);
-    NSLog(@"%@",_customTagColorArray);
-    NSLog(@"%@",_systemTagBGColorArray);
-    NSLog(@"%@",_customTagBGColorArray);
     [cell initUIWithNoTitleWithArray:self.dataArray[indexPath.section] WithTextFieldIsExist:indexPath.section>0?YES:NO withLabelColorArray:indexPath.section?_customTagColorArray:_systemTagColorArray withBackGroundColorArr:indexPath.section?_customTagBGColorArray:_systemTagBGColorArray];
     return cell;
 }

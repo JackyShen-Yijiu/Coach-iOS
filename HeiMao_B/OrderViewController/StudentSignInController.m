@@ -98,6 +98,16 @@
 //    [statusView.okButton setTitle:@"确定" forState:UIControlStateNormal];
 //    [statusView.okButton addTarget:self action:@selector(statusViewOkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
+    if (_locationSuccess) { // 如果定位成功则直接搜索
+        [self startVerification];
+    }else {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self.locationService startUserLocationService];
+    }
+}
+#pragma mark 开始验证学员签到
+- (void)startVerification {
+    
     // 验证二维码信息是否正确，防止传参数时崩溃
     NSString *errorMsg = @"信息不完整，请重新扫码！";
     if (!_dataModel) {
@@ -108,16 +118,6 @@
         [self showAlertWithMessage:errorMsg];
         return ;
     }
-    
-    if (_locationSuccess) { // 如果定位成功则直接搜索
-        [self startVerification];
-    }else {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [self.locationService startUserLocationService];
-    }
-}
-#pragma mark 开始验证学员签到
-- (void)startVerification {
     
     // 设置请求参数
     _viewModel.userId = _dataModel.studentId;
@@ -171,6 +171,9 @@
 #pragma mark 处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
+    // 停止定位
+    [_locationService stopUserLocationService];
+    
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     //    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     _locationSuccess = YES;
