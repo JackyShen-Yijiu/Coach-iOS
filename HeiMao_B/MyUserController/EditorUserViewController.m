@@ -286,6 +286,7 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     if (indexPath.row == 0 && indexPath.section == 0) {
         self.userHeadImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 240)];
         self.userHeadImage.image = [UIImage imageNamed:@"littleImage.png"];
+        self.userHeadImage.contentMode = UIViewContentModeScaleToFill;
         [cell.contentView addSubview:self.userHeadImage];
         if ([UserInfoModel defaultUserInfo].portrait) {
             [self.userHeadImage sd_setImageWithURL:[NSURL URLWithString:[UserInfoModel defaultUserInfo].portrait] placeholderImage:[UIImage imageNamed:@"littleImage.png"]];
