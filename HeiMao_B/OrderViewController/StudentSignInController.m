@@ -51,6 +51,7 @@
     
     // 开始定位
     [self startLocation];
+//    [self test];
     
     if (_dataModel) {
         if (_dataModel.studentName) {
@@ -63,6 +64,11 @@
             _studentLocationAddressLabel.text = [NSString stringWithFormat:@"当前位置:%@", _dataModel.locationAddress];
         }
     }
+}
+- (void)test {
+    _viewModel.coachLatitude = @"1244";
+    _viewModel.coachLongitude = @"123.12";
+    [self startVerification];
 }
 
 #pragma mark 开始定位
@@ -87,16 +93,6 @@
 
 #pragma mark - action
 - (void)okButtonAction:(UIButton *)sender {
-//    __weak typeof(self) ws = self;
-//    StudentSignInStatusView *statusView = [[StudentSignInStatusView alloc] initWithFrame:ws.view.bounds imageName:@"iconfont-iconfontdui" message:@"恭喜您，学员签到成功！"];
-//    [self.view addSubview:statusView];
-//    statusView.okButton.tag = 1;
-//    [statusView.okButton addTarget:self action:@selector(statusViewOkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-//    StudentSignInStatusView *statusView = [[StudentSignInStatusView alloc] initWithFrame:ws.view.bounds imageName:@"iconfont-cuo" message:@"学员签到失败！"];
-//    [self.view addSubview:statusView];
-//    [statusView.okButton setTitle:@"确定" forState:UIControlStateNormal];
-//    [statusView.okButton addTarget:self action:@selector(statusViewOkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
     if (_locationSuccess) { // 如果定位成功则直接搜索
         [self startVerification];
@@ -109,7 +105,7 @@
 - (void)startVerification {
     
     // 验证二维码信息是否正确，防止传参数时崩溃
-    NSString *errorMsg = @"信息不完整，请重新扫码！";
+    NSString *errorMsg = @"信息不完整，请重新扫码";
     if (!_dataModel) {
         [self showAlertWithMessage:errorMsg];
         return ;
@@ -127,6 +123,15 @@
     _viewModel.userLatitude = _dataModel.latitude;
     _viewModel.userLongitude = _dataModel.longitude;
     
+    NSLog(@"userId === %@", _viewModel.userId);
+    NSLog(@"coachId === %@", _viewModel.coachId);
+    NSLog(@"reservationId === %@", _viewModel.reservationId);
+    NSLog(@"codeCreateTime === %@", _viewModel.codeCreateTime);
+    NSLog(@"userLatitude === %@", _viewModel.userLatitude);
+    NSLog(@"userLongitude === %@", _viewModel.userLongitude);
+    NSLog(@"coachLatitude === %@", _viewModel.coachLatitude);
+    NSLog(@"coachLongitude === %@", _viewModel.coachLongitude);
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     // 请求网络数据
     [_viewModel dvvNetworkRequestRefresh];
@@ -142,7 +147,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
 //        [self showAlertWithMessage:@"签到成功"];
 //        [self showToastWithImageName:@"iconfont-iconfontdui" message:@"签到成功"];
-        StudentSignInStatusView *statusView = [[StudentSignInStatusView alloc] initWithFrame:ws.view.bounds imageName:@"iconfont-iconfontdui" message:@"恭喜您，学员签到成功！"];
+        StudentSignInStatusView *statusView = [[StudentSignInStatusView alloc] initWithFrame:ws.view.bounds imageName:@"iconfont-iconfontdui" message:@"学员签到成功"];
         [self.view addSubview:statusView];
         statusView.okButton.tag = 1;
         [statusView.okButton addTarget:self action:@selector(statusViewOkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -151,12 +156,15 @@
     [_viewModel dvvSetRefreshErrorBlock:^{
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        StudentSignInStatusView *statusView = [[StudentSignInStatusView alloc] initWithFrame:ws.view.bounds imageName:@"iconfont-cuo" message:@"学员签到失败！"];
+        StudentSignInStatusView *statusView = [[StudentSignInStatusView alloc] initWithFrame:ws.view.bounds imageName:@"iconfont-cuo" message:@"学员签到失败"];
         [self.view addSubview:statusView];
         [statusView.okButton setTitle:@"确定" forState:UIControlStateNormal];
         [statusView.okButton addTarget:self action:@selector(statusViewOkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
 //        [self showAlertWithMessage:@"签到失败!"];
 //        [self showToastWithImageName:@"iconfont-cuo" message:@"签到失败"];
+    }];
+    [_viewModel dvvSetNetworkErrorBlock:^{
+        [self showAlertWithMessage:@"网络错误"];
     }];
 }
 - (void)statusViewOkButtonAction:(UIButton *)button {

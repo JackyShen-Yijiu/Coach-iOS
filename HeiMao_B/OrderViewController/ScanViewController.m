@@ -77,6 +77,35 @@ static const CGFloat kMargin = 30;
     
     //开始捕获
     [_session startRunning];
+    
+    // 测试时打开注释
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        NSDictionary *testDict = @{ @"studentId": @"123456",
+//                                    @"studentName": @"userName",
+//                                    @"reservationId": @"987654321",
+//                                    @"createTime": @"121298123456",
+//                                    @"locationAddress": @"详细地址",
+//                                    @"latitude": @"39.45454",
+//                                    @"longitude": @"118.34664",
+//                                    @"coachName": @"教练名",
+//                                    @"courseProcessDesc": @"科目信息" };
+//        NSError *error = nil;
+//        NSData *data = [NSJSONSerialization dataWithJSONObject:testDict options:NSJSONWritingPrettyPrinted error:&error];
+//        NSString *string = @"";
+//        if (error) {
+//            NSLog(@"转化失败！");
+//        }else {
+//            string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//        }
+//        
+//        StudentSignInController *vc = [StudentSignInController new];
+//        
+//        NSData *changeData = [string dataUsingEncoding:NSUTF8StringEncoding];
+//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:changeData options:NSJSONReadingMutableContainers error:nil];
+//        NSLog(@"dict:%@", dict);
+//        vc.dataModel = [StudentSignInDataModel yy_modelWithDictionary:dict];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    });
 }
 
 -(void)setupTipTitleView{
@@ -237,39 +266,6 @@ static const CGFloat kMargin = 30;
         AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex : 0 ];
         
         NSLog(@"metadataObject.stringValue:%@",metadataObject.stringValue);
-        
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"扫描结果" message:metadataObject.stringValue delegate:self cancelButtonTitle:@"退出" otherButtonTitles:@"再次扫描", nil];
-//        [alert show];
-        
-//        // 用户id
-//        NSString *userId = @"userId";
-//        // 用户名
-//        NSString *userName = @"userName";
-//        // 详细地址
-//        NSString *locationAddress = @"北京市海淀区";
-//        // 当前的时间
-//        NSString *currentTime = @"20150312130412";
-//        NSString *orderId = @"reservationId";
-//        NSString *coachName = @"coachName";
-//        NSString *courseProcessDesc = @"科目3-9";
-
-//
-//        NSDictionary *testDict = @{ @"studentId": userId,
-//                                    @"studentName": userName,
-//                                    @"reservationId": reservationId,
-//                                    @"createTime": nowTimeStamp,
-//                                    @"locationAddress": locationAddress,
-//                                    @"latitude": latitude,
-//                                    @"longitude": longitude,
-//                                    @"coachName": coachName,
-//                                    @"courseProcessDesc": courseProcessDesc };
-        
-//        NSData *data = [NSJSONSerialization dataWithJSONObject:testDict options:NSJSONWritingPrettyPrinted error:nil];
-//        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        
-//        NSData *changeData = [string dataUsingEncoding:NSUTF8StringEncoding];
-//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:changeData options:NSJSONReadingMutableContainers error:nil];
-//        NSLog(@"dict:%@", dict);
         
         StudentSignInController *vc = [StudentSignInController new];
         

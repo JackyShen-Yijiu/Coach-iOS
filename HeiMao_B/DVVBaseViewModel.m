@@ -60,7 +60,7 @@
     }
 }
 - (void)dvvNetworkError {
-    if (!_networkErrorBlock) {
+    if (_networkErrorBlock) {
         _networkErrorBlock();
     }
 }
