@@ -70,6 +70,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)clickRight:(UIButton *)sender {
+    
+    if (_modifyNameTextField.text.length>18) {
+        [self showTotasViewWithMes:@"超出最大限制"];
+        return;
+    }
     //
     DYNSLog(@"userid = %@",self.modifyNameTextField.text);
     NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
