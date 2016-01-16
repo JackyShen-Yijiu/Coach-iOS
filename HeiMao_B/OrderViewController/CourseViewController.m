@@ -45,7 +45,6 @@
 @property(nonatomic,assign)BOOL isNeedRefresh;
 @property(nonatomic,strong)NSDateFormatter *dateFormattor;
 @property(nonatomic,strong)NoContentTipView * tipView1;
-@property(nonatomic,strong)NoContentTipView * tipView2;
 
 @property (nonatomic,assign)NSInteger reservationstate;
 
@@ -75,8 +74,6 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.isNeedRefresh = YES;
-    
     [self initUI];
     
     [self addNotification];
@@ -86,7 +83,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-   
+    
+    self.isNeedRefresh = YES;
+
     [self resetNavBar];
     
     [self setUpRightNavBar];
@@ -226,13 +225,11 @@
     [self initRefreshView];
     
     //日程
-    self.tipView1 = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有预约"];
+    self.tipView1 = [[NoContentTipView alloc] initWithContetntTip:@"无内容"];
     [self.tipView1 setHidden:YES];
     [self.courseSummaryTableView addSubview:self.tipView1];
     self.tipView1.center = CGPointMake(self.courseSummaryTableView .width/2.f, self.courseSummaryTableView.height/2.f);
-    
-    self.tipView2 = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有预约"];
-    [self.tipView2 setHidden:YES];
+   
 }
 
 #pragma mark Load Data
