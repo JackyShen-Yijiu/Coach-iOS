@@ -52,7 +52,7 @@
     if ([UIDevice jeSystemVersion] >= 7.0) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    self.title = @"驾驶证";
+    self.title = @"教练证";
     self.view.backgroundColor = RGBColor(245, 247, 250);
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.naviBarRightButton];
     self.navigationItem.rightBarButtonItem = rightItem;

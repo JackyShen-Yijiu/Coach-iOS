@@ -25,6 +25,7 @@
 		555B0D6D1C463FEF008C5B17 /* PersonalizeLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 555B0D6C1C463FEF008C5B17 /* PersonalizeLabelCell.m */; };
 		556256251C472FEE00D132F4 /* PersonaizeLabelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556256241C472FEE00D132F4 /* PersonaizeLabelController.m */; };
 		556256281C47798C00D132F4 /* PersonlizeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 556256271C47798C00D132F4 /* PersonlizeModel.m */; };
+		55C8AB9C1C4A43780002466E /* modifyjialinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C8AB9B1C4A43780002466E /* modifyjialinViewController.m */; };
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
 		B253C2BB1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BA1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m */; };
 		B253C2CD1C3FA742001AF771 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BD1C3FA742001AF771 /* bitstream.c */; };
@@ -486,6 +487,8 @@
 		556256241C472FEE00D132F4 /* PersonaizeLabelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonaizeLabelController.m; sourceTree = "<group>"; };
 		556256261C47798C00D132F4 /* PersonlizeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonlizeModel.h; sourceTree = "<group>"; };
 		556256271C47798C00D132F4 /* PersonlizeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonlizeModel.m; sourceTree = "<group>"; };
+		55C8AB9A1C4A43780002466E /* modifyjialinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = modifyjialinViewController.h; sourceTree = "<group>"; };
+		55C8AB9B1C4A43780002466E /* modifyjialinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = modifyjialinViewController.m; sourceTree = "<group>"; };
 		61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B253C2B91C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+JGBarButtonItem.h"; sourceTree = "<group>"; };
 		B253C2BA1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+JGBarButtonItem.m"; sourceTree = "<group>"; };
@@ -1886,6 +1889,8 @@
 				D5D50F5A1BFAD4FE00F54097 /* ButtonSelectedCell.m */,
 				D5D50F5C1BFAD6E800F54097 /* buttonSelectedModel.h */,
 				D5D50F5D1BFAD6E800F54097 /* buttonSelectedModel.m */,
+				55C8AB9A1C4A43780002466E /* modifyjialinViewController.h */,
+				55C8AB9B1C4A43780002466E /* modifyjialinViewController.m */,
 			);
 			name = TeacherController;
 			path = MyUserController;
@@ -3232,6 +3237,7 @@
 				B253C2F31C43C960001AF771 /* PermissiveObject.m in Sources */,
 				B8BC50751BF38A390007B029 /* UIImageView+EMWebCache.m in Sources */,
 				B8C458881BDB5BAD00901F71 /* NetWorkEntiry.m in Sources */,
+				55C8AB9C1C4A43780002466E /* modifyjialinViewController.m in Sources */,
 				B8BC50ED1BF393D00007B029 /* EaseTextView.m in Sources */,
 				D5D50FAA1BFC42CA00F54097 /* FeedBackViewController.m in Sources */,
 			);

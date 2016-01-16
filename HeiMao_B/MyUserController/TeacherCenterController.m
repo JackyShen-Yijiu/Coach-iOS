@@ -231,11 +231,25 @@
     
     // 训练场地
     NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
+    
+    // 工作时间
     NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
+    NSString *beginTime = [[UserInfoModel defaultUserInfo] beginTime];
+    NSString *endTime = [[UserInfoModel defaultUserInfo] endTime];
     NSString * workSetDes = @"未设置";
     if (weekArray.count) {
         workSetDes = @"已设置";
+        
+        if (beginTime&&endTime) {
+            
+            NSString *startDate = [self dateStringWithDateNumber:[weekArray[0] integerValue]];
+            NSString *endDate = [self dateStringWithDateNumber:[[weekArray lastObject] integerValue]];
+            workSetDes = [NSString stringWithFormat:@"%@至%@\n%@点-%@点",startDate,endDate,beginTime,endTime];
+            
+        }
+        
     }
+    NSLog(@"weekArray:%@ beginTime:%@ endTime:%@",weekArray,beginTime,endTime);
     
     //可授科目
     NSArray *array = [UserInfoModel defaultUserInfo].subject;
@@ -279,6 +293,24 @@
     [self.tableView reloadData];
 }
 
+- (NSString *)dateStringWithDateNumber:(NSInteger)number
+{
+    if (number==0) {
+        return @"周日";
+    }else if (number==1){
+        return @"周一";
+    }else if (number==2){
+        return @"周二";
+    }else if (number==3){
+        return @"周三";
+    }else if (number==4){
+        return @"周四";
+    }else if (number==5){
+        return @"周五";
+    }else if (number==6){
+        return @"周六";
+    }return @"";
+}
 #pragma mark - initUI
 
 - (void)initNavBar
