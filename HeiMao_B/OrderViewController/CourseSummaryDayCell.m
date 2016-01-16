@@ -195,11 +195,12 @@
     self.courseBeginTime.text = _model.courseBeginTime;
     self.courseEndTime.text = _model.courseEndtime;
     
-    NSString * str = [NSString stringWithFormat:@"预约剩余%ld课时",(long)model.leavecoursecount];
+    NSString * str = [NSString stringWithFormat:@"剩余%ld课时",(long)model.leavecoursecount];
     if(model.missingcoursecount){
-        str = [str stringByAppendingFormat:@"漏%ld科时",(long)model.missingcoursecount];
+        str = [str stringByAppendingFormat:@"漏%ld课时",(long)model.missingcoursecount];
     }
     self.surplusClassLabel.text = str;
+    
     self.subjectLabel.text = _model.learningcontent;
     
 }

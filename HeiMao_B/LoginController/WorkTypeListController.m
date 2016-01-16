@@ -17,7 +17,9 @@
 
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSArray * dataArray;
-@property(nonatomic,strong)WorkTypeModel * seletedWorkModel;
+
+@property(nonatomic,copy)NSString * seletedWorkModelName;
+
 @end
 
 @implementation WorkTypeListController
@@ -25,6 +27,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    
+    NSInteger coachtype = [UserInfoModel defaultUserInfo].coachtype;
+    NSString *workProperty = [WorkTypeModel converTypeToString:coachtype];
+    NSLog(@"coachtype:%lu workProperty:%@",coachtype,workProperty);
+    self.seletedWorkModelName = workProperty;
+    
+    self.myNavigationItem.title = @"工作性质";
+    
     [self initData];
     [self initUI];
 }
@@ -65,7 +76,9 @@
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 64) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
+    
 }
 
 #pragma mark - NavBar
@@ -133,11 +146,26 @@
     [button addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     cell.accessoryView = button;
     cell.textLabel.textColor = [UIColor blackColor];
-    
+   
     WorkTypeModel * model  = self.dataArray[indexPath.row];
+    
     cell.textLabel.text = model.name;
-    [button setSelected:model == self.seletedWorkModel];
+    
+    [button setSelected:[model.name isEqualToString:self.seletedWorkModelName]];
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    WorkTypeModel * model  = self.dataArray[indexPath.row];
+
+    self.seletedWorkModelName=model.name;
+    
+    [self.tableView reloadData];
+    
+    [self didSeletedModel];
+    
 }
 
 //
@@ -150,16 +178,25 @@
 
 - (void)clickButton:(UIButton *)button
 {
-    self.seletedWorkModel = self.dataArray[button.tag];
+    WorkTypeModel * model  = self.dataArray[button.tag];
+    
+    self.seletedWorkModelName=model.name;
+    
     [self.tableView reloadData];
+    
     [self didSeletedModel];
+    
 }
 
 - (void)didSeletedModel
 {
-    if ([_delegate respondsToSelector:@selector(workTypeListController:didSeletedWorkType:workName:)] && self.seletedWorkModel) {
-        [_delegate workTypeListController:self didSeletedWorkType:self.seletedWorkModel.type workName:self.seletedWorkModel.name];
+    
+    KCourseWorkType workProperty = [WorkTypeModel converStringToType:self.seletedWorkModelName];
+
+    if ([_delegate respondsToSelector:@selector(workTypeListController:didSeletedWorkType:workName:)] && self.seletedWorkModelName) {
+        [_delegate workTypeListController:self didSeletedWorkType:workProperty workName:self.seletedWorkModelName];
     }
+    
 }
 
 @end

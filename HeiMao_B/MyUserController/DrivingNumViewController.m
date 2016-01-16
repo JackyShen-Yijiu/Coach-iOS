@@ -23,7 +23,7 @@
     if (_modifyNameTextField == nil) {
         _modifyNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 20, kSystemWide, 44)];
         _modifyNameTextField.backgroundColor = [UIColor whiteColor];
-        _modifyNameTextField.keyboardType = UIKeyboardTypeNumberPad;
+//        _modifyNameTextField.keyboardType = UIKeyboardTypeNumberPad;
         if ([UserInfoModel defaultUserInfo].name) {
             _modifyNameTextField.text = [UserInfoModel defaultUserInfo].drivinglicensenumber;
         }

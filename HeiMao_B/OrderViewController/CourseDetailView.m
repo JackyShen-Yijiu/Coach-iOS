@@ -102,6 +102,7 @@
     [self addSubview:self.courseProgressTtile];
     self.courseProgressInfo = [self getOnePropertyLabel];
     [self addSubview:self.courseProgressInfo];
+    self.courseProgressInfo.numberOfLines = 0;
     
     self.commentTtile = [self getOnePropertyLabel];
     self.commentTtile.font = [UIFont boldSystemFontOfSize:14.f];
@@ -186,7 +187,7 @@
         make.height.equalTo(@(HM_LINE_HEIGHT));
     }];
     
-    
+    // 学习进展
     [self.courseProgressTtile mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(leftOffsetSpacing);
         make.right.equalTo(self).offset(-leftOffsetSpacing);
@@ -194,13 +195,11 @@
         make.height.equalTo(@(14.f));
     }];
     [self.courseProgressInfo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.equalTo(self.courseProgressTtile);
         make.top.equalTo(self.courseProgressTtile.mas_bottom).offset(10.f);
-        make.left.equalTo(self.courseProgressTtile);
+        make.left.equalTo(self).offset(leftOffsetSpacing);
+        make.right.equalTo(self).offset(-leftOffsetSpacing);
     }];
 
-    
-    
     [self.courseInfoTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.equalTo(self.courseProgressInfo);
         make.left.equalTo(self.courseProgressInfo);

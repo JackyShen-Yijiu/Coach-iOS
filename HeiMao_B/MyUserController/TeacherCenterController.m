@@ -60,11 +60,14 @@
 
 - (UserCenterHeadView *)userCenterView {
     if (_userCenterView == nil) {
+        
         _userCenterView = [[UserCenterHeadView alloc] initWithFrame:CGRectMake(0, 0, kSystemWide, 80) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].tel withUserIdNum:[UserInfoModel defaultUserInfo].displaycoachid yNum:@"Y码:22222222"];
+        
         _userCenterView.delegate = self;
     }
     return _userCenterView;
 }
+
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kSystemWide, kSystemHeight-49) style:UITableViewStylePlain];
@@ -185,8 +188,19 @@
     [controller.navigationController popViewControllerAnimated:YES];
     
     NSLog(@"更改工作性质name:%@",name);
-    [UserInfoModel defaultUserInfo].coachtype = [WorkTypeModel converStringToType:name];
+    //[UserInfoModel defaultUserInfo].coachtype = [WorkTypeModel converStringToType:name];
 
+    [[UserInfoModel defaultUserInfo] setCoachtype:[WorkTypeModel converStringToType:name]];
+    
+    [NetWorkEntiry modifyWorkPropertyCoachid:[UserInfoModel defaultUserInfo].userID type:[WorkTypeModel converStringToType:name] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"更改工作性质 responseObject:%@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -194,10 +208,17 @@
     
 #pragma mark - 更新头像
     [self.userCenterView.userPortrait sd_setImageWithURL:[NSURL URLWithString:[UserInfoModel defaultUserInfo].portrait] placeholderImage:[UIImage imageNamed:@"littleImage.png"]];
-    self.userCenterView.userIdNum.text = [UserInfoModel defaultUserInfo].displaycoachid;
-    self.userCenterView.userPhoneNum.text = [UserInfoModel defaultUserInfo].tel;
-    [self initNavBar];
     
+    // 姓名
+    self.userCenterView.userPhoneNum.text = [UserInfoModel defaultUserInfo].name;
+
+    // 电话
+    self.userCenterView.userIdNum.text = [UserInfoModel defaultUserInfo].tel;
+
+    // Y码
+    self.userCenterView.yNum.text = [NSString stringWithFormat:@"Y码:%lu",[UserInfoModel defaultUserInfo].fcode];
+   
+    [self initNavBar];
    
     // "所属驾校"
     NSString * driveSname = [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
@@ -237,6 +258,7 @@
     if (leavebegintime && leaveendtime) {
         vacationStr =  [NSString stringWithFormat:@"%@-%@",[self strTolerance:leavebegintime],[self strTolerance:leaveendtime]];
     }
+    vacationStr = vacationStr ? @"已设置" : @"未设置";
     
     self.displayArray = @[@[
                             [self strTolerance:driveSname],//"所属驾校"

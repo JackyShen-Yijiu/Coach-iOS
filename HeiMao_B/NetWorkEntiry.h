@@ -281,4 +281,15 @@
 + (void)getSystemMessageCoachid:(NSString *)coachid withSeqindex:(NSInteger)seqindex withCount:(NSInteger)count
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
+ *
+ * 修改教练工作性质
+ *
+ */
++ (void)modifyWorkPropertyCoachid:(NSString *)coachid type:(NSInteger)coachtype
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+
 @end
