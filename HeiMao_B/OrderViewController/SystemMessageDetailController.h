@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SystemMessageDetailControllerDelegate <NSObject>
+
+- (void)SystemMessageDetailControllerGetMessagelastmessage:(NSString *)lastmessage;
+@end
+
 @interface SystemMessageDetailController : UIViewController
+
+@property (nonatomic,weak)id<SystemMessageDetailControllerDelegate>delegate;
 
 @end

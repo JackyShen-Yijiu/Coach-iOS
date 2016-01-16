@@ -20,6 +20,19 @@
 
 @implementation InformationMessageController
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if ([self.delegate respondsToSelector:@selector(InformationMessageControllerGetMessageLastnews:)]) {
+        
+        NSLog(@"((InformationMessageModel *)[_informationMessageViewModel.informationArray lastObject]).newsid:%@",((InformationMessageModel *)[_informationMessageViewModel.informationArray lastObject]).newsid);
+        
+        [self.delegate InformationMessageControllerGetMessageLastnews:((InformationMessageModel *)[_informationMessageViewModel.informationArray lastObject]).newsid];
+    }
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -86,7 +99,7 @@
 #pragma mark --- Lazy加载
 - (UITableView *)tableView{
     if (_tableView == nil) {
-        _tableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+        _tableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64) style:UITableViewStylePlain];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     

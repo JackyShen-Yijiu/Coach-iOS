@@ -10,21 +10,19 @@
 #import "MagicMainTableViewCell.h"
 #import "MagicDetailViewController.h"
 #import "LTBottomView.h"
-#import "ShopModel.h"
 #import "ShopMainModel.h"
-//#import "UIImageView+WebCache.h"
 #import "AFNetworking.h"
-
-#import "MagicAPIUrl.h"
 #import "JENetwoking.h"
 #import "ToolHeader.h"
+
+static NSString *kMagicShop = @"/getmailproduct?index=1&count=10&producttype=0";
 
 
 #define k_Count  3
 #define k_Height 150
 #define k_H      80
 #define k_Width self.view.frame.size.width
-#define kheight 202.5 / 2
+#define kheight 202.5
 
 
 #define kRedColor       [UIColor colorWithHex:0xcc0000]
@@ -36,97 +34,48 @@
 @end
 
 @implementation MagicMainTableViewController
-
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = NO;
 }
 - (void)viewDidLoad {
     
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [super viewDidLoad];
     // 数组初始化
     self.ShopListArray = [[NSMutableArray alloc] init];
     self.shopMainListArray = [[NSMutableArray alloc] init];
     [self.tableView registerNib:[UINib nibWithNibName:@"MagicMainTableViewCell" bundle:nil] forCellReuseIdentifier:@"mainCell"];
     self.title = @"一步商城";
-self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    //创建ScrollView和PageControl
-    
-    
-    
-    [self setupScrollView];
-    [self setupPageControl];
-    
-    //开始计时
-    [self startTimer];
-    
-    
+
     
     // 加载数据
     [self startDownLoad];
     
 }
-// 开启定时器
-- (void)startTimer {
-    
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-}
-
-- (void)updateTimer {
-    
-    //页号随时间发生改变
-    NSInteger page = (self.pageNewList.currentPage + 1) % k_Count;
-    self.pageNewList.currentPage = page;
-  [self pageChanged:self.pageNewList];
-    
-}
-//ScrollView将要被拖拽时计时器失去作用
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    
-    [self.timer invalidate];
-}
-
-//scrollView结束拖拽时又开始计时
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    
-    [self startTimer];
-}
 #pragma mark --------加载数据
 
 - (void)startDownLoad {
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],shopListAPI];
-    [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
+    NSString *urlString = [NSString stringWithFormat:@"%@%@",[NetWorkEntiry  domain],kMagicShop];
+    NSLog(@"%@",urlString);
+    NSDictionary *parm = @{@"cityname":@"北京"};
+//    NSLog(@"%@",[AcountManager manager].userCity);
+    [JENetwoking startDownLoadWithUrl:urlString postParam:parm WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
         DYNSLog(@"data = %@",data);
-        
-        
+        if (data == nil) {
+            return ;
+        }
         NSDictionary *dataDic = [data objectForKey:@"data"];
-        NSArray *keyArray = [dataDic allKeys];
-        
-        
-            for (NSString *keyStr in keyArray)
-                        {
-        
-                            // 封装轮播图Model
-                            if ([keyStr isEqualToString:@"toplist"])
-                            {
-                                NSArray *array = [dataDic objectForKey:keyStr];
-                                for (NSDictionary *dic in array)
-                                {
-                                    ShopModel *model=[[ShopModel alloc]init];
-                                    [model setValuesForKeysWithDictionary:dic];
-                                    [self.ShopListArray addObject:model];
-                                }
-                                // 将数据传给UIScroller;
-                                [self loadScrollImage:_ShopListArray];
-        
-                            }
-                            // 封装展示图Model
-                            else
+       
                             {
                                 NSArray *array = [dataDic objectForKey:@"mainlist"];
+                                if (array.count == 0) {
+                                    ToastAlertView *AlertView = [[ToastAlertView alloc] initWithTitle:@"还没有商品哦!"];
+                                    [AlertView show];
+                                    
+//                                    [self obj_showTotasViewWithMes:@"还没有商品哦!"]; 
+                                    return;
+                                }
                                 for (NSDictionary *dic in array)
                                 {
                                     ShopMainModel *mainDodel = [[ShopMainModel alloc] init];
@@ -134,95 +83,13 @@ self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
                                     [self.shopMainListArray addObject:mainDodel];
                                 }
                              }
-                        }
+        
                         [self.tableView reloadData];
         
         
-    }];
+    } ];
 
 }
-#pragma mark --- 下载scrollView图片
-- (void)loadScrollImage:(NSMutableArray *)imageArray {
-    
-    for (int i = 0; i < imageArray.count; i++) {
-        
-        ShopModel *shopMain = imageArray[i];
-        
-        NSString * strUrl = shopMain.productimg;
-        
-        NSString *encoded = [strUrl  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        self.BackgroundImgView = [[UIImageView alloc] initWithFrame:CGRectMake(i*k_Width, 0, k_Width, k_Height+k_H)];
-        
-        [self.BackgroundImgView sd_setImageWithURL:[NSURL URLWithString:encoded] placeholderImage:[UIImage imageNamed:@"picholder"]];
-        
-        self.BackgroundImgView.userInteractionEnabled = YES;
-        UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickTopImageView:)];
-        [self.BackgroundImgView addGestureRecognizer:singleTap];
-        [self.scrollNewList addSubview:self.BackgroundImgView];
-        
-        
-    }
-}
-#pragma mark ========== 点击scrollView图片显示详情
-- (void)didClickTopImageView:(UITapGestureRecognizer *)tap {
-    
-    MagicDetailViewController *detailVC = [[MagicDetailViewController alloc] init];
-    
-    int count =  _scrollNewList.contentOffset.x/k_Width;
-    
-    detailVC.mainModel = _ShopListArray[count];
-    [self.navigationController pushViewController:detailVC animated:YES];
-}
-
-
-#pragma mark --------创建ScrollView
-- (void)setupScrollView {
-    
-    //1.创建并添加到视图
-    self.scrollNewList = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, k_Width, [UIScreen mainScreen].bounds.size.width * 0.56)];
-    [self.view addSubview:self.scrollNewList];
-    
-    //2.设置scrollView的一些基本属性
-    self.scrollNewList.backgroundColor = [UIColor grayColor];
-    self.scrollNewList.contentSize = CGSizeMake(k_Width*k_Count, 0);
-    self.scrollNewList.pagingEnabled = YES;
-    
-    self.tableView.tableHeaderView = self.scrollNewList;
-    //隐藏滑动阴影
-    self.scrollNewList.showsHorizontalScrollIndicator = NO;
-    
-    //设置代理
-    self.scrollNewList.delegate = self;
-}
-#pragma mark ----创建PageControl
-- (void)setupPageControl {
-    
-    //1.创建并添加到视图
-    self.pageNewList = [[UIPageControl alloc] initWithFrame:CGRectMake(k_Height, _scrollNewList.frame.size.height - 5, k_Width-100-180, 0)];
-    self.pageNewList.numberOfPages = k_Count;
-    [self.view addSubview:self.pageNewList];
-    self.pageNewList.currentPage = 0;
-    self.pageNewList.currentPageIndicatorTintColor = [UIColor redColor];
-    
-    //添加监听事件
-    [self.pageNewList addTarget:self action:@selector(pageChanged:) forControlEvents:UIControlEventValueChanged];
-}
-
-//分页监听方法
-- (void)pageChanged:(UIPageControl *)page {
-    
-    CGFloat x = page.currentPage*k_Width;
-    [self.scrollNewList setContentOffset:CGPointMake(x, 0)  animated:YES];
-}
-
-//实现协议方法
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    //计算
-    int count =  scrollView.contentOffset.x/k_Width;
-    
-    self.pageNewList.currentPage = count;
-}
-
 
 
 - (void)didReceiveMemoryWarning {
@@ -245,7 +112,6 @@ self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 // 从XIB中加载自定义Cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     static NSString *definition = @"myCell";
     BOOL nibsRegistered = NO;
     if (!nibsRegistered)
@@ -262,11 +128,11 @@ self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     NSString *encoded = [mainModel.productimg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [cell.shopMainImage sd_setImageWithURL:[NSURL URLWithString:encoded] placeholderImage:[UIImage imageNamed:@"nav_bg.png"]];
     return cell;
-    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [UIScreen mainScreen].bounds.size.width / 2;
+
     
 }
 
@@ -278,4 +144,9 @@ self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     detailVC.mainModel = _shopMainListArray[indexPath.row];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 @end

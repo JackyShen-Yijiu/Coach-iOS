@@ -247,6 +247,18 @@ static NSString *const kBuyproduct =  @"userinfo/buyproduct";
     
     //获得textfield
     textFiledTwo.keyboardType = UIKeyboardTypeNumberPad;
+    UITextField *textFile = (UITextField *)notification.object;
+    if (textFile.tag == 201) {
+        NSString *phoneNum = textFiledTwo.text;
+        NSString *regex = @"^((17[0-9])|(13[0-9])|(147)|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+        BOOL isMatch = [pred evaluateWithObject:phoneNum];
+        if (!isMatch) {
+            [self showTotasViewWithMes:@"请输入正确的手机号"];
+            return;
+        }
+        
+    }
 
     
     
@@ -283,6 +295,23 @@ static NSString *const kBuyproduct =  @"userinfo/buyproduct";
     
     [NetWorkEntiry postToDidClickButtonByPurchaseWithUseID:userId productid:productid name:textFiledOne.text mobile:textFiledTwo.text address:textFiledThree.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"success = %@",responseObject);
+        if (1 == [[responseObject objectForKey:@"type"] integerValue]) {
+            _finishView =  [finishMessageView instanceBottomView];
+            
+            CGFloat kW = self.tableView.bounds.size.width;
+            CGFloat kH = self.tableView.bounds.size.height;
+            _finishView.frame = CGRectMake(0, 64, kW, kH);
+            _finishView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.85];
+            UIButton *button =   [_finishView viewWithTag:100];
+            [button addTarget:self action:@selector(backMainView:) forControlEvents:UIControlEventTouchUpInside];
+            self.navigationController.navigationBarHidden = YES;
+            [_wid addSubview:_finishView];
+        }
+        
+        
+        
+        
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error = %@",error);
     }];
@@ -290,16 +319,7 @@ static NSString *const kBuyproduct =  @"userinfo/buyproduct";
     
     [walletVC refreshWalletData];
    
- _finishView =  [finishMessageView instanceBottomView];
-    
-    CGFloat kW = self.tableView.bounds.size.width;
-    CGFloat kH = self.tableView.bounds.size.height;
-    _finishView.frame = CGRectMake(0, 64, kW, kH);
-    _finishView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.85];
-  UIButton *button =   [_finishView viewWithTag:100];
-    [button addTarget:self action:@selector(backMainView:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationController.navigationBarHidden = YES;
-    [_wid addSubview:_finishView];
+ 
     
 }
 
