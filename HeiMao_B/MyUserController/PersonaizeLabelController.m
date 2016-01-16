@@ -21,10 +21,12 @@
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (strong, nonatomic) UIButton *referButton;
 
-@property (nonatomic, strong) NSMutableArray *systemTagArr;
-@property (nonatomic, strong) NSMutableArray *customTagArr;
-@property (strong, nonatomic) NSMutableArray *systemTagColorArray;
-@property (strong, nonatomic) NSMutableArray *customTagColorArray;
+@property (nonatomic, strong) NSMutableArray *systemTagArr;                   //系统标签
+@property (nonatomic, strong) NSMutableArray *customTagArr;                   //自定义标签
+@property (strong, nonatomic) NSMutableArray *systemTagColorArray;            //判断系统标签是否选择
+@property (strong, nonatomic) NSMutableArray *customTagColorArray;            //判断自定义标签是否选择
+@property (strong, nonatomic) NSMutableArray *systemTagBGColorArray;          //系统标签颜色
+@property (strong, nonatomic) NSMutableArray *customTagBGColorArray;          //自定义标签颜色
 
 @end
 
@@ -47,26 +49,32 @@
         _customTagArr = [[NSMutableArray alloc] init];
         _systemTagColorArray = [[NSMutableArray alloc] init];
         _customTagColorArray = [[NSMutableArray alloc] init];
+        _systemTagBGColorArray = [[NSMutableArray alloc] init];
+        _customTagBGColorArray = [[NSMutableArray alloc] init];
         for (PersonlizeModel *model in self.systemTagArray) {
             [_systemTagArr addObject:model.tagname];
-            if (model.is_choose) {
+            if (model.is_choose.integerValue == 1) {
                 [_systemTagColorArray addObject:@(1)];
+                [_systemTagBGColorArray addObject:model.color];
             }else{
                 [_systemTagColorArray addObject:@(0)];
+                [_systemTagBGColorArray addObject:@""];
             }
         }
         for (PersonlizeModel *model in self.customTagArray) {
             [_customTagArr addObject:model.tagname];
             if (model.is_audit) {
                 [_customTagColorArray addObject:@(0)];
+                [_customTagBGColorArray addObject:@""];
             }else{
                 [_customTagColorArray addObject:@(1)];
+                [_customTagBGColorArray addObject:model.color];
             }
         }
 
         _dataArray = [NSMutableArray arrayWithObjects:_systemTagArr,_customTagArr, nil];
 //        _dataArray = [[NSMutableArray alloc] init];
-        
+            
     }
     return _dataArray;
 }
@@ -196,7 +204,11 @@
             [alert show];
         }
     };
-    [cell initUIWithNoTitleWithArray:self.dataArray[indexPath.section] WithTextFieldIsExist:indexPath.section>0?YES:NO withLabelColorArray:indexPath.section?_customTagColorArray:_systemTagColorArray];
+    NSLog(@"%@",_systemTagColorArray);
+    NSLog(@"%@",_customTagColorArray);
+    NSLog(@"%@",_systemTagBGColorArray);
+    NSLog(@"%@",_customTagBGColorArray);
+    [cell initUIWithNoTitleWithArray:self.dataArray[indexPath.section] WithTextFieldIsExist:indexPath.section>0?YES:NO withLabelColorArray:indexPath.section?_customTagColorArray:_systemTagColorArray withBackGroundColorArr:indexPath.section?_customTagBGColorArray:_systemTagBGColorArray];
     return cell;
 }
 

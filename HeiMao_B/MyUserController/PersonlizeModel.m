@@ -23,6 +23,7 @@
     pm.tagtype =    [NSString stringWithFormat:@"%@",dic[@"tagtype"]];
     pm.is_audit =   [NSString stringWithFormat:@"%@",dic[@"is_audit"]];
     pm.is_choose =  [NSString stringWithFormat:@"%@",dic[@"is_choose"]];
+    pm.color =      [dic objectStringForKey:@"color"];
     return pm;
 }
 
