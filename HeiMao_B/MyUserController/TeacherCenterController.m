@@ -185,8 +185,10 @@
     [controller.navigationController popViewControllerAnimated:YES];
     
     NSLog(@"更改工作性质name:%@",name);
-    [UserInfoModel defaultUserInfo].coachtype = [WorkTypeModel converStringToType:name];
+    //[UserInfoModel defaultUserInfo].coachtype = [WorkTypeModel converStringToType:name];
 
+    [[UserInfoModel defaultUserInfo] setCoachtype:[WorkTypeModel converStringToType:name]];
+    
     [NetWorkEntiry modifyWorkPropertyCoachid:[UserInfoModel defaultUserInfo].userID type:[WorkTypeModel converStringToType:name] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"更改工作性质 responseObject:%@",responseObject);
