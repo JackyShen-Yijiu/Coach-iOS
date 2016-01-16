@@ -321,7 +321,16 @@
     [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
     
 }
-
+- (void)setYnumber:(NSInteger)ynumber
+{
+    _ynumber = ynumber;
+    
+    NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
+    NSMutableDictionary * mdic = [dic mutableCopy];
+    [mdic setValue:@(ynumber) forKey:@"ynumber"];
+    [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
+    
+}
 - (void)setSchoolId:(NSString *)schoolId
 {
     if (!schoolId) {
