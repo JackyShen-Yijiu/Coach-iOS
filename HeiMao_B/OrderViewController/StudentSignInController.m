@@ -171,6 +171,9 @@
 #pragma mark 处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
+    // 停止定位
+    [_locationService stopUserLocationService];
+    
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     //    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     _locationSuccess = YES;
