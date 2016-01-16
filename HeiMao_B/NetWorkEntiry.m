@@ -446,17 +446,14 @@
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-    if (lastmessage || lastnews) {
-        return [self missParagramercallBackFailure:failure];
-    }
-    
+   
     NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getmessagecount",[self domain]];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:lastmessage forKey:@"lastmessage"];
     [dic setValue:lastnews forKey:@"lastnews"];
     
-    [self GET:urlStr parameters:nil success:success failure:failure];
+    [self GET:urlStr parameters:dic success:success failure:failure];
 }
 /**
  *
