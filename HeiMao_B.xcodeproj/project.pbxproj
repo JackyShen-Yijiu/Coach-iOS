@@ -1791,8 +1791,6 @@
 			children = (
 				0613DE6D1C46273E004A1A2E /* InformationMessage */,
 				0613DE691C45E5D0004A1A2E /* SystemMessage */,
-				B253C2DB1C3FAA84001AF771 /* ScanViewController.h */,
-				B253C2DC1C3FAA84001AF771 /* ScanViewController.m */,
 				B8AFED171BDB96AC00EF8726 /* CourseViewController.h */,
 				B8AFED181BDB96AC00EF8726 /* CourseViewController.m */,
 				B253C2E41C43B0FF001AF771 /* SearchCourseViewController.h */,
@@ -3387,7 +3385,7 @@
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrwb",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dawei.TestOne;
+				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
 				PROVISIONING_PROFILE = "";
 			};
@@ -3413,7 +3411,7 @@
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/HeiMao_B/EaseMobEntity/3rdparty/DeviceHelper/VoiceConvert/opencore-amrwb",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dawei.TestOne;
+				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
 				PROVISIONING_PROFILE = "";
 			};
