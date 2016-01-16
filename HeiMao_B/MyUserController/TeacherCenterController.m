@@ -216,7 +216,7 @@
     self.userCenterView.userIdNum.text = [UserInfoModel defaultUserInfo].tel;
 
     // Y码
-    self.userCenterView.yNum.text = [NSString stringWithFormat:@"Y码:%lu",[UserInfoModel defaultUserInfo].ynumber];
+    self.userCenterView.yNum.text = [NSString stringWithFormat:@"Y码:%lu",[UserInfoModel defaultUserInfo].fcode];
    
     [self initNavBar];
    

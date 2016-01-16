@@ -321,13 +321,13 @@
     [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
     
 }
-- (void)setYnumber:(NSInteger)ynumber
+- (void)setFcode:(NSInteger)fcode
 {
-    _ynumber = ynumber;
+    _fcode = fcode;
     
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
-    [mdic setValue:@(ynumber) forKey:@"ynumber"];
+    [mdic setValue:@(fcode) forKey:@"ynumber"];
     [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
     
 }

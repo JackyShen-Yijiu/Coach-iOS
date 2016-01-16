@@ -49,7 +49,7 @@
 //工作性质
 @property(nonatomic,assign)NSInteger coachtype;
 //Y码
-@property(nonatomic,assign)NSInteger ynumber;
+@property(nonatomic,assign)NSInteger fcode;
 
 + (UserInfoModel *)defaultUserInfo;
 
