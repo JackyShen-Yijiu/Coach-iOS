@@ -20,7 +20,7 @@
     if (_contentDetail == nil) {
         _contentDetail = [WMUITool initWithTextColor:[UIColor blackColor] withFont:[UIFont systemFontOfSize:14]];
         _contentDetail.textAlignment = NSTextAlignmentRight;
-
+        _contentDetail.numberOfLines = 2;
     }
     return _contentDetail;
 }
@@ -74,9 +74,9 @@
     }];
     [self.contentDetail mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.backGroundView.mas_right).offset(-40);
-        make.top.mas_equalTo(self.leftImageView.mas_top).offset(1);
+        make.top.mas_equalTo(self);
         make.width.mas_equalTo(@150);
-        
+        make.height.mas_equalTo(self);
     }];
     
 }
