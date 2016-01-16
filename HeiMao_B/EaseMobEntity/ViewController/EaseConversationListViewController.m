@@ -39,11 +39,6 @@ static NSString *kGroupName = @"GroupName";
 @property (nonatomic,copy)NSString *zixunDetailsStr;
 @property (nonatomic,copy)NSString *zixunTimeStr;
 
-// 最后一条咨询消息ID
-@property (nonatomic,copy)NSString *lastnews;
-// 最后一条系统消息ID
-@property (nonatomic,copy)NSString *lastmessage;
-
 @end
 
 @implementation EaseConversationListViewController
@@ -74,48 +69,10 @@ static NSString *kGroupName = @"GroupName";
     [user synchronize];
 }
 
-// 获取未读消息
-- (void)getUnReadCount
-{
-    
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    self.lastmessage = [user objectForKey:@"lastmessage"];
-    self.lastnews = [user objectForKey:@"lastnews"];
-    
-    WS(ws);
-    [NetWorkEntiry getMessageUnReadCountlastmessage:self.lastmessage lastnews:self.lastnews success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"responseObject:%@",responseObject);
-        
-        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
-        NSArray *data = [responseObject objectArrayForKey:@"data"];
-        
-        if (type == 1) {
-            
-            ws.systemBadgeStr = [NSString stringWithFormat:@"%@",data[0][@"messagecount"]];
-            ws.systemDetailsStr = [NSString stringWithFormat:@"%@",data[0][@"message"]];
-            ws.systemTimeStr = [NSString stringWithFormat:@"%@",data[0][@"messagetime"]];
-
-            ws.zixunBadgeStr = [NSString stringWithFormat:@"%@",data[1][@"messagecount"]];
-            ws.zixunDetailsStr = [NSString stringWithFormat:@"%@",data[1][@"message"]];
-            ws.zixunTimeStr = [NSString stringWithFormat:@"%@",data[1][@"messagetime"]];
-
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        NSLog(@"%@",error.debugDescription);
-        
-    }];
-    
-}
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [self getUnReadCount];
-
     [self tableViewDidTriggerHeaderRefresh];
     
     [self registerNotifications];
@@ -253,64 +210,102 @@ static NSString *kGroupName = @"GroupName";
 #pragma mark - data
 - (void)tableViewDidTriggerHeaderRefresh
 {
-    NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
-    NSArray* sorted = [conversations sortedArrayUsingComparator:
-                       ^(EMConversation *obj1, EMConversation* obj2){
-                           EMMessage *message1 = [obj1 latestMessage];
-                           EMMessage *message2 = [obj2 latestMessage];
-                           if(message1.timestamp > message2.timestamp) {
-                               return(NSComparisonResult)NSOrderedAscending;
-                           }else {
-                               return(NSComparisonResult)NSOrderedDescending;
-                           }
-                       }];
     
-    [self.dataArray removeAllObjects];
     
-    // 添加顶部数据
-    EaseConversationModel *topData1 = [[EaseConversationModel alloc] init];
-    topData1.title = @"系统消息";
-    topData1.detailsTitle = [self strTolerance:self.systemDetailsStr];
-    topData1.time = [self strTolerance:self.systemTimeStr];
-    topData1.avatarPic = @"systemImg.png";
-    topData1.badgeStr = [self strTolerance:self.systemBadgeStr];
-    [self.dataArray addObject:topData1];
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *lastmessage = [user objectForKey:@"lastmessage"];
+    NSString *lastnews = [user objectForKey:@"lastnews"];
     
-    EaseConversationModel *topData2 = [[EaseConversationModel alloc] init];
-    topData2.title = @"咨询消息";
-    topData2.detailsTitle = [self strTolerance:self.zixunDetailsStr];
-    topData2.time = [self strTolerance:self.zixunTimeStr];
-    topData2.avatarPic = @"systemImg.png";
-    topData2.badgeStr = [self strTolerance:self.zixunBadgeStr];
-    [self.dataArray addObject:topData2];
-    
-    for (EMConversation *converstion in sorted) {
+    WS(ws);
+    [NetWorkEntiry getMessageUnReadCountlastmessage:lastmessage lastnews:lastnews success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        EaseConversationModel *model = nil;
-        if (_dataSource && [_dataSource respondsToSelector:@selector(conversationListViewController:modelForConversation:)]) {
-            model = [_dataSource conversationListViewController:self
-                                           modelForConversation:converstion];
-        }
-        else{
-            model = [[EaseConversationModel alloc] initWithConversation:converstion];
+        NSLog(@"获取未读消息responseObject:%@",responseObject);
+        
+        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+        NSDictionary *data = [responseObject objectInfoForKey:@"data"];
+        
+        NSDictionary *messageinfo = [data objectInfoForKey:@"messageinfo"];
+        NSDictionary *Newsinfo = [data objectInfoForKey:@"Newsinfo"];
+        
+        if (type == 1) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                ws.systemBadgeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagecount"]];
+                ws.systemDetailsStr = [NSString stringWithFormat:@"%@",messageinfo[@"message"]];
+                ws.systemTimeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagetime"]];
+                
+                ws.zixunBadgeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"newscount"]];
+                ws.zixunDetailsStr = [NSString stringWithFormat:@"%@",Newsinfo[@"news"]];
+                ws.zixunTimeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"newstime"]];
+                
+                NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
+                
+                NSArray* sorted = [conversations sortedArrayUsingComparator:
+                                   ^(EMConversation *obj1, EMConversation* obj2){
+                                       EMMessage *message1 = [obj1 latestMessage];
+                                       EMMessage *message2 = [obj2 latestMessage];
+                                       if(message1.timestamp > message2.timestamp) {
+                                           return(NSComparisonResult)NSOrderedAscending;
+                                       }else {
+                                           return(NSComparisonResult)NSOrderedDescending;
+                                       }
+                                   }];
+                
+                [ws.dataArray removeAllObjects];
+                
+                // 添加顶部数据
+                EaseConversationModel *topData1 = [[EaseConversationModel alloc] init];
+                topData1.title = @"系统消息";
+                topData1.detailsTitle = [self strTolerance:self.systemDetailsStr];
+                topData1.time = [self strTolerance:self.systemTimeStr];
+                topData1.avatarPic = @"systemImg.png";
+                topData1.badgeStr = [self strTolerance:self.systemBadgeStr];
+                [ws.dataArray addObject:topData1];
+                
+                EaseConversationModel *topData2 = [[EaseConversationModel alloc] init];
+                topData2.title = @"咨询消息";
+                topData2.detailsTitle = [self strTolerance:self.zixunDetailsStr];
+                topData2.time = [self strTolerance:self.zixunTimeStr];
+                topData2.avatarPic = @"systemImg.png";
+                topData2.badgeStr = [self strTolerance:self.zixunBadgeStr];
+                [ws.dataArray addObject:topData2];
+                
+                for (EMConversation *converstion in sorted) {
+                    
+                    EaseConversationModel *model = nil;
+                    if (_dataSource && [_dataSource respondsToSelector:@selector(conversationListViewController:modelForConversation:)]) {
+                        model = [_dataSource conversationListViewController:self
+                                                       modelForConversation:converstion];
+                    }
+                    else{
+                        model = [[EaseConversationModel alloc] initWithConversation:converstion];
+                    }
+                    
+                    if (model) {
+                        [ws.dataArray addObject:model];
+                    }
+                    
+                }
+                
+                [self setupUnreadMessageCount];
+                
+                [self tableViewDidFinishTriggerHeader:YES reload:YES];
+                
+            });
+            
         }
         
-        if (model) {
-            [self.dataArray addObject:model];
-        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-    }
-    
-    [self setupUnreadMessageCount];
-
-    [self tableViewDidFinishTriggerHeader:YES reload:YES];
+        NSLog(@"%@",error.debugDescription);
+        
+    }];
     
 }
 
-
 - (void)didUpdateConversationList:(NSArray *)conversationList
 {
-    [self setupUnreadMessageCount];
 
     [self tableViewDidTriggerHeaderRefresh];
     
@@ -321,9 +316,8 @@ static NSString *kGroupName = @"GroupName";
 // 未读消息数量变化回调
 -(void)didUnreadMessagesCountChanged
 {
-    [self tableViewDidTriggerHeaderRefresh];
 
-    [self setupUnreadMessageCount];
+    [self tableViewDidTriggerHeaderRefresh];
     
     [[self tableView] reloadData];
     
@@ -332,6 +326,7 @@ static NSString *kGroupName = @"GroupName";
 - (void)didFinishedReceiveOfflineMessages
 {
     [self setupUnreadMessageCount];
+    
     [[self tableView] reloadData];
     
 }
@@ -339,6 +334,7 @@ static NSString *kGroupName = @"GroupName";
 #pragma mark - 小红点逻辑 Tab小红点 + App小红点
 -(void)setupUnreadMessageCount
 {
+    
     NSArray *conversations = [[[EaseMob sharedInstance] chatManager] conversations];
     NSInteger unreadCount = [self.systemBadgeStr integerValue] + [self.zixunBadgeStr integerValue];
     for (EMConversation *conversation in conversations) {

@@ -26,9 +26,9 @@
     
     if ([self.delegate respondsToSelector:@selector(InformationMessageControllerGetMessageLastnews:)]) {
         
-        NSLog(@"((InformationMessageModel *)[_informationMessageViewModel.informationArray lastObject]).newsid:%@",((InformationMessageModel *)[_informationMessageViewModel.informationArray lastObject]).newsid);
+        NSLog(@"((InformationMessageModel *)[_informationMessageViewModel.informationArray lastObject]).seqindex:%@",((InformationMessageModel *)[_informationMessageViewModel.informationArray lastObject]).seqindex);
         
-        [self.delegate InformationMessageControllerGetMessageLastnews:((InformationMessageModel *)[_informationMessageViewModel.informationArray lastObject]).newsid];
+        [self.delegate InformationMessageControllerGetMessageLastnews:((InformationMessageModel *)[_informationMessageViewModel.informationArray lastObject]).seqindex];
     }
     
 }

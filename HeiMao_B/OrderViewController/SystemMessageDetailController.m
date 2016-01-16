@@ -26,9 +26,9 @@
     
     if ([self.delegate respondsToSelector:@selector(SystemMessageDetailControllerGetMessagelastmessage:)]) {
         
-        NSLog(@"((SystemMessageModel *)[_systemViewModel.systemMessageArray lastObject]).ID:%@",((SystemMessageModel *)[_systemViewModel.systemMessageArray lastObject]).ID);
+        NSLog(@"((SystemMessageModel *)[_systemViewModel.systemMessageArray lastObject]).seqindex:%@",((SystemMessageModel *)[_systemViewModel.systemMessageArray lastObject]).seqindex);
         
-        [self.delegate SystemMessageDetailControllerGetMessagelastmessage:((SystemMessageModel *)[_systemViewModel.systemMessageArray lastObject]).ID];
+        [self.delegate SystemMessageDetailControllerGetMessagelastmessage:((SystemMessageModel *)[_systemViewModel.systemMessageArray lastObject]).seqindex];
     }
     
 }

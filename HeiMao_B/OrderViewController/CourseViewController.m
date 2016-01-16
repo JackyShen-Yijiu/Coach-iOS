@@ -50,7 +50,6 @@
 @property (nonatomic,assign)NSInteger reservationstate;
 
 @end
-
 @implementation CourseViewController
 
 #pragma mark - LoingNotification

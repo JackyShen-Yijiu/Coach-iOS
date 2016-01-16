@@ -7,6 +7,7 @@
 //
 
 #import "PersonalizeLabelCell.h"
+#import "UIColor+Chameleon.h"
 
 @interface PersonalizeLabelCell () <UITextFieldDelegate> {
     NSInteger _i;
@@ -38,7 +39,7 @@
     return self;
 }
 
-- (void)initUIWithArray:(NSArray *)arr withLabel:(NSString *)string {
+- (void)initUIWithArray:(NSArray *)arr withLabel:(NSString *)string withBackGroundColorArr:(NSArray *)colorArr{
     self.personlizeLabel.text = string;
     _personlizeLabelArray = arr;
     CGFloat width = 100;
@@ -78,8 +79,12 @@
         }
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(width,lineNum*15 +14*(lineNum -1) ,labelSize.width , labelSize.height)];
+        if (colorArr[i]) {
+            label.backgroundColor = [UIColor colorWithHexString:colorArr[i]];
+        }else {
+            label.backgroundColor = [UIColor grayColor];
+        }
         label.text = str;
-        label.backgroundColor = [UIColor grayColor];
         label.font = [UIFont systemFontOfSize:14];
         [self.contentView addSubview:label];
     }
@@ -127,7 +132,9 @@
 
 #pragma mark -  no titleLabel
 
-- (void)initUIWithNoTitleWithArray:(NSArray *)arr WithTextFieldIsExist:(BOOL)isExist withLabelColorArray:(NSArray *)colorArr{
+- (void)initUIWithNoTitleWithArray:(NSArray *)arr WithTextFieldIsExist:(BOOL)isExist withLabelColorArray:(NSArray *)colorArr withBackGroundColorArr:(NSArray *)bgcolorArr{
+    NSLog(@"colorArr:%@",colorArr);
+    NSLog(@"bgcolorArr:%@",bgcolorArr);
     if (isExist) {
         UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(15, 15, [UIScreen mainScreen].bounds.size.width-30, 30)];
         tf.placeholder = @"请输入你想要添加的标签";
@@ -165,7 +172,7 @@
         label.userInteractionEnabled = YES;
         NSNumber *num = colorArr[_i];
         if (num.integerValue == 1) {
-            label.backgroundColor = [UIColor redColor];
+            label.backgroundColor = [UIColor colorWithHexString:bgcolorArr[_i]];
         }else{
             label.backgroundColor = [UIColor grayColor];
         }
