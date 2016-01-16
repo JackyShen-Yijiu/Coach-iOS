@@ -192,7 +192,26 @@
                             };
     [self GET:urlStr parameters:dic success:success failure:failure];
 }
-
+/**
+ *  预约模块搜索
+ *  ====================================================================================================================================
+ */
++ (void)getCourseinfoWithUserId:(NSString *)userId reservationstate:(KCourseStatue)reservationstate pageIndex:(NSInteger)pageIndex pageCount:(NSInteger)pageCount searchname:(NSString *)searchname
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if (!userId) {
+        return [self missParagramercallBackFailure:failure];
+    }
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/searchreservationlist",[self domain]];
+    NSDictionary * dic = @{
+                           @"coachid":userId,
+                           @"index":@(pageIndex),
+                           @"reservationstate":@(reservationstate),
+                           @"searchname":searchname,
+                           };
+    [self GET:urlStr parameters:dic success:success failure:failure];
+}
 
 /**
  *  获取教练每个月的日程安排
@@ -417,6 +436,24 @@
     
     [self POST:urlStr parameters:dic success:success failure:failure];
     
+}
+/**
+ *
+ * 获取系统消息和咨询消息数量
+ *
+ */
++ (void)getMessageUnReadCountlastmessage:(NSString *)lastmessage lastnews:(NSString*)lastnews
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+   
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getmessagecount",[self domain]];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setValue:lastmessage forKey:@"lastmessage"];
+    [dic setValue:lastnews forKey:@"lastnews"];
+    
+    [self GET:urlStr parameters:dic success:success failure:failure];
 }
 /**
  *

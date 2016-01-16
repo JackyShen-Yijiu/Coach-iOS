@@ -35,7 +35,7 @@
 - (NSMutableArray *)searchArray
 {
     if (_searchArray==nil) {
-        _searchArray = [NSMutableArray arrayWithArray:self.dataArray];
+        _searchArray = [NSMutableArray array];
     }
     return _searchArray;
 }
@@ -112,29 +112,33 @@
     NSLog(@"searchBar.text:%@",searchBar.text);
     [self.searchBar endEditing:YES];
     
-    [self.searchArray removeAllObjects];
-
-    if (searchBar.text == nil) {
-        [self.searchArray addObject:self.dataArray];
-        [self.courseSummaryTableView reloadData];
-        return;
-    }
-    
-    NSLog(@"self.dataArray:%@",self.dataArray);
-    
-    for (HMCourseModel *model in self.dataArray) {
+    WS(ws);
+    [NetWorkEntiry getCourseinfoWithUserId:[[UserInfoModel defaultUserInfo] userID] reservationstate:self.reservationstate pageIndex:1 pageCount:RELOADDATACOUNT searchname:searchBar.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"model.studentInfo.userName:%@",model.studentInfo.userName);
+        NSLog(@"responseObject:%@",responseObject);
         
-        if ([model.studentInfo.userName hasPrefix:searchBar.text]) {
+        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+        NSArray *data = [responseObject objectArrayForKey:@"data"];
+        
+        if (type == 1) {
             
-            [self.searchArray addObject:model];
+            [ws.searchArray removeAllObjects];
+            
+            ws.searchArray = [[BaseModelMethod getCourseListArrayFormDicInfo:data] mutableCopy];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+ 
+                [ws.courseSummaryTableView reloadData];
+                
+            });
             
         }
         
-    }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
     
-    [self.courseSummaryTableView reloadData];
     
 }
 //{

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MyWallet.h"
 
+
 @interface MagicMainTableViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 // 设置轮播图的属性
 @property (nonatomic, strong) UIScrollView * scrollNewList;

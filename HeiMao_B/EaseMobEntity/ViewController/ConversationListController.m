@@ -35,7 +35,6 @@
     self.delegate = self;
     self.dataSource = self;
     
-    [self tableViewDidTriggerHeaderRefresh];
     [self networkStateView];
     [self removeEmptyConversationsFromDB];
 
