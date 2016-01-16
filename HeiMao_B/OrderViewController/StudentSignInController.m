@@ -90,6 +90,17 @@
 //    [statusView.okButton setTitle:@"确定" forState:UIControlStateNormal];
 //    [statusView.okButton addTarget:self action:@selector(statusViewOkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
+    // 验证二维码信息是否正确，防止传参数时崩溃
+    NSString *errorMsg = @"信息不完整，请重新扫码！";
+    if (!_dataModel) {
+        [self showAlertWithMessage:errorMsg];
+        return ;
+    }
+    if (!_dataModel.studentId) {
+        [self showAlertWithMessage:errorMsg];
+        return ;
+    }
+    
     if (_locationSuccess) { // 如果定位成功则直接搜索
         [self startVerification];
     }else {
