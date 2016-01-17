@@ -164,10 +164,20 @@
     //#else
     //    apnsCertName = @"modoujiaxiaoPushDis";
     //#endif
+    
+    
+    NSString *EaseAppkey = nil;
+    #if DEBUG
+        EaseAppkey = @"black-cat#yibuxuecheprod";
+    #else
+        EaseAppkey = @"black-cat#yibuxuechetest";
+    #endif
+    
+    
     apnsCertName = @"dis_apns";
     [[EaseSDKHelper shareHelper] easemobApplication:application
                       didFinishLaunchingWithOptions:launchOptions
-                                             appkey:@"black-cat#yibuxuecheprod"
+                                             appkey:@"black-cat#yibuxuechetest"
                                        apnsCertName:apnsCertName
                                         otherConfig:@{kSDKConfigEnableConsoleLogger:[NSNumber numberWithBool:YES]}];
     
