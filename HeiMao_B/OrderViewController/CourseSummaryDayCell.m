@@ -135,7 +135,7 @@
     
     // 剩余课时
     [self.surplusClassLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mainTitle.mas_right).offset(5.f);
+        //=make.left.equalTo(self.mainTitle.mas_right).offset(5.f);
         make.top.equalTo(self.mainTitle);
         make.height.equalTo(@(16.f));
         make.right.equalTo(@(-10));
