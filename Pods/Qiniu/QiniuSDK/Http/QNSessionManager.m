@@ -92,18 +92,17 @@ static BOOL needRetry(NSHTTPURLResponse *httpResponse, NSError *error){
                       timeout:(UInt32)timeout
                  urlConverter:(QNUrlConvert)converter
               upStatsDropRate:(float)dropRate
-                          dns:(QNDnsManager*)dns {
+                          dns:(QNDnsManager*)dns{
 	if (self = [super init]) {
-		NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
 		if (proxyDict != nil) {
-			configuration.connectionProxyDictionary = proxyDict;
 			_noProxy = NO;
 		}
 		else {
 			_noProxy = YES;
 		}
-		_httpManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];
-		_httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        
+        _httpManager = [QNSessionManager httpManagerWithProxy:proxyDict];
+        
 		_timeout = timeout;
 		_converter = converter;
 		_dns = dns;
@@ -111,6 +110,17 @@ static BOOL needRetry(NSHTTPURLResponse *httpResponse, NSError *error){
 	}
 
 	return self;
+}
+
++ (AFHTTPSessionManager*) httpManagerWithProxy:(NSDictionary *)proxyDict{
+    NSURLSessionConfiguration *configuration =  [NSURLSessionConfiguration defaultSessionConfiguration];
+    if (proxyDict != nil) {
+        configuration.connectionProxyDictionary = proxyDict;
+    }
+
+    AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];
+    httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    return httpManager;
 }
 
 - (instancetype)init {
@@ -264,7 +274,7 @@ static BOOL needRetry(NSHTTPURLResponse *httpResponse, NSError *error){
 		progressBlock = ^(long long totalBytesWritten, long long totalBytesExpectedToWrite) {
 		};
 	}
-	QNInternalProgressBlock iProgressBlock = ^(long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+	QNInternalProgressBlock progressBlock2 = ^(long long totalBytesWritten, long long totalBytesExpectedToWrite) {
 		if (stats && totalBytesWritten == totalBytesExpectedToWrite) {
 			double sendTime = [[NSDate date] timeIntervalSinceDate:st];
 			setStat(stats, @"snt", [NSNumber numberWithLongLong:(long long)(sendTime * 1000)]);
@@ -272,9 +282,9 @@ static BOOL needRetry(NSHTTPURLResponse *httpResponse, NSError *error){
 		if (stats && request.HTTPBodyStream) {
 			setStat(stats, @"fs", [NSNumber numberWithLongLong:totalBytesWritten]);
 		}
-		progressBlock(totalBytesWritten, totalBytesWritten);
+		progressBlock(totalBytesWritten, totalBytesExpectedToWrite);
 	};
-	__block QNProgessDelegate *delegate = [[QNProgessDelegate alloc] initWithProgress:iProgressBlock];
+	__block QNProgessDelegate *delegate = [[QNProgessDelegate alloc] initWithProgress:progressBlock2];
 
 	NSURLSessionUploadTask *uploadTask = [_httpManager uploadTaskWithRequest:request fromData:nil progress:&progress completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
 	                                              NSData *data = responseObject;

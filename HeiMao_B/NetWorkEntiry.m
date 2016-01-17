@@ -11,12 +11,6 @@
 #import "NSString+MD5.h"
 #define KNETBASEURL
 
-#define  HOST_TEST_DAMIAN  @"http://101.200.204.240:8181/api/v1"
-
-#define  HOST_LINE_DOMAIN  @"http://123.57.63.15:8181/api/v1"
-
-#define QA_TEST
-
 @implementation NetWorkEntiry
 
 /**
@@ -96,17 +90,16 @@
 }
 
 /**
- *  个人信息模块
- *  ====================================================================================================================================
+ *  获取用户信息（1用户 2教练）
  */
-+ (void)getUserInfoWithUserInfoWithUserId:(NSString *)userId
++ (void)getUserInfoWithUserInfoWithUserId:(NSString *)userId type:(NSString *)type
                                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     if (!userId) {
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getuserinfo/2/userid/%@",[self domain],userId];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getuserinfo/%@/userid/%@",[self domain],type,userId];
     [self GET:urlStr parameters:nil success:success failure:failure];
 }
 

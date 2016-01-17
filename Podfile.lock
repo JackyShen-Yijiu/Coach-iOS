@@ -27,15 +27,16 @@ PODS:
   - EaseMobSDKFull (2.1.7)
   - HappyDNS (0.2.3)
   - JSONKit (1.5pre)
-  - Masonry (0.6.3)
-  - MBProgressHUD (0.9.1)
-  - MD5Digest (1.0.2)
-  - Qiniu (7.0.15):
+  - Masonry (0.6.4)
+  - MBProgressHUD (0.9.2)
+  - MD5Digest (1.1.0)
+  - MJExtension (3.0.10)
+  - Qiniu (7.0.16):
     - AFNetworking (~> 2.0)
     - HappyDNS (~> 0.2)
-  - SDWebImage (3.7.3):
-    - SDWebImage/Core (= 3.7.3)
-  - SDWebImage/Core (3.7.3)
+  - SDWebImage (3.7.4):
+    - SDWebImage/Core (= 3.7.4)
+  - SDWebImage/Core (3.7.4)
   - UMengAnalytics-NO-IDFA (3.6.7)
 
 DEPENDENCIES:
@@ -47,6 +48,7 @@ DEPENDENCIES:
   - Masonry (~> 0.6.1)
   - MBProgressHUD (~> 0.9.1)
   - MD5Digest
+  - MJExtension
   - Qiniu (~> 7.0)
   - SDWebImage (~> 3.7)
   - UMengAnalytics-NO-IDFA
@@ -58,11 +60,12 @@ SPEC CHECKSUMS:
   EaseMobSDKFull: 43858ca9a62bbe1fa4c7c006f944a3e52a4bff48
   HappyDNS: 6d85942e64c28b4fa61f8c76580398f52d6d1d11
   JSONKit: bae313ce6a6c444f40489a6c0b023f399888871f
-  Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
-  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  MD5Digest: b6d6b4b640a379c611d9828fe8f0e45dbaf88d2c
-  Qiniu: ade34d722c8ce0eed7080fd268249e8402a2f535
-  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MD5Digest: fea371215507cfcdc3c9633d02cffc7fd075ebc3
+  MJExtension: d86aacb740c87519d20e3cca55b6fa4be6cc7548
+  Qiniu: 51a8702cddc02b50867e10cef99291b9a8a006b1
+  SDWebImage: 247edd7dd80dd6124197b0d6a17846fe9d1df968
   UMengAnalytics-NO-IDFA: 6d02561a00579b2e37718f204eb81347df5d7b8b
 
 COCOAPODS: 0.39.0

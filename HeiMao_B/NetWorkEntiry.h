@@ -64,14 +64,9 @@
 
 
 /**
- *  个人信息模块
- *  ====================================================================================================================================
+ *  获取用户信息（1用户 2教练）
  */
-
-/**
- *  通过用户ID获取用户信息 (req)
- */
-+ (void)getUserInfoWithUserInfoWithUserId:(NSString *)userId
++ (void)getUserInfoWithUserInfoWithUserId:(NSString *)userId type:(NSString *)type
                                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
@@ -290,6 +285,5 @@
 + (void)modifyWorkPropertyCoachid:(NSString *)coachid type:(NSInteger)coachtype
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-
 
 @end

@@ -14,7 +14,7 @@
 #import "ChatViewController.h"
 #import "EMConversation.h"
 #import "EMConversation.h"
-
+#import "JGUserTools.h"
 
 @interface ConversationListController ()<EaseConversationListViewControllerDelegate,
                                         EaseConversationListViewControllerDataSource,
@@ -108,7 +108,7 @@
         if (conversation) {
             
             ChatViewController *chatController = [[ChatViewController alloc] initWithConversationChatter:conversation.chatter conversationType:conversation.conversationType];
-            chatController.title = conversationModel.title;
+            chatController.title = [NSString stringWithFormat:@"%@",[JGUserTools getNickNameByEMUserName:conversation.chatter]];
             [self.myNavController pushViewController:chatController animated:YES];
             
         }

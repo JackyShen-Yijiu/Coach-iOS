@@ -45,6 +45,8 @@
 		B253C2F41C43C960001AF771 /* PermissiveOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2ED1C43C960001AF771 /* PermissiveOperations.m */; };
 		B253C2F61C43C960001AF771 /* PermissiveScoringMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2F11C43C960001AF771 /* PermissiveScoringMatrix.m */; };
 		B253C2FE1C45203F001AF771 /* PermissiveResearchDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2FD1C45203F001AF771 /* PermissiveResearchDatabase.m */; };
+		B2A6BABA1C4B64CB00B09A0F /* JGUserTools.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6BAB51C4B64CB00B09A0F /* JGUserTools.m */; };
+		B2A6BABF1C4B6D8A00B09A0F /* JGUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6BABE1C4B6D8A00B09A0F /* JGUserModel.m */; };
 		B2AC20371C3E2CBD0033803C /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
@@ -526,6 +528,10 @@
 		B253C2F01C43C960001AF771 /* PermissiveScoringMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissiveScoringMatrix.h; sourceTree = "<group>"; };
 		B253C2F11C43C960001AF771 /* PermissiveScoringMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissiveScoringMatrix.m; sourceTree = "<group>"; };
 		B253C2FD1C45203F001AF771 /* PermissiveResearchDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissiveResearchDatabase.m; sourceTree = "<group>"; };
+		B2A6BAB41C4B64CB00B09A0F /* JGUserTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGUserTools.h; sourceTree = "<group>"; };
+		B2A6BAB51C4B64CB00B09A0F /* JGUserTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGUserTools.m; sourceTree = "<group>"; };
+		B2A6BABD1C4B6D8A00B09A0F /* JGUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGUserModel.h; sourceTree = "<group>"; };
+		B2A6BABE1C4B6D8A00B09A0F /* JGUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGUserModel.m; sourceTree = "<group>"; };
 		B2AC20351C3E2CBD0033803C /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
 		B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
@@ -2169,6 +2175,10 @@
 		B8BC50191BF38A390007B029 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				B2A6BAB41C4B64CB00B09A0F /* JGUserTools.h */,
+				B2A6BAB51C4B64CB00B09A0F /* JGUserTools.m */,
+				B2A6BABD1C4B6D8A00B09A0F /* JGUserModel.h */,
+				B2A6BABE1C4B6D8A00B09A0F /* JGUserModel.m */,
 				B8BC501A1BF38A390007B029 /* EaseSDKHelper.h */,
 				B8BC501B1BF38A390007B029 /* EaseSDKHelper.m */,
 			);
@@ -2723,6 +2733,7 @@
 				TargetAttributes = {
 					B86EB3501BDB50EB0014EBD7 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = MC3VUBEH8X;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -3067,6 +3078,7 @@
 				B8BC50881BF38A390007B029 /* EaseUserModel.m in Sources */,
 				B8BC50811BF38A390007B029 /* PSTGridLayoutItem.m in Sources */,
 				D5F72BCA1BF9AB6700B972B0 /* UIDevice+JEsystemVersion.m in Sources */,
+				B2A6BABA1C4B64CB00B09A0F /* JGUserTools.m in Sources */,
 				556256281C47798C00D132F4 /* PersonlizeModel.m in Sources */,
 				B253C2F61C43C960001AF771 /* PermissiveScoringMatrix.m in Sources */,
 				B86EB3591BDB50EB0014EBD7 /* AppDelegate.m in Sources */,
@@ -3112,6 +3124,7 @@
 				B8BC50921BF38A390007B029 /* EaseEmoji.m in Sources */,
 				B8BC50611BF38A390007B029 /* MWPhoto.m in Sources */,
 				B8C458711BDB59AC00901F71 /* RFSegmentView.m in Sources */,
+				B2A6BABF1C4B6D8A00B09A0F /* JGUserModel.m in Sources */,
 				D964C7EA1C43C52E0009FE7A /* StudentSignInDataModel.m in Sources */,
 				B8BC507C1BF38A390007B029 /* PSTCollectionViewFlowLayout.m in Sources */,
 				0643007E1C47921E008B5A74 /* SystemMessageViewModel.m in Sources */,
@@ -3362,7 +3375,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "7cbdfba7-afb6-4ff4-995f-34ee2449d1cc";
+				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
 			};
 			name = Debug;
 		};
@@ -3388,7 +3401,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "7cbdfba7-afb6-4ff4-995f-34ee2449d1cc";
+				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
 			};
 			name = Release;
 		};

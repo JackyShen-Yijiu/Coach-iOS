@@ -18,6 +18,8 @@
 #import "EMCDDeviceManager.h"
 #import "SystemMessageDetailController.h"
 #import "InformationMessageController.h"
+#import "ChatViewController.h"
+#import "JGUserTools.h"
 
 //两次提示的默认间隔
 static const CGFloat kDefaultPlaySoundInterval = 3.0;
@@ -49,11 +51,18 @@ static NSString *kGroupName = @"GroupName";
     
     [self registerNotifications];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoaded) name:KNOTIFICATION_USERLOADED object:nil];
+    
     self.tipView = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有消息"];
     [self.view addSubview:self.tipView];
     self.tipView.center = CGPointMake(self.view.width/2.f, self.view.height/2.f + 32);
     [self.tipView setHidden:YES];
     
+}
+
+- (void)userLoaded
+{
+    [self tableViewDidTriggerHeaderRefresh];
 }
 
 - (void)InformationMessageControllerGetMessageLastnews:(NSString *)lastnews
@@ -128,6 +137,7 @@ static NSString *kGroupName = @"GroupName";
     }else{
     
         id<IConversationModel> model = [self.dataArray objectAtIndex:indexPath.row];
+        NSLog(@"model.type:%@",model.type);
         
         cell.model = model;
         
@@ -182,10 +192,19 @@ static NSString *kGroupName = @"GroupName";
 
     }else{
         
-        if (_delegate && [_delegate respondsToSelector:@selector(conversationListViewController:didSelectConversationModel:)]) {
-            EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row];
-            [_delegate conversationListViewController:self didSelectConversationModel:model];
-        }
+        id<IConversationModel> model = [self.dataArray objectAtIndex:indexPath.row];
+
+        HMStudentModel *studenModel = [[HMStudentModel alloc] init];
+        studenModel.userName = [NSString stringWithFormat:@"%@",[JGUserTools getNickNameByEMUserName:model.conversation.chatter]];
+        
+        ChatViewController *chatController = [[ChatViewController alloc] initWithConversationChatter:model.conversation.chatter conversationType:model.conversation.conversationType];
+        chatController.studentModel = studenModel;
+        [self.myNavController pushViewController:chatController animated:YES];
+
+//        if (_delegate && [_delegate respondsToSelector:@selector(conversationListViewController:didSelectConversationModel:)]) {
+//            EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row];
+//            [_delegate conversationListViewController:self didSelectConversationModel:model];
+//        }
         
     }
 }

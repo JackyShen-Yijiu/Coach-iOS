@@ -11,6 +11,7 @@
 #import "EMConversation.h"
 #import "UIImageView+EMWebCache.h"
 #import "EaseConversationModel.h"
+#import "JGUserTools.h"
 
 CGFloat const EaseConversationCellPadding = 10;
 
@@ -179,23 +180,30 @@ CGFloat const EaseConversationCellPadding = 10;
 - (void)setModel:(id<IConversationModel>)model
 {
     _model = model;
+
+    // 获取服务器用户名
+    self.titleLabel.text = [NSString stringWithFormat:@"%@",[JGUserTools getNickNameByEMUserName:_model.conversation.chatter]];
     
-    if ([_model.title length] > 0) {
-        self.titleLabel.text = _model.title;
-    }
-    else{
-        self.titleLabel.text = _model.conversation.chatter;
-    }
+    // 获取服务器用户头像
+    NSString *avatar = [JGUserTools getAvatarUrlByEMUserName:_model.conversation.chatter];
+     [self.avatarView.imageView sd_setImageWithURL:[NSURL URLWithString:avatar] placeholderImage:_model.avatarImage];
     
-    if (self.showAvatar) {
-        if ([_model.avatarURLPath length] > 0){
-            [self.avatarView.imageView sd_setImageWithURL:[NSURL URLWithString:_model.avatarURLPath] placeholderImage:_model.avatarImage];
-        } else {
-            if (_model.avatarImage) {
-                self.avatarView.image = _model.avatarImage;
-            }
-        }
-    }
+//    if ([_model.title length] > 0) {
+//        self.titleLabel.text = _model.title;
+//    }
+//    else{
+//        self.titleLabel.text = _model.conversation.chatter;
+//    }
+//    
+//    if (self.showAvatar) {
+//        if ([_model.avatarURLPath length] > 0){
+//            [self.avatarView.imageView sd_setImageWithURL:[NSURL URLWithString:_model.avatarURLPath] placeholderImage:_model.avatarImage];
+//        } else {
+//            if (_model.avatarImage) {
+//                self.avatarView.image = _model.avatarImage;
+//            }
+//        }
+//    }
     
     if (_model.conversation.unreadMessagesCount == 0) {
         _avatarView.showBadge = NO;

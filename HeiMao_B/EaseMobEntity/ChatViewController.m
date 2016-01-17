@@ -61,12 +61,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (self.conversation.conversationType == eConversationTypeGroupChat) {
-        if ([[self.conversation.ext objectForKey:@"groupSubject"] length])
-        {
-            self.title = [self.conversation.ext objectForKey:@"groupSubject"];
-        }
-    }
+//    if (self.conversation.conversationType == eConversationTypeGroupChat) {
+//        if ([[self.conversation.ext objectForKey:@"groupSubject"] length])
+//        {
+//            self.title = [self.conversation.ext objectForKey:@"groupSubject"];
+//        }
+//    }
 }
 
 #pragma mark - setup subviews
@@ -80,6 +80,7 @@
     self.myNavigationItem.leftBarButtonItems = @[[self barSpaingItem],someBarButtonItem];
     
     self.myNavigationItem.title = self.studentModel.userName;
+    
     //单聊
     if (self.conversation.conversationType == eConversationTypeChat) {
 

@@ -109,8 +109,8 @@ static QNDnsManager* initDns(QNConfigurationBuilder *builder) {
 		_converter = nil;
 
 		_disableATS = YES;
-
-		_upStatsRate = 0.3;
+        
+        _upStatsRate = 0.3;
 	}
 	return self;
 }

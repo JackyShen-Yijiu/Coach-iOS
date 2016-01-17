@@ -11,7 +11,9 @@
 
 
 @interface UserInfoModel : NSObject
+
 @property(nonatomic,strong)NSString * userID;
+// 用户头像
 @property(nonatomic,strong)NSString * portrait;
 @property(nonatomic,strong)NSString * name;
 @property(nonatomic,strong)NSString * tel;
