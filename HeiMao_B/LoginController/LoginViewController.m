@@ -271,8 +271,9 @@ static NSString *const kuserType = @"usertype";
             [dic setValue:[self.passwordTextField.text DY_MD5] forKey:@"md5Pass"];
             
             [[UserInfoModel defaultUserInfo] loginViewDic:dic];
-            
-            NSSet *set = [NSSet setWithObject:JPushTag];
+           
+            NSString *coachID = [NSString stringWithFormat:@"%@",[UserInfoModel defaultUserInfo].driveschoolinfo[@"id"]];
+            NSSet *set = [NSSet setWithObjects:JPushTag,coachID, nil];
             [APService setTags:set alias:[UserInfoModel defaultUserInfo].userID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
             
             if ([_delegate respondsToSelector:@selector(loginViewControllerdidLoginSucess:)]) {

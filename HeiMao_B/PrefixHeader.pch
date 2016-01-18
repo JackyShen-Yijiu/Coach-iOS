@@ -50,6 +50,7 @@
 
 //#define QA_TEST
 
+// 驾校的ID、全部
 #define JPushTag @"yibuxuecheCoach"
 
 #endif

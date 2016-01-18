@@ -191,7 +191,8 @@
     [APService setupWithOption:launchOptions];
     
     if ([UserInfoModel defaultUserInfo].userID) {
-        NSSet *set = [NSSet setWithObject:JPushTag];
+        NSString *coachID = [NSString stringWithFormat:@"%@",[UserInfoModel defaultUserInfo].driveschoolinfo[@"id"]];
+        NSSet *set = [NSSet setWithObjects:JPushTag,coachID, nil];
         [APService setTags:set alias:[UserInfoModel defaultUserInfo].userID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
     }
     

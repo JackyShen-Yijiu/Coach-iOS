@@ -418,7 +418,8 @@ static NSString *const kcodeGainUrl = @"code";
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"注册成功" controller:self];
             [alerview show];
 
-            NSSet *set = [NSSet setWithObject:JPushTag];
+            NSString *coachID = [NSString stringWithFormat:@"%@",[UserInfoModel defaultUserInfo].driveschoolinfo[@"id"]];
+            NSSet *set = [NSSet setWithObjects:JPushTag,coachID, nil];
             [APService setTags:set alias:[UserInfoModel defaultUserInfo].userID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
             
             CompleteInformationViewController *comInformation = [[CompleteInformationViewController alloc] init];
