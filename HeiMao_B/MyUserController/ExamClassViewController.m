@@ -74,7 +74,6 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
     
     [self.dataArray removeAllObjects];
 
-    
     NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kExamClassType];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
@@ -89,7 +88,9 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
        
         if (messege.intValue == 1) {
+            
             NSArray *array = dataParam[@"data"];
+            
             for (NSDictionary *dic in array) {
                 
                 ExamClassModel *model = [[ExamClassModel alloc] init];
@@ -98,9 +99,12 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
                 model.price = dic[@"price"];
                 model.onsaleprice = dic[@"onsaleprice"];
                 model.address = dic[@"address"];
-                model.is_choose = dic[@"is_choose"];
+                model.is_choose = [dic[@"is_choose"] integerValue];
+                
                 [self.dataArray addObject:model];
+                
             }
+            
         }else {
             [self showTotasViewWithMes:msg];
         }
@@ -210,7 +214,8 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
     cell.drivingName.text = model.classname;
     
     cell.drivingAdress.text = model.address;
-  
+    NSLog(@"model.is_choose:%d",model.is_choose);
+    
     [cell setSelectedState:model.is_choose];
   
     return cell;

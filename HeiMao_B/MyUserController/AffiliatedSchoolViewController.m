@@ -142,7 +142,7 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
     
     NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
     
-    NSDictionary *dicParam = @{@"driveschoolid":dic[@"schoolid"],@"coachid":[UserInfoModel defaultUserInfo].userID};
+    NSDictionary *dicParam = @{@"driveschoolinfo":dict,@"coachid":[UserInfoModel defaultUserInfo].userID};
     
     [JENetwoking startDownLoadWithUrl:updateUserInfoUrl postParam:dicParam WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
         
