@@ -50,4 +50,6 @@
 
 //#define QA_TEST
 
+#define JPushTag @"yibuxuecheCoach"
+
 #endif

@@ -189,6 +189,20 @@
      categories:nil];
     
     [APService setupWithOption:launchOptions];
+    
+    if ([UserInfoModel defaultUserInfo].userID) {
+        NSSet *set = [NSSet setWithObject:JPushTag];
+        [APService setTags:set alias:[UserInfoModel defaultUserInfo].userID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+    }
+    
+}
+- (void)tagsAliasCallback:(int)iResCode
+                     tags:(NSSet *)tags
+                    alias:(NSString *)alias {
+    NSString *callbackString =
+    [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,
+     tags, alias];
+    NSLog(@"TagsAlias回调:%@", callbackString);
 }
 
 #pragma mark - Nofitication

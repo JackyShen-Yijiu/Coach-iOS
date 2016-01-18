@@ -12,6 +12,8 @@
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 #import "UserInfoModel.h"
 #import "ProtocalViewController.h"
+#import "APService.h"
+
 static NSString *const kregisterUser = @"kregisterUser";
 
 static NSString *const kregisterUrl = @"userinfo/signup";
@@ -410,9 +412,15 @@ static NSString *const kcodeGainUrl = @"code";
         NSNumber *type = param[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
         if (type.integerValue == 1) {
+            
             [[UserInfoModel defaultUserInfo] loginViewDic:param[@"data"]];
+            
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"注册成功" controller:self];
             [alerview show];
+
+            NSSet *set = [NSSet setWithObject:JPushTag];
+            [APService setTags:set alias:[UserInfoModel defaultUserInfo].userID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+            
             CompleteInformationViewController *comInformation = [[CompleteInformationViewController alloc] init];
             [self presentViewController:comInformation animated:YES completion:nil];
 
@@ -428,6 +436,17 @@ static NSString *const kcodeGainUrl = @"code";
     
     
 }
+
+- (void)tagsAliasCallback:(int)iResCode
+                     tags:(NSSet *)tags
+                    alias:(NSString *)alias {
+    NSString *callbackString =
+    [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,
+     tags, alias];
+    
+    NSLog(@"TagsAlias回调:%@", callbackString);
+}
+
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [_phoneTextField resignFirstResponder];
     [_authCodeTextFild resignFirstResponder];

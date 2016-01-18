@@ -12,6 +12,8 @@
 #import "FeedBackViewController.h"
 #import "AboutUsViewController.h"
 #import "NSUserStoreTool.h"
+#import "APService.h"
+
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 
 static NSString *const kSettingUrl = @"userinfo/personalsetting";
@@ -85,14 +87,28 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
     if(alertView.tag == 200 && buttonIndex == 1){
+        
         //退出登陆
         [[UserInfoModel defaultUserInfo] loginOut];
         [self.navigationController popToRootViewControllerAnimated:YES];
+        
+        NSSet *set = [NSSet setWithObject:JPushTag];
+        [APService setTags:set alias:@"" callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+        
     }
 }
 
+//取消别名标示
+- (void)tagsAliasCallback:(int)iResCode
+                     tags:(NSSet *)tags
+                    alias:(NSString *)alias {
+    NSString *callbackString =
+    [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,
+     tags, alias];
+    
+    DYNSLog(@"TagsAlias回调:%@", callbackString);
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

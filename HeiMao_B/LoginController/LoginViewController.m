@@ -14,6 +14,8 @@
 #import "NSString+DY_MD5.h"
 #import "UIView+Sizes.h"
 #import "UserInfoModel.h"
+#import "APService.h"
+
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 
 static NSString *const kloginUrl = @"userinfo/userlogin";
@@ -270,6 +272,9 @@ static NSString *const kuserType = @"usertype";
             
             [[UserInfoModel defaultUserInfo] loginViewDic:dic];
             
+            NSSet *set = [NSSet setWithObject:JPushTag];
+            [APService setTags:set alias:[UserInfoModel defaultUserInfo].userID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+            
             if ([_delegate respondsToSelector:@selector(loginViewControllerdidLoginSucess:)]) {
                 [_delegate loginViewControllerdidLoginSucess:self];
                 self.passwordTextField.text = @"";
@@ -287,6 +292,15 @@ static NSString *const kuserType = @"usertype";
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
 
+}
+- (void)tagsAliasCallback:(int)iResCode
+                     tags:(NSSet *)tags
+                    alias:(NSString *)alias {
+    NSString *callbackString =
+    [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,
+     tags, alias];
+    
+    NSLog(@"TagsAlias回调:%@", callbackString);
 }
 
 #pragma mark - textfieldDelegate 业务逻辑

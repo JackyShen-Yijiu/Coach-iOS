@@ -26,9 +26,14 @@
     
     if ([self.delegate respondsToSelector:@selector(SystemMessageDetailControllerGetMessagelastmessage:)]) {
         
-        NSLog(@"((SystemMessageModel *)[_systemViewModel.systemMessageArray lastObject]).seqindex:%@",((SystemMessageModel *)[_systemViewModel.systemMessageArray lastObject]).seqindex);
-        
-        [self.delegate SystemMessageDetailControllerGetMessagelastmessage:((SystemMessageModel *)[_systemViewModel.systemMessageArray lastObject]).seqindex];
+        if (_systemViewModel.systemMessageArray&&_systemViewModel.systemMessageArray.count>0) {
+            
+            NSLog(@"((SystemMessageModel *)[_systemViewModel.systemMessageArray lastObject]).seqindex:%@",((SystemMessageModel *)_systemViewModel.systemMessageArray[0]).seqindex);
+            
+            [self.delegate SystemMessageDetailControllerGetMessagelastmessage:((SystemMessageModel *)_systemViewModel.systemMessageArray[0]).seqindex];
+            
+        }
+     
     }
     
 }

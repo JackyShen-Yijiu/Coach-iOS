@@ -67,12 +67,16 @@ static NSString *kGroupName = @"GroupName";
 
 - (void)InformationMessageControllerGetMessageLastnews:(NSString *)lastnews
 {
+    NSLog(@"InformationMessageControllerGetMessageLastnews lastnews:%@",lastnews);
+    
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setObject:lastnews forKey:@"lastnews"];
     [user synchronize];
 }
 - (void)SystemMessageDetailControllerGetMessagelastmessage:(NSString *)lastmessage
 {
+    NSLog(@"SystemMessageDetailControllerGetMessagelastmessage lastmessage:%@",lastmessage);
+
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setObject:lastmessage forKey:@"lastmessage"];
     [user synchronize];

@@ -425,8 +425,6 @@
     [dic setValue:productid forKey:@"productid"];
     [dic setValue:address forKey:@"address"];
     
-    
-    
     [self POST:urlStr parameters:dic success:success failure:failure];
     
 }
@@ -443,8 +441,11 @@
     NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getmessagecount",[self domain]];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setValue:[UserInfoModel defaultUserInfo].userID forKey:@"coachid"];
+
     [dic setValue:lastmessage forKey:@"lastmessage"];
     [dic setValue:lastnews forKey:@"lastnews"];
+    NSLog(@"dic:%@",dic);
     
     [self GET:urlStr parameters:dic success:success failure:failure];
 }
