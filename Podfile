@@ -15,4 +15,3 @@ pod 'EaseMobSDKFull'
 pod "Qiniu", "~> 7.0"
 pod 'ChameleonFramework'
 pod 'BaiduMapKit'
-pod 'MJExtension'
