@@ -68,6 +68,7 @@
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
@@ -84,8 +85,6 @@
 {
     [super viewWillAppear:animated];
     
-    self.isNeedRefresh = YES;
-
     [self resetNavBar];
     
     [self setUpRightNavBar];
@@ -108,11 +107,10 @@
 {
     [super viewDidAppear:animated];
     
-    if(self.isNeedRefresh){
-        [self.courseSummaryTableView.refreshHeader beginRefreshing];
-    }
-    self.isNeedRefresh = NO;
-    
+//    if(self.isNeedRefresh){
+//        [self.courseSummaryTableView.refreshHeader beginRefreshing];
+//        self.isNeedRefresh = NO;
+//    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -445,27 +443,33 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HMCourseModel  * courseModel = nil;
+    
+    CourseDetailViewController * decv = [[CourseDetailViewController alloc] init];
+
     if (tableView == self.courseSummaryTableView) {
         if (self.segController.selIndex==0) {
            
             courseModel = [[self courseSummaryData] objectAtIndex:indexPath.row];
-
+            decv.courseTitle = @"新订单";
+            
         }else if (self.segController.selIndex==1){
             
             courseModel = [[self courseSummaryDataWaitEvaluate] objectAtIndex:indexPath.row];
-
+            decv.courseTitle = @"待评价";
+            
         }else if (self.segController.selIndex==2){
             
             courseModel = [[self courseSummaryDataCancled] objectAtIndex:indexPath.row];
+            decv.courseTitle = @"已取消";
 
         }else if (self.segController.selIndex==3){
             
             courseModel = [[self courseSummaryDataCompleted] objectAtIndex:indexPath.row];
+            decv.courseTitle = @"已完成";
 
         }
     }
     if (courseModel) {
-        CourseDetailViewController * decv = [[CourseDetailViewController alloc] init];
         decv.couresID = courseModel.courseId;
         [self.navigationController pushViewController:decv animated:YES];
     }
@@ -483,7 +487,13 @@
 
 - (void)needRefresh:(NSNotification *)notification
 {
+    
+     [self.courseSummaryTableView.refreshHeader beginRefreshing];
+
+    return;
+    /*
     HMCourseModel * model = [notification object];
+    
     if (model) {
         
         NSArray *dataArray = [NSArray array];
@@ -506,7 +516,9 @@
             
         }
         for (HMCourseModel * sumModel in dataArray) {
+            
             if ([sumModel.courseId isEqualToString:model.courseId]) {
+            
                 sumModel.courseStatue = model.courseStatue;
 
                 [self.courseSummaryTableView reloadData];
@@ -515,6 +527,7 @@
             }
         }
     }
+     */
 }
 
 @end

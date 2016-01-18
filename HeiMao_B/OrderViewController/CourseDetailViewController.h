@@ -12,4 +12,7 @@
 
 @interface CourseDetailViewController : UIViewController
 @property(nonatomic,strong)NSString * couresID;
+
+@property (nonatomic,copy)NSString *courseTitle;
+
 @end

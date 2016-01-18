@@ -51,7 +51,11 @@
 - (void)initNavBar
 {
     [self resetNavBar];
+
     self.myNavigationItem.title = @"预约详情";
+    if (self.courseTitle) {
+        self.myNavigationItem.title = _courseTitle;
+    }
     
     UIButton *buttonRight = [self getBarButtonWithTitle:@""];
     [buttonRight setImage:[UIImage imageNamed:@"conversation_normal"] forState:UIControlStateNormal];
