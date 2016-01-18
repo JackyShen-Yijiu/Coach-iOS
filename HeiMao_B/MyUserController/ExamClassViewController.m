@@ -80,9 +80,12 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
     [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
         
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-
+        NSLog(@"data:%@",data);
+        
         NSDictionary *dataParam = data;
+        
         NSNumber *messege = dataParam[@"type"];
+        
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
        
         if (messege.intValue == 1) {
@@ -127,18 +130,50 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
     for (ExamClassModel * model in self.dataArray) {
         [str appendFormat:@"%@,",model.classid];
     }
-    NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"classtypelist":str};
     
+    NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"classtypelist":str};
+    NSLog(@"param:%@ str:%@",param,str);
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-    [JENetwoking startDownLoadWithUrl:urlString postParam:param WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+    [NetWorkEntiry modifyExamClassCoachid:[UserInfoModel defaultUserInfo].userID classtypelist:str success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"responseObject:%@",responseObject);
         
         [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+        
+        NSDictionary *dataParam = responseObject;
+        
+        NSNumber *messege = dataParam[@"type"];
+        
+        NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
+        
+        [UserInfoModel defaultUserInfo].setClassMode = YES;
+        
+        if (messege.intValue == 1) {
+            [self showTotasViewWithMes:@"设置成功"];
+            [self.myNavController popViewControllerAnimated:YES];
+        }else {
+            [self showTotasViewWithMes:msg];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+    /*
+    [JENetwoking startDownLoadWithUrl:urlString postParam:param WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+        
+        NSLog(@"data:%@",data);
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+        
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
         [UserInfoModel defaultUserInfo].setClassMode  =  YES;
+       
         if (messege.intValue == 1) {
             [self showTotasViewWithMes:@"设置成功"];
             [self.myNavController popViewControllerAnimated:YES];
@@ -146,7 +181,8 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
             [self showTotasViewWithMes:msg];
         }
     }];
-
+     */
+    
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -168,9 +204,13 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
     }
     
     ExamClassModel *model = self.dataArray[indexPath.row];
+    
     cell.drivingName.text = model.classname;
+    
     cell.drivingAdress.text = model.address;
+  
     [cell setSelectedState:model.is_choose];
+  
     return cell;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

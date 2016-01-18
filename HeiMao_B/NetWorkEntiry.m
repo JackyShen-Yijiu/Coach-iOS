@@ -502,6 +502,24 @@
     
     [self POST:urlStr parameters:dict success:success failure:failure];
 }
+/**
+ *
+ * 修改教练授课班型
+ *
+ */
++ (void)modifyExamClassCoachid:(NSString *)coachid classtypelist:(NSString *)classtypelist
+                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/coachsetclass",[self domain]];
+    
+    NSMutableDictionary*dict = [NSMutableDictionary dictionary];
+    dict[@"coachid"] = coachid;
+    dict[@"classtypelist"] = classtypelist;
+    
+    [self POST:urlStr parameters:dict success:success failure:failure];
+}
 #pragma mark 学员签到
 + (void)studentSignInWithUserId:(NSString *)userId
                         coachId:(NSString *)coachId

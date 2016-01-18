@@ -285,5 +285,12 @@
 + (void)modifyWorkPropertyCoachid:(NSString *)coachid type:(NSInteger)coachtype
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-
+/**
+ *
+ * 修改教练授课班型
+ *
+ */
++ (void)modifyExamClassCoachid:(NSString *)coachid classtypelist:(NSString *)classtypelist
+                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

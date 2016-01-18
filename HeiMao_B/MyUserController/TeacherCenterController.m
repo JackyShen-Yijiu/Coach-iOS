@@ -264,6 +264,9 @@
     
     //班型设置
     NSString * carName =  [[UserInfoModel defaultUserInfo] setClassMode] ? @"已设置" : @"未设置";
+    NSDictionary *carmodel = [UserInfoModel defaultUserInfo].carmodel;
+    NSLog(@"班型设置carmodel:%@",carmodel);
+    
     
     // "休假"
     NSString *leavebegintime = [UserInfoModel defaultUserInfo].leavebegintime;
