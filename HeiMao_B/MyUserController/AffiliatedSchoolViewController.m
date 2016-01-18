@@ -56,7 +56,7 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
         _searchTextField = [[UISearchBar alloc] init];
         _searchTextField.placeholder = @"驾校搜索";
         _searchTextField.delegate = self;
-        //        [_searchTextField addTarget:self action:@selector(dealChange:) forControlEvents:UIControlEventEditingChanged];
+//    [_searchTextField addTarget:self action:@selector(dealChange:) forControlEvents:UIControlEventEditingChanged];
     }
     return _searchTextField;
 }
@@ -71,6 +71,7 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
 - (UILabel *)topLabel {
     if (_topLabel == nil) {
         _topLabel = [[UILabel alloc] init];
+        _topLabel.backgroundColor = [UIColor redColor];
         _topLabel.textAlignment = NSTextAlignmentCenter;
         _topLabel.font = [UIFont boldSystemFontOfSize:18];
         _topLabel.textColor = [UIColor whiteColor];
@@ -104,7 +105,8 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
         make.top.mas_equalTo(self.navImage.mas_bottom).offset(0);
     }];
     [self.view addSubview:self.tableView];
-    [self searchBar:nil textDidChange:@""];
+   // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeEndValue:) name:uisearchbar object:_searchTextField];
+//    [self searchBar:nil textDidChange:@""];
 }
 
 - (void)clickRight:(UIButton *)sender {
@@ -148,10 +150,15 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
         
     }];
 }
+- (void)changeEndValue:(NSNotification *)notification
+{
+    [self searchBar:notification.object textDidChange:_searchTextField.text];
+}
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     searchText = [searchText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *url = [NSString stringWithFormat:kAffiliatedSchool,searchText];
-    NSString *urlstring = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
+    NSString *urlstring = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],url];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:urlstring parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -163,6 +170,9 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
                 [self.dataArray addObject:dic];
             }
             [self.tableView reloadData];
+        }else if(array.count == 0){
+            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"没有搜索到该驾校"];
+            [alerview show];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         
