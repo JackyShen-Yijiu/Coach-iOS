@@ -38,7 +38,8 @@
 - (void)sizeToFit
 {
     [super sizeToFit];
-    self.seletedButton.frame = CGRectMake(0, self.height /2.f - 9, 18, 18);
+    self.seletedButton.frame = CGRectMake(0, self.height /2.f - 9, 23, 23);
+//    self.seletedButton.backgroundColor = [UIColor redColor];
     CGSize size = [self.contentLabel sizeThatFits:CGSizeMake(320, 20)];
     self.contentLabel.frame = CGRectMake(self.seletedButton.right + 15.f, self.height/2.f - size.height/2.f, size.width, size.height);
     self.frame = CGRectMake(0, 0, self.contentLabel.right, size.height);
