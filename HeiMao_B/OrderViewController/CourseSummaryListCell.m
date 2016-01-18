@@ -218,7 +218,8 @@
 
             break;
         case  KCourseStatueapplyconfirm:  // 已确定(新订单)
-        
+            self.statueLabel.textColor = RGB_Color(0xff, 0x66, 0x33);
+
             break;
         case  KCourseStatueapplyrefuse:      // 教练拒绝或者取消（已取消）
             self.statueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);

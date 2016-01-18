@@ -23,6 +23,7 @@
 @interface CourseViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate>
 
 @property(nonatomic,strong) RFSegmentView * segController;
+
 @property(nonatomic,strong)RefreshTableView * courseSummaryTableView;
 
 /*
@@ -43,12 +44,15 @@
 @property(nonatomic,strong)NSMutableArray * courseSummaryDataCompleted;
 
 @property(nonatomic,assign)BOOL isNeedRefresh;
+
 @property(nonatomic,strong)NSDateFormatter *dateFormattor;
+
 @property(nonatomic,strong)NoContentTipView * tipView1;
 
 @property (nonatomic,assign)NSInteger reservationstate;
 
 @end
+
 @implementation CourseViewController
 
 #pragma mark - LoingNotification
@@ -221,6 +225,7 @@
     [self.view addSubview:self.courseSummaryTableView];
     
     [self initRefreshView];
+    [self.courseSummaryTableView.refreshHeader beginRefreshing];
     
     //日程
     self.tipView1 = [[NoContentTipView alloc] initWithContetntTip:@"无内容"];

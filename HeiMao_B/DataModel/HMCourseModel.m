@@ -73,10 +73,10 @@
             return @"学生取消";
             break;
         case  KCourseStatueapplyconfirm:  // 已确定
-            return @"已确定";
+            return @"新订单";
             break;
         case  KCourseStatueapplyrefuse:      // 教练（拒绝或者取消）
-            return @"教练拒绝或取消";
+            return @"已取消";
             break;
         case  KCourseStatueunconfirmfinish: //  待确认完成  (v1.1 中没有该字段)
             return @"待确认完成";
