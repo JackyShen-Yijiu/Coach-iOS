@@ -137,12 +137,12 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
    // [UserInfoModel defaultUserInfo].schoolId = dic[@"schoolid"];
 //    [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
     
-    
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"name"] = dic[@"name"];
-    dict[@"schoolid"] = dic[@"schoolid"];
+    dict[@"id"] = dic[@"schoolid"];
     [UserInfoModel defaultUserInfo].driveschoolinfo = dict;
-
+    [UserInfoModel defaultUserInfo].schoolId = dic[@"schoolid"];
+    
     NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
     
     NSDictionary *dicParam = @{@"driveschoolid":dic[@"schoolid"],@"coachid":[UserInfoModel defaultUserInfo].userID};

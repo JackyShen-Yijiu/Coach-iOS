@@ -69,7 +69,8 @@ static NSString *const kTrainingGround = @"getschooltrainingfield?schoolid=%@";
     [self startDownLoad];
 
 }
-- (void)startDownLoad {
+- (void)startDownLoad
+{
     NSString *urlString = [NSString stringWithFormat:kTrainingGround,[UserInfoModel defaultUserInfo].schoolId];
     NSString *url = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],urlString];
     [JENetwoking startDownLoadWithUrl:url postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
@@ -88,18 +89,23 @@ static NSString *const kTrainingGround = @"getschooltrainingfield?schoolid=%@";
     }];
 }
 - (void)clickRight:(UIButton *)sender {
-    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
-   
     
+    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
     
     NSDictionary *dicParam = @{@"trainfield":self.model.infoId,@"coachid":[UserInfoModel defaultUserInfo].userID};
-    
     
     [JENetwoking startDownLoadWithUrl:updateUserInfoUrl postParam:dicParam WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
         if (messege.intValue == 1) {
+            
+            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+            dict[@"name"] = self.model.name;
+            dict[@"id"] = self.model.infoId;
+            [UserInfoModel defaultUserInfo].trainfieldlinfo = dict;
+            
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"上传成功" controller:self];
+            
             [alerview show];
             [self.navigationController popViewControllerAnimated:YES];
         }else {
@@ -127,6 +133,7 @@ static NSString *const kTrainingGround = @"getschooltrainingfield?schoolid=%@";
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     buttonSelectedModel *model = self.dataArray[indexPath.row];
     if (model.is_selected == NO) {
         model.is_selected = YES;
