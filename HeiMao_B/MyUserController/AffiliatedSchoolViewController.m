@@ -106,7 +106,7 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
     }];
     [self.view addSubview:self.tableView];
    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeEndValue:) name:uisearchbar object:_searchTextField];
-//    [self searchBar:nil textDidChange:@""];
+    [self searchBar:_searchTextField textDidChange:@""];
 }
 
 - (void)clickRight:(UIButton *)sender {
