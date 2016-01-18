@@ -124,11 +124,13 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
         return;
     }
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kUpClassType];
+    //NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kUpClassType];
     NSMutableString * str = [NSMutableString stringWithCapacity:0];
     
     for (ExamClassModel * model in self.dataArray) {
-        [str appendFormat:@"%@,",model.classid];
+        if (model.is_choose) {
+            [str appendFormat:@"%@,",model.classid];
+        }
     }
     
     NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"classtypelist":str};
