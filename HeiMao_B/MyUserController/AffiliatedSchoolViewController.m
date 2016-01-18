@@ -107,6 +107,8 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
     [self.view addSubview:self.tableView];
    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeEndValue:) name:uisearchbar object:_searchTextField];
 //    [self searchBar:nil textDidChange:@""];
+    
+    [self search:@""];
 }
 
 - (void)clickRight:(UIButton *)sender {
@@ -126,15 +128,29 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
     cell.textLabel.text = dic[@"name"];
     return cell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
     NSDictionary *dic = self.dataArray[indexPath.row];
 
-    [UserInfoModel defaultUserInfo].schoolId = dic[@"schoolid"];
+   // [UserInfoModel defaultUserInfo].schoolId = dic[@"schoolid"];
+//    [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
+    
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"name"] = dic[@"name"];
+    dict[@"schoolid"] = dic[@"schoolid"];
+    [UserInfoModel defaultUserInfo].driveschoolinfo = dict;
+
     NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
     
     NSDictionary *dicParam = @{@"driveschoolid":dic[@"schoolid"],@"coachid":[UserInfoModel defaultUserInfo].userID};
     
     [JENetwoking startDownLoadWithUrl:updateUserInfoUrl postParam:dicParam WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+        
+        NSLog(@"修改所属驾校:data:%@",data);
+        
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
@@ -156,6 +172,11 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self search:searchText];
+}
+
+- (void)search:(NSString *)searchText
+{
     searchText = [searchText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *url = [NSString stringWithFormat:kAffiliatedSchool,searchText];
     NSString *urlstring = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],url];
