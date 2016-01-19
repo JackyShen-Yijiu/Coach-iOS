@@ -159,6 +159,13 @@ static NSString *const kchangePassword = @"kchangePassword";
         make.left.mas_equalTo(self.view.mas_left).with.offset(20);
         make.height.mas_equalTo(@44);
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissSelfNoAnimation) name:@"kForgetPassworkControllerDismiss" object:nil];
+}
+
+#pragma mark 在下一个界面
+- (void)dismissSelfNoAnimation {
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 #define TIME 60
 - (void)dealSend:(UIButton *)sender {
@@ -256,6 +263,11 @@ static NSString *const kchangePassword = @"kchangePassword";
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [_phoneNumTextField resignFirstResponder];
     [_confirmTextField resignFirstResponder];
+}
+
+- (void)dealloc {
+    
+//    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:@"kForgetPassworkControllerDismiss"];
 }
 @end
 
