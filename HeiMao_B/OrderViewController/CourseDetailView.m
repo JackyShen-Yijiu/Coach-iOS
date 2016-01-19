@@ -304,6 +304,7 @@
     self.courseProgressInfo.text = _model.courseProgress;
     
     self.courseInfoTitle.text = @"课程信息";
+    NSLog(@"_model.courseTime:%@",_model.courseTime);
     self.courseTimeLabel.text = _model.courseTime;
     self.courseAddressLabel.text = [NSString stringWithFormat:@"训练场地: %@",_model.courseTrainInfo.address];
     if (_model.coursePikerAddres) {
