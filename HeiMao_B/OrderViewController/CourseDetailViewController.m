@@ -163,15 +163,30 @@
 - (void)courseDetailViewDidClickAgreeButton:(CourseDetailView *)view
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [NetWorkEntiry postToDealRequestOfCoureseWithCoachid:[[UserInfoModel defaultUserInfo] userID] coureseID:self.model.courseId didReject:NO cancelreason:nil cancelcontent:nil  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"接收预约responseObject:%@",responseObject);
+        
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
         NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+        
         if (type == 1) {
+            
+            [self postNotificationMakeSummarRefreshUI];
+            
             [self showTotasViewWithMes:@"操作成功"];
-            [[[self tableView] refreshHeader] beginRefreshing];
+            
+            //[[[self tableView] refreshHeader] beginRefreshing];
+            [self.navigationController popViewControllerAnimated:YES];
+            
         }else{
+            
             [self dealErrorResponseWithTableView:nil info:responseObject];
+            
         }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [self showTotasViewWithMes:@"网络异常"];
