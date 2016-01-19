@@ -73,7 +73,7 @@
 - (void)initNavBar
 {
     [self resetNavBar];
-    self.myNavigationItem.title = @"教学内容确定";
+    self.myNavigationItem.title = @"评价";
     UIButton *buttonRight = [self getBarButtonWithTitle:@"确定"];
     [buttonRight addTarget:self action:@selector(rightButtonDidClick:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithCustomView:buttonRight];

@@ -17,13 +17,13 @@
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitle:highTitle forState:UIControlStateHighlighted];
     button.titleLabel.font = [UIFont systemFontOfSize:14];
-    [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     
     CGFloat itemX = 0.0;
     CGFloat itemW = [title sizeWithFont:[UIFont systemFontOfSize:14]].width;
     CGFloat itemH = 44;
-    if (isRightItem==YES) {
+    if (isRightItem) {
         itemX = 10+5;
         button.titleLabel.textAlignment = NSTextAlignmentRight;
     }else{

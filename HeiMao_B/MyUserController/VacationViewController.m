@@ -273,6 +273,9 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
         
         if (messege.intValue == 1) {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"modifyVacation" object:self];
+            
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
             [alerview show];
             [self.navigationController popViewControllerAnimated:YES];
@@ -283,4 +286,10 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
     }];
 
 }
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end

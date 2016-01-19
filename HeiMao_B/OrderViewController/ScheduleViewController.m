@@ -15,6 +15,7 @@
 #import "CourseSummaryDayCell.h"
 #import "CourseDetailViewController.h"
 #import "NoContentTipView.h"
+#import "VacationViewController.h"
 
 @interface ScheduleViewController () <UITableViewDataSource,UITableViewDelegate,FDCalendarDelegate>
 
@@ -54,16 +55,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self resetNavBar];
-    self.myNavigationItem.title = @"日程";
-    
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.isNeedRefresh = YES;
     [self initUI];
     [self addNotification];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modifyVacation) name:@"modifyVacation" object:nil];
+    
 }
 
+- (void)modifyVacation
+{
+    [self fdCalendar:nil didSelectedDate:[NSDate date]];
+}
+
+- (void)restBtnDidClick
+{
+    VacationViewController *vacation = [[VacationViewController alloc] init];
+    [self.navigationController pushViewController:vacation animated:YES];
+}
 
 #pragma mark Life Sycle
 - (void)viewWillAppear:(BOOL)animated
@@ -71,7 +82,12 @@
     [super viewWillAppear:animated];
     
     [self resetNavBar];
+    
     self.myNavigationItem.title = @"日程";
+    
+    self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"休假" highTitle:@"休假" target:self action:@selector(restBtnDidClick) isRightItem:YES];
+    
+    //self.myNavigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTitle:@"今天" highTitle:@"今天" target:self action:@selector(modifyVacation) isRightItem:NO];
 
     [self.scrollView setContentOffset:CGPointMake(1 * self.scrollView.width, self.scrollView.contentOffset.y) animated:YES];
 
