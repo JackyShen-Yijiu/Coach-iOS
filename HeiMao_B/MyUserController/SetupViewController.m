@@ -179,8 +179,10 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
                 
             }
         }else if (indexPath.row == 2) {
+            
             if ([NSUserStoreTool getObjectWithKey:@"classremind"]) {
                 NSNumber *num = [NSUserStoreTool getObjectWithKey:@"classremind"];
+                NSLog(@"num:%d",num.intValue);
                 switchControl.on = num.intValue;
             }else {
                 switchControl.on = YES;

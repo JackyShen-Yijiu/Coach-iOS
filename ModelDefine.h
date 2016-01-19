@@ -14,9 +14,9 @@
 typedef NS_ENUM(NSInteger,KCourseStatue){
     
     KCourseStatueInvalid = 0,
-    KCourseStatueapplying = 1,   // 预约中(新订单)-------"预约中"
+    KCourseStatueapplying = 1,   // 预约中(新订单)-------"预约中"（待接受）
     KCourseStatueapplycancel = 2,// 学生取消（已取消)-------"学生取消"
-    KCourseStatueapplyconfirm,  // 已确定(新订单)-------"新订单"
+    KCourseStatueapplyconfirm,  // 已确定(新订单)-------"新订单"（已接受）
     KCourseStatueapplyrefuse,      // 教练拒绝或者取消（已取消）-------"已取消"
     KCourseStatueunconfirmfinish, //  待确认完成(无此状态)-------"待确认完成"
     KCourseStatueucomments,    // 待评论(待评论)-------"待评论"
@@ -30,10 +30,10 @@ typedef NS_ENUM(NSInteger,KCourseStatue){
 
 
 #pragma mark -- 对应APP首页顶部分类
-//新订单:applyconfirm=3,  // 已确定
-//待评论:ucomments:6,//待评论
-//已取消:applycancel:2,// 学生取消
-//已完成:finish:7,  // 订单完成
+//新订单:applying=1,
+//待评论:ucomments:6,
+//已取消:applycancel:2
+//已完成:finish:7,
 
 #pragma mark -- 对应APP界面显示
 /*

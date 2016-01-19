@@ -234,22 +234,38 @@
     
     // 工作时间
     NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
-    NSString *beginTime = [[UserInfoModel defaultUserInfo] beginTime];
-    NSString *endTime = [[UserInfoModel defaultUserInfo] endTime];
+    NSLog(@"weekArray:%@",weekArray);
+    //NSString *beginTime = [[UserInfoModel defaultUserInfo] beginTime];
+    //NSString *endTime = [[UserInfoModel defaultUserInfo] endTime];
     NSString * workSetDes = @"未设置";
-    if (weekArray.count) {
-        workSetDes = @"已设置";
+    if (weekArray && weekArray.count>0) {
         
-        if (beginTime&&endTime) {
+        NSMutableString *mutableStr = [NSMutableString string];
+        
+        for (int i = 0; i<weekArray.count; i++) {
             
-            NSString *startDate = [self dateStringWithDateNumber:[weekArray[0] integerValue]];
-            NSString *endDate = [self dateStringWithDateNumber:[[weekArray lastObject] integerValue]];
-            workSetDes = [NSString stringWithFormat:@"%@至%@\n%@点-%@点",startDate,endDate,beginTime,endTime];
+            if (i==0) {
+               
+                NSString *startDate = [NSString stringWithFormat:@"%@",[self dateStringWithDateNumber:[weekArray[i] integerValue]]];
+                [mutableStr appendString:startDate];
+ 
+            }else if (i!=0&&i!=weekArray.count-1){
+                
+                NSString *startDate = [NSString stringWithFormat:@"%@,",[self dateStringWithDateNumber:[weekArray[i] integerValue]]];
+                [mutableStr appendString:startDate];
+                
+            }else if (i==weekArray.count-1) {
+               
+                NSString *endDate = [NSString stringWithFormat:@"%@",[self dateStringWithDateNumber:[weekArray[i] integerValue]]];
+                [mutableStr appendString:endDate];
+
+            }
+            
             
         }
+        workSetDes = mutableStr;
         
     }
-    NSLog(@"weekArray:%@ beginTime:%@ endTime:%@",weekArray,beginTime,endTime);
     
     //可授科目
     NSArray *array = [UserInfoModel defaultUserInfo].subject;
@@ -298,7 +314,7 @@
 
 - (NSString *)dateStringWithDateNumber:(NSInteger)number
 {
-    if (number==0) {
+    if (number==7) {
         return @"周日";
     }else if (number==1){
         return @"周一";

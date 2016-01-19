@@ -172,7 +172,7 @@
     WS(ws);
     [NetWorkEntiry getAllCourseInfoWithUserId:userId DayTime:dataStr  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"%s responseObject:%@",__func__,responseObject);
+        NSLog(@"切换日历获取最新数据:responseObject:%@",responseObject);
         
         NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
         
