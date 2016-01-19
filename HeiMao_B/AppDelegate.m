@@ -36,8 +36,6 @@
     
     [self sysConfigWithApplication:application LaunchOptions:launchOptions];
     
-    [ProjectGuideView showViewWithDelegate:nil];
-    
     if (([UIDevice jeSystemVersion] > 7.99)&&
         ([UIDevice jeSystemVersion] < 9.001)) {
         
@@ -54,6 +52,8 @@
     self.window.rootViewController =  self.navController;
     [self.window makeKeyAndVisible];
     
+    [ProjectGuideView showViewWithDelegate:nil];
+
     if ([UserInfoModel isLogin]) {
         [self loginViewControllerdidLoginSucess:nil];
     }
