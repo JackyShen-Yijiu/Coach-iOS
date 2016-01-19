@@ -132,10 +132,8 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.naviBarRightButton];
     self.navigationItem.rightBarButtonItem = rightItem;
     
-    self.dataArray = @[@"工作日",@"星期日",@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六"];
+    self.dataArray = @[@"工作日",@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六",@"星期日"];
     [self.view addSubview:self.tableView];
-    
-    
     
     self.tableView.tableFooterView = [self tableViewFootView];
 
@@ -145,13 +143,20 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     NSArray * workWook = [[UserInfoModel defaultUserInfo] workweek];
+    
+    NSLog(@"viewWillAppear workWook:%@",workWook);
+    
     if (workWook.count)
         [self.upDateArray addObjectsFromArray:workWook];
     
     self.beginTextField.text = [[UserInfoModel defaultUserInfo] beginTime];
+    
     self.endTextField.text = [[UserInfoModel defaultUserInfo] endTime];
+    
     [self.tableView reloadData];
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -203,6 +208,7 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     button.tag = 100 + indexPath.row;
     [button setBackgroundImage:[UIImage imageNamed:@"cancelSelect_click"] forState:UIControlStateSelected];
     [button setSelected:[self hasSeleted:indexPath.row]];
+    
     if (indexPath.row != 0) {
         cell.accessoryView = button;
         cell.userInteractionEnabled = YES;
@@ -217,8 +223,10 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
 
 - (BOOL)hasSeleted:(NSInteger)indexRow
 {
+    NSLog(@"hasSeleted self.upDateArray:%@",self.upDateArray);
+    
     for (NSNumber * value in self.upDateArray) {
-        if ([value integerValue] + 1  == indexRow) {
+        if ([value integerValue] == indexRow) {
             return YES;
         }
     }
@@ -239,7 +247,11 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     }
  
     NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kchangeWorkTime];
+    
     NSMutableString *workweek = [[NSMutableString alloc] init];
+    
+    NSLog(@"--self.upDateArray:%@",self.upDateArray);
+
     for (NSInteger i = 0; i<self.upDateArray.count; i++) {
         NSNumber *num = self.upDateArray[i];
         if (i == self.upDateArray.count - 1 ) {
@@ -248,6 +260,9 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
             [workweek appendFormat:@"%@,",num];
         }
     }
+    
+    NSLog(@"++self.upDateArray:%@",self.upDateArray);
+    
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:0];
     if (self.upDateArray.count) {
         [dic setValue:self.upDateArray forKey:@"weekList"];
@@ -299,27 +314,37 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
 
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     [self.endTextField resignFirstResponder];
+    
     [self.beginTextField resignFirstResponder];
+    
     for (UIButton *b in self.buttonArray) {
+        
         if (b.tag == indexPath.row + 100) {
+            
             if (b.selected == YES) {
+                
                 b.selected = NO;
 //                UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 //                cell.textLabel.textColor = [UIColor blackColor];
-                NSNumber *num = [NSNumber numberWithInteger:indexPath.row - 1];
+                NSNumber *num = [NSNumber numberWithInteger:indexPath.row];
                 [self.upDateArray removeObject:num];
 
             }else if (b.selected == NO) {
+                
                 b.selected = YES;
 //                UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 //                cell.textLabel.textColor = kDefaultTintColor;
-                NSNumber *num = [NSNumber numberWithInteger:indexPath.row - 1];
+                NSNumber *num = [NSNumber numberWithInteger:indexPath.row];
                 [self.upDateArray addObject:num];
 
             }
         }
     }
+    
+    NSLog(@"didSelect self.upDateArray:%@",self.upDateArray);
+    
 }
 
 
