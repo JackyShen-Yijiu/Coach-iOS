@@ -10,6 +10,7 @@
 #import <Masonry/Masonry.h>
 #import "NSString+DY_MD5.h"
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
+static NSString *const kchangePassword = @"kchangePassword";
 
 @interface GainPasswordViewController ()
 @property (strong, nonatomic) UIButton *accomplishButton;
@@ -160,7 +161,12 @@
         if (type.integerValue == 1) {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改密码成功" controller:self];
             [alerview show];
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"kForgetPassworkControllerDismiss" object:nil];
+            
+            
+
         }else {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
             [alerview show];
