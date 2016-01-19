@@ -45,6 +45,9 @@ static NSDateFormatter *dateFormattor;
         [self setFrame:CGRectMake(0, 0, DeviceWidth, CGRectGetMaxY(self.scrollView.frame))];
         
         [self setCurrentDate:self.date];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modifyVacation) name:@"modifyVacation" object:nil];
+
     }
     return self;
 }
@@ -147,6 +150,11 @@ static NSDateFormatter *dateFormattor;
     self.rightCalendarItem.frame = itemFrame;
     [self.scrollView addSubview:self.rightCalendarItem];
     
+}
+
+- (void)modifyVacation
+{
+    [self setCurrentDate:[NSDate date]];
 }
 
 // 设置当前日期，初始化

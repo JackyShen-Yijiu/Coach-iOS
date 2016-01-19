@@ -354,7 +354,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
                 cell.layer.cornerRadius = cell.frame.size.height / 2;
                 cell.dayLabel.textColor = [UIColor blackColor];
                 cell.chineseDayLabel.textColor = [UIColor blackColor];
-                cell.restLabel.textColor = [UIColor blueColor];
+                cell.restLabel.textColor = RGB_Color(31, 124, 235);
 
             }else{
             
@@ -377,7 +377,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
                 
                 cell.dayLabel.textColor = [UIColor blackColor];
                 cell.chineseDayLabel.textColor = [UIColor blackColor];
-                cell.restLabel.textColor = [UIColor blueColor];
+                cell.restLabel.textColor = RGB_Color(31, 124, 235);
 
             }
             
