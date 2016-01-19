@@ -23,7 +23,7 @@
     if (_modifyNameTextField == nil) {
         _modifyNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 20, kSystemWide, 44)];
         _modifyNameTextField.backgroundColor = [UIColor whiteColor];
-         _modifyNameTextField.keyboardType = UIKeyboardTypeNumberPad;
+        _modifyNameTextField.keyboardType = UIKeyboardTypeNumberPad;
         if ([UserInfoModel defaultUserInfo].name) {
             _modifyNameTextField.text = [NSString stringWithFormat:@"%lu",[UserInfoModel defaultUserInfo].Seniority];
         }
@@ -68,6 +68,11 @@
 }
 - (void)clickRight:(UIButton *)sender {
     
+    if ([self.modifyNameTextField.text integerValue]>30) {
+        [self showTotasViewWithMes:@"驾龄不能大于30"];
+        return;
+    }
+    
     //
     DYNSLog(@"userid = %@",self.modifyNameTextField.text);
     
@@ -87,7 +92,7 @@
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
         
         if (messege.intValue == 1) {
-          
+            
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
             [alerview show];
             [UserInfoModel defaultUserInfo].Seniority = [self.modifyNameTextField.text integerValue];
