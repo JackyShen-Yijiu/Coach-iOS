@@ -347,11 +347,23 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
         cell.chineseDayLabel.hidden = NO;
 
         if (day == [[NSCalendar currentCalendar] component:NSCalendarUnitDay fromDate:self.date]) {
-            cell.backgroundColor = [UIColor redColor];
-            cell.layer.cornerRadius = cell.frame.size.height / 2;
-            cell.dayLabel.textColor = [UIColor whiteColor];
-            cell.chineseDayLabel.textColor = [UIColor whiteColor];
+            
+            if (day == [[NSCalendar currentCalendar] component:NSCalendarUnitDay fromDate:[NSDate date]]) {
+                
+                cell.backgroundColor = [UIColor redColor];
+                cell.layer.cornerRadius = cell.frame.size.height / 2;
+                cell.dayLabel.textColor = [UIColor blackColor];
+                cell.chineseDayLabel.textColor = [UIColor blackColor];
+                cell.restLabel.textColor = [UIColor blueColor];
 
+            }else{
+            
+                cell.backgroundColor = [UIColor lightGrayColor];
+                cell.layer.cornerRadius = cell.frame.size.height / 2;
+                cell.dayLabel.textColor = [UIColor whiteColor];
+                cell.chineseDayLabel.textColor = [UIColor whiteColor];
+                
+            }
         }
         
         // 如果日期和当期日期同年同月不同天, 注：第一个判断中的方法是iOS8的新API, 会比较传入单元以及比传入单元大得单元上数据是否相等，亲测同时传入Year和Month结果错误
@@ -360,12 +372,13 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
             // 将当前日期的那天高亮显示
             if (day == [[NSCalendar currentCalendar] component:NSCalendarUnitDay fromDate:[NSDate date]]) {
                 
-                cell.backgroundColor = [UIColor clearColor];
+                cell.backgroundColor = [UIColor redColor];
                 cell.layer.cornerRadius = cell.height/2;
                 
-                cell.dayLabel.textColor = [UIColor blueColor];
-                cell.chineseDayLabel.textColor = [UIColor blueColor];
-                
+                cell.dayLabel.textColor = [UIColor blackColor];
+                cell.chineseDayLabel.textColor = [UIColor blackColor];
+                cell.restLabel.textColor = [UIColor blueColor];
+
             }
             
             NSDate *curDate = [self dateOfMonth:FDCalendarMonthCurrent WithDay:day];
