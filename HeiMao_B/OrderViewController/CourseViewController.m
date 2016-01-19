@@ -175,7 +175,7 @@
     [self setUpRightNavBar];
 
     if (index==0) {
-        self.reservationstate = 3;
+        self.reservationstate = 1;
     }else if (index==1){
         self.reservationstate = 6;
     }else if (index==2){

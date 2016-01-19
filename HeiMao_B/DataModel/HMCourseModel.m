@@ -67,13 +67,13 @@
         case  KCourseStatueInvalid :
              break;
         case  KCourseStatueapplying :   // 预约中
-            return @"预约中";
+            return @"待接受";
             break;
         case  KCourseStatueapplycancel :// 学生取消
             return @"学生取消";
             break;
         case  KCourseStatueapplyconfirm:  // 已确定
-            return @"新订单";
+            return @"已接受";
             break;
         case  KCourseStatueapplyrefuse:      // 教练（拒绝或者取消）
             return @"已取消";
