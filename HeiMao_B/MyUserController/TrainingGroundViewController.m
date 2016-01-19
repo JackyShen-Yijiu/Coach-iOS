@@ -88,7 +88,14 @@ static NSString *const kTrainingGround = @"getschooltrainingfield?schoolid=%@";
         }
     }];
 }
-- (void)clickRight:(UIButton *)sender {
+- (void)clickRight:(UIButton *)sender
+{
+    
+    if (self.model==nil) {
+        ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"请选择训练场地" controller:self];
+        [alerview show];
+        return;
+    }
     
     NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
     
