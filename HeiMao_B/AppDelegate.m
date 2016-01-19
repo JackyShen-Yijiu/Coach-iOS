@@ -33,18 +33,9 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    LoginViewController * loginViewC = [[LoginViewController alloc] init];
-    loginViewC.delegate = self;
-    self.navController = [[HMNagationController alloc] initWithRootViewController:loginViewC];
-    self.window.rootViewController =  self.navController;
-    [self.window makeKeyAndVisible];
-    if ([UserInfoModel isLogin]) {
-        [self loginViewControllerdidLoginSucess:nil];
-    }
-    if([self isReciveFromHunaxin:launchOptions]){
-        [self.navController jumpToMessageList];
-    }
+    
     [self sysConfigWithApplication:application LaunchOptions:launchOptions];
+    
     [ProjectGuideView showViewWithDelegate:nil];
     
     if (([UIDevice jeSystemVersion] > 7.99)&&
@@ -57,6 +48,19 @@
     }
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
+    LoginViewController * loginViewC = [[LoginViewController alloc] init];
+    loginViewC.delegate = self;
+    self.navController = [[HMNagationController alloc] initWithRootViewController:loginViewC];
+    self.window.rootViewController =  self.navController;
+    [self.window makeKeyAndVisible];
+    
+    if ([UserInfoModel isLogin]) {
+        [self loginViewControllerdidLoginSucess:nil];
+    }
+    if([self isReciveFromHunaxin:launchOptions]){
+        [self.navController jumpToMessageList];
+    }
+  
     return YES;
     
 }
