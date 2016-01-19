@@ -223,13 +223,20 @@
 
 - (void)courseDetailViewDidClickRecommentButton:(CourseDetailView *)view
 {
-    //评论
-    CoureseRatingController * crc = [[CoureseRatingController alloc] init];
-    crc.courseId = self.model.courseId;
-    crc.studentModel = self.model.studentInfo;
-    crc.delegate = self;
-    [self.navigationController pushViewController:crc animated:YES];
+    //确认学完
+    OrderCompleteViewController * completeController = [[OrderCompleteViewController alloc] init];
+    completeController.courseModel = view.model;
+    completeController.delegate = self;
+    [self.navigationController pushViewController:completeController animated:YES];
 }
+//{
+//    //评论
+//    CoureseRatingController * crc = [[CoureseRatingController alloc] init];
+//    crc.courseId = self.model.courseId;
+//    crc.studentModel = self.model.studentInfo;
+//    crc.delegate = self;
+//    [self.navigationController pushViewController:crc animated:YES];
+//}
 
 
 - (void)courseDetailViewDidClickStudentDetail:(CourseDetailView *)view
