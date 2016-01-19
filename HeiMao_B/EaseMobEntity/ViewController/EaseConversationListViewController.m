@@ -287,7 +287,7 @@ static NSString *kGroupName = @"GroupName";
                 [ws.dataArray addObject:topData1];
                 
                 EaseConversationModel *topData2 = [[EaseConversationModel alloc] init];
-                topData2.title = @"咨询消息";
+                topData2.title = @"资讯消息";
                 topData2.detailsTitle = [self strTolerance:self.zixunDetailsStr];
                 topData2.time = [self strTolerance:self.zixunTimeStr];
                 topData2.avatarPic = @"systemImg.png";
