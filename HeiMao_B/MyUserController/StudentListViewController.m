@@ -80,15 +80,12 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
 }
 
 - (void)startDownLoad {
-    NSInteger seqix = 1;
-    NSString *url = [NSString stringWithFormat:kstudentList,[UserInfoModel defaultUserInfo].userID,seqix];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],url];
     WS(ws);
     self.tableView.refreshHeader.beginRefreshingBlock = ^()
     {
         
-        NSInteger seqix = 1;
-        NSString *url = [NSString stringWithFormat:kstudentList,[UserInfoModel defaultUserInfo].userID,seqix];
+        NSInteger startSeqix = 1;
+        NSString *url = [NSString stringWithFormat:kstudentList,[UserInfoModel defaultUserInfo].userID,startSeqix];
         NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],url];
 
         [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data)
@@ -115,6 +112,7 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
         }];
     };
     [self.tableView refreshFooter].beginRefreshingBlock = ^(){
+        
         if(ws.dataArray.count % RELOADDATACOUNT)
         {
             [ws showTotasViewWithMes:@"已经加载所有数据"];
@@ -122,9 +120,19 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
             ws.tableView.refreshFooter.scrollView = nil;
             return ;
         }
+        NSInteger seqix = ws.dataArray.count / RELOADDATACOUNT + 1;
+        NSString *url = [NSString stringWithFormat:kstudentList,[UserInfoModel defaultUserInfo].userID,seqix];
+        NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],url];
+
         [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data)
          {
              NSArray *param = [data objectForKey:@"data"];
+             if (param.count == ws.dataArray.count) {
+                 [ws showTotasViewWithMes:@"已经加载所有数据"];
+                 [ws.tableView.refreshFooter endRefreshing];
+                 ws.tableView.refreshFooter.scrollView = nil;
+                 return ;
+             }
              if (param != nil && ![param isEqual:[NSNull null]] && param.count > 0)
              {
                  for (NSDictionary *dic in param)
@@ -133,16 +141,12 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
                      [ws.dataArray addObject:stuModel];
                      [ws.tableView.refreshHeader endRefreshing];
                  }
-             }
-             if (ws.dataArray.count==0)
-             {
-                 ws.tipView1.hidden = NO;
-             }else
-             {
-                 ws.tipView1.hidden = YES;
+             } else{
+                 [ws showTotasViewWithMes:@"已经加载所有数据"];
              }
              
              [ws.tableView reloadData];
+             [ws.tableView.refreshFooter endRefreshing];
          }];
 
         
