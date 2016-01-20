@@ -125,15 +125,22 @@
     self.schoolLabel.text = [NSString stringWithFormat:@"报考驾校：%@",[_model.schoolInfo schoolName]];
     self.carLicenseTypeLabel.text = [NSString stringWithFormat:@"车       型： %@  %@",[_model carLicenseInfo].code, [_model carLicenseInfo].name];
     
-    NSString * courseSchedu = [NSString stringWithFormat:@"学车进度： %@",[_model courseSchedule]];
-    NSDictionary * attru = @{
-                             NSFontAttributeName:[UIFont systemFontOfSize:14.f]
-                             };
-    NSMutableAttributedString * atr = [[NSMutableAttributedString alloc] initWithString:courseSchedu attributes:attru];
-    
-    [atr addAttribute:NSForegroundColorAttributeName value:RGB_Color(0x28, 0x79, 0xf3) range:NSMakeRange(6, courseSchedu.length - 6)];
-    
-    [self.courseScheduleLabel setAttributedText:atr];
+    if ([_model courseSchedule] && [_model courseSchedule].length!=0) {
+        
+        NSString * courseSchedu = [NSString stringWithFormat:@"学车进度： %@",[_model courseSchedule]];
+        
+        NSDictionary * attru = @{
+                                 NSFontAttributeName:[UIFont systemFontOfSize:14.f]
+                                 };
+        NSMutableAttributedString * atr = [[NSMutableAttributedString alloc] initWithString:courseSchedu attributes:attru];
+        
+        [atr addAttribute:NSForegroundColorAttributeName value:RGB_Color(0x28, 0x79, 0xf3) range:NSMakeRange(6, courseSchedu.length - 6)];
+        
+        [self.courseScheduleLabel setAttributedText:atr];
+        
+    }
+
+   
     
     self.commmonAddressLabel.text = [NSString stringWithFormat:@"接送地址： %@",[_model commmonAddress]];
     
