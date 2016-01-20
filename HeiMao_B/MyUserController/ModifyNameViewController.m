@@ -71,6 +71,11 @@
 }
 - (void)clickRight:(UIButton *)sender {
     //
+    if (self.modifyNameTextField.text.length > 6) {
+        [self showTotasViewWithMes:@"姓名长度不能超过六个字符!"];
+        return;
+    }
+
     DYNSLog(@"userid = %@",self.modifyNameTextField.text);
     NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
     
