@@ -235,34 +235,30 @@
     // 工作时间
     NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
     NSLog(@"weekArray:%@",weekArray);
-    //NSString *beginTime = [[UserInfoModel defaultUserInfo] beginTime];
-    //NSString *endTime = [[UserInfoModel defaultUserInfo] endTime];
+    NSLog(@"weekArray.count:%lu",weekArray.count);
+
+//    NSString *beginTime = [[UserInfoModel defaultUserInfo] beginTime];
+//    NSString *endTime = [[UserInfoModel defaultUserInfo] endTime];
     NSString * workSetDes = @"未设置";
     if (weekArray && weekArray.count>0) {
         
         NSMutableString *mutableStr = [NSMutableString string];
         
-        for (int i = 0; i<weekArray.count; i++) {
+        if (weekArray.count==7) {
             
-            if (i==0) {
-               
-                NSString *startDate = [NSString stringWithFormat:@"%@",[self dateStringWithDateNumber:[weekArray[i] integerValue]]];
-                [mutableStr appendString:startDate];
- 
-            }else if (i!=0&&i!=weekArray.count-1){
+            [mutableStr appendString:@"周一至周日"];
+            
+        }else{
+           
+            for (int i = 0; i<weekArray.count; i++) {
                 
-                NSString *startDate = [NSString stringWithFormat:@"%@,",[self dateStringWithDateNumber:[weekArray[i] integerValue]]];
-                [mutableStr appendString:startDate];
-                
-            }else if (i==weekArray.count-1) {
-               
                 NSString *endDate = [NSString stringWithFormat:@"%@",[self dateStringWithDateNumber:[weekArray[i] integerValue]]];
                 [mutableStr appendString:endDate];
-
+                
             }
             
-            
         }
+        
         workSetDes = mutableStr;
         
     }
@@ -314,7 +310,7 @@
 
 - (NSString *)dateStringWithDateNumber:(NSInteger)number
 {
-    if (number==7) {
+    if (number==0) {
         return @"周日";
     }else if (number==1){
         return @"周一";
@@ -328,7 +324,8 @@
         return @"周五";
     }else if (number==6){
         return @"周六";
-    }return @"";
+    }
+    return nil;
 }
 #pragma mark - initUI
 
