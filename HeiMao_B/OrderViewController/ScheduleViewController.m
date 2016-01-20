@@ -85,7 +85,7 @@
     
     self.myNavigationItem.title = @"日程";
     
-    self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"休假" highTitle:@"休假" target:self action:@selector(restBtnDidClick) isRightItem:YES];
+    //self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"休假" highTitle:@"休假" target:self action:@selector(restBtnDidClick) isRightItem:YES];
     
     //self.myNavigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTitle:@"今天" highTitle:@"今天" target:self action:@selector(modifyVacation) isRightItem:NO];
 
