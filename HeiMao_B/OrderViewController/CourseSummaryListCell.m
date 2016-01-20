@@ -233,10 +233,10 @@
             self.statueLabel.textColor = RGB_Color(0xff, 0x93, 0x33);
 
             break;
-        case  KCourseStatueOnCommended: // 评论成功（已完成）
-            self.statueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
-
-            break;
+//        case  KCourseStatueOnCommended: // 评论成功（已完成）
+//            self.statueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+//
+//            break;
         case  KCourseStatuefinish: // 订单完成（已完成）
             
             break;

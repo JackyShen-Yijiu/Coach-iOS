@@ -10,13 +10,12 @@
 #import "CourseDetailView.h"
 #import "SutdentHomeController.h"
 #import "CourseCancelController.h"
-#import "CoureseRatingController.h"
 #import "RefreshTableView.h"
 #import "CourseDetailViewCell.h"
 #import "ChatViewController.h"
 #import "OrderCompleteViewController.h"
 
-@interface CourseDetailViewController()<CourseDetailViewDelegate,UITableViewDataSource,UITableViewDelegate,CourseCancelControllerDelegate,CoureseRatingControllerDelegate,OrderCompleteViewControllerDelegate>
+@interface CourseDetailViewController()<CourseDetailViewDelegate,UITableViewDataSource,UITableViewDelegate,CourseCancelControllerDelegate,OrderCompleteViewControllerDelegate>
 @property(nonatomic,strong)RefreshTableView * tableView;
 @property(nonatomic,strong)HMCourseModel * model;
 @property(nonatomic,assign)BOOL isNeedRefresh;
@@ -224,15 +223,27 @@
 
 - (void)orderCompleteViewControllerDidEnsutreSucess:(OrderCompleteViewController *)controller :(BOOL)isGotoRecomend
 {
-    [[self myNavController] popViewControllerAnimated:!isGotoRecomend];
-    if (isGotoRecomend) {
-        //评论
-        CoureseRatingController * crc = [[CoureseRatingController alloc] init];
-        crc.courseId = self.model.courseId;
-        crc.studentModel = self.model.studentInfo;
-        crc.delegate = self;
-        [self.navigationController pushViewController:crc animated:YES];
-    }
+    [[self myNavController] popViewControllerAnimated:isGotoRecomend];
+    
+//    {
+//        //确认学完
+//        OrderCompleteViewController * completeController = [[OrderCompleteViewController alloc] init];
+//        completeController.courseModel = view.model;
+//        completeController.delegate = self;
+//        [self.navigationController pushViewController:completeController animated:YES];
+//    }
+    
+//    if (isGotoRecomend) {
+//
+//        [[self.tableView refreshHeader] beginRefreshing];
+//
+////        //评论
+////        CoureseRatingController * crc = [[CoureseRatingController alloc] init];
+////        crc.courseId = self.model.courseId;
+////        crc.studentModel = self.model.studentInfo;
+////        crc.delegate = self;
+////        [self.navigationController pushViewController:crc animated:YES];
+//    }
     self.isNeedRefresh = YES;
 }
 
@@ -263,12 +274,6 @@
 
 #pragma mark - delegate
 - (void)courseCancelControllerDidOpeartionSucess:(CourseCancelController *)controller
-{
-    [self.navigationController popViewControllerAnimated:YES];
-    [[self.tableView refreshHeader] beginRefreshing];
-}
-
-- (void)coureseRatingControllerDidOpeartionSucess:(CoureseRatingController *)controller
 {
     [self.navigationController popViewControllerAnimated:YES];
     [[self.tableView refreshHeader] beginRefreshing];

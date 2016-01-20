@@ -420,14 +420,16 @@
             [self.leftButton setHBackColor:RGB_Color(0x24, 0x6d, 0xd0)];
         }
             break;
-        case  KCourseStatueOnCommended: // 评论成功（已完成）
-
-            [self.leftButton setHidden:YES];
-            [self.rightButton setHidden:YES];
-            
-            break;
+//        case  KCourseStatueOnCommended: // 评论成功（已完成）
+//
+//            [self.leftButton setHidden:YES];
+//            [self.rightButton setHidden:YES];
+//            
+//            break;
         case  KCourseStatuefinish: // 订单完成（已完成）
-        
+          
+            self.leftButton.hidden = YES;
+            
             break;
         case  KCourseStatuesystemcancel: // 系统取消（已取消）
 
@@ -617,12 +619,12 @@
             }
         }
             break;
-        case  KCourseStatueOnCommended: // 评论成功（已完成）
-            
-            [self.leftButton setHidden:YES];
-            [self.rightButton setHidden:YES];
-            
-            break;
+//        case  KCourseStatueOnCommended: // 评论成功（已完成）
+//            
+//            [self.leftButton setHidden:YES];
+//            [self.rightButton setHidden:YES];
+//            
+//            break;
         case  KCourseStatuefinish: // 订单完成（已完成）
             
             break;
