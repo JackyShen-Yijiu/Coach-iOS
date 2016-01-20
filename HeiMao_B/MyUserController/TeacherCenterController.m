@@ -242,20 +242,26 @@
     NSLog(@"weekArray:%@",weekArray);
     NSLog(@"weekArray.count:%lu",weekArray.count);
     
+    NSArray *newArray = [self bubbleSort:weekArray];
+    NSLog(@"newArray:%@",newArray);
+    for (int i = 0;i<newArray.count;i++) {
+        NSLog(@"i:%d",[newArray[i] intValue]);
+    }
+    
     NSString * workSetDes = @"未设置";
-    if (weekArray && weekArray.count>0) {
+    if (newArray && newArray.count>0) {
         
         NSMutableString *mutableStr = [NSMutableString string];
         
-        if (weekArray.count==7) {
+        if (newArray.count==7) {
             
             [mutableStr appendString:@"周一至周日"];
             
         }else{
            
-            for (int i = 0; i<weekArray.count; i++) {
+            for (int i = 0; i<newArray.count; i++) {
                 
-                NSString *endDate = [NSString stringWithFormat:@"%@",[self dateStringWithDateNumber:[weekArray[i] integerValue]]];
+                NSString *endDate = [NSString stringWithFormat:@"%@",[self dateStringWithDateNumber:[newArray[i] integerValue]]];
                 [mutableStr appendString:endDate];
                 
             }
@@ -321,10 +327,11 @@
             
             if (args[i]>args[j]){
                 
-                NSInteger temp = (NSInteger)args[i];
+                int temp = [args[i] intValue];
                 
-                args[i] = args[j];
-                
+//                args[i] = args[j];
+                [args replaceObjectAtIndex:i withObject:args[j]];
+
                 args[j] = @(temp);
                
             }
