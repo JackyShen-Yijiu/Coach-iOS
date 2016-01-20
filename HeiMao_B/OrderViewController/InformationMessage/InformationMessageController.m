@@ -10,6 +10,7 @@
 #import "InformationMessageCell.h"
 #import "InformationMessageViewModel.h"
 #import "RefreshTableView.h"
+#import "InformationMessageDetailController.h"
 
 @interface InformationMessageController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -114,21 +115,10 @@
     [super didReceiveMemoryWarning];
     
 }
-////赋值 and 自动换行,计算出cell的高度
-//-(void)setIntroductionText:(NSString*)text{
-//    //获得当前cell高度
-//    CGRect frame = [self frame];
-//    //文本赋值
-//    self.introduction.text = text;
-//    //设置label的最大行数
-//    self.introduction.numberOfLines = 10;
-//    CGSize size = CGSizeMake(300, 1000);
-//    CGSize labelSize = [self.introduction.text sizeWithFont:self.introduction.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
-//    self.introduction.frame = CGRectMake(self.introduction.frame.origin.x, self.introduction.frame.origin.y, labelSize.width, labelSize.height);
-//    
-//    //计算出自适应的高度
-//    frame.size.height = labelSize.height+100;
-//    
-//    self.frame = frame;
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    InformationMessageDetailController *informationMessageDetailVC = [[InformationMessageDetailController alloc] init];
+    InformationMessageModel *resultModel =_informationMessageViewModel.informationArray[indexPath.row];
+    informationMessageDetailVC.urlStr = resultModel.contenturl;
+    [self.navigationController pushViewController:informationMessageDetailVC animated:YES];
+}
 @end
