@@ -63,38 +63,39 @@
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.detailBackView.mas_top).offset(10);
-        make.left.equalTo(self.detailBackView.mas_left).offset(20);
+        make.left.equalTo(self.detailBackView.mas_left).offset(10);
         make.width.equalTo(@200);
         make.height.equalTo(@20);
         
     }];
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.detailBackView.mas_top).offset(10);
-        make.right.equalTo(self.detailBackView.mas_right).offset(-20);
-        make.width.equalTo(@23);
-        make.height.equalTo(@29);
+        make.right.equalTo(self.detailBackView.mas_right).offset(-10);
+        make.width.equalTo(@20);
+        make.height.equalTo(@24);
         
     }];
     [self.dataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom).offset(2);
-        make.left.equalTo(self.detailBackView.mas_left).offset(20);
+        make.left.equalTo(self.detailBackView.mas_left).offset(10);
         make.width.equalTo(@100);
-        make.height.equalTo(@20);
+        make.height.equalTo(@12);
         
     }];
     [self.contentTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.dataLabel.mas_bottom).offset(-10);
-        make.left.equalTo(self.detailBackView.mas_left).offset(20);
+        make.top.equalTo(self.dataLabel.mas_bottom).offset(2);
+        make.left.equalTo(self.detailBackView.mas_left).offset(10);
         make.right.equalTo(self.detailBackView.mas_right).offset(0);
-        make.height.equalTo(@50);
+        make.height.equalTo(@25);
         
     }];
 
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentTitleLabel.mas_bottom).offset(5);
-        make.left.equalTo(self.detailBackView.mas_left).offset(20);
-        make.right.equalTo(self.detailBackView.mas_right).offset(0);
-        make.bottom.equalTo(self.detailBackView.mas_bottom).offset(-10);
+        make.top.equalTo(self.contentTitleLabel.mas_bottom).offset(0);
+        make.left.equalTo(self.detailBackView.mas_left).offset(10);
+        make.right.equalTo(self.detailBackView.mas_right).offset(-10);
+//        make.bottom.equalTo(self.detailBackView.mas_bottom).offset(-10);
+        make.height.equalTo(@50);
         
     }];
     
@@ -103,10 +104,12 @@
 - (UILabel *)timeLabel{
     if (_timeLabel == nil) {
         _timeLabel = [[ UILabel alloc] init];
-        _timeLabel.backgroundColor = [UIColor grayColor];
+        _timeLabel.backgroundColor = RGB_Color(153, 153, 153);
         _timeLabel.text = @" ";
         _timeLabel.textColor = [UIColor whiteColor];
         _timeLabel.textAlignment = UITextAlignmentCenter;
+        [_timeLabel.layer setMasksToBounds:YES];
+        [_timeLabel.layer setCornerRadius:5];
         _timeLabel.font = [UIFont systemFontOfSize:12];
     }
     return _timeLabel;
@@ -170,6 +173,7 @@
         _detailLabel.textColor = [UIColor grayColor];
         _detailLabel.numberOfLines = 0;
         _detailLabel.font = [UIFont systemFontOfSize:14];
+        
     }
     return _detailLabel;
 }
