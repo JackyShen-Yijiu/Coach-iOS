@@ -238,11 +238,10 @@
     
     // 工作时间
     NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
+    
     NSLog(@"weekArray:%@",weekArray);
     NSLog(@"weekArray.count:%lu",weekArray.count);
-
-//    NSString *beginTime = [[UserInfoModel defaultUserInfo] beginTime];
-//    NSString *endTime = [[UserInfoModel defaultUserInfo] endTime];
+    
     NSString * workSetDes = @"未设置";
     if (weekArray && weekArray.count>0) {
         
@@ -311,6 +310,29 @@
   
     [self.tableView reloadData];
 }
+
+- (NSArray *)bubbleSort:(NSArray *)arg{//冒泡排序算法
+    
+    NSMutableArray *args = [NSMutableArray arrayWithArray:arg];
+    
+    for(int i=0;i<args.count-1;i++){
+        
+        for(int j=i+1;j<args.count;j++){
+            
+            if (args[i]>args[j]){
+                
+                NSInteger temp = (NSInteger)args[i];
+                
+                args[i] = args[j];
+                
+                args[j] = @(temp);
+               
+            }
+        }
+    }
+    return args;
+}
+
 
 - (NSString *)dateStringWithDateNumber:(NSInteger)number
 {
