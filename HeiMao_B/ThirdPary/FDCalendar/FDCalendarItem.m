@@ -8,10 +8,13 @@
 
 #import "FDCalendarItem.h"
 
+#define cellWidth_Height 35
+
 @interface FDCalendarCell : UICollectionViewCell
 
 @property(nonatomic,assign) KCellStation station;
 
+- (UIView *)selectView;
 - (UILabel *)dayLabel;
 - (UILabel *)chineseDayLabel;
 - (UILabel *)pointView;
@@ -23,12 +26,12 @@
 @implementation FDCalendarCell
 
 {
+    UIView *_selectView;
     UILabel *_dayLabel;
     UILabel *_chineseDayLabel;
     UIView *_pointView;
     UIView * _lineView;
     UILabel *_restLabel;
-
 }
 
 - (UILabel *)dayLabel {
@@ -44,7 +47,7 @@
 - (UILabel *)restLabel {
     
     if (!_restLabel) {
-        _restLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width-18, 3, 15, 15)];
+        _restLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width-12, 0, 15, 15)];
         _restLabel.textAlignment = NSTextAlignmentCenter;
         _restLabel.font = [UIFont systemFontOfSize:10];
         _restLabel.backgroundColor = [UIColor clearColor];
@@ -82,13 +85,24 @@
     if (!_pointView) {
         _pointView = [[UIView alloc] init];
         _pointView.backgroundColor =  [UIColor grayColor];
-        _pointView.frame = CGRectMake(_chineseDayLabel.center.x-2,self.height-2, 4, 4);
+        _pointView.frame = CGRectMake(_chineseDayLabel.center.x-2,self.height-7, 4, 4);
         _pointView.layer.masksToBounds = YES;
         [_pointView setHidden:YES];
         _pointView.layer.cornerRadius = _pointView.size.width/2.f;
         [self addSubview:_pointView];
     }
     return _pointView;
+}
+- (UIView *)selectView
+{
+    if (!_selectView) {
+        _selectView = [[UIView alloc] init];
+        _selectView.frame = CGRectMake(self.width/2-cellWidth_Height/2,self.height/2-cellWidth_Height/2-3,cellWidth_Height,cellWidth_Height);
+        _selectView.layer.masksToBounds = YES;
+        _selectView.layer.cornerRadius = _selectView.size.width/2.f;
+        [self insertSubview:_selectView belowSubview:self.contentView];
+    }
+    return _selectView;
 }
 
 - (void)layoutSubviews
@@ -107,7 +121,7 @@
             break;
     }
    // self.maskView.center = CGPointMake(self.width/2.f, self.height/2.f);
-    [self pointView].center = CGPointMake(self.width/2.f, self.height-3);
+    [self pointView].center = CGPointMake(self.width/2.f, self.height-7);
 }
 
 - (void)setIsSeletedDay:(BOOL)isSeletedDay curDay:(BOOL)isCurDay
@@ -166,7 +180,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     if (self = [super init]) {
         self.backgroundColor = [UIColor clearColor];
         [self setupCollectionView];
-        [self setFrame:CGRectMake(0, 0, DeviceWidth, self.collectionView.frame.size.height + CollectionViewVerticalMargin * 2)];
+        [self setFrame:CGRectMake(0, 0, DeviceWidth, self.collectionView.frame.size.height + CollectionViewVerticalMargin * 2+12)];
     }
     return self;
 }
@@ -217,7 +231,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     
     UICollectionViewFlowLayout *flowLayot = [[UICollectionViewFlowLayout alloc] init];
     flowLayot.sectionInset = UIEdgeInsetsZero;
-    flowLayot.itemSize = CGSizeMake(itemWidth, itemHeight);
+    flowLayot.itemSize = CGSizeMake(itemWidth, itemHeight+10);
     flowLayot.minimumLineSpacing = 0;
     flowLayot.minimumInteritemSpacing = 0;
     
@@ -304,15 +318,24 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     cell.dayLabel.textColor = [UIColor blackColor];
     cell.chineseDayLabel.textColor = [UIColor grayColor];
     
+    cell.selectView.hidden = YES;
+    
     NSInteger firstWeekday = [self weekdayOfFirstDayInDate];
     NSInteger totalDaysOfMonth = [self totalDaysInMonthOfDate:self.date];
     NSInteger totalDaysOfLastMonth = [self totalDaysInMonthOfDate:[self previousMonthDate]];
     
     // cell点击变色
     UIView* selectedBGView = [[UIView alloc] initWithFrame:cell.bounds];
-    selectedBGView.layer.masksToBounds = YES;
-    selectedBGView.layer.cornerRadius = cell.frame.size.height / 2;
-    selectedBGView.backgroundColor = [UIColor lightGrayColor];
+    selectedBGView.backgroundColor = [UIColor clearColor];
+    
+//    _selectView.frame = CGRectMake(self.width/2-size/2,self.height/2-size/2-3,size,size);
+    
+    UIView *selVc = [[UIView alloc] initWithFrame:CGRectMake(cell.width/2-cellWidth_Height/2,cell.height/2-cellWidth_Height/2-3,cellWidth_Height,cellWidth_Height)];
+    selVc.layer.masksToBounds = YES;
+    selVc.layer.cornerRadius = selVc.height / 2;
+    selVc.backgroundColor = [UIColor lightGrayColor];
+    [selectedBGView addSubview:selVc];
+    
     cell.selectedBackgroundView = selectedBGView;
     
     if (indexPath.row < firstWeekday) {// 小于这个月的第一天
@@ -350,16 +373,19 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
             
             if (day == [[NSCalendar currentCalendar] component:NSCalendarUnitDay fromDate:[NSDate date]]) {
                 
-                cell.backgroundColor = [UIColor redColor];
-                cell.layer.cornerRadius = cell.frame.size.height / 2;
-                cell.dayLabel.textColor = [UIColor blackColor];
-                cell.chineseDayLabel.textColor = [UIColor blackColor];
+                cell.selectView.hidden = NO;
+                cell.selectView.backgroundColor = [UIColor redColor];
+
+                cell.dayLabel.textColor = [UIColor whiteColor];
+                cell.chineseDayLabel.textColor = [UIColor whiteColor];
                 cell.restLabel.textColor = RGB_Color(31, 124, 235);
 
+                
             }else{
             
-                cell.backgroundColor = [UIColor lightGrayColor];
-                cell.layer.cornerRadius = cell.frame.size.height / 2;
+                cell.selectView.hidden = NO;
+                cell.selectView.backgroundColor = [UIColor lightGrayColor];
+
                 cell.dayLabel.textColor = [UIColor whiteColor];
                 cell.chineseDayLabel.textColor = [UIColor whiteColor];
                 
@@ -372,11 +398,11 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
             // 将当前日期的那天高亮显示
             if (day == [[NSCalendar currentCalendar] component:NSCalendarUnitDay fromDate:[NSDate date]]) {
                 
-                cell.backgroundColor = [UIColor redColor];
-                cell.layer.cornerRadius = cell.height/2;
-                
-                cell.dayLabel.textColor = [UIColor blackColor];
-                cell.chineseDayLabel.textColor = [UIColor blackColor];
+                cell.selectView.hidden = NO;
+                cell.selectView.backgroundColor = [UIColor redColor];
+
+                cell.dayLabel.textColor = [UIColor whiteColor];
+                cell.chineseDayLabel.textColor = [UIColor whiteColor];
                 cell.restLabel.textColor = RGB_Color(31, 124, 235);
 
             }
