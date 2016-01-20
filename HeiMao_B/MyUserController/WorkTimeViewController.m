@@ -132,7 +132,7 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.naviBarRightButton];
     self.navigationItem.rightBarButtonItem = rightItem;
     
-    self.dataArray = @[@"工作日",@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六",@"星期日"];
+    self.dataArray = @[@"星期日",@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六"];
     [self.view addSubview:self.tableView];
     
     self.tableView.tableFooterView = [self tableViewFootView];
@@ -209,13 +209,8 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     [button setBackgroundImage:[UIImage imageNamed:@"cancelSelect_click"] forState:UIControlStateSelected];
     [button setSelected:[self hasSeleted:indexPath.row]];
     
-    if (indexPath.row != 0) {
-        cell.accessoryView = button;
-        cell.userInteractionEnabled = YES;
+    cell.accessoryView = button;
 
-    }else {
-        cell.userInteractionEnabled = NO;
-    }
     [self.buttonArray addObject:button];
     
     return cell;

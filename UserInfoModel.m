@@ -179,7 +179,7 @@
     if (!workTime) {
         workTime = [NSMutableDictionary dictionaryWithCapacity:0];
     }
-    [workTime setValue:endTime forKey:@"begintimeint"];
+    [workTime setValue:endTime forKey:@"endtimeint"];
     [mdic setValue:workTime forKey:@"worktimespace"];
     [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
 }
