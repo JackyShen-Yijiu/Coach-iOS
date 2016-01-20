@@ -107,14 +107,24 @@
                 [NetWorkEntiry getAllRecomendWithUserID:ws.studentId WithIndex:1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
                     if (type == 1) {
-                        ws.model.recommendArrays = [[BaseModelMethod getRecomendListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+                        
+                        NSArray *dataArray = [BaseModelMethod getRecomendListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]];
+                        
+                        ws.model.recommendArrays = [dataArray mutableCopy];
+                        
                         dispatch_async(dispatch_get_main_queue(), ^{
                             ws.tableView.refreshFooter.scrollView = ws.tableView;
                             [ws.tableView.refreshHeader endRefreshing];
                             [ws.tableView reloadData];
                         });
-                        
                         [ws.buttonRight setHidden:![ws.model.telPhoto length]];
+                        
+                        if (dataArray.count>=10) {
+                            ws.tableView.refreshFooter.scrollView = ws.tableView;
+                        }else{
+                            ws.tableView.refreshFooter.scrollView = nil;
+                        }
+                        
                     }else{
                         [ws.buttonRight setHidden:YES];
                         [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];

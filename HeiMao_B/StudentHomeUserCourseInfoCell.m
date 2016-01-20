@@ -140,9 +140,9 @@
         
     }
 
-   
-    
-    self.commmonAddressLabel.text = [NSString stringWithFormat:@"接送地址： %@",[_model commmonAddress]];
+    if ([_model commmonAddress] && [[_model commmonAddress] length]!=0) {
+        self.commmonAddressLabel.text = [NSString stringWithFormat:@"接送地址： %@",[_model commmonAddress]];
+    }
     
 }
 
