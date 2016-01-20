@@ -51,7 +51,7 @@
     if ([UIDevice jeSystemVersion] >= 7.0) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    self.title = @"自我介绍";
+    self.title = @"个人说明";
     self.view.backgroundColor = RGBColor(245, 247, 250);
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.naviBarRightButton];
     self.navigationItem.rightBarButtonItem = rightItem;
