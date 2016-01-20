@@ -55,6 +55,8 @@
         _contentLabel.backgroundColor = [UIColor clearColor];
         _contentLabel.textAlignment = NSTextAlignmentLeft;
         _contentLabel.textColor = RGB_Color(0x33, 0x33, 0x33);
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelDidClick)];
+        [_contentLabel addGestureRecognizer:tap];
         [self addSubview:_contentLabel];
     }
     return _contentLabel;
@@ -80,6 +82,10 @@
     _model = model;
     [self.seletedButton setSelected:_model.isSeleted];
     self.contentLabel.text = _model.title;
+}
+
+- (void)labelDidClick {
+    [self buttonDidClick:_seletedButton];
 }
 
 - (void)buttonDidClick:(UIButton *)button
