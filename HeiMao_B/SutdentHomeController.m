@@ -213,7 +213,7 @@
     
     if(section == 4 && self.model.leavecoursecount == 0){
         //最后一行
-        [self setNExtViewTitle:[NSString stringWithFormat:@"报考%@",self.model.subjectInfo.subJectName]];
+        [self setNExtViewTitle:[NSString stringWithFormat:@"可报考%@",self.model.subjectInfo.subJectName]];
         return self.nextView;
     }
     return [UIView new];

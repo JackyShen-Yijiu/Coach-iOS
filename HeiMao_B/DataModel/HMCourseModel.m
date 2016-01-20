@@ -84,9 +84,9 @@
         case  KCourseStatueucomments:    // 待评论
             return @"待评价";
             break;
-        case  KCourseStatueOnCommended: // 评论成功
-            return @"评价成功";
-            break;
+//        case  KCourseStatueOnCommended: // 评论成功
+//            return @"评价成功";
+//            break;
         case  KCourseStatuefinish: // 订单完成
             return @"订单完成";
             break;
@@ -97,7 +97,7 @@
             return @"已签到";
             break;
         case  KCourseStatuenosignin: // 未签到
-            return @"未签到";
+            return @"已漏课";
             break;
         
     }

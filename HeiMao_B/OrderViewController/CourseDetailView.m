@@ -337,7 +337,7 @@
             
         case  KCourseStatueInvalid :
             break;
-        case  KCourseStatueapplying :   // 预约中(新订单)
+        case  KCourseStatueapplying :   // "预约中"（待接受）
         {
             [self.leftButton setTitle:@"拒绝" forState:UIControlStateNormal];
             [self.leftButton setTitle:@"拒绝" forState:UIControlStateHighlighted];
@@ -353,6 +353,10 @@
             [self.rightButton setTitleColor:RGB_Color(0x33, 0x33, 0x33) forState:UIControlStateNormal];
             [self.rightButton setNBackColor:[UIColor whiteColor]];
             [self.rightButton setHBackColor:RGB_Color(0xe5, 0xe5, 0xe5)];
+            self.rightButton.layer.masksToBounds = YES;
+            self.rightButton.layer.cornerRadius = 2;
+            self.rightButton.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+            self.rightButton.layer.borderWidth = 0.5;
             
             // 自动接收预约
             NSNumber *num = [NSUserStoreTool getObjectWithKey:@"classremind"];
@@ -371,37 +375,35 @@
 
             
             break;
-        case  KCourseStatueapplyconfirm:  // 已确定(新订单)
-//        {
-//            [self.leftButton setTitle:@"拒绝" forState:UIControlStateNormal];
-//            [self.leftButton setTitle:@"拒绝" forState:UIControlStateHighlighted];
-//            [self.leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//            [self.leftButton setNBackColor:RGB_Color(31, 124, 235)];
-//            [self.leftButton setHBackColor:RGB_Color(0x24, 0x6d, 0xd0)];
-//            self.leftButton.layer.borderColor = RGB_Color(201, 201, 201).CGColor;
-//            self.leftButton.layer.borderWidth = 1.f;
-//            
-//            [self.rightButton setHidden:NO];
-//            [self.rightButton setTitle:@"接受" forState:UIControlStateNormal];
-//            [self.rightButton setTitle:@"接受" forState:UIControlStateHighlighted];
-//            [self.rightButton setTitleColor:RGB_Color(0x33, 0x33, 0x33) forState:UIControlStateNormal];
-//            [self.rightButton setNBackColor:[UIColor whiteColor]];
-//            [self.rightButton setHBackColor:RGB_Color(0xe5, 0xe5, 0xe5)];
-//            self.rightButton.layer.masksToBounds = YES;
-//            self.rightButton.layer.cornerRadius = 2;
-//            self.rightButton.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-//            self.rightButton.layer.borderWidth = 0.5;
-//           
-//            // 自动接收预约
-//            NSNumber *num = [NSUserStoreTool getObjectWithKey:@"classremind"];
-//            NSLog(@"自动接收预约num:%d",num.intValue);
-//            if (num&&num.intValue==0) {// 未自动接收预约
-//                [self.rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//                [self.rightButton setNBackColor:RGB_Color(31, 124, 235)];
-//                [self.rightButton setHBackColor:RGB_Color(0x24, 0x6d, 0xd0)];
-//                
-//            }
-//        }
+        case  KCourseStatueapplyconfirm:  // "新订单"（已接受）
+        {
+            // 自动接收预约
+            NSNumber *num = [NSUserStoreTool getObjectWithKey:@"classremind"];
+            NSLog(@"自动接收预约num:%d",num.intValue);
+            if (num&&num.intValue==1) {// 自动接收预约
+                
+                [self.leftButton setTitle:@"拒绝" forState:UIControlStateNormal];
+                [self.leftButton setTitle:@"拒绝" forState:UIControlStateHighlighted];
+                [self.leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                [self.leftButton setNBackColor:RGB_Color(31, 124, 235)];
+                [self.leftButton setHBackColor:RGB_Color(0x24, 0x6d, 0xd0)];
+                self.leftButton.layer.borderColor = RGB_Color(201, 201, 201).CGColor;
+                self.leftButton.layer.borderWidth = 1.f;
+                
+                [self.rightButton setHidden:NO];
+                [self.rightButton setTitle:@"接受" forState:UIControlStateNormal];
+                [self.rightButton setTitle:@"接受" forState:UIControlStateHighlighted];
+                [self.rightButton setTitleColor:RGB_Color(0x33, 0x33, 0x33) forState:UIControlStateNormal];
+                [self.rightButton setNBackColor:[UIColor whiteColor]];
+                [self.rightButton setHBackColor:RGB_Color(0xe5, 0xe5, 0xe5)];
+                self.rightButton.layer.masksToBounds = YES;
+                self.rightButton.layer.cornerRadius = 2;
+                self.rightButton.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+                self.rightButton.layer.borderWidth = 0.5;
+                
+            }
+        }
+       
             break;
         case  KCourseStatueapplyrefuse:      // 教练拒绝或者取消（已取消）
 
@@ -418,14 +420,16 @@
             [self.leftButton setHBackColor:RGB_Color(0x24, 0x6d, 0xd0)];
         }
             break;
-        case  KCourseStatueOnCommended: // 评论成功（已完成）
-
-            [self.leftButton setHidden:YES];
-            [self.rightButton setHidden:YES];
-            
-            break;
+//        case  KCourseStatueOnCommended: // 评论成功（已完成）
+//
+//            [self.leftButton setHidden:YES];
+//            [self.rightButton setHidden:YES];
+//            
+//            break;
         case  KCourseStatuefinish: // 订单完成（已完成）
-        
+          
+            self.leftButton.hidden = YES;
+            
             break;
         case  KCourseStatuesystemcancel: // 系统取消（已取消）
 
@@ -442,14 +446,14 @@
             
             break;
         case  KCourseStatuenosignin: // 未签到(已完成)
-        {
-            [self.rightButton setHighlighted:YES];
-            [self.leftButton setTitle:@"取消课程" forState:UIControlStateNormal];
-            [self.leftButton setTitle:@"取消课程" forState:UIControlStateHighlighted];
-            [self.leftButton setNBackColor:RGB_Color(205, 212, 217)];
-            [self.leftButton setHBackColor:HM_HIGHTCOLOR];
-            
-        }
+//        {
+//            [self.rightButton setHighlighted:YES];
+//            [self.leftButton setTitle:@"取消课程" forState:UIControlStateNormal];
+//            [self.leftButton setTitle:@"取消课程" forState:UIControlStateHighlighted];
+//            [self.leftButton setNBackColor:RGB_Color(205, 212, 217)];
+//            [self.leftButton setHBackColor:HM_HIGHTCOLOR];
+//            
+//        }
             break;
             
     }
@@ -544,7 +548,7 @@
             
         case  KCourseStatueInvalid :
             break;
-        case  KCourseStatueapplying :   // 预约中(新订单)
+        case  KCourseStatueapplying :   // "预约中"（待接受）
         {
             if (button.tag == 200) {// 接收
                 
@@ -572,28 +576,35 @@
             
             
             break;
-        case  KCourseStatueapplyconfirm:  // 已确定(新订单)
-//        {
-//            if (button.tag == 200) {// 接收
-//                
-//                // 自动接收预约
-//                NSNumber *num = [NSUserStoreTool getObjectWithKey:@"classremind"];
-//                NSLog(@"自动接收预约num:%d",num.intValue);
-//                if (num&&num.intValue==0) {// 未自动接收预约
+        case  KCourseStatueapplyconfirm:  // "新订单"（已接受）
+        {
+            // 自动接收预约
+            NSNumber *num = [NSUserStoreTool getObjectWithKey:@"classremind"];
+            NSLog(@"自动接收预约num:%d",num.intValue);
+            if (num&&num.intValue==1) {// 自动接收预约
+                
+                if (button.tag == 200) {// 接收
 //                    
-//                    if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickAgreeButton:)]) {
-//                        [_delegate courseDetailViewDidClickAgreeButton:self];
+//                    // 自动接收预约
+//                    NSNumber *num = [NSUserStoreTool getObjectWithKey:@"classremind"];
+//                    NSLog(@"自动接收预约num:%d",num.intValue);
+//                    if (num&&num.intValue==0) {// 未自动接收预约
+//                        
+//                        if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickAgreeButton:)]) {
+//                            [_delegate courseDetailViewDidClickAgreeButton:self];
+//                        }
+//                        
 //                    }
-//                    
-//                }
-//                
-//            }else{// 拒绝
-//                
-//                if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickDisAgreeButton:)]) {
-//                    [_delegate courseDetailViewDidClickDisAgreeButton:self];
-//                }
-//            }
-//        }
+                    
+                }else{// 拒绝
+                    
+                    if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickDisAgreeButton:)]) {
+                        [_delegate courseDetailViewDidClickDisAgreeButton:self];
+                    }
+                }
+                
+            }
+        }
             break;
         case  KCourseStatueapplyrefuse:      // 教练拒绝或者取消（已取消）
             
@@ -608,12 +619,12 @@
             }
         }
             break;
-        case  KCourseStatueOnCommended: // 评论成功（已完成）
-            
-            [self.leftButton setHidden:YES];
-            [self.rightButton setHidden:YES];
-            
-            break;
+//        case  KCourseStatueOnCommended: // 评论成功（已完成）
+//            
+//            [self.leftButton setHidden:YES];
+//            [self.rightButton setHidden:YES];
+//            
+//            break;
         case  KCourseStatuefinish: // 订单完成（已完成）
             
             break;
@@ -630,12 +641,12 @@
             
             break;
         case  KCourseStatuenosignin: // 未签到(已完成)
-        {
-            if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickCanCelButton:)]) {
-                [_delegate courseDetailViewDidClickCanCelButton:self];
-            }
-            
-        }
+//        {
+//            if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickCanCelButton:)]) {
+//                [_delegate courseDetailViewDidClickCanCelButton:self];
+//            }
+//            
+//        }
             break;
             
     }

@@ -124,7 +124,9 @@
         [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];
     
     self.mainTitle.text = _model.userName;
-    self.subTitle.text = [NSString stringWithFormat:@"ID %@",_model.disPlayId];
+    if (_model.courseSchedule) {
+        self.subTitle.text = [NSString stringWithFormat:@"%@",_model.courseSchedule];
+    }
     [self setNeedsUpdateConstraints];
 }
 

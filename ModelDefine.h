@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger,KCourseStatue){
     KCourseStatueapplyrefuse,      // 教练拒绝或者取消（已取消）-------"已取消"
     KCourseStatueunconfirmfinish, //  待确认完成(无此状态)-------"待确认完成"
     KCourseStatueucomments,    // 待评论(待评论)-------"待评论"
-    KCourseStatueOnCommended, // 评论成功（已完成）-------"评论成功"
+//    KCourseStatueOnCommended, // 评论成功（已完成）-------"评论成功"
     KCourseStatuefinish, // 订单完成（已完成）-------"订单完成"
     KCourseStatuesystemcancel, // 系统取消（已取消）-------"系统取消"
     KCourseStatuesignin, // 已签到(新订单)-------"已签到"

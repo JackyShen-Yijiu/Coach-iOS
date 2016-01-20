@@ -211,8 +211,8 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
         
     }else if (picker.tag == 101) {
         self.finalStart.text = destDateString;
+        [self checkDate];
     }
-    
 }
 - (void)timeChange:(UIDatePicker *)picker {
     
@@ -231,6 +231,7 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
 }
 - (void)clickRight:(UIButton *)sender {
     
+    [self checkNotFilledContent];
     if (self.beginStart.text == nil || self.beginStart.text.length == 0) {
         return;
     }
@@ -286,6 +287,59 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
     }];
 
 }
+
+- (void)checkDate {
+    
+    NSString *begin = [NSString stringWithFormat:@"%@",self.beginStart.text];
+    NSString *end = [NSString stringWithFormat:@"%@",self.finalStart.text];
+    
+    NSDateFormatter *dateFormatter =  [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
+    NSDate *beginDate = [dateFormatter dateFromString:begin];
+    NSDate *endDate = [dateFormatter dateFromString:end];
+    if ([beginDate timeIntervalSince1970] >= [endDate timeIntervalSince1970]) {
+        self.finalStart.text = @"";
+        [self showTotasViewWithMes:@"结束时间必须大于开始时间"];
+    }
+}
+
+- (void)checkNotFilledContent {
+    
+    if (!self.beginStart.text.length) {
+        [self showTotasViewWithMes:@"请选择开始日期"];
+        return ;
+    }
+    if (!self.beginEnd.text.length) {
+        [self showTotasViewWithMes:@"请选择开始时间"];
+        return ;
+    }
+    if (!self.finalStart.text.length) {
+        [self showTotasViewWithMes:@"请选择结束日期"];
+        return ;
+    }
+    if (!self.finalEnd.text.length) {
+        [self showTotasViewWithMes:@"请选择结束时间"];
+    }
+}
+
+//- (void)checkTime {
+//    
+//    if (self.beginStart.text.length && self.beginEnd.text.length) {
+//        <#statements#>
+//    }
+//    
+//    NSString *begin = [NSString stringWithFormat:@"%@",self.beginEnd.text];
+//    NSString *end = [NSString stringWithFormat:@"%@",self.finalEnd.text];
+//    
+//    NSDateFormatter *dateFormatter =  [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
+//    NSDate *beginDate = [dateFormatter dateFromString:begin];
+//    NSDate *endDate = [dateFormatter dateFromString:end];
+//    if ([beginDate timeIntervalSince1970] >= [endDate timeIntervalSince1970]) {
+//        self.finalStart.text = @"";
+//        [self showTotasViewWithMes:@"结束时间必须大于开始时间"];
+//    }
+//}
 
 - (void)dealloc
 {

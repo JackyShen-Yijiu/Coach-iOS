@@ -78,7 +78,6 @@
 		B8447A141BE0DE09004E5E15 /* CourseDesInPutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A131BE0DE09004E5E15 /* CourseDesInPutCell.m */; };
 		B8447A171BE0E456004E5E15 /* CoursePicListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A161BE0E456004E5E15 /* CoursePicListCell.m */; };
 		B8447A1A1BE1BEC2004E5E15 /* CourseEnsureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A191BE1BEC2004E5E15 /* CourseEnsureCell.m */; };
-		B8447A1F1BE1CC0D004E5E15 /* CoureseRatingController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A1E1BE1CC0D004E5E15 /* CoureseRatingController.m */; };
 		B8447A221BE1CC25004E5E15 /* CWStarRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A211BE1CC25004E5E15 /* CWStarRateView.m */; };
 		B8447A251BE1CC9E004E5E15 /* CourseRatingUserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A241BE1CC9E004E5E15 /* CourseRatingUserInfoCell.m */; };
 		B8447A281BE1E150004E5E15 /* CourseRatingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8447A271BE1E150004E5E15 /* CourseRatingCell.m */; };
@@ -584,8 +583,6 @@
 		B8447A161BE0E456004E5E15 /* CoursePicListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursePicListCell.m; sourceTree = "<group>"; };
 		B8447A181BE1BEC2004E5E15 /* CourseEnsureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseEnsureCell.h; sourceTree = "<group>"; };
 		B8447A191BE1BEC2004E5E15 /* CourseEnsureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseEnsureCell.m; sourceTree = "<group>"; };
-		B8447A1D1BE1CC0D004E5E15 /* CoureseRatingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoureseRatingController.h; sourceTree = "<group>"; };
-		B8447A1E1BE1CC0D004E5E15 /* CoureseRatingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoureseRatingController.m; sourceTree = "<group>"; };
 		B8447A201BE1CC25004E5E15 /* CWStarRateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStarRateView.h; sourceTree = "<group>"; };
 		B8447A211BE1CC25004E5E15 /* CWStarRateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWStarRateView.m; sourceTree = "<group>"; };
 		B8447A231BE1CC9E004E5E15 /* CourseRatingUserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseRatingUserInfoCell.h; sourceTree = "<group>"; };
@@ -1415,8 +1412,6 @@
 		B8447A1C1BE1CBF6004E5E15 /* CoureseRatingController */ = {
 			isa = PBXGroup;
 			children = (
-				B8447A1D1BE1CC0D004E5E15 /* CoureseRatingController.h */,
-				B8447A1E1BE1CC0D004E5E15 /* CoureseRatingController.m */,
 				B8447A231BE1CC9E004E5E15 /* CourseRatingUserInfoCell.h */,
 				B8447A241BE1CC9E004E5E15 /* CourseRatingUserInfoCell.m */,
 				B8447A261BE1E150004E5E15 /* CourseRatingCell.h */,
@@ -3122,7 +3117,6 @@
 				D5D50FA41BFC135B00F54097 /* ShopModel.m in Sources */,
 				B8BFA2581BF64C20002D7F22 /* CustomMessageCell.m in Sources */,
 				B253C2CF1C3FA742001AF771 /* QRCodeGenerator.m in Sources */,
-				B8447A1F1BE1CC0D004E5E15 /* CoureseRatingController.m in Sources */,
 				B8BC50901BF38A390007B029 /* EaseConvertToCommonEmoticonsHelper.m in Sources */,
 				B8BC506F1BF38A390007B029 /* NSData+EMImageContentType.m in Sources */,
 				B8BC50E21BF393D00007B029 /* EaseMessageTimeCell.m in Sources */,
