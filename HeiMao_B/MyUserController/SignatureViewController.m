@@ -11,16 +11,17 @@
 #import "ToolHeader.h"
 //static NSString *const kupdateUserInfo = @"userinfo/updatecoachinfo";
 @interface SignatureViewController ()
-@property (strong, nonatomic) UITextField *signatureTextField;
+@property (strong, nonatomic) UITextView *signatureTextField;
 @property (strong, nonatomic) UIButton *naviBarRightButton;
 @property (strong, nonatomic) UIButton *naviBarLeftButton;
 
 @end
 
 @implementation SignatureViewController
-- (UITextField *)signatureTextField {
+
+- (UITextView *)signatureTextField {
     if (_signatureTextField == nil) {
-        _signatureTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 20, kSystemWide, 44)];
+        _signatureTextField = [[UITextView alloc] initWithFrame:CGRectMake(0, 20, kSystemWide, 100)];
         _signatureTextField.backgroundColor = [UIColor whiteColor];
         if ([UserInfoModel defaultUserInfo].introduction) {
             _signatureTextField.text = [UserInfoModel defaultUserInfo].introduction;
