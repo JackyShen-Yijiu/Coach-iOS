@@ -205,7 +205,7 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 15, 15);
     [button setBackgroundImage:[UIImage imageNamed:@"cancelSelect"] forState:UIControlStateNormal];
-    button.tag = 100 + indexPath.row;
+    button.tag = 1000 + indexPath.row;
     [button setBackgroundImage:[UIImage imageNamed:@"cancelSelect_click"] forState:UIControlStateSelected];
     [button setSelected:[self hasSeleted:indexPath.row]];
     
@@ -249,7 +249,7 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
 
     for (NSInteger i = 0; i<self.upDateArray.count; i++) {
         NSNumber *num = self.upDateArray[i];
-        if (i == self.upDateArray.count - 1 ) {
+        if (i == self.upDateArray.count) {
            [workweek appendFormat:@"%@",num ];
         }else {
             [workweek appendFormat:@"%@,",num];
@@ -271,6 +271,7 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     NSArray *second = [self.endTextField.text componentsSeparatedByString:@":"];
     
     NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"workweek":workweek,@"worktimedesc":workDes,@"begintimeint":first.firstObject,@"endtimeint":second.firstObject};
+    NSLog(@"param:%@",param);
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
@@ -316,7 +317,7 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     
     for (UIButton *b in self.buttonArray) {
         
-        if (b.tag == indexPath.row + 100) {
+        if (b.tag == indexPath.row + 1000) {
             
             if (b.selected == YES) {
                 
