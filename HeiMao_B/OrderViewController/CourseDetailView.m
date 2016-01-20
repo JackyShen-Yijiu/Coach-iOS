@@ -420,14 +420,16 @@
             [self.leftButton setHBackColor:RGB_Color(0x24, 0x6d, 0xd0)];
         }
             break;
-        case  KCourseStatueOnCommended: // 评论成功（已完成）
-
-            [self.leftButton setHidden:YES];
-            [self.rightButton setHidden:YES];
-            
-            break;
+//        case  KCourseStatueOnCommended: // 评论成功（已完成）
+//
+//            [self.leftButton setHidden:YES];
+//            [self.rightButton setHidden:YES];
+//            
+//            break;
         case  KCourseStatuefinish: // 订单完成（已完成）
-        
+          
+            self.leftButton.hidden = YES;
+            
             break;
         case  KCourseStatuesystemcancel: // 系统取消（已取消）
 
@@ -444,14 +446,14 @@
             
             break;
         case  KCourseStatuenosignin: // 未签到(已完成)
-        {
-            [self.rightButton setHighlighted:YES];
-            [self.leftButton setTitle:@"取消课程" forState:UIControlStateNormal];
-            [self.leftButton setTitle:@"取消课程" forState:UIControlStateHighlighted];
-            [self.leftButton setNBackColor:RGB_Color(205, 212, 217)];
-            [self.leftButton setHBackColor:HM_HIGHTCOLOR];
-            
-        }
+//        {
+//            [self.rightButton setHighlighted:YES];
+//            [self.leftButton setTitle:@"取消课程" forState:UIControlStateNormal];
+//            [self.leftButton setTitle:@"取消课程" forState:UIControlStateHighlighted];
+//            [self.leftButton setNBackColor:RGB_Color(205, 212, 217)];
+//            [self.leftButton setHBackColor:HM_HIGHTCOLOR];
+//            
+//        }
             break;
             
     }
@@ -617,12 +619,12 @@
             }
         }
             break;
-        case  KCourseStatueOnCommended: // 评论成功（已完成）
-            
-            [self.leftButton setHidden:YES];
-            [self.rightButton setHidden:YES];
-            
-            break;
+//        case  KCourseStatueOnCommended: // 评论成功（已完成）
+//            
+//            [self.leftButton setHidden:YES];
+//            [self.rightButton setHidden:YES];
+//            
+//            break;
         case  KCourseStatuefinish: // 订单完成（已完成）
             
             break;
@@ -639,12 +641,12 @@
             
             break;
         case  KCourseStatuenosignin: // 未签到(已完成)
-        {
-            if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickCanCelButton:)]) {
-                [_delegate courseDetailViewDidClickCanCelButton:self];
-            }
-            
-        }
+//        {
+//            if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickCanCelButton:)]) {
+//                [_delegate courseDetailViewDidClickCanCelButton:self];
+//            }
+//            
+//        }
             break;
             
     }
