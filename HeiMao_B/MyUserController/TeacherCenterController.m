@@ -231,6 +231,10 @@
     
     // 训练场地
     NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
+    NSLog(@"trainName:%@",trainName);
+    if (trainName==nil) {
+        trainName = @"未设置";
+    }
     
     // 工作时间
     NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
