@@ -446,14 +446,14 @@
             
             break;
         case  KCourseStatuenosignin: // 未签到(已完成)
-        {
-            [self.rightButton setHighlighted:YES];
-            [self.leftButton setTitle:@"取消课程" forState:UIControlStateNormal];
-            [self.leftButton setTitle:@"取消课程" forState:UIControlStateHighlighted];
-            [self.leftButton setNBackColor:RGB_Color(205, 212, 217)];
-            [self.leftButton setHBackColor:HM_HIGHTCOLOR];
-            
-        }
+//        {
+//            [self.rightButton setHighlighted:YES];
+//            [self.leftButton setTitle:@"取消课程" forState:UIControlStateNormal];
+//            [self.leftButton setTitle:@"取消课程" forState:UIControlStateHighlighted];
+//            [self.leftButton setNBackColor:RGB_Color(205, 212, 217)];
+//            [self.leftButton setHBackColor:HM_HIGHTCOLOR];
+//            
+//        }
             break;
             
     }
@@ -641,12 +641,12 @@
             
             break;
         case  KCourseStatuenosignin: // 未签到(已完成)
-        {
-            if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickCanCelButton:)]) {
-                [_delegate courseDetailViewDidClickCanCelButton:self];
-            }
-            
-        }
+//        {
+//            if ([_delegate respondsToSelector:@selector(courseDetailViewDidClickCanCelButton:)]) {
+//                [_delegate courseDetailViewDidClickCanCelButton:self];
+//            }
+//            
+//        }
             break;
             
     }

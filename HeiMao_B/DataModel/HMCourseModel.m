@@ -97,7 +97,7 @@
             return @"已签到";
             break;
         case  KCourseStatuenosignin: // 未签到
-            return @"未签到";
+            return @"已漏课";
             break;
         
     }
