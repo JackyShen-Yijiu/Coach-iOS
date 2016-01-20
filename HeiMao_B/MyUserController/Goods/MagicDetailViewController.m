@@ -59,7 +59,7 @@
     
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.webView loadRequest:request];
 
     
@@ -128,6 +128,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     _webView.hidden = NO;
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error {
     [self showTotasViewWithMes:@"加载失败"];

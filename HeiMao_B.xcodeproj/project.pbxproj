@@ -15,6 +15,7 @@
 		0613DE761C46404C004A1A2E /* InformationMessageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE751C46404C004A1A2E /* InformationMessageViewModel.m */; };
 		0613DE791C4641AE004A1A2E /* InformationMessageModelRootClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE781C4641AE004A1A2E /* InformationMessageModelRootClass.m */; };
 		0613DE7C1C4642BB004A1A2E /* InformationMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613DE7B1C4642BB004A1A2E /* InformationMessageModel.m */; };
+		0631221B1C4F20AD00631E67 /* InformationMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0631221A1C4F20AD00631E67 /* InformationMessageDetailController.m */; };
 		064300781C478E8E008B5A74 /* SystemMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 064300771C478E8E008B5A74 /* SystemMessageModel.m */; };
 		0643007B1C4791B4008B5A74 /* SystemMessageModelRootClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0643007A1C4791B4008B5A74 /* SystemMessageModelRootClass.m */; };
 		0643007E1C47921E008B5A74 /* SystemMessageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0643007D1C47921E008B5A74 /* SystemMessageViewModel.m */; };
@@ -467,6 +468,8 @@
 		0613DE781C4641AE004A1A2E /* InformationMessageModelRootClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationMessageModelRootClass.m; sourceTree = "<group>"; };
 		0613DE7A1C4642BB004A1A2E /* InformationMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationMessageModel.h; sourceTree = "<group>"; };
 		0613DE7B1C4642BB004A1A2E /* InformationMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationMessageModel.m; sourceTree = "<group>"; };
+		063122191C4F20AD00631E67 /* InformationMessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationMessageDetailController.h; sourceTree = "<group>"; };
+		0631221A1C4F20AD00631E67 /* InformationMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationMessageDetailController.m; sourceTree = "<group>"; };
 		064300761C478E8E008B5A74 /* SystemMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMessageModel.h; sourceTree = "<group>"; };
 		064300771C478E8E008B5A74 /* SystemMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMessageModel.m; sourceTree = "<group>"; };
 		064300791C4791B4008B5A74 /* SystemMessageModelRootClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMessageModelRootClass.h; sourceTree = "<group>"; };
@@ -1269,6 +1272,8 @@
 			children = (
 				0613DE6E1C462785004A1A2E /* InformationMessageController.h */,
 				0613DE6F1C462785004A1A2E /* InformationMessageController.m */,
+				063122191C4F20AD00631E67 /* InformationMessageDetailController.h */,
+				0631221A1C4F20AD00631E67 /* InformationMessageDetailController.m */,
 				0613DE741C46404C004A1A2E /* InformationMessageViewModel.h */,
 				0613DE751C46404C004A1A2E /* InformationMessageViewModel.m */,
 				0613DE771C4641AE004A1A2E /* InformationMessageModelRootClass.h */,
@@ -3179,6 +3184,7 @@
 				D5F72BBA1BF99D3900B972B0 /* PFActionSheetView.m in Sources */,
 				B8BC505D1BF38A390007B029 /* UIView+MJExtension.m in Sources */,
 				D964C7E41C43B5BD0009FE7A /* DVVBaseViewModel.m in Sources */,
+				0631221B1C4F20AD00631E67 /* InformationMessageDetailController.m in Sources */,
 				B84479DB1BDFB35D004E5E15 /* HMButton.m in Sources */,
 				B865C17F1BDCA4D600C1E681 /* PortraitView.m in Sources */,
 				B8BC505F1BF38A390007B029 /* MWGridCell.m in Sources */,
