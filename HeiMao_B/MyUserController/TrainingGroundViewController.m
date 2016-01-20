@@ -81,7 +81,12 @@ static NSString *const kTrainingGround = @"getschooltrainingfield?schoolid=%@";
                 buttonSelectedModel *model = [[buttonSelectedModel alloc] init];
                 model.infoId = dic[@"id"];
                 model.name = dic[@"name"];
-                model.is_selected = NO;
+                NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
+                if (trainName && [trainName isEqualToString:dic[@"name"]]) {
+                    model.is_selected = YES;
+                }else{
+                    model.is_selected = NO;
+                }
                 [self.dataArray addObject:model];
             }
             [self.tableView reloadData];
