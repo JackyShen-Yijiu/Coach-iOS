@@ -229,7 +229,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     _addTag(textField.text);
     [textField resignFirstResponder];
-    textField.text = @"";
+//    textField.text = @"";
     return YES;
 }
 
