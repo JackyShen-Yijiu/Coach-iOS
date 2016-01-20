@@ -45,7 +45,7 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 @implementation EditorUserViewController
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = @[@[@"",@"姓名"],@[@"身份证",@"联系电话",@"教练证",@"驾龄",@"性别"],@[@"个性标签",@"个人说明"]];
+        _dataArray = @[@[@"",@"姓名"],@[@"身份证",@"联系电话",@"教练证",@"教龄",@"性别"],@[@"个性标签",@"个人说明"]];
     }
     return _dataArray;
 }

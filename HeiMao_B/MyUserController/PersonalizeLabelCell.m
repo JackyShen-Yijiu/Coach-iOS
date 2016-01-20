@@ -11,6 +11,7 @@
 
 @interface PersonalizeLabelCell () <UITextFieldDelegate> {
     NSInteger _i;
+
 }
 
 @end
@@ -136,12 +137,12 @@
     NSLog(@"colorArr:%@",colorArr);
     NSLog(@"bgcolorArr:%@",bgcolorArr);
     if (isExist) {
-        UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(15, 15, [UIScreen mainScreen].bounds.size.width-30, 30)];
-        tf.placeholder = @"请输入你想要添加的标签";
-        tf.backgroundColor = [UIColor colorWithWhite:0.7 alpha:0.1];
-        tf.returnKeyType = UIReturnKeyDone;
-        tf.delegate = self;
-        [self.contentView addSubview:tf];
+        _tf = [[UITextField alloc] initWithFrame:CGRectMake(15, 15, [UIScreen mainScreen].bounds.size.width-30, 30)];
+        _tf.placeholder = @"请输入你想要添加的标签";
+        _tf.backgroundColor = [UIColor colorWithWhite:0.7 alpha:0.1];
+        _tf.returnKeyType = UIReturnKeyDone;
+        _tf.delegate = self;
+        [self.contentView addSubview:_tf];
     }
     CGFloat width = 15;
     CGFloat lineNum = 1;

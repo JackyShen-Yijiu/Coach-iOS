@@ -52,7 +52,7 @@
     if ([UIDevice jeSystemVersion] >= 7.0) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    self.title = @"驾龄";
+    self.title = @"教龄";
     self.view.backgroundColor = RGBColor(245, 247, 250);
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.naviBarRightButton];
     self.navigationItem.rightBarButtonItem = rightItem;
@@ -69,7 +69,7 @@
 - (void)clickRight:(UIButton *)sender {
     
     if ([self.modifyNameTextField.text integerValue]>30) {
-        [self showTotasViewWithMes:@"驾龄不能大于30"];
+        [self showTotasViewWithMes:@"教龄不能大于30"];
         return;
     }
     

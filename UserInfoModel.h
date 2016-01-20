@@ -52,7 +52,7 @@
 @property(nonatomic,assign)NSInteger coachtype;
 //Y码
 @property(nonatomic,assign)NSInteger fcode;
-//驾龄
+//教龄
 @property(nonatomic,assign)NSInteger Seniority;
 
 + (UserInfoModel *)defaultUserInfo;

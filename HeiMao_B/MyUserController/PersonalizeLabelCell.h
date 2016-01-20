@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) UILabel *personlizeLabel;
 @property (nonatomic, strong) NSArray *personlizeLabelArray;
+@property (nonatomic, strong) UITextField *tf;
 @property (nonatomic, copy) void (^addTag)(NSString *str);
 @property (nonatomic, copy) void (^tapTagLabel)(NSInteger tag);
 

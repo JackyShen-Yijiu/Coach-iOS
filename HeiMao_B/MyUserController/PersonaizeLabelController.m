@@ -28,6 +28,8 @@
 @property (strong, nonatomic) NSMutableArray *systemTagBGColorArray;          //系统标签颜色
 @property (strong, nonatomic) NSMutableArray *customTagBGColorArray;          //自定义标签颜色
 
+@property (nonatomic, strong) UITextField *textFiled;
+
 @end
 
 @implementation PersonaizeLabelController
@@ -96,6 +98,12 @@
 #pragma mark -   action
 
 - (void)dealRefer:(UIButton *)btn {
+    if (_textFiled.text.length > 6) {
+        ToastAlertView *alertView = [[ToastAlertView alloc] initWithTitle:@"标签不能超过6个字符!"];
+        [alertView show];
+        return;
+    }
+
     NSString *coachTags = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kchooseTag];
     NSString *tagslist = @"";
     NSMutableArray *strArray = [[NSMutableArray alloc] init];
@@ -128,7 +136,7 @@
     
     [self.view addSubview:self.referButton];
     [self.view addSubview:self.tableView];
-    
+    _textFiled.delegate = self;
     [self.referButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.view.mas_bottom).with.offset(0);
         make.left.mas_equalTo(0);
@@ -208,6 +216,7 @@
         }
     };
     [cell initUIWithNoTitleWithArray:self.dataArray[indexPath.section] WithTextFieldIsExist:indexPath.section>0?YES:NO withLabelColorArray:indexPath.section?_customTagColorArray:_systemTagColorArray withBackGroundColorArr:indexPath.section?_customTagBGColorArray:_systemTagBGColorArray];
+    _textFiled = cell.tf;
     return cell;
 }
 
@@ -231,15 +240,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
