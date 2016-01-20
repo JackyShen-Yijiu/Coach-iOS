@@ -3404,7 +3404,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
 				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
-			};
+};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
