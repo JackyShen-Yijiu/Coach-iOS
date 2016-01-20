@@ -238,7 +238,8 @@
 //
 //            break;
         case  KCourseStatuefinish: // 订单完成（已完成）
-            
+            self.statueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+
             break;
         case  KCourseStatuesystemcancel: // 系统取消（已取消）
             self.statueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
