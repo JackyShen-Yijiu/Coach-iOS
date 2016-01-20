@@ -248,12 +248,15 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     NSLog(@"--self.upDateArray:%@",self.upDateArray);
 
     for (NSInteger i = 0; i<self.upDateArray.count; i++) {
+        
         NSNumber *num = self.upDateArray[i];
-        if (i == self.upDateArray.count) {
-           [workweek appendFormat:@"%@",num ];
-        }else {
+
+        if (i==self.upDateArray.count-1){
+            [workweek appendFormat:@"%@",num];
+        }else{
             [workweek appendFormat:@"%@,",num];
         }
+        
     }
     
     NSLog(@"++self.upDateArray:%@",self.upDateArray);
