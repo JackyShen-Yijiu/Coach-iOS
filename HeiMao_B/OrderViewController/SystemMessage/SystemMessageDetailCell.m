@@ -85,30 +85,30 @@
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.detailBackView.mas_top).offset(10);
-        make.left.equalTo(self.detailBackView.mas_left).offset(20);
+        make.left.equalTo(self.detailBackView.mas_left).offset(10);
         make.width.equalTo(@200);
-        make.height.equalTo(@20);
+        make.height.equalTo(@15);
         
     }];
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.detailBackView.mas_top).offset(10);
-        make.right.equalTo(self.detailBackView.mas_right).offset(-20);
-        make.width.equalTo(@37);
-        make.height.equalTo(@30);
+        make.right.equalTo(self.detailBackView.mas_right).offset(-10);
+        make.width.equalTo(@28);
+        make.height.equalTo(@24);
         
     }];
     [self.dataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(8);
-        make.left.equalTo(self.detailBackView.mas_left).offset(20);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(5);
+        make.left.equalTo(self.detailBackView.mas_left).offset(10);
         make.width.equalTo(@100);
         make.height.equalTo(@10);
         
     }];
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.dataLabel.mas_bottom).offset(0);
-        make.left.equalTo(self.detailBackView.mas_left).offset(20);
+        make.left.equalTo(self.detailBackView.mas_left).offset(10);
         make.right.equalTo(self.detailBackView.mas_right).offset(0);
-        make.height.equalTo(@40);
+        make.height.equalTo(@30);
         
     }];
     [self.topLineView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -121,14 +121,14 @@
     }];
     [self.didClickLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topLineView.mas_bottom).offset(10);
-        make.left.equalTo(self.detailBackView.mas_left).offset(20);
+        make.left.equalTo(self.detailBackView.mas_left).offset(10);
         make.width.equalTo(@100);
         make.height.equalTo(@20);
         
     }];
     [self.arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topLineView.mas_bottom).offset(10);
-        make.right.equalTo(self.detailBackView.mas_right).offset(-20);
+        make.right.equalTo(self.detailBackView.mas_right).offset(-10);
         make.width.equalTo(@13);
         make.height.equalTo(@22);
         
@@ -146,6 +146,9 @@
         _timeLabel.text = @"昨天  10:00";
         _timeLabel.textColor = [UIColor whiteColor];
         _timeLabel.textAlignment = UITextAlignmentCenter;
+         _timeLabel.backgroundColor = RGB_Color(153, 153, 153);
+        [_timeLabel.layer setMasksToBounds:YES];
+        [_timeLabel.layer setCornerRadius:5];
         _timeLabel.font = [UIFont systemFontOfSize:12];
     }
     return _timeLabel;

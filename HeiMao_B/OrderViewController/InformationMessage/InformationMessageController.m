@@ -92,15 +92,16 @@
     return informationCell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    InformationMessageModel *model = _informationMessageViewModel.informationArray[indexPath.row];
-    InformationMessageCell *cell = (InformationMessageCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-    
-    return [cell heightWithcell:model];
+//    InformationMessageModel *model = _informationMessageViewModel.informationArray[indexPath.row];
+//    InformationMessageCell *cell = (InformationMessageCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+//    
+//    return [cell heightWithcell:model];
+    return 170;
 
-}
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 250;
-}
+};
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 250;
+//}
 #pragma mark --- Lazy加载
 - (UITableView *)tableView{
     if (_tableView == nil) {

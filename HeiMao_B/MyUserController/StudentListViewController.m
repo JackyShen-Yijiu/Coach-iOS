@@ -15,15 +15,19 @@
 #import "HMStudentModel.h"
 #import "SutdentHomeController.h"
 #import "NoContentTipView.h"
+#import "RefreshTableView.h"
 
-static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&index=1";
+static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&index=%lu";
 
 @interface StudentListViewController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic)  RefreshTableView *tableView;
+
 @property (strong, nonatomic) NSMutableArray *dataArray;
 
 @property(nonatomic,strong)NoContentTipView * tipView1;
+
+@property(nonatomic,assign)BOOL isNeedRefresh;
 
 @end
 
@@ -37,12 +41,21 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
 }
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kSystemWide, kSystemHeight-64) style:UITableViewStylePlain];
+        _tableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, 0, kSystemWide, kSystemHeight-64) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
     }
     return _tableView;
 }
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if(self.isNeedRefresh){
+        [self.tableView.refreshHeader beginRefreshing];
+    }
+    self.isNeedRefresh = NO;
+}
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -61,30 +74,116 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
     [self.tipView1 setHidden:YES];
     [self.tableView addSubview:self.tipView1];
     self.tipView1.center = CGPointMake(self.tableView .width/2.f, self.tableView.height/2.f);
+    self.isNeedRefresh = YES;
 
     [self startDownLoad];
 }
 
 - (void)startDownLoad {
-    NSString *url = [NSString stringWithFormat:kstudentList,[UserInfoModel defaultUserInfo].userID];
+    NSInteger seqix = 1;
+    NSString *url = [NSString stringWithFormat:kstudentList,[UserInfoModel defaultUserInfo].userID,seqix];
     NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],url];
-    
-    [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
-        NSArray *param = [data objectForKey:@"data"];
-        if (param != nil && ![param isEqual:[NSNull null]] && param.count > 0) {
-            for (NSDictionary *dic in param) {
-                HMStudentModel *stuModel = [HMStudentModel converJsonDicToModel:dic];
-                [self.dataArray addObject:stuModel];
-            }
-        }
-        if (self.dataArray.count==0) {
-            self.tipView1.hidden = NO;
-        }else{
-            self.tipView1.hidden = YES;
-        }
+    WS(ws);
+    self.tableView.refreshHeader.beginRefreshingBlock = ^()
+    {
         
-        [self.tableView reloadData];
-    }];
+        NSInteger seqix = 1;
+        NSString *url = [NSString stringWithFormat:kstudentList,[UserInfoModel defaultUserInfo].userID,seqix];
+        NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],url];
+
+        [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data)
+        {
+            NSArray *param = [data objectForKey:@"data"];
+            if (param != nil && ![param isEqual:[NSNull null]] && param.count > 0)
+            {
+                for (NSDictionary *dic in param)
+                {
+                    HMStudentModel *stuModel = [HMStudentModel converJsonDicToModel:dic];
+                    [ws.dataArray addObject:stuModel];
+                    [ws.tableView.refreshHeader endRefreshing];
+                }
+            }
+            if (ws.dataArray.count==0)
+            {
+                ws.tipView1.hidden = NO;
+            }else
+            {
+                ws.tipView1.hidden = YES;
+            }
+            
+            [ws.tableView reloadData];
+        }];
+    };
+    [self.tableView refreshFooter].beginRefreshingBlock = ^(){
+        if(ws.dataArray.count % RELOADDATACOUNT)
+        {
+            [ws showTotasViewWithMes:@"已经加载所有数据"];
+            [ws.tableView.refreshFooter endRefreshing];
+            ws.tableView.refreshFooter.scrollView = nil;
+            return ;
+        }
+        [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data)
+         {
+             NSArray *param = [data objectForKey:@"data"];
+             if (param != nil && ![param isEqual:[NSNull null]] && param.count > 0)
+             {
+                 for (NSDictionary *dic in param)
+                 {
+                     HMStudentModel *stuModel = [HMStudentModel converJsonDicToModel:dic];
+                     [ws.dataArray addObject:stuModel];
+                     [ws.tableView.refreshHeader endRefreshing];
+                 }
+             }
+             if (ws.dataArray.count==0)
+             {
+                 ws.tipView1.hidden = NO;
+             }else
+             {
+                 ws.tipView1.hidden = YES;
+             }
+             
+             [ws.tableView reloadData];
+         }];
+
+        
+        
+  };
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        [NetWorkEntiry getAllRecomendWithUserID:ws.studentId WithIndex:ws.model.recommendArrays.count / RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+//            if (type == 1) {
+//                NSArray * listArray = [BaseModelMethod getRecomendListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]];
+//                if (listArray.count) {
+//                    [ws.model.recommendArrays addObjectsFromArray:listArray];
+//                    [ws.tableView reloadData];
+//                }else{
+//                    [ws showTotasViewWithMes:@"已经加载所有数据"];
+//                }
+//                
+//                [ws.tableView.refreshFooter endRefreshing];
+//                
+//            }else{
+//                [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
+//            }
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            [ws netErrorWithTableView:ws.tableView];
+//            
+//        }];
+  
+
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 80.0f;
@@ -112,4 +211,19 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
     [self.navigationController pushViewController:stuH animated:YES];
 
 }
+#pragma mark Load Data
+- (void)dealErrorResponseWithTableView:(RefreshTableView *)tableview info:(NSDictionary *)dic
+{
+    [self showTotasViewWithMes:[dic objectForKey:@"msg"]];
+    [tableview.refreshHeader endRefreshing];
+    [tableview.refreshFooter endRefreshing];
+}
+
+- (void)netErrorWithTableView:(RefreshTableView*)tableView
+{
+    [self showTotasViewWithMes:@"网络异常，稍后重试"];
+    [tableView.refreshHeader endRefreshing];
+    [tableView.refreshFooter endRefreshing];
+}
+
 @end
