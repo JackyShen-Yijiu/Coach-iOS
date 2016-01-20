@@ -47,6 +47,9 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
     }
     return _tableView;
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [self startDownLoad];
+}
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -76,7 +79,7 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
     self.tipView1.center = CGPointMake(self.tableView .width/2.f, self.tableView.height/2.f);
     self.isNeedRefresh = YES;
 
-    [self startDownLoad];
+    
 }
 
 - (void)startDownLoad {
@@ -93,13 +96,22 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
             NSArray *param = [data objectForKey:@"data"];
             if (param != nil && ![param isEqual:[NSNull null]] && param.count > 0)
             {
+                [ws.dataArray removeAllObjects];
                 for (NSDictionary *dic in param)
                 {
+            
                     HMStudentModel *stuModel = [HMStudentModel converJsonDicToModel:dic];
                     [ws.dataArray addObject:stuModel];
                     [ws.tableView.refreshHeader endRefreshing];
                 }
             }
+            
+            if (param.count>=10) {
+                ws.tableView.refreshFooter.scrollView = ws.tableView;
+            }else{
+                ws.tableView.refreshFooter.scrollView = nil;
+            }
+            
             if (ws.dataArray.count==0)
             {
                 ws.tipView1.hidden = NO;
@@ -111,6 +123,7 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
             [ws.tableView reloadData];
         }];
     };
+    // 加载
     [self.tableView refreshFooter].beginRefreshingBlock = ^(){
         
         if(ws.dataArray.count % RELOADDATACOUNT)
@@ -127,42 +140,36 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
         [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data)
          {
              NSArray *param = [data objectForKey:@"data"];
-             if (param.count == ws.dataArray.count) {
-                 [ws showTotasViewWithMes:@"已经加载所有数据"];
-                 [ws.tableView.refreshFooter endRefreshing];
-                 ws.tableView.refreshFooter.scrollView = nil;
-                 return ;
-             }
+//             if (param.count == 0) {
+//                 [ws showTotasViewWithMes:@"已经加载所有数据"];
+//                 [ws.tableView.refreshFooter endRefreshing];
+//                 ws.tableView.refreshFooter.scrollView = nil;
+//                 return ;
+//             }
              if (param != nil && ![param isEqual:[NSNull null]] && param.count > 0)
              {
                  for (NSDictionary *dic in param)
                  {
                      HMStudentModel *stuModel = [HMStudentModel converJsonDicToModel:dic];
                      [ws.dataArray addObject:stuModel];
-                     [ws.tableView.refreshHeader endRefreshing];
                  }
              } else{
                  [ws showTotasViewWithMes:@"已经加载所有数据"];
              }
              
-             [ws.tableView reloadData];
+             if (param.count>=10) {
+                 ws.tableView.refreshFooter.scrollView = ws.tableView;
+             }else{
+                 ws.tableView.refreshFooter.scrollView = nil;
+             }
+             
              [ws.tableView.refreshFooter endRefreshing];
+             [ws.tableView reloadData];
          }];
 
         
         
   };
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
