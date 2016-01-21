@@ -266,33 +266,38 @@
     NSLog(@"weekArray:%@",weekArray);
     NSLog(@"weekArray.count:%lu",weekArray.count);
     
-    NSArray *newArray = [self bubbleSort:weekArray];
-    NSLog(@"newArray:%@",newArray);
-    for (int i = 0;i<newArray.count;i++) {
-        NSLog(@"i:%d",[newArray[i] intValue]);
-    }
-    
     NSString * workSetDes = @"未设置";
-    if (newArray && newArray.count>0) {
+    
+    if (weekArray) {
         
-        NSMutableString *mutableStr = [NSMutableString string];
+        NSArray *newArray = [self bubbleSort:weekArray];
+        NSLog(@"newArray:%@",newArray);
+        for (int i = 0;i<newArray.count;i++) {
+            NSLog(@"i:%d",[newArray[i] intValue]);
+        }
         
-        if (newArray.count==7) {
+        if (newArray && newArray.count>0) {
             
-            [mutableStr appendString:@"周一至周日"];
+            NSMutableString *mutableStr = [NSMutableString string];
             
-        }else{
-           
-            for (int i = 0; i<newArray.count; i++) {
+            if (newArray.count==7) {
                 
-                NSString *endDate = [NSString stringWithFormat:@"%@",[self dateStringWithDateNumber:[newArray[i] integerValue]]];
-                [mutableStr appendString:endDate];
+                [mutableStr appendString:@"周一至周日"];
+                
+            }else{
+                
+                for (int i = 0; i<newArray.count; i++) {
+                    
+                    NSString *endDate = [NSString stringWithFormat:@"%@",[self dateStringWithDateNumber:[newArray[i] integerValue]]];
+                    [mutableStr appendString:endDate];
+                    
+                }
                 
             }
             
+            workSetDes = mutableStr;
+            
         }
-        
-        workSetDes = mutableStr;
         
     }
     
