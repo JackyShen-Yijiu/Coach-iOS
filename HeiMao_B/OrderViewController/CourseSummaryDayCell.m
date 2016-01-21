@@ -59,7 +59,7 @@
     self.subTitle.textAlignment = NSTextAlignmentLeft;
     self.subTitle.font = [UIFont systemFontOfSize:14.f];
     self.subTitle.textColor = RGB_Color(0x33, 0x33, 0x33);
-    self.subTitle.backgroundColor = [UIColor redColor];
+    self.subTitle.backgroundColor = [UIColor clearColor];
     self.subTitle.numberOfLines = 1;
     [self.contentView addSubview:self.subTitle];
     
