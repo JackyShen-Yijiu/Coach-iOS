@@ -11,7 +11,7 @@
 #import "RefreshTableView.h"
 #import "HMCourseModel.h"
 #import "CourseSummaryListCell.h"
-
+#import "JGvalidationView.h"
 
 #import "CourseDetailViewController.h"
 #import "NoContentTipView.h"
@@ -51,6 +51,8 @@
 
 @property (nonatomic,assign)NSInteger reservationstate;
 
+@property (nonatomic,strong)JGvalidationView*bgView;
+
 @end
 
 @implementation CourseViewController
@@ -74,12 +76,15 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+   
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self initUI];
+   
+    _bgView = [[JGvalidationView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, 80)];
+    [self.view addSubview:_bgView];
     
     [self addNotification];
 }
@@ -94,6 +99,12 @@
     [self setUpRightNavBar];
     
     self.myNavigationItem.title = @"约车";
+   
+    _bgView.hidden = YES;
+    if ([UserInfoModel defaultUserInfo].userID && [UserInfoModel defaultUserInfo].is_validation==NO) {
+        _bgView.hidden = NO;
+        return;
+    }
     
 }
 
