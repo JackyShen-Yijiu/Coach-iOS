@@ -20,6 +20,7 @@
 		0643007B1C4791B4008B5A74 /* SystemMessageModelRootClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0643007A1C4791B4008B5A74 /* SystemMessageModelRootClass.m */; };
 		0643007E1C47921E008B5A74 /* SystemMessageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0643007D1C47921E008B5A74 /* SystemMessageViewModel.m */; };
 		06891F781C06D23800E9C131 /* WalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06891F771C06D23800E9C131 /* WalletModel.m */; };
+		06BED0B01C50F34100BE86FF /* AppDelegate+YJPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BED0AF1C50F34100BE86FF /* AppDelegate+YJPush.m */; };
 		06C1252E1C4351560033DCDE /* WorkNatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C1252D1C4351560033DCDE /* WorkNatureController.m */; };
 		06FBBA9E1C48CD3500207FDB /* MagicMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FBBA9D1C48CD3500207FDB /* MagicMainTableViewController.m */; };
 		06FBBAA11C48D14A00207FDB /* MagicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FBBAA01C48D14A00207FDB /* MagicDetailViewController.m */; };
@@ -478,6 +479,8 @@
 		0643007D1C47921E008B5A74 /* SystemMessageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMessageViewModel.m; sourceTree = "<group>"; };
 		06891F761C06D23800E9C131 /* WalletModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletModel.h; sourceTree = "<group>"; };
 		06891F771C06D23800E9C131 /* WalletModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletModel.m; sourceTree = "<group>"; };
+		06BED0AF1C50F34100BE86FF /* AppDelegate+YJPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+YJPush.m"; sourceTree = "<group>"; };
+		06BED0B11C50F34E00BE86FF /* AppDelegate+YJPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+YJPush.h"; sourceTree = "<group>"; };
 		06C1252C1C4351560033DCDE /* WorkNatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkNatureController.h; path = ../WorkNatureController.h; sourceTree = "<group>"; };
 		06C1252D1C4351560033DCDE /* WorkNatureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkNatureController.m; path = ../WorkNatureController.m; sourceTree = "<group>"; };
 		06FBBA9C1C48CD2800207FDB /* MagicMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicMainTableViewController.h; sourceTree = "<group>"; };
@@ -1485,6 +1488,8 @@
 				B89534701C43C968009F5E9B /* CompleteViewController */,
 				B86EB3571BDB50EB0014EBD7 /* AppDelegate.h */,
 				B86EB3581BDB50EB0014EBD7 /* AppDelegate.m */,
+				06BED0AF1C50F34100BE86FF /* AppDelegate+YJPush.m */,
+				06BED0B11C50F34E00BE86FF /* AppDelegate+YJPush.h */,
 				B8C4584C1BDB571A00901F71 /* PrefixHeader.pch */,
 				B873EEFA1C21C2C5000579CB /* FunctionGuide */,
 				B8BC4F7C1BF38A390007B029 /* EaseMobEntity */,
@@ -3148,6 +3153,7 @@
 				B8BC50E61BF393D00007B029 /* EaseBubbleView+Text.m in Sources */,
 				B8BC50E91BF393D00007B029 /* EaseBubbleView.m in Sources */,
 				B8447A281BE1E150004E5E15 /* CourseRatingCell.m in Sources */,
+				06BED0B01C50F34100BE86FF /* AppDelegate+YJPush.m in Sources */,
 				D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */,
 				B8BC506D1BF38A390007B029 /* EMSDWebImagePrefetcher.m in Sources */,
 				B865C1791BDCA49400C1E681 /* CourseSummaryListCell.m in Sources */,
@@ -3317,7 +3323,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
+				PROVISIONING_PROFILE = "9fe64bd0-4d36-4e32-8196-798e56d60dc7";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3355,7 +3361,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
+				PROVISIONING_PROFILE = "9fe64bd0-4d36-4e32-8196-798e56d60dc7";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3368,8 +3374,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guobin Shen (69F6W58BNP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
@@ -3383,7 +3389,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "64a7bd79-5a7e-4af3-969d-c749e0136260";
+				PROVISIONING_PROFILE = "9fe64bd0-4d36-4e32-8196-798e56d60dc7";
 			};
 			name = Debug;
 		};
@@ -3394,8 +3400,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guobin Shen (69F6W58BNP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
@@ -3409,7 +3415,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "64a7bd79-5a7e-4af3-969d-c749e0136260";
+				PROVISIONING_PROFILE = "9fe64bd0-4d36-4e32-8196-798e56d60dc7";
 			};
 			name = Release;
 		};
