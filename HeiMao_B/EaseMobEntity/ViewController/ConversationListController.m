@@ -15,12 +15,16 @@
 #import "EMConversation.h"
 #import "EMConversation.h"
 #import "JGUserTools.h"
+#import "JGvalidationView.h"
 
 @interface ConversationListController ()<EaseConversationListViewControllerDelegate,
                                         EaseConversationListViewControllerDataSource,
                                         EMChatManagerDelegate>
 
 @property (nonatomic, strong) UIView *networkStateView;
+
+@property (nonatomic,strong)JGvalidationView*bgView;
+
 @end
 
 @implementation ConversationListController
@@ -38,7 +42,6 @@
     [self networkStateView];
     [self removeEmptyConversationsFromDB];
 
-    
 }
 
 
@@ -46,6 +49,13 @@
 {
     [super viewWillAppear:animated];
     [self initNavBar];
+    
+    [_bgView removeFromSuperview];
+    if ([UserInfoModel defaultUserInfo].userID && [UserInfoModel defaultUserInfo].is_validation==NO) {
+        _bgView = [[JGvalidationView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, 80)];
+        [self.view addSubview:_bgView];
+        return;
+    }
 }
 
 #pragma mark - initUI

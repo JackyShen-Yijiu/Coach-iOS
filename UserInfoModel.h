@@ -47,7 +47,8 @@
 @property(nonatomic,strong)NSString *endTime;
 @property(nonatomic,strong)NSString * md5Pass;
 @property(nonatomic,strong)NSString * invitationcode;
-
+//审核状态
+@property(nonatomic,assign)BOOL is_validation;
 //工作性质
 @property(nonatomic,assign)NSInteger coachtype;
 //Y码

@@ -28,6 +28,7 @@
 		556256281C47798C00D132F4 /* PersonlizeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 556256271C47798C00D132F4 /* PersonlizeModel.m */; };
 		55C8AB9C1C4A43780002466E /* modifyjialinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C8AB9B1C4A43780002466E /* modifyjialinViewController.m */; };
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
+		B246441F1C50C034009B5649 /* JGvalidationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B246441E1C50C034009B5649 /* JGvalidationView.m */; };
 		B253C2BB1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BA1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m */; };
 		B253C2CD1C3FA742001AF771 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BD1C3FA742001AF771 /* bitstream.c */; };
 		B253C2CE1C3FA742001AF771 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BF1C3FA742001AF771 /* mask.c */; };
@@ -494,6 +495,8 @@
 		55C8AB9A1C4A43780002466E /* modifyjialinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = modifyjialinViewController.h; sourceTree = "<group>"; };
 		55C8AB9B1C4A43780002466E /* modifyjialinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = modifyjialinViewController.m; sourceTree = "<group>"; };
 		61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B246441D1C50C034009B5649 /* JGvalidationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGvalidationView.h; sourceTree = "<group>"; };
+		B246441E1C50C034009B5649 /* JGvalidationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGvalidationView.m; sourceTree = "<group>"; };
 		B253C2B91C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+JGBarButtonItem.h"; sourceTree = "<group>"; };
 		B253C2BA1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+JGBarButtonItem.m"; sourceTree = "<group>"; };
 		B253C2BD1C3FA742001AF771 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
@@ -2683,6 +2686,8 @@
 				D5D50F8D1BFC135B00F54097 /* ShopMainModel.m */,
 				D5D50F8E1BFC135B00F54097 /* ShopModel.h */,
 				D5D50F8F1BFC135B00F54097 /* ShopModel.m */,
+				B246441D1C50C034009B5649 /* JGvalidationView.h */,
+				B246441E1C50C034009B5649 /* JGvalidationView.m */,
 			);
 			path = Goods;
 			sourceTree = "<group>";
@@ -3074,6 +3079,7 @@
 				B84479E81BE07B7A004E5E15 /* StudentHomeUserCourseInfoCell.m in Sources */,
 				B865C1661BDC969700C1E681 /* HMStudentModel.m in Sources */,
 				B8BC50F21BF393D00007B029 /* EaseConversationCell.m in Sources */,
+				B246441F1C50C034009B5649 /* JGvalidationView.m in Sources */,
 				B8BC50471BF38A390007B029 /* EMCDDeviceManager+Media.m in Sources */,
 				B8BC50881BF38A390007B029 /* EaseUserModel.m in Sources */,
 				B8BC50811BF38A390007B029 /* PSTGridLayoutItem.m in Sources */,
@@ -3288,8 +3294,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guobin Shen (69F6W58BNP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -3311,7 +3317,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "64a7bd79-5a7e-4af3-969d-c749e0136260";
+				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3333,8 +3339,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guobin Shen (69F6W58BNP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -3349,7 +3355,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "64a7bd79-5a7e-4af3-969d-c749e0136260";
+				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3362,8 +3368,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guobin Shen (69F6W58BNP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
@@ -3377,8 +3383,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "64a7bd79-5a7e-4af3-969d-c749e0136260";
-			};
+				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
+};
 			name = Debug;
 		};
 		B86EB36A1BDB50EB0014EBD7 /* Release */ = {
@@ -3388,8 +3394,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guobin Shen (69F6W58BNP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
@@ -3403,7 +3409,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "64a7bd79-5a7e-4af3-969d-c749e0136260";
+				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
 			};
 			name = Release;
 		};

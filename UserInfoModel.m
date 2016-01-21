@@ -120,6 +120,8 @@
     _leavebegintime = [info objectForKey:@"leavebegintime"];
     _leaveendtime = [info objectForKey:@"leaveendtime"];
 
+    _is_validation = [[info objectForKey:@"is_validation"] boolValue];
+    
     [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:self.userID password:self.md5Pass];
   
     if (![[self class] isLogin]) {
@@ -189,6 +191,13 @@
     NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
     NSMutableDictionary * mdic = [dic mutableCopy];
     [mdic setValue:@(setClassMode) forKey:@"serverclass"];
+    [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
+}
+- (void)setIs_validation:(BOOL)is_validation
+{
+    NSDictionary * dic = [[[self class] dataForKey:USERINFO_IDENTIFY] objectFromJSONData];
+    NSMutableDictionary * mdic = [dic mutableCopy];
+    [mdic setValue:@(is_validation) forKey:@"is_validation"];
     [[self class] storeData:[mdic JSONData] forKey:USERINFO_IDENTIFY];
 }
 

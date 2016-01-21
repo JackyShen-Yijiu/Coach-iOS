@@ -25,6 +25,7 @@
 #import "JSONKit.h"
 #import "WorkTypeModel.h"
 #import "WorkTypeListController.h"
+#import "JGvalidationView.h"
 
 #define kSystemWide [UIScreen mainScreen].bounds.size.width
 
@@ -37,8 +38,12 @@
 @property (strong, nonatomic) NSArray *dataArray;
 @property (strong, nonatomic) NSArray *imageArray;
 @property (strong, nonatomic) NSArray *displayArray;
+
+@property (nonatomic,strong)JGvalidationView*bgView;
+
 @end
 @implementation TeacherCenterController
+
 
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
@@ -61,7 +66,7 @@
 - (UserCenterHeadView *)userCenterView {
     if (_userCenterView == nil) {
         
-        _userCenterView = [[UserCenterHeadView alloc] initWithFrame:CGRectMake(0, 0, kSystemWide, 80) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].tel withUserIdNum:[UserInfoModel defaultUserInfo].displaycoachid yNum:@"Y码:22222222"];
+        _userCenterView = [[UserCenterHeadView alloc] initWithFrame:CGRectMake(0, 0, kSystemWide, 80) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].tel withUserIdNum:[UserInfoModel defaultUserInfo].tel yNum:@"Y码:"];
         
         _userCenterView.delegate = self;
     }
@@ -81,6 +86,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
+    
+    _bgView = [[JGvalidationView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, 80)];
+    [self.view addSubview:_bgView];
+    _bgView.hidden = YES;
     
     self.tableView.tableHeaderView = self.userCenterView;
     
@@ -134,42 +143,48 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (indexPath.section == 0 && indexPath.row == 0) {// @"所属驾校"
-        AffiliatedSchoolViewController *query = [[AffiliatedSchoolViewController alloc] init];
-        [self.navigationController pushViewController:query animated:YES];
-    }else if (indexPath.section == 0 && indexPath.row == 1){//// new @"工作性质"
-        [self workTypeButtonClick];
-        NSLog(@"工作性质");
-    }else if (indexPath.section == 0 && indexPath.row == 2) {// @"训练场地"
-        if ([UserInfoModel defaultUserInfo].schoolId) {
-            TrainingGroundViewController *training = [[TrainingGroundViewController alloc] init];
-            [self.navigationController pushViewController:training animated:YES];
+    if ([UserInfoModel defaultUserInfo].is_validation) {
+
+        if (indexPath.section == 0 && indexPath.row == 0) {// @"所属驾校"
+            AffiliatedSchoolViewController *query = [[AffiliatedSchoolViewController alloc] init];
+            [self.navigationController pushViewController:query animated:YES];
+        }else if (indexPath.section == 0 && indexPath.row == 1){//// new @"工作性质"
+            [self workTypeButtonClick];
+            NSLog(@"工作性质");
+        }else if (indexPath.section == 0 && indexPath.row == 2) {// @"训练场地"
+            if ([UserInfoModel defaultUserInfo].schoolId) {
+                TrainingGroundViewController *training = [[TrainingGroundViewController alloc] init];
+                [self.navigationController pushViewController:training animated:YES];
+            }
+        }else if (indexPath.section == 0 && indexPath.row == 3) {// @"工作时间"
+            WorkTimeViewController *workTime = [[WorkTimeViewController alloc] init];
+            [self.navigationController pushViewController:workTime animated:YES];
+        }else if (indexPath.section == 0 && indexPath.row == 4) {// @"可授科目"
+            TeachSubjectViewController *teach = [[TeachSubjectViewController alloc] init];
+            [self.navigationController pushViewController:teach animated:YES];
+        }else if (indexPath.section == 0 && indexPath.row == 5) {// @"授课班型"
+            ExamClassViewController *examClass = [[ExamClassViewController alloc] init];
+            [self.navigationController pushViewController:examClass animated:YES];
         }
-    }else if (indexPath.section == 0 && indexPath.row == 3) {// @"工作时间"
-        WorkTimeViewController *workTime = [[WorkTimeViewController alloc] init];
-        [self.navigationController pushViewController:workTime animated:YES];
-    }else if (indexPath.section == 0 && indexPath.row == 4) {// @"可授科目"
-        TeachSubjectViewController *teach = [[TeachSubjectViewController alloc] init];
-        [self.navigationController pushViewController:teach animated:YES];
-    }else if (indexPath.section == 0 && indexPath.row == 5) {// @"授课班型"
-        ExamClassViewController *examClass = [[ExamClassViewController alloc] init];
-        [self.navigationController pushViewController:examClass animated:YES];
+        
+        else if (indexPath.section == 1 && indexPath.row == 0) {// @"休假"
+            VacationViewController *vacation = [[VacationViewController alloc] init];
+            [self.navigationController pushViewController:vacation animated:YES];
+        }else if (indexPath.section == 1 && indexPath.row == 1) {// @"学员列表"
+            StudentListViewController *student = [[StudentListViewController alloc] init];
+            [self.navigationController pushViewController:student animated:YES];
+        }
+        
+        else if (indexPath.section == 2 && indexPath.row == 0) {// @"钱包"
+            MyWalletViewController *myWallet = [[MyWalletViewController alloc] init];
+            [self.navigationController pushViewController:myWallet animated:YES];
+        }
+        
     }
     
-    else if (indexPath.section == 1 && indexPath.row == 0) {// @"休假"
-        VacationViewController *vacation = [[VacationViewController alloc] init];
-        [self.navigationController pushViewController:vacation animated:YES];
-    }else if (indexPath.section == 1 && indexPath.row == 1) {// @"学员列表"
-        StudentListViewController *student = [[StudentListViewController alloc] init];
-        [self.navigationController pushViewController:student animated:YES];
-    }else if (indexPath.section == 1 && indexPath.row == 2) {// @"设置"
+    if (indexPath.section == 1 && indexPath.row == 2) {// @"设置"
         SetupViewController *setUp = [[SetupViewController alloc] init];
         [self.navigationController pushViewController:setUp animated:YES];
-    }
-    
-    else if (indexPath.section == 2 && indexPath.row == 0) {// @"钱包"
-        MyWalletViewController *myWallet = [[MyWalletViewController alloc] init];
-        [self.navigationController pushViewController:myWallet animated:YES];
     }
     
     
@@ -205,6 +220,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+    _bgView.hidden = YES;
+    
+    if ([UserInfoModel defaultUserInfo].userID && [UserInfoModel defaultUserInfo].is_validation==NO) {
+        
+        _bgView.hidden = NO;
+
+        return;
+    }
     
 #pragma mark - 更新头像
     [self.userCenterView.userPortrait sd_setImageWithURL:[NSURL URLWithString:[UserInfoModel defaultUserInfo].portrait] placeholderImage:[UIImage imageNamed:@"littleImage.png"]];
@@ -329,7 +353,6 @@
                 
                 int temp = [args[i] intValue];
                 
-//                args[i] = args[j];
                 [args replaceObjectAtIndex:i withObject:args[j]];
 
                 args[j] = @(temp);

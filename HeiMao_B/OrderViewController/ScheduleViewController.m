@@ -16,6 +16,7 @@
 #import "CourseDetailViewController.h"
 #import "NoContentTipView.h"
 #import "VacationViewController.h"
+#import "JGvalidationView.h"
 
 @interface ScheduleViewController () <UITableViewDataSource,UITableViewDelegate,FDCalendarDelegate>
 
@@ -29,6 +30,9 @@
 @property(nonatomic,assign)BOOL isNeedRefresh;
 @property(nonatomic,strong)NSDateFormatter *dateFormattor;
 @property(nonatomic,strong)NoContentTipView * tipView2;
+
+@property (nonatomic,strong)JGvalidationView*bgView;
+
 @end
 
 @implementation ScheduleViewController
@@ -58,7 +62,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.isNeedRefresh = YES;
+    
     [self initUI];
+    
     [self addNotification];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modifyVacation) name:@"modifyVacation" object:nil];
@@ -102,6 +108,13 @@
         [self fdCalendar:nil didSelectedDate:[NSDate date]];
     }
     self.isNeedRefresh = NO;
+    
+    [_bgView removeFromSuperview];
+    if ([UserInfoModel defaultUserInfo].userID && [UserInfoModel defaultUserInfo].is_validation==NO) {
+        _bgView = [[JGvalidationView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, 80)];
+        [self.view addSubview:_bgView];
+        return;
+    }
 }
 
 #pragma mark - initUI
