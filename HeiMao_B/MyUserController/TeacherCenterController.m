@@ -266,6 +266,15 @@
     NSLog(@"weekArray:%@",weekArray);
     NSLog(@"weekArray.count:%lu",weekArray.count);
     
+    BOOL isInclude = [weekArray containsObject:@(7)];
+    NSLog(@"isInclude:%d",isInclude);
+    if (isInclude) {
+        NSMutableArray *tempArray = [NSMutableArray arrayWithArray:weekArray];
+        [tempArray removeObject:@(7)];
+        weekArray = tempArray;
+        [UserInfoModel defaultUserInfo].workweek = weekArray;
+    }
+    
     NSString * workSetDes = @"未设置";
     
     if (weekArray) {
@@ -347,7 +356,7 @@
 }
 
 - (NSArray *)bubbleSort:(NSArray *)arg{//冒泡排序算法
-    
+   
     NSMutableArray *args = [NSMutableArray arrayWithArray:arg];
     
     for(int i=0;i<args.count-1;i++){

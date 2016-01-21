@@ -41,9 +41,15 @@
     
     [self networkStateView];
     [self removeEmptyConversationsFromDB];
+   
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefresh) name:KCourseViewController_NeedRefresh object:nil];
 
 }
 
+- (void)needRefresh
+{
+    [self tableViewDidTriggerHeaderRefresh];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {

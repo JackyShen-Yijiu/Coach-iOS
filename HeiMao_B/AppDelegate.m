@@ -20,6 +20,7 @@
 #import "UIDevice+JEsystemVersion.h"
 #import "ScheduleViewController.h"
 #import <BaiduMapAPI_Location/BMKLocationService.h>
+#import "AppDelegate+YJPush.h"
 
 @interface AppDelegate ()<LoginViewControllerDelegate>
 @property(nonatomic,strong)HMNagationController * navController;
@@ -223,10 +224,60 @@
 
 //接受通知
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    NSLog(@"%s userInfo:%@",__func__,userInfo);
+
     if ([self isReciveFromHunaxin:userInfo]) {
         [self.navController jumpToMessageList];
     }else{
         [APService handleRemoteNotification:userInfo];
+        [self handleJPushNotification:userInfo];
+    }
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler
+{
+    
+#warning 当App在后台接受到消息推送,点击消息提醒,调用此方法
+#warning 当App在前台接受到消息推送,调用此方法
+
+    NSLog(@"%s userInfo:%@",__func__,userInfo);
+    /*
+     // 自定义消息
+     {
+       "_j_msgid" = 1488777374;
+       aps =     {
+          alert = babababbaba;
+          badge = 1;
+          sound = default;
+       };
+     }
+     // 接受到后台消息
+     
+     {
+         "_j_msgid" = 1488777374;
+         aps =     {
+             alert = babababbaba;
+             badge = 1;
+             sound = default;
+         };
+         data = {
+                reservationid = 11111
+                userid = 554154544
+         }
+         type = "dasdsa"
+     
+     }
+     
+     */
+    
+    completionHandler(UIBackgroundFetchResultNewData);
+    
+    if ([self isReciveFromHunaxin:userInfo]) {
+        [self.navController jumpToMessageList];
+    }else{
+        [APService handleRemoteNotification:userInfo];
+        [self handleJPushNotification:userInfo];
     }
 }
 
@@ -235,6 +286,11 @@
     return  [dic objectStringForKey:@"f"] &&
     [dic objectStringForKey:@"m"] &&
     [dic objectStringForKey:@"t"];
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    [UIApplication sharedApplication].applicationIconBadgeNumber=0;
 }
 
 @end

@@ -27,8 +27,16 @@
         
         NSString *message = aps[@"alert"];
         
+        NSDictionary *data = [userInfo objectForKey:@"data"];
+        if (data&&data.count!=0) {
+#warning 从data中去除字段进行定向界面跳转处理
+        }
+        
         // 审核通过
         if ([type isEqualToString:@"auditsucess"]) {
+            
+            [UserInfoModel defaultUserInfo].is_validation = YES;
+            
             [self showAlertWithMessage:message];
         }
         // 审核未通过
@@ -37,18 +45,30 @@
         }
         // 新的预约
         if ([type isEqualToString:@"newreservation"]) {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:KCourseViewController_NeedRefresh object:self];
+            
             [self showAlertWithMessage:message];
         }
         // 预约取消
         if ([type isEqualToString:@"reservationcancel"]) {
+           
+            [[NSNotificationCenter defaultCenter] postNotificationName:KCourseViewController_NeedRefresh object:self];
+
             [self showAlertWithMessage:message];
         }
         // 得到新的评价
         if ([type isEqualToString:@"newcommnent"]) {
+          
+            [[NSNotificationCenter defaultCenter] postNotificationName:KCourseViewController_NeedRefresh object:self];
+
             [self showAlertWithMessage:message];
         }
         // 系统通知
         if ([type isEqualToString:@"systemmsg"]) {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:KCourseViewController_NeedRefresh object:self];
+
             [self showAlertWithMessage:@"您有一条新系统消息"];
         }
         // 钱包更新
@@ -60,6 +80,11 @@
             [self showAlertWithMessage:message];
         }
     }
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark 显示弹窗提示
