@@ -31,6 +31,10 @@
                                                              NSFontAttributeName : [UIFont boldSystemFontOfSize:18]};
 
                 [fromController presentViewController:picker animated:YES completion:nil];
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"相机不可用" message:@"请在设置-隐私-相机 里面开启服务" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+                [alert show];
+
             }
         }else if (selectedOtherButtonIndex == 1) {
             if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
