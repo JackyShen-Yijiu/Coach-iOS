@@ -1488,8 +1488,8 @@
 				B89534701C43C968009F5E9B /* CompleteViewController */,
 				B86EB3571BDB50EB0014EBD7 /* AppDelegate.h */,
 				B86EB3581BDB50EB0014EBD7 /* AppDelegate.m */,
-				06BED0AF1C50F34100BE86FF /* AppDelegate+YJPush.m */,
 				06BED0B11C50F34E00BE86FF /* AppDelegate+YJPush.h */,
+				06BED0AF1C50F34100BE86FF /* AppDelegate+YJPush.m */,
 				B8C4584C1BDB571A00901F71 /* PrefixHeader.pch */,
 				B873EEFA1C21C2C5000579CB /* FunctionGuide */,
 				B8BC4F7C1BF38A390007B029 /* EaseMobEntity */,
@@ -3323,7 +3323,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "891ed271-1df2-4b91-a8d6-011eddda5bc0";
+				PROVISIONING_PROFILE = "c278427e-af59-4286-9377-e2a464f4cd75";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3361,7 +3361,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "891ed271-1df2-4b91-a8d6-011eddda5bc0";
+				PROVISIONING_PROFILE = "c278427e-af59-4286-9377-e2a464f4cd75";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3374,8 +3374,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guobin Shen (69F6W58BNP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
@@ -3389,7 +3389,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "891ed271-1df2-4b91-a8d6-011eddda5bc0";
+				PROVISIONING_PROFILE = "9fe64bd0-4d36-4e32-8196-798e56d60dc7";
 			};
 			name = Debug;
 		};
@@ -3400,8 +3400,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guobin Shen (69F6W58BNP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
@@ -3415,7 +3415,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "891ed271-1df2-4b91-a8d6-011eddda5bc0";
+				PROVISIONING_PROFILE = "9fe64bd0-4d36-4e32-8196-798e56d60dc7";
 			};
 			name = Release;
 		};
