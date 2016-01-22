@@ -99,7 +99,7 @@
     UIImage * tCourse = [UIImage imageNamed:@"iconfont-riliricheng"];
     UIImage * HtCourse = [UIImage imageNamed:@"iconfont-rilirichengblue"];
     
-    // 消息
+    // 消息2
     UIImage * nMess = [UIImage imageNamed:@"im_normal"];
     UIImage * HMess = [UIImage imageNamed:@"im_seleted"];
     

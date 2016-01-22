@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JGBaseViewController.h"
 
-@interface TeacherCenterController : UIViewController
+@interface TeacherCenterController : JGBaseViewController
 
 @end

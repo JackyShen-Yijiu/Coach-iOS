@@ -88,6 +88,7 @@
     [self.view addSubview:_bgView];
     
     [self addNotification];
+    
 }
 
 #pragma mark Life Sycle
