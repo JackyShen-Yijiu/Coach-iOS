@@ -86,7 +86,7 @@
     self.subTitle.font = [UIFont systemFontOfSize:14.f];
     self.subTitle.textColor = RGB_Color(0x99, 0x99, 0x99);
     self.subTitle.backgroundColor = [UIColor clearColor];
-    self.subTitle.numberOfLines = 1;
+    self.subTitle.numberOfLines = 2;
     [self.studentBgView addSubview:self.subTitle];
     
     self.statueLabel = [[UILabel alloc] init];
@@ -176,9 +176,10 @@
     
     [self.subTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mainTitle);
-        make.width.equalTo(self.mainTitle);
+        make.right.equalTo(self.studentBgView).offset(-leftOffsetSpacing);
+        //make.width.equalTo(self.mainTitle);
         make.top.equalTo(self.mainTitle.mas_bottom).offset(10.f);
-        make.height.equalTo(@(16.f));
+        //make.height.equalTo(@(16.f));
     }];
     
     [self.midLine mas_makeConstraints:^(MASConstraintMaker *make) {
