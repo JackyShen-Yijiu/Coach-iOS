@@ -7,7 +7,8 @@
 //  日程首页
 
 #import <UIKit/UIKit.h>
+#import "JGBaseViewController.h"
 
-@interface ScheduleViewController : UIViewController
+@interface ScheduleViewController : JGBaseViewController
 
 @end
