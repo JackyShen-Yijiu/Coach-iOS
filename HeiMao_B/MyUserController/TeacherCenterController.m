@@ -26,6 +26,7 @@
 #import "WorkTypeModel.h"
 #import "WorkTypeListController.h"
 #import "JGvalidationView.h"
+#import "YBSignUpStudentListController.h"
 
 #define kSystemWide [UIScreen mainScreen].bounds.size.width
 
@@ -182,6 +183,8 @@
         else if (indexPath.section == 2 && indexPath.row == 0) {// @"钱包"
             MyWalletViewController *myWallet = [[MyWalletViewController alloc] init];
             [self.navigationController pushViewController:myWallet animated:YES];
+//            YBSignUpStudentListController *myWallet = [[YBSignUpStudentListController alloc] init];
+//                        [self.navigationController pushViewController:myWallet animated:YES];
         }
         
     }
