@@ -27,6 +27,7 @@
 #import "WorkTypeListController.h"
 #import "JGvalidationView.h"
 #import "YBSignUpStudentListController.h"
+#import "DVVStudentListController.h"
 
 #define kSystemWide [UIScreen mainScreen].bounds.size.width
 
@@ -176,8 +177,8 @@
             VacationViewController *vacation = [[VacationViewController alloc] init];
             [self.navigationController pushViewController:vacation animated:YES];
         }else if (indexPath.section == 1 && indexPath.row == 1) {// @"学员列表"
-            StudentListViewController *student = [[StudentListViewController alloc] init];
-            [self.navigationController pushViewController:student animated:YES];
+            DVVStudentListController *studentListVC = [[DVVStudentListController alloc] init];
+            [self.navigationController pushViewController:studentListVC animated:YES];
         }
         
         else if (indexPath.section == 2 && indexPath.row == 0) {// @"钱包"

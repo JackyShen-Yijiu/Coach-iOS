@@ -9,8 +9,9 @@
 #import "DVVSendMessageToStudentController.h"
 #import "DVVToolBarView.h"
 #import "DVVSendMessageToStudentView.h"
+#import <MessageUI/MessageUI.h>
 
-@interface DVVSendMessageToStudentController ()<UIScrollViewDelegate>
+@interface DVVSendMessageToStudentController ()<UIScrollViewDelegate,MFMessageComposeViewControllerDelegate>
 
 @property (nonatomic, strong) DVVToolBarView *dvvToolBarView;
 @property (nonatomic, strong) UIView *toolBarBottomLineView;
@@ -70,16 +71,28 @@
     // 根据UIScrollView的偏移量,判断发送对象
     if (self.scrollView.contentOffset.x == 0) {
         // 理论学员发送信息
-        
+        if (self.theoreticalArray.count) {
+            [self showMessageView:self.theoreticalArray title:nil body:nil];
+        }else {
+            [self showTotasViewWithMes:@"请添加群发对象!"];
+        }
         
         NSLog(@"--理论学员发送信息");
     }else if (self.scrollView.contentOffset.x == self.view.frame.size.width * 1){
         // 上车学员发送信息
-        
+        if (self.drivingArray.count) {
+            [self showMessageView:self.drivingArray title:nil body:nil];
+        }else {
+            [self showTotasViewWithMes:@"请添加群发对象!"];
+        }
         NSLog(@"--上车学员发送信息");
     }else if (self.scrollView.contentOffset.x == self.view.frame.size.width * 2){
         // 领证学员发送信息
-        
+        if (self.licensingArray.count) {
+            [self showMessageView:self.licensingArray title:nil body:nil];
+        }else {
+            [self showTotasViewWithMes:@"请添加群发对象!"];
+        }
         NSLog(@"--领证学员发送信息");
     }
     
@@ -198,14 +211,82 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+// 群发短信功能
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    //    [self.dismissViewControllerAnimated:YEScompletion:nil];
+    
+    switch(result){
+            
+        caseMessageComposeResultSent:
+            
+            //信息传送成功
+            
+            break;
+            
+        caseMessageComposeResultFailed:
+            
+            //信息传送失败
+            
+            break;
+            
+        caseMessageComposeResultCancelled:
+            
+            //信息被用户取消传送
+            
+            break;
+            
+        default:
+            
+            break;
+            
+    }
+    
 }
-*/
+
+
+
+-(void)showMessageView:(NSArray*)phones title:(NSString*)title body:(NSString*)body
+
+{
+    
+    if([MFMessageComposeViewController canSendText])
+        
+    {
+        
+        MFMessageComposeViewController *controller=[[MFMessageComposeViewController alloc] init];
+        
+        controller.recipients = phones;
+        
+        controller.navigationBar.tintColor=[UIColor redColor];
+        
+        controller.body=body;
+        
+        controller.messageComposeDelegate=self;
+        [self presentViewController:controller animated:YES completion:nil];
+        
+        
+        [[[[controller viewControllers] lastObject] navigationItem]setTitle:title];//修改短信界面标题
+        
+    }
+    
+    else
+        
+    {
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示信息"
+                            
+                                                     message:@"该设备不支持短信功能"
+                            
+                                                    delegate:nil
+                            
+                                           cancelButtonTitle:@"确定"
+                            
+                                           otherButtonTitles:nil,nil];
+        
+        [alert show];
+        
+    }
+    
+}
 
 @end
