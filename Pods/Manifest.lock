@@ -33,9 +33,9 @@ PODS:
   - Qiniu (7.0.16):
     - AFNetworking (~> 2.0)
     - HappyDNS (~> 0.2)
-  - SDWebImage (3.7.4):
-    - SDWebImage/Core (= 3.7.4)
-  - SDWebImage/Core (3.7.4)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
   - UMengAnalytics-NO-IDFA (3.6.7)
 
 DEPENDENCIES:
@@ -62,7 +62,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MD5Digest: fea371215507cfcdc3c9633d02cffc7fd075ebc3
   Qiniu: 51a8702cddc02b50867e10cef99291b9a8a006b1
-  SDWebImage: 247edd7dd80dd6124197b0d6a17846fe9d1df968
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   UMengAnalytics-NO-IDFA: 6d02561a00579b2e37718f204eb81347df5d7b8b
 
 COCOAPODS: 0.39.0

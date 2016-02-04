@@ -102,7 +102,7 @@
     
     [self.subTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mainTitle);
-        make.width.equalTo(self.mainTitle);
+        make.width.equalTo(@200);
         make.top.equalTo(self.mainTitle.mas_bottom).offset(10.f);
         make.height.equalTo(@(16.f));
     }];

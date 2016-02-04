@@ -19,6 +19,7 @@
 #import "ScanViewController.h"
 #import "UINavigationBar+JGNavigationBar.h"
 #import "SearchCourseViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 #import "DVVStudentListController.h"
 #import "DVVSendMessageToStudentController.h"
@@ -98,6 +99,7 @@
     [self.view addSubview:_bgView];
     
     [self addNotification];
+    
 }
 
 #pragma mark Life Sycle
@@ -215,9 +217,20 @@
 - (void)rightBarBtnWithQianDaoDidClick
 {
     NSLog(@"签到");
-    ScanViewController *vc = [[ScanViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    AVAuthorizationStatus state = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (state == AVAuthorizationStatusAuthorized) {
+        
+        ScanViewController *vc = [[ScanViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    
+    }else{
 
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"相机不可用" message:@"请在设置->一步教练->相机 里面开启服务" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    
 }
 
 - (void)rightBarBtnWithSearchDidClick

@@ -20,6 +20,7 @@
 		0643007B1C4791B4008B5A74 /* SystemMessageModelRootClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0643007A1C4791B4008B5A74 /* SystemMessageModelRootClass.m */; };
 		0643007E1C47921E008B5A74 /* SystemMessageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0643007D1C47921E008B5A74 /* SystemMessageViewModel.m */; };
 		06891F781C06D23800E9C131 /* WalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06891F771C06D23800E9C131 /* WalletModel.m */; };
+		06BED0B01C50F34100BE86FF /* AppDelegate+YJPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BED0AF1C50F34100BE86FF /* AppDelegate+YJPush.m */; };
 		06C1252E1C4351560033DCDE /* WorkNatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C1252D1C4351560033DCDE /* WorkNatureController.m */; };
 		06FBBA9E1C48CD3500207FDB /* MagicMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FBBA9D1C48CD3500207FDB /* MagicMainTableViewController.m */; };
 		06FBBAA11C48D14A00207FDB /* MagicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FBBAA01C48D14A00207FDB /* MagicDetailViewController.m */; };
@@ -29,6 +30,7 @@
 		55C8AB9C1C4A43780002466E /* modifyjialinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C8AB9B1C4A43780002466E /* modifyjialinViewController.m */; };
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
 		B246441F1C50C034009B5649 /* JGvalidationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B246441E1C50C034009B5649 /* JGvalidationView.m */; };
+		B24644221C521946009B5649 /* JGBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B24644211C521946009B5649 /* JGBaseViewController.m */; };
 		B253C2BB1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BA1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m */; };
 		B253C2CD1C3FA742001AF771 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BD1C3FA742001AF771 /* bitstream.c */; };
 		B253C2CE1C3FA742001AF771 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BF1C3FA742001AF771 /* mask.c */; };
@@ -497,6 +499,8 @@
 		0643007D1C47921E008B5A74 /* SystemMessageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMessageViewModel.m; sourceTree = "<group>"; };
 		06891F761C06D23800E9C131 /* WalletModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletModel.h; sourceTree = "<group>"; };
 		06891F771C06D23800E9C131 /* WalletModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletModel.m; sourceTree = "<group>"; };
+		06BED0AF1C50F34100BE86FF /* AppDelegate+YJPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+YJPush.m"; sourceTree = "<group>"; };
+		06BED0B11C50F34E00BE86FF /* AppDelegate+YJPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+YJPush.h"; sourceTree = "<group>"; };
 		06C1252C1C4351560033DCDE /* WorkNatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkNatureController.h; path = ../WorkNatureController.h; sourceTree = "<group>"; };
 		06C1252D1C4351560033DCDE /* WorkNatureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkNatureController.m; path = ../WorkNatureController.m; sourceTree = "<group>"; };
 		06FBBA9C1C48CD2800207FDB /* MagicMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicMainTableViewController.h; sourceTree = "<group>"; };
@@ -516,6 +520,8 @@
 		61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B246441D1C50C034009B5649 /* JGvalidationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGvalidationView.h; sourceTree = "<group>"; };
 		B246441E1C50C034009B5649 /* JGvalidationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGvalidationView.m; sourceTree = "<group>"; };
+		B24644201C521946009B5649 /* JGBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGBaseViewController.h; sourceTree = "<group>"; };
+		B24644211C521946009B5649 /* JGBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGBaseViewController.m; sourceTree = "<group>"; };
 		B253C2B91C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+JGBarButtonItem.h"; sourceTree = "<group>"; };
 		B253C2BA1C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+JGBarButtonItem.m"; sourceTree = "<group>"; };
 		B253C2BD1C3FA742001AF771 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
@@ -1541,7 +1547,11 @@
 				B89534701C43C968009F5E9B /* CompleteViewController */,
 				B86EB3571BDB50EB0014EBD7 /* AppDelegate.h */,
 				B86EB3581BDB50EB0014EBD7 /* AppDelegate.m */,
+				06BED0B11C50F34E00BE86FF /* AppDelegate+YJPush.h */,
+				06BED0AF1C50F34100BE86FF /* AppDelegate+YJPush.m */,
 				B8C4584C1BDB571A00901F71 /* PrefixHeader.pch */,
+				B24644201C521946009B5649 /* JGBaseViewController.h */,
+				B24644211C521946009B5649 /* JGBaseViewController.m */,
 				B873EEFA1C21C2C5000579CB /* FunctionGuide */,
 				B8BC4F7C1BF38A390007B029 /* EaseMobEntity */,
 				D5C240501BF108CF00832CF3 /* LoginController */,
@@ -3267,6 +3277,7 @@
 				B8BC50E61BF393D00007B029 /* EaseBubbleView+Text.m in Sources */,
 				B8BC50E91BF393D00007B029 /* EaseBubbleView.m in Sources */,
 				B8447A281BE1E150004E5E15 /* CourseRatingCell.m in Sources */,
+				06BED0B01C50F34100BE86FF /* AppDelegate+YJPush.m in Sources */,
 				D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */,
 				B8BC506D1BF38A390007B029 /* EMSDWebImagePrefetcher.m in Sources */,
 				B865C1791BDCA49400C1E681 /* CourseSummaryListCell.m in Sources */,
@@ -3335,6 +3346,7 @@
 				D5D510261BFDF99D00F54097 /* NSUserStoreTool.m in Sources */,
 				B865C1731BDC9F1C00C1E681 /* HMPortraitInfoModel.m in Sources */,
 				D5C240661BF108CF00832CF3 /* ForgetViewController.m in Sources */,
+				B24644221C521946009B5649 /* JGBaseViewController.m in Sources */,
 				B865C1761BDCA0B400C1E681 /* RefreshTableView.m in Sources */,
 				B8BC50EA1BF393D00007B029 /* EaseChatToolbar.m in Sources */,
 				06FBBA9E1C48CD3500207FDB /* MagicMainTableViewController.m in Sources */,
@@ -3418,8 +3430,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Guobin Shen (69F6W58BNP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -3441,7 +3453,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "22434bc0-7c8f-4b7b-b4d1-a6e1c6fc433e";
+				PROVISIONING_PROFILE = "c278427e-af59-4286-9377-e2a464f4cd75";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3463,8 +3475,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Guobin Shen (69F6W58BNP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Wei Ai Chi Kuang Tech Co. Ltd (MC3VUBEH8X)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -3479,7 +3491,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "22434bc0-7c8f-4b7b-b4d1-a6e1c6fc433e";
+				PROVISIONING_PROFILE = "c278427e-af59-4286-9377-e2a464f4cd75";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3492,7 +3504,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Guobin Shen (69F6W58BNP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guobin Shen (69F6W58BNP)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
@@ -3507,7 +3518,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9fe64bd0-4d36-4e32-8196-798e56d60dc7";
 			};
 			name = Debug;
 		};
@@ -3533,7 +3544,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9fe64bd0-4d36-4e32-8196-798e56d60dc7";
 			};
 			name = Release;
 		};

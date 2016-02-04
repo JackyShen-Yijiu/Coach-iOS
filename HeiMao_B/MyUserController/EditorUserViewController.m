@@ -24,6 +24,13 @@
 #import "PersonlizeModel.h"
 #import "modifyjialinViewController.h"
 
+#import "TrainingGroundViewController.h"
+#import "WorkTimeViewController.h"
+#import "TeachSubjectViewController.h"
+
+
+
+
 //static NSString *const kupdateUserInfo = @"userinfo/updateuserinfo";
 static NSString *const ktagArrChange = @"ktagArrChange";
 
@@ -40,12 +47,14 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 @property (strong, nonatomic) NSMutableArray *systemTagArray;
 @property (strong, nonatomic) NSMutableArray *customTagArray;
 
+@property (strong, nonatomic) NSArray *strArray;
+
 @end
 
 @implementation EditorUserViewController
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = @[@[@"",@"姓名"],@[@"身份证",@"联系电话",@"教练证",@"教龄",@"性别"],@[@"个性标签",@"个人说明"]];
+        _dataArray = @[@[@"",@"姓名"],@[@"身份证",@"联系电话",@"教练证",@"教龄",@"性别",@"训练场地",@"工作时间",@"可授科目"],@[@"个性标签",@"个人说明"]];
     }
     return _dataArray;
 }
@@ -74,6 +83,13 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     NSString * tel = [UserInfoModel defaultUserInfo].tel;
     NSString * dirving = [UserInfoModel defaultUserInfo].drivinglicensenumber;
     NSString * gender = [UserInfoModel defaultUserInfo].Gender;
+//    NSString * trainName = [UserInfoModel defaultUserInfo].trainfieldlinfo; // 训练场地
+    
+    
+    
+    
+    
+    
     NSArray * item2 = @[
                         [self strTolerance:idcardnumber],
                         [self strTolerance:tel],
@@ -104,6 +120,7 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 
 - (void)viewWillAppear:(BOOL)animated {
     [self startNetWork];
+    [self startAddData];
 }
 
 - (void)viewDidLoad {
@@ -124,9 +141,83 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagArrayChange) name:ktagArrChange object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modifyjialinKey) name:modifyjialinKey object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trainGroundKey) name:ktrainGroundKey object:nil]; // 训练场地
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(worktimeKey) name:kworktimeKey object:nil]; // 工作时间
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(teachSubjectKey) name:kteachSubjectKey object:nil]; // 可授科目
 
 }
+- (void)startAddData{
+    // 训练场地
+    NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
+    NSLog(@"trainName:%@",trainName);
+    if (trainName==nil) {
+        trainName = @"未设置";
+    }
+    
+    // 工作时间
+    NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
+    
+    NSLog(@"weekArray:%@",weekArray);
+    NSLog(@"weekArray.count:%lu",weekArray.count);
+    
+    BOOL isInclude = [weekArray containsObject:@(7)];
+    NSLog(@"isInclude:%d",isInclude);
+    if (isInclude) {
+        NSMutableArray *tempArray = [NSMutableArray arrayWithArray:weekArray];
+        [tempArray removeObject:@(7)];
+        weekArray = tempArray;
+        [UserInfoModel defaultUserInfo].workweek = weekArray;
+    }
+    
+    NSString * workSetDes = @"未设置";
+    
+    if (weekArray) {
+        
+        NSArray *newArray = [self bubbleSort:weekArray];
+        NSLog(@"newArray:%@",newArray);
+        for (int i = 0;i<newArray.count;i++) {
+            NSLog(@"i:%d",[newArray[i] intValue]);
+        }
+        
+        if (newArray && newArray.count>0) {
+            
+            NSMutableString *mutableStr = [NSMutableString string];
+            
+            if (newArray.count==7) {
+                
+                [mutableStr appendString:@"周一至周日"];
+                
+            }else{
+                
+                for (int i = 0; i<newArray.count; i++) {
+                    
+                    NSString *endDate = [NSString stringWithFormat:@"%@",[self dateStringWithDateNumber:[newArray[i] integerValue]]];
+                    [mutableStr appendString:endDate];
+                    
+                }
+                
+            }
+            
+            workSetDes = mutableStr;
+            
+        }
+        
+    }
+    
+    //可授科目
+    NSArray *array = [UserInfoModel defaultUserInfo].subject;
+    NSMutableString *string = [[NSMutableString alloc] init];
+    if (array.count == 0) {
+        [string appendString:@"未设置"];
+    }else if(array.count == 1){
+        [string appendString:[[array firstObject] objectForKey:@"name"]];
+    }else{
+        [string appendString:@"已设置"];
+    }
+    self.strArray = [NSArray arrayWithObjects:trainName,workSetDes,string, nil];
+    [self.tableView reloadData];
 
+}
 - (void)startNetWork {
     
     NSString *coachTags = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kcoachTags];
@@ -147,6 +238,48 @@ static NSString *const ktagArrChange = @"ktagArrChange";
             [[NSNotificationCenter defaultCenter] postNotificationName:ktagArrChange object:nil];
         }
     }];
+}
+- (NSArray *)bubbleSort:(NSArray *)arg{//冒泡排序算法
+    
+    NSMutableArray *args = [NSMutableArray arrayWithArray:arg];
+    
+    for(int i=0;i<args.count-1;i++){
+        
+        for(int j=i+1;j<args.count;j++){
+            
+            if (args[i]>args[j]){
+                
+                int temp = [args[i] intValue];
+                
+                [args replaceObjectAtIndex:i withObject:args[j]];
+                
+                args[j] = @(temp);
+                
+            }
+        }
+    }
+    return args;
+}
+
+
+- (NSString *)dateStringWithDateNumber:(NSInteger)number
+{
+    if (number==0) {
+        return @"周日";
+    }else if (number==1){
+        return @"周一";
+    }else if (number==2){
+        return @"周二";
+    }else if (number==3){
+        return @"周三";
+    }else if (number==4){
+        return @"周四";
+    }else if (number==5){
+        return @"周五";
+    }else if (number==6){
+        return @"周六";
+    }
+    return nil;
 }
 
 - (void)nameChange {          //名字改变
@@ -178,6 +311,18 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     NSIndexPath *path = [NSIndexPath indexPathForRow:4 inSection:1];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 }
+//- (void)trainGroundKey {        //训练场地
+//    NSIndexPath *path = [NSIndexPath indexPathForRow:5 inSection:1];
+//    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+//}
+//- (void)worktimeKey {        //工作时间
+//    NSIndexPath *path = [NSIndexPath indexPathForRow:6 inSection:1];
+//    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+//}
+//- (void)teachSubjectKey {        //可授科目
+//    NSIndexPath *path = [NSIndexPath indexPathForRow:7 inSection:1];
+//    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+//}
 - (void)signatureChange {     //个人说明改变
     NSIndexPath *path = [NSIndexPath indexPathForItem:1 inSection:2];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
@@ -291,7 +436,17 @@ static NSString *const ktagArrChange = @"ktagArrChange";
         if ([UserInfoModel defaultUserInfo].portrait) {
             [self.userHeadImage sd_setImageWithURL:[NSURL URLWithString:[UserInfoModel defaultUserInfo].portrait] placeholderImage:[UIImage imageNamed:@"littleImage.png"]];
         }
-    }else {
+    }if ((indexPath.row == 5 && indexPath.section == 1) || (indexPath.row == 6 && indexPath.section == 1) || (indexPath.row == 7 && indexPath.section == 1)) {
+        NSLog(@"indexPath.section = %lu,indexPath.row= %lu",indexPath.section,indexPath.row);
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
+        cell.textLabel.textColor = [UIColor blackColor];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.detailTextLabel.text = self.strArray[indexPath.row - 5];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
+
+    }
+    else{
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
         cell.textLabel.textColor = [UIColor blackColor];
@@ -337,9 +492,42 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     }else if (indexPath.section==1&&indexPath.row==3){
         modifyjialinViewController *vc = [[modifyjialinViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.section==1&&indexPath.row==5)
+    { // 训练场地
+        if ([UserInfoModel defaultUserInfo].schoolId) {
+        TrainingGroundViewController *training = [[TrainingGroundViewController alloc] init];
+        [self.navigationController pushViewController:training animated:YES];
+                        }
+    }else if (indexPath.section==1&&indexPath.row==6){ // 工作时间
+        WorkTimeViewController *workTime = [[WorkTimeViewController alloc] init];
+        [self.navigationController pushViewController:workTime animated:YES];
+    }else if (indexPath.section==1&&indexPath.row==7){ // 可授科目
+        TeachSubjectViewController *teach = [[TeachSubjectViewController alloc] init];
+        [self.navigationController pushViewController:teach animated:YES];
+
     }
 }
+/*
+ 
+ //            else if (indexPath.section == 0 && indexPath.row == 2) {// @"训练场地"
+ //            if ([UserInfoModel defaultUserInfo].schoolId) {
+ //                TrainingGroundViewController *training = [[TrainingGroundViewController alloc] init];
+ //                [self.navigationController pushViewController:training animated:YES];
+ //            }
+ //        }else if (indexPath.section == 0 && indexPath.row == 3) {// @"工作时间"
+ //            WorkTimeViewController *workTime = [[WorkTimeViewController alloc] init];
+ //            [self.navigationController pushViewController:workTime animated:YES];
+ //        }else if (indexPath.section == 0 && indexPath.row == 4) {// @"可授科目"
+ //            TeachSubjectViewController *teach = [[TeachSubjectViewController alloc] init];
+ //            [self.navigationController pushViewController:teach animated:YES];
+ //        }
 
+ 
+ 
+ 
+ 
+ 
+ */
 #pragma mark - delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSLog(@"data = %@",info);

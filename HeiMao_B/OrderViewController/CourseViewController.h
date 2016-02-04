@@ -7,7 +7,8 @@
 //  预约首页
 
 #import <UIKit/UIKit.h>
+#import "JGBaseViewController.h"
 
-@interface CourseViewController : UIViewController
+@interface CourseViewController : JGBaseViewController
 
 @end

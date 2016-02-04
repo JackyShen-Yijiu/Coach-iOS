@@ -45,3 +45,8 @@
 @interface UIViewController(Tolerance)
 - (NSString *)strTolerance:(NSString *)str;
 @end
+
+
+@interface UIViewController(swizzling)
+
+@end
