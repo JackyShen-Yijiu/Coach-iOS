@@ -40,7 +40,13 @@
     model.coachcomment = [dic objectStringForKey:@"coachcomment"];
     model.cancelreason = [dic objectStringForKey:@"cancelreason"];
     
+    model.officialDesc = [dic objectStringForKey:@"officialDesc"];
+    
     model.courseTrainInfo = [HMTrainaddressModel converJsonDicToModel:[dic objectInfoForKey:@"trainfieldlinfo"]];
+
+    model.subjectthree = [JGSubjectthreeModel converJsonDicToModel:[dic objectInfoForKey:@"subjectthree"]];
+
+    model.courseprocessdesc = [dic objectStringForKey:@"courseprocessdesc"];
     
     model.coursePikerAddres = [dic objectStringForKey:@"shuttleaddress"];
     model.isPickerUp = [[dic objectForKey:@"is_shuttle"] boolValue];

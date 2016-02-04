@@ -245,7 +245,32 @@
     [self GET:urlStr parameters:dic success:success failure:failure];
     
 }
++ (void)getcoursereservationlistWithUserId:(NSString *)userId  courseid:(NSString *)courseid
+                                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if (!userId || !courseid) {
+        return [self missParagramercallBackFailure:failure];
+    }
+    
+    // GET /courseinfo/coursereservationlist
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coursereservationlist?coachid=%@&courseid=%@",[self domain],userId,courseid];
+    
+    [self GET:urlStr parameters:nil success:success failure:failure];
+    
+}
++ (void)getAllCourseTimeWithUserId:(NSString *)userId  DayTime:(NSString *)dayTime
+                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if (!userId || !dayTime) {
+        return [self missParagramercallBackFailure:failure];
+    }
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/getcoursebycoach?coachid=%@&date=%@",[self domain],userId,dayTime];
 
+    [self GET:urlStr parameters:nil success:success failure:failure];
+    
+}
 + (void)getCoureDetailInfoWithCouresId:(NSString *)couresId
                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
@@ -555,6 +580,18 @@
                                      @"coachlongitude": coachLongitude };
     
     [self POST:urlStr parameters:paramtersDict success:success failure:failure];
+}
+
++ (void)coachStudentListWithCoachId:(NSString *)coachId
+                        studentType:(NSUInteger)type
+                              index:(NSUInteger)index
+                            success:(void (^)(AFHTTPRequestOperation *, id))success
+                            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
+    NSString *urlStr = [NSString stringWithFormat:@"%@/userinfo/coachstudentlist",[self domain]];
+    NSDictionary *paramterDict = @{ @"coachid": coachId,
+                                    @"studenttype": [NSString stringWithFormat:@"%d", type],
+                                    @"index": [NSString stringWithFormat:@"%d", index] };
+    [self GET:urlStr parameters:paramterDict success:success failure:failure];
 }
 
 #pragma mark - Common Method

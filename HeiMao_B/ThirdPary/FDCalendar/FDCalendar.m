@@ -16,7 +16,11 @@
 static NSDateFormatter *dateFormattor;
 
 @interface FDCalendar () <UIScrollViewDelegate, FDCalendarItemDelegate>
-
+{
+    CGFloat startContentOffsetX;
+    CGFloat willEndContentOffsetX;
+    CGFloat endContentOffsetX;
+}
 @property (strong, nonatomic) NSDate *date;
 
 @property (strong, nonatomic) UILabel *titleLabel;
@@ -36,14 +40,23 @@ static NSDateFormatter *dateFormattor;
     if (self = [super init]) {
         
         self.backgroundColor = [UIColor whiteColor];
+        
         self.date = date;
         
-        [self setupTitleBar];
+        //[self setupTitleBar];
+        
+        // 星期
         [self setupWeekHeader];
+        
+        // 滚动视图、三个日历
         [self setupCalendarItems];
+        
+        // 设置滚动视图
         [self setupScrollView];
+        
         [self setFrame:CGRectMake(0, 0, DeviceWidth, CGRectGetMaxY(self.scrollView.frame))];
         
+        // 初始化日期
         [self setCurrentDate:self.date];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modifyVacation) name:@"modifyVacation" object:nil];
@@ -62,72 +75,51 @@ static NSDateFormatter *dateFormattor;
     return [dateFormattor stringFromDate:date];
 }
 
-// 设置上层的titleBar
-- (void)setupTitleBar {
-    
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, ITEMHEIGTH)];
-    titleView.backgroundColor = [UIColor whiteColor];
-    [self addSubview:titleView];
-    
-    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((DeviceWidth - 150)/2.f, 0, 150, titleView.height)];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = [UIFont systemFontOfSize:15.f];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.textColor = [UIColor colorWithRed:0x33/255.f green:0x33/255.f blue:0x33/255.f alpha:1];    
-    [titleView addSubview:titleLabel];
-    self.titleLabel = titleLabel;
-    
-    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(titleLabel.left - 44, 10, 32, 24)];
-    [leftButton setImage:[UIImage imageNamed:@"icon_previous"] forState:UIControlStateNormal];
-    [leftButton setImage:[UIImage imageNamed:@"icon_previous_h"] forState:UIControlStateHighlighted];
-    [leftButton addTarget:self action:@selector(setPreviousMonthDate) forControlEvents:UIControlEventTouchUpInside];
-    [titleView addSubview:leftButton];
-    
-    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(titleLabel.right + 20, 10, 32, 24)];
-    [rightButton setImage:[UIImage imageNamed:@"icon_next"] forState:UIControlStateNormal];
-    [rightButton setImage:[UIImage imageNamed:@"icon_next_h"] forState:UIControlStateHighlighted];
-    [rightButton addTarget:self action:@selector(setNextMonthDate) forControlEvents:UIControlEventTouchUpInside];
-    [titleView addSubview:rightButton];
-    
-    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, titleView.frame.size.height - .5, titleView.frame.size.width, .5)];
-    lineView.backgroundColor = [UIColor colorWithRed:0xe6/255.f green:0xe6/255.f blue:0xe6/255.f alpha:1.f];
-    [titleView addSubview:lineView];
-    
-}
-
 // 设置星期文字的显示
 - (void)setupWeekHeader {
     
+    UIView *weekTitleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, ITEMHEIGTH)];
+    weekTitleView.backgroundColor = RGB_Color(31, 124, 235);
+    [self addSubview:weekTitleView];
+    
     NSInteger count = [Weekdays count];
     
-    CGFloat offsetX = 20.f;
+    CGFloat offsetX = 0.f;
     CGFloat width  = (DeviceWidth - offsetX * 2)/ count;
     
     for (int i = 0; i < count; i++) {
-        UILabel *weekdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(offsetX, ITEMHEIGTH, width, ITEMHEIGTH)];
+        
+        UILabel *weekdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(offsetX, 0, width, ITEMHEIGTH)];
         weekdayLabel.textAlignment = NSTextAlignmentCenter;
         weekdayLabel.text = Weekdays[i];
         weekdayLabel.font = [UIFont systemFontOfSize:10.f];
-        weekdayLabel.textColor = [UIColor colorWithRed:51/255.f green:51/255.f blue:51/255.f alpha:1.f];
+        weekdayLabel.textColor = [UIColor whiteColor];
+        weekdayLabel.backgroundColor = RGB_Color(31, 124, 235);
         
-        [self addSubview:weekdayLabel];
+        [weekTitleView addSubview:weekdayLabel];
         offsetX += weekdayLabel.frame.size.width;
+        
     }
-//    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 46 * 2 - .5, DeviceWidth, .5)];
-//    lineView.backgroundColor = [UIColor colorWithRed:0xe6/255.f green:0xe6/255.f blue:0xe6/255.f alpha:1.f];
-//    [self addSubview:lineView];
+    
 }
 
 // 设置包含日历的item的scrollView
-- (void)setupScrollView {
+- (void)setupScrollView
+{
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
-    [self.scrollView setFrame:CGRectMake(0, ITEMHEIGTH + 30, DeviceWidth, self.centerCalendarItem.frame.size.height)];
+    [self.scrollView setFrame:CGRectMake(0, ITEMHEIGTH, DeviceWidth, self.centerCalendarItem.frame.size.height)];
     self.scrollView.contentSize = CGSizeMake(3 * self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     self.scrollView.contentOffset = CGPointMake(self.scrollView.frame.size.width, 0);
     [self addSubview:self.scrollView];
+    
+    UIView *delive = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.scrollView.frame)-0.5, self.scrollView.width, 0.5)];
+    delive.backgroundColor = [UIColor lightGrayColor];
+    delive.alpha = 0.3;
+    [self addSubview:delive];
+    
 }
 
 // 设置3个日历的item
@@ -136,18 +128,21 @@ static NSDateFormatter *dateFormattor;
     self.scrollView = [[UIScrollView alloc] init];
     
     self.leftCalendarItem = [[FDCalendarItem alloc] init];
+    self.leftCalendarItem.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.leftCalendarItem];
     
+    self.centerCalendarItem = [[FDCalendarItem alloc] init];
     CGRect itemFrame = self.leftCalendarItem.frame;
     itemFrame.origin.x = DeviceWidth;
-    self.centerCalendarItem = [[FDCalendarItem alloc] init];
     self.centerCalendarItem.frame = itemFrame;
     self.centerCalendarItem.delegate = self;
+    self.centerCalendarItem.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.centerCalendarItem];
     
-    itemFrame.origin.x = DeviceWidth * 2;
     self.rightCalendarItem = [[FDCalendarItem alloc] init];
+    itemFrame.origin.x = DeviceWidth * 2;
     self.rightCalendarItem.frame = itemFrame;
+    self.rightCalendarItem.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.rightCalendarItem];
     
 }
@@ -170,7 +165,10 @@ static NSDateFormatter *dateFormattor;
     
     // 设置顶部标题
     [self.titleLabel setText:[self stringFromDate:self.centerCalendarItem.date]];
-   
+    if ([_delegate respondsToSelector:@selector(fdCalendar:didSelectedDate:)]) {
+        [_delegate fdCalendar:self didSelectedDate:self.centerCalendarItem.date];
+    }
+    
     // 设置当前月份的预约、休假
     [self loadCurrentCalendarData:date];
     
@@ -230,43 +228,49 @@ static NSDateFormatter *dateFormattor;
     
 }
 
-// 重新加载日历items的数据
-- (void)reloadCalendarItems
-{
-    CGPoint offset = self.scrollView.contentOffset;
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{    //拖动前的起始坐标
     
-    if (offset.x > self.scrollView.frame.size.width) {
-        [self setNextMonthDate];
-    } else {
-        [self setPreviousMonthDate];
-    }
+    startContentOffsetX = scrollView.contentOffset.x;
     
 }
 
-#pragma mark - SEL
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{    //将要停止前的坐标
+    
+    willEndContentOffsetX = scrollView.contentOffset.x;
+    
+}
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    endContentOffsetX = scrollView.contentOffset.x;
+    
+    if (endContentOffsetX < willEndContentOffsetX && willEndContentOffsetX < startContentOffsetX) { // 画面从右往左移动，前一页
+        [self setPreviousMonthDate];
+        NSLog(@"画面从右往左移动，前一页");
+    } else if (endContentOffsetX > willEndContentOffsetX && willEndContentOffsetX > startContentOffsetX) {// 画面从左往右移动，后一页
+        [self setNextMonthDate];
+        NSLog(@"画面从左往右移动，后一页");
+    }
+    
+    // 重置
+    self.scrollView.contentOffset = CGPointMake(self.scrollView.width, 0);
+    
+}
+
+#pragma mark - UIScrollViewDelegate
+
+#pragma mark - SEL
 // 跳到上一个月
 - (void)setPreviousMonthDate
 {
     [self setCurrentDate:[self.centerCalendarItem previousMonthDate]];
 }
-
 // 跳到下一个月
 - (void)setNextMonthDate {
     [self setCurrentDate:[self.centerCalendarItem nextMonthDate]];
 }
-#pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    [self reloadCalendarItems];
-    
-    self.scrollView.contentOffset = CGPointMake(self.scrollView.frame.size.width, 0);
-    
-}
 
 #pragma mark - FDCalendarItemDelegate
-
 - (void)calendarItem:(FDCalendarItem *)item didSelectedDate:(NSDate *)date
 {
     
@@ -276,7 +280,11 @@ static NSDateFormatter *dateFormattor;
     self.centerCalendarItem.seletedDate = date;
     self.leftCalendarItem.seletedDate = date;
     self.rightCalendarItem.seletedDate = date;
-    [self setCurrentDate:self.date];
+    
+    // 设置当前日期，初始化
+   // [self setCurrentDate:self.date];
+    
+    // 刷新控制器底部数据
     if ([_delegate respondsToSelector:@selector(fdCalendar:didSelectedDate:)]) {
         [_delegate fdCalendar:self didSelectedDate:self.date];
     }

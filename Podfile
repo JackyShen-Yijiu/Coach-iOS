@@ -15,3 +15,5 @@ pod 'EaseMobSDKFull'
 pod "Qiniu", "~> 7.0"
 pod 'ChameleonFramework'
 pod 'BaiduMapKit'
+pod 'Mantle', '~> 2.0.5'
+pod 'Masonry'

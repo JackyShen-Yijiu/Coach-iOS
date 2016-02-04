@@ -16,6 +16,7 @@
 @property (nonatomic, copy) DVVBaseViewModelUpdataBlock loadMoreErrorBlock;
 @property (nonatomic, copy) DVVBaseViewModelBlock nilResponseObjectBlock;
 @property (nonatomic, copy) DVVBaseViewModelBlock networkErrorBlock;
+@property (nonatomic, copy) dispatch_block_t networkCallBackBlock;
 
 @end
 
@@ -27,7 +28,11 @@
 - (void)dvvNetworkRequestLoadMore {
     // 重写此方法加载数据（需自己调用加载回调）
 }
-- (BOOL)dvvCheckErrorWithResponseObject:(id)responseObject {
+- (void)dvvNetworkRequestWithIndex:(NSUInteger)index
+                         isRefresh:(BOOL)isRefresh {
+    
+}
+- (BOOL)dvvCheckError:(id)responseObject {
     
     // 重写此方法检测服务器是否返回了数据
     return NO;
@@ -64,6 +69,11 @@
         _networkErrorBlock();
     }
 }
+- (void)dvvNetworkCallBack {
+    if (_networkCallBackBlock) {
+        _networkCallBackBlock();
+    }
+}
 
 #pragma mark - set block
 - (void)dvvSetRefreshSuccessBlock:(DVVBaseViewModelUpdataBlock)refreshSuccessBlock {
@@ -83,6 +93,33 @@
 }
 - (void)dvvSetNetworkErrorBlock:(DVVBaseViewModelBlock)netwrokErrorBlock {
     _networkErrorBlock = netwrokErrorBlock;
+}
+- (void)dvvSetNetworkCallBackBlock:(dispatch_block_t)handle {
+    _networkCallBackBlock = handle;
+}
+
+#pragma mark 检测是否有数据
+- (BOOL)checkErrorWithData:(id)data {
+    
+    if (!data) {
+        return YES;
+    }
+    NSDictionary *dict = data;
+    if (![dict isKindOfClass:[NSDictionary class]]) {
+        return YES;
+    }
+    if (![[dict objectForKey:@"type"] integerValue]) {
+        return YES;
+    }
+    if (![[dict objectForKey:@"data"] isKindOfClass:[NSArray class]]) {
+        return YES;
+    }
+    NSArray *array = [dict objectForKey:@"data"];
+    if (!array.count) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end

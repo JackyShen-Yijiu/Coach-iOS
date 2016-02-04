@@ -15,5 +15,9 @@
 @interface FDCalendar : UIView
 
 - (instancetype)initWithCurrentDate:(NSDate *)date;
+
 @property(nonatomic,weak)id<FDCalendarDelegate>delegate;
+
+- (void)setCurrentDate:(NSDate *)date;
+
 @end

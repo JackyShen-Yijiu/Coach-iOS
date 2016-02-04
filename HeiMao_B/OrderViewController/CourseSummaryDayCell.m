@@ -17,10 +17,17 @@
 @property(nonatomic,strong)UILabel * courseEndTime;
 @property(nonatomic,strong)UIView * midLine;
 @property(nonatomic,strong)UIView * bottomLine;
-// 剩余课时
-@property(nonatomic,strong)UILabel * surplusClassLabel;
-// 侧方停车等科目
-@property(nonatomic,strong)UILabel * subjectLabel;
+
+// 官方24课时
+@property(nonatomic,strong)UILabel * guanfangLabel;
+
+// 已约多少课时
+@property(nonatomic,strong)UILabel * yiyueLabel;
+// 剩余23课时
+@property(nonatomic,strong)UILabel * shengyuLabel;
+// 漏课
+@property(nonatomic,strong)UILabel * loukeLabel;
+
 @end
 
 @implementation CourseSummaryDayCell
@@ -52,39 +59,62 @@
     self.mainTitle.textColor = RGB_Color(0x33, 0x33, 0x33);
     self.mainTitle.backgroundColor = [UIColor clearColor];
     self.mainTitle.numberOfLines = 1;
+    self.mainTitle.text = @"姓名";
     [self.contentView addSubview:self.mainTitle];
-    
     
     self.subTitle = [[UILabel alloc] init];
     self.subTitle.textAlignment = NSTextAlignmentLeft;
-    self.subTitle.font = [UIFont systemFontOfSize:14.f];
-    self.subTitle.textColor = RGB_Color(0x33, 0x33, 0x33);
+    self.subTitle.font = [UIFont systemFontOfSize:13.f];
+    self.subTitle.textColor = [UIColor lightGrayColor];
     self.subTitle.backgroundColor = [UIColor clearColor];
     self.subTitle.numberOfLines = 1;
+    self.subTitle.text = @"subTitle";
     [self.contentView addSubview:self.subTitle];
     
-    self.surplusClassLabel = [[UILabel alloc] init];
-    self.surplusClassLabel.textAlignment = NSTextAlignmentLeft;
-    self.surplusClassLabel.font = [UIFont systemFontOfSize:13.f];
-    self.surplusClassLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
-    self.surplusClassLabel.backgroundColor = [UIColor clearColor];
-    self.surplusClassLabel.numberOfLines = 1;
-    [self.contentView addSubview:self.surplusClassLabel];
+    self.guanfangLabel = [[UILabel alloc] init];
+    self.guanfangLabel.textAlignment = NSTextAlignmentLeft;
+    self.guanfangLabel.font = [UIFont systemFontOfSize:13.f];
+    self.guanfangLabel.textColor = [UIColor lightGrayColor];
+    self.guanfangLabel.backgroundColor = [UIColor clearColor];
+    self.guanfangLabel.numberOfLines = 1;
+    self.guanfangLabel.text = @"guanfangLabel";
+    [self.contentView addSubview:self.guanfangLabel];
     
-    self.subjectLabel = [[UILabel alloc] init];
-    self.subjectLabel.textAlignment = NSTextAlignmentLeft;
-    self.subjectLabel.font = [UIFont systemFontOfSize:13.f];
-    self.subjectLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
-    self.subjectLabel.backgroundColor = [UIColor clearColor];
-    self.subjectLabel.numberOfLines = 1;
-    [self.contentView addSubview:self.subjectLabel];
+    self.yiyueLabel = [[UILabel alloc] init];
+    self.yiyueLabel.textAlignment = NSTextAlignmentLeft;
+    self.yiyueLabel.font = [UIFont systemFontOfSize:10.f];
+    self.yiyueLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+    self.yiyueLabel.backgroundColor = [UIColor clearColor];
+    self.yiyueLabel.numberOfLines = 1;
+    self.yiyueLabel.text = @"yiyueLabel";
+    [self.contentView addSubview:self.yiyueLabel];
+    
+    self.shengyuLabel = [[UILabel alloc] init];
+    self.shengyuLabel.textAlignment = NSTextAlignmentLeft;
+    self.shengyuLabel.font = [UIFont systemFontOfSize:10.f];
+    self.shengyuLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+    self.shengyuLabel.backgroundColor = [UIColor clearColor];
+    self.shengyuLabel.numberOfLines = 1;
+    self.shengyuLabel.text = @"shengyuLabel";
+    [self.contentView addSubview:self.shengyuLabel];
+    
+    self.loukeLabel = [[UILabel alloc] init];
+    self.loukeLabel.textAlignment = NSTextAlignmentLeft;
+    self.loukeLabel.font = [UIFont systemFontOfSize:10.f];
+    self.loukeLabel.textColor = RGB_Color(0x99, 0x99, 0x99);
+    self.loukeLabel.backgroundColor = [UIColor clearColor];
+    self.loukeLabel.numberOfLines = 1;
+    self.loukeLabel.text = @"loukeLabel";
+    [self.contentView addSubview:self.loukeLabel];
     
     self.courseBeginTime = [self getOnePropertyLabel];
     self.courseBeginTime.textColor = RGB_Color(30, 31, 34);
+    self.courseBeginTime.text = @"开始时间";
     [self.contentView addSubview:self.courseBeginTime];
     
     self.courseEndTime = [self getOnePropertyLabel];
     self.courseEndTime.textColor = RGB_Color(153, 153, 153);
+    self.courseEndTime.text = @"courseEndTime";
     [self.contentView addSubview:self.courseEndTime];
     
     self.midLine = [self getOnelineView];
@@ -133,25 +163,35 @@
         make.top.equalTo(@(([[self class] cellHeight] - 16 - 10 - 14)/2.f));
     }];
     
-    // 剩余课时
-    [self.surplusClassLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        //=make.left.equalTo(self.mainTitle.mas_right).offset(5.f);
-        make.top.equalTo(self.mainTitle);
-        make.height.equalTo(@(16.f));
-        make.right.equalTo(@(-10));
-    }];
-    
     [self.subTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mainTitle);
         make.width.equalTo(@200);
-        make.top.equalTo(self.mainTitle.mas_bottom).offset(10.f);
+        make.top.equalTo(self.mainTitle.mas_bottom).offset(5.f);
         make.height.equalTo(@(16.f));
     }];
     
-    // 侧方停车等科目
-    [self.subjectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.subTitle.mas_right).offset(5.f);
-        make.top.equalTo(self.subTitle);
+    [self.guanfangLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mainTitle);
+        make.width.equalTo(@200);
+        make.top.equalTo(self.subTitle.mas_bottom).offset(5.f);
+        make.height.equalTo(@(16.f));
+    }];
+    
+    // 已约
+    [self.yiyueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView).offset(10);
+        make.height.equalTo(@(16.f));
+        make.right.equalTo(@(-10));
+    }];
+    // 剩余
+    [self.shengyuLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.yiyueLabel.mas_bottom).offset(10);
+        make.height.equalTo(@(16.f));
+        make.right.equalTo(@(-10));
+    }];
+    // 漏课
+    [self.loukeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.shengyuLabel.mas_bottom).offset(10);
         make.height.equalTo(@(16.f));
         make.right.equalTo(@(-10));
     }];
@@ -190,19 +230,31 @@
     if(imageStr)
         [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];
     
-    self.mainTitle.text = _model.studentInfo.userName;
-    self.subTitle.text = _model.courseProgress;
+    // 时间
     self.courseBeginTime.text = _model.courseBeginTime;
     self.courseEndTime.text = _model.courseEndtime;
     
-    NSString * str = [NSString stringWithFormat:@"剩%ld",(long)model.leavecoursecount];
-    if(model.missingcoursecount){
-        str = [str stringByAppendingFormat:@"漏%ld",(long)model.missingcoursecount];
-    }
-    str = [str stringByAppendingString:@"课时"];
-    self.surplusClassLabel.text = str;
+    // 姓名
+    self.mainTitle.text = _model.studentInfo.userName;
     
-    self.subjectLabel.text = _model.learningcontent;
+    // 学习内容
+    self.subTitle.text = _model.courseprocessdesc;
+
+    // 官方24课时
+    self.guanfangLabel.text = @"运管处登记学时:暂无";
+    if (_model.officialDesc&&[_model.officialDesc length]!=0) {
+        self.guanfangLabel.text = _model.officialDesc;
+    }
+    
+    // 已约
+    NSInteger totleYiyueCount = model.subjectthree.finishcourse+model.subjectthree.reservation;
+    self.yiyueLabel.text = [NSString stringWithFormat:@"已约%ld课时",totleYiyueCount];
+    
+    // 剩余
+    self.shengyuLabel.text = [NSString stringWithFormat:@"剩余%ld课时",(long)model.leavecoursecount];
+    
+    // 漏课
+    self.loukeLabel.text = [NSString stringWithFormat:@"漏%ld课时",(long)model.missingcoursecount];
     
 }
 
