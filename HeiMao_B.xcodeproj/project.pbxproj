@@ -63,6 +63,11 @@
 		B28D5DD71C61EF3D00D9E9E1 /* CourseTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DD61C61EF3D00D9E9E1 /* CourseTimeModel.m */; };
 		B28D5DDA1C62357B00D9E9E1 /* NSString+CurrentTimeDay.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DD91C62357B00D9E9E1 /* NSString+CurrentTimeDay.m */; };
 		B28D5DDD1C6303B400D9E9E1 /* JGSubjectthreeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DDC1C6303B400D9E9E1 /* JGSubjectthreeModel.m */; };
+		B28D5DE01C631AE800D9E9E1 /* JGAppointMentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DDF1C631AE800D9E9E1 /* JGAppointMentViewController.m */; };
+		B28D5DE31C631C5700D9E9E1 /* JGAppointMentFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DE21C631C5700D9E9E1 /* JGAppointMentFootView.m */; };
+		B28D5DE61C6320B000D9E9E1 /* JGAppointMentFootCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DE51C6320B000D9E9E1 /* JGAppointMentFootCell.m */; };
+		B28D5DE91C6337CB00D9E9E1 /* JGAppointMentMidView.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DE81C6337CB00D9E9E1 /* JGAppointMentMidView.m */; };
+		B28D5DEC1C633E0200D9E9E1 /* BLInformationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DEB1C633E0200D9E9E1 /* BLInformationManager.m */; };
 		B2A6BABA1C4B64CB00B09A0F /* JGUserTools.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6BAB51C4B64CB00B09A0F /* JGUserTools.m */; };
 		B2A6BABF1C4B6D8A00B09A0F /* JGUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6BABE1C4B6D8A00B09A0F /* JGUserModel.m */; };
 		B2AC20371C3E2CBD0033803C /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */; };
@@ -600,6 +605,16 @@
 		B28D5DD91C62357B00D9E9E1 /* NSString+CurrentTimeDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CurrentTimeDay.m"; sourceTree = "<group>"; };
 		B28D5DDB1C6303B400D9E9E1 /* JGSubjectthreeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGSubjectthreeModel.h; sourceTree = "<group>"; };
 		B28D5DDC1C6303B400D9E9E1 /* JGSubjectthreeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGSubjectthreeModel.m; sourceTree = "<group>"; };
+		B28D5DDE1C631AE800D9E9E1 /* JGAppointMentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGAppointMentViewController.h; sourceTree = "<group>"; };
+		B28D5DDF1C631AE800D9E9E1 /* JGAppointMentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGAppointMentViewController.m; sourceTree = "<group>"; };
+		B28D5DE11C631C5700D9E9E1 /* JGAppointMentFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGAppointMentFootView.h; sourceTree = "<group>"; };
+		B28D5DE21C631C5700D9E9E1 /* JGAppointMentFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGAppointMentFootView.m; sourceTree = "<group>"; };
+		B28D5DE41C6320B000D9E9E1 /* JGAppointMentFootCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGAppointMentFootCell.h; sourceTree = "<group>"; };
+		B28D5DE51C6320B000D9E9E1 /* JGAppointMentFootCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGAppointMentFootCell.m; sourceTree = "<group>"; };
+		B28D5DE71C6337CB00D9E9E1 /* JGAppointMentMidView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGAppointMentMidView.h; sourceTree = "<group>"; };
+		B28D5DE81C6337CB00D9E9E1 /* JGAppointMentMidView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGAppointMentMidView.m; sourceTree = "<group>"; };
+		B28D5DEA1C633E0200D9E9E1 /* BLInformationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLInformationManager.h; sourceTree = "<group>"; };
+		B28D5DEB1C633E0200D9E9E1 /* BLInformationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLInformationManager.m; sourceTree = "<group>"; };
 		B2A6BAB41C4B64CB00B09A0F /* JGUserTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGUserTools.h; sourceTree = "<group>"; };
 		B2A6BAB51C4B64CB00B09A0F /* JGUserTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGUserTools.m; sourceTree = "<group>"; };
 		B2A6BABD1C4B6D8A00B09A0F /* JGUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGUserModel.h; sourceTree = "<group>"; };
@@ -1926,6 +1941,16 @@
 				B253C2E51C43B0FF001AF771 /* SearchCourseViewController.m */,
 				B2AC20351C3E2CBD0033803C /* ScheduleViewController.h */,
 				B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */,
+				B28D5DDE1C631AE800D9E9E1 /* JGAppointMentViewController.h */,
+				B28D5DDF1C631AE800D9E9E1 /* JGAppointMentViewController.m */,
+				B28D5DE71C6337CB00D9E9E1 /* JGAppointMentMidView.h */,
+				B28D5DE81C6337CB00D9E9E1 /* JGAppointMentMidView.m */,
+				B28D5DEA1C633E0200D9E9E1 /* BLInformationManager.h */,
+				B28D5DEB1C633E0200D9E9E1 /* BLInformationManager.m */,
+				B28D5DE11C631C5700D9E9E1 /* JGAppointMentFootView.h */,
+				B28D5DE21C631C5700D9E9E1 /* JGAppointMentFootView.m */,
+				B28D5DE41C6320B000D9E9E1 /* JGAppointMentFootCell.h */,
+				B28D5DE51C6320B000D9E9E1 /* JGAppointMentFootCell.m */,
 				B865C1771BDCA49400C1E681 /* CourseSummaryListCell.h */,
 				B865C1781BDCA49400C1E681 /* CourseSummaryListCell.m */,
 				B865C17A1BDCA4A300C1E681 /* CourseSummaryDayCell.h */,
@@ -3261,6 +3286,7 @@
 				D98B906F1C44E4B300271B7B /* StudentSignInViewModel.m in Sources */,
 				B8BC50671BF38A390007B029 /* EMSDImageCache.m in Sources */,
 				B8BC50761BF38A390007B029 /* UIView+EMWebCacheOperation.m in Sources */,
+				B28D5DEC1C633E0200D9E9E1 /* BLInformationManager.m in Sources */,
 				D5D50F641BFB230900F54097 /* ExamClassViewController.m in Sources */,
 				D5C240651BF108CF00832CF3 /* CompleteInformationViewController.m in Sources */,
 				B8BC50681BF38A390007B029 /* EMSDWebImageCompat.m in Sources */,
@@ -3373,6 +3399,7 @@
 				B253C2DA1C3FA901001AF771 /* UIView+SDExtension.m in Sources */,
 				B8447A1A1BE1BEC2004E5E15 /* CourseEnsureCell.m in Sources */,
 				06891F781C06D23800E9C131 /* WalletModel.m in Sources */,
+				B28D5DE91C6337CB00D9E9E1 /* JGAppointMentMidView.m in Sources */,
 				B811E4691BDD3CF90077EAF5 /* NGOSegmentControl.m in Sources */,
 				B8BC50771BF38A390007B029 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				D5C240671BF108CF00832CF3 /* GainPasswordViewController.m in Sources */,
@@ -3380,10 +3407,12 @@
 				D5C240691BF108CF00832CF3 /* NSString+DY_MD5.m in Sources */,
 				B253C2D01C3FA742001AF771 /* qrencode.c in Sources */,
 				B8447A141BE0DE09004E5E15 /* CourseDesInPutCell.m in Sources */,
+				B28D5DE61C6320B000D9E9E1 /* JGAppointMentFootCell.m in Sources */,
 				D5D50FA31BFC135B00F54097 /* ShopMainModel.m in Sources */,
 				B8BC50711BF38A390007B029 /* UIImage+EMGIF.m in Sources */,
 				D96470EF1C61DA1700C97984 /* DVVDrivingStudentListCell.m in Sources */,
 				06FBBAA11C48D14A00207FDB /* MagicDetailViewController.m in Sources */,
+				B28D5DE31C631C5700D9E9E1 /* JGAppointMentFootView.m in Sources */,
 				B8BFA24B1BF64AF5002D7F22 /* EaseLocationViewController.m in Sources */,
 				D5D50F671BFB233200F54097 /* ExamClassCollectionViewCell.m in Sources */,
 				B8BC50E81BF393D00007B029 /* EaseBubbleView+Voice.m in Sources */,
@@ -3415,6 +3444,7 @@
 				B8C458701BDB59AC00901F71 /* YiRefreshHeader.m in Sources */,
 				D5F72BAB1BF989C900B972B0 /* UIView+CalculateUIView.m in Sources */,
 				B253C2D11C3FA742001AF771 /* qrinput.c in Sources */,
+				B28D5DE01C631AE800D9E9E1 /* JGAppointMentViewController.m in Sources */,
 				B8BC508C1BF38A390007B029 /* NSString+Valid.m in Sources */,
 				B8BC50821BF38A390007B029 /* PSTGridLayoutRow.m in Sources */,
 				B8BC505C1BF38A390007B029 /* UIScrollView+MJRefresh.m in Sources */,
