@@ -50,7 +50,8 @@
        
         //_dataArray = @[@[@"所属驾校",@"训练场地",@"工作时间",@"可授科目",@"班型设置"],@[@"休假",@"学员列表",@"钱包"],@[@"设置"]];
         
-        _dataArray = @[@[@"所属驾校",@"工作性质",@"训练场地",@"工作时间",@"可授科目",@"授课班型"],@[@"休假",@"学员列表",@"设置"],@[@"钱包"]];
+//        _dataArray = @[@[@"所属驾校",@"工作性质",@"训练场地",@"工作时间",@"可授科目",@"授课班型"],@[@"休假",@"学员列表",@"设置"],@[@"钱包"]];
+         _dataArray = @[@[@"所属驾校",@"工作性质",@"授课班型"],@[@"休假",@"学员列表",@"设置"],@[@"钱包"]];
 
     }
     return _dataArray;
@@ -58,7 +59,8 @@
 
 - (NSArray *)imageArray {
     if (_imageArray == nil) {
-        _imageArray = @[@[@"dependSchool.png",@"workPropertyImg.png",@"studyGround.png",@"workTime.png",@"teachSubject.png",@"sendMeet.png"],@[@"rest.png",@"studentList.png",@"setting.png"],@[@"wallet.png"]];
+//        _imageArray = @[@[@"dependSchool.png",@"workPropertyImg.png",@"studyGround.png",@"workTime.png",@"teachSubject.png",@"sendMeet.png"],@[@"rest.png",@"studentList.png",@"setting.png"],@[@"wallet.png"]];
+         _imageArray = @[@[@"dependSchool.png",@"workPropertyImg.png",@"sendMeet.png"],@[@"rest.png",@"studentList.png",@"setting.png"],@[@"wallet.png"]];
     }
     return _imageArray;
 }
@@ -151,18 +153,20 @@
         }else if (indexPath.section == 0 && indexPath.row == 1){//// new @"工作性质"
             [self workTypeButtonClick];
             NSLog(@"工作性质");
-        }else if (indexPath.section == 0 && indexPath.row == 2) {// @"训练场地"
-            if ([UserInfoModel defaultUserInfo].schoolId) {
-                TrainingGroundViewController *training = [[TrainingGroundViewController alloc] init];
-                [self.navigationController pushViewController:training animated:YES];
-            }
-        }else if (indexPath.section == 0 && indexPath.row == 3) {// @"工作时间"
-            WorkTimeViewController *workTime = [[WorkTimeViewController alloc] init];
-            [self.navigationController pushViewController:workTime animated:YES];
-        }else if (indexPath.section == 0 && indexPath.row == 4) {// @"可授科目"
-            TeachSubjectViewController *teach = [[TeachSubjectViewController alloc] init];
-            [self.navigationController pushViewController:teach animated:YES];
-        }else if (indexPath.section == 0 && indexPath.row == 5) {// @"授课班型"
+        }
+//            else if (indexPath.section == 0 && indexPath.row == 2) {// @"训练场地"
+//            if ([UserInfoModel defaultUserInfo].schoolId) {
+//                TrainingGroundViewController *training = [[TrainingGroundViewController alloc] init];
+//                [self.navigationController pushViewController:training animated:YES];
+//            }
+//        }else if (indexPath.section == 0 && indexPath.row == 3) {// @"工作时间"
+//            WorkTimeViewController *workTime = [[WorkTimeViewController alloc] init];
+//            [self.navigationController pushViewController:workTime animated:YES];
+//        }else if (indexPath.section == 0 && indexPath.row == 4) {// @"可授科目"
+//            TeachSubjectViewController *teach = [[TeachSubjectViewController alloc] init];
+//            [self.navigationController pushViewController:teach animated:YES];
+//        }
+            else if (indexPath.section == 0 && indexPath.row == 2) {// @"授课班型"
             ExamClassViewController *examClass = [[ExamClassViewController alloc] init];
             [self.navigationController pushViewController:examClass animated:YES];
         }
@@ -339,9 +343,9 @@
     self.displayArray = @[@[
                             [self strTolerance:driveSname],//"所属驾校"
                             [self strTolerance:workProperty],//new - "工作性质"
-                            [self strTolerance:trainName],//"训练场地"
-                            [self strTolerance:workSetDes],//"工作时间"
-                            [self strTolerance:string],//"可授科目"
+//                            [self strTolerance:trainName],//"训练场地"
+//                            [self strTolerance:workSetDes],//"工作时间"
+//                            [self strTolerance:string],//"可授科目"
                             [self strTolerance:carName]//"班型设置"
                           ],
                           @[
