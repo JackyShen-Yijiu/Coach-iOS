@@ -257,73 +257,73 @@
     NSString *workProperty = [WorkTypeModel converTypeToString:coachtype];
     NSLog(@"workProperty:%@",workProperty);
     
-    // 训练场地
-    NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
-    NSLog(@"trainName:%@",trainName);
-    if (trainName==nil) {
-        trainName = @"未设置";
-    }
-    
-    // 工作时间
-    NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
-    
-    NSLog(@"weekArray:%@",weekArray);
-    NSLog(@"weekArray.count:%lu",weekArray.count);
-    
-    BOOL isInclude = [weekArray containsObject:@(7)];
-    NSLog(@"isInclude:%d",isInclude);
-    if (isInclude) {
-        NSMutableArray *tempArray = [NSMutableArray arrayWithArray:weekArray];
-        [tempArray removeObject:@(7)];
-        weekArray = tempArray;
-        [UserInfoModel defaultUserInfo].workweek = weekArray;
-    }
-    
-    NSString * workSetDes = @"未设置";
-    
-    if (weekArray) {
-        
-        NSArray *newArray = [self bubbleSort:weekArray];
-        NSLog(@"newArray:%@",newArray);
-        for (int i = 0;i<newArray.count;i++) {
-            NSLog(@"i:%d",[newArray[i] intValue]);
-        }
-        
-        if (newArray && newArray.count>0) {
-            
-            NSMutableString *mutableStr = [NSMutableString string];
-            
-            if (newArray.count==7) {
-                
-                [mutableStr appendString:@"周一至周日"];
-                
-            }else{
-                
-                for (int i = 0; i<newArray.count; i++) {
-                    
-                    NSString *endDate = [NSString stringWithFormat:@"%@",[self dateStringWithDateNumber:[newArray[i] integerValue]]];
-                    [mutableStr appendString:endDate];
-                    
-                }
-                
-            }
-            
-            workSetDes = mutableStr;
-            
-        }
-        
-    }
-    
-    //可授科目
-    NSArray *array = [UserInfoModel defaultUserInfo].subject;
-    NSMutableString *string = [[NSMutableString alloc] init];
-    if (array.count == 0) {
-        [string appendString:@"未设置"];
-    }else if(array.count == 1){
-        [string appendString:[[array firstObject] objectForKey:@"name"]];
-    }else{
-        [string appendString:@"已设置"];
-    }
+//    // 训练场地
+//    NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
+//    NSLog(@"trainName:%@",trainName);
+//    if (trainName==nil) {
+//        trainName = @"未设置";
+//    }
+//    
+//    // 工作时间
+//    NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
+//    
+//    NSLog(@"weekArray:%@",weekArray);
+//    NSLog(@"weekArray.count:%lu",weekArray.count);
+//    
+//    BOOL isInclude = [weekArray containsObject:@(7)];
+//    NSLog(@"isInclude:%d",isInclude);
+//    if (isInclude) {
+//        NSMutableArray *tempArray = [NSMutableArray arrayWithArray:weekArray];
+//        [tempArray removeObject:@(7)];
+//        weekArray = tempArray;
+//        [UserInfoModel defaultUserInfo].workweek = weekArray;
+//    }
+//    
+//    NSString * workSetDes = @"未设置";
+//    
+//    if (weekArray) {
+//        
+//        NSArray *newArray = [self bubbleSort:weekArray];
+//        NSLog(@"newArray:%@",newArray);
+//        for (int i = 0;i<newArray.count;i++) {
+//            NSLog(@"i:%d",[newArray[i] intValue]);
+//        }
+//        
+//        if (newArray && newArray.count>0) {
+//            
+//            NSMutableString *mutableStr = [NSMutableString string];
+//            
+//            if (newArray.count==7) {
+//                
+//                [mutableStr appendString:@"周一至周日"];
+//                
+//            }else{
+//                
+//                for (int i = 0; i<newArray.count; i++) {
+//                    
+//                    NSString *endDate = [NSString stringWithFormat:@"%@",[self dateStringWithDateNumber:[newArray[i] integerValue]]];
+//                    [mutableStr appendString:endDate];
+//                    
+//                }
+//                
+//            }
+//            
+//            workSetDes = mutableStr;
+//            
+//        }
+//        
+//    }
+//    
+//    //可授科目
+//    NSArray *array = [UserInfoModel defaultUserInfo].subject;
+//    NSMutableString *string = [[NSMutableString alloc] init];
+//    if (array.count == 0) {
+//        [string appendString:@"未设置"];
+//    }else if(array.count == 1){
+//        [string appendString:[[array firstObject] objectForKey:@"name"]];
+//    }else{
+//        [string appendString:@"已设置"];
+//    }
     
     //班型设置
     NSString * carName =  [[UserInfoModel defaultUserInfo] setClassMode] ? @"已设置" : @"未设置";

@@ -212,7 +212,7 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
     ExamClassModel *model = self.dataArray[indexPath.row];
     
     cell.drivingName.text = model.classname;
-    
+    cell.moneyLabel.text = [NSString stringWithFormat:@"%@",model.price];
     cell.drivingAdress.text = model.address;
     NSLog(@"model.is_choose:%d",model.is_choose);
     

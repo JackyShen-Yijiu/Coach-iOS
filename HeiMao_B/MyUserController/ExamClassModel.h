@@ -16,7 +16,7 @@
 //"address": "",
 @property (copy, nonatomic) NSString *classid;
 @property (copy, nonatomic) NSString *classname;
-@property (copy, nonatomic) NSString *price;
+@property (copy, nonatomic) NSNumber *price;
 @property (copy, nonatomic) NSString *onsaleprice;
 @property (copy, nonatomic) NSString *address;
 @property (strong, nonatomic) NSArray *vipserverlist;
