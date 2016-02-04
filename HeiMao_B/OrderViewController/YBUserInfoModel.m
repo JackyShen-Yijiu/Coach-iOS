@@ -34,19 +34,25 @@
 
 + (YBUserInfoModel *)converJsonDicToModel:(NSDictionary *)dic{
     
-if (!dic || ![dic isKindOfClass:[NSDictionary class]] ||![dic allKeys].count) {
-    return nil;
-}
+    if (!dic || ![dic isKindOfClass:[NSDictionary class]] ||![dic allKeys].count) {
+       return nil;
+    }
+    
     YBUserInfoModel *model = [[YBUserInfoModel alloc] init];
     model._id = [dic objectForKey:@"_id"];
     model.name = [dic objectForKey:@"name"];
     model.mobile = [dic objectForKey:@"mobile"];
+    model.subjecttwo = [dic objectForKey:@"subjecttwo"];
+    
     NSArray *keyArry = [dic allKeys];
+    
     if (!keyArry || ![keyArry isKindOfClass:[NSArray class]] ||!keyArry.count) {
         return nil;
     }
     for (NSString *keystr in keyArry) {
+        
         if ([keystr isEqualToString:@"headportrait"]) {
+            
             NSDictionary *dictionary = [dic objectForKey:@"headportrait"];
             model.height = [dictionary objectForKey:@"height"];
             model.width = [dictionary objectForKey:@"width"];

@@ -21,6 +21,7 @@
 #import "JGAppointMentViewController.h"
 #import "JGAppointMentFootView.h"
 #import "BLInformationManager.h"
+#import "YBSignUpStuentListModel.h"
 
 @interface JGAppointMentViewController () <FDCalendarDelegate,JGAppointMentMidViewDelegate>
 
@@ -72,6 +73,9 @@
     
     [self addNotification];
     
+    [[BLInformationManager sharedInstance].appointmentData removeAllObjects];
+    [[BLInformationManager sharedInstance].appointmentUserData removeAllObjects];
+    
 }
 
 #pragma mark Life Sycle
@@ -86,14 +90,15 @@
     self.firstLabel.text = nil;
     self.secondLabel.text = nil;
     
+    [self fdCalendar:self.calendarHeadView didSelectedDate:[NSDate date]];
+
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    [self fdCalendar:self.calendarHeadView didSelectedDate:[NSDate date]];
-
 }
 
 #pragma mark - initUI
@@ -180,8 +185,8 @@
     [self loadMidYuyueTimeData:dataStr];
     
     // 设置中间筛选框数据
-#warning 等待亚涛传递过来的数据 HMCourseModel 模型
-    [self.toolView receiveCoachTimeData:nil];
+    NSLog(@"[BLInformationManager sharedInstance].appointmentUserData:%@",[BLInformationManager sharedInstance].appointmentUserData);
+    [self.toolView receiveCoachTimeData:[BLInformationManager sharedInstance].appointmentUserData];
     
     // 设置顶部标题
     self.myNavigationItem.title = [NSString stringWithFormat:@"%@",[self.dateFormattor stringFromDate:date]];
@@ -327,9 +332,9 @@
     
 
 #warning 修改底部数据
-    self.firstLabel.text = [NSString stringWithFormat:@"当前预约为科目%@ 第%@-第%@学时",((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid,((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid,((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid];
-
-    self.secondLabel.text = [NSString stringWithFormat:@"已确认练车课时为%@课时",((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid];
+    self.firstLabel.text = [NSString stringWithFormat:@"当前预约为%@",((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).courseprocessdesc];
+    self.secondLabel.text = [NSString stringWithFormat:@"已确认练车课时为(%@)课时",((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).courseprocessdesc];
+    
     
 }
 
@@ -340,14 +345,10 @@
     // 移除上次添加的数据
     [[BLInformationManager sharedInstance].appointmentData removeAllObjects];
     [[BLInformationManager sharedInstance].appointmentUserData removeAllObjects];
-
     
     // 修改底部UI
-#warning 等待亚涛数据
-    self.firstLabel.text = [NSString stringWithFormat:@"当前预约为科目%@ 第%@-第%@学时",((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid,((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid,((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid];
-    self.secondLabel.text = [NSString stringWithFormat:@"已确认练车课时为%@课时",((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid];
-    
-    
+    self.firstLabel.text = [NSString stringWithFormat:@"当前预约为%@",((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).courseprocessdesc];
+    self.secondLabel.text = [NSString stringWithFormat:@"已确认练车课时为(%@)课时",((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).courseprocessdesc];
     
 }
 

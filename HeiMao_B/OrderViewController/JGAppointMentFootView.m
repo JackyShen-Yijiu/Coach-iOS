@@ -13,6 +13,8 @@
 //#import "BLInformationManager.h"
 //#import "CoachViewController.h"
 #import "PortraitView.h"
+#import "YBSignUpStudentListController.h"
+#import "YBSignUpStuentListModel.h"
 
 @interface JGAppointMentFootView ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
@@ -20,9 +22,7 @@
 
 @property (strong, nonatomic) NSMutableArray *dataArray;
 
-@property (strong, nonatomic) NSIndexPath *indexPath;
-
-@property (strong, nonatomic) NSIndexPath *firstPath;
+@property (nonatomic,strong) UIButton *addBtn;
 
 @end
 
@@ -45,8 +45,8 @@
         flowLayout.itemSize = CGSizeMake(175, 75);
         flowLayout.sectionInset = UIEdgeInsetsMake(7, 10, 7, 10);
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 90) collectionViewLayout:flowLayout];
-        _collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 195, 90) collectionViewLayout:flowLayout];
+        _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.showsHorizontalScrollIndicator = NO;// 隐藏水平滚动条
         _collectionView.bounces = NO;// 取消弹簧效果
         [_collectionView registerClass:[JGAppointMentFootCell class] forCellWithReuseIdentifier:@"JGAppointMentFootCell"];
@@ -60,6 +60,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.backgroundColor = [UIColor whiteColor];
+        
         [self addSubview:self.collectionView];
         
     }
@@ -68,53 +70,69 @@
 
 - (void)receiveCoachTimeData:(NSArray *)coachTimeData {
         
-    [self.dataArray removeAllObjects];
-    [self.dataArray addObjectsFromArray:coachTimeData];
+    NSLog(@"coachTimeData.count:%lu",(unsigned long)coachTimeData.count);
     
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-    [self.collectionView reloadData];
-    
-    NSLog(@"self.dataArray.count:%lu",(unsigned long)self.dataArray.count);
+    if (coachTimeData && coachTimeData.count!=0) {
+        
+        [self.addBtn removeFromSuperview];
+
+        [self.dataArray removeAllObjects];
+        [self.dataArray addObjectsFromArray:coachTimeData];
+        
+        self.collectionView.delegate = self;
+        self.collectionView.dataSource = self;
+        [self.collectionView reloadData];
+        
+    }else{
+        
+        [self addSubview:self.addBtn];
+        
+    }
     
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    self.indexPath = nil;
-    return 1;
-}
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    NSLog(@"JGAppointMentFootCell self.dataArray.count:%lu",(unsigned long)self.dataArray.count);
+
     static NSString *cellId = @"JGAppointMentFootCell";
     JGAppointMentFootCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     if (!cell) {
         DYNSLog(@"创建错误");
     }
     
-    if (self.dataArray && self.dataArray.count>0) {
-        
-        cell.selectedAppView.hidden = NO;
-        cell.addBtn.hidden = YES;
-        
-        HMCourseModel *model = self.dataArray[indexPath.row];
-        cell.coachTimeInfo = model;
-        
-    }else{
-        
-        cell.selectedAppView.hidden = YES;
-        cell.addBtn.hidden = NO;
-        [cell.addBtn addTarget:self action:@selector(addBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
-        
-    }
+    YBSignUpStuentListModel *model = self.dataArray[indexPath.row];
+    
+    NSLog(@"model.userInfooModel.originalpic:%@",model.userInfooModel.originalpic);
+    
+    cell.coachTimeInfo = model;
     
     return cell;
 }
 
+
+- (UIButton *)addBtn
+{
+    if (_addBtn == nil) {
+        
+        _addBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 175, 75)];
+        [_addBtn setImage:[UIImage imageNamed:@"JGAppointMentFootCellAddStudentImg"] forState:UIControlStateNormal];
+        [_addBtn setImage:[UIImage imageNamed:@"JGAppointMentFootCellAddStudentImg"] forState:UIControlStateHighlighted];
+        [_addBtn addTarget:self action:@selector(addBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
+
+    }
+    return _addBtn;
+}
+
 - (void)addBtnDidClick{
     NSLog(@"%s",__func__);
+    
+    YBSignUpStudentListController *vc = [[YBSignUpStudentListController alloc] init];
+    [self.parentViewController.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

@@ -36,5 +36,8 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *mobile;
 
+@property (nonatomic,strong) NSDictionary *subjecttwo;
+
+
 + (YBUserInfoModel *)converJsonDicToModel:(NSDictionary *)dic;
 @end

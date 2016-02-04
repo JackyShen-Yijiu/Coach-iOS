@@ -7,23 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-@class HMCourseModel;
+@class YBSignUpStuentListModel;
 @class PortraitView;
 
 @interface JGAppointMentFootCell : UICollectionViewCell
 
-@property (nonatomic,strong) HMCourseModel *coachTimeInfo;
-
-@property(nonatomic,strong)PortraitView * potraitView;
-
-@property(nonatomic,strong)UILabel * mainTitle;
-
-@property(nonatomic,strong)UILabel * subTitle;
-
-@property(nonatomic,strong)UILabel * countLabel;
-
-@property (strong, nonatomic) UIView *selectedAppView;
-
-@property (nonatomic,strong) UIButton *addBtn;
+@property (nonatomic,strong) YBSignUpStuentListModel *coachTimeInfo;
 
 @end

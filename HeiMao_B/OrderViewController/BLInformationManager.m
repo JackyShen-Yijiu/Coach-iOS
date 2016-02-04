@@ -11,6 +11,15 @@
 @interface BLInformationManager ()
 @end
 @implementation BLInformationManager
+
+- (NSMutableArray *)appointmentUserData
+{
+    if (_appointmentUserData == nil) {
+        _appointmentUserData = [NSMutableArray array];
+    }
+    return _appointmentUserData;
+}
+
 + (BLInformationManager *)sharedInstance {
     
     static BLInformationManager *manager = nil;

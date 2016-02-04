@@ -13,7 +13,7 @@
 // 预约的时间
 @property (copy, nonatomic) NSMutableArray *appointmentData;
 
-// 预约的学员
+// 预约的学员 数组中是模型
 @property (copy, nonatomic) NSMutableArray *appointmentUserData;
 
 + (BLInformationManager *)sharedInstance;

@@ -110,12 +110,6 @@
     return cell;
 }
 
-- (void)cellWithDidClick
-{
-    NSLog(@"cellWithDidClick");
-}
-
-
  - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     

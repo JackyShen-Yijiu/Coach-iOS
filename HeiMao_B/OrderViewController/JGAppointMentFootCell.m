@@ -8,10 +8,20 @@
 
 #import "JGAppointMentFootCell.h"
 #import "ToolHeader.h"
-#import "HMCourseModel.h"
+#import "YBSignUpStuentListModel.h"
 #import "PortraitView.h"
 
 @interface JGAppointMentFootCell ()
+
+@property(nonatomic,strong)PortraitView * potraitView;
+
+@property(nonatomic,strong)UILabel * mainTitle;
+
+@property(nonatomic,strong)UILabel * subTitle;
+
+@property(nonatomic,strong)UILabel * countLabel;
+
+@property (strong, nonatomic) UIView *selectedAppView;
 
 @end
 
@@ -75,32 +85,22 @@
     return _countLabel;
 }
 
-- (UIButton *)addBtn
-{
-    if (_addBtn == nil) {
-        
-        _addBtn = [[UIButton alloc] initWithFrame:self.bounds];
-        [_addBtn setImage:[UIImage imageNamed:@"JGAppointMentFootCellAddStudentImg"] forState:UIControlStateNormal];
-        [_addBtn setImage:[UIImage imageNamed:@"JGAppointMentFootCellAddStudentImg"] forState:UIControlStateHighlighted];
-
-    }
-    return _addBtn;
-}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+       
+        self.selectedBackgroundView = self.selectedAppView;
         
-        self.backgroundColor = [UIColor whiteColor];
-        
-        UIImageView *selImg = [[UIImageView alloc] init];
-        selImg.image = [UIImage imageNamed:@"JGAppointMentFootCellSelectBg"];
-        CGFloat JGAppointMentFootCellSelectBgW = 32;
-        CGFloat JGAppointMentFootCellSelectBgH = 32;
-        CGFloat JGAppointMentFootCellSelectBgY = 0;
-        CGFloat JGAppointMentFootCellSelectBgX = self.contentView.width-JGAppointMentFootCellSelectBgW;
-        selImg.frame = CGRectMake(JGAppointMentFootCellSelectBgX, JGAppointMentFootCellSelectBgY, JGAppointMentFootCellSelectBgW, JGAppointMentFootCellSelectBgH);
-        [self.selectedAppView addSubview:selImg];
-        [self.contentView addSubview:self.selectedAppView];
+//        [self.contentView addSubview:self.selectedAppView];
+
+//        UIImageView *selImg = [[UIImageView alloc] init];
+//        selImg.image = [UIImage imageNamed:@"JGAppointMentFootCellSelectBg"];
+//        CGFloat JGAppointMentFootCellSelectBgW = 32;
+//        CGFloat JGAppointMentFootCellSelectBgH = 32;
+//        CGFloat JGAppointMentFootCellSelectBgY = 0;
+//        CGFloat JGAppointMentFootCellSelectBgX = self.contentView.width-JGAppointMentFootCellSelectBgW;
+//        selImg.frame = CGRectMake(JGAppointMentFootCellSelectBgX, JGAppointMentFootCellSelectBgY, JGAppointMentFootCellSelectBgW, JGAppointMentFootCellSelectBgH);
+//        [self.selectedAppView addSubview:selImg];
         
         [self.contentView addSubview:self.potraitView];
         
@@ -110,8 +110,6 @@
         
         [self.contentView addSubview:self.countLabel];
         
-        [self.contentView addSubview:self.addBtn];
-
         [self.potraitView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(60, 60.f));
             make.left.equalTo(self.contentView.mas_right).offset(10.f);
@@ -133,30 +131,33 @@
             make.top.equalTo(self.subTitle.mas_bottom).offset(5.f);
         }];
        
-
     }
     return self;
 }
 
 
-- (void)setCoachTimeInfo:(HMCourseModel *)coachTimeInfo
+- (void)setCoachTimeInfo:(YBSignUpStuentListModel *)coachTimeInfo
 {
     _coachTimeInfo = coachTimeInfo;
     
     UIImage * defaultImage = [UIImage imageNamed:@"defoult_por"];
     self.potraitView.imageView.image = defaultImage;
-    NSString * imageStr = coachTimeInfo.studentInfo.porInfo.originalpic;
+    NSString * imageStr = [NSString stringWithFormat:@"%@",_coachTimeInfo.userInfooModel.originalpic];
     if(imageStr)
         [self.potraitView.imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:defaultImage];
     
     // 姓名
-    self.mainTitle.text = coachTimeInfo.studentInfo.userName;
+    NSLog(@"_coachTimeInfo.userInfooModel.name:%@",_coachTimeInfo.userInfooModel.name);
+    self.mainTitle.text = [NSString stringWithFormat:@"%@",_coachTimeInfo.userInfooModel.name];
     
     // 学习内容
-    self.subTitle.text = coachTimeInfo.courseprocessdesc;
+    NSLog(@"_coachTimeInfo.userInfooModel.subjecttwo.progress:%@",_coachTimeInfo.userInfooModel.subjecttwo[@"progress"]);
+    
+    self.subTitle.text = [NSString stringWithFormat:@"%@",_coachTimeInfo.userInfooModel.subjecttwo[@"progress"]];
     
     // 学习内容
-    self.countLabel.text = coachTimeInfo.learningcontent;
+    NSLog(@"_coachTimeInfo.courseprocessdesc:%@",_coachTimeInfo.courseprocessdesc);
+    self.countLabel.text = [NSString stringWithFormat:@"%@",_coachTimeInfo.courseprocessdesc];
     
 }
 

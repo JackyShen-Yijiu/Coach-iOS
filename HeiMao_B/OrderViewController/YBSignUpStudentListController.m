@@ -11,6 +11,7 @@
 #import "WMUITool.h"
 #import "RefreshTableView.h"
 #import "YBSignUpStudentListViewModel.h"
+#import "BLInformationManager.h"
 
 @interface YBSignUpStudentListController ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) UIButton *naviBarRightButton;
@@ -82,6 +83,20 @@
     
     return listCell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    [[BLInformationManager sharedInstance].appointmentUserData removeAllObjects];
+    YBSignUpStuentListModel *model = _signUpStudentListViewModel.systemMessageArray[indexPath.row];
+    [[BLInformationManager sharedInstance].appointmentUserData addObject:model];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kCellChange" object:self];
+   
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+
 // 打电话的回调方法
 - (void)callphone:(NSIndexPath *)indexPath{
     YBSignUpStuentListModel *listModel = _signUpStudentListViewModel.systemMessageArray[indexPath.row];
@@ -112,5 +127,15 @@
 }
 #pragma mark - 完成
 - (void)clickRight:(UIButton *)sender {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kCellChange" object:self];
+
+    [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end
