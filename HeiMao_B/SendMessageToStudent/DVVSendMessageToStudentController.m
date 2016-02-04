@@ -22,6 +22,10 @@
 
 @property (nonatomic, strong) UIButton *senderMessagebutton;
 
+@property (nonatomic, strong) NSArray *theoreticalArray;
+@property (nonatomic, strong) NSArray *drivingArray;
+@property (nonatomic, strong) NSArray *licensingArray;
+
 @end
 
 @implementation DVVSendMessageToStudentController
@@ -52,14 +56,32 @@
 #pragma mark - action
 - (void)theoreticalSelectButtonAction:(UIButton *)sender mobileArray:(NSArray *)array {
     NSLog(@"1===%@", array);
+    self.theoreticalArray = array;
 }
 - (void)drivingSelectButtonAction:(UIButton *)sender mobileArray:(NSArray *)array {
     NSLog(@"2===%@", array);
+    self.drivingArray = array;
 }
 - (void)licensingSelectButtonAction:(UIButton *)sender mobileArray:(NSArray *)array {
     NSLog(@"3===%@", array);
+    self.licensingArray = array;
 }
 - (void)sendMessageButtonAction:(UIButton *)sender {
+    // 根据UIScrollView的偏移量,判断发送对象
+    if (self.scrollView.contentOffset.x == 0) {
+        // 理论学员发送信息
+        
+        
+        NSLog(@"--理论学员发送信息");
+    }else if (self.scrollView.contentOffset.x == self.view.frame.size.width * 1){
+        // 上车学员发送信息
+        
+        NSLog(@"--上车学员发送信息");
+    }else if (self.scrollView.contentOffset.x == self.view.frame.size.width * 2){
+        // 领证学员发送信息
+        
+        NSLog(@"--领证学员发送信息");
+    }
     
 }
 

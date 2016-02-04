@@ -503,22 +503,22 @@
 		0613DE781C4641AE004A1A2E /* InformationMessageModelRootClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationMessageModelRootClass.m; sourceTree = "<group>"; };
 		0613DE7A1C4642BB004A1A2E /* InformationMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationMessageModel.h; sourceTree = "<group>"; };
 		0613DE7B1C4642BB004A1A2E /* InformationMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationMessageModel.m; sourceTree = "<group>"; };
-		062B6B3C1C62EE8D0069A670 /* YBSignUpStudentListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBSignUpStudentListController.h; sourceTree = "<group>"; };
-		062B6B3D1C62EE8E0069A670 /* YBSignUpStudentListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBSignUpStudentListController.m; sourceTree = "<group>"; };
-		062B6B3F1C62F15E0069A670 /* YBSignUpStudentListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBSignUpStudentListCell.h; sourceTree = "<group>"; };
-		062B6B401C62F15E0069A670 /* YBSignUpStudentListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBSignUpStudentListCell.m; sourceTree = "<group>"; };
-		062B6B421C6305C50069A670 /* YBSignUpStudentListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBSignUpStudentListViewModel.h; sourceTree = "<group>"; };
-		062B6B431C6305C50069A670 /* YBSignUpStudentListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBSignUpStudentListViewModel.m; sourceTree = "<group>"; };
-		062B6B451C63069E0069A670 /* YBSignUpStuentListModelRootClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBSignUpStuentListModelRootClass.h; sourceTree = "<group>"; };
-		062B6B461C63069E0069A670 /* YBSignUpStuentListModelRootClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBSignUpStuentListModelRootClass.m; sourceTree = "<group>"; };
-		062B6B481C6306AD0069A670 /* YBSignUpStuentListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBSignUpStuentListModel.h; sourceTree = "<group>"; };
-		062B6B491C6306AD0069A670 /* YBSignUpStuentListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBSignUpStuentListModel.m; sourceTree = "<group>"; };
-		062B6B4B1C6325FD0069A670 /* YBUserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBUserInfoModel.h; sourceTree = "<group>"; };
-		062B6B4C1C6325FD0069A670 /* YBUserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBUserInfoModel.m; sourceTree = "<group>"; };
-		062B6B4E1C63293A0069A670 /* YBSubjectMoel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBSubjectMoel.h; sourceTree = "<group>"; };
-		062B6B4F1C63293A0069A670 /* YBSubjectMoel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBSubjectMoel.m; sourceTree = "<group>"; };
-		062B6B511C632A710069A670 /* YBTrainfieldlinfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBTrainfieldlinfoModel.h; sourceTree = "<group>"; };
-		062B6B521C632A710069A670 /* YBTrainfieldlinfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBTrainfieldlinfoModel.m; sourceTree = "<group>"; };
+		062B6B3C1C62EE8D0069A670 /* YBSignUpStudentListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBSignUpStudentListController.h; path = HeiMao_B/OrderViewController/YBSignUpStudentListController.h; sourceTree = SOURCE_ROOT; };
+		062B6B3D1C62EE8E0069A670 /* YBSignUpStudentListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBSignUpStudentListController.m; path = HeiMao_B/OrderViewController/YBSignUpStudentListController.m; sourceTree = SOURCE_ROOT; };
+		062B6B3F1C62F15E0069A670 /* YBSignUpStudentListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBSignUpStudentListCell.h; path = HeiMao_B/OrderViewController/YBSignUpStudentListCell.h; sourceTree = SOURCE_ROOT; };
+		062B6B401C62F15E0069A670 /* YBSignUpStudentListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBSignUpStudentListCell.m; path = HeiMao_B/OrderViewController/YBSignUpStudentListCell.m; sourceTree = SOURCE_ROOT; };
+		062B6B421C6305C50069A670 /* YBSignUpStudentListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBSignUpStudentListViewModel.h; path = HeiMao_B/OrderViewController/YBSignUpStudentListViewModel.h; sourceTree = SOURCE_ROOT; };
+		062B6B431C6305C50069A670 /* YBSignUpStudentListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBSignUpStudentListViewModel.m; path = HeiMao_B/OrderViewController/YBSignUpStudentListViewModel.m; sourceTree = SOURCE_ROOT; };
+		062B6B451C63069E0069A670 /* YBSignUpStuentListModelRootClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBSignUpStuentListModelRootClass.h; path = ../YBSignUpStuentListModelRootClass.h; sourceTree = "<group>"; };
+		062B6B461C63069E0069A670 /* YBSignUpStuentListModelRootClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBSignUpStuentListModelRootClass.m; path = ../YBSignUpStuentListModelRootClass.m; sourceTree = "<group>"; };
+		062B6B481C6306AD0069A670 /* YBSignUpStuentListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBSignUpStuentListModel.h; path = ../YBSignUpStuentListModel.h; sourceTree = "<group>"; };
+		062B6B491C6306AD0069A670 /* YBSignUpStuentListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBSignUpStuentListModel.m; path = ../YBSignUpStuentListModel.m; sourceTree = "<group>"; };
+		062B6B4B1C6325FD0069A670 /* YBUserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBUserInfoModel.h; path = ../YBUserInfoModel.h; sourceTree = "<group>"; };
+		062B6B4C1C6325FD0069A670 /* YBUserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBUserInfoModel.m; path = ../YBUserInfoModel.m; sourceTree = "<group>"; };
+		062B6B4E1C63293A0069A670 /* YBSubjectMoel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBSubjectMoel.h; path = ../YBSubjectMoel.h; sourceTree = "<group>"; };
+		062B6B4F1C63293A0069A670 /* YBSubjectMoel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBSubjectMoel.m; path = ../YBSubjectMoel.m; sourceTree = "<group>"; };
+		062B6B511C632A710069A670 /* YBTrainfieldlinfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBTrainfieldlinfoModel.h; path = ../YBTrainfieldlinfoModel.h; sourceTree = "<group>"; };
+		062B6B521C632A710069A670 /* YBTrainfieldlinfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBTrainfieldlinfoModel.m; path = ../YBTrainfieldlinfoModel.m; sourceTree = "<group>"; };
 		063122191C4F20AD00631E67 /* InformationMessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationMessageDetailController.h; sourceTree = "<group>"; };
 		0631221A1C4F20AD00631E67 /* InformationMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationMessageDetailController.m; sourceTree = "<group>"; };
 		064300761C478E8E008B5A74 /* SystemMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMessageModel.h; sourceTree = "<group>"; };
@@ -1388,6 +1388,29 @@
 			path = InformationMessage;
 			sourceTree = "<group>";
 		};
+		062B6B541C6348260069A670 /* YBSignUpStudentList */ = {
+			isa = PBXGroup;
+			children = (
+				062B6B3C1C62EE8D0069A670 /* YBSignUpStudentListController.h */,
+				062B6B3D1C62EE8E0069A670 /* YBSignUpStudentListController.m */,
+				062B6B3F1C62F15E0069A670 /* YBSignUpStudentListCell.h */,
+				062B6B401C62F15E0069A670 /* YBSignUpStudentListCell.m */,
+				062B6B421C6305C50069A670 /* YBSignUpStudentListViewModel.h */,
+				062B6B431C6305C50069A670 /* YBSignUpStudentListViewModel.m */,
+				062B6B451C63069E0069A670 /* YBSignUpStuentListModelRootClass.h */,
+				062B6B461C63069E0069A670 /* YBSignUpStuentListModelRootClass.m */,
+				062B6B481C6306AD0069A670 /* YBSignUpStuentListModel.h */,
+				062B6B491C6306AD0069A670 /* YBSignUpStuentListModel.m */,
+				062B6B4B1C6325FD0069A670 /* YBUserInfoModel.h */,
+				062B6B4C1C6325FD0069A670 /* YBUserInfoModel.m */,
+				062B6B4E1C63293A0069A670 /* YBSubjectMoel.h */,
+				062B6B4F1C63293A0069A670 /* YBSubjectMoel.m */,
+				062B6B511C632A710069A670 /* YBTrainfieldlinfoModel.h */,
+				062B6B521C632A710069A670 /* YBTrainfieldlinfoModel.m */,
+			);
+			path = YBSignUpStudentList;
+			sourceTree = "<group>";
+		};
 		B23983D2EE43E3BC88B5F3F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1896,6 +1919,7 @@
 			children = (
 				0613DE6D1C46273E004A1A2E /* InformationMessage */,
 				0613DE691C45E5D0004A1A2E /* SystemMessage */,
+				062B6B541C6348260069A670 /* YBSignUpStudentList */,
 				B8AFED171BDB96AC00EF8726 /* CourseViewController.h */,
 				B8AFED181BDB96AC00EF8726 /* CourseViewController.m */,
 				B253C2E41C43B0FF001AF771 /* SearchCourseViewController.h */,
@@ -1916,22 +1940,6 @@
 				D964C7E91C43C52E0009FE7A /* StudentSignInDataModel.m */,
 				D986553F1C46080C0040B719 /* StudentSignInStatusView.h */,
 				D98655401C46080C0040B719 /* StudentSignInStatusView.m */,
-				062B6B3C1C62EE8D0069A670 /* YBSignUpStudentListController.h */,
-				062B6B3D1C62EE8E0069A670 /* YBSignUpStudentListController.m */,
-				062B6B3F1C62F15E0069A670 /* YBSignUpStudentListCell.h */,
-				062B6B401C62F15E0069A670 /* YBSignUpStudentListCell.m */,
-				062B6B421C6305C50069A670 /* YBSignUpStudentListViewModel.h */,
-				062B6B431C6305C50069A670 /* YBSignUpStudentListViewModel.m */,
-				062B6B451C63069E0069A670 /* YBSignUpStuentListModelRootClass.h */,
-				062B6B461C63069E0069A670 /* YBSignUpStuentListModelRootClass.m */,
-				062B6B481C6306AD0069A670 /* YBSignUpStuentListModel.h */,
-				062B6B491C6306AD0069A670 /* YBSignUpStuentListModel.m */,
-				062B6B4B1C6325FD0069A670 /* YBUserInfoModel.h */,
-				062B6B4C1C6325FD0069A670 /* YBUserInfoModel.m */,
-				062B6B4E1C63293A0069A670 /* YBSubjectMoel.h */,
-				062B6B4F1C63293A0069A670 /* YBSubjectMoel.m */,
-				062B6B511C632A710069A670 /* YBTrainfieldlinfoModel.h */,
-				062B6B521C632A710069A670 /* YBTrainfieldlinfoModel.m */,
 				B28D5DCC1C61EE6900D9E9E1 /* JGYuYueHeadView.h */,
 				B28D5DCD1C61EE6900D9E9E1 /* JGYuYueHeadView.m */,
 				B28D5DCF1C61EEDA00D9E9E1 /* AppointmentCollectionViewCell.h */,
