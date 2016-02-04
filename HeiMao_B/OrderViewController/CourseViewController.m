@@ -80,11 +80,11 @@
 - (void)viewDidLoad {
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        DVVStudentListController *listVC = [DVVStudentListController new];
-//        [self.navigationController pushViewController:listVC animated:YES];
+        DVVStudentListController *listVC = [DVVStudentListController new];
+        [self.navigationController pushViewController:listVC animated:YES];
         
-        DVVSendMessageToStudentController *sendMsgVC = [DVVSendMessageToStudentController new];
-        [self.navigationController pushViewController:sendMsgVC animated:YES];
+//        DVVSendMessageToStudentController *sendMsgVC = [DVVSendMessageToStudentController new];
+//        [self.navigationController pushViewController:sendMsgVC animated:YES];
     });
     
     [super viewDidLoad];
