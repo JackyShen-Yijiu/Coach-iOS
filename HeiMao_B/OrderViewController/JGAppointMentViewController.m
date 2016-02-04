@@ -202,11 +202,17 @@
 {
     
     NSArray *array = [BLInformationManager sharedInstance].appointmentData;
-    NSLog(@"appointmentData array:%@",array);
-    if (array.count==0) {
-        [self showTotasViewWithMes:@"请选择预约时间和学员"];
+    if (array&&array.count==0) {
+        [self showTotasViewWithMes:@"请选择预约时间"];
         return;
     }
+    
+    NSArray *userArray = [BLInformationManager sharedInstance].appointmentUserData;
+    if (userArray&&userArray.count==0) {
+        [self showTotasViewWithMes:@"请选择预约学员"];
+        return;
+    }
+    
     
     // 数组排序
     NSArray *resultArray = [array sortedArrayUsingComparator:^NSComparisonResult(AppointmentCoachTimeInfoModel *  _Nonnull obj1, AppointmentCoachTimeInfoModel *  _Nonnull obj2) {
