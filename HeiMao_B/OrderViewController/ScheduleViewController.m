@@ -19,6 +19,7 @@
 #import "JGvalidationView.h"
 #import "JGYuYueHeadView.h"
 #import "AppointmentCoachTimeInfoModel.h"
+#import "JGAppointMentViewController.h"
 
 @interface ScheduleViewController () <UITableViewDataSource,UITableViewDelegate,FDCalendarDelegate,JGYuYueHeadViewDelegate>
 
@@ -92,6 +93,8 @@
 - (void)xueyuanyuyueDidClick
 {
     NSLog(@"%s",__func__);
+    JGAppointMentViewController *vc = [[JGAppointMentViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark Life Sycle

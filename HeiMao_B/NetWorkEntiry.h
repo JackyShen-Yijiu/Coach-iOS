@@ -293,7 +293,10 @@
 + (void)modifyExamClassCoachid:(NSString *)coachid classtypelist:(NSString *)classtypelist
                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-
+// 预约
++ (void)postcourseinfoUserreservationcourseWithParams:(NSDictionary *)params
+                                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failur;
 /**
  *
  * 获取某时间段教练预约列表

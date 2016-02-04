@@ -14,6 +14,9 @@
 @property (strong, nonatomic) UILabel *finalTimeLabel;
 @property (strong, nonatomic) UILabel *remainingPersonLabel;
 
+// 日程模块
 @property (nonatomic,strong) AppointmentCoachTimeInfoModel *coachTimeInfo;
+// 预约模块
+@property (nonatomic,strong) AppointmentCoachTimeInfoModel *appointInfoModel;
 
 @end

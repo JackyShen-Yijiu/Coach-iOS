@@ -453,6 +453,20 @@
     [self POST:urlStr parameters:dic success:success failure:failure];
     
 }
+
+// 预约
++ (void)postcourseinfoUserreservationcourseWithParams:(NSDictionary *)params
+                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if (!params) {
+        return [self missParagramercallBackFailure:failure];
+    }
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/userreservationcourse",[self domain]];
+    
+    [self GET:urlStr parameters:params success:success failure:failure];
+    
+}
 /**
  *
  * 获取系统消息和咨询消息数量

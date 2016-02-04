@@ -1,0 +1,434 @@
+//
+//  JGAppointMentViewController.m
+//  HeiMao_B
+//
+//  Created by kequ on 15/10/24.
+//  Copyright © 2015年 ke. All rights reserved.
+//
+
+#import "JGAppointMentViewController.h"
+#import "RefreshTableView.h"
+#import "HMCourseModel.h"
+#import "CourseSummaryListCell.h"
+#import "FDCalendar.h"
+#import "CourseSummaryDayCell.h"
+#import "CourseDetailViewController.h"
+#import "NoContentTipView.h"
+#import "VacationViewController.h"
+#import "JGvalidationView.h"
+#import "JGAppointMentMidView.h"
+#import "AppointmentCoachTimeInfoModel.h"
+#import "JGAppointMentViewController.h"
+#import "JGAppointMentFootView.h"
+#import "BLInformationManager.h"
+
+@interface JGAppointMentViewController () <FDCalendarDelegate,JGAppointMentMidViewDelegate>
+
+// 日历
+@property(nonatomic,strong) FDCalendar *calendarHeadView;
+// 中间预约时间
+@property (nonatomic,strong) JGAppointMentMidView *yuYueheadView;
+
+@property (nonatomic,strong) JGAppointMentFootView *toolView;
+
+@property(nonatomic,strong)NSDateFormatter *dateFormattor;
+
+@property (nonatomic ,strong) NSString *startTimeStr;
+@property (nonatomic ,strong) NSString *endTimeStr;
+@property (strong, nonatomic) NSString *updateTimeString;
+
+@property (nonatomic,strong) UILabel *firstLabel;
+@property (nonatomic,strong) UILabel *secondLabel;
+
+@end
+
+@implementation JGAppointMentViewController
+
+#pragma mark - LoingNotification
+- (void)didLoginSucess:(NSNotification *)notification
+{
+    [self fdCalendar:nil didSelectedDate:[NSDate date]];
+}
+
+- (void)didLoginoutSucess:(NSNotification *)notifcation
+{
+
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    
+    self.view.backgroundColor = RGB_Color(244, 249, 250);
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    [self initUI];
+    
+    [self addNotification];
+    
+}
+
+#pragma mark Life Sycle
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self resetNavBar];
+    
+    self.myNavigationItem.title = @"学员预约";
+    
+    self.firstLabel.text = nil;
+    self.secondLabel.text = nil;
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self fdCalendar:self.calendarHeadView didSelectedDate:[NSDate date]];
+
+}
+
+#pragma mark - initUI
+
+- (void)initNavBar
+{
+    [self resetNavBar];
+    
+}
+
+-(void)initUI
+{
+    
+    // 顶部日历
+    self.calendarHeadView = [[FDCalendar alloc] initWithCurrentDate:[NSDate date]];
+    self.calendarHeadView.delegate = self;
+    self.calendarHeadView.frame = CGRectMake(0, 64, self.view.width, 30+65);
+    [self.view addSubview:self.calendarHeadView];
+    
+    // 中间方格
+    self.yuYueheadView = [[JGAppointMentMidView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.calendarHeadView.frame), self.view.width, 180)];
+    self.yuYueheadView.delegate = self;
+    [self.view addSubview:self.yuYueheadView];
+    
+    // 添加预约框
+    self.toolView = [[JGAppointMentFootView alloc] init];
+    self.toolView.frame = CGRectMake(0, CGRectGetMaxY(self.yuYueheadView.frame)+10, self.view.width, 90);
+    [self.view addSubview:self.toolView];
+    self.toolView.parentViewController = self;
+    
+    // 底部提交按钮
+    UIButton *footBtn = [[UIButton alloc] init];
+    footBtn.backgroundColor = RGB_Color(31, 124, 235);
+    footBtn.frame = CGRectMake(0, self.view.height-50, self.view.width, 50);
+    [footBtn setTitle:@"提交" forState:UIControlStateNormal];
+    [footBtn setTitle:@"提交" forState:UIControlStateNormal];
+    footBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [footBtn addTarget:self action:@selector(footBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:footBtn];
+    
+    self.firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.toolView.frame)+10, self.view.width, 40)];
+    self.firstLabel.backgroundColor = [UIColor clearColor];
+    self.firstLabel.textAlignment = NSTextAlignmentLeft;
+    self.firstLabel.textColor = [UIColor grayColor];
+    self.firstLabel.font = [UIFont systemFontOfSize:15];
+    [self.view addSubview:self.firstLabel];
+    
+    self.secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.firstLabel.frame)+5, self.view.width, 40)];
+    self.secondLabel.backgroundColor = [UIColor clearColor];
+    self.secondLabel.textAlignment = NSTextAlignmentLeft;
+    self.secondLabel.textColor = [UIColor grayColor];
+    self.secondLabel.font = [UIFont systemFontOfSize:15];
+    [self.view addSubview:self.secondLabel];
+    
+}
+
+#pragma mark Load Data
+- (void)dealErrorResponseWithTableView:(RefreshTableView *)tableview info:(NSDictionary *)dic
+{
+    [self showTotasViewWithMes:[dic objectForKey:@"msg"]];
+    [tableview.refreshHeader endRefreshing];
+    [tableview.refreshFooter endRefreshing];
+}
+
+- (void)netErrorWithTableView:(RefreshTableView*)tableView
+{
+    [self showTotasViewWithMes:@"网络异常，稍后重试"];
+    [tableView.refreshHeader endRefreshing];
+    [tableView.refreshFooter endRefreshing];
+}
+
+#pragma mark LoadDayData
+- (void)fdCalendar:(FDCalendar *)calendar didSelectedDate:(NSDate *)date
+{
+    NSLog(@"切换日历代理方法 %s",__func__);
+    
+    if (!self.dateFormattor) {
+        self.dateFormattor = [[NSDateFormatter alloc] init];
+        [self.dateFormattor setDateFormat:@"yyyy-M-d"];
+    }
+    NSString * dataStr = [self.dateFormattor stringFromDate:date];
+    
+    // 加载中间预约时间
+    [self loadMidYuyueTimeData:dataStr];
+    
+    // 设置中间筛选框数据
+#warning 等待亚涛传递过来的数据 HMCourseModel 模型
+    [self.toolView receiveCoachTimeData:nil];
+    
+    // 设置顶部标题
+    self.myNavigationItem.title = [NSString stringWithFormat:@"%@",[self.dateFormattor stringFromDate:date]];
+    
+}
+
+- (void)footBtnDidClick
+{
+    
+    NSArray *array = [BLInformationManager sharedInstance].appointmentData;
+    if (array.count==0) {
+        [self showTotasViewWithMes:@"请选择预约时间和学员"];
+        return;
+    }
+    
+    // 数组排序
+    NSArray *resultArray = [array sortedArrayUsingComparator:^NSComparisonResult(AppointmentCoachTimeInfoModel *  _Nonnull obj1, AppointmentCoachTimeInfoModel *  _Nonnull obj2) {
+        //obj1.coursetime.numMark < obj2.coursetime.numMark
+        return obj1.coursetime.numMark > obj2.coursetime.numMark ;
+        
+    }];
+    
+    AppointmentCoachTimeInfoModel *firstModel = resultArray.firstObject;
+    AppointmentCoachTimeInfoModel *lastModel = resultArray.lastObject;
+    
+    NSArray *beginArray = [firstModel.coursetime.begintime componentsSeparatedByString:@":"];
+    NSString *beginString = beginArray.firstObject;
+    _startTimeStr = [NSString stringWithFormat:@"%d",[self chagetime:beginString data:_updateTimeString]];
+    
+    NSArray *endArray = [lastModel.coursetime.endtime componentsSeparatedByString:@":"];
+    NSString *endString = endArray.firstObject;
+    _endTimeStr = [NSString stringWithFormat:@"%d",[self chagetime:endString data:_updateTimeString]];
+    
+    
+    NSMutableString *courselistStr;
+    for (int i = 0; i<resultArray.count; i++) {
+        
+        AppointmentCoachTimeInfoModel *model = resultArray[i];
+        
+        NSString *courseID = model.infoId;
+        
+        if (i==resultArray.count-1) {
+            
+            [courselistStr appendString:[NSString stringWithFormat:@"%@",courseID]];
+            
+        }else{
+            
+            [courselistStr appendString:[NSString stringWithFormat:@"%@,",courseID]];
+            
+        }
+        
+        
+    }
+    
+    /*
+     
+     "userid": "560539bea694336c25c3acb9",（用户id）
+     
+     "coachid": "5616352721ec29041a9af889",（教练id）
+     
+     "courselist": "5616352721ec29041a9af889, 5616352721ec29041a9af889",（课程id列表）
+     
+     "is_shuttle": 1,（是否接送1接送0不接送）
+     
+     "address": "sdfsdfsdfdsfdssf",（接送地址）
+     
+     "begintime": "2015-09-10 10:00:00",（课程的开始时间
+     
+     "endtime": "2015-09-10 14:00:00"（课程结束时间）
+     
+     */
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+#warning 待修改,等待亚涛数据
+    params[@"userid"] = ((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid;
+    params[@"coachid"] = [[UserInfoModel defaultUserInfo] userID];
+    params[@"courselist"] = courselistStr;
+    params[@"is_shuttle"] = @"1";
+    params[@"address"] = @"";
+    params[@"begintime"] = _startTimeStr;
+    params[@"endtime"] = _endTimeStr;
+    
+    [NetWorkEntiry postcourseinfoUserreservationcourseWithParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"params:%@ responseObject:%@",params,responseObject);
+        
+        NSDictionary *param = responseObject;
+        
+        NSString *type = [NSString stringWithFormat:@"%@",param[@"type"]];
+        
+        if ([type isEqualToString:@"1"]) {
+            
+            NSLog(@"预约成功");
+            [[BLInformationManager sharedInstance].appointmentData removeAllObjects];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }else {
+            
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+    
+}
+
+
+#pragma mark ---- 修改UI
+- (void)kCellChange
+{
+    
+    NSArray *array = [BLInformationManager sharedInstance].appointmentData;
+    if (array.count==0) {
+        [self showTotasViewWithMes:@"请选择预约时间"];
+        return;
+    }
+    
+    NSArray *userArray = [BLInformationManager sharedInstance].appointmentUserData;
+    if (userArray.count==0) {
+        [self showTotasViewWithMes:@"请选择预约学员"];
+        return;
+    }
+    
+    // 数组排序
+    NSArray *resultArray = [array sortedArrayUsingComparator:^NSComparisonResult(AppointmentCoachTimeInfoModel *  _Nonnull obj1, AppointmentCoachTimeInfoModel *  _Nonnull obj2) {
+        //obj1.coursetime.numMark < obj2.coursetime.numMark
+        return obj1.coursetime.numMark > obj2.coursetime.numMark ;
+        
+    }];
+    
+    AppointmentCoachTimeInfoModel *firstModel = resultArray.firstObject;
+    AppointmentCoachTimeInfoModel *lastModel = resultArray.lastObject;
+    
+    NSArray *beginArray = [firstModel.coursetime.begintime componentsSeparatedByString:@":"];
+    NSString *beginString = beginArray.firstObject;
+    _startTimeStr = [NSString stringWithFormat:@"%d",[self chagetime:beginString data:_updateTimeString]];
+    
+    NSArray *endArray = [lastModel.coursetime.endtime componentsSeparatedByString:@":"];
+    NSString *endString = endArray.firstObject;
+    _endTimeStr = [NSString stringWithFormat:@"%d",[self chagetime:endString data:_updateTimeString]];
+    
+
+#warning 修改底部数据
+    self.firstLabel.text = [NSString stringWithFormat:@"当前预约为科目%@ 第%@-第%@学时",((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid,((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid,((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid];
+
+    self.secondLabel.text = [NSString stringWithFormat:@"已确认练车课时为%@课时",((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid];
+    
+}
+
+#pragma mark --- 选择预约学员代理方法
+- (void)yuyueDidClick
+{
+    
+    // 移除上次添加的数据
+    [[BLInformationManager sharedInstance].appointmentData removeAllObjects];
+    [[BLInformationManager sharedInstance].appointmentUserData removeAllObjects];
+
+    
+    // 修改底部UI
+#warning 等待亚涛数据
+    self.firstLabel.text = [NSString stringWithFormat:@"当前预约为科目%@ 第%@-第%@学时",((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid,((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid,((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid];
+    self.secondLabel.text = [NSString stringWithFormat:@"已确认练车课时为%@课时",((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid];
+    
+    
+    
+}
+
+
+- (int)chagetime:(NSString *)timeStr data:(NSString *)dataStr {
+    NSLog(@"%@%@",timeStr,dataStr);
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    //设置格式
+    df.dateFormat = @"yyyy-MM-dd HH:mm:ss.0";
+    //将符合格式的字符串转成NSDate对象
+    NSDate *date = [df dateFromString:[NSString stringWithFormat:@"%@ %@:00:00",dataStr,timeStr]];
+    //计算一个时间和系统当前时间的时间差
+    int second = [date timeIntervalSince1970];
+    return second;
+}
+
+#pragma mark --- 中间日程点击事件
+- (void)JGAppointMentMidViewWithCollectionViewDidSelectItemAtIndexPath:(NSIndexPath *)indexPath timeInfo:(AppointmentCoachTimeInfoModel *)model
+{
+    NSLog(@"刷新底部数据");
+}
+
+- (void)loadMidYuyueTimeData:(NSString *)dataStr
+{
+    
+    NSLog(@"loadMidYuyueTimeData dataStr:%@",dataStr);
+    
+    NSString *userId = [[UserInfoModel defaultUserInfo] userID];
+    if (userId==nil) {
+        return;
+    }
+    
+    WS(ws);
+    [NetWorkEntiry getAllCourseTimeWithUserId:userId DayTime:dataStr success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"loadMidYuyueTimeData responseObject:%@",responseObject);
+        
+        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+        
+        if (type == 1) {
+            
+            NSError *error=nil;
+            
+            NSArray *dataArray = [MTLJSONAdapter modelsOfClass:AppointmentCoachTimeInfoModel.class fromJSONArray:responseObject[@"data"] error:&error];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [ws.yuYueheadView receiveCoachTimeData:dataArray];
+                
+            });
+            
+        }else{
+            
+            [ws dealErrorResponseWithTableView:nil info:responseObject];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [ws netErrorWithTableView:nil];
+        
+    }];
+    
+}
+
+
+#pragma mark -
+//其他页面预约状态发生变化，通知本页面更新
+- (void)addNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefresh:) name:KCourseViewController_NeedRefresh object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginSucess:) name:@"kLoginSuccess" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginoutSucess:) name:@"kLoginoutSuccess" object:nil];
+
+    // 预约接收通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kCellChange) name:@"kCellChange" object:nil];
+
+}
+
+- (void)needRefresh:(NSNotification *)notification
+{
+//    [self.courseDayTableView reloadData];
+}
+
+@end
