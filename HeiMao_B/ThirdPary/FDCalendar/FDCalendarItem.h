@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 
 #define DeviceWidth [UIScreen mainScreen].bounds.size.width
-#define ITEMHEIGTH 46.F
+
+// 顶部标题高度
+#define ITEMHEIGTH 30.F
+// 日期高度
+#define calendarItemH 65
 
 typedef NS_ENUM(NSInteger,KCellStation){
     KCellStationLeft,

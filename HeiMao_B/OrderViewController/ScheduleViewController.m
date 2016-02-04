@@ -17,20 +17,27 @@
 #import "NoContentTipView.h"
 #import "VacationViewController.h"
 #import "JGvalidationView.h"
+#import "JGYuYueHeadView.h"
+#import "AppointmentCoachTimeInfoModel.h"
 
-@interface ScheduleViewController () <UITableViewDataSource,UITableViewDelegate,FDCalendarDelegate>
+@interface ScheduleViewController () <UITableViewDataSource,UITableViewDelegate,FDCalendarDelegate,JGYuYueHeadViewDelegate>
 
-@property(nonatomic,strong)UISegmentedControl * segController;
-@property(nonatomic,strong)UIScrollView * scrollView;
+// 底部tableview
+@property(nonatomic,strong) UITableView * courseDayTableView;
+// 日历
+@property(nonatomic,strong) FDCalendar *calendarHeadView;
+// 中间预约时间
+@property (nonatomic,strong) JGYuYueHeadView *yuYueheadView;
 
-@property(nonatomic,strong)UITableView * courseDayTableView;
-@property(nonatomic,strong)FDCalendar *calendarHeadView;
 @property(nonatomic,strong)NSMutableArray * courseDayTableData;
 
 @property(nonatomic,assign)BOOL isNeedRefresh;
+
 @property(nonatomic,strong)NSDateFormatter *dateFormattor;
+
 @property(nonatomic,strong)NoContentTipView * tipView2;
 
+// 教练资格审核提示框
 @property (nonatomic,strong)JGvalidationView*bgView;
 
 @end
@@ -55,7 +62,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -73,13 +79,19 @@
 
 - (void)modifyVacation
 {
-    [self fdCalendar:nil didSelectedDate:[NSDate date]];
+    NSLog(@"%s",__func__);
+    
+    // 设置当前日期
+    [self.calendarHeadView setCurrentDate:[NSDate date]];
+    
+   [self fdCalendar:self.calendarHeadView didSelectedDate:[NSDate date]];
+    
+    
 }
 
-- (void)restBtnDidClick
+- (void)xueyuanyuyueDidClick
 {
-    VacationViewController *vacation = [[VacationViewController alloc] init];
-    [self.navigationController pushViewController:vacation animated:YES];
+    NSLog(@"%s",__func__);
 }
 
 #pragma mark Life Sycle
@@ -91,14 +103,12 @@
     
     self.myNavigationItem.title = @"日程";
     
-    //self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"休假" highTitle:@"休假" target:self action:@selector(restBtnDidClick) isRightItem:YES];
+    self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"学员预约" highTitle:@"学员预约" target:self action:@selector(xueyuanyuyueDidClick) isRightItem:YES];
     
-    //self.myNavigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTitle:@"今天" highTitle:@"今天" target:self action:@selector(modifyVacation) isRightItem:NO];
+    self.myNavigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTitle:@"今天" highTitle:@"今天" target:self action:@selector(modifyVacation) isRightItem:NO];
 
-    [self.scrollView setContentOffset:CGPointMake(1 * self.scrollView.width, self.scrollView.contentOffset.y) animated:YES];
-
-    //[self initNavBar];
-    //    [self showMessCountInTabBar:10];
+//    [self fdCalendar:self.calendarHeadView didSelectedDate:[NSDate date]];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -127,33 +137,33 @@
 
 -(void)initUI
 {
-    UIView * view = [[UIView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:view];
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 64 - 48)];
-    self.scrollView.contentSize = CGSizeMake(self.view.width * 2, 0);
-    self.scrollView.pagingEnabled = YES;
-    self.scrollView.scrollEnabled = NO;
-    [self.view addSubview:self.scrollView];
+    // 顶部日历
+    self.calendarHeadView = [[FDCalendar alloc] initWithCurrentDate:[NSDate date]];
+    self.calendarHeadView.delegate = self;
+    self.calendarHeadView.frame = CGRectMake(0, 64, self.view.width, 30+65);
+    [self.view addSubview:self.calendarHeadView];
     
-    //日程
-    self.courseDayTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.scrollView.width, 0, self.scrollView.width, self.scrollView.height) style:UITableViewStylePlain];
+    // 中间方格
+    self.yuYueheadView = [[JGYuYueHeadView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 180)];
+    self.yuYueheadView.delegate = self;
+    
+    // 底部预约列表
+    self.courseDayTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.calendarHeadView.frame), self.view.width, self.view.height-self.calendarHeadView.height-64) style:UITableViewStylePlain];
     self.courseDayTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.courseDayTableView.delegate = self;
     self.courseDayTableView.dataSource = self;
+    self.courseDayTableView.tableHeaderView = self.yuYueheadView;
+    self.courseDayTableView.contentInset = UIEdgeInsetsMake(0, 0, self.calendarHeadView.height, 0);
+    [self.view addSubview:self.courseDayTableView];
     
-    self.calendarHeadView = [[FDCalendar alloc] initWithCurrentDate:[NSDate date]];
-    self.calendarHeadView.delegate = self;
-    self.courseDayTableView.tableHeaderView = self.calendarHeadView;
-    self.courseDayTableView.sectionHeaderHeight = self.calendarHeadView.height;
-    [self.scrollView addSubview:self.courseDayTableView];
-    
+    // 占位图
     self.tipView2 = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有预约"];
     [self.tipView2 setHidden:YES];
     [self.courseDayTableView addSubview:self.tipView2];
-    self.tipView2.center = CGPointMake(self.courseDayTableView .width/2.f, self.courseDayTableView.height/2.f + 190);
+    self.tipView2.center = CGPointMake(self.courseDayTableView .width/2.f, CGRectGetMaxY(self.yuYueheadView.frame)+self.tipView2.height);
+    
 }
-
 
 #pragma mark Load Data
 - (void)dealErrorResponseWithTableView:(RefreshTableView *)tableview info:(NSDictionary *)dic
@@ -180,10 +190,79 @@
         [self.dateFormattor setDateFormat:@"yyyy-M-d"];
     }
     NSString * dataStr = [self.dateFormattor stringFromDate:date];
-    NSString *  userId = [[UserInfoModel defaultUserInfo] userID];
+    
+    // 加载中间预约时间
+    [self loadMidYuyueTimeData:dataStr];
+
+    // 加载底部预约列表数据
+    [self loadFootListData:dataStr];
+    
+    // 设置顶部标题
+    self.myNavigationItem.title = [NSString stringWithFormat:@"%@",[self.dateFormattor stringFromDate:date]];
+
+}
+
+#pragma mark --- 中间日程点击事件
+- (void)JGYuYueHeadViewWithCollectionViewDidSelectItemAtIndexPath:(NSIndexPath *)indexPath timeInfo:(AppointmentCoachTimeInfoModel *)model
+{
+    NSLog(@"加载底部数据");
+    [self loadFootListDataWithinfoId:model.infoId];
+    
+}
+
+- (void)loadMidYuyueTimeData:(NSString *)dataStr
+{
+    
+    NSLog(@"loadMidYuyueTimeData dataStr:%@",dataStr);
+    
+    NSString *userId = [[UserInfoModel defaultUserInfo] userID];
+    if (userId==nil) {
+        return;
+    }
     
     WS(ws);
-    [NetWorkEntiry getAllCourseInfoWithUserId:userId DayTime:dataStr  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry getAllCourseTimeWithUserId:userId DayTime:dataStr success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"loadMidYuyueTimeData responseObject:%@",responseObject);
+        
+        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+        
+        if (type == 1) {
+            
+            NSError *error=nil;
+            
+            NSArray *dataArray = [MTLJSONAdapter modelsOfClass:AppointmentCoachTimeInfoModel.class fromJSONArray:responseObject[@"data"] error:&error];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [ws.yuYueheadView receiveCoachTimeData:dataArray];
+                
+            });
+            
+        }else{
+            
+            [ws dealErrorResponseWithTableView:nil info:responseObject];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [ws netErrorWithTableView:nil];
+
+    }];
+    
+}
+
+- (void)loadFootListDataWithinfoId:(NSString *)infoId
+{
+    
+    NSString *  userId = [[UserInfoModel defaultUserInfo] userID];
+    if (userId==nil && infoId==nil) {
+        return;
+    }
+    
+    WS(ws);
+    // 加载底部预约列表数据
+    [NetWorkEntiry getcoursereservationlistWithUserId:userId courseid:infoId  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"切换日历获取最新数据:responseObject:%@",responseObject);
         
@@ -208,6 +287,40 @@
     }];
 }
 
+- (void)loadFootListData:(NSString *)dataStr
+{
+    
+    NSString *  userId = [[UserInfoModel defaultUserInfo] userID];
+    if (userId==nil) {
+        return;
+    }
+    
+    WS(ws);
+    // 加载底部预约列表数据
+    [NetWorkEntiry getAllCourseInfoWithUserId:userId DayTime:dataStr  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"切换日历获取最新数据:responseObject:%@",responseObject);
+        
+        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+        
+        if (type == 1) {
+            
+            ws.courseDayTableData = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [ws.courseDayTableView reloadData];
+            });
+            
+        }else{
+            
+            [ws dealErrorResponseWithTableView:nil info:responseObject];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [ws netErrorWithTableView:nil];
+        
+    }];
+}
 
 #pragma mark - DataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

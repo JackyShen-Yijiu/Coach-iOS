@@ -20,13 +20,16 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - BaiduMapKit (2.9.1)
+  - BaiduMapKit (2.10.0)
   - ChameleonFramework (2.0.4):
     - ChameleonFramework/Default (= 2.0.4)
   - ChameleonFramework/Default (2.0.4)
   - EaseMobSDKFull (2.1.7)
   - HappyDNS (0.2.3)
   - JSONKit (1.5pre)
+  - Mantle (2.0.6):
+    - Mantle/extobjc (= 2.0.6)
+  - Mantle/extobjc (2.0.6)
   - Masonry (0.6.4)
   - MBProgressHUD (0.9.2)
   - MD5Digest (1.1.0)
@@ -44,6 +47,8 @@ DEPENDENCIES:
   - ChameleonFramework
   - EaseMobSDKFull
   - JSONKit (~> 1.5pre)
+  - Mantle (~> 2.0.5)
+  - Masonry
   - Masonry (~> 0.6.1)
   - MBProgressHUD (~> 0.9.1)
   - MD5Digest
@@ -53,11 +58,12 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  BaiduMapKit: 97d2d44b41a876de2371fb91ddf78cdf84dafa05
+  BaiduMapKit: 5df028c6b455d29e68e89694adbcf9d37a4bcc99
   ChameleonFramework: 5abe69b1f2a6cc79c3c435fcd9d3d855748225ee
   EaseMobSDKFull: 43858ca9a62bbe1fa4c7c006f944a3e52a4bff48
   HappyDNS: 6d85942e64c28b4fa61f8c76580398f52d6d1d11
   JSONKit: bae313ce6a6c444f40489a6c0b023f399888871f
+  Mantle: 299966b00759634931699f69cb6a30b9239b944d
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MD5Digest: fea371215507cfcdc3c9633d02cffc7fd075ebc3

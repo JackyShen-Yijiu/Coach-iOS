@@ -293,4 +293,22 @@
 + (void)modifyExamClassCoachid:(NSString *)coachid classtypelist:(NSString *)classtypelist
                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
+ *
+ * 获取某时间段教练预约列表
+ *
+ */
++ (void)getAllCourseTimeWithUserId:(NSString *)userId  DayTime:(NSString *)dayTime
+                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
+ *
+ * 教练获取某一节课的课程详情
+ *
+ */
++ (void)getcoursereservationlistWithUserId:(NSString *)userId  courseid:(NSString *)courseid
+                                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

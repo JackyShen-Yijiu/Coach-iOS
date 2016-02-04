@@ -13,6 +13,7 @@
 #import "ModelDefine.h"
 #import "BaseModelMethod.h"
 #import "HMTrainaddressModel.h"
+#import "JGSubjectthreeModel.h"
 
 @interface HMCourseModel : NSObject
 
@@ -36,13 +37,21 @@
 @property(nonatomic,strong)NSString * coachcomment;
 @property(nonatomic,strong)NSString * cancelreason;
 
+@property(nonatomic,strong)NSString * courseprocessdesc;
+// 官方学时
+@property(nonatomic,strong)NSString * officialDesc;
+
 /*
  * v1.1.0添加剩余多少课时，漏课统计
  */
 @property(nonatomic,assign)NSInteger leavecoursecount;
 @property(nonatomic,assign)NSInteger missingcoursecount;
 
+@property (nonatomic,strong) JGSubjectthreeModel *subjectthree;
+
 + (HMCourseModel *)converJsonDicToModel:(NSDictionary *)dic;
 
 - (NSString *)getStatueString;
 @end
+
+

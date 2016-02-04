@@ -49,6 +49,12 @@
 		B253C2F41C43C960001AF771 /* PermissiveOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2ED1C43C960001AF771 /* PermissiveOperations.m */; };
 		B253C2F61C43C960001AF771 /* PermissiveScoringMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2F11C43C960001AF771 /* PermissiveScoringMatrix.m */; };
 		B253C2FE1C45203F001AF771 /* PermissiveResearchDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2FD1C45203F001AF771 /* PermissiveResearchDatabase.m */; };
+		B28D5DCE1C61EE6900D9E9E1 /* JGYuYueHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DCD1C61EE6900D9E9E1 /* JGYuYueHeadView.m */; };
+		B28D5DD11C61EEDA00D9E9E1 /* AppointmentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DD01C61EEDA00D9E9E1 /* AppointmentCollectionViewCell.m */; };
+		B28D5DD41C61EF0200D9E9E1 /* AppointmentCoachTimeInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DD31C61EF0200D9E9E1 /* AppointmentCoachTimeInfoModel.m */; };
+		B28D5DD71C61EF3D00D9E9E1 /* CourseTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DD61C61EF3D00D9E9E1 /* CourseTimeModel.m */; };
+		B28D5DDA1C62357B00D9E9E1 /* NSString+CurrentTimeDay.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DD91C62357B00D9E9E1 /* NSString+CurrentTimeDay.m */; };
+		B28D5DDD1C6303B400D9E9E1 /* JGSubjectthreeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DDC1C6303B400D9E9E1 /* JGSubjectthreeModel.m */; };
 		B2A6BABA1C4B64CB00B09A0F /* JGUserTools.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6BAB51C4B64CB00B09A0F /* JGUserTools.m */; };
 		B2A6BABF1C4B6D8A00B09A0F /* JGUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6BABE1C4B6D8A00B09A0F /* JGUserModel.m */; };
 		B2AC20371C3E2CBD0033803C /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */; };
@@ -539,6 +545,18 @@
 		B253C2F01C43C960001AF771 /* PermissiveScoringMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissiveScoringMatrix.h; sourceTree = "<group>"; };
 		B253C2F11C43C960001AF771 /* PermissiveScoringMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissiveScoringMatrix.m; sourceTree = "<group>"; };
 		B253C2FD1C45203F001AF771 /* PermissiveResearchDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissiveResearchDatabase.m; sourceTree = "<group>"; };
+		B28D5DCC1C61EE6900D9E9E1 /* JGYuYueHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGYuYueHeadView.h; sourceTree = "<group>"; };
+		B28D5DCD1C61EE6900D9E9E1 /* JGYuYueHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGYuYueHeadView.m; sourceTree = "<group>"; };
+		B28D5DCF1C61EEDA00D9E9E1 /* AppointmentCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppointmentCollectionViewCell.h; sourceTree = "<group>"; };
+		B28D5DD01C61EEDA00D9E9E1 /* AppointmentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointmentCollectionViewCell.m; sourceTree = "<group>"; };
+		B28D5DD21C61EF0200D9E9E1 /* AppointmentCoachTimeInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppointmentCoachTimeInfoModel.h; sourceTree = "<group>"; };
+		B28D5DD31C61EF0200D9E9E1 /* AppointmentCoachTimeInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointmentCoachTimeInfoModel.m; sourceTree = "<group>"; };
+		B28D5DD51C61EF3D00D9E9E1 /* CourseTimeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseTimeModel.h; sourceTree = "<group>"; };
+		B28D5DD61C61EF3D00D9E9E1 /* CourseTimeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseTimeModel.m; sourceTree = "<group>"; };
+		B28D5DD81C62357B00D9E9E1 /* NSString+CurrentTimeDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CurrentTimeDay.h"; sourceTree = "<group>"; };
+		B28D5DD91C62357B00D9E9E1 /* NSString+CurrentTimeDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CurrentTimeDay.m"; sourceTree = "<group>"; };
+		B28D5DDB1C6303B400D9E9E1 /* JGSubjectthreeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGSubjectthreeModel.h; sourceTree = "<group>"; };
+		B28D5DDC1C6303B400D9E9E1 /* JGSubjectthreeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGSubjectthreeModel.m; sourceTree = "<group>"; };
 		B2A6BAB41C4B64CB00B09A0F /* JGUserTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGUserTools.h; sourceTree = "<group>"; };
 		B2A6BAB51C4B64CB00B09A0F /* JGUserTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGUserTools.m; sourceTree = "<group>"; };
 		B2A6BABD1C4B6D8A00B09A0F /* JGUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGUserModel.h; sourceTree = "<group>"; };
@@ -1818,6 +1836,16 @@
 				D964C7E91C43C52E0009FE7A /* StudentSignInDataModel.m */,
 				D986553F1C46080C0040B719 /* StudentSignInStatusView.h */,
 				D98655401C46080C0040B719 /* StudentSignInStatusView.m */,
+				B28D5DCC1C61EE6900D9E9E1 /* JGYuYueHeadView.h */,
+				B28D5DCD1C61EE6900D9E9E1 /* JGYuYueHeadView.m */,
+				B28D5DCF1C61EEDA00D9E9E1 /* AppointmentCollectionViewCell.h */,
+				B28D5DD01C61EEDA00D9E9E1 /* AppointmentCollectionViewCell.m */,
+				B28D5DD21C61EF0200D9E9E1 /* AppointmentCoachTimeInfoModel.h */,
+				B28D5DD31C61EF0200D9E9E1 /* AppointmentCoachTimeInfoModel.m */,
+				B28D5DD51C61EF3D00D9E9E1 /* CourseTimeModel.h */,
+				B28D5DD61C61EF3D00D9E9E1 /* CourseTimeModel.m */,
+				B28D5DDB1C6303B400D9E9E1 /* JGSubjectthreeModel.h */,
+				B28D5DDC1C6303B400D9E9E1 /* JGSubjectthreeModel.m */,
 			);
 			name = CourseSummaryController;
 			path = OrderViewController;
@@ -2630,6 +2658,8 @@
 				B8FFDF661BDE78E6005BD535 /* FDCalendar.m */,
 				B8FFDF671BDE78E6005BD535 /* FDCalendarItem.h */,
 				B8FFDF681BDE78E6005BD535 /* FDCalendarItem.m */,
+				B28D5DD81C62357B00D9E9E1 /* NSString+CurrentTimeDay.h */,
+				B28D5DD91C62357B00D9E9E1 /* NSString+CurrentTimeDay.m */,
 			);
 			path = FDCalendar;
 			sourceTree = "<group>";
@@ -3080,11 +3110,13 @@
 				B8BC50741BF38A390007B029 /* UIImageView+EMHighlightedWebCache.m in Sources */,
 				B8BC50631BF38A390007B029 /* MWTapDetectingImageView.m in Sources */,
 				B253C2CE1C3FA742001AF771 /* mask.c in Sources */,
+				B28D5DD71C61EF3D00D9E9E1 /* CourseTimeModel.m in Sources */,
 				D5F72BC71BF9AB0D00B972B0 /* ModifyNameViewController.m in Sources */,
 				B873EEFF1C21C2C5000579CB /* ProjectGuideView.m in Sources */,
 				B8BC508F1BF38A390007B029 /* EaseChineseToPinyin.m in Sources */,
 				0613DE7C1C4642BB004A1A2E /* InformationMessageModel.m in Sources */,
 				B8BA98C51C229C3D009DB449 /* CourEnsureItemView.m in Sources */,
+				B28D5DDA1C62357B00D9E9E1 /* NSString+CurrentTimeDay.m in Sources */,
 				B8BC50461BF38A390007B029 /* EMAudioRecorderUtil.m in Sources */,
 				B84479E81BE07B7A004E5E15 /* StudentHomeUserCourseInfoCell.m in Sources */,
 				B865C1661BDC969700C1E681 /* HMStudentModel.m in Sources */,
@@ -3161,6 +3193,7 @@
 				06BED0B01C50F34100BE86FF /* AppDelegate+YJPush.m in Sources */,
 				D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */,
 				B8BC506D1BF38A390007B029 /* EMSDWebImagePrefetcher.m in Sources */,
+				B28D5DD11C61EEDA00D9E9E1 /* AppointmentCollectionViewCell.m in Sources */,
 				B865C1791BDCA49400C1E681 /* CourseSummaryListCell.m in Sources */,
 				B8BC50E41BF393D00007B029 /* EaseBubbleView+Image.m in Sources */,
 				0613DE791C4641AE004A1A2E /* InformationMessageModelRootClass.m in Sources */,
@@ -3240,6 +3273,7 @@
 				0613DE681C45E466004A1A2E /* SystemMessageDetailController.m in Sources */,
 				D5D50FA21BFC135B00F54097 /* PrivateMessageController.m in Sources */,
 				B8447A171BE0E456004E5E15 /* CoursePicListCell.m in Sources */,
+				B28D5DD41C61EF0200D9E9E1 /* AppointmentCoachTimeInfoModel.m in Sources */,
 				B8BC504E1BF38A390007B029 /* EMVoiceConverter.mm in Sources */,
 				D5C2406B1BF108CF00832CF3 /* RegisterViewController.m in Sources */,
 				B253C2D31C3FA742001AF771 /* rscode.c in Sources */,
@@ -3252,6 +3286,7 @@
 				0613DE731C462890004A1A2E /* InformationMessageCell.m in Sources */,
 				B8BC50731BF38A390007B029 /* UIImage+EMWebP.m in Sources */,
 				B8BC50571BF38A390007B029 /* MJRefreshGifHeader.m in Sources */,
+				B28D5DCE1C61EE6900D9E9E1 /* JGYuYueHeadView.m in Sources */,
 				D964C7F11C43CA970009FE7A /* NSObject+YYModel.m in Sources */,
 				B8447A081BE0D2E3004E5E15 /* CourseCancelController.m in Sources */,
 				B8DDB7B81BE47FDE008FE867 /* HMTrainaddressModel.m in Sources */,
@@ -3270,6 +3305,7 @@
 				B8C458881BDB5BAD00901F71 /* NetWorkEntiry.m in Sources */,
 				55C8AB9C1C4A43780002466E /* modifyjialinViewController.m in Sources */,
 				B8BC50ED1BF393D00007B029 /* EaseTextView.m in Sources */,
+				B28D5DDD1C6303B400D9E9E1 /* JGSubjectthreeModel.m in Sources */,
 				D5D50FAA1BFC42CA00F54097 /* FeedBackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

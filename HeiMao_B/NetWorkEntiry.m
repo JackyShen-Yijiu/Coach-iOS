@@ -245,7 +245,32 @@
     [self GET:urlStr parameters:dic success:success failure:failure];
     
 }
++ (void)getcoursereservationlistWithUserId:(NSString *)userId  courseid:(NSString *)courseid
+                                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if (!userId || !courseid) {
+        return [self missParagramercallBackFailure:failure];
+    }
+    
+    // GET /courseinfo/coursereservationlist
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coursereservationlist?coachid=%@&courseid=%@",[self domain],userId,courseid];
+    
+    [self GET:urlStr parameters:nil success:success failure:failure];
+    
+}
++ (void)getAllCourseTimeWithUserId:(NSString *)userId  DayTime:(NSString *)dayTime
+                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if (!userId || !dayTime) {
+        return [self missParagramercallBackFailure:failure];
+    }
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/getcoursebycoach?coachid=%@&date=%@",[self domain],userId,dayTime];
 
+    [self GET:urlStr parameters:nil success:success failure:failure];
+    
+}
 + (void)getCoureDetailInfoWithCouresId:(NSString *)couresId
                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
