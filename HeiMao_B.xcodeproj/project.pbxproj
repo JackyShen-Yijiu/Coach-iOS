@@ -441,8 +441,27 @@
 		D5F72BD31BF9BD8700B972B0 /* IDCardNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F72BD21BF9BD8700B972B0 /* IDCardNumViewController.m */; };
 		D5F72BD61BF9BE9700B972B0 /* PhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F72BD51BF9BE9700B972B0 /* PhoneNumViewController.m */; };
 		D5F72BD91BF9BF6900B972B0 /* DrivingNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F72BD81BF9BF6900B972B0 /* DrivingNumViewController.m */; };
+		D96470E01C61D71A00C97984 /* DVVDrivingStudentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = D96470D01C61D71A00C97984 /* DVVDrivingStudentListView.m */; };
+		D96470E11C61D71A00C97984 /* DVVLicensingStudentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = D96470D21C61D71A00C97984 /* DVVLicensingStudentListView.m */; };
+		D96470E21C61D71A00C97984 /* DVVStudentListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96470D41C61D71A00C97984 /* DVVStudentListController.m */; };
+		D96470E31C61D71A00C97984 /* DVVStudentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D96470D61C61D71A00C97984 /* DVVStudentListViewModel.m */; };
+		D96470E41C61D71A00C97984 /* DVVTheoreticalStudentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96470D81C61D71A00C97984 /* DVVTheoreticalStudentListCell.m */; };
+		D96470E51C61D71A00C97984 /* DVVTheoreticalStudentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96470D91C61D71A00C97984 /* DVVTheoreticalStudentListCell.xib */; };
+		D96470E61C61D71A00C97984 /* DVVTheoreticalStudentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = D96470DB1C61D71A00C97984 /* DVVTheoreticalStudentListView.m */; };
+		D96470E71C61D71A00C97984 /* DVVToast.m in Sources */ = {isa = PBXBuildFile; fileRef = D96470DD1C61D71A00C97984 /* DVVToast.m */; };
+		D96470E81C61D71A00C97984 /* DVVToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D96470DF1C61D71A00C97984 /* DVVToolBarView.m */; };
+		D96470EB1C61D8FE00C97984 /* DVVBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D96470EA1C61D8FE00C97984 /* DVVBaseViewModel.m */; };
+		D96470EF1C61DA1700C97984 /* DVVDrivingStudentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96470ED1C61DA1700C97984 /* DVVDrivingStudentListCell.m */; };
+		D96470F01C61DA1700C97984 /* DVVDrivingStudentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96470EE1C61DA1700C97984 /* DVVDrivingStudentListCell.xib */; };
+		D96470F41C61EA5200C97984 /* DVVSendMessageToStudentController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96470F31C61EA5200C97984 /* DVVSendMessageToStudentController.m */; };
+		D96470FA1C61EB5800C97984 /* DVVSendMessageToStudentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D96470F91C61EB5700C97984 /* DVVSendMessageToStudentView.m */; };
+		D96470FE1C61EB8800C97984 /* DVVSendMessageToStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96470FC1C61EB8800C97984 /* DVVSendMessageToStudentCell.m */; };
+		D96470FF1C61EB8800C97984 /* DVVSendMessageToStudentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96470FD1C61EB8800C97984 /* DVVSendMessageToStudentCell.xib */; };
+		D96471021C61FB7F00C97984 /* DVVStudentListDMRootClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D96471011C61FB7F00C97984 /* DVVStudentListDMRootClass.m */; };
+		D96471051C61FB9D00C97984 /* DVVStudentListDMData.m in Sources */ = {isa = PBXBuildFile; fileRef = D96471041C61FB9D00C97984 /* DVVStudentListDMData.m */; };
+		D964710B1C61FD1E00C97984 /* DVVStudentListDMHeadPortrait.m in Sources */ = {isa = PBXBuildFile; fileRef = D964710A1C61FD1E00C97984 /* DVVStudentListDMHeadPortrait.m */; };
+		D964710E1C61FD8300C97984 /* DVVStudentListDMSubject.m in Sources */ = {isa = PBXBuildFile; fileRef = D964710D1C61FD8300C97984 /* DVVStudentListDMSubject.m */; };
 		D964C7E11C43A7B00009FE7A /* StudentSignInController.m in Sources */ = {isa = PBXBuildFile; fileRef = D964C7E01C43A7B00009FE7A /* StudentSignInController.m */; };
-		D964C7E41C43B5BD0009FE7A /* DVVBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D964C7E31C43B5BD0009FE7A /* DVVBaseViewModel.m */; };
 		D964C7EA1C43C52E0009FE7A /* StudentSignInDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D964C7E91C43C52E0009FE7A /* StudentSignInDataModel.m */; };
 		D964C7F11C43CA970009FE7A /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D964C7ED1C43CA970009FE7A /* NSObject+YYModel.m */; };
 		D964C7F21C43CA970009FE7A /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D964C7EF1C43CA970009FE7A /* YYClassInfo.m */; };
@@ -1194,10 +1213,45 @@
 		D5F72BD51BF9BE9700B972B0 /* PhoneNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumViewController.m; sourceTree = "<group>"; };
 		D5F72BD71BF9BF6900B972B0 /* DrivingNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrivingNumViewController.h; sourceTree = "<group>"; };
 		D5F72BD81BF9BF6900B972B0 /* DrivingNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrivingNumViewController.m; sourceTree = "<group>"; };
+		D96470CF1C61D71A00C97984 /* DVVDrivingStudentListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVDrivingStudentListView.h; sourceTree = "<group>"; };
+		D96470D01C61D71A00C97984 /* DVVDrivingStudentListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVDrivingStudentListView.m; sourceTree = "<group>"; };
+		D96470D11C61D71A00C97984 /* DVVLicensingStudentListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVLicensingStudentListView.h; sourceTree = "<group>"; };
+		D96470D21C61D71A00C97984 /* DVVLicensingStudentListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVLicensingStudentListView.m; sourceTree = "<group>"; };
+		D96470D31C61D71A00C97984 /* DVVStudentListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVStudentListController.h; sourceTree = "<group>"; };
+		D96470D41C61D71A00C97984 /* DVVStudentListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVStudentListController.m; sourceTree = "<group>"; };
+		D96470D51C61D71A00C97984 /* DVVStudentListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVStudentListViewModel.h; sourceTree = "<group>"; };
+		D96470D61C61D71A00C97984 /* DVVStudentListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVStudentListViewModel.m; sourceTree = "<group>"; };
+		D96470D71C61D71A00C97984 /* DVVTheoreticalStudentListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVTheoreticalStudentListCell.h; sourceTree = "<group>"; };
+		D96470D81C61D71A00C97984 /* DVVTheoreticalStudentListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVTheoreticalStudentListCell.m; sourceTree = "<group>"; };
+		D96470D91C61D71A00C97984 /* DVVTheoreticalStudentListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DVVTheoreticalStudentListCell.xib; sourceTree = "<group>"; };
+		D96470DA1C61D71A00C97984 /* DVVTheoreticalStudentListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVTheoreticalStudentListView.h; sourceTree = "<group>"; };
+		D96470DB1C61D71A00C97984 /* DVVTheoreticalStudentListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVTheoreticalStudentListView.m; sourceTree = "<group>"; };
+		D96470DC1C61D71A00C97984 /* DVVToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVToast.h; sourceTree = "<group>"; };
+		D96470DD1C61D71A00C97984 /* DVVToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVToast.m; sourceTree = "<group>"; };
+		D96470DE1C61D71A00C97984 /* DVVToolBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVToolBarView.h; sourceTree = "<group>"; };
+		D96470DF1C61D71A00C97984 /* DVVToolBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVToolBarView.m; sourceTree = "<group>"; };
+		D96470E91C61D8FE00C97984 /* DVVBaseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVBaseViewModel.h; sourceTree = "<group>"; };
+		D96470EA1C61D8FE00C97984 /* DVVBaseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVBaseViewModel.m; sourceTree = "<group>"; };
+		D96470EC1C61DA1700C97984 /* DVVDrivingStudentListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVDrivingStudentListCell.h; sourceTree = "<group>"; };
+		D96470ED1C61DA1700C97984 /* DVVDrivingStudentListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVDrivingStudentListCell.m; sourceTree = "<group>"; };
+		D96470EE1C61DA1700C97984 /* DVVDrivingStudentListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DVVDrivingStudentListCell.xib; sourceTree = "<group>"; };
+		D96470F21C61EA5200C97984 /* DVVSendMessageToStudentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVSendMessageToStudentController.h; sourceTree = "<group>"; };
+		D96470F31C61EA5200C97984 /* DVVSendMessageToStudentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVSendMessageToStudentController.m; sourceTree = "<group>"; };
+		D96470F81C61EB5700C97984 /* DVVSendMessageToStudentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVSendMessageToStudentView.h; sourceTree = "<group>"; };
+		D96470F91C61EB5700C97984 /* DVVSendMessageToStudentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVSendMessageToStudentView.m; sourceTree = "<group>"; };
+		D96470FB1C61EB8800C97984 /* DVVSendMessageToStudentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVSendMessageToStudentCell.h; sourceTree = "<group>"; };
+		D96470FC1C61EB8800C97984 /* DVVSendMessageToStudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVSendMessageToStudentCell.m; sourceTree = "<group>"; };
+		D96470FD1C61EB8800C97984 /* DVVSendMessageToStudentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DVVSendMessageToStudentCell.xib; sourceTree = "<group>"; };
+		D96471001C61FB7F00C97984 /* DVVStudentListDMRootClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVStudentListDMRootClass.h; sourceTree = "<group>"; };
+		D96471011C61FB7F00C97984 /* DVVStudentListDMRootClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVStudentListDMRootClass.m; sourceTree = "<group>"; };
+		D96471031C61FB9D00C97984 /* DVVStudentListDMData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVStudentListDMData.h; sourceTree = "<group>"; };
+		D96471041C61FB9D00C97984 /* DVVStudentListDMData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVStudentListDMData.m; sourceTree = "<group>"; };
+		D96471091C61FD1E00C97984 /* DVVStudentListDMHeadPortrait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVStudentListDMHeadPortrait.h; sourceTree = "<group>"; };
+		D964710A1C61FD1E00C97984 /* DVVStudentListDMHeadPortrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVStudentListDMHeadPortrait.m; sourceTree = "<group>"; };
+		D964710C1C61FD8300C97984 /* DVVStudentListDMSubject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVStudentListDMSubject.h; sourceTree = "<group>"; };
+		D964710D1C61FD8300C97984 /* DVVStudentListDMSubject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVStudentListDMSubject.m; sourceTree = "<group>"; };
 		D964C7DF1C43A7B00009FE7A /* StudentSignInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentSignInController.h; sourceTree = "<group>"; };
 		D964C7E01C43A7B00009FE7A /* StudentSignInController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentSignInController.m; sourceTree = "<group>"; };
-		D964C7E21C43B5BD0009FE7A /* DVVBaseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVBaseViewModel.h; sourceTree = "<group>"; };
-		D964C7E31C43B5BD0009FE7A /* DVVBaseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVBaseViewModel.m; sourceTree = "<group>"; };
 		D964C7E81C43C52E0009FE7A /* StudentSignInDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentSignInDataModel.h; sourceTree = "<group>"; };
 		D964C7E91C43C52E0009FE7A /* StudentSignInDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentSignInDataModel.m; sourceTree = "<group>"; };
 		D964C7EC1C43CA970009FE7A /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
@@ -1482,6 +1536,8 @@
 		B86EB3531BDB50EB0014EBD7 /* HeiMao_B */ = {
 			isa = PBXGroup;
 			children = (
+				D96470F11C61E96800C97984 /* SendMessageToStudent */,
+				D96470CE1C61D71A00C97984 /* StudentList */,
 				B89534701C43C968009F5E9B /* CompleteViewController */,
 				B86EB3571BDB50EB0014EBD7 /* AppDelegate.h */,
 				B86EB3581BDB50EB0014EBD7 /* AppDelegate.m */,
@@ -2582,8 +2638,8 @@
 		B8C458811BDB5B7600901F71 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				D964C7E21C43B5BD0009FE7A /* DVVBaseViewModel.h */,
-				D964C7E31C43B5BD0009FE7A /* DVVBaseViewModel.m */,
+				D96470E91C61D8FE00C97984 /* DVVBaseViewModel.h */,
+				D96470EA1C61D8FE00C97984 /* DVVBaseViewModel.m */,
 				B253C2E11C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.h */,
 				B253C2E21C3FD33B001AF771 /* UINavigationBar+JGNavigationBar.m */,
 				B253C2B91C3F5B01001AF771 /* UIBarButtonItem+JGBarButtonItem.h */,
@@ -2692,6 +2748,55 @@
 			path = Goods;
 			sourceTree = "<group>";
 		};
+		D96470CE1C61D71A00C97984 /* StudentList */ = {
+			isa = PBXGroup;
+			children = (
+				D96470CF1C61D71A00C97984 /* DVVDrivingStudentListView.h */,
+				D96470D01C61D71A00C97984 /* DVVDrivingStudentListView.m */,
+				D96470EC1C61DA1700C97984 /* DVVDrivingStudentListCell.h */,
+				D96470ED1C61DA1700C97984 /* DVVDrivingStudentListCell.m */,
+				D96470EE1C61DA1700C97984 /* DVVDrivingStudentListCell.xib */,
+				D96470D11C61D71A00C97984 /* DVVLicensingStudentListView.h */,
+				D96470D21C61D71A00C97984 /* DVVLicensingStudentListView.m */,
+				D96470D31C61D71A00C97984 /* DVVStudentListController.h */,
+				D96470D41C61D71A00C97984 /* DVVStudentListController.m */,
+				D96470D51C61D71A00C97984 /* DVVStudentListViewModel.h */,
+				D96470D61C61D71A00C97984 /* DVVStudentListViewModel.m */,
+				D96470D71C61D71A00C97984 /* DVVTheoreticalStudentListCell.h */,
+				D96470D81C61D71A00C97984 /* DVVTheoreticalStudentListCell.m */,
+				D96470D91C61D71A00C97984 /* DVVTheoreticalStudentListCell.xib */,
+				D96470DA1C61D71A00C97984 /* DVVTheoreticalStudentListView.h */,
+				D96470DB1C61D71A00C97984 /* DVVTheoreticalStudentListView.m */,
+				D96470DC1C61D71A00C97984 /* DVVToast.h */,
+				D96470DD1C61D71A00C97984 /* DVVToast.m */,
+				D96470DE1C61D71A00C97984 /* DVVToolBarView.h */,
+				D96470DF1C61D71A00C97984 /* DVVToolBarView.m */,
+				D96471001C61FB7F00C97984 /* DVVStudentListDMRootClass.h */,
+				D96471011C61FB7F00C97984 /* DVVStudentListDMRootClass.m */,
+				D96471031C61FB9D00C97984 /* DVVStudentListDMData.h */,
+				D96471041C61FB9D00C97984 /* DVVStudentListDMData.m */,
+				D96471091C61FD1E00C97984 /* DVVStudentListDMHeadPortrait.h */,
+				D964710A1C61FD1E00C97984 /* DVVStudentListDMHeadPortrait.m */,
+				D964710C1C61FD8300C97984 /* DVVStudentListDMSubject.h */,
+				D964710D1C61FD8300C97984 /* DVVStudentListDMSubject.m */,
+			);
+			path = StudentList;
+			sourceTree = "<group>";
+		};
+		D96470F11C61E96800C97984 /* SendMessageToStudent */ = {
+			isa = PBXGroup;
+			children = (
+				D96470F21C61EA5200C97984 /* DVVSendMessageToStudentController.h */,
+				D96470F31C61EA5200C97984 /* DVVSendMessageToStudentController.m */,
+				D96470F81C61EB5700C97984 /* DVVSendMessageToStudentView.h */,
+				D96470F91C61EB5700C97984 /* DVVSendMessageToStudentView.m */,
+				D96470FB1C61EB8800C97984 /* DVVSendMessageToStudentCell.h */,
+				D96470FC1C61EB8800C97984 /* DVVSendMessageToStudentCell.m */,
+				D96470FD1C61EB8800C97984 /* DVVSendMessageToStudentCell.xib */,
+			);
+			path = SendMessageToStudent;
+			sourceTree = "<group>";
+		};
 		D964C7EB1C43CA970009FE7A /* YYModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -2738,7 +2843,7 @@
 				TargetAttributes = {
 					B86EB3501BDB50EB0014EBD7 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = MC3VUBEH8X;
+						DevelopmentTeam = C34F4H4R4C;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -2834,6 +2939,7 @@
 				B8A052021BF6F32F0058D27A /* call_out_h.png in Resources */,
 				B8A051E11BF6F32F0058D27A /* VoiceSearchFeedback005@2x.png in Resources */,
 				B8A0520B1BF6F32F0058D27A /* chatBar_more_card@2x.png in Resources */,
+				D96470F01C61DA1700C97984 /* DVVDrivingStudentListCell.xib in Resources */,
 				B8A052291BF6F32F0058D27A /* chatBar_more@2x.png in Resources */,
 				B8A052101BF6F32F0058D27A /* chatBar_more_faceSelected.png in Resources */,
 				B8A051E91BF6F32F0058D27A /* VoiceSearchFeedback009@2x.png in Resources */,
@@ -2906,6 +3012,7 @@
 				B8A052031BF6F32F0058D27A /* call_out_h@2x.png in Resources */,
 				B8A052071BF6F32F0058D27A /* call_silence_h@2x.png in Resources */,
 				B8A052181BF6F32F0058D27A /* chat_location_detail_disclosureHL.png in Resources */,
+				D96470FF1C61EB8800C97984 /* DVVSendMessageToStudentCell.xib in Resources */,
 				B8A0521A1BF6F32F0058D27A /* chat_location_preview.png in Resources */,
 				B8A0522A1BF6F32F0058D27A /* chatBar_moreSelected.png in Resources */,
 				B8A052581BF6F32F0058D27A /* chat_sender_audio_playing_full@2x.png in Resources */,
@@ -2913,6 +3020,7 @@
 				B8A051DA1BF6F32F0058D27A /* VoiceSearchFeedback002.png in Resources */,
 				B8A0523C1BF6F32F0058D27A /* chatBar_colorMore_video@2x.png in Resources */,
 				B8BC50841BF38A390007B029 /* MWPhotoBrowser.bundle in Resources */,
+				D96470E51C61D71A00C97984 /* DVVTheoreticalStudentListCell.xib in Resources */,
 				B8A052311BF6F32F0058D27A /* chatBar_recordSelected@2x.png in Resources */,
 				B8A052191BF6F32F0058D27A /* chat_location_detail_disclosureHL@2x.png in Resources */,
 				B8A051FD1BF6F32F0058D27A /* VoiceSearchFeedback019@2x.png in Resources */,
@@ -2995,6 +3103,7 @@
 				0613DE6C1C45F06B004A1A2E /* SystemMessageDetailCell.m in Sources */,
 				B8DDB7B51BE47808008FE867 /* CourseDetailViewCell.m in Sources */,
 				B8BC50831BF38A390007B029 /* PSTGridLayoutSection.m in Sources */,
+				D96470EB1C61D8FE00C97984 /* DVVBaseViewModel.m in Sources */,
 				B8BC50891BF38A390007B029 /* NSDate+Category.m in Sources */,
 				B253C2D21C3FA742001AF771 /* qrspec.c in Sources */,
 				B8C458571BDB592B00901F71 /* HMNagationController.m in Sources */,
@@ -3002,6 +3111,7 @@
 				B8BC50E51BF393D00007B029 /* EaseBubbleView+Location.m in Sources */,
 				B8BFA2591BF64C20002D7F22 /* EMBubbleView+Gif.m in Sources */,
 				B8BC50651BF38A390007B029 /* MWZoomingScrollView.m in Sources */,
+				D96470E01C61D71A00C97984 /* DVVDrivingStudentListView.m in Sources */,
 				0643007B1C4791B4008B5A74 /* SystemMessageModelRootClass.m in Sources */,
 				B8BC50E31BF393D00007B029 /* EaseBubbleView+File.m in Sources */,
 				D5D50F961BFC135B00F54097 /* InfoModel.m in Sources */,
@@ -3021,7 +3131,10 @@
 				B8BC50801BF38A390007B029 /* PSTGridLayoutInfo.m in Sources */,
 				D5D50F5B1BFAD4FE00F54097 /* ButtonSelectedCell.m in Sources */,
 				B8FFDF691BDE78E6005BD535 /* FDCalendar.m in Sources */,
+				D96471021C61FB7F00C97984 /* DVVStudentListDMRootClass.m in Sources */,
 				B8BC50621BF38A390007B029 /* MWPhotoBrowser.m in Sources */,
+				D96470E11C61D71A00C97984 /* DVVLicensingStudentListView.m in Sources */,
+				D96470E81C61D71A00C97984 /* DVVToolBarView.m in Sources */,
 				B8BC506A1BF38A390007B029 /* EMSDWebImageDownloader.m in Sources */,
 				B8BC504B1BF38A390007B029 /* EMCDDeviceManagerBase.m in Sources */,
 				B8BC50691BF38A390007B029 /* EMSDWebImageDecoder.m in Sources */,
@@ -3030,6 +3143,7 @@
 				B8BC507A1BF38A390007B029 /* PSTCollectionViewController.m in Sources */,
 				B8BFA24E1BF64B17002D7F22 /* EaseViewController.m in Sources */,
 				B8BC50581BF38A390007B029 /* MJRefreshHeader.m in Sources */,
+				D964710B1C61FD1E00C97984 /* DVVStudentListDMHeadPortrait.m in Sources */,
 				D5D50F971BFC135B00F54097 /* LTBottomView.m in Sources */,
 				B8BC508D1BF38A390007B029 /* UIViewController+DismissKeyboard.m in Sources */,
 				06C1252E1C4351560033DCDE /* WorkNatureController.m in Sources */,
@@ -3045,6 +3159,7 @@
 				B8447A111BE0D8C4004E5E15 /* PickListView.m in Sources */,
 				D5D50F5E1BFAD6E800F54097 /* buttonSelectedModel.m in Sources */,
 				B8BC505E1BF38A390007B029 /* MWCaptionView.m in Sources */,
+				D96470E21C61D71A00C97984 /* DVVStudentListController.m in Sources */,
 				B8BC50DF1BF393D00007B029 /* EaseUserCell.m in Sources */,
 				B253C2E61C43B0FF001AF771 /* SearchCourseViewController.m in Sources */,
 				B84479E51BE07A46004E5E15 /* StudentHomeUserBasicInfoCell.m in Sources */,
@@ -3081,6 +3196,8 @@
 				B8BC50F21BF393D00007B029 /* EaseConversationCell.m in Sources */,
 				B246441F1C50C034009B5649 /* JGvalidationView.m in Sources */,
 				B8BC50471BF38A390007B029 /* EMCDDeviceManager+Media.m in Sources */,
+				D96470F41C61EA5200C97984 /* DVVSendMessageToStudentController.m in Sources */,
+				D96470E71C61D71A00C97984 /* DVVToast.m in Sources */,
 				B8BC50881BF38A390007B029 /* EaseUserModel.m in Sources */,
 				B8BC50811BF38A390007B029 /* PSTGridLayoutItem.m in Sources */,
 				D5F72BCA1BF9AB6700B972B0 /* UIDevice+JEsystemVersion.m in Sources */,
@@ -3098,6 +3215,7 @@
 				B8BC50F51BF394B20007B029 /* ConversationListController.m in Sources */,
 				B865C17C1BDCA4A300C1E681 /* CourseSummaryDayCell.m in Sources */,
 				D5F72BCD1BF9BAED00B972B0 /* SignatureViewController.m in Sources */,
+				D964710E1C61FD8300C97984 /* DVVStudentListDMSubject.m in Sources */,
 				D5D50EA11BF9DE8D00F54097 /* StudentListCell.m in Sources */,
 				B84479EB1BE099D9004E5E15 /* StudentHomeRecomendCell.m in Sources */,
 				B8C4587C1BDB5ABB00901F71 /* NSDictionary+StrDic.m in Sources */,
@@ -3105,6 +3223,7 @@
 				B8BC50EC1BF393D00007B029 /* EaseImageView.m in Sources */,
 				B8BC50701BF38A390007B029 /* UIButton+EMWebCache.m in Sources */,
 				0613DE761C46404C004A1A2E /* InformationMessageViewModel.m in Sources */,
+				D96470FE1C61EB8800C97984 /* DVVSendMessageToStudentCell.m in Sources */,
 				D5F72BD91BF9BF6900B972B0 /* DrivingNumViewController.m in Sources */,
 				D5F72BA81BF988E700B972B0 /* UserCenterHeadView.m in Sources */,
 				B8BC50451BF38A390007B029 /* EMAudioPlayerUtil.m in Sources */,
@@ -3151,6 +3270,7 @@
 				D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */,
 				B8BC506D1BF38A390007B029 /* EMSDWebImagePrefetcher.m in Sources */,
 				B865C1791BDCA49400C1E681 /* CourseSummaryListCell.m in Sources */,
+				D96470E31C61D71A00C97984 /* DVVStudentListViewModel.m in Sources */,
 				B8BC50E41BF393D00007B029 /* EaseBubbleView+Image.m in Sources */,
 				0613DE791C4641AE004A1A2E /* InformationMessageModelRootClass.m in Sources */,
 				B8BC508A1BF38A390007B029 /* NSDateFormatter+Category.m in Sources */,
@@ -3166,6 +3286,7 @@
 				B8447A141BE0DE09004E5E15 /* CourseDesInPutCell.m in Sources */,
 				D5D50FA31BFC135B00F54097 /* ShopMainModel.m in Sources */,
 				B8BC50711BF38A390007B029 /* UIImage+EMGIF.m in Sources */,
+				D96470EF1C61DA1700C97984 /* DVVDrivingStudentListCell.m in Sources */,
 				06FBBAA11C48D14A00207FDB /* MagicDetailViewController.m in Sources */,
 				B8BFA24B1BF64AF5002D7F22 /* EaseLocationViewController.m in Sources */,
 				D5D50F671BFB233200F54097 /* ExamClassCollectionViewCell.m in Sources */,
@@ -3183,8 +3304,8 @@
 				B2AC20371C3E2CBD0033803C /* ScheduleViewController.m in Sources */,
 				D5F72BBA1BF99D3900B972B0 /* PFActionSheetView.m in Sources */,
 				B8BC505D1BF38A390007B029 /* UIView+MJExtension.m in Sources */,
-				D964C7E41C43B5BD0009FE7A /* DVVBaseViewModel.m in Sources */,
 				0631221B1C4F20AD00631E67 /* InformationMessageDetailController.m in Sources */,
+				D96470E61C61D71A00C97984 /* DVVTheoreticalStudentListView.m in Sources */,
 				B84479DB1BDFB35D004E5E15 /* HMButton.m in Sources */,
 				B865C17F1BDCA4D600C1E681 /* PortraitView.m in Sources */,
 				B8BC505F1BF38A390007B029 /* MWGridCell.m in Sources */,
@@ -3233,9 +3354,11 @@
 				B253C2D31C3FA742001AF771 /* rscode.c in Sources */,
 				B8BC504C1BF38A390007B029 /* amrFileCodec.mm in Sources */,
 				D5F72BB11BF9993A00B972B0 /* EditorUserViewController.m in Sources */,
+				D96470FA1C61EB5800C97984 /* DVVSendMessageToStudentView.m in Sources */,
 				B865C16A1BDC9ABB00C1E681 /* HMClassInfoModel.m in Sources */,
 				B8BC50E71BF393D00007B029 /* EaseBubbleView+Video.m in Sources */,
 				D5D5102C1BFE1B6D00F54097 /* ProtocalViewController.m in Sources */,
+				D96470E41C61D71A00C97984 /* DVVTheoreticalStudentListCell.m in Sources */,
 				B8BC50871BF38A390007B029 /* EaseMessageModel.m in Sources */,
 				0613DE731C462890004A1A2E /* InformationMessageCell.m in Sources */,
 				B8BC50731BF38A390007B029 /* UIImage+EMWebP.m in Sources */,
@@ -3248,6 +3371,7 @@
 				B8BC50491BF38A390007B029 /* EMCDDeviceManager+ProximitySensor.m in Sources */,
 				D964C7F21C43CA970009FE7A /* YYClassInfo.m in Sources */,
 				D98655411C46080C0040B719 /* StudentSignInStatusView.m in Sources */,
+				D96471051C61FB9D00C97984 /* DVVStudentListDMData.m in Sources */,
 				B8BFA2451BF64A84002D7F22 /* ChatViewController.m in Sources */,
 				D5D50FA71BFC425B00F54097 /* SetupViewController.m in Sources */,
 				B8BC50481BF38A390007B029 /* EMCDDeviceManager+Microphone.m in Sources */,
@@ -3317,7 +3441,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
+				PROVISIONING_PROFILE = "22434bc0-7c8f-4b7b-b4d1-a6e1c6fc433e";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3355,7 +3479,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
+				PROVISIONING_PROFILE = "22434bc0-7c8f-4b7b-b4d1-a6e1c6fc433e";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3383,8 +3507,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
-};
+				PROVISIONING_PROFILE = "";
+			};
 			name = Debug;
 		};
 		B86EB36A1BDB50EB0014EBD7 /* Release */ = {
@@ -3409,7 +3533,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.modoujiaxiao;
 				PRODUCT_NAME = "一步学车教练端";
-				PROVISIONING_PROFILE = "186730fd-fa68-4099-8433-b970523decc9";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

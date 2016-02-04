@@ -557,6 +557,18 @@
     [self POST:urlStr parameters:paramtersDict success:success failure:failure];
 }
 
++ (void)coachStudentListWithCoachId:(NSString *)coachId
+                        studentType:(NSUInteger)type
+                              index:(NSUInteger)index
+                            success:(void (^)(AFHTTPRequestOperation *, id))success
+                            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
+    NSString *urlStr = [NSString stringWithFormat:@"%@/userinfo/coachstudentlist",[self domain]];
+    NSDictionary *paramterDict = @{ @"coachid": coachId,
+                                    @"studenttype": [NSString stringWithFormat:@"%d", type],
+                                    @"index": [NSString stringWithFormat:@"%d", index] };
+    [self GET:urlStr parameters:paramterDict success:success failure:failure];
+}
+
 #pragma mark - Common Method
 
 + (NSString *)domain

@@ -293,4 +293,14 @@
 + (void)modifyExamClassCoachid:(NSString *)coachid classtypelist:(NSString *)classtypelist
                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
+ *  获取学员列表
+ *
+ */
++ (void)coachStudentListWithCoachId:(NSString *)coachId
+                        studentType:(NSUInteger)type
+                              index:(NSUInteger)index
+                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end
