@@ -135,9 +135,9 @@
         if (self.upDateArray.count == 0) {
             
             AppointmentCollectionViewCell *cell = (AppointmentCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-            cell.startTimeLabel.textColor = MAINCOLOR;
-            cell.finalTimeLabel.textColor = MAINCOLOR;
-            cell.remainingPersonLabel.textColor = MAINCOLOR;
+            cell.startTimeLabel.textColor = RGB_Color(31, 124, 235);//MAINCOLOR;
+            cell.finalTimeLabel.textColor = RGB_Color(31, 124, 235);//MAINCOLOR;
+            cell.remainingPersonLabel.textColor = RGB_Color(31, 124, 235);//MAINCOLOR;
             model.is_selected = YES;
             [self.upDateArray addObject:model];
             [self.dataArray replaceObjectAtIndex:indexPath.row withObject:model];
@@ -153,9 +153,9 @@
             if ((model.indexPath + 1 == UpDatemodel.indexPath )|| (model.indexPath-1 == UpDatemodel.indexPath)) {
                 //            [SVProgressHUD showInfoWithStatus:@"请选择相邻的时间段"];
                 AppointmentCollectionViewCell *cell = (AppointmentCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-                cell.startTimeLabel.textColor = MAINCOLOR;
-                cell.finalTimeLabel.textColor = MAINCOLOR;
-                cell.remainingPersonLabel.textColor = MAINCOLOR;
+                cell.startTimeLabel.textColor = RGB_Color(31, 124, 235);//MAINCOLOR;
+                cell.finalTimeLabel.textColor = RGB_Color(31, 124, 235);//MAINCOLOR;
+                cell.remainingPersonLabel.textColor = RGB_Color(31, 124, 235);//MAINCOLOR;
                 model.is_selected = YES;
                 [self.upDateArray addObject:model];
                 [self.dataArray replaceObjectAtIndex:indexPath.row withObject:model];

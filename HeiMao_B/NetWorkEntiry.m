@@ -464,7 +464,7 @@
     }
     NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/userreservationcourse",[self domain]];
     
-    [self GET:urlStr parameters:params success:success failure:failure];
+    [self POST:urlStr parameters:params success:success failure:failure];
     
 }
 /**

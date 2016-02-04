@@ -41,6 +41,8 @@
 @property (nonatomic,strong) UILabel *firstLabel;
 @property (nonatomic,strong) UILabel *secondLabel;
 
+@property (nonatomic,copy) NSString *selectDateStr;
+
 @end
 
 @implementation JGAppointMentViewController
@@ -73,8 +75,9 @@
     
     [self addNotification];
     
-    [[BLInformationManager sharedInstance].appointmentData removeAllObjects];
-    [[BLInformationManager sharedInstance].appointmentUserData removeAllObjects];
+    if ([BLInformationManager sharedInstance].appointmentUserData) {
+        [[BLInformationManager sharedInstance].appointmentUserData removeAllObjects];
+    }
     
 }
 
@@ -139,14 +142,14 @@
     [footBtn addTarget:self action:@selector(footBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:footBtn];
     
-    self.firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.toolView.frame)+10, self.view.width, 40)];
+    self.firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.toolView.frame)+5, self.view.width, 20)];
     self.firstLabel.backgroundColor = [UIColor clearColor];
     self.firstLabel.textAlignment = NSTextAlignmentLeft;
     self.firstLabel.textColor = [UIColor grayColor];
     self.firstLabel.font = [UIFont systemFontOfSize:15];
     [self.view addSubview:self.firstLabel];
     
-    self.secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.firstLabel.frame)+5, self.view.width, 40)];
+    self.secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.firstLabel.frame)+5, self.view.width, 20)];
     self.secondLabel.backgroundColor = [UIColor clearColor];
     self.secondLabel.textAlignment = NSTextAlignmentLeft;
     self.secondLabel.textColor = [UIColor grayColor];
@@ -175,17 +178,19 @@
 {
     NSLog(@"切换日历代理方法 %s",__func__);
     
+    
     if (!self.dateFormattor) {
         self.dateFormattor = [[NSDateFormatter alloc] init];
         [self.dateFormattor setDateFormat:@"yyyy-M-d"];
     }
+
     NSString * dataStr = [self.dateFormattor stringFromDate:date];
-    
+    self.selectDateStr = dataStr;
+
     // 加载中间预约时间
     [self loadMidYuyueTimeData:dataStr];
     
     // 设置中间筛选框数据
-    NSLog(@"[BLInformationManager sharedInstance].appointmentUserData:%@",[BLInformationManager sharedInstance].appointmentUserData);
     [self.toolView receiveCoachTimeData:[BLInformationManager sharedInstance].appointmentUserData];
     
     // 设置顶部标题
@@ -197,6 +202,7 @@
 {
     
     NSArray *array = [BLInformationManager sharedInstance].appointmentData;
+    NSLog(@"appointmentData array:%@",array);
     if (array.count==0) {
         [self showTotasViewWithMes:@"请选择预约时间和学员"];
         return;
@@ -208,7 +214,8 @@
         return obj1.coursetime.numMark > obj2.coursetime.numMark ;
         
     }];
-    
+    NSLog(@"appointmentData resultArray:%@",resultArray);
+
     AppointmentCoachTimeInfoModel *firstModel = resultArray.firstObject;
     AppointmentCoachTimeInfoModel *lastModel = resultArray.lastObject;
     
@@ -220,27 +227,27 @@
     NSString *endString = endArray.firstObject;
     _endTimeStr = [NSString stringWithFormat:@"%d",[self chagetime:endString data:_updateTimeString]];
     
+    NSLog(@"self.selectDateStr:%@",self.selectDateStr);
+    NSLog(@"firstModel.coursetime.begintime:%@",firstModel.coursetime.begintime);
+    NSLog(@"lastModel.coursetime.endtime:%@",lastModel.coursetime.endtime);
     
-    NSMutableString *courselistStr;
+    NSMutableString *courselistStr = [NSMutableString string];
     for (int i = 0; i<resultArray.count; i++) {
         
         AppointmentCoachTimeInfoModel *model = resultArray[i];
         
         NSString *courseID = model.infoId;
+        NSLog(@"courseID:%@",courseID);
         
         if (i==resultArray.count-1) {
-            
-            [courselistStr appendString:[NSString stringWithFormat:@"%@",courseID]];
-            
+            NSString *lastID = ((AppointmentCoachTimeInfoModel *)[resultArray lastObject]).infoId;
+            [courselistStr appendString:[NSString stringWithFormat:@"%@",lastID]];
         }else{
-            
             [courselistStr appendString:[NSString stringWithFormat:@"%@,",courseID]];
-            
         }
-        
-        
+
     }
-    
+        
     /*
      
      "userid": "560539bea694336c25c3acb9",（用户id）
@@ -260,36 +267,57 @@
      */
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-#warning 待修改,等待亚涛数据
-    params[@"userid"] = ((AppointmentCoachTimeInfoModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).coachid;
+    params[@"userid"] = ((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).userInfooModel._id;
     params[@"coachid"] = [[UserInfoModel defaultUserInfo] userID];
     params[@"courselist"] = courselistStr;
     params[@"is_shuttle"] = @"1";
     params[@"address"] = @"";
-    params[@"begintime"] = _startTimeStr;
-    params[@"endtime"] = _endTimeStr;
+    params[@"begintime"] = [NSString stringWithFormat:@"%@ %@",self.selectDateStr,firstModel.coursetime.begintime];
+    params[@"endtime"] = [NSString stringWithFormat:@"%@ %@",self.selectDateStr,lastModel.coursetime.endtime];
+    
+    NSLog(@"预约params:%@",params);
     
     [NetWorkEntiry postcourseinfoUserreservationcourseWithParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"params:%@ responseObject:%@",params,responseObject);
         
+        /*
+         
+         params:{
+             address = "";
+             begintime = "2016-2-5 10:00:00";
+             coachid = 564227ec1eb4017436ade69c;
+             courselist = "56b2c0c43b91852651223d29,56b2c0c43b91852651223d2a,56b2c0c43b91852651223d2b,56b2c0c43b91852651223d2c";
+             endtime = "2016-2-5 14:00:00";
+             "is_shuttle" = 1;
+             userid = 564cba5cd3714e510b0d8333;
+         } responseObject:{
+             data = success;
+             msg = "";
+             type = 1;
+         }
+         
+         */
         NSDictionary *param = responseObject;
         
         NSString *type = [NSString stringWithFormat:@"%@",param[@"type"]];
-        
+        NSString *message = [NSString stringWithFormat:@"%@",param[@"msg"]];
+
         if ([type isEqualToString:@"1"]) {
             
             NSLog(@"预约成功");
-            [[BLInformationManager sharedInstance].appointmentData removeAllObjects];
-            
             [self.navigationController popViewControllerAnimated:YES];
             
         }else {
             
+            NSLog(@"预约失败");
+            [self showPopAlerViewWithMes:message];
             
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"error.debugDescription:%@",error.debugDescription);
         
     }];
     
@@ -301,16 +329,17 @@
 {
     
     NSArray *array = [BLInformationManager sharedInstance].appointmentData;
-    if (array.count==0) {
+    if (array&&array.count==0) {
         [self showTotasViewWithMes:@"请选择预约时间"];
         return;
     }
     
     NSArray *userArray = [BLInformationManager sharedInstance].appointmentUserData;
-    if (userArray.count==0) {
+    if (userArray&&userArray.count==0) {
         [self showTotasViewWithMes:@"请选择预约学员"];
         return;
     }
+    
     
     // 数组排序
     NSArray *resultArray = [array sortedArrayUsingComparator:^NSComparisonResult(AppointmentCoachTimeInfoModel *  _Nonnull obj1, AppointmentCoachTimeInfoModel *  _Nonnull obj2) {
@@ -330,28 +359,19 @@
     NSString *endString = endArray.firstObject;
     _endTimeStr = [NSString stringWithFormat:@"%d",[self chagetime:endString data:_updateTimeString]];
     
-
-#warning 修改底部数据
-    self.firstLabel.text = [NSString stringWithFormat:@"当前预约为%@",((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).courseprocessdesc];
-    self.secondLabel.text = [NSString stringWithFormat:@"已确认练车课时为(%@)课时",((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).courseprocessdesc];
     
+    NSLog(@"self.selectDateStr:%@",self.selectDateStr);
+    NSLog(@"firstModel.coursetime.begintime:%@",firstModel.coursetime.begintime);
+    NSLog(@"lastModel.coursetime.endtime:%@",lastModel.coursetime.endtime);
     
-}
-
-#pragma mark --- 选择预约学员代理方法
-- (void)yuyueDidClick
-{
-    
-    // 移除上次添加的数据
-    [[BLInformationManager sharedInstance].appointmentData removeAllObjects];
-    [[BLInformationManager sharedInstance].appointmentUserData removeAllObjects];
-    
-    // 修改底部UI
-    self.firstLabel.text = [NSString stringWithFormat:@"当前预约为%@",((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).courseprocessdesc];
-    self.secondLabel.text = [NSString stringWithFormat:@"已确认练车课时为(%@)课时",((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).courseprocessdesc];
+    if ([BLInformationManager sharedInstance].appointmentUserData && [BLInformationManager sharedInstance].appointmentUserData.count!=0) {
+        self.firstLabel.text = [NSString stringWithFormat:@"  当前预约为%@",((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).courseprocessdesc];
+    }
+    if ([BLInformationManager sharedInstance].appointmentUserData && [BLInformationManager sharedInstance].appointmentUserData.count!=0) {
+        self.secondLabel.text = [NSString stringWithFormat:@"  已确认练车课时为(%@)课时",((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).courseprocessdesc];
+    }
     
 }
-
 
 - (int)chagetime:(NSString *)timeStr data:(NSString *)dataStr {
     NSLog(@"%@%@",timeStr,dataStr);

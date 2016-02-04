@@ -87,7 +87,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    [[BLInformationManager sharedInstance].appointmentUserData removeAllObjects];
+    if ([BLInformationManager sharedInstance].appointmentUserData) {
+        [[BLInformationManager sharedInstance].appointmentUserData removeAllObjects];
+    }
+    
     YBSignUpStuentListModel *model = _signUpStudentListViewModel.systemMessageArray[indexPath.row];
     [[BLInformationManager sharedInstance].appointmentUserData addObject:model];
 

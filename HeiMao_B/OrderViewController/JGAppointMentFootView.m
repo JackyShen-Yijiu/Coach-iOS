@@ -46,7 +46,7 @@
         flowLayout.sectionInset = UIEdgeInsetsMake(7, 10, 7, 10);
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 195, 90) collectionViewLayout:flowLayout];
-        _collectionView.backgroundColor = [UIColor clearColor];
+        _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.showsHorizontalScrollIndicator = NO;// 隐藏水平滚动条
         _collectionView.bounces = NO;// 取消弹簧效果
         [_collectionView registerClass:[JGAppointMentFootCell class] forCellWithReuseIdentifier:@"JGAppointMentFootCell"];
@@ -79,8 +79,9 @@
         [self.dataArray removeAllObjects];
         [self.dataArray addObjectsFromArray:coachTimeData];
         
-        self.collectionView.delegate = self;
-        self.collectionView.dataSource = self;
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        
         [self.collectionView reloadData];
         
     }else{
@@ -96,18 +97,17 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"JGAppointMentFootCell self.dataArray.count:%lu",(unsigned long)self.dataArray.count);
-
     static NSString *cellId = @"JGAppointMentFootCell";
     JGAppointMentFootCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     if (!cell) {
         DYNSLog(@"创建错误");
     }
+    cell.selected = YES;
     
+    NSLog(@"JGAppointMentFootCell self.dataArray.count:%lu",(unsigned long)self.dataArray.count);
+
     YBSignUpStuentListModel *model = self.dataArray[indexPath.row];
-    
-    NSLog(@"model.userInfooModel.originalpic:%@",model.userInfooModel.originalpic);
-    
+        
     cell.coachTimeInfo = model;
     
     return cell;
