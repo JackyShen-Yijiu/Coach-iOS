@@ -63,8 +63,8 @@
     [self.phoneButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.bgView.mas_top).offset(20);
         make.right.mas_equalTo(self.bgView.mas_right).offset(-20);
-        make.width.mas_equalTo(17);
-        make.height.mas_equalTo(17);
+        make.width.mas_equalTo(20);
+        make.height.mas_equalTo(20);
     }];
     [self.lineBottiom mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(0);

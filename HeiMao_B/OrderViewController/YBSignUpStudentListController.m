@@ -76,10 +76,22 @@
     // 电话点击回调
     listCell.callStudent = ^(UIButton *btn){
         NSLog(@"callStudent == 被回调了");
+        [self callphone:indexPath];
     };
     listCell.signUpStudentModel = _signUpStudentListViewModel.systemMessageArray[indexPath.row];
     
     return listCell;
+}
+// 打电话的回调方法
+- (void)callphone:(NSIndexPath *)indexPath{
+    YBSignUpStuentListModel *listModel = _signUpStudentListViewModel.systemMessageArray[indexPath.row];
+    if (listModel.userInfooModel.mobile) {
+        NSString * telPhoto = [NSString stringWithFormat:@"telprompt://%@",listModel.userInfooModel.mobile];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telPhoto]];
+    }else{
+                [self showTotasViewWithMes:@"无用户手机号"];
+    }
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 130;

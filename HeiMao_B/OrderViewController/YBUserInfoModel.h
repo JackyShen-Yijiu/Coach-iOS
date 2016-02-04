@@ -24,6 +24,7 @@
  },
  
  "name": "nimenhao"
+ mobile = 139110516852;
  },
 
  */
@@ -33,6 +34,7 @@
 @property (nonatomic, strong) NSString *thumbnailpic;
 @property (nonatomic, strong) NSString *originalpic;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *mobile;
 
 + (YBUserInfoModel *)converJsonDicToModel:(NSDictionary *)dic;
 @end

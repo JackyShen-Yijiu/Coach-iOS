@@ -22,6 +22,7 @@
  },
  
  "name": "nimenhao"
+ mobile = 139110516852;
  },
  
  */
@@ -39,7 +40,7 @@ if (!dic || ![dic isKindOfClass:[NSDictionary class]] ||![dic allKeys].count) {
     YBUserInfoModel *model = [[YBUserInfoModel alloc] init];
     model._id = [dic objectForKey:@"_id"];
     model.name = [dic objectForKey:@"name"];
-    
+    model.mobile = [dic objectForKey:@"mobile"];
     NSArray *keyArry = [dic allKeys];
     if (!keyArry || ![keyArry isKindOfClass:[NSArray class]] ||!keyArry.count) {
         return nil;
