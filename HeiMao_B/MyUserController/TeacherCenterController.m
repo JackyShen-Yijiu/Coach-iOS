@@ -229,6 +229,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
+    [self resetNavBar];
+    self.myNavigationItem.title = @"我的";
+
     _bgView.hidden = YES;
     
     if ([UserInfoModel defaultUserInfo].userID && [UserInfoModel defaultUserInfo].is_validation==NO) {
@@ -249,9 +252,7 @@
 
     // Y码
     self.userCenterView.yNum.text = [NSString stringWithFormat:@"Y码:%lu",[UserInfoModel defaultUserInfo].fcode];
-   
-    [self initNavBar];
-   
+      
     // "所属驾校"
     NSString * driveSname = [[UserInfoModel defaultUserInfo].driveschoolinfo objectStringForKey:@"name"];
     
@@ -405,12 +406,6 @@
     }
     return nil;
 }
-#pragma mark - initUI
 
-- (void)initNavBar
-{
-    [self resetNavBar];
-    self.myNavigationItem.title = @"我的";
-}
 
 @end
