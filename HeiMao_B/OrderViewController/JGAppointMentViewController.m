@@ -22,8 +22,9 @@
 #import "JGAppointMentFootView.h"
 #import "BLInformationManager.h"
 #import "YBSignUpStuentListModel.h"
+#import <MessageUI/MessageUI.h>
 
-@interface JGAppointMentViewController () <FDCalendarDelegate,JGAppointMentMidViewDelegate>
+@interface JGAppointMentViewController () <FDCalendarDelegate,JGAppointMentMidViewDelegate,MFMessageComposeViewControllerDelegate,UIAlertViewDelegate>
 
 // 日历
 @property(nonatomic,strong) FDCalendar *calendarHeadView;
@@ -310,9 +311,10 @@
 
         if ([type isEqualToString:@"1"]) {
             
-            NSLog(@"预约成功");
-            [self.navigationController popViewControllerAnimated:YES];
+            UIAlertView * alerView = [[UIAlertView alloc] initWithTitle:nil message:@"恭喜您预约成功，是否短信通知学员" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是",nil];
             
+            [alerView show];
+     
         }else {
             
             NSLog(@"预约失败");
@@ -328,6 +330,89 @@
     
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    NSLog(@"buttonIndex:%ld",(long)buttonIndex);
+    
+    if (buttonIndex==0) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else if (buttonIndex==1){
+        
+        if (((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).userInfooModel.mobile && [((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).userInfooModel.mobile length]!=0) {
+    
+            NSString *mobil = ((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).userInfooModel.mobile;
+    
+//            params[@"begintime"] = [NSString stringWithFormat:@"%@ %@",self.selectDateStr,firstModel.coursetime.begintime];
+//            params[@"endtime"] = [NSString stringWithFormat:@"%@ %@",self.selectDateStr,lastModel.coursetime.endtime];
+//            
+            [self showMessageView:[NSArray arrayWithObjects:mobil, nil] title:nil body:nil];
+    
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    
+    }
+
+}
+
+
+// 群发短信功能
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    //    [self.dismissViewControllerAnimated:YEScompletion:nil];
+    
+    switch(result){
+            
+        caseMessageComposeResultSent:
+            
+            //信息传送成功
+            
+            break;
+            
+        caseMessageComposeResultFailed:
+            
+            //信息传送失败
+            
+            break;
+            
+        caseMessageComposeResultCancelled:
+            
+            //信息被用户取消传送
+            
+            break;
+            
+        default:
+            
+            break;
+            
+    }
+    
+}
+
+-(void)showMessageView:(NSArray*)phones title:(NSString*)title body:(NSString*)body
+{
+    
+    NSLog(@"phones:%@",phones);
+    
+    if([MFMessageComposeViewController canSendText])
+    {
+        MFMessageComposeViewController*controller=[[MFMessageComposeViewController alloc]init];
+        controller.recipients=phones;
+        controller.navigationBar.tintColor=[UIColor redColor];
+        controller.body=body;
+        controller.messageComposeDelegate=self;
+        [self presentViewController:controller animated:YES completion:nil];
+        [[[[controller viewControllers] lastObject]navigationItem]setTitle:title];//修改短信界面标题
+    }
+    else
+    {
+        UIAlertView*alert=[[UIAlertView alloc]initWithTitle:@"提示信息"
+                                                    message:@"该设备不支持短信功能"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil,nil];
+        [alert show];
+    }
+}
 
 #pragma mark ---- 修改UI
 - (void)kCellChange

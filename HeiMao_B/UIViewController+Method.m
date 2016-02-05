@@ -102,8 +102,17 @@
     self.myNavigationItem.rightBarButtonItem = nil;
     self.myNavigationItem.rightBarButtonItems = nil;
     self.myNavigationItem.leftBarButtonItem = nil;
-    self.myNavigationItem.leftBarButtonItems = nil;
 
+    NSArray * controllers = [self.myNavController viewControllers];
+    
+    NSLog(@"controllers.count:%lu",(unsigned long)controllers.count);
+    
+    if (controllers.count > 2) {
+         self.myNavigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.createBackButton];
+    }else{
+        self.myNavigationItem.leftBarButtonItem = nil;
+    }
+    
     [[[self myNavController] navigationBar] setBarTintColor:RGB_Color(31, 124, 235)];
     NSDictionary *textAttributes1 = @{NSFontAttributeName: [UIFont systemFontOfSize:16.f],
                                       NSForegroundColorAttributeName: [UIColor whiteColor]
@@ -152,13 +161,18 @@
     UIButton* backButton= [UIButton buttonWithType:UIButtonTypeCustom];
     
     backButton.frame = backframe;
-    
+    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     [backButton setImage:[UIImage imageNamed:@"icon_back_page"] forState:UIControlStateNormal];
     [backButton setImage:[UIImage imageNamed:@"icon_back_page"] forState:UIControlStateHighlighted];    
     //定制自己的风格的  UIBarButtonItem
 //    UIBarButtonItem* someBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:backButton];
     return backButton;
     
+}
+
+- (void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)navigationBack:(id)sender
