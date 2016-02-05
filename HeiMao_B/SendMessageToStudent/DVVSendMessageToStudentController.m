@@ -32,17 +32,20 @@
 @implementation DVVSendMessageToStudentController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"群发短信";
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.senderMessagebutton];
     self.navigationItem.rightBarButtonItem = item;
     
+    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.title = @"群发短信";
+    
     [self.view addSubview:self.dvvToolBarView];
     [self.view addSubview:self.toolBarBottomLineView];
     [self.view addSubview:self.scrollView];
+   
     [_scrollView addSubview:self.theoreticalView];
     [_scrollView addSubview:self.drivingView];
     [_scrollView addSubview:self.licensingView];
@@ -52,6 +55,7 @@
     [_theoreticalView beginNetworkRequest];
     [_drivingView beginNetworkRequest];
     [_licensingView beginNetworkRequest];
+    
 }
 
 #pragma mark - action
@@ -67,9 +71,20 @@
     NSLog(@"3===%@", array);
     self.licensingArray = array;
 }
+
 - (void)sendMessageButtonAction:(UIButton *)sender {
+    
     // 根据UIScrollView的偏移量,判断发送对象
     if (self.scrollView.contentOffset.x == 0) {
+        
+        NSLog(@"理论学员 self.theoreticalView.mobileDict:%@",self.theoreticalView.mobileDict);
+        NSLog(@"self.theoreticalArray:%@",self.theoreticalArray);
+        
+        if (self.theoreticalView.mobileDict.count==0) {
+            [self showTotasViewWithMes:@"暂无数据"];
+            return;
+        }
+        
         // 理论学员发送信息
         if (self.theoreticalArray.count) {
             [self showMessageView:self.theoreticalArray title:nil body:nil];
@@ -79,6 +94,15 @@
         
         NSLog(@"--理论学员发送信息");
     }else if (self.scrollView.contentOffset.x == self.view.frame.size.width * 1){
+        
+        NSLog(@"上车学员 self.drivingView.mobileDict:%@",self.drivingView.mobileDict);
+        NSLog(@"self.drivingArray:%@",self.drivingArray);
+        
+        if (self.drivingView.mobileDict.count==0) {
+            [self showTotasViewWithMes:@"暂无数据"];
+            return;
+        }
+        
         // 上车学员发送信息
         if (self.drivingArray.count) {
             [self showMessageView:self.drivingArray title:nil body:nil];
@@ -86,7 +110,17 @@
             [self showTotasViewWithMes:@"请添加群发对象!"];
         }
         NSLog(@"--上车学员发送信息");
+        
     }else if (self.scrollView.contentOffset.x == self.view.frame.size.width * 2){
+        
+        NSLog(@"领证学员 self.licensingView.mobileDict:%@",self.licensingView.mobileDict);
+        NSLog(@"self.licensingArray:%@",self.licensingArray);
+        
+        if (self.licensingView.mobileDict.count==0) {
+            [self showTotasViewWithMes:@"暂无数据"];
+            return;
+        }
+        
         // 领证学员发送信息
         if (self.licensingArray.count) {
             [self showMessageView:self.licensingArray title:nil body:nil];
@@ -246,47 +280,29 @@
 
 
 -(void)showMessageView:(NSArray*)phones title:(NSString*)title body:(NSString*)body
-
 {
     
+    NSLog(@"phones:%@",phones);
+    
     if([MFMessageComposeViewController canSendText])
-        
     {
-        
-        MFMessageComposeViewController *controller=[[MFMessageComposeViewController alloc] init];
-        
-        controller.recipients = phones;
-        
+        MFMessageComposeViewController*controller=[[MFMessageComposeViewController alloc]init];
+        controller.recipients=phones;
         controller.navigationBar.tintColor=[UIColor redColor];
-        
         controller.body=body;
-        
         controller.messageComposeDelegate=self;
         [self presentViewController:controller animated:YES completion:nil];
-        
-        
-        [[[[controller viewControllers] lastObject] navigationItem]setTitle:title];//修改短信界面标题
-        
+        [[[[controller viewControllers] lastObject]navigationItem]setTitle:title];//修改短信界面标题
     }
-    
     else
-        
     {
-        
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示信息"
-                            
-                                                     message:@"该设备不支持短信功能"
-                            
-                                                    delegate:nil
-                            
-                                           cancelButtonTitle:@"确定"
-                            
-                                           otherButtonTitles:nil,nil];
-        
+        UIAlertView*alert=[[UIAlertView alloc]initWithTitle:@"提示信息"
+                                                   message:@"该设备不支持短信功能"
+                                                  delegate:nil
+                                         cancelButtonTitle:@"确定"
+                                         otherButtonTitles:nil,nil];
         [alert show];
-        
     }
-    
 }
 
 @end

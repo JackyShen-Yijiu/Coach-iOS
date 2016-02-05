@@ -35,7 +35,7 @@
 @property (nonatomic, strong) DVVStudentListDMHeadPortrait *headportrait;
 @property (nonatomic, assign) NSInteger leavecoursecount;
 @property (nonatomic, assign) NSInteger missingcoursecount;
-@property (nonatomic, assign) NSInteger mobile;
+@property (nonatomic, copy) NSString *mobile;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, strong) DVVStudentListDMSubject *subject;
 @property (nonatomic, copy) NSString *subjectprocess;

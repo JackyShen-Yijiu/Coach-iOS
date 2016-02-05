@@ -16,6 +16,7 @@ typedef void(^DVVSendMessageToStudentViewBlock)(UIButton *button, NSArray *mobil
 @property (nonatomic, assign) NSUInteger studentType;
 
 @property (nonatomic, strong) DVVStudentListViewModel *viewModel;
+
 // 存储要拨打的学员的电话号码(所有的key)
 @property (nonatomic, strong) NSMutableDictionary *mobileDict;
 

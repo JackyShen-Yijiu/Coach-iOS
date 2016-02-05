@@ -57,10 +57,24 @@
     [_viewModel dvvSetRefreshSuccessBlock:^{
         for (DVVStudentListDMData *dmData in _viewModel.dataArray) {
             // 保存所有的电话号码
-            NSString *string = [NSString stringWithFormat:@"%d", dmData.mobile];
+            NSString *string = [NSString stringWithFormat:@"%@", dmData.mobile];
+            
             if (string && string.length) {
                 [_mobileDict setValue:@"1" forKey:string];
             }
+            
+            NSMutableArray *mobileArray = [NSMutableArray array];
+            for (NSString *string in _mobileDict.allKeys) {
+                NSString *flage = [_mobileDict objectForKey:string];
+                if ([flage integerValue]) {
+                    [mobileArray addObject:string];
+                }
+            }
+            
+            if (_touchUpInsideBlock) {
+                _touchUpInsideBlock(nil, mobileArray);
+            }
+            
         }
         
         [ws.dataTabelView reloadData];
@@ -94,7 +108,7 @@
     
     DVVStudentListDMData *dmData = _viewModel.dataArray[sender.tag];
     
-    NSString *string = [NSString stringWithFormat:@"%d", dmData.mobile];
+    NSString *string = [NSString stringWithFormat:@"%@", dmData.mobile];
     if (string && string.length) {
         if (sender.selected) {
             [_mobileDict setValue:@"1" forKey:string];
@@ -131,7 +145,7 @@
     [cell refreshData:dmData];
     
     // 检查选中状态
-    NSString *string = [NSString stringWithFormat:@"%d", dmData.mobile];
+    NSString *string = [NSString stringWithFormat:@"%@", dmData.mobile];
     if (string && string.length) {
         NSString *flage = [_mobileDict objectForKey:string];
         if ([flage integerValue]) {

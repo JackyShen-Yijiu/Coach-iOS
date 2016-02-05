@@ -65,6 +65,9 @@
             DVVStudentListDMData *dmData = [DVVStudentListDMData yy_modelWithDictionary:dataDict];
             [_dataArray addObject:dmData];
         }
+        
+        NSLog(@"_dataArray:%@",_dataArray);
+        
         if (isRefresh) {
             [self dvvRefreshSuccess];
         }else {
