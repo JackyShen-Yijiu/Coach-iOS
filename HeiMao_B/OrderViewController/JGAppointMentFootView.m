@@ -42,10 +42,10 @@
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.minimumInteritemSpacing = 5;// 设置cell之间间距
         flowLayout.minimumLineSpacing = 5;// 设置行距
-        flowLayout.itemSize = CGSizeMake(175, 75);
+        flowLayout.itemSize = CGSizeMake(185, 75);
         flowLayout.sectionInset = UIEdgeInsetsMake(7, 10, 7, 10);
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 195, 90) collectionViewLayout:flowLayout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0,205, 90) collectionViewLayout:flowLayout];
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.showsHorizontalScrollIndicator = NO;// 隐藏水平滚动条
         _collectionView.bounces = NO;// 取消弹簧效果
@@ -118,9 +118,12 @@
 {
     if (_addBtn == nil) {
         
-        _addBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 175, 75)];
-        [_addBtn setImage:[UIImage imageNamed:@"JGAppointMentFootCellAddStudentImg"] forState:UIControlStateNormal];
-        [_addBtn setImage:[UIImage imageNamed:@"JGAppointMentFootCellAddStudentImg"] forState:UIControlStateHighlighted];
+        _addBtn = [[UIButton alloc] init];
+        _addBtn.backgroundColor = RGB_Color(31, 124, 235);
+        _addBtn.frame = CGRectMake(self.width/2-100/2, self.height/2-45/2, 100, 45);
+        [_addBtn setTitle:@"添加学员" forState:UIControlStateNormal];
+        [_addBtn setTitle:@"添加学员" forState:UIControlStateNormal];
+        _addBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_addBtn addTarget:self action:@selector(addBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
 
     }
@@ -135,11 +138,9 @@
     
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    HMCourseModel *model = self.dataArray[indexPath.row];
-    
-    
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self addBtnDidClick];
 }
 
 @end

@@ -95,22 +95,24 @@
         [self.mainTitle mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.potraitView.mas_top).offset(5);
             make.left.equalTo(self.potraitView.mas_right).offset(5);
+            make.width.equalTo(@75);
         }];
         
         [self.subTitle mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.mainTitle.mas_bottom);
             make.left.equalTo(self.mainTitle);
+            make.width.equalTo(@105);
         }];
         
         [self.countLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.subTitle.mas_bottom).offset(5.f);
             make.left.equalTo(self.mainTitle);
+            make.width.equalTo(@80);
         }];
        
     }
     return self;
 }
-
 
 - (void)setCoachTimeInfo:(YBSignUpStuentListModel *)coachTimeInfo
 {
@@ -127,13 +129,16 @@
     self.mainTitle.text = [NSString stringWithFormat:@"%@",_coachTimeInfo.userInfooModel.name];
     
     // 学习内容
-    NSLog(@"_coachTimeInfo.userInfooModel.subjecttwo.progress:%@",_coachTimeInfo.userInfooModel.subjecttwo[@"progress"]);
-    
-    self.subTitle.text = [NSString stringWithFormat:@"%@",_coachTimeInfo.userInfooModel.subjecttwo[@"progress"]];
+    NSLog(@"_coachTimeInfo.courseprocessdesc:%@",_coachTimeInfo.courseprocessdesc);
+    self.subTitle.text = [NSString stringWithFormat:@"%@",_coachTimeInfo.courseprocessdesc];
     
     // 学习内容
-    NSLog(@"_coachTimeInfo.courseprocessdesc:%@",_coachTimeInfo.courseprocessdesc);
-    self.countLabel.text = [NSString stringWithFormat:@"%@",_coachTimeInfo.courseprocessdesc];
+    NSLog(@"_coachTimeInfo.leaningcontents:%@",_coachTimeInfo.leaningcontents);
+    if (_coachTimeInfo.leaningcontents&&_coachTimeInfo.leaningcontents.length!=0) {
+        self.countLabel.text = [NSString stringWithFormat:@"%@",_coachTimeInfo.leaningcontents];
+    }else{
+        self.countLabel.text = @"暂无";
+    }
     
 }
 

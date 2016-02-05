@@ -95,7 +95,6 @@
     
     [self fdCalendar:self.calendarHeadView didSelectedDate:[NSDate date]];
 
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -146,14 +145,14 @@
     self.firstLabel.backgroundColor = [UIColor clearColor];
     self.firstLabel.textAlignment = NSTextAlignmentLeft;
     self.firstLabel.textColor = [UIColor grayColor];
-    self.firstLabel.font = [UIFont systemFontOfSize:15];
+    self.firstLabel.font = [UIFont systemFontOfSize:13];
     [self.view addSubview:self.firstLabel];
     
     self.secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.firstLabel.frame)+5, self.view.width, 20)];
     self.secondLabel.backgroundColor = [UIColor clearColor];
     self.secondLabel.textAlignment = NSTextAlignmentLeft;
     self.secondLabel.textColor = [UIColor grayColor];
-    self.secondLabel.font = [UIFont systemFontOfSize:15];
+    self.secondLabel.font = [UIFont systemFontOfSize:13];
     [self.view addSubview:self.secondLabel];
     
 }
@@ -374,7 +373,9 @@
         self.firstLabel.text = [NSString stringWithFormat:@"  当前预约为%@",((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).courseprocessdesc];
     }
     if ([BLInformationManager sharedInstance].appointmentUserData && [BLInformationManager sharedInstance].appointmentUserData.count!=0) {
-        self.secondLabel.text = [NSString stringWithFormat:@"  已确认练车课时为(%@)课时",((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).courseprocessdesc];
+        if (((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).confirmhours&&[((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).confirmhours length]!=0) {
+            self.secondLabel.text = [NSString stringWithFormat:@"  已确认练车课时为%@课时",((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).confirmhours];
+        }
     }
     
 }

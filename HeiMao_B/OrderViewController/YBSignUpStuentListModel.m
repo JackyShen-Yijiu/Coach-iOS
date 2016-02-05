@@ -73,6 +73,8 @@
         _shuttleaddress = [dictionary objectStringForKey:@"shuttleaddress"];
         _courseprocessdesc = [dictionary objectStringForKey:@"courseprocessdesc"];
         _classdatetimedesc = [dictionary objectStringForKey:@"classdatetimedesc"];
+        _leaningcontents = [dictionary objectStringForKey:@"leaningcontents"];
+        _confirmhours = [dictionary objectStringForKey:@"confirmhours"];
         _trainfieldlinfoModel = [YBTrainfieldlinfoModel converJsonDicToModel:[dictionary objectForKey:@"trainfieldlinfo"]];
     }
     return self;

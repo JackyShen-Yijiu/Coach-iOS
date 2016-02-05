@@ -105,7 +105,7 @@
     
     AppointmentCoachTimeInfoModel *model = self.dataArray[indexPath.row];
     
-    cell.coachTimeInfo = model;
+    cell.appointInfoModel = model;
     
     return cell;
 }

@@ -98,6 +98,8 @@
 - (void)setAppointInfoModel:(AppointmentCoachTimeInfoModel *)appointInfoModel
 {
     
+    _appointInfoModel = appointInfoModel;
+    
     // 时间
     self.startTimeLabel.text = [self dealStringWithTime:_appointInfoModel.coursetime.begintime];
     
@@ -108,6 +110,7 @@
     NSInteger keyueCount = [_appointInfoModel.coursestudentcount integerValue] - [_appointInfoModel.selectedstudentcount integerValue];
     self.remainingPersonLabel.text = [NSString stringWithFormat:@"剩余%ld个名额",(long)keyueCount];
     
+    /*
     BOOL is_CotainMySelf = NO;
     
     for (NSString *string in _appointInfoModel.courseuser) {
@@ -137,28 +140,30 @@
         self.userInteractionEnabled = YES;
         
     }
-   
+   */
+    
     // 此方法判断当前时间是否大于预约的时间；
     [self isCellCanClick:_appointInfoModel.coursedate startTimeStr:_appointInfoModel.coursetime.begintime];
     
-    if (is_CotainMySelf) {
-        
-        self.remainingPersonLabel.text = @"您已经预约";
-        
-    }else{
-        
-        NSInteger shengyuCount = _appointInfoModel.coursestudentcount.intValue - _appointInfoModel.selectedstudentcount.intValue;
-        if (shengyuCount>0) {
-
-            self.remainingPersonLabel.textColor = TEXTGRAYCOLOR;
-        }else{
-            self.userInteractionEnabled = YES;
-
-            self.remainingPersonLabel.textColor = [UIColor blackColor];
-
-        }
-        
-    }
+//    if (is_CotainMySelf) {
+//        
+//        self.remainingPersonLabel.text = @"您已经预约";
+//        
+//    }else{
+//        
+//        NSInteger shengyuCount = _appointInfoModel.coursestudentcount.intValue - _appointInfoModel.selectedstudentcount.intValue;
+//        if (shengyuCount>0) {
+//
+//            self.remainingPersonLabel.textColor = TEXTGRAYCOLOR;
+//        }else{
+//            self.userInteractionEnabled = YES;
+//
+//            self.remainingPersonLabel.textColor = [UIColor blackColor];
+//
+//        }
+//        
+//    }
+    
 }
 
 
@@ -280,7 +285,14 @@
         
         if (startTime <= nowTime) {// 开始时间小于当前时间
             
-            NSInteger shengyuCount = _coachTimeInfo.coursestudentcount.intValue - _coachTimeInfo.selectedstudentcount.intValue;
+            self.userInteractionEnabled = NO;
+            self.startTimeLabel.textColor = [UIColor lightGrayColor];
+            self.finalTimeLabel.textColor = [UIColor lightGrayColor];
+            self.remainingPersonLabel.textColor = [UIColor lightGrayColor];
+            
+        }else{// 开始时间大于当前时间
+            
+            NSInteger shengyuCount = _appointInfoModel.coursestudentcount.intValue - _appointInfoModel.selectedstudentcount.intValue;
             
             if (shengyuCount>0) {// 可预约
                 
@@ -296,13 +308,6 @@
                 self.remainingPersonLabel.textColor = [UIColor lightGrayColor];
                 
             }
-            
-        }else{// 开始时间大于当前时间
-            
-            self.userInteractionEnabled = NO;
-            self.startTimeLabel.textColor = [UIColor lightGrayColor];
-            self.finalTimeLabel.textColor = [UIColor lightGrayColor];
-            self.remainingPersonLabel.textColor = [UIColor lightGrayColor];
             
         }
         

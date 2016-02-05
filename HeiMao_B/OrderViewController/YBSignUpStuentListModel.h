@@ -76,6 +76,10 @@
 
 @property (nonatomic, copy) NSString * courseprocessdesc;
 
+@property (nonatomic, copy) NSString * leaningcontents;
+
+@property (nonatomic, copy) NSString * confirmhours;
+
 @property (nonatomic, copy) NSString * classdatetimedesc;
 
 @property (nonatomic, strong) YBTrainfieldlinfoModel *trainfieldlinfoModel;
