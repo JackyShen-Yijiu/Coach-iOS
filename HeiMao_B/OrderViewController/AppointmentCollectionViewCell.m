@@ -189,8 +189,68 @@
     // coachTimeInfo.coursedate:2016-02-04T00:00:00.000Z
 //                                2016-02-03T16:00:00.000Z
     // coachTimeInfo.coursetime.begintime:13:00:00
-    [self isCellCanClick:_coachTimeInfo.coursedate startTimeStr:_coachTimeInfo.coursetime.begintime];
+    [self isRiChengCellCanClick:_coachTimeInfo.coursedate startTimeStr:_coachTimeInfo.coursetime.begintime];
 
+}
+
+- (void)isRiChengCellCanClick:(NSString *)couresebegintimeStr startTimeStr:(NSString *)startTimeStr
+{
+    
+    // 当前时间
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSDate *datenow = [NSDate date];
+    NSString *nowtimeStr = [formatter stringFromDate:datenow];//当前的时间 YYYY-MM-dd HH:mm:ss
+    NSRange range = NSMakeRange(0, 10);
+    NSString *nowTimeStr = [nowtimeStr substringWithRange:range];//当前的时间 YYYY-MM-dd
+    NSString *appointTimeStr = [couresebegintimeStr substringWithRange:range];//预约课程的时间 YYYY-MM-dd
+    
+    if ([appointTimeStr isEqualToString:nowTimeStr]) {
+        
+        NSArray *indexArray= [startTimeStr componentsSeparatedByString:@":"];//课程开始的时间 hh:mm
+        NSString *indexString = indexArray.firstObject;
+        NSInteger startTime = indexString.integerValue;
+        NSRange range = NSMakeRange(11,8);
+        NSString *subNowTimeStr = [nowtimeStr substringWithRange:range];//现在的时间 HH:mm:ss
+        NSArray *nowTimeArray= [subNowTimeStr componentsSeparatedByString:@":"];//课程开始的时间 hh:mm
+        NSString *nowTimeStr = nowTimeArray.firstObject;
+        NSInteger nowTime = nowTimeStr.integerValue;
+        
+        if (startTime <= nowTime) {// 开始时间小于当前时间
+            
+            NSInteger shengyuCount = _coachTimeInfo.coursestudentcount.intValue - _coachTimeInfo.selectedstudentcount.intValue;
+            
+            if (shengyuCount>0) {// 可预约
+                
+                self.startTimeLabel.textColor = [UIColor blackColor];
+                self.finalTimeLabel.textColor = [UIColor blackColor];
+                
+            }else{// 不可预约
+                
+                self.startTimeLabel.textColor = [UIColor lightGrayColor];
+                self.finalTimeLabel.textColor = [UIColor lightGrayColor];
+                self.remainingPersonLabel.textColor = [UIColor lightGrayColor];
+                
+            }
+            
+        }else{// 开始时间大于当前时间
+            
+            self.startTimeLabel.textColor = [UIColor lightGrayColor];
+            self.finalTimeLabel.textColor = [UIColor lightGrayColor];
+            self.remainingPersonLabel.textColor = [UIColor lightGrayColor];
+            
+        }
+        
+    }else{// 预约时间不等于当前时间
+        
+        NSLog(@"------------------------");
+        self.startTimeLabel.textColor = [UIColor lightGrayColor];
+        self.finalTimeLabel.textColor = [UIColor lightGrayColor];
+        self.remainingPersonLabel.textColor = [UIColor lightGrayColor];
+        
+    }
 }
 
 - (void)isCellCanClick:(NSString *)couresebegintimeStr startTimeStr:(NSString *)startTimeStr

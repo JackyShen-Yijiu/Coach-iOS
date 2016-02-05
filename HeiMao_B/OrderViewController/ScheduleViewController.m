@@ -208,7 +208,7 @@
 #pragma mark --- 中间日程点击事件
 - (void)JGYuYueHeadViewWithCollectionViewDidSelectItemAtIndexPath:(NSIndexPath *)indexPath timeInfo:(AppointmentCoachTimeInfoModel *)model
 {
-    NSLog(@"加载底部数据");
+    NSLog(@"加载日程模块底部预约列表数据");
     [self loadFootListDataWithinfoId:model.infoId];
     
 }
