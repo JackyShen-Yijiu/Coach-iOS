@@ -91,6 +91,7 @@
         _selectView = [[UIView alloc] init];
         _selectView.frame = CGRectMake(self.width/2-25/2,0,25,25);
         _selectView.layer.masksToBounds = YES;
+        _selectView.backgroundColor = RGB_Color(31, 124, 235);
         _selectView.layer.cornerRadius = _selectView.size.width/2.f;
         [self insertSubview:_selectView belowSubview:self.contentView];
     }
@@ -106,9 +107,6 @@
     }
     return _lineView;
 }
-
-
-
 
 - (void)layoutSubviews
 {
@@ -328,7 +326,6 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     
     cell.backgroundColor = [UIColor clearColor];
     cell.dayLabel.textColor = [UIColor blackColor];
-
     cell.selectView.hidden = YES;
     
     NSInteger firstWeekday = [self weekdayOfFirstDayInDate];
@@ -343,7 +340,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     UIView *selVc = [[UIView alloc] initWithFrame:CGRectMake(cell.width/2-25/2,0,25,25)];
     selVc.layer.masksToBounds = YES;
     selVc.layer.cornerRadius = selVc.height / 2;
-    selVc.backgroundColor = [UIColor lightGrayColor];
+    selVc.backgroundColor = RGB_Color(31, 124, 235);
     [selectedBGView addSubview:selVc];
     cell.selectedBackgroundView = selectedBGView;
     
@@ -387,14 +384,13 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
             if (day == [[NSCalendar currentCalendar] component:NSCalendarUnitDay fromDate:[NSDate date]]) {
                 
                 // 默认选中的当前日期
-                cell.selectView.hidden = YES;
-                cell.dayLabel.textColor = RGB_Color(31, 124, 235);
+                cell.selectView.hidden = NO;
+                cell.dayLabel.textColor = [UIColor whiteColor];//RGB_Color(31, 124, 235);
 
             }else{
             
                 // 点击的是当前item
                 cell.selectView.hidden = NO;
-                cell.selectView.backgroundColor = RGB_Color(31, 124, 235);
                 cell.dayLabel.textColor = [UIColor whiteColor];
 
             }

@@ -55,7 +55,7 @@
     
     self.mainTitle = [[UILabel alloc] init];
     self.mainTitle.textAlignment = NSTextAlignmentLeft;
-    self.mainTitle.font = [UIFont boldSystemFontOfSize:16.f];
+    self.mainTitle.font = [UIFont boldSystemFontOfSize:15.f];
     self.mainTitle.textColor = RGB_Color(0x33, 0x33, 0x33);
     self.mainTitle.backgroundColor = [UIColor clearColor];
     self.mainTitle.numberOfLines = 1;
@@ -64,7 +64,7 @@
     
     self.subTitle = [[UILabel alloc] init];
     self.subTitle.textAlignment = NSTextAlignmentLeft;
-    self.subTitle.font = [UIFont systemFontOfSize:13.f];
+    self.subTitle.font = [UIFont systemFontOfSize:12.f];
     self.subTitle.textColor = [UIColor lightGrayColor];
     self.subTitle.backgroundColor = [UIColor clearColor];
     self.subTitle.numberOfLines = 1;
@@ -73,7 +73,7 @@
     
     self.guanfangLabel = [[UILabel alloc] init];
     self.guanfangLabel.textAlignment = NSTextAlignmentLeft;
-    self.guanfangLabel.font = [UIFont systemFontOfSize:13.f];
+    self.guanfangLabel.font = [UIFont systemFontOfSize:12.f];
     self.guanfangLabel.textColor = [UIColor lightGrayColor];
     self.guanfangLabel.backgroundColor = [UIColor clearColor];
     self.guanfangLabel.numberOfLines = 1;
@@ -160,7 +160,7 @@
     [self.mainTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.potraitView.mas_right).offset(12.f);
         make.height.equalTo(@(16.f));
-        make.top.equalTo(@(([[self class] cellHeight] - 16 - 10 - 14)/2.f));
+        make.top.equalTo(self.potraitView.mas_top);
     }];
     
     [self.subTitle mas_makeConstraints:^(MASConstraintMaker *make) {
