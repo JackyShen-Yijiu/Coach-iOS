@@ -23,6 +23,9 @@
 #import "BLInformationManager.h"
 #import "YBSignUpStuentListModel.h"
 #import <MessageUI/MessageUI.h>
+#import "EMMessage.h"
+#import "EaseMob.h"
+#import "EaseSDKHelper.h"
 
 @interface JGAppointMentViewController () <FDCalendarDelegate,JGAppointMentMidViewDelegate,MFMessageComposeViewControllerDelegate,UIAlertViewDelegate>
 
@@ -311,6 +314,23 @@
 
         if ([type isEqualToString:@"1"]) {
             
+            NSString *content = @"成功预约我的课程，请准时练车";
+            
+            // 预约成功后，通过环信给教练发送一条提示消息
+            NSString *userid = ((YBSignUpStuentListModel *)[BLInformationManager sharedInstance].appointmentUserData[0]).userInfooModel._id;
+            
+            EMMessage *message = [EaseSDKHelper sendTextMessage:content to:userid messageType:eMessageTypeChat requireEncryption:YES messageExt:nil];
+            
+            [[EaseMob sharedInstance].chatManager asyncSendMessage:message progress:nil prepare:^(EMMessage *message, EMError *error) {
+                
+            } onQueue:nil completion:^(EMMessage *message, EMError *error) {
+                
+                if(!error){
+                    
+                }
+                
+            } onQueue:nil];
+            
             UIAlertView * alerView = [[UIAlertView alloc] initWithTitle:nil message:@"恭喜您预约成功，是否短信通知学员" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是",nil];
             
             [alerView show];
@@ -346,7 +366,7 @@
 //            params[@"begintime"] = [NSString stringWithFormat:@"%@ %@",self.selectDateStr,firstModel.coursetime.begintime];
 //            params[@"endtime"] = [NSString stringWithFormat:@"%@ %@",self.selectDateStr,lastModel.coursetime.endtime];
 //            
-            [self showMessageView:[NSArray arrayWithObjects:mobil, nil] title:nil body:nil];
+            [self showMessageView:[NSArray arrayWithObjects:mobil, nil] title:nil body:@"成功预约我的课程，请准时练车"];
     
         }
         [self.navigationController popViewControllerAnimated:YES];
