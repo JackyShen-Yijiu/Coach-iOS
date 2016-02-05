@@ -68,6 +68,9 @@
 		B28D5E281C63567500D9E9E1 /* YBSubjectMoel.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5E211C63567500D9E9E1 /* YBSubjectMoel.m */; };
 		B28D5E291C63567500D9E9E1 /* YBTrainfieldlinfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5E231C63567500D9E9E1 /* YBTrainfieldlinfoModel.m */; };
 		B28D5E2A1C63567500D9E9E1 /* YBUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5E251C63567500D9E9E1 /* YBUserInfoModel.m */; };
+		B28D5E341C644B0600D9E9E1 /* ChineseString.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5E2D1C644B0600D9E9E1 /* ChineseString.m */; };
+		B28D5E361C644B0600D9E9E1 /* pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5E311C644B0600D9E9E1 /* pinyin.m */; };
+		B28D5E371C644B0600D9E9E1 /* WChineseSting.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5E331C644B0600D9E9E1 /* WChineseSting.m */; };
 		B2A6BABA1C4B64CB00B09A0F /* JGUserTools.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6BAB51C4B64CB00B09A0F /* JGUserTools.m */; };
 		B2A6BABF1C4B6D8A00B09A0F /* JGUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6BABE1C4B6D8A00B09A0F /* JGUserModel.m */; };
 		B2AC20371C3E2CBD0033803C /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */; };
@@ -615,6 +618,12 @@
 		B28D5E231C63567500D9E9E1 /* YBTrainfieldlinfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBTrainfieldlinfoModel.m; path = HeiMao_B/OrderViewController/YBTrainfieldlinfoModel.m; sourceTree = SOURCE_ROOT; };
 		B28D5E241C63567500D9E9E1 /* YBUserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBUserInfoModel.h; path = HeiMao_B/OrderViewController/YBUserInfoModel.h; sourceTree = SOURCE_ROOT; };
 		B28D5E251C63567500D9E9E1 /* YBUserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBUserInfoModel.m; path = HeiMao_B/OrderViewController/YBUserInfoModel.m; sourceTree = SOURCE_ROOT; };
+		B28D5E2C1C644B0600D9E9E1 /* ChineseString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseString.h; sourceTree = "<group>"; };
+		B28D5E2D1C644B0600D9E9E1 /* ChineseString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseString.m; sourceTree = "<group>"; };
+		B28D5E301C644B0600D9E9E1 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
+		B28D5E311C644B0600D9E9E1 /* pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pinyin.m; sourceTree = "<group>"; };
+		B28D5E321C644B0600D9E9E1 /* WChineseSting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WChineseSting.h; sourceTree = "<group>"; };
+		B28D5E331C644B0600D9E9E1 /* WChineseSting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WChineseSting.m; sourceTree = "<group>"; };
 		B2A6BAB41C4B64CB00B09A0F /* JGUserTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGUserTools.h; sourceTree = "<group>"; };
 		B2A6BAB51C4B64CB00B09A0F /* JGUserTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGUserTools.m; sourceTree = "<group>"; };
 		B2A6BABD1C4B6D8A00B09A0F /* JGUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGUserModel.h; sourceTree = "<group>"; };
@@ -1473,6 +1482,19 @@
 				B253C2F11C43C960001AF771 /* PermissiveScoringMatrix.m */,
 			);
 			path = QCSearch;
+			sourceTree = "<group>";
+		};
+		B28D5E2B1C644B0600D9E9E1 /* ChineseSorting */ = {
+			isa = PBXGroup;
+			children = (
+				B28D5E2C1C644B0600D9E9E1 /* ChineseString.h */,
+				B28D5E2D1C644B0600D9E9E1 /* ChineseString.m */,
+				B28D5E301C644B0600D9E9E1 /* pinyin.h */,
+				B28D5E311C644B0600D9E9E1 /* pinyin.m */,
+				B28D5E321C644B0600D9E9E1 /* WChineseSting.h */,
+				B28D5E331C644B0600D9E9E1 /* WChineseSting.m */,
+			);
+			path = ChineseSorting;
 			sourceTree = "<group>";
 		};
 		B636E4EC57D3A22E3FC68559 /* Frameworks */ = {
@@ -2664,6 +2686,7 @@
 		B8C458581BDB59AC00901F71 /* ThirdPary */ = {
 			isa = PBXGroup;
 			children = (
+				B28D5E2B1C644B0600D9E9E1 /* ChineseSorting */,
 				D978ACD31C47B38A00D633B4 /* DVVLocationStatus.h */,
 				D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */,
 				D964C7EB1C43CA970009FE7A /* YYModel */,
@@ -3262,6 +3285,7 @@
 				D964710B1C61FD1E00C97984 /* DVVStudentListDMHeadPortrait.m in Sources */,
 				D5D50F971BFC135B00F54097 /* LTBottomView.m in Sources */,
 				B8BC508D1BF38A390007B029 /* UIViewController+DismissKeyboard.m in Sources */,
+				B28D5E341C644B0600D9E9E1 /* ChineseString.m in Sources */,
 				06C1252E1C4351560033DCDE /* WorkNatureController.m in Sources */,
 				B80F1B701BE26785008D5843 /* UITabBar+RedHot.m in Sources */,
 				D5D50F6A1BFB243500F54097 /* ExamClassModel.m in Sources */,
@@ -3373,6 +3397,7 @@
 				B8BC507C1BF38A390007B029 /* PSTCollectionViewFlowLayout.m in Sources */,
 				0643007E1C47921E008B5A74 /* SystemMessageViewModel.m in Sources */,
 				B8AFED191BDB96AC00EF8726 /* CourseViewController.m in Sources */,
+				B28D5E361C644B0600D9E9E1 /* pinyin.m in Sources */,
 				B801DDA91C25056C0086F8AB /* NoContentTipView.m in Sources */,
 				B8BA98BF1C22963C009DB449 /* OrderCompleteViewController.m in Sources */,
 				D5F72BD61BF9BE9700B972B0 /* PhoneNumViewController.m in Sources */,
@@ -3447,6 +3472,7 @@
 				B8BC50821BF38A390007B029 /* PSTGridLayoutRow.m in Sources */,
 				B8BC505C1BF38A390007B029 /* UIScrollView+MJRefresh.m in Sources */,
 				D5D50EA71BFA108D00F54097 /* TeachSubjectViewController.m in Sources */,
+				B28D5E371C644B0600D9E9E1 /* WChineseSting.m in Sources */,
 				0613DE701C462785004A1A2E /* InformationMessageController.m in Sources */,
 				B8BC506C1BF38A390007B029 /* EMSDWebImageManager.m in Sources */,
 				B253C2DD1C3FAA84001AF771 /* ScanViewController.m in Sources */,

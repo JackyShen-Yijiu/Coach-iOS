@@ -12,4 +12,6 @@
 
 - (void)beginNetworkRequest;
 
+@property (nonatomic,weak) UIViewController *parentViewController;
+
 @end

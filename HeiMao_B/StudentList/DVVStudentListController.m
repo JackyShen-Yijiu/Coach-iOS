@@ -26,6 +26,7 @@
 @implementation DVVStudentListController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"学员列表";
@@ -35,8 +36,13 @@
     [self.view addSubview:self.toolBarBottomLineView];
     [self.view addSubview:self.scrollView];
     [_scrollView addSubview:self.theoreticalView];
+    self.theoreticalView.parentViewController = self;
+    
     [_scrollView addSubview:self.drivingView];
+    self.drivingView.parentViewController = self;
+    
     [_scrollView addSubview:self.licensingView];
+    self.licensingView.parentViewController = self;
     
     [self configUI];
     
