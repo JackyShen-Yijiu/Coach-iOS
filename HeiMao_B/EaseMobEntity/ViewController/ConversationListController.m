@@ -57,8 +57,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [self initNavBar];
-    [self setUpRightNavBar];
+    
     [_bgView removeFromSuperview];
     if ([UserInfoModel defaultUserInfo].userID && [UserInfoModel defaultUserInfo].is_validation==NO) {
         _bgView = [[JGvalidationView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, 80)];
@@ -70,19 +71,17 @@
 
 - (void)setUpRightNavBar
 {
-    self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"群发短信" highTitle:nil target:self action:@selector(clickRight) isRightItem:YES];
+    self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"群发短信" highTitle:@"群发短信" target:self action:@selector(clickRight) isRightItem:YES];
 }
-
-
-
-
 
 #pragma mark - initUI
 
 - (void)initNavBar
 {
     [self resetNavBar];
+    
      self.myNavigationItem.title = @"消息";
+    
     [self setUpRightNavBar];
 }
 

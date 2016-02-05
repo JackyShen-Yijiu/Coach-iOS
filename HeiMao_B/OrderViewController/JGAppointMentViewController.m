@@ -378,8 +378,9 @@
 
 // 群发短信功能
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
-    //    [self.dismissViewControllerAnimated:YEScompletion:nil];
-    
+
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+
     switch(result){
             
         caseMessageComposeResultSent:
@@ -421,7 +422,7 @@
         controller.body=body;
         controller.messageComposeDelegate=self;
         [self presentViewController:controller animated:YES completion:nil];
-        [[[[controller viewControllers] lastObject]navigationItem]setTitle:title];//修改短信界面标题
+        [[[[controller viewControllers] lastObject]navigationItem]setTitle:@"一步教练"];//修改短信界面标题
     }
     else
     {

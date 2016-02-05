@@ -7,7 +7,6 @@
 //
 
 #import "WChineseSting.h"
-#import "IQFirendListObject.h"
 
 @implementation WChineseSting
 

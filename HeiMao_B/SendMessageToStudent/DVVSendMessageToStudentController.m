@@ -247,26 +247,29 @@
 
 // 群发短信功能
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
-    //    [self.dismissViewControllerAnimated:YEScompletion:nil];
     
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    
+    NSLog(@"信息传送回传result:%d",result);
+
     switch(result){
             
         caseMessageComposeResultSent:
             
             //信息传送成功
-            
+           
             break;
             
         caseMessageComposeResultFailed:
             
             //信息传送失败
-            
+           
             break;
             
         caseMessageComposeResultCancelled:
             
             //信息被用户取消传送
-            
+           
             break;
             
         default:
@@ -292,7 +295,7 @@
         controller.body=body;
         controller.messageComposeDelegate=self;
         [self presentViewController:controller animated:YES completion:nil];
-        [[[[controller viewControllers] lastObject]navigationItem]setTitle:title];//修改短信界面标题
+        [[[[controller viewControllers] lastObject] navigationItem]setTitle:@"一步教练"];//修改短信界面标题
     }
     else
     {
