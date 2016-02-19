@@ -11,6 +11,7 @@
 #import "DVVTheoreticalStudentListView.h"
 #import "DVVDrivingStudentListView.h"
 #import "DVVLicensingStudentListView.h"
+#import "DVVToast.h"
 
 @interface DVVStudentListController ()<UIScrollViewDelegate>
 
@@ -56,6 +57,20 @@
 - (void)toolBarItemSelectedAction:(UIButton *)sender {
     
     [self changeScrollViewOffSetX:sender.tag];
+    
+    if (0 == sender.tag) {
+        if (!_theoreticalView.viewModel.dataArray.count) {
+            [DVVToast showMessage:@"暂时没有理论学员"];
+        }
+    }else if (1 == sender.tag) {
+        if (!_drivingView.viewModel.dataArray.count) {
+            [DVVToast showMessage:@"暂时没有上车学员"];
+        }
+    }else if (2 == sender.tag) {
+        if (!_licensingView.viewModel.dataArray.count) {
+            [DVVToast showMessage:@"暂时没有领证学员"];
+        }
+    }
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     

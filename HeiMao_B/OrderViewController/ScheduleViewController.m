@@ -97,6 +97,14 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    self.myNavigationItem.leftBarButtonItem = nil;
+
+}
+
 #pragma mark Life Sycle
 - (void)viewWillAppear:(BOOL)animated
 {

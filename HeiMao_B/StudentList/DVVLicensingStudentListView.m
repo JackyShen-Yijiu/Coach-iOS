@@ -18,8 +18,6 @@
 
 @interface DVVLicensingStudentListView ()<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) DVVStudentListViewModel *viewModel;
-
 @property(nonatomic,strong)NSMutableArray *indexArray;
 
 @property(nonatomic,retain)NSMutableArray *LetterResultArr;
@@ -127,7 +125,7 @@
             [DVVToast showMessage:@"已经全部加载完毕"];
             ws.footer.state = MJRefreshFooterStateNoMoreData;
         }else {
-            [DVVToast showMessage:@"暂时没有领证学员"];
+//            [DVVToast showMessage:@"暂时没有领证学员"];
         }
     }];
     [_viewModel dvvSetRefreshErrorBlock:^{

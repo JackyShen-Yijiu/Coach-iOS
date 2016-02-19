@@ -7,7 +7,6 @@
 //
 
 #import "DVVDrivingStudentListView.h"
-#import "DVVStudentListViewModel.h"
 #import "DVVDrivingStudentListCell.h"
 #import "MJRefresh.h"
 #import "DVVToast.h"
@@ -17,8 +16,6 @@
 #define kCellIdentifier @"kCellIdentifier"
 
 @interface DVVDrivingStudentListView ()<UITableViewDataSource, UITableViewDelegate>
-
-@property (nonatomic, strong) DVVStudentListViewModel *viewModel;
 
 @property(nonatomic,strong)NSMutableArray *indexArray;
 
@@ -127,7 +124,7 @@
             [DVVToast showMessage:@"已经全部加载完毕"];
             ws.footer.state = MJRefreshFooterStateNoMoreData;
         }else {
-            [DVVToast showMessage:@"暂时没有上车学员"];
+//            [DVVToast showMessage:@"暂时没有上车学员"];
         }
     }];
     

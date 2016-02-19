@@ -101,17 +101,12 @@
     self.myNavigationItem.titleView = nil;
     self.myNavigationItem.rightBarButtonItem = nil;
     self.myNavigationItem.rightBarButtonItems = nil;
-    self.myNavigationItem.leftBarButtonItem = nil;
 
     NSArray * controllers = [self.myNavController viewControllers];
     
     NSLog(@"controllers.count:%lu",(unsigned long)controllers.count);
     
-    if (controllers.count > 2) {
-         self.myNavigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.createBackButton];
-    }else{
-        self.myNavigationItem.leftBarButtonItem = nil;
-    }
+//    self.myNavigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.createBackButton];
     
     [[[self myNavController] navigationBar] setBarTintColor:RGB_Color(31, 124, 235)];
     NSDictionary *textAttributes1 = @{NSFontAttributeName: [UIFont systemFontOfSize:16.f],
