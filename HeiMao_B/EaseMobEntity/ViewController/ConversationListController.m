@@ -33,10 +33,10 @@
 
 @implementation ConversationListController
 
-
-
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
     [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:NO];
     self.showRefreshHeader = YES;
     self.delegate = self;
