@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DVVStudentListViewModel.h"
 
 @interface DVVTheoreticalStudentListView : UITableView
 
 - (void)beginNetworkRequest;
+
+@property (nonatomic, strong) DVVStudentListViewModel *viewModel;
 
 @property (nonatomic,weak) UIViewController *parentViewController;
 

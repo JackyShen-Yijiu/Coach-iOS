@@ -7,7 +7,6 @@
 //
 
 #import "DVVTheoreticalStudentListView.h"
-#import "DVVStudentListViewModel.h"
 #import "DVVTheoreticalStudentListCell.h"
 #import "MJRefresh.h"
 #import "DVVToast.h"
@@ -17,8 +16,6 @@
 #define kCellIdentifier @"kCellIdentifier"
 
 @interface DVVTheoreticalStudentListView ()<UITableViewDataSource, UITableViewDelegate>
-
-@property (nonatomic, strong) DVVStudentListViewModel *viewModel;
 
 @property(nonatomic,strong)NSMutableArray *indexArray;
 
