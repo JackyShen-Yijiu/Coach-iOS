@@ -83,6 +83,9 @@
 
 - (void)loginViewControllerdidLoginSucess:(LoginViewController *)controller
 {
+    
+    [[EaseMob sharedInstance].chatManager removeAllConversationsWithDeleteMessages:YES append2Chat:NO];
+    
     [self.navController.navigationBar setHidden:NO];
     
     [self.navController pushViewController:[self getMainTabBar] animated:NO];

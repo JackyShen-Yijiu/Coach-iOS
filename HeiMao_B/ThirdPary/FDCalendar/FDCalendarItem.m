@@ -7,6 +7,7 @@
 //
 
 #import "FDCalendarItem.h"
+#import "YBObjectTool.h"
 
 #define cellWidth_Height 35
 
@@ -203,9 +204,24 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     NSLog(@"reloadData.restArray:%@",self.restArray);
     NSLog(@"reloadData.bookArray:%@",self.bookArray);
     
-    self.collectionView.contentOffset = CGPointMake(0, 0);
+    self.collectionView.contentOffset = CGPointMake([self getCurrentDataOffsetWithData:self.date], 0);
     
     [self.collectionView reloadData];
+}
+
+- (CGFloat)getCurrentDataOffsetWithData:(NSDate *)date
+{
+    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
+    [fomatter setDateFormat:@"dd"];
+    
+    NSString *dateStr = [fomatter stringFromDate:date];
+    
+    if ([YBObjectTool compareMonthDateWithSelectDate:date]!=1) {
+        return [dateStr integerValue] / 7 * self.collectionView.width;
+    }else{
+        return 0;
+    }
+    
 }
 
 #pragma mark - Public
