@@ -74,6 +74,7 @@
 		B2A6BABA1C4B64CB00B09A0F /* JGUserTools.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6BAB51C4B64CB00B09A0F /* JGUserTools.m */; };
 		B2A6BABF1C4B6D8A00B09A0F /* JGUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6BABE1C4B6D8A00B09A0F /* JGUserModel.m */; };
 		B2AC20371C3E2CBD0033803C /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */; };
+		B2F1AE4C1C7D60C5006D56FF /* YBObjectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F1AE4B1C7D60C5006D56FF /* YBObjectTool.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
 		B80003CC1BEFACA50099D194 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003CB1BEFACA50099D194 /* CoreFoundation.framework */; };
@@ -630,6 +631,8 @@
 		B2A6BABE1C4B6D8A00B09A0F /* JGUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGUserModel.m; sourceTree = "<group>"; };
 		B2AC20351C3E2CBD0033803C /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
 		B2AC20361C3E2CBD0033803C /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
+		B2F1AE4A1C7D60C5006D56FF /* YBObjectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBObjectTool.h; sourceTree = "<group>"; };
+		B2F1AE4B1C7D60C5006D56FF /* YBObjectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBObjectTool.m; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		B80003C91BEFAC9C0099D194 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -2806,6 +2809,8 @@
 		B8FFDF641BDE78E6005BD535 /* FDCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				B2F1AE4A1C7D60C5006D56FF /* YBObjectTool.h */,
+				B2F1AE4B1C7D60C5006D56FF /* YBObjectTool.m */,
 				B8FFDF651BDE78E6005BD535 /* FDCalendar.h */,
 				B8FFDF661BDE78E6005BD535 /* FDCalendar.m */,
 				B8FFDF671BDE78E6005BD535 /* FDCalendarItem.h */,
@@ -3489,6 +3494,7 @@
 				D5C240661BF108CF00832CF3 /* ForgetViewController.m in Sources */,
 				B24644221C521946009B5649 /* JGBaseViewController.m in Sources */,
 				B865C1761BDCA0B400C1E681 /* RefreshTableView.m in Sources */,
+				B2F1AE4C1C7D60C5006D56FF /* YBObjectTool.m in Sources */,
 				B8BC50EA1BF393D00007B029 /* EaseChatToolbar.m in Sources */,
 				06FBBA9E1C48CD3500207FDB /* MagicMainTableViewController.m in Sources */,
 				B8BC50641BF38A390007B029 /* MWTapDetectingView.m in Sources */,
