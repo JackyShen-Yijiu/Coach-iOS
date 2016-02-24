@@ -83,6 +83,9 @@
 
 - (void)loginViewControllerdidLoginSucess:(LoginViewController *)controller
 {
+    
+    [[EaseMob sharedInstance].chatManager removeAllConversationsWithDeleteMessages:YES append2Chat:NO];
+
     [self.navController.navigationBar setHidden:NO];
     
     [self.navController pushViewController:[self getMainTabBar] animated:NO];
@@ -200,6 +203,8 @@
         NSSet *set = [NSSet setWithObjects:JPushTag,coachID, nil];
         [APService setTags:set alias:[UserInfoModel defaultUserInfo].userID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
     }
+    
+    
     
 }
 - (void)tagsAliasCallback:(int)iResCode

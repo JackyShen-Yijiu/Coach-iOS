@@ -37,13 +37,16 @@
     
     [super viewDidLoad];
     
-    [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:NO];
+//    [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:NO];
     self.showRefreshHeader = YES;
     self.delegate = self;
     self.dataSource = self;
     
-    [self networkStateView];
     [self removeEmptyConversationsFromDB];
+
+    [self tableViewDidTriggerHeaderRefresh];
+
+    [self networkStateView];
    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefresh) name:KCourseViewController_NeedRefresh object:nil];
 

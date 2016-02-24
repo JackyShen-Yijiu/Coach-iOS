@@ -86,11 +86,11 @@ static NSString *kGroupName = @"GroupName";
 {
     [super viewWillAppear:animated];
     
-    [self tableViewDidTriggerHeaderRefresh];
+  //  [self tableViewDidTriggerHeaderRefresh];
     
     [self registerNotifications];
     
-    [self initNavBar];
+   // [self initNavBar];
 
 }
 
@@ -263,6 +263,8 @@ static NSString *kGroupName = @"GroupName";
                 ws.zixunTimeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"newstime"]];
                 
                 NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
+                NSLog(@"conversations:%@",conversations);
+                
                 
                 NSArray* sorted = [conversations sortedArrayUsingComparator:
                                    ^(EMConversation *obj1, EMConversation* obj2){
@@ -296,6 +298,8 @@ static NSString *kGroupName = @"GroupName";
                 
                 for (EMConversation *converstion in sorted) {
                     
+                    NSLog(@"converstion.chatter:%@",converstion.chatter);
+                    
                     EaseConversationModel *model = nil;
                     if (_dataSource && [_dataSource respondsToSelector:@selector(conversationListViewController:modelForConversation:)]) {
                         model = [_dataSource conversationListViewController:self
@@ -311,9 +315,9 @@ static NSString *kGroupName = @"GroupName";
                     
                 }
                 
-                [self setupUnreadMessageCount];
+                [ws setupUnreadMessageCount];
                 
-                [self tableViewDidFinishTriggerHeader:YES reload:YES];
+                [ws tableViewDidFinishTriggerHeader:YES reload:YES];
                 
             });
             
