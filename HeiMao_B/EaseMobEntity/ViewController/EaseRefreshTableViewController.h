@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JGBaseViewController.h"
 
 #define KCELLDEFAULTHEIGHT 50
 
-@interface EaseRefreshTableViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface EaseRefreshTableViewController : JGBaseViewController<UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *_rightItems;
 }
