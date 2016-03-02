@@ -45,10 +45,10 @@
 
 #define KNOTIFICATION_USERLOADED @"userLoaded"
 
-#define  HOST_TEST_DAMIAN  @"http://101.200.204.240:8181/api/v1"
+#define  HOST_TEST_DAMIAN  @"http://jzapi.yibuxueche.com/api/v1"
 
 //#define  HOST_LINE_DOMAIN  @"http://123.57.63.15:8181/api/v1"
-#define  HOST_LINE_DOMAIN  @"http://api.yibuxueche.com/api/v1"
+#define  HOST_LINE_DOMAIN  @"http://jzapi.yibuxueche.com/api/v1"
 
 //#define QA_TEST
 

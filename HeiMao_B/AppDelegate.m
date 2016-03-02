@@ -158,7 +158,7 @@
     [self configBaiduMap];
     
     //umeng统计
-    [MobClick startWithAppkey:@"564dc12967e58ee280001457" reportPolicy:BATCH   channelId:nil];
+    [MobClick startWithAppkey:@"56d551df67e58e06d5001664" reportPolicy:BATCH   channelId:nil];
     
     //AFNet log显示
     AFNetworkReachabilityManager *  manager = [AFNetworkReachabilityManager sharedManager];
@@ -181,11 +181,10 @@
         EaseAppkey = @"black-cat#yibuxuechetest";
     #endif
     
-    
-    apnsCertName = @"dis_apns";
+    apnsCertName = @"jizhijiafuDistribution";
     [[EaseSDKHelper shareHelper] easemobApplication:application
                       didFinishLaunchingWithOptions:launchOptions
-                                             appkey:@"black-cat#yibuxuecheprod"
+                                             appkey:@"black-cat#jizhijaifu"
                                        apnsCertName:apnsCertName
                                         otherConfig:@{kSDKConfigEnableConsoleLogger:[NSNumber numberWithBool:YES]}];
     

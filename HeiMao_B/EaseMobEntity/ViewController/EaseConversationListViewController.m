@@ -86,7 +86,7 @@ static NSString *kGroupName = @"GroupName";
 {
     [super viewWillAppear:animated];
     
-  //  [self tableViewDidTriggerHeaderRefresh];
+   // [self tableViewDidTriggerHeaderRefresh];
     
     [self registerNotifications];
     
@@ -192,8 +192,6 @@ static NSString *kGroupName = @"GroupName";
             [self.navigationController pushViewController:informationMessageVC animated:YES];
         }
         
-        [self setupUnreadMessageCount];
-
     }else{
         
         id<IConversationModel> model = [self.dataArray objectAtIndex:indexPath.row];
@@ -211,6 +209,9 @@ static NSString *kGroupName = @"GroupName";
 //        }
         
     }
+    
+    [self tableViewDidTriggerHeaderRefresh];
+
 }
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{

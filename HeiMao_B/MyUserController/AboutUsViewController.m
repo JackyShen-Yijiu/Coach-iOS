@@ -30,7 +30,7 @@
 //        _topLabel = [[UILabel alloc] init];
 //        _topLabel.textAlignment = NSTextAlignmentCenter;
 //        _topLabel.font = [UIFont boldSystemFontOfSize:14];
-//        _topLabel.text = @"一步学车";
+//        _topLabel.text = @"极致";
 //    }
 //    return _topLabel;
 //}

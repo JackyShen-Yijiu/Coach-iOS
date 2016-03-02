@@ -45,7 +45,7 @@ static NSString *kMagicShop = @"/getmailproduct?index=1&count=10&producttype=0";
     self.ShopListArray = [[NSMutableArray alloc] init];
     self.shopMainListArray = [[NSMutableArray alloc] init];
     [self.tableView registerNib:[UINib nibWithNibName:@"MagicMainTableViewCell" bundle:nil] forCellReuseIdentifier:@"mainCell"];
-    self.title = @"一步商城";
+    self.title = @"极致商城";
 
     
     // 加载数据

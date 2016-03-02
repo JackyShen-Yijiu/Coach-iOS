@@ -178,7 +178,7 @@ static NSString *const kMyWalletUrl = @"userinfo/getmywallet?userid=%@&usertype=
     
     UILabel *labelone = [[UILabel alloc] initWithFrame:CGRectMake(0, 80, 250, 20)];
     labelone.textAlignment = NSTextAlignmentCenter;
-    labelone.text = @"一步学车设计了最先进的用户激励机制";
+    labelone.text = @"极致设计了最先进的用户激励机制";
     labelone.textColor = [UIColor whiteColor];
     labelone.font = [UIFont systemFontOfSize:14];
     UILabel *labeltwo = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 250, 20)];

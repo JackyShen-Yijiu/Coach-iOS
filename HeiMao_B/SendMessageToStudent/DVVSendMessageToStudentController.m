@@ -295,7 +295,7 @@
         controller.body=body;
         controller.messageComposeDelegate=self;
         [self presentViewController:controller animated:YES completion:nil];
-        [[[[controller viewControllers] lastObject] navigationItem]setTitle:@"一步教练"];//修改短信界面标题
+        [[[[controller viewControllers] lastObject] navigationItem]setTitle:@"极致教练"];//修改短信界面标题
     }
     else
     {
