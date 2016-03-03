@@ -64,11 +64,11 @@
         _showRefreshHeader = showRefreshHeader;
         if (_showRefreshHeader) {
             __weak EaseRefreshTableViewController *weakSelf = self;
-            MJRefreshLegendHeader *header = [self.tableView addLegendHeaderWithRefreshingBlock:^{
+            [self.tableView addLegendHeaderWithRefreshingBlock:^{
                 [weakSelf tableViewDidTriggerHeaderRefresh];
-                [weakSelf.tableView.header beginRefreshing];
+//                [weakSelf.tableView.header beginRefreshing];
             }];
-            header.updatedTimeHidden = YES;
+//            header.updatedTimeHidden = YES;
         }
         else{
             [self.tableView removeHeader];
@@ -84,7 +84,7 @@
             __weak EaseRefreshTableViewController *weakSelf = self;
             [self.tableView addLegendFooterWithRefreshingBlock:^{
                 [weakSelf tableViewDidTriggerFooterRefresh];
-                [weakSelf.tableView.footer beginRefreshing];
+//                [weakSelf.tableView.footer beginRefreshing];
             }];
         }
         else{
@@ -193,12 +193,12 @@
             [weakSelf.tableView reloadData];
         }
         
-        if (isHeader) {
+//        if (isHeader) {
             [weakSelf.tableView.header endRefreshing];
-        }
-        else{
+//        }
+//        else{
             [weakSelf.tableView.footer endRefreshing];
-        }
+//        }
     });
 }
 

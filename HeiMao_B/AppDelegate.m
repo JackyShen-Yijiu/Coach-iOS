@@ -71,7 +71,7 @@
     
     // 配置百度地图
     _mapManager = [BMKMapManager new];
-    BOOL mapManagerStatus = [_mapManager start:@"AsrX0h3VNsqQOkYPXXrslrY8" generalDelegate:nil];
+    BOOL mapManagerStatus = [_mapManager start:baiduMapAppkey generalDelegate:nil];
     if (mapManagerStatus) {
         NSLog(@"mapManager OK");
         _locationService = [BMKLocationService new];
@@ -158,7 +158,7 @@
     [self configBaiduMap];
     
     //umeng统计
-    [MobClick startWithAppkey:@"56d551df67e58e06d5001664" reportPolicy:BATCH   channelId:nil];
+    [MobClick startWithAppkey:umengAppkey reportPolicy:BATCH   channelId:nil];
     
     //AFNet log显示
     AFNetworkReachabilityManager *  manager = [AFNetworkReachabilityManager sharedManager];
@@ -176,15 +176,15 @@
     
     NSString *EaseAppkey = nil;
     #if DEBUG
-        EaseAppkey = @"black-cat#yibuxuecheprod";
+        EaseAppkey = EaseAppkey;
     #else
-        EaseAppkey = @"black-cat#yibuxuechetest";
+        EaseAppkey = EaseAppkey;
     #endif
     
-    apnsCertName = @"jizhijiafuDistribution";
+    apnsCertName = easeMobPushName;
     [[EaseSDKHelper shareHelper] easemobApplication:application
                       didFinishLaunchingWithOptions:launchOptions
-                                             appkey:@"black-cat#jizhijaifu"
+                                             appkey:EaseAppkey
                                        apnsCertName:apnsCertName
                                         otherConfig:@{kSDKConfigEnableConsoleLogger:[NSNumber numberWithBool:YES]}];
     

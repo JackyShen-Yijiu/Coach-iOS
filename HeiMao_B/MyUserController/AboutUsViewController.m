@@ -70,7 +70,11 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.webView];
     NSDictionary * bundle = [[NSBundle mainBundle] infoDictionary];
-    NSString * str = [NSString stringWithFormat:@"%@?ver=%@",@"http://www.yibuxueche.com/about.html",[bundle objectStringForKey:@"CFBundleShortVersionString"]];
+    
+    
+    
+//    @"http://jzapi.yibuxueche.com/api/v1"
+    NSString * str = [NSString stringWithFormat:@"%@?ver=%@",@"http://www.yibuxueche.com/jzjfabout.html",[bundle objectStringForKey:@"CFBundleShortVersionString"]];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
 //    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.size.equalTo(self);

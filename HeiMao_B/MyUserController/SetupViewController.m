@@ -278,9 +278,9 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
         [self.navigationController pushViewController:about animated:YES];
     }else if (indexPath.section == 1 && indexPath.row == 1){
         //评分
-        NSString *str = [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=1060635200" ];
+        NSString *str = [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=1089530725" ];
         if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)){
-            str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/1060635200"];
+            str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/1089530725"];
         }
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     }

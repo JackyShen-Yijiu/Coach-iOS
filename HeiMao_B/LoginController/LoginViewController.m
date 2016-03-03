@@ -112,7 +112,7 @@ static NSString *const kuserType = @"usertype";
 - (UIImageView *)logoImageView {
     if (_logoImageView == nil) {
         _logoImageView = [[UIImageView alloc] init];
-        _logoImageView.image = [UIImage imageNamed:@"logoImage.png"];
+        _logoImageView.image = [UIImage imageNamed:@"Coach_logoImage.png"];
     }
     return _logoImageView;
 }

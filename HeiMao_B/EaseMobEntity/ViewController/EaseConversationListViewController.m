@@ -86,7 +86,7 @@ static NSString *kGroupName = @"GroupName";
 {
     [super viewWillAppear:animated];
     
-   // [self tableViewDidTriggerHeaderRefresh];
+    [self tableViewDidTriggerHeaderRefresh];
     
     [self registerNotifications];
     
