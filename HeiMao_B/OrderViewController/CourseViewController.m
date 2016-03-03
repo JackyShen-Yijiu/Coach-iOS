@@ -217,6 +217,49 @@
 - (void)rightBarBtnWithQianDaoDidClick
 {
     NSLog(@"签到");
+    //判断是否拥有权限
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    NSLog(@"status = %i",authStatus);
+    switch (authStatus) {
+            
+        case AVAuthorizationStatusNotDetermined:
+        {
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+                if (granted)
+                {
+                                 NSLog(@"User Granted");
+                }
+                else
+                {
+                                 NSLog(@"User Denied");
+                }
+            }];
+            break;
+        }
+        case AVAuthorizationStatusRestricted:
+            
+        case AVAuthorizationStatusDenied:
+        {
+            UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:@"相机授权" message:@"没有权限访问您的相机，请在“设置－隐私－相机”中允许使用" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
+            [alterView show];
+            break;
+        }
+            
+        default:
+        {
+            NSLog(@"拍照");
+            
+            ScanViewController *vc = [[ScanViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            //拍照
+            //从相册获取
+            break;
+            
+        }
+    }
+    
+    return;
     
     AVAuthorizationStatus state = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if (state == AVAuthorizationStatusAuthorized) {

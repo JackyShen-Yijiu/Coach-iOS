@@ -20,14 +20,42 @@
 + (void)pickPhotofromController:(UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>*)fromController{
     
     [PFActionSheetView showAlertWithTitle:nil message:nil cancelButtonTitle:@"取消" otherButtonTitles:@[@"拍照",@"从相册选取"] withVc:fromController completion:^(NSUInteger selectedOtherButtonIndex) {
-        if (selectedOtherButtonIndex == 0) {
+        
+        if (selectedOtherButtonIndex == 0) {// 相机
             
-            
-            AVAuthorizationStatus state = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-            if (state == AVAuthorizationStatusAuthorized) {
-                
-                if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            //判断是否拥有权限
+            AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+            NSLog(@"status = %i",authStatus);
+            switch (authStatus) {
                     
+                case AVAuthorizationStatusNotDetermined:
+                {
+                    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+                        if (granted)
+                        {
+                            NSLog(@"User Granted");
+                        }
+                        else
+                        {
+                            NSLog(@"User Denied");
+                        }
+                    }];
+                    break;
+                }
+                case AVAuthorizationStatusRestricted:
+                    
+                case AVAuthorizationStatusDenied:
+                {
+                    UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:@"相机授权" message:@"没有权限访问您的相机，请在“设置－隐私－相机”中允许使用" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
+                    [alterView show];
+                    break;
+                }
+                    
+                default:
+                {
+                    NSLog(@"拍照");
+                    
+                    // 调用相机
                     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
                     picker.allowsEditing = YES;
                     picker.delegate = fromController;
@@ -38,35 +66,28 @@
                                                                  NSFontAttributeName : [UIFont boldSystemFontOfSize:18]};
                     
                     [fromController presentViewController:picker animated:YES completion:nil];
+                    
+                    //拍照
+                    //从相册获取
+                    break;
+                    
                 }
- 
-                
-            }else{
-            
-                
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"相机不可用" message:@"请在设置->极致教练->相机 里面开启服务" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
-                [alert show];
-                
-            } //
-            
-        }else if (selectedOtherButtonIndex == 1) {
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-
-                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-                picker.allowsEditing = YES;
-                picker.delegate = fromController;
-                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                picker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
-                picker.navigationBar.barTintColor = fromController.navigationController.navigationBar.barTintColor;
-                picker.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
-                                                             NSFontAttributeName : [UIFont boldSystemFontOfSize:18]};
-                
-                [fromController presentViewController:picker animated:YES completion:nil];
-
-                //0x00007ff7f587e0a0
             }
-        }
            
+        }else if (selectedOtherButtonIndex == 1) {// 相册
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.allowsEditing = YES;
+            picker.delegate = fromController;
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            picker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
+            picker.navigationBar.barTintColor = fromController.navigationController.navigationBar.barTintColor;
+            picker.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
+                                                         NSFontAttributeName : [UIFont boldSystemFontOfSize:18]};
+            
+            [fromController presentViewController:picker animated:YES completion:nil];
+   
+        }
     }];
     
 }
