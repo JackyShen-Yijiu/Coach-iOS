@@ -23,6 +23,7 @@
 
 #import "DVVStudentListController.h"
 #import "DVVSendMessageToStudentController.h"
+#import "BLPFAlertView.h"
 
 @interface CourseViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate>
 
@@ -216,65 +217,34 @@
 
 - (void)rightBarBtnWithQianDaoDidClick
 {
-    NSLog(@"签到");
-    //判断是否拥有权限
+    // 检测摄像头的状态
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-    NSLog(@"status = %i",authStatus);
-    switch (authStatus) {
+    if (authStatus == AVAuthorizationStatusDenied) {
+        // 用户拒绝App使用
+        
+        [BLPFAlertView showAlertWithTitle:@"相机不可用" message:@"请在设置中开启相机服务" cancelButtonTitle:@"知道了" otherButtonTitles:@[ @"去设置" ] completion:^(NSUInteger selectedOtherButtonIndex) {
             
-        case AVAuthorizationStatusNotDetermined:
-        {
-            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-                if (granted)
-                {
-                                 NSLog(@"User Granted");
-                }
-                else
-                {
-                                 NSLog(@"User Denied");
-                }
-            }];
-            break;
-        }
-        case AVAuthorizationStatusRestricted:
+            if (0 == selectedOtherButtonIndex) {
+                // 打开应用设置面板
+                [self goAppSet];
+            }
             
-        case AVAuthorizationStatusDenied:
-        {
-            UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:@"相机授权" message:@"没有权限访问您的相机，请在“设置－隐私－相机”中允许使用" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
-            [alterView show];
-            break;
-        }
-            
-        default:
-        {
-            NSLog(@"拍照");
-            
-            ScanViewController *vc = [[ScanViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-            
-            //拍照
-            //从相册获取
-            break;
-            
-        }
+        }];
+        
+        return ;
     }
     
-    return;
-    
-    AVAuthorizationStatus state = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-    if (state == AVAuthorizationStatusAuthorized) {
-        
-        ScanViewController *vc = [[ScanViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    
-    }else{
-
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"相机不可用" message:@"请在设置->极致教练->相机 里面开启服务" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
-        [alert show];
-        
-    }
-    
+    ScanViewController *vc = [[ScanViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
+
+- (void)goAppSet {
+    
+    // 打开应用设置面板
+    NSURL *appSettingUrl = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    [[UIApplication sharedApplication] openURL:appSettingUrl];
+}
+
 
 - (void)rightBarBtnWithSearchDidClick
 {
