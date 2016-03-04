@@ -196,17 +196,23 @@ static NSString *kGroupName = @"GroupName";
         
         id<IConversationModel> model = [self.dataArray objectAtIndex:indexPath.row];
 
-        HMStudentModel *studenModel = [[HMStudentModel alloc] init];
-        studenModel.userName = [NSString stringWithFormat:@"%@",[JGUserTools getNickNameByEMUserName:model.conversation.chatter]];
-        
-        ChatViewController *chatController = [[ChatViewController alloc] initWithConversationChatter:model.conversation.chatter conversationType:model.conversation.conversationType];
-        chatController.studentModel = studenModel;
-        [self.myNavController pushViewController:chatController animated:YES];
+//        HMStudentModel *studenModel = [[HMStudentModel alloc] init];
+       // studenModel.userName = [NSString stringWithFormat:@"%@",[JGUserTools getNickNameByEMUserName:model.conversation.chatter]];
+    
+        NSDictionary * ext = [[model conversation] ext];
+        NSLog(@"获取用户信息ext:%@",ext);
+        NSString * title = [ext objectStringForKey:@"nickName"];
+        NSString * ava = [ext objectStringForKey:@"headUrl"];
+        NSString * userId = [ext objectStringForKey:@"userId"];
 
-//        if (_delegate && [_delegate respondsToSelector:@selector(conversationListViewController:didSelectConversationModel:)]) {
-//            EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row];
-//            [_delegate conversationListViewController:self didSelectConversationModel:model];
-//        }
+//        ChatViewController *chatController = [[ChatViewController alloc] initWithConversationChatter:model.conversation.chatter conversationType:model.conversation.conversationType];
+//        chatController.studentModel = studenModel;
+//        [self.myNavController pushViewController:chatController animated:YES];
+
+        if (_delegate && [_delegate respondsToSelector:@selector(conversationListViewController:didSelectConversationModel:)]) {
+            EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row];
+            [_delegate conversationListViewController:self didSelectConversationModel:model];
+        }
         
     }
     

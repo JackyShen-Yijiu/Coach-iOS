@@ -227,16 +227,16 @@
     if (model.isSender==NO) {
        
         // 获取服务器用户名
-        _nameLabel.text = [NSString stringWithFormat:@"%@",[JGUserTools getNickNameByEMUserName:model.message.from]];
+//        _nameLabel.text = [NSString stringWithFormat:@"%@",[JGUserTools getNickNameByEMUserName:model.message.from]];
         
         // 获取服务器用户头像
-        NSString *avatar = [JGUserTools getAvatarUrlByEMUserName:model.message.from];
+//        NSString *avatar = [JGUserTools getAvatarUrlByEMUserName:model.message.from];
     
-        if (avatar) {
-            [self.avatarView sd_setImageWithURL:[NSURL URLWithString:avatar] placeholderImage:model.avatarImage];
-        } else {
-            self.avatarView.image = model.avatarImage;
-        }
+//        if (avatar) {
+//            [self.avatarView sd_setImageWithURL:[NSURL URLWithString:avatar] placeholderImage:model.avatarImage];
+//        } else {
+//            self.avatarView.image = model.avatarImage;
+//        }
         
     }
     
