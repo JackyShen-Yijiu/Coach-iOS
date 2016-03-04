@@ -79,6 +79,12 @@
         if ([type isEqualToString:@"newversion"]) {
             [self showAlertWithMessage:message];
         }
+        
+        // jpush后台推送
+        if ([type isEqualToString:@"1"]) {
+#warning 总userInfo中取得其他字段，进行界面跳转，跳转web
+            [self showAlertWithMessage:message];
+        }
     }
 }
 

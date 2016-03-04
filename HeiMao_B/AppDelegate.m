@@ -22,7 +22,10 @@
 #import <BaiduMapAPI_Location/BMKLocationService.h>
 #import "AppDelegate+YJPush.h"
 
-@interface AppDelegate ()<LoginViewControllerDelegate>
+@interface AppDelegate ()<LoginViewControllerDelegate,IChatManagerDelegate>
+{
+    BOOL isReceiveMessage;
+}
 @property(nonatomic,strong)HMNagationController * navController;
 @property (nonatomic, strong) BMKLocationService *locationService;
 @end
@@ -86,6 +89,18 @@
     
     [[EaseMob sharedInstance].chatManager removeAllConversationsWithDeleteMessages:YES append2Chat:NO];
 
+    //设置是否自动登录
+    [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
+    
+    // 旧数据转换 (如果您的sdk是由2.1.2版本升级过来的，需要家这句话)
+    [[EaseMob sharedInstance].chatManager importDataToNewDatabase];
+    //获取数据库中数据
+    [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
+    
+    EMPushNotificationOptions *options = [[EaseMob sharedInstance].chatManager pushNotificationOptions];
+    options.nickname = [UserInfoModel defaultUserInfo].name;
+    options.displayStyle = ePushNotificationDisplayStyle_messageSummary;
+    
     [self.navController.navigationBar setHidden:NO];
     
     [self.navController pushViewController:[self getMainTabBar] animated:NO];
@@ -166,27 +181,14 @@
     [[AFNetworkActivityLogger sharedLogger] startLogging];
     
     //环信
-    NSString *apnsCertName = nil;
-    //#if DEBUG
-    //    apnsCertName = @"modoujiaxiaoPushDev";
-    //#else
-    //    apnsCertName = @"modoujiaxiaoPushDis";
-    //#endif
-    
-    
-    NSString *EaseAppkey = nil;
-    #if DEBUG
-        EaseAppkey = EaseAppkey;
-    #else
-        EaseAppkey = EaseAppkey;
-    #endif
-    
-    apnsCertName = easeMobPushName;
     [[EaseSDKHelper shareHelper] easemobApplication:application
                       didFinishLaunchingWithOptions:launchOptions
-                                             appkey:EaseAppkey
-                                       apnsCertName:apnsCertName
+                                             appkey:easeMobAPPkey
+                                       apnsCertName:easeMobPushName
                                         otherConfig:@{kSDKConfigEnableConsoleLogger:[NSNumber numberWithBool:YES]}];
+    
+    // 注册环信
+    [self registerEaseMobNotification];
     
     //极光推送
     [APService
@@ -203,9 +205,20 @@
         [APService setTags:set alias:[UserInfoModel defaultUserInfo].userID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
     }
     
-    
-    
 }
+
+
+#pragma mark - registerEaseMobNotification
+- (void)registerEaseMobNotification{
+    [self unRegisterEaseMobNotification];
+    // 将self 添加到SDK回调中，以便本类可以收到SDK回调
+    [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
+}
+
+- (void)unRegisterEaseMobNotification{
+    [[EaseMob sharedInstance].chatManager removeDelegate:self];
+}
+
 - (void)tagsAliasCallback:(int)iResCode
                      tags:(NSSet *)tags
                     alias:(NSString *)alias {
@@ -249,12 +262,13 @@
     /*
      // 自定义消息
      {
-       "_j_msgid" = 1488777374;
-       aps =     {
-          alert = babababbaba;
-          badge = 1;
-          sound = default;
-       };
+     "_j_msgid" = 4122902527;
+     aps =     {
+         alert = "\U6d4b\U8bd5\U6559\U7ec3\U7aef\U63a8\U9001";
+         badge = 1;
+         sound = default;
+     };
+     type = 1;
      }
      // 接受到后台消息
      
@@ -296,5 +310,52 @@
 {
     [UIApplication sharedApplication].applicationIconBadgeNumber=0;
 }
+
+- (void)didReceiveMessage:(EMMessage *)message
+{
+    
+    NSLog(@"didReceiveMessage message.messageBodies:%@",message.messageBodies);
+    
+    if (([UIApplication sharedApplication].applicationState == UIApplicationStateActive)&&([[NSUserDefaults standardUserDefaults] boolForKey:@"isInChatVc"])) {
+        return;
+    }
+    
+    //发送本地推送
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.fireDate = [NSDate date]; //触发通知的时间
+    notification.alertBody = [NSString stringWithFormat:@"%@",@"你有一条新消息,快点击查看吧"];
+    notification.alertAction = NSLocalizedString(@"确定", @"确定");
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    
+    //发送通知
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [[UIApplication sharedApplication] cancelLocalNotification:notification];
+        
+    });
+    
+    NSArray *conversations = [[[EaseMob sharedInstance] chatManager] conversations];
+    NSInteger unreadCount = 0;
+    for (EMConversation *conversation in conversations) {
+        unreadCount += conversation.unreadMessagesCount;
+    }
+    [UIApplication sharedApplication].applicationIconBadgeNumber = unreadCount;
+    
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    NSLog(@"接收到环信推送通知UILocalNotification = %@",notification);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"receiveMainChatMessage" object:self];
+    
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 @end

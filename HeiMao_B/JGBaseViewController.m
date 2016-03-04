@@ -27,6 +27,19 @@
     
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveMainChatMessage) name:@"receiveMainChatMessage" object:nil];
+    
+}
+
+- (void)receiveMainChatMessage
+{
+    [self loadMessageData];
+}
+
 - (void)loadMessageData
 {
     
