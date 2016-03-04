@@ -8,8 +8,11 @@
 
 #import "JEPhotoPickManger.h"
 #import "PFActionSheetView.h"
+#import "BLPFAlertView.h"
+#import "ToolHeader.h"
 #import <AVFoundation/AVFoundation.h>
-//#import "ToolHeader.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+
 @interface JEPhotoPickManger ()
 @property (weak, nonatomic) UIViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate> *fromVc;
 
@@ -21,75 +24,91 @@
     
     [PFActionSheetView showAlertWithTitle:nil message:nil cancelButtonTitle:@"取消" otherButtonTitles:@[@"拍照",@"从相册选取"] withVc:fromController completion:^(NSUInteger selectedOtherButtonIndex) {
         
-        if (selectedOtherButtonIndex == 0) {// 相机
+        if (selectedOtherButtonIndex == 0) {
             
-            //判断是否拥有权限
+            
+            // 检测摄像头的状态
             AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-            NSLog(@"status = %i",authStatus);
-            switch (authStatus) {
+            if (authStatus == AVAuthorizationStatusDenied) {
+                // 用户拒绝App使用
+                
+                [BLPFAlertView showAlertWithTitle:@"相机不可用" message:@"请在设置中开启相机服务" cancelButtonTitle:@"知道了" otherButtonTitles:@[ @"去设置" ] completion:^(NSUInteger selectedOtherButtonIndex) {
                     
-                case AVAuthorizationStatusNotDetermined:
-                {
-                    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-                        if (granted)
-                        {
-                            NSLog(@"User Granted");
-                        }
-                        else
-                        {
-                            NSLog(@"User Denied");
-                        }
-                    }];
-                    break;
-                }
-                case AVAuthorizationStatusRestricted:
+                    if (0 == selectedOtherButtonIndex) {
+                        // 打开应用设置面板
+                        [self goAppSet];
+                    }
                     
-                case AVAuthorizationStatusDenied:
-                {
-                    UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:@"相机授权" message:@"没有权限访问您的相机，请在“设置－隐私－相机”中允许使用" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
-                    [alterView show];
-                    break;
-                }
-                    
-                default:
-                {
-                    NSLog(@"拍照");
-                    
-                    // 调用相机
-                    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-                    picker.allowsEditing = YES;
-                    picker.delegate = fromController;
-                    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-                    picker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
-                    picker.navigationBar.barTintColor = fromController.navigationController.navigationBar.barTintColor;
-                    picker.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
-                                                                 NSFontAttributeName : [UIFont boldSystemFontOfSize:18]};
-                    
-                    [fromController presentViewController:picker animated:YES completion:nil];
-                    
-                    //拍照
-                    //从相册获取
-                    break;
-                    
-                }
+                }];
+                
+                return ;
             }
-           
-        }else if (selectedOtherButtonIndex == 1) {// 相册
             
-            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-            picker.allowsEditing = YES;
-            picker.delegate = fromController;
-            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            picker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
-            picker.navigationBar.barTintColor = fromController.navigationController.navigationBar.barTintColor;
-            picker.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
-                                                         NSFontAttributeName : [UIFont boldSystemFontOfSize:18]};
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                
+                DYNSLog(@"camera");
+                
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.allowsEditing = YES;
+                picker.delegate = fromController;
+                UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypeCamera;
+                if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                    type = UIImagePickerControllerSourceTypePhotoLibrary;
+                }
+                picker.sourceType = type;
+                
+                picker.navigationBar.barTintColor = fromController.navigationController.navigationBar.barTintColor;
+                picker.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                             NSFontAttributeName : [UIFont boldSystemFontOfSize:18]};
+                
+                [fromController presentViewController:picker animated:YES completion:nil];
+                
+            }
             
-            [fromController presentViewController:picker animated:YES completion:nil];
-   
+        }else if (selectedOtherButtonIndex == 1) {
+            
+            // 检测照片库授权状态
+            ALAuthorizationStatus authStatus = [ALAssetsLibrary authorizationStatus];
+            if (authStatus == ALAuthorizationStatusDenied) {
+                // 用户拒绝App使用
+                
+                [BLPFAlertView showAlertWithTitle:@"相册不可用" message:@"请在设置中开启相册服务" cancelButtonTitle:@"知道了" otherButtonTitles:@[ @"去设置" ] completion:^(NSUInteger selectedOtherButtonIndex) {
+                    
+                    if (0 == selectedOtherButtonIndex) {
+                        // 打开应用设置面板
+                        [self goAppSet];
+                    }
+                    
+                }];
+                
+                return ;
+            }
+            
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+                
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.allowsEditing = YES;
+                picker.delegate = fromController;
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                picker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
+                picker.navigationBar.barTintColor = fromController.navigationController.navigationBar.barTintColor;
+                picker.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                             NSFontAttributeName : [UIFont boldSystemFontOfSize:18]};
+                [fromController presentViewController:picker animated:YES completion:nil];
+                
+                //0x00007ff7f587e0a0
+            }
         }
+        
     }];
-    
 }
+
++ (void)goAppSet {
+    
+    // 打开应用设置面板
+    NSURL *appSettingUrl = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    [[UIApplication sharedApplication] openURL:appSettingUrl];
+}
+
 
 @end

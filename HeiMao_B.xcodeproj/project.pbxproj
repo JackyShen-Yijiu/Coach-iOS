@@ -493,6 +493,7 @@
 		D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */; };
 		D98655411C46080C0040B719 /* StudentSignInStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = D98655401C46080C0040B719 /* StudentSignInStatusView.m */; };
 		D98B906F1C44E4B300271B7B /* StudentSignInViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D98B906E1C44E4B300271B7B /* StudentSignInViewModel.m */; };
+		D9ABF86D1C896463001B6930 /* BLPFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ABF86C1C896463001B6930 /* BLPFAlertView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1340,6 +1341,8 @@
 		D98655401C46080C0040B719 /* StudentSignInStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentSignInStatusView.m; sourceTree = "<group>"; };
 		D98B906D1C44E4B300271B7B /* StudentSignInViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentSignInViewModel.h; sourceTree = "<group>"; };
 		D98B906E1C44E4B300271B7B /* StudentSignInViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentSignInViewModel.m; sourceTree = "<group>"; };
+		D9ABF86B1C896463001B6930 /* BLPFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLPFAlertView.h; sourceTree = "<group>"; };
+		D9ABF86C1C896463001B6930 /* BLPFAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLPFAlertView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2689,6 +2692,8 @@
 		B8C458581BDB59AC00901F71 /* ThirdPary */ = {
 			isa = PBXGroup;
 			children = (
+				D9ABF86B1C896463001B6930 /* BLPFAlertView.h */,
+				D9ABF86C1C896463001B6930 /* BLPFAlertView.m */,
 				B28D5E381C64857000D9E9E1 /* ChineseSorting */,
 				D978ACD31C47B38A00D633B4 /* DVVLocationStatus.h */,
 				D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */,
@@ -3443,6 +3448,7 @@
 				D96470EF1C61DA1700C97984 /* DVVDrivingStudentListCell.m in Sources */,
 				06FBBAA11C48D14A00207FDB /* MagicDetailViewController.m in Sources */,
 				B28D5DE31C631C5700D9E9E1 /* JGAppointMentFootView.m in Sources */,
+				D9ABF86D1C896463001B6930 /* BLPFAlertView.m in Sources */,
 				B8BFA24B1BF64AF5002D7F22 /* EaseLocationViewController.m in Sources */,
 				D5D50F671BFB233200F54097 /* ExamClassCollectionViewCell.m in Sources */,
 				B8BC50E81BF393D00007B029 /* EaseBubbleView+Voice.m in Sources */,

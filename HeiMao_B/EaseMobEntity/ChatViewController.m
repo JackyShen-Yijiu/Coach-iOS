@@ -58,15 +58,23 @@
     [self.faceView setEmotionManagers:@[manager]];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-//    if (self.conversation.conversationType == eConversationTypeGroupChat) {
-//        if ([[self.conversation.ext objectForKey:@"groupSubject"] length])
-//        {
-//            self.title = [self.conversation.ext objectForKey:@"groupSubject"];
-//        }
-//    }
+    [super viewDidAppear:animated];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isInChatVc"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isInChatVc"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 #pragma mark - setup subviews
