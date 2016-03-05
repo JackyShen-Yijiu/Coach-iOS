@@ -59,7 +59,7 @@
 // 环信appKey
 #define easeMobAPPkey @"black-cat#jizhijaifu"
 // 环信推送证书 jizhijiafuCoachDevelopment	:开发 jizhijiafuCoachDistribution:生产
-#define easeMobPushName @"jizhijiafuCoachDevelopment"
+#define easeMobPushName @"jizhijiafuCoachDistribution"
 // JPush（需要在pushconfig.plist中配置）
 #define JPushAppKey @"d4d7ba64212dbad5a2be2c0e"
 // 友盟appkey
