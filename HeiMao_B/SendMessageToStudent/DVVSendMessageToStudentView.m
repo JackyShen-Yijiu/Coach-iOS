@@ -85,11 +85,11 @@
             [DVVToast showMessage:@"已经全部加载完毕"];
         }else {
             if (1 == _studentType) {
-                [DVVToast showMessage:@"暂时没有理论学员"];
+//                [DVVToast showMessage:@"暂时没有理论学员"];
             }else if (2 == _studentType) {
-                [DVVToast showMessage:@"暂时没有上车学员"];
+//                [DVVToast showMessage:@"暂时没有上车学员"];
             }else if (3 == _studentType) {
-                [DVVToast showMessage:@"暂时没有领证学员"];
+//                [DVVToast showMessage:@"暂时没有领证学员"];
             }
         }
     }];
