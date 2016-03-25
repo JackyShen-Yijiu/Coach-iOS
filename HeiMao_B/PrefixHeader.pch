@@ -55,4 +55,16 @@
 // 驾校的ID、全部
 #define JPushTag @"yibuxuecheCoach"
 
+// 主色
+#define JZ_MAIN_COLOR  RGB_Color(91,142,251)
+
+// 背景颜色
+#define JZ_BACKGROUNDCOLOR_COLOR RGB_Color(232,232,237)
+
+// 深色字体颜色
+#define JZ_FONTCOLOR_DRAK   RGB_Color(110,110,110)
+
+// 浅色字体颜色
+#define JZ_FONTCOLOR_LIGHT   RGB_Color(183,183,183)
+
 #endif
