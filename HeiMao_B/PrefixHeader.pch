@@ -55,7 +55,6 @@
 // 驾校的ID、全部
 #define JPushTag @"yibuxuecheCoach"
 
-<<<<<<< HEAD
 // 主色
 #define JZ_MAIN_COLOR  RGB_Color(91,142,251)
 
@@ -67,7 +66,6 @@
 
 // 浅色字体颜色
 #define JZ_FONTCOLOR_LIGHT   RGB_Color(183,183,183)
-=======
 
 // 环信appKey
 #define easeMobAPPkey @"black-cat#jizhijaifu"
@@ -79,6 +77,5 @@
 #define umengAppkey @"56d551df67e58e06d5001664"
 // 百度地图
 #define baiduMapAppkey @"gBe9r3Gd8PYRrcDkz0etT1f6"
->>>>>>> 3b5a5ee787fdae51b01d8b26191d055d0b28922a
 
 #endif
