@@ -1,6 +1,5 @@
 # Uncomment this line to define a global platform for your project
 
-
 platform :ios, '7.0'
 inhibit_all_warnings!
 
@@ -17,3 +16,4 @@ pod 'ChameleonFramework'
 pod 'BaiduMapKit'
 pod 'Mantle', '~> 2.0.5'
 pod 'Masonry'
+pod 'YYModel'

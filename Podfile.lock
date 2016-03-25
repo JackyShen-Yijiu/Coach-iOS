@@ -40,6 +40,7 @@ PODS:
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
   - UMengAnalytics-NO-IDFA (3.6.7)
+  - YYModel (1.0.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.6.0)
@@ -55,6 +56,7 @@ DEPENDENCIES:
   - Qiniu (~> 7.0)
   - SDWebImage (~> 3.7)
   - UMengAnalytics-NO-IDFA
+  - YYModel
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
@@ -70,5 +72,6 @@ SPEC CHECKSUMS:
   Qiniu: 51a8702cddc02b50867e10cef99291b9a8a006b1
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   UMengAnalytics-NO-IDFA: 6d02561a00579b2e37718f204eb81347df5d7b8b
+  YYModel: 7a467eff45ae3641c33efb136c262d33b6f48c1a
 
 COCOAPODS: 0.39.0

@@ -30,7 +30,6 @@
 #import "DVVStudentListController.h"
 
 #define kSystemWide [UIScreen mainScreen].bounds.size.width
-
 #define kSystemHeight [UIScreen mainScreen].bounds.size.height
 
 @interface TeacherCenterController ()<UITableViewDataSource,UITableViewDelegate,UserCenterHeadViewDelegte,WorkTypeListControllerDelegate>
