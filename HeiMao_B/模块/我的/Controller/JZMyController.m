@@ -14,6 +14,7 @@
 #import "SetupViewController.h"
 #import "VacationViewController.h"
 #import "InformationMessageController.h"
+#import "EditorUserViewController.h"
 
 #define kHeight 216
 @interface JZMyController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) NSArray *bottomTitleArray;
 @property (nonatomic, strong) NSArray *bottomImgArray;
 @property (nonatomic, strong) MyHeaderView *headerView;
+@property (nonatomic, strong) UIImageView *signatureImgView;
 
 
 
@@ -32,6 +34,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self initNarBar];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 }
@@ -48,15 +51,29 @@
     [self initUI];
    
 }
+- (void)initNarBar{
+//    self.myNavigationItem.title = nil;
+//    self.myNavigationItem.titleView = nil;
+//    self.myNavigationItem.rightBarButtonItem = nil;
+//    self.myNavigationItem.rightBarButtonItems = nil;
+    self.myNavigationItem.title = [UserInfoModel defaultUserInfo].name;
+    CGRect backframe= CGRectMake(0, 0, 14, 14);
+    UIButton* backButton= [UIButton buttonWithType:UIButtonTypeSystem];
+    backButton.frame = backframe;
+    [backButton setBackgroundImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(dealGoBack:) forControlEvents:UIControlEventTouchUpInside];
+    self.myNavigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+
+    
+}
+
 - (void)initArray{
     self.topimgArray = @[@"class",@"time"];
     self.bottomImgArray = @[@"rest",@"wallet",@"Information",@"set"];
     self.bottomTitleArray = @[@"休假",@"钱包",@"资讯",@"设置"];
 }
 - (void)initUI{
-    
-
-    self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -kHeight, self.view.frame.size.width, kHeight)];
+    self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -kHeight, self.view.frame.size.width, kHeight) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%ld",[UserInfoModel defaultUserInfo].fcode]];
     _headerView.tag = 201;
     [self.collectionView addSubview:self.headerView];
     
@@ -72,6 +89,11 @@
          
      }
  }
+#pragma  mark ---- 头像点击进入编辑
+- (void)dealGoBack:(UIButton *)btn{
+    EditorUserViewController *editor = [[EditorUserViewController alloc] init];
+    [self.navigationController pushViewController:editor animated:YES];
+}
 #pragma mark - collectionView
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 2;
@@ -194,4 +216,15 @@
     }
     return _collectionView;
 }
+- (UIImageView *)signatureImgView{
+    if (_signatureImgView == nil) {
+        _signatureImgView = [[UIImageView alloc] init];
+        _signatureImgView.image = [UIImage imageNamed:@"edit"];
+        _signatureImgView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signatureSetUp)];
+        [_signatureImgView addGestureRecognizer:tapGes];
+    }
+    return _signatureImgView;
+}
+
 @end

@@ -10,12 +10,34 @@
 
 @interface MyHeaderView ()
 
+@property (nonatomic, strong) NSString *yNum;
+
+@property (nonatomic, strong) NSString *schoolName;
+
+
 @end
 
 @implementation MyHeaderView
-- (instancetype)initWithFrame:(CGRect)frame{
+- (id)initWithFrame:(CGRect)frame
+   withUserPortrait:(NSString *)image
+   withUserPhoneNum:(NSString *)schoolName
+           withYNum:(NSString *)yNum{
+    
     if (self = [super initWithFrame:frame]) {
+        
         [self initUI];
+        if (image) {
+            [_iconView sd_setImageWithURL:[NSURL URLWithString:image] placeholderImage:[UIImage imageNamed:@"littleImage.png"]];
+        }
+        _schoolLabel.text = schoolName;
+        if (yNum == nil || [yNum isEqualToString:@"0"] || [yNum isEqualToString:@""]) {
+            _yLabel.text = [NSString stringWithFormat:@"y码:暂无"];
+        }else{
+            _yLabel.text  = [NSString stringWithFormat:@"y码:%@",yNum];
+
+        }
+        
+        
     }
     return self;
 }
@@ -24,7 +46,7 @@
     [self addSubview:self.bgView];
     [self.bgView addSubview:self.topImgView];
     [self.bgView addSubview:self.bottomImgView];
-    [self.bgView addSubview:self.nameLable];
+//    [self.bgView addSubview:self.nameLable];
     [self.bgView addSubview:self.iconView];
     [self.bgView addSubview:self.schoolLabel];
     [self.bgView addSubview:self.yLabel];
@@ -74,14 +96,14 @@
         
     }];
 
-    [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.iconView.mas_top).offset(-25);
-        make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.height.mas_equalTo(@14);
-         make.width.mas_equalTo(@80);
-        
-    }];
-                [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+//    [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.mas_equalTo(self.iconView.mas_top).offset(-25);
+//        make.centerX.mas_equalTo(self.bgView.mas_centerX);
+//        make.height.mas_equalTo(@14);
+//         make.width.mas_equalTo(@80);
+//        
+//    }];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(0);
         make.left.mas_equalTo(self.bgView.mas_left).offset(0);
         make.right.mas_equalTo(self.bgView.mas_right).offset(0);
@@ -94,6 +116,12 @@
     
 
 }
+// 头像设置
+- (void)signatureSetUp{
+    if (_signtureImageGas) {
+        _signtureImageGas();
+    }
+}
 - (UIView *)bgView{
     if (_bgView == nil) {
         _bgView = [[UIView alloc] init];
@@ -105,6 +133,7 @@
     if (_topImgView == nil) {
         _topImgView = [[UIImageView alloc] init];
         _topImgView.image = [UIImage imageNamed:@"mine_background_My.jpg"];
+        _topImgView.contentMode = UIViewContentModeScaleAspectFill;
         
     }
     return _topImgView;
@@ -113,27 +142,28 @@
     if (_bottomImgView == nil) {
         _bottomImgView = [[UIImageView alloc] init];
         _bottomImgView.image = [UIImage imageNamed:@"mine_screen"];
+        _bottomImgView.contentMode = UIViewContentModeScaleAspectFill;
         
     }
     return _bottomImgView;
 }
-- (UILabel *)nameLable{
-    if (_nameLable == nil) {
-        _nameLable = [[UILabel alloc] init];
-        _nameLable.text = @"王教练";
-        _nameLable.font = [UIFont systemFontOfSize:14];
-        _nameLable.textColor = [UIColor whiteColor];
-        _nameLable.textAlignment = NSTextAlignmentCenter;
-    }
-    return _nameLable;
-}
+//- (UILabel *)nameLable{
+//    if (_nameLable == nil) {
+//        _nameLable = [[UILabel alloc] init];
+//        _nameLable.text = @"王教练";
+//        _nameLable.font = [UIFont systemFontOfSize:14];
+//        _nameLable.textColor = [UIColor whiteColor];
+//        _nameLable.textAlignment = NSTextAlignmentCenter;
+//    }
+//    return _nameLable;
+//}
 - (UIImageView *)iconView{
     if (_iconView == nil) {
         _iconView = [[UIImageView alloc] init];
         _iconView.backgroundColor = [UIColor cyanColor];
         _iconView.layer.masksToBounds = YES;
         _iconView.layer.cornerRadius = 34;
-        _iconView.image = [UIImage imageNamed:@""];
+        _iconView.image = [UIImage imageNamed:@"littleImage.png"];
         
     }
     return _iconView;

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^signatureImageViewGasBlock)(); // 编辑设置
+
 @interface MyHeaderView : UIView
 @property (nonatomic, strong) UIView *bgView;
 
@@ -15,7 +17,9 @@
 
 @property (nonatomic, strong) UIImageView *bottomImgView;
 
-@property (nonatomic, strong) UILabel *nameLable;
+//@property (nonatomic, strong) UILabel *nameLable;
+
+
 
 @property (nonatomic, strong) UIImageView *iconView;
 
@@ -24,4 +28,10 @@
 @property (nonatomic, strong) UILabel *yLabel;
 
 @property (nonatomic, strong) UIView *lineView;
+
+@property (nonatomic, copy) signatureImageViewGasBlock signtureImageGas;
+- (id)initWithFrame:(CGRect)frame
+   withUserPortrait:(NSString *)image
+   withUserPhoneNum:(NSString *)schoolName
+           withYNum:(NSString *)yNum;
 @end
