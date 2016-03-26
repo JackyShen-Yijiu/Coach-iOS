@@ -27,7 +27,7 @@
 
 @property (nonatomic, strong) UIView *networkStateView;
 
-@property (nonatomic,strong)JGvalidationView*bgView;
+@property (nonatomic,strong)JGvalidationView *bgView;
 
 @end
 
@@ -61,7 +61,7 @@
 {
     [super viewWillAppear:animated];
     
-    [self initNavBar];
+//    [self initNavBar];
     
     [_bgView removeFromSuperview];
     if ([UserInfoModel defaultUserInfo].userID && [UserInfoModel defaultUserInfo].is_validation==NO) {

@@ -22,6 +22,7 @@
 #import <BaiduMapAPI_Location/BMKLocationService.h>
 #import "AppDelegate+YJPush.h"
 #import "YBStudentHomeController.h"
+#import "JZMyController.h"
 
 @interface AppDelegate ()<LoginViewControllerDelegate,IChatManagerDelegate>
 {
@@ -136,7 +137,8 @@
     ConversationListController * courList = [[ConversationListController alloc] init];
     
     // 我
-    TeacherCenterController * userCentertro = [[TeacherCenterController alloc] init];
+//    TeacherCenterController * userCentertro = [[TeacherCenterController alloc] init];
+    JZMyController * userCentertro = [[JZMyController alloc] init];
     
     return [self getTabWithTitleArray:@[@"日程",@"学员",@"消息",@"我的"] nimagesArray:@[nCourse,tCourse,nMess,nUser] himages:@[hCourse,HtCourse,HMess,hUser] andControllers:@[ScheduleVc,studentVc,courList,userCentertro]];
     

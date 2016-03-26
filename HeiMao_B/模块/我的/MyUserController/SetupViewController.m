@@ -13,6 +13,7 @@
 #import "AboutUsViewController.h"
 #import "NSUserStoreTool.h"
 #import "APService.h"
+#import "BLPFAlertView.h"
 
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 
@@ -27,7 +28,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 @implementation SetupViewController
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = @[@[@"预约提醒",@"新消息通知",@"自动接收预约"],@[@"关于我们",@"去评分",@"反馈"]];
+        _dataArray = @[@[@"预约提醒",@"新消息通知",@"自动接收预约"],@[@"清除缓存",@"关于我们",@"去评分",@"意见反馈",@"版本更新"]];
     }
     return _dataArray;
 }
@@ -141,9 +142,11 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 3;
+        NSArray *sectionOneArray = self.dataArray[0];
+        return sectionOneArray.count;
     }else if (section == 1) {
-        return 3;
+         NSArray *sectionTwoArray = self.dataArray[1];
+        return sectionTwoArray.count;
     }
     return 0;
 }
@@ -270,20 +273,117 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1 && indexPath.row == 2) {
-        FeedBackViewController *feedBack = [[FeedBackViewController alloc] init];
-        [self.navigationController pushViewController:feedBack animated:YES];
-    }else if (indexPath.section == 1 && indexPath.row == 0) {
-        AboutUsViewController *about = [[AboutUsViewController alloc] init];
-        [self.navigationController pushViewController:about animated:YES];
-    }else if (indexPath.section == 1 && indexPath.row == 1){
-        //评分
-        NSString *str = [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=1089530725" ];
-        if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)){
-            str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/1089530725"];
+    if (1 == indexPath.section) {
+        if (0 == indexPath.row) {
+            // 清除缓存
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES)lastObject];
+            CGFloat sizeF = [self folderSizeAtPath:path];
+            
+            if (sizeF == 0) {
+                // 当缓存为0时,不让去在去清理
+                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"现在没有可清理的内存!" controller:self];
+                [alerview show];
+                return;
+
+            }
+            NSString *message = [NSString stringWithFormat:@"缓存大小为%fM.确定要清除缓存吗?",sizeF];
+            
+            [BLPFAlertView showAlertWithTitle:@"提示" message:message cancelButtonTitle:@"取消" otherButtonTitles:@[ @"确定" ] completion:^(NSUInteger selectedOtherButtonIndex) {
+                
+                if (1 == selectedOtherButtonIndex) {
+                    // 点击取消
+                }
+                if (0 == selectedOtherButtonIndex) {
+                    // 点击确定清除缓存
+                    
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        // 开子线程进行清除内存
+                        [self clearCache:path];
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            // 回到主线程进行显示
+                            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"清除成功" controller:self];
+                            [alerview show];
+                        });
+
+                    });
+                    
+                }
+                
+            }];
+        
         }
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+        if (1 == indexPath.row) {
+            // 关于我们
+            AboutUsViewController *about = [[AboutUsViewController alloc] init];
+            [self.navigationController pushViewController:about animated:YES];
+
+        }
+        if (2 == indexPath.row) {
+            // 去评分
+            [self goToAppStore];
+
+        }
+        if (3 == indexPath.row) {
+            // 意见反馈
+            FeedBackViewController *feedBack = [[FeedBackViewController alloc] init];
+            [self.navigationController pushViewController:feedBack animated:YES];
+        }
+        if (4 == indexPath.row) {
+            // 版本更新
+            [self goToAppStore];
+        }
     }
 }
+#pragma mark ------ 去评分和版本更新相关操作
+- (void)goToAppStore{
+    NSString *str = [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=1089530725" ];
+    if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)){
+        str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/1089530725"];
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+}
 
+#pragma mark ----- 清除缓存相关操作
+
+// 计算单个文件大小
+- (float)fileSizeAtPath:(NSString *)path{
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    if([fileManager fileExistsAtPath:path]){
+        long long size=[fileManager attributesOfItemAtPath:path error:nil].fileSize;
+        return size/1024.0/1024.0;
+    }
+    return 0;
+}
+// 计算目录大小
+- (float)folderSizeAtPath:(NSString *)path{
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    float folderSize;
+    if ([fileManager fileExistsAtPath:path]) {
+        NSArray *childerFiles=[fileManager subpathsAtPath:path];
+        for (NSString *fileName in childerFiles) {
+            NSString *absolutePath=[path stringByAppendingPathComponent:fileName];
+            folderSize +=[self fileSizeAtPath:absolutePath];
+        }
+        //SDWebImage框架自身计算缓存的实现
+        folderSize+=[[SDImageCache sharedImageCache] getSize]/1024.0/1024.0;
+        return folderSize;
+    }
+    return 0;
+}
+// 清除文件缓存
+- (void)clearCache:(NSString *)path{
+    NSLog(@"path = %@",path);
+    
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:path]) {
+        NSArray *childerFiles=[fileManager contentsOfDirectoryAtPath:path error:NULL];;
+        for (NSString *fileName in childerFiles) {
+            //如有需要，加入条件，过滤掉不想删除的文件
+            NSString *absolutePath=[path stringByAppendingPathComponent:fileName];
+            [fileManager removeItemAtPath:absolutePath error:nil];
+        }
+    }
+    [[SDImageCache sharedImageCache] cleanDisk];
+}
 @end

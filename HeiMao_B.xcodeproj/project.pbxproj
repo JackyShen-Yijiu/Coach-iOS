@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06361A4E1CA51AB8002708F2 /* JZMyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A4D1CA51AB8002708F2 /* JZMyController.m */; };
+		06361A511CA51DF1002708F2 /* TopCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A501CA51DF1002708F2 /* TopCollectionCell.m */; };
+		06361A541CA51E12002708F2 /* BottomCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A531CA51E12002708F2 /* BottomCollectionCell.m */; };
+		06361A571CA53511002708F2 /* MyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A561CA53511002708F2 /* MyHeaderView.m */; };
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
 		B253C2CD1C3FA742001AF771 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BD1C3FA742001AF771 /* bitstream.c */; };
 		B253C2CE1C3FA742001AF771 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BF1C3FA742001AF771 /* mask.c */; };
@@ -499,6 +503,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06361A4C1CA51AB8002708F2 /* JZMyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZMyController.h; sourceTree = "<group>"; };
+		06361A4D1CA51AB8002708F2 /* JZMyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZMyController.m; sourceTree = "<group>"; };
+		06361A4F1CA51DF1002708F2 /* TopCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopCollectionCell.h; sourceTree = "<group>"; };
+		06361A501CA51DF1002708F2 /* TopCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopCollectionCell.m; sourceTree = "<group>"; };
+		06361A521CA51E12002708F2 /* BottomCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomCollectionCell.h; sourceTree = "<group>"; };
+		06361A531CA51E12002708F2 /* BottomCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomCollectionCell.m; sourceTree = "<group>"; };
+		06361A551CA53511002708F2 /* MyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeaderView.h; sourceTree = "<group>"; };
+		06361A561CA53511002708F2 /* MyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHeaderView.m; sourceTree = "<group>"; };
 		1371250ABB78626F8329AC98 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2823AFD5ABA09767DD4F0623 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -1380,6 +1392,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06361A481CA51A4C002708F2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				06361A4C1CA51AB8002708F2 /* JZMyController.h */,
+				06361A4D1CA51AB8002708F2 /* JZMyController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		06361A491CA51A52002708F2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				06361A4F1CA51DF1002708F2 /* TopCollectionCell.h */,
+				06361A501CA51DF1002708F2 /* TopCollectionCell.m */,
+				06361A521CA51E12002708F2 /* BottomCollectionCell.h */,
+				06361A531CA51E12002708F2 /* BottomCollectionCell.m */,
+				06361A551CA53511002708F2 /* MyHeaderView.h */,
+				06361A561CA53511002708F2 /* MyHeaderView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		06361A4A1CA51A5B002708F2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		06361A4B1CA51A61002708F2 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		B23983D2EE43E3BC88B5F3F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1676,27 +1724,13 @@
 		B2BA3F031CA5035700926584 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
-				B2BA3F041CA5035700926584 /* controller */,
-				B2BA3F051CA5035700926584 /* model */,
+				06361A4B1CA51A61002708F2 /* Other */,
+				06361A4A1CA51A5B002708F2 /* Model */,
+				06361A491CA51A52002708F2 /* View */,
+				06361A481CA51A4C002708F2 /* Controller */,
 				B2BA3F061CA5035700926584 /* MyUserController */,
-				B2BA3F7A1CA5035700926584 /* tool */,
-				B2BA3F7B1CA5035700926584 /* view */,
 			);
 			path = "我的";
-			sourceTree = "<group>";
-		};
-		B2BA3F041CA5035700926584 /* controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = controller;
-			sourceTree = "<group>";
-		};
-		B2BA3F051CA5035700926584 /* model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = model;
 			sourceTree = "<group>";
 		};
 		B2BA3F061CA5035700926584 /* MyUserController */ = {
@@ -1826,20 +1860,6 @@
 				B2BA3F3E1CA5035700926584 /* WalletModel.m */,
 			);
 			path = Goods;
-			sourceTree = "<group>";
-		};
-		B2BA3F7A1CA5035700926584 /* tool */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = tool;
-			sourceTree = "<group>";
-		};
-		B2BA3F7B1CA5035700926584 /* view */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = view;
 			sourceTree = "<group>";
 		};
 		B2BA3F7C1CA5035700926584 /* 消息 */ = {
@@ -3417,6 +3437,7 @@
 				B2BA43321CA5041100926584 /* InformationMessageController.m in Sources */,
 				B2BA41991CA5035700926584 /* IDCardNumViewController.m in Sources */,
 				B2BA41DC1CA5035700926584 /* EMSDWebImageManager.m in Sources */,
+				06361A571CA53511002708F2 /* MyHeaderView.m in Sources */,
 				B2BA41BC1CA5035700926584 /* EMCDDeviceManagerBase.m in Sources */,
 				B2BA417D1CA5035700926584 /* AffiliatedSchoolViewController.m in Sources */,
 				B2BA42C01CA5035700926584 /* DVVStudentListViewModel.m in Sources */,
@@ -3526,6 +3547,7 @@
 				B2BA41741CA5035700926584 /* QueryViewController.m in Sources */,
 				B2BA43391CA5041100926584 /* JGAppointMentMidView.m in Sources */,
 				B2BA43241CA5041100926584 /* CourEnsureItemView.m in Sources */,
+				06361A511CA51DF1002708F2 /* TopCollectionCell.m in Sources */,
 				B2BA3E661CA4E70300926584 /* SMPageControl.m in Sources */,
 				B2BA42941CA5035700926584 /* EaseEmoji.m in Sources */,
 				B2BA435C1CA51DE600926584 /* YBHomeLeftViewController.m in Sources */,
@@ -3589,7 +3611,11 @@
 				B2BA41DA1CA5035700926584 /* EMSDWebImageDownloader.m in Sources */,
 				B2BA41C41CA5035700926584 /* MJRefreshConst.m in Sources */,
 				B2BA3E651CA4E70300926584 /* ProjectGuideView.m in Sources */,
+<<<<<<< HEAD
 				B2BA43561CA5065700926584 /* ScheduleViewController.m in Sources */,
+=======
+				06361A541CA51E12002708F2 /* BottomCollectionCell.m in Sources */,
+>>>>>>> a0585d34d34e0038df0f7ade126f207a6a57d800
 				B28D5E441C64857000D9E9E1 /* WChineseSting.m in Sources */,
 				B2BA3EA11CA4F49F00926584 /* NetWorkEntiry.m in Sources */,
 				B2BA42901CA5035700926584 /* UIViewController+HUD.m in Sources */,
@@ -3621,6 +3647,7 @@
 				B2BA434E1CA5041100926584 /* YBSubjectMoel.m in Sources */,
 				B2BA3E4F1CA4E6BA00926584 /* AppDelegate+YJPush.m in Sources */,
 				B2BA3EDD1CA5003B00926584 /* HMRecomendModel.m in Sources */,
+				06361A4E1CA51AB8002708F2 /* JZMyController.m in Sources */,
 				B2BA42B41CA5035700926584 /* StudentHomeUserBasicInfoCell.m in Sources */,
 				B2BA42891CA5035700926584 /* EaseMessageModel.m in Sources */,
 				B2BA42B91CA5035700926584 /* DVVDrivingStudentListView.m in Sources */,

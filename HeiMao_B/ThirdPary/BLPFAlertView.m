@@ -34,6 +34,7 @@
                                                                                   preferredStyle:UIAlertControllerStyleAlert];
 
         void (^alertActionHandler)(UIAlertAction *) = [^(UIAlertAction *action){
+            
             // This block intentionally retains alertController, and releases it afterwards.
             NSUInteger index = [alertController.actions indexOfObject:action];
             completion(index - 1);
