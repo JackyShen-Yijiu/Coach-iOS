@@ -1,5 +1,5 @@
 //
-//  FDCalendarItem.h
+//  YBFDCalendarItem.h
 //  FDCalendarDemo
 //
 //  Created by fergusding on 15/8/20.
@@ -8,12 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#define DeviceWidth [UIScreen mainScreen].bounds.size.width
-
-// 顶部标题高度
-#define ITEMHEIGTH 30.F
-// 日期高度
-#define calendarItemH 65
 
 typedef NS_ENUM(NSInteger,KCellStation){
     KCellStationLeft,
@@ -21,14 +15,13 @@ typedef NS_ENUM(NSInteger,KCellStation){
     KCellStationRight
 };
 
-@protocol FDCalendarItemDelegate;
+@protocol YBFDCalendarItemDelegate;
 
-@interface FDCalendarItem : UIView
+@interface YBFDCalendarItem : UIView
 
-@property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) NSDate *seletedDate;
 @property (strong, nonatomic) UICollectionView *collectionView;
-@property (weak, nonatomic) id<FDCalendarItemDelegate> delegate;
+@property (weak, nonatomic) id<YBFDCalendarItemDelegate> delegate;
 
 - (NSDate *)nextMonthDate;
 - (NSDate *)previousMonthDate;
@@ -48,8 +41,8 @@ typedef NS_ENUM(NSInteger,KCellStation){
 
 @end
 
-@protocol FDCalendarItemDelegate <NSObject>
+@protocol YBFDCalendarItemDelegate <NSObject>
 
-- (void)calendarItem:(FDCalendarItem *)item didSelectedDate:(NSDate *)date;
+- (void)YBCalendarItem:(YBFDCalendarItem *)item didSelectedDate:(NSDate *)date;
 
 @end

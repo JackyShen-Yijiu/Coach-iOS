@@ -20,4 +20,6 @@
 
 - (void)setCurrentDate:(NSDate *)date;
 
+@property (nonatomic,strong) NSDate *selectDate;
+
 @end
