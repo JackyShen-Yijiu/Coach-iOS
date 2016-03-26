@@ -27,7 +27,7 @@
 
 @property (nonatomic, strong) UIView *networkStateView;
 
-@property (nonatomic,strong)JGvalidationView*bgView;
+@property (nonatomic,strong)JGvalidationView *bgView;
 
 @end
 

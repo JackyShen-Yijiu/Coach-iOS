@@ -263,7 +263,7 @@ static NSString *kGroupName = @"GroupName";
                 
                 ws.systemBadgeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagecount"]];
                 ws.systemDetailsStr = [NSString stringWithFormat:@"%@",messageinfo[@"message"]];
-                ws.systemTimeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagetime"]];
+//                ws.systemTimeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagetime"]];
                 
                 ws.zixunBadgeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"newscount"]];
                 ws.zixunDetailsStr = [NSString stringWithFormat:@"%@",Newsinfo[@"news"]];
@@ -290,18 +290,18 @@ static NSString *kGroupName = @"GroupName";
                 EaseConversationModel *topData1 = [[EaseConversationModel alloc] init];
                 topData1.title = @"系统消息";
                 topData1.detailsTitle = [self strTolerance:self.systemDetailsStr];
-                topData1.time = [self strTolerance:self.systemTimeStr];
-                topData1.avatarPic = @"systemImg.png";
+//                topData1.time = [self strTolerance:self.systemTimeStr];
+                topData1.avatarPic = @"system_messages.png";
                 topData1.badgeStr = [self strTolerance:self.systemBadgeStr];
                 [ws.dataArray addObject:topData1];
                 
-                EaseConversationModel *topData2 = [[EaseConversationModel alloc] init];
-                topData2.title = @"资讯消息";
-                topData2.detailsTitle = [self strTolerance:self.zixunDetailsStr];
-                topData2.time = [self strTolerance:self.zixunTimeStr];
-                topData2.avatarPic = @"systemImg.png";
-                topData2.badgeStr = [self strTolerance:self.zixunBadgeStr];
-                [ws.dataArray addObject:topData2];
+//                EaseConversationModel *topData2 = [[EaseConversationModel alloc] init];
+//                topData2.title = @"资讯消息";
+//                topData2.detailsTitle = [self strTolerance:self.zixunDetailsStr];
+//                topData2.time = [self strTolerance:self.zixunTimeStr];
+//                topData2.avatarPic = @"systemImg.png";
+//                topData2.badgeStr = [self strTolerance:self.zixunBadgeStr];
+//                [ws.dataArray addObject:topData2];
                 
                 for (EMConversation *converstion in sorted) {
                     
