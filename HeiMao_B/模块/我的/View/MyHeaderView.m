@@ -41,6 +41,7 @@
         make.top.mas_equalTo(self.bgView.mas_top).offset(0);
         make.left.mas_equalTo(self.bgView.mas_left).offset(0);
         make.right.mas_equalTo(self.bgView.mas_right).offset(0);
+        make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(0);
 //        make.height.mas_equalTo(@196);
         
     }];
@@ -51,35 +52,36 @@
         make.height.mas_equalTo(@115);
         
     }];
-    [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.bgView.mas_top).offset(20);
-        make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.height.mas_equalTo(@14);
-         make.width.mas_equalTo(@80);
-        
-    }];
-    [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.nameLable.mas_bottom).offset(40);
-        make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.height.mas_equalTo(@68);
-        make.width.mas_equalTo(@68);
-        
-    }];
-    [self.schoolLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.iconView.mas_bottom).offset(16);
-        make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.height.mas_equalTo(@12);
-        make.width.mas_equalTo(@100);
-        
-    }];
     [self.yLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.schoolLabel.mas_bottom).offset(16);
+        make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(-16);
         make.centerX.mas_equalTo(self.bgView.mas_centerX);
         make.height.mas_equalTo(@12);
         make.width.mas_equalTo(@200);
         
     }];
-    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.schoolLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.yLabel.mas_top).offset(-16);
+        make.centerX.mas_equalTo(self.bgView.mas_centerX);
+        make.height.mas_equalTo(@12);
+        make.width.mas_equalTo(@100);
+        
+    }];
+    [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.schoolLabel.mas_top).offset(-16);
+        make.centerX.mas_equalTo(self.bgView.mas_centerX);
+        make.height.mas_equalTo(@68);
+        make.width.mas_equalTo(@68);
+        
+    }];
+
+    [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.iconView.mas_top).offset(-25);
+        make.centerX.mas_equalTo(self.bgView.mas_centerX);
+        make.height.mas_equalTo(@14);
+         make.width.mas_equalTo(@80);
+        
+    }];
+                [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(0);
         make.left.mas_equalTo(self.bgView.mas_left).offset(0);
         make.right.mas_equalTo(self.bgView.mas_right).offset(0);
