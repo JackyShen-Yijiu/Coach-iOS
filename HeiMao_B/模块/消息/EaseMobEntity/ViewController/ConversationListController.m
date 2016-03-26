@@ -61,7 +61,7 @@
 {
     [super viewWillAppear:animated];
     
-    [self initNavBar];
+//    [self initNavBar];
     
     [_bgView removeFromSuperview];
     if ([UserInfoModel defaultUserInfo].userID && [UserInfoModel defaultUserInfo].is_validation==NO) {
