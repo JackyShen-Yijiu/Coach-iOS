@@ -29,7 +29,6 @@
 		B253C2F41C43C960001AF771 /* PermissiveOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2ED1C43C960001AF771 /* PermissiveOperations.m */; };
 		B253C2F61C43C960001AF771 /* PermissiveScoringMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2F11C43C960001AF771 /* PermissiveScoringMatrix.m */; };
 		B253C2FE1C45203F001AF771 /* PermissiveResearchDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B253C2FD1C45203F001AF771 /* PermissiveResearchDatabase.m */; };
-		B28D5DDA1C62357B00D9E9E1 /* NSString+CurrentTimeDay.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5DD91C62357B00D9E9E1 /* NSString+CurrentTimeDay.m */; };
 		B28D5E411C64857000D9E9E1 /* ChineseString.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5E3A1C64857000D9E9E1 /* ChineseString.m */; };
 		B28D5E431C64857000D9E9E1 /* pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5E3E1C64857000D9E9E1 /* pinyin.m */; };
 		B28D5E441C64857000D9E9E1 /* WChineseSting.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5E401C64857000D9E9E1 /* WChineseSting.m */; };
@@ -433,7 +432,6 @@
 		B2BA432D1CA5041100926584 /* CourseSummaryDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42DB1CA5041100926584 /* CourseSummaryDayCell.m */; };
 		B2BA432E1CA5041100926584 /* CourseSummaryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42DD1CA5041100926584 /* CourseSummaryListCell.m */; };
 		B2BA432F1CA5041100926584 /* CourseTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42DF1CA5041100926584 /* CourseTimeModel.m */; };
-		B2BA43301CA5041100926584 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42E11CA5041100926584 /* CourseViewController.m */; };
 		B2BA43311CA5041100926584 /* InformationMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42E41CA5041100926584 /* InformationMessageCell.m */; };
 		B2BA43321CA5041100926584 /* InformationMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42E61CA5041100926584 /* InformationMessageController.m */; };
 		B2BA43331CA5041100926584 /* InformationMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42E81CA5041100926584 /* InformationMessageDetailController.m */; };
@@ -447,7 +445,6 @@
 		B2BA433B1CA5041100926584 /* JGSubjectthreeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42F81CA5041100926584 /* JGSubjectthreeModel.m */; };
 		B2BA433C1CA5041100926584 /* JGYuYueHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42FA1CA5041100926584 /* JGYuYueHeadView.m */; };
 		B2BA433D1CA5041100926584 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42FC1CA5041100926584 /* ScanViewController.m */; };
-		B2BA433E1CA5041100926584 /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42FE1CA5041100926584 /* ScheduleViewController.m */; };
 		B2BA433F1CA5041100926584 /* SearchCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43001CA5041100926584 /* SearchCourseViewController.m */; };
 		B2BA43401CA5041100926584 /* StudentSignInController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43021CA5041100926584 /* StudentSignInController.m */; };
 		B2BA43411CA5041100926584 /* StudentSignInDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43041CA5041100926584 /* StudentSignInDataModel.m */; };
@@ -467,7 +464,17 @@
 		B2BA434F1CA5041100926584 /* YBTrainfieldlinfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43211CA5041100926584 /* YBTrainfieldlinfoModel.m */; };
 		B2BA43501CA5041100926584 /* YBUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43231CA5041100926584 /* YBUserInfoModel.m */; };
 		B2BA43531CA5050F00926584 /* YBStudentHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43521CA5050F00926584 /* YBStudentHomeController.m */; };
-		B2F1AE4C1C7D60C5006D56FF /* YBObjectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F1AE4B1C7D60C5006D56FF /* YBObjectTool.m */; };
+		B2BA43561CA5065700926584 /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43551CA5065700926584 /* ScheduleViewController.m */; };
+		B2BA43591CA5153000926584 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43581CA5153000926584 /* CourseViewController.m */; };
+		B2BA435C1CA51DE600926584 /* YBHomeLeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA435B1CA51DE600926584 /* YBHomeLeftViewController.m */; };
+		B2BA435F1CA51DF600926584 /* YBHomeRightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA435E1CA51DF600926584 /* YBHomeRightViewController.m */; };
+		B2BA436A1CA5324000926584 /* FDCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43631CA5324000926584 /* FDCalendar.m */; };
+		B2BA436B1CA5324000926584 /* FDCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43651CA5324000926584 /* FDCalendarItem.m */; };
+		B2BA436C1CA5324000926584 /* NSString+CurrentTimeDay.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43671CA5324000926584 /* NSString+CurrentTimeDay.m */; };
+		B2BA436D1CA5324000926584 /* YBObjectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43691CA5324000926584 /* YBObjectTool.m */; };
+		B2BA43721CA62ECD00926584 /* YBFDCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43711CA62ECD00926584 /* YBFDCalendar.m */; };
+		B2BA43791CA6424B00926584 /* YBFDCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43781CA6424B00926584 /* YBFDCalendarItem.m */; };
+		B2BA43C31CA6678E00926584 /* FDCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43C21CA6678E00926584 /* FDCalendarCell.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
 		B80003CC1BEFACA50099D194 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003CB1BEFACA50099D194 /* CoreFoundation.framework */; };
@@ -493,8 +500,6 @@
 		B8C458741BDB59AC00901F71 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4586D1BDB59AC00901F71 /* UIViewAdditions.m */; };
 		B8C4587C1BDB5ABB00901F71 /* NSDictionary+StrDic.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587B1BDB5ABB00901F71 /* NSDictionary+StrDic.m */; };
 		B8C458801BDB5B5C00901F71 /* ToastAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587F1BDB5B5C00901F71 /* ToastAlertView.m */; };
-		B8FFDF691BDE78E6005BD535 /* FDCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFDF661BDE78E6005BD535 /* FDCalendar.m */; };
-		B8FFDF6A1BDE78E6005BD535 /* FDCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFDF681BDE78E6005BD535 /* FDCalendarItem.m */; };
 		D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */; };
 		D9ABF86D1C896463001B6930 /* BLPFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ABF86C1C896463001B6930 /* BLPFAlertView.m */; };
 /* End PBXBuildFile section */
@@ -545,8 +550,6 @@
 		B253C2F01C43C960001AF771 /* PermissiveScoringMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissiveScoringMatrix.h; sourceTree = "<group>"; };
 		B253C2F11C43C960001AF771 /* PermissiveScoringMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissiveScoringMatrix.m; sourceTree = "<group>"; };
 		B253C2FD1C45203F001AF771 /* PermissiveResearchDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissiveResearchDatabase.m; sourceTree = "<group>"; };
-		B28D5DD81C62357B00D9E9E1 /* NSString+CurrentTimeDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CurrentTimeDay.h"; sourceTree = "<group>"; };
-		B28D5DD91C62357B00D9E9E1 /* NSString+CurrentTimeDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CurrentTimeDay.m"; sourceTree = "<group>"; };
 		B28D5E391C64857000D9E9E1 /* ChineseString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseString.h; sourceTree = "<group>"; };
 		B28D5E3A1C64857000D9E9E1 /* ChineseString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseString.m; sourceTree = "<group>"; };
 		B28D5E3D1C64857000D9E9E1 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
@@ -1234,8 +1237,6 @@
 		B2BA42DD1CA5041100926584 /* CourseSummaryListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseSummaryListCell.m; sourceTree = "<group>"; };
 		B2BA42DE1CA5041100926584 /* CourseTimeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseTimeModel.h; sourceTree = "<group>"; };
 		B2BA42DF1CA5041100926584 /* CourseTimeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseTimeModel.m; sourceTree = "<group>"; };
-		B2BA42E01CA5041100926584 /* CourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseViewController.h; sourceTree = "<group>"; };
-		B2BA42E11CA5041100926584 /* CourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseViewController.m; sourceTree = "<group>"; };
 		B2BA42E31CA5041100926584 /* InformationMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationMessageCell.h; sourceTree = "<group>"; };
 		B2BA42E41CA5041100926584 /* InformationMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationMessageCell.m; sourceTree = "<group>"; };
 		B2BA42E51CA5041100926584 /* InformationMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationMessageController.h; sourceTree = "<group>"; };
@@ -1262,8 +1263,6 @@
 		B2BA42FA1CA5041100926584 /* JGYuYueHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGYuYueHeadView.m; sourceTree = "<group>"; };
 		B2BA42FB1CA5041100926584 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
 		B2BA42FC1CA5041100926584 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
-		B2BA42FD1CA5041100926584 /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
-		B2BA42FE1CA5041100926584 /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
 		B2BA42FF1CA5041100926584 /* SearchCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCourseViewController.h; sourceTree = "<group>"; };
 		B2BA43001CA5041100926584 /* SearchCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCourseViewController.m; sourceTree = "<group>"; };
 		B2BA43011CA5041100926584 /* StudentSignInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentSignInController.h; sourceTree = "<group>"; };
@@ -1302,8 +1301,29 @@
 		B2BA43231CA5041100926584 /* YBUserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBUserInfoModel.m; sourceTree = "<group>"; };
 		B2BA43511CA5050F00926584 /* YBStudentHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentHomeController.h; sourceTree = "<group>"; };
 		B2BA43521CA5050F00926584 /* YBStudentHomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentHomeController.m; sourceTree = "<group>"; };
-		B2F1AE4A1C7D60C5006D56FF /* YBObjectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBObjectTool.h; sourceTree = "<group>"; };
-		B2F1AE4B1C7D60C5006D56FF /* YBObjectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBObjectTool.m; sourceTree = "<group>"; };
+		B2BA43541CA5065700926584 /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
+		B2BA43551CA5065700926584 /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
+		B2BA43571CA5153000926584 /* CourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseViewController.h; sourceTree = "<group>"; };
+		B2BA43581CA5153000926584 /* CourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseViewController.m; sourceTree = "<group>"; };
+		B2BA435A1CA51DE600926584 /* YBHomeLeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBHomeLeftViewController.h; sourceTree = "<group>"; };
+		B2BA435B1CA51DE600926584 /* YBHomeLeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBHomeLeftViewController.m; sourceTree = "<group>"; };
+		B2BA435D1CA51DF600926584 /* YBHomeRightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBHomeRightViewController.h; sourceTree = "<group>"; };
+		B2BA435E1CA51DF600926584 /* YBHomeRightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBHomeRightViewController.m; sourceTree = "<group>"; };
+		B2BA43621CA5324000926584 /* FDCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCalendar.h; sourceTree = "<group>"; };
+		B2BA43631CA5324000926584 /* FDCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendar.m; sourceTree = "<group>"; };
+		B2BA43641CA5324000926584 /* FDCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCalendarItem.h; sourceTree = "<group>"; };
+		B2BA43651CA5324000926584 /* FDCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendarItem.m; sourceTree = "<group>"; };
+		B2BA43661CA5324000926584 /* NSString+CurrentTimeDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CurrentTimeDay.h"; sourceTree = "<group>"; };
+		B2BA43671CA5324000926584 /* NSString+CurrentTimeDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CurrentTimeDay.m"; sourceTree = "<group>"; };
+		B2BA43681CA5324000926584 /* YBObjectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBObjectTool.h; sourceTree = "<group>"; };
+		B2BA43691CA5324000926584 /* YBObjectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBObjectTool.m; sourceTree = "<group>"; };
+		B2BA43701CA62ECD00926584 /* YBFDCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBFDCalendar.h; sourceTree = "<group>"; };
+		B2BA43711CA62ECD00926584 /* YBFDCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBFDCalendar.m; sourceTree = "<group>"; };
+		B2BA43761CA6413600926584 /* YBUIMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBUIMacro.h; sourceTree = "<group>"; };
+		B2BA43771CA6424B00926584 /* YBFDCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBFDCalendarItem.h; sourceTree = "<group>"; };
+		B2BA43781CA6424B00926584 /* YBFDCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBFDCalendarItem.m; sourceTree = "<group>"; };
+		B2BA43C11CA6678E00926584 /* FDCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCalendarCell.h; sourceTree = "<group>"; };
+		B2BA43C21CA6678E00926584 /* FDCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendarCell.m; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		B80003C91BEFAC9C0099D194 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -1346,10 +1366,6 @@
 		B8C4587B1BDB5ABB00901F71 /* NSDictionary+StrDic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+StrDic.m"; sourceTree = "<group>"; };
 		B8C4587E1BDB5B5C00901F71 /* ToastAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToastAlertView.h; sourceTree = "<group>"; };
 		B8C4587F1BDB5B5C00901F71 /* ToastAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToastAlertView.m; sourceTree = "<group>"; };
-		B8FFDF651BDE78E6005BD535 /* FDCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCalendar.h; sourceTree = "<group>"; };
-		B8FFDF661BDE78E6005BD535 /* FDCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendar.m; sourceTree = "<group>"; };
-		B8FFDF671BDE78E6005BD535 /* FDCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCalendarItem.h; sourceTree = "<group>"; };
-		B8FFDF681BDE78E6005BD535 /* FDCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendarItem.m; sourceTree = "<group>"; };
 		D978ACD31C47B38A00D633B4 /* DVVLocationStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVLocationStatus.h; sourceTree = "<group>"; };
 		D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVLocationStatus.m; sourceTree = "<group>"; };
 		D9ABF86B1C896463001B6930 /* BLPFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLPFAlertView.h; sourceTree = "<group>"; };
@@ -1680,9 +1696,9 @@
 			children = (
 				B2BA42C61CA5041100926584 /* OrderCompleteViewController */,
 				B2BA42CB1CA5041100926584 /* OrderViewController */,
+				B2BA43601CA5324000926584 /* tool */,
 				B2BA3EFF1CA5035700926584 /* controller */,
 				B2BA3F001CA5035700926584 /* model */,
-				B2BA3F011CA5035700926584 /* tool */,
 				B2BA3F021CA5035700926584 /* view */,
 			);
 			path = "日程";
@@ -1691,6 +1707,14 @@
 		B2BA3EFF1CA5035700926584 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				B2BA43571CA5153000926584 /* CourseViewController.h */,
+				B2BA43581CA5153000926584 /* CourseViewController.m */,
+				B2BA43541CA5065700926584 /* ScheduleViewController.h */,
+				B2BA43551CA5065700926584 /* ScheduleViewController.m */,
+				B2BA435A1CA51DE600926584 /* YBHomeLeftViewController.h */,
+				B2BA435B1CA51DE600926584 /* YBHomeLeftViewController.m */,
+				B2BA435D1CA51DF600926584 /* YBHomeRightViewController.h */,
+				B2BA435E1CA51DF600926584 /* YBHomeRightViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1700,13 +1724,6 @@
 			children = (
 			);
 			path = model;
-			sourceTree = "<group>";
-		};
-		B2BA3F011CA5035700926584 /* tool */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = tool;
 			sourceTree = "<group>";
 		};
 		B2BA3F021CA5035700926584 /* view */ = {
@@ -2799,8 +2816,6 @@
 				B2BA42DD1CA5041100926584 /* CourseSummaryListCell.m */,
 				B2BA42DE1CA5041100926584 /* CourseTimeModel.h */,
 				B2BA42DF1CA5041100926584 /* CourseTimeModel.m */,
-				B2BA42E01CA5041100926584 /* CourseViewController.h */,
-				B2BA42E11CA5041100926584 /* CourseViewController.m */,
 				B2BA42E21CA5041100926584 /* InformationMessage */,
 				B2BA42EF1CA5041100926584 /* JGAppointMentFootCell.h */,
 				B2BA42F01CA5041100926584 /* JGAppointMentFootCell.m */,
@@ -2816,8 +2831,6 @@
 				B2BA42FA1CA5041100926584 /* JGYuYueHeadView.m */,
 				B2BA42FB1CA5041100926584 /* ScanViewController.h */,
 				B2BA42FC1CA5041100926584 /* ScanViewController.m */,
-				B2BA42FD1CA5041100926584 /* ScheduleViewController.h */,
-				B2BA42FE1CA5041100926584 /* ScheduleViewController.m */,
 				B2BA42FF1CA5041100926584 /* SearchCourseViewController.h */,
 				B2BA43001CA5041100926584 /* SearchCourseViewController.m */,
 				B2BA43011CA5041100926584 /* StudentSignInController.h */,
@@ -2883,6 +2896,36 @@
 				B2BA43111CA5041100926584 /* SystemMessageViewModel.m */,
 			);
 			path = SystemMessage;
+			sourceTree = "<group>";
+		};
+		B2BA43601CA5324000926584 /* tool */ = {
+			isa = PBXGroup;
+			children = (
+				B2BA43611CA5324000926584 /* FDCalendar */,
+			);
+			path = tool;
+			sourceTree = "<group>";
+		};
+		B2BA43611CA5324000926584 /* FDCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				B2BA43701CA62ECD00926584 /* YBFDCalendar.h */,
+				B2BA43711CA62ECD00926584 /* YBFDCalendar.m */,
+				B2BA43771CA6424B00926584 /* YBFDCalendarItem.h */,
+				B2BA43781CA6424B00926584 /* YBFDCalendarItem.m */,
+				B2BA43621CA5324000926584 /* FDCalendar.h */,
+				B2BA43631CA5324000926584 /* FDCalendar.m */,
+				B2BA43641CA5324000926584 /* FDCalendarItem.h */,
+				B2BA43651CA5324000926584 /* FDCalendarItem.m */,
+				B2BA43661CA5324000926584 /* NSString+CurrentTimeDay.h */,
+				B2BA43671CA5324000926584 /* NSString+CurrentTimeDay.m */,
+				B2BA43681CA5324000926584 /* YBObjectTool.h */,
+				B2BA43691CA5324000926584 /* YBObjectTool.m */,
+				B2BA43761CA6413600926584 /* YBUIMacro.h */,
+				B2BA43C11CA6678E00926584 /* FDCalendarCell.h */,
+				B2BA43C21CA6678E00926584 /* FDCalendarCell.m */,
+			);
+			path = FDCalendar;
 			sourceTree = "<group>";
 		};
 		B636E4EC57D3A22E3FC68559 /* Frameworks */ = {
@@ -2968,7 +3011,6 @@
 				B253C2D91C3FA901001AF771 /* UIView+SDExtension.m */,
 				B253C2BC1C3FA742001AF771 /* libqrencode */,
 				B80003C51BEFAC720099D194 /* JGPush */,
-				B8FFDF641BDE78E6005BD535 /* FDCalendar */,
 				B8C4587D1BDB5B5C00901F71 /* ToastAlertView */,
 				B8C458791BDB5ABB00901F71 /* SafeDic */,
 				B8C458591BDB59AC00901F71 /* AFNetworkActivityLogger */,
@@ -3040,21 +3082,6 @@
 				B8C4587F1BDB5B5C00901F71 /* ToastAlertView.m */,
 			);
 			path = ToastAlertView;
-			sourceTree = "<group>";
-		};
-		B8FFDF641BDE78E6005BD535 /* FDCalendar */ = {
-			isa = PBXGroup;
-			children = (
-				B2F1AE4A1C7D60C5006D56FF /* YBObjectTool.h */,
-				B2F1AE4B1C7D60C5006D56FF /* YBObjectTool.m */,
-				B8FFDF651BDE78E6005BD535 /* FDCalendar.h */,
-				B8FFDF661BDE78E6005BD535 /* FDCalendar.m */,
-				B8FFDF671BDE78E6005BD535 /* FDCalendarItem.h */,
-				B8FFDF681BDE78E6005BD535 /* FDCalendarItem.m */,
-				B28D5DD81C62357B00D9E9E1 /* NSString+CurrentTimeDay.h */,
-				B28D5DD91C62357B00D9E9E1 /* NSString+CurrentTimeDay.m */,
-			);
-			path = FDCalendar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3376,7 +3403,6 @@
 				B2BA3EDF1CA5003B00926584 /* HMStudentModel.m in Sources */,
 				B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */,
 				B2BA42991CA5035700926584 /* EaseConversationListViewController.m in Sources */,
-				B8FFDF691BDE78E6005BD535 /* FDCalendar.m in Sources */,
 				B28D5E411C64857000D9E9E1 /* ChineseString.m in Sources */,
 				B2BA42B71CA5035700926584 /* DVVDrivingStudentListCell.m in Sources */,
 				B2BA42C31CA5035700926584 /* DVVTheoreticalStudentListView.m in Sources */,
@@ -3391,12 +3417,14 @@
 				B2BA3EE21CA5003B00926584 /* UserInfoModel.m in Sources */,
 				B2BA43351CA5041100926584 /* InformationMessageModelRootClass.m in Sources */,
 				B2BA41B61CA5035700926584 /* EMAudioPlayerUtil.m in Sources */,
+				B2BA436C1CA5324000926584 /* NSString+CurrentTimeDay.m in Sources */,
 				B2BA41C91CA5035700926584 /* MJRefreshLegendFooter.m in Sources */,
 				B2BA41E11CA5035700926584 /* UIImage+EMGIF.m in Sources */,
 				B2BA41BF1CA5035700926584 /* EMVoiceConverter.mm in Sources */,
 				B2BA42831CA5035700926584 /* EaseMessageViewController.m in Sources */,
 				B2BA41AB1CA5035700926584 /* StudentListViewController.m in Sources */,
 				B2BA41D91CA5035700926584 /* EMSDWebImageDecoder.m in Sources */,
+				B2BA436B1CA5324000926584 /* FDCalendarItem.m in Sources */,
 				B2BA419F1CA5035700926584 /* MyWalletViewController.m in Sources */,
 				B2BA3E951CA4F44E00926584 /* CourseRatingCell.m in Sources */,
 				B2BA419B1CA5035700926584 /* JEPhotoPickManger.m in Sources */,
@@ -3413,7 +3441,6 @@
 				B2BA41B81CA5035700926584 /* EMCDDeviceManager+Media.m in Sources */,
 				B2BA41EE1CA5035700926584 /* PSTCollectionViewLayout.m in Sources */,
 				B8C458721BDB59AC00901F71 /* UIView+Sizes.m in Sources */,
-				B2BA433E1CA5041100926584 /* ScheduleViewController.m in Sources */,
 				B2BA434B1CA5041100926584 /* YBSignUpStudentListViewModel.m in Sources */,
 				B253C2CE1C3FA742001AF771 /* mask.c in Sources */,
 				B28D5DDA1C62357B00D9E9E1 /* NSString+CurrentTimeDay.m in Sources */,
@@ -3430,6 +3457,7 @@
 				B2BA41951CA5035700926584 /* ShopMainModel.m in Sources */,
 				B2BA42981CA5035700926584 /* ConversationListController.m in Sources */,
 				B2BA41871CA5035700926584 /* finishMessageView.m in Sources */,
+				B2BA43591CA5153000926584 /* CourseViewController.m in Sources */,
 				B2BA434A1CA5041100926584 /* YBSignUpStudentListController.m in Sources */,
 				B2BA41F61CA5035700926584 /* EMBubbleView+Gif.m in Sources */,
 				B2BA3EDA1CA5003B00926584 /* HMClassInfoModel.m in Sources */,
@@ -3535,6 +3563,7 @@
 				06361A511CA51DF1002708F2 /* TopCollectionCell.m in Sources */,
 				B2BA3E661CA4E70300926584 /* SMPageControl.m in Sources */,
 				B2BA42941CA5035700926584 /* EaseEmoji.m in Sources */,
+				B2BA435C1CA51DE600926584 /* YBHomeLeftViewController.m in Sources */,
 				B2BA3EB71CA4FF9800926584 /* NGOSegmentControl.m in Sources */,
 				B2BA3E971CA4F44E00926584 /* CWStarRateView.m in Sources */,
 				B2BA43451CA5041100926584 /* SystemMessageModel.m in Sources */,
@@ -3591,17 +3620,18 @@
 				B2BA41EC1CA5035700926584 /* PSTCollectionViewFlowLayout.m in Sources */,
 				B2BA3E531CA4E6D400926584 /* JGBaseViewController.m in Sources */,
 				B2BA42841CA5035700926584 /* EaseViewController.m in Sources */,
+				B2BA436D1CA5324000926584 /* YBObjectTool.m in Sources */,
 				B2BA43431CA5041100926584 /* StudentSignInViewModel.m in Sources */,
 				B2BA41DA1CA5035700926584 /* EMSDWebImageDownloader.m in Sources */,
 				B2BA41C41CA5035700926584 /* MJRefreshConst.m in Sources */,
 				B2BA3E651CA4E70300926584 /* ProjectGuideView.m in Sources */,
+				B2BA43561CA5065700926584 /* ScheduleViewController.m in Sources */,
 				06361A541CA51E12002708F2 /* BottomCollectionCell.m in Sources */,
 				B28D5E441C64857000D9E9E1 /* WChineseSting.m in Sources */,
 				B2BA3EA11CA4F49F00926584 /* NetWorkEntiry.m in Sources */,
 				B2BA42901CA5035700926584 /* UIViewController+HUD.m in Sources */,
 				B2BA432B1CA5041100926584 /* CourseDetailViewCell.m in Sources */,
 				B2BA433A1CA5041100926584 /* JGAppointMentViewController.m in Sources */,
-				B2BA43301CA5041100926584 /* CourseViewController.m in Sources */,
 				B2BA43371CA5041100926584 /* JGAppointMentFootCell.m in Sources */,
 				B2BA43441CA5041100926584 /* SystemMessageDetailCell.m in Sources */,
 				B2BA41DD1CA5035700926584 /* EMSDWebImagePrefetcher.m in Sources */,
@@ -3611,9 +3641,7 @@
 				B2BA42BC1CA5035700926584 /* DVVStudentListDMData.m in Sources */,
 				B2BA428D1CA5035700926584 /* NSObject+EaseMob.m in Sources */,
 				B2BA43491CA5041100926584 /* YBSignUpStudentListCell.m in Sources */,
-				B2F1AE4C1C7D60C5006D56FF /* YBObjectTool.m in Sources */,
 				B2BA41E41CA5035700926584 /* UIImageView+EMHighlightedWebCache.m in Sources */,
-				B8FFDF6A1BDE78E6005BD535 /* FDCalendarItem.m in Sources */,
 				B253C2D31C3FA742001AF771 /* rscode.c in Sources */,
 				B2BA41EA1CA5035700926584 /* PSTCollectionViewController.m in Sources */,
 				B2BA41841CA5035700926584 /* ExamClassViewController.m in Sources */,
@@ -3634,13 +3662,18 @@
 				B2BA42B41CA5035700926584 /* StudentHomeUserBasicInfoCell.m in Sources */,
 				B2BA42891CA5035700926584 /* EaseMessageModel.m in Sources */,
 				B2BA42B91CA5035700926584 /* DVVDrivingStudentListView.m in Sources */,
+				B2BA436A1CA5324000926584 /* FDCalendar.m in Sources */,
 				B2BA43421CA5041100926584 /* StudentSignInStatusView.m in Sources */,
+				B2BA43791CA6424B00926584 /* YBFDCalendarItem.m in Sources */,
 				B2BA418D1CA5035700926584 /* MagicDetailViewController.m in Sources */,
 				B2BA42C51CA5035700926584 /* DVVToolBarView.m in Sources */,
 				B2BA3EBD1CA4FF9800926584 /* UIViewController+Method.m in Sources */,
 				B2BA43361CA5041100926584 /* InformationMessageViewModel.m in Sources */,
 				B86EB3561BDB50EB0014EBD7 /* main.m in Sources */,
+				B2BA43721CA62ECD00926584 /* YBFDCalendar.m in Sources */,
 				B2BA41761CA5035700926584 /* WorkTypeListController.m in Sources */,
+				B2BA43C31CA6678E00926584 /* FDCalendarCell.m in Sources */,
+				B2BA435F1CA51DF600926584 /* YBHomeRightViewController.m in Sources */,
 				B2BA41B71CA5035700926584 /* EMAudioRecorderUtil.m in Sources */,
 				B2BA41CE1CA5035700926584 /* MWCaptionView.m in Sources */,
 				B2BA42B21CA5035700926584 /* DVVSendMessageToStudentView.m in Sources */,
