@@ -59,6 +59,10 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 
 @property (strong, nonatomic) NSArray *strArray;
 
+@property (nonatomic, strong) UIView *footerView;
+
+@property (nonatomic, strong) UILabel *footerLabel;
+
 @end
 
 @implementation EditorUserViewController
@@ -87,7 +91,22 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     }
     return _customTagArray;
 }
-
+- (UIView *)footerView{
+    if (_footerView == nil) {
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 66)];
+        _footerView.backgroundColor = [UIColor whiteColor];
+    }
+    return _footerView;
+}
+- (UILabel *)footerLabel{
+    if (_footerLabel == nil) {
+        _footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, 10, self.view.width - 16, 50)];
+        _footerLabel.font = [UIFont systemFontOfSize:12];
+        _footerLabel.numberOfLines = 0;
+        _footerLabel.textColor = JZ_FONTCOLOR_LIGHT;
+    }
+    return _footerLabel;
+}
 - (NSArray *)detailDataArray {
     /*
      {
@@ -286,6 +305,7 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 
 - (void)viewWillAppear:(BOOL)animated {
 //    [self startAddData];
+    self.footerLabel.text = [UserInfoModel defaultUserInfo].introduction;
 }
 
 - (void)viewDidLoad {
@@ -297,7 +317,9 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     //    if ([UIDevice jeSystemVersion] >= 7.0f) {
 //        //当你的容器是navigation controller时，默认的布局将从navigation bar的顶部开始。这就是为什么所有的UI元素都往上漂移了44pt
-    
+    // 设置tableView的footview
+    [self.footerView addSubview:self.footerLabel];
+    self.tableView.tableFooterView = self.footerView;
     
     [self.view addSubview:self.tableView];
     
@@ -542,6 +564,11 @@ static NSString *const ktagArrChange = @"ktagArrChange";
                 editorBottomCell.arrowImageView.hidden = YES;
             }
         }
+        // 隐藏详情展示
+        if (3 == indexPath.section) {
+             editorBottomCell.detailLabel.hidden = YES;
+        }
+        
         editorBottomCell.iconImgeView.image = [UIImage imageNamed:self.imgArray[indexPath.section][indexPath.row]];
         editorBottomCell.titleLabel.text =  self.dataArray[indexPath.section][indexPath.row];
         editorBottomCell.detailLabel.text = self.detailDataArray[indexPath.section][indexPath.row];
@@ -652,6 +679,13 @@ static NSString *const ktagArrChange = @"ktagArrChange";
             [self.navigationController pushViewController:training animated:YES];
         }
 
+    }
+    if (3 == indexPath.section ) {
+        // 个人说明
+        SignatureViewController *signatureVC = [[SignatureViewController alloc] init];
+        [self.navigationController pushViewController:signatureVC animated:YES];
+        
+        
     }
     
     
