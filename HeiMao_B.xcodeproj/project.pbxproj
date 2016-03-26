@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		061F56481CA682DD0052BEA9 /* EditorUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061F56471CA682DD0052BEA9 /* EditorUserViewController.m */; };
+		061F564B1CA686060052BEA9 /* EditorUseTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061F564A1CA686060052BEA9 /* EditorUseTopCell.m */; };
+		061F564E1CA689890052BEA9 /* EditorUseBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061F564D1CA689890052BEA9 /* EditorUseBottomCell.m */; };
 		06361A4E1CA51AB8002708F2 /* JZMyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A4D1CA51AB8002708F2 /* JZMyController.m */; };
 		06361A511CA51DF1002708F2 /* TopCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A501CA51DF1002708F2 /* TopCollectionCell.m */; };
 		06361A541CA51E12002708F2 /* BottomCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A531CA51E12002708F2 /* BottomCollectionCell.m */; };
@@ -94,7 +97,6 @@
 		B2BA417E1CA5035700926584 /* ButtonSelectedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F0C1CA5035700926584 /* ButtonSelectedCell.m */; };
 		B2BA417F1CA5035700926584 /* buttonSelectedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F0E1CA5035700926584 /* buttonSelectedModel.m */; };
 		B2BA41801CA5035700926584 /* DrivingNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F101CA5035700926584 /* DrivingNumViewController.m */; };
-		B2BA41811CA5035700926584 /* EditorUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F121CA5035700926584 /* EditorUserViewController.m */; };
 		B2BA41821CA5035700926584 /* ExamClassCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F141CA5035700926584 /* ExamClassCollectionViewCell.m */; };
 		B2BA41831CA5035700926584 /* ExamClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F161CA5035700926584 /* ExamClassModel.m */; };
 		B2BA41841CA5035700926584 /* ExamClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F181CA5035700926584 /* ExamClassViewController.m */; };
@@ -498,6 +500,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		061F56461CA682DD0052BEA9 /* EditorUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorUserViewController.h; sourceTree = "<group>"; };
+		061F56471CA682DD0052BEA9 /* EditorUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorUserViewController.m; sourceTree = "<group>"; };
+		061F56491CA686060052BEA9 /* EditorUseTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorUseTopCell.h; sourceTree = "<group>"; };
+		061F564A1CA686060052BEA9 /* EditorUseTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorUseTopCell.m; sourceTree = "<group>"; };
+		061F564C1CA689890052BEA9 /* EditorUseBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorUseBottomCell.h; sourceTree = "<group>"; };
+		061F564D1CA689890052BEA9 /* EditorUseBottomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorUseBottomCell.m; sourceTree = "<group>"; };
 		06361A4C1CA51AB8002708F2 /* JZMyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZMyController.h; sourceTree = "<group>"; };
 		06361A4D1CA51AB8002708F2 /* JZMyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZMyController.m; sourceTree = "<group>"; };
 		06361A4F1CA51DF1002708F2 /* TopCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopCollectionCell.h; sourceTree = "<group>"; };
@@ -662,8 +670,6 @@
 		B2BA3F0E1CA5035700926584 /* buttonSelectedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = buttonSelectedModel.m; sourceTree = "<group>"; };
 		B2BA3F0F1CA5035700926584 /* DrivingNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrivingNumViewController.h; sourceTree = "<group>"; };
 		B2BA3F101CA5035700926584 /* DrivingNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrivingNumViewController.m; sourceTree = "<group>"; };
-		B2BA3F111CA5035700926584 /* EditorUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorUserViewController.h; sourceTree = "<group>"; };
-		B2BA3F121CA5035700926584 /* EditorUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorUserViewController.m; sourceTree = "<group>"; };
 		B2BA3F131CA5035700926584 /* ExamClassCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamClassCollectionViewCell.h; sourceTree = "<group>"; };
 		B2BA3F141CA5035700926584 /* ExamClassCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamClassCollectionViewCell.m; sourceTree = "<group>"; };
 		B2BA3F151CA5035700926584 /* ExamClassModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamClassModel.h; sourceTree = "<group>"; };
@@ -1381,6 +1387,8 @@
 			children = (
 				06361A4C1CA51AB8002708F2 /* JZMyController.h */,
 				06361A4D1CA51AB8002708F2 /* JZMyController.m */,
+				061F56461CA682DD0052BEA9 /* EditorUserViewController.h */,
+				061F56471CA682DD0052BEA9 /* EditorUserViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1394,6 +1402,10 @@
 				06361A531CA51E12002708F2 /* BottomCollectionCell.m */,
 				06361A551CA53511002708F2 /* MyHeaderView.h */,
 				06361A561CA53511002708F2 /* MyHeaderView.m */,
+				061F56491CA686060052BEA9 /* EditorUseTopCell.h */,
+				061F564A1CA686060052BEA9 /* EditorUseTopCell.m */,
+				061F564C1CA689890052BEA9 /* EditorUseBottomCell.h */,
+				061F564D1CA689890052BEA9 /* EditorUseBottomCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1729,8 +1741,6 @@
 				B2BA3F0E1CA5035700926584 /* buttonSelectedModel.m */,
 				B2BA3F0F1CA5035700926584 /* DrivingNumViewController.h */,
 				B2BA3F101CA5035700926584 /* DrivingNumViewController.m */,
-				B2BA3F111CA5035700926584 /* EditorUserViewController.h */,
-				B2BA3F121CA5035700926584 /* EditorUserViewController.m */,
 				B2BA3F131CA5035700926584 /* ExamClassCollectionViewCell.h */,
 				B2BA3F141CA5035700926584 /* ExamClassCollectionViewCell.m */,
 				B2BA3F151CA5035700926584 /* ExamClassModel.h */,
@@ -3407,6 +3417,7 @@
 				B2BA434B1CA5041100926584 /* YBSignUpStudentListViewModel.m in Sources */,
 				B253C2CE1C3FA742001AF771 /* mask.c in Sources */,
 				B28D5DDA1C62357B00D9E9E1 /* NSString+CurrentTimeDay.m in Sources */,
+				061F564E1CA689890052BEA9 /* EditorUseBottomCell.m in Sources */,
 				B2BA41891CA5035700926584 /* InfoModel.m in Sources */,
 				B2BA43321CA5041100926584 /* InformationMessageController.m in Sources */,
 				B2BA41991CA5035700926584 /* IDCardNumViewController.m in Sources */,
@@ -3482,6 +3493,7 @@
 				B2BA43401CA5041100926584 /* StudentSignInController.m in Sources */,
 				B2BA3E691CA4F30200926584 /* WorkNatureController.m in Sources */,
 				B253C2FE1C45203F001AF771 /* PermissiveResearchDatabase.m in Sources */,
+				061F56481CA682DD0052BEA9 /* EditorUserViewController.m in Sources */,
 				B2BA41D41CA5035700926584 /* MWTapDetectingView.m in Sources */,
 				B2BA42C41CA5035700926584 /* DVVToast.m in Sources */,
 				B2BA3EB61CA4FF9800926584 /* HMButton.m in Sources */,
@@ -3540,6 +3552,7 @@
 				B2BA41751CA5035700926584 /* RegisterViewController.m in Sources */,
 				B2BA429C1CA5035700926584 /* EaseBaseMessageCell.m in Sources */,
 				B2BA41A41CA5035700926584 /* PersonlizeModel.m in Sources */,
+				061F564B1CA686060052BEA9 /* EditorUseTopCell.m in Sources */,
 				B2BA3E961CA4F44E00926584 /* CourseRatingUserInfoCell.m in Sources */,
 				B2BA41ED1CA5035700926584 /* PSTCollectionViewItemKey.m in Sources */,
 				B2BA3EB51CA4FF9800926584 /* DVVBaseViewModel.m in Sources */,
@@ -3637,7 +3650,6 @@
 				B2BA42BB1CA5035700926584 /* DVVStudentListController.m in Sources */,
 				B2BA41AE1CA5035700926584 /* TrainingGroundViewController.m in Sources */,
 				B2BA42AB1CA5035700926584 /* EaseFacialView.m in Sources */,
-				B2BA41811CA5035700926584 /* EditorUserViewController.m in Sources */,
 				B2BA41C51CA5035700926584 /* MJRefreshFooter.m in Sources */,
 				B2BA43531CA5050F00926584 /* YBStudentHomeController.m in Sources */,
 				B2BA41AC1CA5035700926584 /* TeacherCenterController.m in Sources */,

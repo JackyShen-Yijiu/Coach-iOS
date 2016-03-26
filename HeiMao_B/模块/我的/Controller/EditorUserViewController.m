@@ -27,6 +27,9 @@
 #import "TrainingGroundViewController.h"
 #import "WorkTimeViewController.h"
 #import "TeachSubjectViewController.h"
+#import "EditorUseTopCell.h"
+#import "EditorUseBottomCell.h"
+#import "WorkNatureController.h"
 
 
 
@@ -39,12 +42,19 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 
 @interface EditorUserViewController ()<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (strong, nonatomic) UITableView *tableView;
+
 @property (strong, nonatomic) NSArray *dataArray;
+
+@property (nonatomic, strong) NSArray *imgArray;
+
 @property (strong, nonatomic) UIImageView *userHeadImage;
+
 @property (strong, nonatomic) NSArray *detailDataArray;
+
 @property (strong, nonatomic) NSString *qiniuToken;
 
 @property (strong, nonatomic) NSMutableArray *systemTagArray;
+
 @property (strong, nonatomic) NSMutableArray *customTagArray;
 
 @property (strong, nonatomic) NSArray *strArray;
@@ -54,11 +64,16 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 @implementation EditorUserViewController
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = @[@[@"",@"姓名"],@[@"身份证",@"联系电话",@"教练证",@"教龄",@"性别",@"训练场地",@"工作时间",@"可授科目"],@[@"个性标签",@"个人说明"]];
+        _dataArray = @[@[@""],@[@"姓名",@"性别",@"身份证",@"手机号码"],@[@"教练证",@"教龄",@"工作性质",@"可授科目",@"训练场地"],@[@"个人说明"]];
     }
     return _dataArray;
 }
-
+- (NSArray *)imgArray{
+    if (_imgArray == nil) {
+        _imgArray = @[@[@""],@[@"name.png",@"sex",@"card",@"phone"],@[@"permit",@"age",@"work",@"teach",@"site"],@[@"explain"]];
+    }
+    return _imgArray;
+}
 - (NSMutableArray *)systemTagArray {
     if (!_systemTagArray) {
         _systemTagArray = [[NSMutableArray alloc] init];
@@ -74,44 +89,195 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 }
 
 - (NSArray *)detailDataArray {
+    /*
+     {
+     Gender = "\U7537";
+     Seniority = 0;
+     address = "\U6d77\U6dc0\U533a\U4e2d\U5173\U6751";
+     carmodel =     {
+     code = C1;
+     modelsid = 1; 1 直营教练  2 挂靠教练
+     name = "\U624b\U52a8\U6321\U6c7d\U8f66";
+     };
+     cartype = "";
+     coachid = 564227ec1eb4017436ade69c;
+     coachnumber = 5455454848456645;
+     coachtype = 1;
+     commentcount = 10;
+     createtime = "2015-11-10T17:21:04.368Z";
+     displaycoachid = 100061;
+     driveschoolinfo =     {
+     id = 56c71dc8de346bda5466f8ef;
+     name = "\U4e00\U6b65\U9a7e\U6821 \U592a\U539f\U5206\U6821";
+     };
+     drivinglicensenumber = 130503196404010719vsv;
+     email = "";
+     fcode = "";
+     headportrait =     {
+     height = "";
+     originalpic = "http://7xnjg0.com1.z0.glb.clouddn.com/564227ec1eb4017436ade69c1455614511222";
+     thumbnailpic = "";
+     width = "";
+     };
+     idcardnumber = "56565656525845****";
+     introduction = "\U5982\U679c\U5728\U5b66\U8f66\U8fc7\U7a0b\U4e2d\U9047\U5230\U4e86\U4e00\U4e2a\U57f9\U8bad\U7ecf\U9a8c\U4e30\U5bcc\U4e14\U6027\U683c\U723d\U6717\U7684\U6559\U7ec3\Uff0c\U90a3\U4e48\U4f60 \U5c06\U5ea6\U8fc7\U4e00\U4e2a\U6109\U5feb\U7684\U5b66\U8f66\U8fc7\U7a0b\U3002\U8010\U5fc3\U7684\U6559\U5b66\U6001\U5ea6\Uff0c\U72ec\U7279\U7684\U6559\U5b66\U7406\U5ff5\U6765\U8fce\U63a5\U6bcf\U4e00\U4f4d\U5b66\U5458\U3002   \U54c8\U54c8";
+     invitationcode = 1061;
+     "is_lock" = 0;
+     "is_shuttle" = 0;
+     "is_validation" = 1;
+     leavebegintime = 1469155140;
+     leaveendtime = 1477104000;
+     logintime = "2016-03-25T11:52:56.697Z";
+     md5Pass = e10adc3949ba59abbe56e057f20f883e;
+     mobile = 18444444001;
+     name = "\U5218\U5947\U82b3";
+     passrate = 99;
+     platenumber = "<null>";
+     serverclass = 8;
+     shuttlemsg = "\U6682\U4e0d\U63d0\U4f9b\U63a5\U9001\U670d\U52a1";
+     starlevel = 5;
+     studentcoount = 10;
+     subject =     (
+     {
+     "_id" = 56d949f20402bf7762d86af5;
+     name = "\U79d1\U76ee\U4e8c";
+     subjectid = 2;
+     },
+     {
+     "_id" = 56d949f20402bf7762d86af4;
+     name = "\U79d1\U76ee\U4e09";
+     subjectid = 3;
+     }
+     );
+     tagslist =     (
+     {
+     "_id" = 56a0d121a835f788669cb3db;
+     color = "#ffb814";
+     tagname = "\U4e94\U661f\U7ea7\U6559\U7ec3";
+     tagtype = 0;
+     },
+     {
+     "_id" = 569e34ba77e15ea1406264ad;
+     color = "#ef56b9";
+     tagname = "\U5f88\U597d";
+     tagtype = 1;
+     },
+     {
+     "_id" = 569eddcb77e15ea1406264b7;
+     color = "#20d1bc";
+     tagname = "\U4f60\U5c31";
+     tagtype = 1;
+     },
+     {
+     "_id" = 56a096c5b23b45e15310833b;
+     color = "#20d1bc";
+     tagname = "\U80e1\U5929";
+     tagtype = 1;
+     },
+     {
+     "_id" = 56a0d09cbb44dfc956b95822;
+     color = "#45cbfb";
+     tagname = "\U660e\U5e74";
+     tagtype = 1;
+     },
+     {
+     "_id" = 56a0e00df1bd513a58ffc23a;
+     color = "#ef56b9";
+     tagname = "\U62b9\U54af";
+     tagtype = 1;
+     },
+     {
+     "_id" = 56a0e02bf1bd513a58ffc23b;
+     color = "#d755f2";
+     tagname = "\U4e86\U89e3";
+     tagtype = 1;
+     }
+     );
+     token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI1NjQyMjdlYzFlYjQwMTc0MzZhZGU2OWMiLCJ0aW1lc3RhbXAiOiIyMDE2LTAzLTI1VDExOjUyOjU2LjY5N1oiLCJhdWQiOiJibGFja2NhdGUiLCJpYXQiOjE0NTg5MDY3NzZ9.fjkjrUQ3e6ahq-_dDbZdeG-9ZuTiD95i0W4DbeBflNQ";
+     trainfieldlinfo =     {
+     id = 561636cc21ec29041a9af88e;
+     name = "\U4e00\U6b65\U9a7e\U6821\U7b2c\U4e00\U8bad\U7ec3\U573a";
+     };
+     usersetting =     {
+     classremind = 1;
+     newmessagereminder = 1;
+     reservationreminder = 1;
+     };
+     validationstate = 3;
+     worktimedesc = "\U5468\U4e00\U5468\U4e8c\U5468\U4e09\U5468\U56db\U5468\U4e94\U5468\U516d 0:00--23:00";
+     worktimespace =     {
+     begintimeint = 0;
+     endtimeint = 23;
+     };
+     workweek =     (
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+     );
+     }
+     
+     */
+
+    // 数组一
+     NSArray *item1 = @[@""];
     
+    // 数组二
     NSString * name = [UserInfoModel defaultUserInfo].name;
-    NSArray * item1 = @[@"",[self strTolerance:name]
-                        ];
-    
+    NSString * gender = [UserInfoModel defaultUserInfo].Gender;
     NSString * idcardnumber = [UserInfoModel defaultUserInfo].idcardnumber;
     NSString * tel = [UserInfoModel defaultUserInfo].tel;
-    NSString * dirving = [UserInfoModel defaultUserInfo].drivinglicensenumber;
-    NSString * gender = [UserInfoModel defaultUserInfo].Gender;
-//    NSString * trainName = [UserInfoModel defaultUserInfo].trainfieldlinfo; // 训练场地
+    NSArray *item2 = @[[self strTolerance:name],[self strTolerance:gender],[self strTolerance:idcardnumber],[self strTolerance:tel]];
+    
+    // 数组三
+    NSString *coachNumber = [NSString stringWithFormat:@"%lu",[UserInfoModel defaultUserInfo].coachNumber];
+    NSString *seniority = [NSString stringWithFormat:@"%lu",[UserInfoModel defaultUserInfo].Seniority];
+    NSString *workWay = nil;
+    if (0 == [UserInfoModel defaultUserInfo].coachtype) {
+        workWay = @"挂靠教练";
+    } else if (1 == [UserInfoModel defaultUserInfo].coachtype){
+        workWay = @"直营教练";
+    }
+    //可授科目
+    NSArray *array = [UserInfoModel defaultUserInfo].subject;
+    NSMutableString *string = [[NSMutableString alloc] init];
+    if (array.count == 0) {
+        [string appendString:@"未设置"];
+    }else if(array.count == 1){
+        [string appendString:[[array firstObject] objectForKey:@"name"]];
+    }else{
+        [string appendString:@"已设置"];
+    }
+
+    NSString *trainName = [UserInfoModel defaultUserInfo].trainfieldlinfo[@"name"]; // 训练场地
     
     
-    
-    
-    
-    
-    NSArray * item2 = @[
-                        [self strTolerance:idcardnumber],
-                        [self strTolerance:tel],
-                        [self strTolerance:dirving],
-                        [self strTolerance:[NSString stringWithFormat:@"%lu",[UserInfoModel defaultUserInfo].Seniority]],
-                        [self strTolerance:gender],
+    NSArray *item3 = @[
+                        [self strTolerance:coachNumber],
+                        [self strTolerance:seniority],
+                        [self strTolerance:workWay],
+                        [self strTolerance:trainName],
+                        [self strTolerance:string]
+                    
                         ];
-    
-    NSString * intruduce = [UserInfoModel defaultUserInfo].introduction;    
-    NSArray * item3 = @[
-                         @"",
-                         [self strTolerance:intruduce]
-                         ];
+    // 数组四
+    NSString * intruduce = [UserInfoModel defaultUserInfo].introduction;
+    NSArray * item4 = @[[self strTolerance:intruduce]];
+                        
     
     _detailDataArray = @[item1,
                          item2,
-                         item3];
+                         item3,
+                         item4];
     return _detailDataArray;
 }
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kSystemWide, kSystemHeight - 64) style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
     }
@@ -119,15 +285,14 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self startNetWork];
-    [self startAddData];
+//    [self startAddData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"编辑信息";
+    self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
+    self.title = @"个人信息";
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     //    if ([UIDevice jeSystemVersion] >= 7.0f) {
@@ -221,27 +386,6 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     self.strArray = [NSArray arrayWithObjects:trainName,workSetDes,string, nil];
     [self.tableView reloadData];
 
-}
-- (void)startNetWork {
-    
-    NSString *coachTags = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kcoachTags];
-    [JENetwoking startDownLoadWithUrl:coachTags postParam:@{@"coachid":[UserInfoModel defaultUserInfo].userID} WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
-        [self.systemTagArray removeAllObjects];
-        [self.customTagArray removeAllObjects];
-        NSLog(@"%@",data);
-        NSDictionary *dic = data;
-        if ([[dic objectForKey:@"type"] integerValue] == 1) {
-            NSArray *systemTagArr = [[data objectForKey:@"data"] objectForKey:@"systemtag"];
-            NSArray *customTagArr = [[data objectForKey:@"data"] objectForKey:@"selft"];
-            for (NSDictionary *subSystemTagDic in systemTagArr) {
-                [self.systemTagArray addObject:[PersonlizeModel converJsonDicToModel:subSystemTagDic]];
-            }
-            for (NSDictionary *subCustomTagDic in customTagArr) {
-                [self.customTagArray addObject:[PersonlizeModel converJsonDicToModel:subCustomTagDic]];
-            }
-            [[NSNotificationCenter defaultCenter] postNotificationName:ktagArrChange object:nil];
-        }
-    }];
 }
 - (NSArray *)bubbleSort:(NSArray *)arg{//冒泡排序算法
     
@@ -337,201 +481,200 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section==0 && indexPath.row == 0) {
-        return 240;
-    }
-    if (indexPath.section == 2 && indexPath.row == 0) {
-        NSArray *arr = @[];
-        if (self.systemTagArray) {
-            NSMutableArray *tagArr = [[NSMutableArray alloc] init];
-           
-            for (PersonlizeModel *model in self.systemTagArray) {
-                if (model.is_audit.integerValue == 0 && model.is_choose.integerValue == 1) {
-                    [tagArr addObject:model.tagname];
-                }
-            }
-            for (PersonlizeModel *model in self.customTagArray) {
-                if (model.is_audit.integerValue == 0) {
-                    [tagArr addObject:model.tagname];
-                }
-            }
-            arr = [tagArr copy];
-        }
-        return [PersonalizeLabelCell cellHeightWithArray:arr];
-    }
-    if (indexPath.section == 2 && indexPath.row == 1) {
-        NSString *string = self.detailDataArray[indexPath.section][indexPath.row];
-        CGRect bounds = [string boundingRectWithSize:
-                         CGSizeMake([[UIScreen mainScreen] bounds].size.width - 30, 10000) options:
-                         NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.f]} context:nil];
-        return 20+bounds.size.height+10;
+    
+    
+    if (0 == indexPath.section) {
+        return 80;
     }
     return 44;
+//    if (indexPath.section == 2 && indexPath.row == 1) {
+//        NSString *string = self.detailDataArray[indexPath.section][indexPath.row];
+//        CGRect bounds = [string boundingRectWithSize:
+//                         CGSizeMake([[UIScreen mainScreen] bounds].size.width - 30, 10000) options:
+//                         NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.f]} context:nil];
+//        return 20+bounds.size.height+10;
+//    }
+//    return 44;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 0) {
-        return 0;
-    }
-    return 20;
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10;
 }
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+////    if (section == 0) {
+////        return 0;
+////    }
+////    return 20;
+//}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSArray *array = self.dataArray[section];
     return array.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 2 && indexPath.row == 1) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"yy_1"];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"yy_1"];
-        }
-        cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
-        cell.textLabel.font = [UIFont systemFontOfSize:14];
-        cell.detailTextLabel.text = self.detailDataArray[indexPath.section][indexPath.row];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
-        cell.detailTextLabel.numberOfLines = 0;
-        return cell;
-    }
-    if (indexPath.row == 0 && indexPath.section == 2) {
-        PersonalizeLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"yy"];
-        for (UIView *view in cell.contentView.subviews) {
-            UILabel *label = (UILabel *)view;
-            if (![label.text isEqualToString:@"个性标签"]) {
-                [view removeFromSuperview];
-            }
-        }
-        if (!cell) {
-            cell = [[PersonalizeLabelCell alloc] initWithStyle:0 reuseIdentifier:@"yy"];
-        }
-        NSArray *arr = @[];
-        NSMutableArray *tagBackgroundColorArr = [[NSMutableArray alloc] init];
-        if (self.systemTagArray.count >0) {
-            NSMutableArray *tagArr = [[NSMutableArray alloc] init];
-            for (PersonlizeModel *model in self.systemTagArray) {
-                if (model.is_audit.integerValue == 0 && model.is_choose.integerValue == 1) {
-                    [tagArr addObject:model.tagname];
-                    [tagBackgroundColorArr addObject:model.color];
-                }
-            }
-            for (PersonlizeModel *model in self.customTagArray) {
-                if (model.is_audit.integerValue == 0) {
-                    [tagArr addObject:model.tagname];
-                    [tagBackgroundColorArr addObject:model.color];
-                }
-            }
-            arr = [tagArr copy];
-        }
-        [cell initUIWithArray:arr withLabel:self.dataArray[indexPath.section][indexPath.row] withBackGroundColorArr:[tagBackgroundColorArr copy]];
-        return cell;
-    }
-    static NSString *cellId = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
     if (indexPath.row == 0 && indexPath.section == 0) {
-        self.userHeadImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 240)];
-        self.userHeadImage.image = [UIImage imageNamed:@"littleImage.png"];
-        self.userHeadImage.contentMode = UIViewContentModeScaleToFill;
-        [cell.contentView addSubview:self.userHeadImage];
-        if ([UserInfoModel defaultUserInfo].portrait) {
-            [self.userHeadImage sd_setImageWithURL:[NSURL URLWithString:[UserInfoModel defaultUserInfo].portrait] placeholderImage:[UIImage imageNamed:@"littleImage.png"]];
+        static NSString *IDtopCell = @"topCell";
+        EditorUseTopCell *editorCell = [tableView dequeueReusableCellWithIdentifier:IDtopCell];
+        if (!editorCell) {
+            editorCell = [[EditorUseTopCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDtopCell];
         }
-    }if ((indexPath.row == 5 && indexPath.section == 1) || (indexPath.row == 6 && indexPath.section == 1) || (indexPath.row == 7 && indexPath.section == 1)) {
-        NSLog(@"indexPath.section = %lu,indexPath.row= %lu",indexPath.section,indexPath.row);
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
-        cell.textLabel.textColor = [UIColor blackColor];
-        cell.textLabel.font = [UIFont systemFontOfSize:14];
-        cell.detailTextLabel.text = self.strArray[indexPath.row - 5];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
+        if ([UserInfoModel defaultUserInfo].portrait) {
+            [editorCell.iconImgeView sd_setImageWithURL:[NSURL URLWithString:[UserInfoModel defaultUserInfo].portrait] placeholderImage:[UIImage imageNamed:@"littleImage.png"]];
+        }
+        
+        
+        return editorCell;
+    } else{
+        static NSString *IDBottomCell = @"bottomCell";
+        EditorUseBottomCell *editorBottomCell = [tableView dequeueReusableCellWithIdentifier:IDBottomCell];
+        if (!editorBottomCell) {
+            editorBottomCell = [[EditorUseBottomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDBottomCell];
+        }
+        // 隐藏右侧的箭头
+        if (1 == indexPath.section) {
+            if (0 == indexPath.row || 1 == indexPath.row || 2 == indexPath.row) {
+                editorBottomCell.arrowImageView.hidden = YES;
+            }
+        }
+        if (2 == indexPath.section) {
+            if (2 == indexPath.row) {
+                editorBottomCell.arrowImageView.hidden = YES;
+            }
+        }
+        editorBottomCell.iconImgeView.image = [UIImage imageNamed:self.imgArray[indexPath.section][indexPath.row]];
+        editorBottomCell.titleLabel.text =  self.dataArray[indexPath.section][indexPath.row];
+        editorBottomCell.detailLabel.text = self.detailDataArray[indexPath.section][indexPath.row];
+        
+        return editorBottomCell;
 
     }
-    else{
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
-        cell.textLabel.textColor = [UIColor blackColor];
-        cell.textLabel.font = [UIFont systemFontOfSize:14];
-        cell.detailTextLabel.text = self.detailDataArray[indexPath.section][indexPath.row];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
-
-    }
-    return cell;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    if (indexPath.section == 2 && indexPath.row == 1) {
+//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"yy_1"];
+//        if (!cell) {
+//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"yy_1"];
+//        }
+//        cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
+//        cell.textLabel.font = [UIFont systemFontOfSize:14];
+//        cell.detailTextLabel.text = self.detailDataArray[indexPath.section][indexPath.row];
+//        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+//        cell.detailTextLabel.numberOfLines = 0;
+//        return cell;
+//    }
+//    static NSString *cellId = @"cell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+//    if (!cell) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    }
+//    if ((indexPath.row == 5 && indexPath.section == 1) || (indexPath.row == 6 && indexPath.section == 1) || (indexPath.row == 7 && indexPath.section == 1)) {
+//        NSLog(@"indexPath.section = %lu,indexPath.row= %lu",indexPath.section,indexPath.row);
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
+//        cell.textLabel.textColor = [UIColor blackColor];
+//        cell.textLabel.font = [UIFont systemFontOfSize:14];
+//        cell.detailTextLabel.text = self.strArray[indexPath.row - 5];
+//        cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
+//
+//    }
+//    else{
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
+//        cell.textLabel.textColor = [UIColor blackColor];
+//        cell.textLabel.font = [UIFont systemFontOfSize:14];
+//        cell.detailTextLabel.text = self.detailDataArray[indexPath.section][indexPath.row];
+//        cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
+//
+//    }
+//    return cell;
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    
     if (indexPath.section == 0 && indexPath.row == 0) {
+        // 头像
         [JEPhotoPickManger pickPhotofromController:self];
     }
-    else if (indexPath.section == 0 && indexPath.row == 1) {
-      ModifyNameViewController *modifyName = [[ModifyNameViewController alloc] init];
-      [self.navigationController pushViewController:modifyName animated:YES];
-    }
-    else if (indexPath.section == 1 && indexPath.row == 4) {
-        GenderViewController *gender = [[GenderViewController alloc] init];
-        [self.navigationController pushViewController:gender animated:YES];
-    }
-    else if (indexPath.section == 2 && indexPath.row == 1) {
-        SignatureViewController *signature = [[SignatureViewController alloc] init];
-        [self.navigationController pushViewController:signature animated:YES];
-    }
-    else if (indexPath.section == 1 && indexPath.row == 0) {
-        IDCardNumViewController *idcar = [[IDCardNumViewController alloc] init];
-        [self.navigationController pushViewController:idcar animated:YES];
-    }else if (indexPath.section == 1 && indexPath.row == 1) {
+    
+    
+    if (indexPath.section == 1 && 3 == indexPath.row) {
+        // 手机号
         PhoneNumViewController *phoneNum = [[PhoneNumViewController alloc] init];
         [self.navigationController pushViewController:phoneNum animated:YES];
-    }else if (indexPath.section == 1 && indexPath.row == 2) {
+    }
+   
+    if (2 == indexPath.section && 0 == indexPath.row) {
+         // 教练证
         DrivingNumViewController *driving = [[DrivingNumViewController alloc] init];
         [self.navigationController pushViewController:driving animated:YES];
-    }else if (indexPath.section == 2 && indexPath.row == 0) {
-        PersonaizeLabelController *plc = [[PersonaizeLabelController alloc] init];
-        plc.systemTagArray = self.systemTagArray;
-        plc.customTagArray = self.customTagArray;
-        [self.navigationController pushViewController:plc animated:YES];
-    }else if (indexPath.section==1&&indexPath.row==3){
+        
+    }
+    if (2 == indexPath.section && 1 == indexPath.row) {
+        // 教龄
         modifyjialinViewController *vc = [[modifyjialinViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.section==1&&indexPath.row==5)
-    { // 训练场地
-        if ([UserInfoModel defaultUserInfo].schoolId) {
-        TrainingGroundViewController *training = [[TrainingGroundViewController alloc] init];
-        [self.navigationController pushViewController:training animated:YES];
-                        }
-    }else if (indexPath.section==1&&indexPath.row==6){ // 工作时间
-        WorkTimeViewController *workTime = [[WorkTimeViewController alloc] init];
-        [self.navigationController pushViewController:workTime animated:YES];
-    }else if (indexPath.section==1&&indexPath.row==7){ // 可授科目
+        
+    }
+    if (2 == indexPath.section && 2 == indexPath.row) {
+        // 工作性质
+        
+        WorkNatureController *workNatureVC = [[WorkNatureController alloc] init];
+        [self.navigationController pushViewController:workNatureVC animated:YES];
+        
+    }
+    if (2 == indexPath.section && 3 == indexPath.row) {
+        // 可授科目
         TeachSubjectViewController *teach = [[TeachSubjectViewController alloc] init];
         [self.navigationController pushViewController:teach animated:YES];
+        
+    }
+    if (2 == indexPath.section && 4 == indexPath.row) {
+        // 训练场地
+        if ([UserInfoModel defaultUserInfo].schoolId) {
+            TrainingGroundViewController *training = [[TrainingGroundViewController alloc] init];
+            [self.navigationController pushViewController:training animated:YES];
+        }
 
     }
+    
+    
+    
+//    }else if (indexPath.section == 1 && indexPath.row == 2) {
+//        
+//    }else if (indexPath.section == 2 && indexPath.row == 0) {
+//        PersonaizeLabelController *plc = [[PersonaizeLabelController alloc] init];
+//        plc.systemTagArray = self.systemTagArray;
+//        plc.customTagArray = self.customTagArray;
+//        [self.navigationController pushViewController:plc animated:YES];
+//    }else if (indexPath.section==1&&indexPath.row==3){
+//        
+//    }else if (indexPath.section==1&&indexPath.row==5)
+//    { // 训练场地
+//            }else if (indexPath.section==1&&indexPath.row==6){ // 工作时间
+//        WorkTimeViewController *workTime = [[WorkTimeViewController alloc] init];
+//        [self.navigationController pushViewController:workTime animated:YES];
+//    }else if (indexPath.section==1&&indexPath.row==7){ // 可授科目
+//        
+//
+//    }
 }
-/*
- 
- //            else if (indexPath.section == 0 && indexPath.row == 2) {// @"训练场地"
- //            if ([UserInfoModel defaultUserInfo].schoolId) {
- //                TrainingGroundViewController *training = [[TrainingGroundViewController alloc] init];
- //                [self.navigationController pushViewController:training animated:YES];
- //            }
- //        }else if (indexPath.section == 0 && indexPath.row == 3) {// @"工作时间"
- //            WorkTimeViewController *workTime = [[WorkTimeViewController alloc] init];
- //            [self.navigationController pushViewController:workTime animated:YES];
- //        }else if (indexPath.section == 0 && indexPath.row == 4) {// @"可授科目"
- //            TeachSubjectViewController *teach = [[TeachSubjectViewController alloc] init];
- //            [self.navigationController pushViewController:teach animated:YES];
- //        }
-
- 
- 
- 
- 
- 
- */
 #pragma mark - delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSLog(@"data = %@",info);

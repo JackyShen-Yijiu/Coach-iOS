@@ -80,7 +80,138 @@
 
 - (BOOL)loginViewDic:(NSDictionary *)info
 {
-  
+    /*
+     {
+     Gender = "\U7537";
+     Seniority = 0;
+     address = "\U6d77\U6dc0\U533a\U4e2d\U5173\U6751";
+     carmodel =     {
+     code = C1;
+     modelsid = 1; 1 直营教练 0 挂靠教练
+     name = "\U624b\U52a8\U6321\U6c7d\U8f66";
+     };
+     cartype = "";
+     coachid = 564227ec1eb4017436ade69c;
+     coachnumber = 5455454848456645;
+     coachtype = 1;
+     commentcount = 10;
+     createtime = "2015-11-10T17:21:04.368Z";
+     displaycoachid = 100061;
+     driveschoolinfo =     {
+     id = 56c71dc8de346bda5466f8ef;
+     name = "\U4e00\U6b65\U9a7e\U6821 \U592a\U539f\U5206\U6821";
+     };
+     drivinglicensenumber = 130503196404010719vsv;
+     email = "";
+     fcode = "";
+     headportrait =     {
+     height = "";
+     originalpic = "http://7xnjg0.com1.z0.glb.clouddn.com/564227ec1eb4017436ade69c1455614511222";
+     thumbnailpic = "";
+     width = "";
+     };
+     idcardnumber = "56565656525845****";
+     introduction = "\U5982\U679c\U5728\U5b66\U8f66\U8fc7\U7a0b\U4e2d\U9047\U5230\U4e86\U4e00\U4e2a\U57f9\U8bad\U7ecf\U9a8c\U4e30\U5bcc\U4e14\U6027\U683c\U723d\U6717\U7684\U6559\U7ec3\Uff0c\U90a3\U4e48\U4f60 \U5c06\U5ea6\U8fc7\U4e00\U4e2a\U6109\U5feb\U7684\U5b66\U8f66\U8fc7\U7a0b\U3002\U8010\U5fc3\U7684\U6559\U5b66\U6001\U5ea6\Uff0c\U72ec\U7279\U7684\U6559\U5b66\U7406\U5ff5\U6765\U8fce\U63a5\U6bcf\U4e00\U4f4d\U5b66\U5458\U3002   \U54c8\U54c8";
+     invitationcode = 1061;
+     "is_lock" = 0;
+     "is_shuttle" = 0;
+     "is_validation" = 1;
+     leavebegintime = 1469155140;
+     leaveendtime = 1477104000;
+     logintime = "2016-03-25T11:52:56.697Z";
+     md5Pass = e10adc3949ba59abbe56e057f20f883e;
+     mobile = 18444444001;
+     name = "\U5218\U5947\U82b3";
+     passrate = 99;
+     platenumber = "<null>";
+     serverclass = 8;
+     shuttlemsg = "\U6682\U4e0d\U63d0\U4f9b\U63a5\U9001\U670d\U52a1";
+     starlevel = 5;
+     studentcoount = 10;
+     subject =     (
+     {
+     "_id" = 56d949f20402bf7762d86af5;
+     name = "\U79d1\U76ee\U4e8c";
+     subjectid = 2;
+     },
+     {
+     "_id" = 56d949f20402bf7762d86af4;
+     name = "\U79d1\U76ee\U4e09";
+     subjectid = 3;
+     }
+     );
+     tagslist =     (
+     {
+     "_id" = 56a0d121a835f788669cb3db;
+     color = "#ffb814";
+     tagname = "\U4e94\U661f\U7ea7\U6559\U7ec3";
+     tagtype = 0;
+     },
+     {
+     "_id" = 569e34ba77e15ea1406264ad;
+     color = "#ef56b9";
+     tagname = "\U5f88\U597d";
+     tagtype = 1;
+     },
+     {
+     "_id" = 569eddcb77e15ea1406264b7;
+     color = "#20d1bc";
+     tagname = "\U4f60\U5c31";
+     tagtype = 1;
+     },
+     {
+     "_id" = 56a096c5b23b45e15310833b;
+     color = "#20d1bc";
+     tagname = "\U80e1\U5929";
+     tagtype = 1;
+     },
+     {
+     "_id" = 56a0d09cbb44dfc956b95822;
+     color = "#45cbfb";
+     tagname = "\U660e\U5e74";
+     tagtype = 1;
+     },
+     {
+     "_id" = 56a0e00df1bd513a58ffc23a;
+     color = "#ef56b9";
+     tagname = "\U62b9\U54af";
+     tagtype = 1;
+     },
+     {
+     "_id" = 56a0e02bf1bd513a58ffc23b;
+     color = "#d755f2";
+     tagname = "\U4e86\U89e3";
+     tagtype = 1;
+     }
+     );
+     token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI1NjQyMjdlYzFlYjQwMTc0MzZhZGU2OWMiLCJ0aW1lc3RhbXAiOiIyMDE2LTAzLTI1VDExOjUyOjU2LjY5N1oiLCJhdWQiOiJibGFja2NhdGUiLCJpYXQiOjE0NTg5MDY3NzZ9.fjkjrUQ3e6ahq-_dDbZdeG-9ZuTiD95i0W4DbeBflNQ";
+     trainfieldlinfo =     {
+     id = 561636cc21ec29041a9af88e;
+     name = "\U4e00\U6b65\U9a7e\U6821\U7b2c\U4e00\U8bad\U7ec3\U573a";
+     };
+     usersetting =     {
+     classremind = 1;
+     newmessagereminder = 1;
+     reservationreminder = 1;
+     };
+     validationstate = 3;
+     worktimedesc = "\U5468\U4e00\U5468\U4e8c\U5468\U4e09\U5468\U56db\U5468\U4e94\U5468\U516d 0:00--23:00";
+     worktimespace =     {
+     begintimeint = 0;
+     endtimeint = 23;
+     };
+     workweek =     (
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+     );
+     }
+
+     */
+    NSLog(@"%@",info);
     _name =  [info objectForKey:@"name"];
     _portrait = [[info objectInfoForKey:@"headportrait"] objectStringForKey:@"originalpic"];
     _Gender = [info objectForKey:@"Gender"];
@@ -97,6 +228,7 @@
 
     _token = [info objectForKey:@"token"];
     _userID = [info objectForKey:@"coachid"];
+    _coachNumber = [info objectForKey:@"coachnumber"];
     _tel = [info objectForKey:@"mobile"];
     _md5Pass = [info objectForKey:@"md5Pass"];
     _displaycoachid = [info objectForKey:@"displaycoachid"];

@@ -25,6 +25,8 @@
 //驾驶证号
 @property(nonatomic,strong)NSString * drivinglicensenumber;
 @property(nonatomic,strong)NSString * schoolId;
+// 教练证
+@property (nonatomic, assign) NSInteger coachNumber;
 //挂靠驾校
 @property(nonatomic,strong)NSDictionary *driveschoolinfo;
 //训练场地
