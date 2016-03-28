@@ -68,6 +68,9 @@
 // 浅色字体颜色
 #define JZ_FONTCOLOR_LIGHT   RGB_Color(183,183,183)
 
+// 蓝色
+#define JZ_BlueColor RGB_Color(31, 124, 235)
+
 // 环信appKey
 #define easeMobAPPkey @"black-cat#jizhijaifu"
 // 环信推送证书 jizhijiafuCoachDevelopment	:开发 jizhijiafuCoachDistribution:生产

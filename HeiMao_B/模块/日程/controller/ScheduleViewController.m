@@ -110,6 +110,8 @@ typedef NS_ENUM(NSInteger, kControllerType) {
         
         [self initNavigationItem];
         
+        [self.leftVc modifyVacation];
+        
     }else if (1 == seg.selectedSegmentIndex) {
         
         self.leftVc.view.hidden = YES;

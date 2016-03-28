@@ -245,16 +245,17 @@
     [self GET:urlStr parameters:dic success:success failure:failure];
     
 }
-+ (void)getcoursereservationlistWithUserId:(NSString *)userId  courseid:(NSString *)courseid
++ (void)getcoursereservationlistWithUserId:(NSString *)userId  date:(NSString *)date
                                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-    if (!userId || !courseid) {
+    if (!userId || !date) {
         return [self missParagramercallBackFailure:failure];
     }
     
-    // GET /courseinfo/coursereservationlist
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coursereservationlist?coachid=%@&courseid=%@",[self domain],userId,courseid];
+    // http://127.0.0.1:8183/api/v2/courseinfo/daytimelysreservation?coachid=5666365ef14c20d07ffa6ae8&date=2016-03-25
+    
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/daytimelysreservation?coachid=%@&date=%@",@"http://jzapi.yibuxueche.com/api/v2",userId,date];
     
     [self GET:urlStr parameters:nil success:success failure:failure];
     

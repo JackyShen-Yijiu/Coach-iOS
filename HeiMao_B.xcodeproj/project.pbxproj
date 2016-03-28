@@ -475,6 +475,15 @@
 		B2BA43791CA6424B00926584 /* YBFDCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43781CA6424B00926584 /* YBFDCalendarItem.m */; };
 		B2BA43C31CA6678E00926584 /* FDCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43C21CA6678E00926584 /* FDCalendarCell.m */; };
 		B2BA43C61CA8E9DB00926584 /* CourseSummaryDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43C51CA8E9DB00926584 /* CourseSummaryDayCell.m */; };
+		B2BA43C91CA9125000926584 /* YBAppointMentUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43C81CA9125000926584 /* YBAppointMentUserCell.m */; };
+		B2BA43D81CA951A200926584 /* YBCourseCoursereservationdetial.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43CB1CA951A200926584 /* YBCourseCoursereservationdetial.m */; };
+		B2BA43D91CA951A200926584 /* YBCourseCoursetime.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43CD1CA951A200926584 /* YBCourseCoursetime.m */; };
+		B2BA43DA1CA951A200926584 /* YBCourseData.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43CF1CA951A200926584 /* YBCourseData.m */; };
+		B2BA43DB1CA951A200926584 /* YBCourseHeadportrait.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43D11CA951A200926584 /* YBCourseHeadportrait.m */; };
+		B2BA43DC1CA951A200926584 /* YBCourseRootClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43D31CA951A200926584 /* YBCourseRootClass.m */; };
+		B2BA43DD1CA951A200926584 /* YBCourseSubject.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43D51CA951A200926584 /* YBCourseSubject.m */; };
+		B2BA43DE1CA951A200926584 /* YBCourseUserid.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43D71CA951A200926584 /* YBCourseUserid.m */; };
+		B2BA43E11CA962A600926584 /* YBCourseAppointMentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43E01CA962A600926584 /* YBCourseAppointMentView.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
 		B80003CC1BEFACA50099D194 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003CB1BEFACA50099D194 /* CoreFoundation.framework */; };
@@ -1324,6 +1333,24 @@
 		B2BA43C21CA6678E00926584 /* FDCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendarCell.m; sourceTree = "<group>"; };
 		B2BA43C41CA8E9DB00926584 /* CourseSummaryDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseSummaryDayCell.h; sourceTree = "<group>"; };
 		B2BA43C51CA8E9DB00926584 /* CourseSummaryDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseSummaryDayCell.m; sourceTree = "<group>"; };
+		B2BA43C71CA9125000926584 /* YBAppointMentUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBAppointMentUserCell.h; sourceTree = "<group>"; };
+		B2BA43C81CA9125000926584 /* YBAppointMentUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBAppointMentUserCell.m; sourceTree = "<group>"; };
+		B2BA43CA1CA951A200926584 /* YBCourseCoursereservationdetial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBCourseCoursereservationdetial.h; sourceTree = "<group>"; };
+		B2BA43CB1CA951A200926584 /* YBCourseCoursereservationdetial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseCoursereservationdetial.m; sourceTree = "<group>"; };
+		B2BA43CC1CA951A200926584 /* YBCourseCoursetime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBCourseCoursetime.h; sourceTree = "<group>"; };
+		B2BA43CD1CA951A200926584 /* YBCourseCoursetime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseCoursetime.m; sourceTree = "<group>"; };
+		B2BA43CE1CA951A200926584 /* YBCourseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBCourseData.h; sourceTree = "<group>"; };
+		B2BA43CF1CA951A200926584 /* YBCourseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseData.m; sourceTree = "<group>"; };
+		B2BA43D01CA951A200926584 /* YBCourseHeadportrait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBCourseHeadportrait.h; sourceTree = "<group>"; };
+		B2BA43D11CA951A200926584 /* YBCourseHeadportrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseHeadportrait.m; sourceTree = "<group>"; };
+		B2BA43D21CA951A200926584 /* YBCourseRootClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBCourseRootClass.h; sourceTree = "<group>"; };
+		B2BA43D31CA951A200926584 /* YBCourseRootClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseRootClass.m; sourceTree = "<group>"; };
+		B2BA43D41CA951A200926584 /* YBCourseSubject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBCourseSubject.h; sourceTree = "<group>"; };
+		B2BA43D51CA951A200926584 /* YBCourseSubject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseSubject.m; sourceTree = "<group>"; };
+		B2BA43D61CA951A200926584 /* YBCourseUserid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBCourseUserid.h; sourceTree = "<group>"; };
+		B2BA43D71CA951A200926584 /* YBCourseUserid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseUserid.m; sourceTree = "<group>"; };
+		B2BA43DF1CA962A600926584 /* YBCourseAppointMentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBCourseAppointMentView.h; sourceTree = "<group>"; };
+		B2BA43E01CA962A600926584 /* YBCourseAppointMentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseAppointMentView.m; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		B80003C91BEFAC9C0099D194 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -1732,6 +1759,20 @@
 		B2BA3F001CA5035700926584 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				B2BA43D21CA951A200926584 /* YBCourseRootClass.h */,
+				B2BA43D31CA951A200926584 /* YBCourseRootClass.m */,
+				B2BA43CE1CA951A200926584 /* YBCourseData.h */,
+				B2BA43CF1CA951A200926584 /* YBCourseData.m */,
+				B2BA43CA1CA951A200926584 /* YBCourseCoursereservationdetial.h */,
+				B2BA43CB1CA951A200926584 /* YBCourseCoursereservationdetial.m */,
+				B2BA43CC1CA951A200926584 /* YBCourseCoursetime.h */,
+				B2BA43CD1CA951A200926584 /* YBCourseCoursetime.m */,
+				B2BA43D01CA951A200926584 /* YBCourseHeadportrait.h */,
+				B2BA43D11CA951A200926584 /* YBCourseHeadportrait.m */,
+				B2BA43D41CA951A200926584 /* YBCourseSubject.h */,
+				B2BA43D51CA951A200926584 /* YBCourseSubject.m */,
+				B2BA43D61CA951A200926584 /* YBCourseUserid.h */,
+				B2BA43D71CA951A200926584 /* YBCourseUserid.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1741,6 +1782,10 @@
 			children = (
 				B2BA43C41CA8E9DB00926584 /* CourseSummaryDayCell.h */,
 				B2BA43C51CA8E9DB00926584 /* CourseSummaryDayCell.m */,
+				B2BA43DF1CA962A600926584 /* YBCourseAppointMentView.h */,
+				B2BA43E01CA962A600926584 /* YBCourseAppointMentView.m */,
+				B2BA43C71CA9125000926584 /* YBAppointMentUserCell.h */,
+				B2BA43C81CA9125000926584 /* YBAppointMentUserCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3397,6 +3442,7 @@
 				B2BA41BE1CA5035700926584 /* wav.mm in Sources */,
 				B2BA434C1CA5041100926584 /* YBSignUpStuentListModel.m in Sources */,
 				B2BA41A31CA5035700926584 /* PersonalizeLabelCell.m in Sources */,
+				B2BA43DB1CA951A200926584 /* YBCourseHeadportrait.m in Sources */,
 				B2BA41E51CA5035700926584 /* UIImageView+EMWebCache.m in Sources */,
 				B2BA3EE01CA5003B00926584 /* HMSubjectModel.m in Sources */,
 				B2BA3EDF1CA5003B00926584 /* HMStudentModel.m in Sources */,
@@ -3500,12 +3546,14 @@
 				B2BA41F21CA5035700926584 /* PSTGridLayoutRow.m in Sources */,
 				B2BA3EDC1CA5003B00926584 /* HMPortraitInfoModel.m in Sources */,
 				B2BA42861CA5035700926584 /* JGUserModel.m in Sources */,
+				B2BA43D81CA951A200926584 /* YBCourseCoursereservationdetial.m in Sources */,
 				B2BA41F01CA5035700926584 /* PSTGridLayoutInfo.m in Sources */,
 				B2BA42A81CA5035700926584 /* EaseImageView.m in Sources */,
 				B2BA41F11CA5035700926584 /* PSTGridLayoutItem.m in Sources */,
 				B2BA417C1CA5035700926584 /* AboutUsViewController.m in Sources */,
 				B2BA42931CA5035700926584 /* EaseMessageReadManager.m in Sources */,
 				B2BA42A01CA5035700926584 /* EaseBubbleView+Image.m in Sources */,
+				B2BA43DE1CA951A200926584 /* YBCourseUserid.m in Sources */,
 				B2BA42B31CA5035700926584 /* StudentHomeRecomendCell.m in Sources */,
 				B2BA41911CA5035700926584 /* MyWallet.m in Sources */,
 				B2BA43381CA5041100926584 /* JGAppointMentFootView.m in Sources */,
@@ -3528,12 +3576,14 @@
 				B253C2D41C3FA742001AF771 /* split.c in Sources */,
 				B2BA41821CA5035700926584 /* ExamClassCollectionViewCell.m in Sources */,
 				B2BA41BA1CA5035700926584 /* EMCDDeviceManager+ProximitySensor.m in Sources */,
+				B2BA43C91CA9125000926584 /* YBAppointMentUserCell.m in Sources */,
 				B2BA42881CA5035700926584 /* EaseConversationModel.m in Sources */,
 				B2BA432E1CA5041100926584 /* CourseSummaryListCell.m in Sources */,
 				B2BA419A1CA5035700926584 /* JENetwoking.m in Sources */,
 				B2BA41F51CA5035700926584 /* CustomMessageCell.m in Sources */,
 				B2BA41E01CA5035700926584 /* UIButton+EMWebCache.m in Sources */,
 				B8C458741BDB59AC00901F71 /* UIViewAdditions.m in Sources */,
+				B2BA43D91CA951A200926584 /* YBCourseCoursetime.m in Sources */,
 				B2BA41731CA5035700926584 /* ProtocalViewController.m in Sources */,
 				B253C2CF1C3FA742001AF771 /* QRCodeGenerator.m in Sources */,
 				B2BA41AA1CA5035700926584 /* StudentListModel.m in Sources */,
@@ -3552,7 +3602,9 @@
 				B2BA41A71CA5035700926584 /* SetupViewController.m in Sources */,
 				B2BA416F1CA5035700926584 /* GainPasswordViewController.m in Sources */,
 				B2BA433C1CA5041100926584 /* JGYuYueHeadView.m in Sources */,
+				B2BA43DC1CA951A200926584 /* YBCourseRootClass.m in Sources */,
 				B2BA42851CA5035700926584 /* EaseSDKHelper.m in Sources */,
+				B2BA43E11CA962A600926584 /* YBCourseAppointMentView.m in Sources */,
 				B2BA43461CA5041100926584 /* SystemMessageModelRootClass.m in Sources */,
 				B253C2DA1C3FA901001AF771 /* UIView+SDExtension.m in Sources */,
 				B2BA41981CA5035700926584 /* WalletModel.m in Sources */,
@@ -3654,6 +3706,7 @@
 				B2BA42A41CA5035700926584 /* EaseBubbleView+Voice.m in Sources */,
 				B2BA41701CA5035700926584 /* LoginViewController.m in Sources */,
 				B2BA3EE31CA5003B00926584 /* WorkTypeModel.m in Sources */,
+				B2BA43DD1CA951A200926584 /* YBCourseSubject.m in Sources */,
 				B2BA3E8A1CA4F3D900926584 /* CourseEnsureCell.m in Sources */,
 				B2BA433F1CA5041100926584 /* SearchCourseViewController.m in Sources */,
 				B2BA434E1CA5041100926584 /* YBSubjectMoel.m in Sources */,
@@ -3691,6 +3744,7 @@
 				B2BA3E8B1CA4F3D900926584 /* CoursePicListCell.m in Sources */,
 				B2BA419C1CA5035700926584 /* JsonTransformManager.m in Sources */,
 				B2BA41E31CA5035700926584 /* UIImage+EMWebP.m in Sources */,
+				B2BA43DA1CA951A200926584 /* YBCourseData.m in Sources */,
 				B253C2F31C43C960001AF771 /* PermissiveObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
