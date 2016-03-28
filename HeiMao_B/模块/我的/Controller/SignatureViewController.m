@@ -10,10 +10,13 @@
 #import "UIDevice+JEsystemVersion.h"
 #import "ToolHeader.h"
 //static NSString *const kupdateUserInfo = @"userinfo/updatecoachinfo";
-@interface SignatureViewController ()
+
+#define knumberTitle  288;
+@interface SignatureViewController ()<UITextViewDelegate>
 @property (strong, nonatomic) UITextView *signatureTextField;
 @property (strong, nonatomic) UIButton *naviBarRightButton;
 @property (strong, nonatomic) UIButton *naviBarLeftButton;
+@property (nonatomic, strong) UILabel *messageLabel;
 
 @end
 
@@ -21,7 +24,8 @@
 
 - (UITextView *)signatureTextField {
     if (_signatureTextField == nil) {
-        _signatureTextField = [[UITextView alloc] initWithFrame:CGRectMake(0, 20, kSystemWide, 100)];
+        _signatureTextField = [[UITextView alloc] initWithFrame:CGRectMake(0, 10, kSystemWide, 100)];
+        _signatureTextField.delegate = self;
         _signatureTextField.backgroundColor = [UIColor whiteColor];
         if ([UserInfoModel defaultUserInfo].introduction) {
             _signatureTextField.text = [UserInfoModel defaultUserInfo].introduction;
@@ -29,9 +33,20 @@
     }
     return _signatureTextField;
 }
+- (UILabel *)messageLabel{
+    if (_messageLabel == nil) {
+        _messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.width - 16 - 100 , self.signatureTextField.height - 16, 100, 12)];
+        _messageLabel.textAlignment = NSTextAlignmentRight;
+        _messageLabel.font = [UIFont systemFontOfSize:12];
+        _messageLabel.textColor = RGB_Color(74, 118, 250);
+        NSInteger resulNumber = [[UserInfoModel defaultUserInfo].introduction length];
+        _messageLabel.text = [NSString stringWithFormat:@"%lu\\288",resulNumber];
+    }
+    return _messageLabel;
+}
 - (UIButton *)naviBarRightButton {
     if (_naviBarRightButton == nil) {
-        _naviBarRightButton = [WMUITool initWithTitle:@"完成" withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont systemFontOfSize:16]];
+        _naviBarRightButton = [WMUITool initWithTitle:@"保存" withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont systemFontOfSize:16]];
         _naviBarRightButton.frame = CGRectMake(0, 0, 44, 44);
         [_naviBarRightButton addTarget:self action:@selector(clickRight:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -52,14 +67,14 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     self.title = @"个人说明";
-    self.view.backgroundColor = RGBColor(245, 247, 250);
+    self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.naviBarRightButton];
     self.navigationItem.rightBarButtonItem = rightItem;
     
 //    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:self.naviBarLeftButton];
 //    self.navigationItem.leftBarButtonItem = leftItem;
 
-    
+    [self.signatureTextField addSubview:self.messageLabel];
     [self.view addSubview:self.signatureTextField];
     
     [self.signatureTextField becomeFirstResponder];
@@ -108,6 +123,15 @@
 
         
     }];
+}
+- (void)textViewDidChange:(UITextView *)textView{
+    if([_signatureTextField.text length] > 288)
+    {
+        _signatureTextField.text = [_signatureTextField.text substringToIndex:288];
+        return;
+    }
+    self.messageLabel.text = [NSString stringWithFormat:@"%lu\\288字",[_signatureTextField.text length]];
+
 }
 
 @end
