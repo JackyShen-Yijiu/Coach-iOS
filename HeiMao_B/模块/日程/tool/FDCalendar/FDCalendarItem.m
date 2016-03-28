@@ -185,8 +185,26 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     return self;
 }
 
+- (void)changeDate
+{
+    NSLog(@"reloadData.restArray:%@",self.restArray);
+    NSLog(@"reloadData.bookArray:%@",self.bookArray);
+    NSLog(@"self.seletedDate:%@",self.seletedDate);
+    
+    NSInteger firstWeekday = [self weekdayOfFirstDayInDate];
+    
+    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
+    [fomatter setDateFormat:@"dd"];
+    NSInteger dateStr = [[fomatter stringFromDate:self.seletedDate] integerValue] + firstWeekday;
+    NSLog(@"reloadData dateStr:%ld",(long)dateStr);
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:dateStr inSection:0];
+    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+    
+    [self.collectionView reloadData];
+}
+
 #pragma mark - Custom Accessors
-- (void)reloadData
+- (void)reloadDate
 {
     NSLog(@"reloadData.restArray:%@",self.restArray);
     NSLog(@"reloadData.bookArray:%@",self.bookArray);
@@ -509,6 +527,8 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     [components setDay:indexPath.row - firstWeekday + 1];
     
     NSDate *selectedDate = [[NSCalendar currentCalendar] dateFromComponents:components];
+    NSLog(@"didSelectItemAtIndexPath selectedDate:%@",selectedDate);
+    
     self.seletedDate = selectedDate;
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(calendarItem:didSelectedDate:)]) {

@@ -21,7 +21,6 @@ static NSDateFormatter *dateFormattor;
 }
 @property (strong, nonatomic) NSDate *date;
 
-@property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) FDCalendarItem *leftCalendarItem;
 @property (strong, nonatomic) FDCalendarItem *centerCalendarItem;
@@ -136,10 +135,9 @@ static NSDateFormatter *dateFormattor;
     
 }
 
-// 设置当前日期，初始化
-- (void)setCurrentDate:(NSDate *)date
+- (void)changeDate:(NSDate *)date
 {
-    NSLog(@"设置当前日期，初始化");
+    NSLog(@"设置当前日期，初始化setCurrentDate");
     
     self.centerCalendarItem.seletedDate = date;
     
@@ -147,14 +145,26 @@ static NSDateFormatter *dateFormattor;
     
     self.rightCalendarItem.seletedDate = [self.centerCalendarItem nextMonthDate];
     
-    // 设置顶部标题
-    [self.titleLabel setText:[self stringFromDate:self.centerCalendarItem.seletedDate]];
-   
+    [self.centerCalendarItem changeDate];
+
+}
+
+// 设置当前日期，初始化
+- (void)setCurrentDate:(NSDate *)date
+{
+    NSLog(@"设置当前日期，初始化setCurrentDate date:%@",date);
+    
+    self.centerCalendarItem.seletedDate = date;
+    
+    self.leftCalendarItem.seletedDate = [self.centerCalendarItem previousMonthDate];
+    
+    self.rightCalendarItem.seletedDate = [self.centerCalendarItem nextMonthDate];
+    
     if ([_delegate respondsToSelector:@selector(fdCalendar:didSelectedDate:)]) {
         [_delegate fdCalendar:self didSelectedDate:self.centerCalendarItem.seletedDate];
     }
     
-    [self.centerCalendarItem reloadData];
+    [self.centerCalendarItem reloadDate];
 
     // 设置当前月份的预约、休假
     //[self loadCurrentCalendarData:date];
@@ -199,7 +209,7 @@ static NSDateFormatter *dateFormattor;
                 
                 ws.centerCalendarItem.bookArray = reservationapply;
                 
-                [ws.centerCalendarItem reloadData];
+                [ws.centerCalendarItem reloadDate];
                 
             });
            
@@ -250,20 +260,20 @@ static NSDateFormatter *dateFormattor;
 // 跳到上一个月
 - (void)setPreviousMonthDate
 {
-//    [self setCurrentDate:[self.centerCalendarItem previousMonthDate]];
-    self.selectDate = [self.centerCalendarItem previousMonthDate];
+    [self setCurrentDate:[self.centerCalendarItem previousMonthDate]];
+//    self.selectDate = [self.centerCalendarItem previousMonthDate];
 }
 // 跳到下一个月
 - (void)setNextMonthDate {
-//    [self setCurrentDate:[self.centerCalendarItem nextMonthDate]];
-    self.selectDate = [self.centerCalendarItem nextMonthDate];
+    [self setCurrentDate:[self.centerCalendarItem nextMonthDate]];
+//    self.selectDate = [self.centerCalendarItem nextMonthDate];
 }
 
 #pragma mark - FDCalendarItemDelegate
 - (void)calendarItem:(FDCalendarItem *)item didSelectedDate:(NSDate *)date
 {
     
-    NSLog(@"%s",__func__);
+    NSLog(@"%s date:%@",__func__,date);
     
     self.date = date;
     self.centerCalendarItem.seletedDate = date;
