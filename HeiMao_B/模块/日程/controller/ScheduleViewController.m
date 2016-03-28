@@ -99,6 +99,8 @@ typedef NS_ENUM(NSInteger, kControllerType) {
 
 - (void)didClicksegmentedControlAction:(UISegmentedControl *)seg{
     
+    [self.leftVc hiddenOpenCalendar];
+    
     self.controllerType = seg.selectedSegmentIndex;
     
     if (0 == seg.selectedSegmentIndex) {

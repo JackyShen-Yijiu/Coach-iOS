@@ -429,7 +429,6 @@
 		B2BA432A1CA5041100926584 /* CourseDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42D51CA5041100926584 /* CourseDetailView.m */; };
 		B2BA432B1CA5041100926584 /* CourseDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42D71CA5041100926584 /* CourseDetailViewCell.m */; };
 		B2BA432C1CA5041100926584 /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42D91CA5041100926584 /* CourseDetailViewController.m */; };
-		B2BA432D1CA5041100926584 /* CourseSummaryDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42DB1CA5041100926584 /* CourseSummaryDayCell.m */; };
 		B2BA432E1CA5041100926584 /* CourseSummaryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42DD1CA5041100926584 /* CourseSummaryListCell.m */; };
 		B2BA432F1CA5041100926584 /* CourseTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42DF1CA5041100926584 /* CourseTimeModel.m */; };
 		B2BA43311CA5041100926584 /* InformationMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA42E41CA5041100926584 /* InformationMessageCell.m */; };
@@ -475,6 +474,7 @@
 		B2BA43721CA62ECD00926584 /* YBFDCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43711CA62ECD00926584 /* YBFDCalendar.m */; };
 		B2BA43791CA6424B00926584 /* YBFDCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43781CA6424B00926584 /* YBFDCalendarItem.m */; };
 		B2BA43C31CA6678E00926584 /* FDCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43C21CA6678E00926584 /* FDCalendarCell.m */; };
+		B2BA43C61CA8E9DB00926584 /* CourseSummaryDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43C51CA8E9DB00926584 /* CourseSummaryDayCell.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
 		B80003CC1BEFACA50099D194 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003CB1BEFACA50099D194 /* CoreFoundation.framework */; };
@@ -1231,8 +1231,6 @@
 		B2BA42D71CA5041100926584 /* CourseDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseDetailViewCell.m; sourceTree = "<group>"; };
 		B2BA42D81CA5041100926584 /* CourseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailViewController.h; sourceTree = "<group>"; };
 		B2BA42D91CA5041100926584 /* CourseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseDetailViewController.m; sourceTree = "<group>"; };
-		B2BA42DA1CA5041100926584 /* CourseSummaryDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseSummaryDayCell.h; sourceTree = "<group>"; };
-		B2BA42DB1CA5041100926584 /* CourseSummaryDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseSummaryDayCell.m; sourceTree = "<group>"; };
 		B2BA42DC1CA5041100926584 /* CourseSummaryListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseSummaryListCell.h; sourceTree = "<group>"; };
 		B2BA42DD1CA5041100926584 /* CourseSummaryListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseSummaryListCell.m; sourceTree = "<group>"; };
 		B2BA42DE1CA5041100926584 /* CourseTimeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseTimeModel.h; sourceTree = "<group>"; };
@@ -1324,6 +1322,8 @@
 		B2BA43781CA6424B00926584 /* YBFDCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBFDCalendarItem.m; sourceTree = "<group>"; };
 		B2BA43C11CA6678E00926584 /* FDCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCalendarCell.h; sourceTree = "<group>"; };
 		B2BA43C21CA6678E00926584 /* FDCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendarCell.m; sourceTree = "<group>"; };
+		B2BA43C41CA8E9DB00926584 /* CourseSummaryDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseSummaryDayCell.h; sourceTree = "<group>"; };
+		B2BA43C51CA8E9DB00926584 /* CourseSummaryDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseSummaryDayCell.m; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		B80003C91BEFAC9C0099D194 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -1739,6 +1739,8 @@
 		B2BA3F021CA5035700926584 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				B2BA43C41CA8E9DB00926584 /* CourseSummaryDayCell.h */,
+				B2BA43C51CA8E9DB00926584 /* CourseSummaryDayCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -2810,8 +2812,6 @@
 				B2BA42D71CA5041100926584 /* CourseDetailViewCell.m */,
 				B2BA42D81CA5041100926584 /* CourseDetailViewController.h */,
 				B2BA42D91CA5041100926584 /* CourseDetailViewController.m */,
-				B2BA42DA1CA5041100926584 /* CourseSummaryDayCell.h */,
-				B2BA42DB1CA5041100926584 /* CourseSummaryDayCell.m */,
 				B2BA42DC1CA5041100926584 /* CourseSummaryListCell.h */,
 				B2BA42DD1CA5041100926584 /* CourseSummaryListCell.m */,
 				B2BA42DE1CA5041100926584 /* CourseTimeModel.h */,
@@ -3422,6 +3422,7 @@
 				B2BA41BF1CA5035700926584 /* EMVoiceConverter.mm in Sources */,
 				B2BA42831CA5035700926584 /* EaseMessageViewController.m in Sources */,
 				B2BA41AB1CA5035700926584 /* StudentListViewController.m in Sources */,
+				B2BA43C61CA8E9DB00926584 /* CourseSummaryDayCell.m in Sources */,
 				B2BA41D91CA5035700926584 /* EMSDWebImageDecoder.m in Sources */,
 				B2BA436B1CA5324000926584 /* FDCalendarItem.m in Sources */,
 				B2BA419F1CA5035700926584 /* MyWalletViewController.m in Sources */,
@@ -3650,7 +3651,6 @@
 				B2BA41721CA5035700926584 /* NSString+DY_MD5.m in Sources */,
 				B2BA429D1CA5035700926584 /* EaseMessageCell.m in Sources */,
 				B2BA41C71CA5035700926584 /* MJRefreshGifHeader.m in Sources */,
-				B2BA432D1CA5041100926584 /* CourseSummaryDayCell.m in Sources */,
 				B2BA42A41CA5035700926584 /* EaseBubbleView+Voice.m in Sources */,
 				B2BA41701CA5035700926584 /* LoginViewController.m in Sources */,
 				B2BA3EE31CA5003B00926584 /* WorkTypeModel.m in Sources */,

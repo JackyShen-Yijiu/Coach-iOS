@@ -23,6 +23,8 @@
 // 底部tableview
 @property(nonatomic,strong) UITableView * courseDayTableView;
 
+@property (nonatomic,strong) UIView *headView;
+
 @property(nonatomic,strong) FDCalendar *calendarHeadView;
 @property(nonatomic,strong) YBFDCalendar *ybCalendarHeadView;
 
@@ -40,6 +42,23 @@
 
 @implementation YBHomeLeftViewController
 
+- (void)hiddenOpenCalendar
+{
+    // 隐藏展开更多
+    if (self.isOpen) {
+        [self xialaBtnDidClick];
+    }
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self hiddenOpenCalendar];
+    
+}
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -47,15 +66,28 @@
     self.view.backgroundColor = RGB_Color(253, 253, 253);
     self.selectDate = [NSDate date];
     
+    // 底部预约列表
+    self.courseDayTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64+calendarH, self.view.width, self.view.height) style:UITableViewStylePlain];
+    self.courseDayTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.courseDayTableView.delegate = self;
+    self.courseDayTableView.dataSource = self;
+    self.courseDayTableView.contentInset = UIEdgeInsetsMake(0, 0, self.calendarHeadView.height, 0);
+    [self.view addSubview:self.courseDayTableView];
+    self.courseDayTableView.backgroundColor = [UIColor whiteColor];
+    
+    self.headView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, calendarH)];
+    self.headView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.headView];
+    self.headView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.headView.layer.shadowOffset = CGSizeMake(0, 2);
+    self.headView.layer.shadowOpacity = 0.036;
+    self.headView.layer.shadowRadius = 2;
+    
     // 顶部日历
     self.calendarHeadView = [[FDCalendar alloc] initWithCurrentDate:[NSDate date]];
     self.calendarHeadView.delegate = self;
-    self.calendarHeadView.frame = CGRectMake(0, 64, self.view.width, calendarH);
-    [self.view addSubview:self.calendarHeadView];
-    self.calendarHeadView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.calendarHeadView.layer.shadowOffset = CGSizeMake(0, 2);
-    self.calendarHeadView.layer.shadowOpacity = 0.036;
-    self.calendarHeadView.layer.shadowRadius = 2;
+    self.calendarHeadView.frame = CGRectMake(0, 0, self.view.width, calendarH);
+    [self.headView addSubview:self.calendarHeadView];
     
     // 添加右边下拉按钮
     UIButton *xialaBtn = [[UIButton alloc] init];
@@ -63,15 +95,6 @@
     [xialaBtn setImage:[UIImage imageNamed:@"JZCoursefold_down"] forState:UIControlStateNormal];
     [xialaBtn addTarget:self action:@selector(xialaBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
     [self.calendarHeadView addSubview:xialaBtn];
-    
-    // 底部预约列表
-    self.courseDayTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.calendarHeadView.frame), self.view.width, self.view.height-self.calendarHeadView.height-64) style:UITableViewStylePlain];
-    self.courseDayTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.courseDayTableView.delegate = self;
-    self.courseDayTableView.dataSource = self;
-    self.courseDayTableView.contentInset = UIEdgeInsetsMake(0, 0, self.calendarHeadView.height, 0);
-    [self.view addSubview:self.courseDayTableView];
-    self.courseDayTableView.backgroundColor = RGB_Color(253, 253, 253);
     
     // 占位图
     self.tipView2 = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有预约"];
@@ -130,17 +153,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    // 隐藏展开更多
-    if (self.isOpen) {
-        [self xialaBtnDidClick];
-    }
-    
 }
 
 - (void)needRefresh:(NSNotification *)notification
@@ -342,21 +354,19 @@
         decv.couresID = courseModel.courseId;
         [self.navigationController pushViewController:decv animated:YES];
     }
+    
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView==self.courseDayTableView) {
+        [self hiddenOpenCalendar];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
