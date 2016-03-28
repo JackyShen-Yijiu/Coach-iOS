@@ -393,56 +393,6 @@ static NSString *const ktagArrChange = @"ktagArrChange";
         trainName = @"未设置";
     }
     
-    // 工作时间
-    NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
-    
-    NSLog(@"weekArray:%@",weekArray);
-    NSLog(@"weekArray.count:%lu",weekArray.count);
-    
-    BOOL isInclude = [weekArray containsObject:@(7)];
-    NSLog(@"isInclude:%d",isInclude);
-    if (isInclude) {
-        NSMutableArray *tempArray = [NSMutableArray arrayWithArray:weekArray];
-        [tempArray removeObject:@(7)];
-        weekArray = tempArray;
-        [UserInfoModel defaultUserInfo].workweek = weekArray;
-    }
-    
-    NSString * workSetDes = @"未设置";
-    
-    if (weekArray) {
-        
-        NSArray *newArray = [self bubbleSort:weekArray];
-        NSLog(@"newArray:%@",newArray);
-        for (int i = 0;i<newArray.count;i++) {
-            NSLog(@"i:%d",[newArray[i] intValue]);
-        }
-        
-        if (newArray && newArray.count>0) {
-            
-            NSMutableString *mutableStr = [NSMutableString string];
-            
-            if (newArray.count==7) {
-                
-                [mutableStr appendString:@"周一至周日"];
-                
-            }else{
-                
-                for (int i = 0; i<newArray.count; i++) {
-                    
-                    NSString *endDate = [NSString stringWithFormat:@"%@",[self dateStringWithDateNumber:[newArray[i] integerValue]]];
-                    [mutableStr appendString:endDate];
-                    
-                }
-                
-            }
-            
-            workSetDes = mutableStr;
-            
-        }
-        
-    }
-    
     //可授科目
     NSArray *array = [UserInfoModel defaultUserInfo].subject;
     NSMutableString *string = [[NSMutableString alloc] init];
@@ -453,51 +403,9 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     }else{
         [string appendString:@"已设置"];
     }
-    self.strArray = [NSArray arrayWithObjects:trainName,workSetDes,string, nil];
+//    self.strArray = [NSArray arrayWithObjects:trainName,workSetDes,string, nil];
     [self.tableView reloadData];
 
-}
-- (NSArray *)bubbleSort:(NSArray *)arg{//冒泡排序算法
-    
-    NSMutableArray *args = [NSMutableArray arrayWithArray:arg];
-    
-    for(int i=0;i<args.count-1;i++){
-        
-        for(int j=i+1;j<args.count;j++){
-            
-            if (args[i]>args[j]){
-                
-                int temp = [args[i] intValue];
-                
-                [args replaceObjectAtIndex:i withObject:args[j]];
-                
-                args[j] = @(temp);
-                
-            }
-        }
-    }
-    return args;
-}
-
-
-- (NSString *)dateStringWithDateNumber:(NSInteger)number
-{
-    if (number==0) {
-        return @"周日";
-    }else if (number==1){
-        return @"周一";
-    }else if (number==2){
-        return @"周二";
-    }else if (number==3){
-        return @"周三";
-    }else if (number==4){
-        return @"周四";
-    }else if (number==5){
-        return @"周五";
-    }else if (number==6){
-        return @"周六";
-    }
-    return nil;
 }
 // 手机号码改名
 - (void)phoneNumChange{

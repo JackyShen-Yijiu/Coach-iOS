@@ -19,6 +19,15 @@
 		06361A511CA51DF1002708F2 /* TopCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A501CA51DF1002708F2 /* TopCollectionCell.m */; };
 		06361A541CA51E12002708F2 /* BottomCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A531CA51E12002708F2 /* BottomCollectionCell.m */; };
 		06361A571CA53511002708F2 /* MyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A561CA53511002708F2 /* MyHeaderView.m */; };
+		06DB70BE1CA906C500A6AC9D /* ExamClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70BD1CA906C500A6AC9D /* ExamClassViewController.m */; };
+		06DB70C21CA909DC00A6AC9D /* ExamClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70C11CA909DC00A6AC9D /* ExamClassModel.m */; };
+		06DB70C51CA90E3800A6AC9D /* WorkTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70C41CA90E3800A6AC9D /* WorkTimeViewController.m */; };
+		06DB70C91CA91D4200A6AC9D /* JZHomeStudentToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70C81CA91D4200A6AC9D /* JZHomeStudentToolBarView.m */; };
+		06DB70CC1CA942F400A6AC9D /* JZHomeStudentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70CB1CA942F400A6AC9D /* JZHomeStudentListCell.m */; };
+		06DB70CF1CA9557500A6AC9D /* JZHomeStudentSubjectOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70CE1CA9557500A6AC9D /* JZHomeStudentSubjectOneView.m */; };
+		06DB70D21CA9559800A6AC9D /* JZHomeStudentSubjectTwoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70D11CA9559800A6AC9D /* JZHomeStudentSubjectTwoView.m */; };
+		06DB70D51CA955AF00A6AC9D /* JZHomeStudentSubjectThreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70D41CA955AF00A6AC9D /* JZHomeStudentSubjectThreeView.m */; };
+		06DB70D81CA955C000A6AC9D /* JZHomeStudentSubjectFourView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70D71CA955C000A6AC9D /* JZHomeStudentSubjectFourView.m */; };
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
 		B253C2CD1C3FA742001AF771 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BD1C3FA742001AF771 /* bitstream.c */; };
 		B253C2CE1C3FA742001AF771 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BF1C3FA742001AF771 /* mask.c */; };
@@ -101,8 +110,6 @@
 		B2BA417E1CA5035700926584 /* ButtonSelectedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F0C1CA5035700926584 /* ButtonSelectedCell.m */; };
 		B2BA417F1CA5035700926584 /* buttonSelectedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F0E1CA5035700926584 /* buttonSelectedModel.m */; };
 		B2BA41821CA5035700926584 /* ExamClassCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F141CA5035700926584 /* ExamClassCollectionViewCell.m */; };
-		B2BA41831CA5035700926584 /* ExamClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F161CA5035700926584 /* ExamClassModel.m */; };
-		B2BA41841CA5035700926584 /* ExamClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F181CA5035700926584 /* ExamClassViewController.m */; };
 		B2BA41851CA5035700926584 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F1A1CA5035700926584 /* FeedBackViewController.m */; };
 		B2BA41861CA5035700926584 /* GenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F1C1CA5035700926584 /* GenderViewController.m */; };
 		B2BA41871CA5035700926584 /* finishMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F1F1CA5035700926584 /* finishMessageView.m */; };
@@ -147,7 +154,6 @@
 		B2BA41B21CA5035700926584 /* UserCenterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F731CA5035700926584 /* UserCenterHeadView.m */; };
 		B2BA41B31CA5035700926584 /* VacationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F751CA5035700926584 /* VacationViewController.m */; };
 		B2BA41B41CA5035700926584 /* WMUITool.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F771CA5035700926584 /* WMUITool.m */; };
-		B2BA41B51CA5035700926584 /* WorkTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F791CA5035700926584 /* WorkTimeViewController.m */; };
 		B2BA41B61CA5035700926584 /* EMAudioPlayerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F861CA5035700926584 /* EMAudioPlayerUtil.m */; };
 		B2BA41B71CA5035700926584 /* EMAudioRecorderUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F881CA5035700926584 /* EMAudioRecorderUtil.m */; };
 		B2BA41B81CA5035700926584 /* EMCDDeviceManager+Media.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F8A1CA5035700926584 /* EMCDDeviceManager+Media.m */; };
@@ -538,6 +544,24 @@
 		06361A531CA51E12002708F2 /* BottomCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomCollectionCell.m; sourceTree = "<group>"; };
 		06361A551CA53511002708F2 /* MyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeaderView.h; sourceTree = "<group>"; };
 		06361A561CA53511002708F2 /* MyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHeaderView.m; sourceTree = "<group>"; };
+		06DB70BC1CA906C500A6AC9D /* ExamClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamClassViewController.h; sourceTree = "<group>"; };
+		06DB70BD1CA906C500A6AC9D /* ExamClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamClassViewController.m; sourceTree = "<group>"; };
+		06DB70C01CA909DC00A6AC9D /* ExamClassModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamClassModel.h; sourceTree = "<group>"; };
+		06DB70C11CA909DC00A6AC9D /* ExamClassModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamClassModel.m; sourceTree = "<group>"; };
+		06DB70C31CA90E3800A6AC9D /* WorkTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkTimeViewController.h; sourceTree = "<group>"; };
+		06DB70C41CA90E3800A6AC9D /* WorkTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkTimeViewController.m; sourceTree = "<group>"; };
+		06DB70C71CA91D4200A6AC9D /* JZHomeStudentToolBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentToolBarView.h; sourceTree = "<group>"; };
+		06DB70C81CA91D4200A6AC9D /* JZHomeStudentToolBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentToolBarView.m; sourceTree = "<group>"; };
+		06DB70CA1CA942F400A6AC9D /* JZHomeStudentListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentListCell.h; sourceTree = "<group>"; };
+		06DB70CB1CA942F400A6AC9D /* JZHomeStudentListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentListCell.m; sourceTree = "<group>"; };
+		06DB70CD1CA9557500A6AC9D /* JZHomeStudentSubjectOneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentSubjectOneView.h; sourceTree = "<group>"; };
+		06DB70CE1CA9557500A6AC9D /* JZHomeStudentSubjectOneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentSubjectOneView.m; sourceTree = "<group>"; };
+		06DB70D01CA9559800A6AC9D /* JZHomeStudentSubjectTwoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentSubjectTwoView.h; sourceTree = "<group>"; };
+		06DB70D11CA9559800A6AC9D /* JZHomeStudentSubjectTwoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentSubjectTwoView.m; sourceTree = "<group>"; };
+		06DB70D31CA955AF00A6AC9D /* JZHomeStudentSubjectThreeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentSubjectThreeView.h; sourceTree = "<group>"; };
+		06DB70D41CA955AF00A6AC9D /* JZHomeStudentSubjectThreeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentSubjectThreeView.m; sourceTree = "<group>"; };
+		06DB70D61CA955C000A6AC9D /* JZHomeStudentSubjectFourView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentSubjectFourView.h; sourceTree = "<group>"; };
+		06DB70D71CA955C000A6AC9D /* JZHomeStudentSubjectFourView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentSubjectFourView.m; sourceTree = "<group>"; };
 		1371250ABB78626F8329AC98 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2823AFD5ABA09767DD4F0623 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -692,10 +716,6 @@
 		B2BA3F0E1CA5035700926584 /* buttonSelectedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = buttonSelectedModel.m; sourceTree = "<group>"; };
 		B2BA3F131CA5035700926584 /* ExamClassCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamClassCollectionViewCell.h; sourceTree = "<group>"; };
 		B2BA3F141CA5035700926584 /* ExamClassCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamClassCollectionViewCell.m; sourceTree = "<group>"; };
-		B2BA3F151CA5035700926584 /* ExamClassModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamClassModel.h; sourceTree = "<group>"; };
-		B2BA3F161CA5035700926584 /* ExamClassModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamClassModel.m; sourceTree = "<group>"; };
-		B2BA3F171CA5035700926584 /* ExamClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamClassViewController.h; sourceTree = "<group>"; };
-		B2BA3F181CA5035700926584 /* ExamClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamClassViewController.m; sourceTree = "<group>"; };
 		B2BA3F191CA5035700926584 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
 		B2BA3F1A1CA5035700926584 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
 		B2BA3F1B1CA5035700926584 /* GenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenderViewController.h; sourceTree = "<group>"; };
@@ -782,8 +802,6 @@
 		B2BA3F751CA5035700926584 /* VacationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VacationViewController.m; sourceTree = "<group>"; };
 		B2BA3F761CA5035700926584 /* WMUITool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMUITool.h; sourceTree = "<group>"; };
 		B2BA3F771CA5035700926584 /* WMUITool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMUITool.m; sourceTree = "<group>"; };
-		B2BA3F781CA5035700926584 /* WorkTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkTimeViewController.h; sourceTree = "<group>"; };
-		B2BA3F791CA5035700926584 /* WorkTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkTimeViewController.m; sourceTree = "<group>"; };
 		B2BA3F811CA5035700926584 /* EMCDDeviceManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCDDeviceManagerDelegate.h; sourceTree = "<group>"; };
 		B2BA3F821CA5035700926584 /* EMCDDeviceManagerProximitySensorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCDDeviceManagerProximitySensorDelegate.h; sourceTree = "<group>"; };
 		B2BA3F841CA5035700926584 /* DemoErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoErrorCode.h; sourceTree = "<group>"; };
@@ -1442,6 +1460,10 @@
 				06234CA81CA8E66A00007DB7 /* TrainingGroundViewController.m */,
 				06234CAA1CA8E69200007DB7 /* SignatureViewController.h */,
 				06234CAB1CA8E69200007DB7 /* SignatureViewController.m */,
+				06DB70BC1CA906C500A6AC9D /* ExamClassViewController.h */,
+				06DB70BD1CA906C500A6AC9D /* ExamClassViewController.m */,
+				06DB70C31CA90E3800A6AC9D /* WorkTimeViewController.h */,
+				06DB70C41CA90E3800A6AC9D /* WorkTimeViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1463,18 +1485,39 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		06361A4A1CA51A5B002708F2 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		06361A4B1CA51A61002708F2 /* Other */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		06DB70BF1CA909DC00A6AC9D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				06DB70C01CA909DC00A6AC9D /* ExamClassModel.h */,
+				06DB70C11CA909DC00A6AC9D /* ExamClassModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		06DB70C61CA91CD200A6AC9D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				06DB70C71CA91D4200A6AC9D /* JZHomeStudentToolBarView.h */,
+				06DB70C81CA91D4200A6AC9D /* JZHomeStudentToolBarView.m */,
+				06DB70CD1CA9557500A6AC9D /* JZHomeStudentSubjectOneView.h */,
+				06DB70CE1CA9557500A6AC9D /* JZHomeStudentSubjectOneView.m */,
+				06DB70D01CA9559800A6AC9D /* JZHomeStudentSubjectTwoView.h */,
+				06DB70D11CA9559800A6AC9D /* JZHomeStudentSubjectTwoView.m */,
+				06DB70D31CA955AF00A6AC9D /* JZHomeStudentSubjectThreeView.h */,
+				06DB70D41CA955AF00A6AC9D /* JZHomeStudentSubjectThreeView.m */,
+				06DB70D61CA955C000A6AC9D /* JZHomeStudentSubjectFourView.h */,
+				06DB70D71CA955C000A6AC9D /* JZHomeStudentSubjectFourView.m */,
+				06DB70CA1CA942F400A6AC9D /* JZHomeStudentListCell.h */,
+				06DB70CB1CA942F400A6AC9D /* JZHomeStudentListCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		B23983D2EE43E3BC88B5F3F2 /* Pods */ = {
@@ -1793,8 +1836,8 @@
 		B2BA3F031CA5035700926584 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				06DB70BF1CA909DC00A6AC9D /* Model */,
 				06361A4B1CA51A61002708F2 /* Other */,
-				06361A4A1CA51A5B002708F2 /* Model */,
 				06361A491CA51A52002708F2 /* View */,
 				06361A481CA51A4C002708F2 /* Controller */,
 				B2BA3F061CA5035700926584 /* MyUserController */,
@@ -1815,10 +1858,6 @@
 				B2BA3F0E1CA5035700926584 /* buttonSelectedModel.m */,
 				B2BA3F131CA5035700926584 /* ExamClassCollectionViewCell.h */,
 				B2BA3F141CA5035700926584 /* ExamClassCollectionViewCell.m */,
-				B2BA3F151CA5035700926584 /* ExamClassModel.h */,
-				B2BA3F161CA5035700926584 /* ExamClassModel.m */,
-				B2BA3F171CA5035700926584 /* ExamClassViewController.h */,
-				B2BA3F181CA5035700926584 /* ExamClassViewController.m */,
 				B2BA3F191CA5035700926584 /* FeedBackViewController.h */,
 				B2BA3F1A1CA5035700926584 /* FeedBackViewController.m */,
 				B2BA3F1B1CA5035700926584 /* GenderViewController.h */,
@@ -1873,8 +1912,6 @@
 				B2BA3F751CA5035700926584 /* VacationViewController.m */,
 				B2BA3F761CA5035700926584 /* WMUITool.h */,
 				B2BA3F771CA5035700926584 /* WMUITool.m */,
-				B2BA3F781CA5035700926584 /* WorkTimeViewController.h */,
-				B2BA3F791CA5035700926584 /* WorkTimeViewController.m */,
 			);
 			path = MyUserController;
 			sourceTree = "<group>";
@@ -2724,13 +2761,13 @@
 		B2BA413A1CA5035700926584 /* 学员 */ = {
 			isa = PBXGroup;
 			children = (
+				06DB70C61CA91CD200A6AC9D /* View */,
 				B2BA413B1CA5035700926584 /* controller */,
 				B2BA413C1CA5035700926584 /* model */,
 				B2BA413D1CA5035700926584 /* SendMessageToStudent */,
 				B2BA41451CA5035700926584 /* StudentHomeController */,
 				B2BA414E1CA5035700926584 /* StudentList */,
 				B2BA416B1CA5035700926584 /* tool */,
-				B2BA416C1CA5035700926584 /* view */,
 			);
 			path = "学员";
 			sourceTree = "<group>";
@@ -2820,13 +2857,6 @@
 			children = (
 			);
 			path = tool;
-			sourceTree = "<group>";
-		};
-		B2BA416C1CA5035700926584 /* view */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = view;
 			sourceTree = "<group>";
 		};
 		B2BA42C61CA5041100926584 /* OrderCompleteViewController */ = {
@@ -3428,7 +3458,6 @@
 				B2BA41C81CA5035700926584 /* MJRefreshHeader.m in Sources */,
 				B2BA3EDB1CA5003B00926584 /* HMCourseModel.m in Sources */,
 				B2BA43331CA5041100926584 /* InformationMessageDetailController.m in Sources */,
-				B2BA41B51CA5035700926584 /* WorkTimeViewController.m in Sources */,
 				B2BA3E9D1CA4F47300926584 /* HMNagationController.m in Sources */,
 				B2BA41861CA5035700926584 /* GenderViewController.m in Sources */,
 				B2BA429B1CA5035700926584 /* EaseUserCell.m in Sources */,
@@ -3437,6 +3466,7 @@
 				B2BA42A71CA5035700926584 /* EaseChatToolbarItem.m in Sources */,
 				B2BA429A1CA5035700926584 /* EaseRefreshTableViewController.m in Sources */,
 				B2BA433D1CA5041100926584 /* ScanViewController.m in Sources */,
+				06DB70C21CA909DC00A6AC9D /* ExamClassModel.m in Sources */,
 				B2BA41901CA5035700926584 /* MagicMainTableViewController.m in Sources */,
 				B2BA41E91CA5035700926584 /* PSTCollectionViewCell.m in Sources */,
 				B2BA41BE1CA5035700926584 /* wav.mm in Sources */,
@@ -3477,6 +3507,7 @@
 				B2BA428B1CA5035700926584 /* NSDate+Category.m in Sources */,
 				06234CA01CA8E5D100007DB7 /* PhoneNumViewController.m in Sources */,
 				B2BA432C1CA5041100926584 /* CourseDetailViewController.m in Sources */,
+				06DB70D51CA955AF00A6AC9D /* JZHomeStudentSubjectThreeView.m in Sources */,
 				B2BA41A11CA5035700926584 /* NSUserStoreTool.m in Sources */,
 				B2BA41D51CA5035700926584 /* MWZoomingScrollView.m in Sources */,
 				B253C2F21C43C960001AF771 /* PermissiveAlignementMethods.c in Sources */,
@@ -3513,6 +3544,7 @@
 				B2BA41961CA5035700926584 /* ShopModel.m in Sources */,
 				B2BA434D1CA5041100926584 /* YBSignUpStuentListModelRootClass.m in Sources */,
 				B2BA41F71CA5035700926584 /* ChatViewController.m in Sources */,
+				06DB70BE1CA906C500A6AC9D /* ExamClassViewController.m in Sources */,
 				B2BA43271CA5041100926584 /* AppointmentCollectionViewCell.m in Sources */,
 				B2BA432F1CA5041100926584 /* CourseTimeModel.m in Sources */,
 				B2BA43341CA5041100926584 /* InformationMessageModel.m in Sources */,
@@ -3549,6 +3581,7 @@
 				B2BA43D81CA951A200926584 /* YBCourseCoursereservationdetial.m in Sources */,
 				B2BA41F01CA5035700926584 /* PSTGridLayoutInfo.m in Sources */,
 				B2BA42A81CA5035700926584 /* EaseImageView.m in Sources */,
+				06DB70D21CA9559800A6AC9D /* JZHomeStudentSubjectTwoView.m in Sources */,
 				B2BA41F11CA5035700926584 /* PSTGridLayoutItem.m in Sources */,
 				B2BA417C1CA5035700926584 /* AboutUsViewController.m in Sources */,
 				B2BA42931CA5035700926584 /* EaseMessageReadManager.m in Sources */,
@@ -3586,12 +3619,14 @@
 				B2BA43D91CA951A200926584 /* YBCourseCoursetime.m in Sources */,
 				B2BA41731CA5035700926584 /* ProtocalViewController.m in Sources */,
 				B253C2CF1C3FA742001AF771 /* QRCodeGenerator.m in Sources */,
+				06DB70CF1CA9557500A6AC9D /* JZHomeStudentSubjectOneView.m in Sources */,
 				B2BA41AA1CA5035700926584 /* StudentListModel.m in Sources */,
 				B8C458711BDB59AC00901F71 /* RFSegmentView.m in Sources */,
 				B2BA42AE1CA5035700926584 /* EaseConversationCell.m in Sources */,
 				B2BA428C1CA5035700926584 /* NSDateFormatter+Category.m in Sources */,
 				06234CA91CA8E66A00007DB7 /* TrainingGroundViewController.m in Sources */,
 				B28D5E431C64857000D9E9E1 /* pinyin.m in Sources */,
+				06DB70C51CA90E3800A6AC9D /* WorkTimeViewController.m in Sources */,
 				B2BA41A01CA5035700926584 /* NSString+CurrentTimeDay.m in Sources */,
 				B2BA3E501CA4E6BA00926584 /* AppDelegate.m in Sources */,
 				D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */,
@@ -3609,7 +3644,6 @@
 				B253C2DA1C3FA901001AF771 /* UIView+SDExtension.m in Sources */,
 				B2BA41981CA5035700926584 /* WalletModel.m in Sources */,
 				B2BA42821CA5035700926584 /* EaseLocationViewController.m in Sources */,
-				B2BA41831CA5035700926584 /* ExamClassModel.m in Sources */,
 				B2BA41741CA5035700926584 /* QueryViewController.m in Sources */,
 				B2BA43391CA5041100926584 /* JGAppointMentMidView.m in Sources */,
 				B2BA43241CA5041100926584 /* CourEnsureItemView.m in Sources */,
@@ -3640,6 +3674,7 @@
 				B2BA3EB51CA4FF9800926584 /* DVVBaseViewModel.m in Sources */,
 				B2BA41C21CA5035700926584 /* EMGifImage.m in Sources */,
 				B2BA41E21CA5035700926584 /* UIImage+EMMultiFormat.m in Sources */,
+				06DB70C91CA91D4200A6AC9D /* JZHomeStudentToolBarView.m in Sources */,
 				B2BA3EB91CA4FF9800926584 /* PortraitView.m in Sources */,
 				B2BA417E1CA5035700926584 /* ButtonSelectedCell.m in Sources */,
 				B2BA3ED91CA5003B00926584 /* HMCarLicenseModel.m in Sources */,
@@ -3663,6 +3698,7 @@
 				B2BA432A1CA5041100926584 /* CourseDetailView.m in Sources */,
 				B2BA42A61CA5035700926584 /* EaseChatToolbar.m in Sources */,
 				B2BA42871CA5035700926584 /* JGUserTools.m in Sources */,
+				06DB70CC1CA942F400A6AC9D /* JZHomeStudentListCell.m in Sources */,
 				B2BA41B31CA5035700926584 /* VacationViewController.m in Sources */,
 				B253C2D11C3FA742001AF771 /* qrinput.c in Sources */,
 				B2BA41A91CA5035700926584 /* StudentListCell.m in Sources */,
@@ -3682,6 +3718,7 @@
 				06361A541CA51E12002708F2 /* BottomCollectionCell.m in Sources */,
 				B28D5E441C64857000D9E9E1 /* WChineseSting.m in Sources */,
 				B2BA3EA11CA4F49F00926584 /* NetWorkEntiry.m in Sources */,
+				06DB70D81CA955C000A6AC9D /* JZHomeStudentSubjectFourView.m in Sources */,
 				B2BA42901CA5035700926584 /* UIViewController+HUD.m in Sources */,
 				B2BA432B1CA5041100926584 /* CourseDetailViewCell.m in Sources */,
 				B2BA433A1CA5041100926584 /* JGAppointMentViewController.m in Sources */,
@@ -3698,7 +3735,6 @@
 				B2BA41E41CA5035700926584 /* UIImageView+EMHighlightedWebCache.m in Sources */,
 				B253C2D31C3FA742001AF771 /* rscode.c in Sources */,
 				B2BA41EA1CA5035700926584 /* PSTCollectionViewController.m in Sources */,
-				B2BA41841CA5035700926584 /* ExamClassViewController.m in Sources */,
 				B2BA42A51CA5035700926584 /* EaseBubbleView.m in Sources */,
 				B2BA41721CA5035700926584 /* NSString+DY_MD5.m in Sources */,
 				B2BA429D1CA5035700926584 /* EaseMessageCell.m in Sources */,

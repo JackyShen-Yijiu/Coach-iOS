@@ -22,6 +22,8 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
 @property (strong, nonatomic) UIButton *naviBarRightButton;
 @property (strong, nonatomic) ExamClassModel *examclassmodel;
 @property (strong, nonatomic) NSMutableArray *dataArray;
+
+@property (nonatomic, strong) NSString *classModel;
 @end
 
 @implementation ExamClassViewController
@@ -155,9 +157,12 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
         
         [UserInfoModel defaultUserInfo].setClassMode = YES;
+        [UserInfoModel defaultUserInfo].classModel = self.classModel;
+       
         
         if (messege.intValue == 1) {
             [self showTotasViewWithMes:@"设置成功"];
+             [[NSNotificationCenter defaultCenter] postNotificationName:kclassTypeChange object:nil];
             [self.myNavController popViewControllerAnimated:YES];
         }else {
             [self showTotasViewWithMes:msg];
@@ -229,6 +234,7 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     ExamClassModel *  model =  self.dataArray[indexPath.row];
+    self.classModel = model.classname;
     model.is_choose = !model.is_choose;
     [collectionView reloadData];
 }

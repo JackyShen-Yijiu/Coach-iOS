@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+static NSString *kclassTypeChange = @"classTypeChange";
 @interface ExamClassViewController : UIViewController
 
 @end

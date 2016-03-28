@@ -204,9 +204,9 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 15, 15);
-    [button setBackgroundImage:[UIImage imageNamed:@"cancelSelect"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"JZCoursechoose"] forState:UIControlStateNormal];
     button.tag = 1000 + indexPath.row;
-    [button setBackgroundImage:[UIImage imageNamed:@"cancelSelect_click"] forState:UIControlStateSelected];
+    [button setBackgroundImage:[UIImage imageNamed:@"JZCoursesure"] forState:UIControlStateSelected];
     [button setSelected:[self hasSeleted:indexPath.row]];
     
     cell.accessoryView = button;
@@ -291,6 +291,7 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
             [UserInfoModel defaultUserInfo].workweek = [ws upDateArray];
             [UserInfoModel defaultUserInfo].beginTime = [first firstObject];
             [UserInfoModel defaultUserInfo].endTime = [second firstObject];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kworktimeChange object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }else {
             [self showTotasViewWithMes:msg];

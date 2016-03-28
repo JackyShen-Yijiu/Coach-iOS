@@ -38,6 +38,9 @@
 
 @property(nonatomic,assign)BOOL setClassMode;
 
+// 授课班型
+@property (nonatomic, strong) NSString *classModel;
+
 //请假开始时间
 @property(nonatomic,strong)NSString *leavebegintime;
 //请假结束时间
