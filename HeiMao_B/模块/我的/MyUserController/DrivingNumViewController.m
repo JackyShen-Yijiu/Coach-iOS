@@ -21,18 +21,19 @@
 
 - (UITextField *)modifyNameTextField {
     if (_modifyNameTextField == nil) {
-        _modifyNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 20, kSystemWide, 44)];
+        _modifyNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 10, kSystemWide, 44)];
         _modifyNameTextField.backgroundColor = [UIColor whiteColor];
+        _modifyNameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
 //        _modifyNameTextField.keyboardType = UIKeyboardTypeNumberPad;
         if ([UserInfoModel defaultUserInfo].name) {
-            _modifyNameTextField.text = [UserInfoModel defaultUserInfo].drivinglicensenumber;
+            _modifyNameTextField.text = [NSString stringWithFormat:@"%lu",[UserInfoModel defaultUserInfo].coachNumber];
         }
     }
     return _modifyNameTextField;
 }
 - (UIButton *)naviBarRightButton {
     if (_naviBarRightButton == nil) {
-        _naviBarRightButton = [WMUITool initWithTitle:@"完成" withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont systemFontOfSize:16]];
+        _naviBarRightButton = [WMUITool initWithTitle:@"保存" withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont systemFontOfSize:16]];
         _naviBarRightButton.frame = CGRectMake(0, 0, 44, 44);
         [_naviBarRightButton addTarget:self action:@selector(clickRight:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -53,7 +54,7 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     self.title = @"教练证";
-    self.view.backgroundColor = RGBColor(245, 247, 250);
+    self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.naviBarRightButton];
     self.navigationItem.rightBarButtonItem = rightItem;
     
@@ -92,7 +93,7 @@
         if (messege.intValue == 1) {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
             [alerview show];
-            [UserInfoModel defaultUserInfo].drivinglicensenumber = self.modifyNameTextField.text;
+            [UserInfoModel defaultUserInfo].coachNumber  = [self.modifyNameTextField.text integerValue];
             [[NSNotificationCenter defaultCenter] postNotificationName:kDrivingNumChange object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }else {

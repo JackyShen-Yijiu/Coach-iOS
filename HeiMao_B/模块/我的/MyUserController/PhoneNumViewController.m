@@ -21,9 +21,10 @@
 
 - (UITextField *)modifyNameTextField {
     if (_modifyNameTextField == nil) {
-        _modifyNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 20, kSystemWide, 44)];
+        _modifyNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 10, kSystemWide, 44)];
         _modifyNameTextField.backgroundColor = [UIColor whiteColor];
         _modifyNameTextField.keyboardType = UIKeyboardTypeNumberPad;
+       _modifyNameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         if ([UserInfoModel defaultUserInfo].name) {
             _modifyNameTextField.text = [UserInfoModel defaultUserInfo].tel;
         }
@@ -32,7 +33,7 @@
 }
 - (UIButton *)naviBarRightButton {
     if (_naviBarRightButton == nil) {
-        _naviBarRightButton = [WMUITool initWithTitle:@"完成" withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont systemFontOfSize:16]];
+        _naviBarRightButton = [WMUITool initWithTitle:@"保存" withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont systemFontOfSize:16]];
         _naviBarRightButton.frame = CGRectMake(0, 0, 44, 44);
         [_naviBarRightButton addTarget:self action:@selector(clickRight:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -53,7 +54,7 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     self.title = @"手机号";
-    self.view.backgroundColor = RGBColor(245, 247, 250);
+    self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.naviBarRightButton];
     self.navigationItem.rightBarButtonItem = rightItem;
 //    
