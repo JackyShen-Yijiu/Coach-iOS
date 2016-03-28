@@ -15,12 +15,17 @@
 #import "VacationViewController.h"
 #import "InformationMessageController.h"
 #import "EditorUserViewController.h"
+#import "ExamClassViewController.h"
+#import "WorkTimeViewController.h"
 
 #define kHeight 216
 @interface JZMyController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *topimgArray;
+@property (nonatomic, strong) NSArray *topTitleArray;
+@property (nonatomic, strong) NSArray *topDetailArray;
+
 @property (nonatomic, strong) NSArray *bottomTitleArray;
 @property (nonatomic, strong) NSArray *bottomImgArray;
 @property (nonatomic, strong) MyHeaderView *headerView;
@@ -49,13 +54,20 @@
     [self.view addSubview:self.collectionView];
     [self initArray];
     [self initUI];
+    [self initNationcenter];
    
 }
+- (void)initNationcenter{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(classTypeChange) name:kclassTypeChange object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(worktimeChange) name:kworktimeChange object: nil];
+}
 - (void)initNarBar{
-//    self.myNavigationItem.title = nil;
-//    self.myNavigationItem.titleView = nil;
-//    self.myNavigationItem.rightBarButtonItem = nil;
-//    self.myNavigationItem.rightBarButtonItems = nil;
+    self.myNavigationItem.title = nil;
+    self.myNavigationItem.titleView = nil;
+    self.myNavigationItem.rightBarButtonItem = nil;
+    self.myNavigationItem.rightBarButtonItems = nil;
+    self.myNavigationItem.leftBarButtonItem = nil;
     self.myNavigationItem.title = [UserInfoModel defaultUserInfo].name;
     CGRect backframe= CGRectMake(0, 0, 14, 14);
     UIButton* backButton= [UIButton buttonWithType:UIButtonTypeSystem];
@@ -69,6 +81,21 @@
 
 - (void)initArray{
     self.topimgArray = @[@"class",@"time"];
+    self.topTitleArray = @[@"授课班型",@"工作时间"];
+    
+    // 授课班型数据
+    NSString *classTypeStr = nil;
+    if ([[UserInfoModel defaultUserInfo].classModel isEqualToString:@""] || [UserInfoModel defaultUserInfo].classModel == nil ) {
+        
+        classTypeStr = @"未设置";
+    }else{
+        classTypeStr = [UserInfoModel defaultUserInfo].classModel;
+    }
+    // 工作时间数据
+    NSString *workTimeStr = [self workTimeData];
+    
+    self.topDetailArray = @[classTypeStr,workTimeStr];
+    
     self.bottomImgArray = @[@"rest",@"wallet",@"Information",@"set"];
     self.bottomTitleArray = @[@"休假",@"钱包",@"资讯",@"设置"];
 }
@@ -126,6 +153,8 @@
         TopCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
         
         cell.imgView.image = [UIImage imageNamed:self.topimgArray[indexPath.row]];
+        cell.classTypeLabel.text = self.topTitleArray[indexPath.row];
+        cell.contentLabel.text = self.topDetailArray[indexPath.row];
         return cell;
     }
     if (1 == indexPath.section) {
@@ -142,6 +171,24 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPat{
+    if (0 == indexPat.section) {
+        if (0 == indexPat.row) {
+            // 授课班型
+            ExamClassViewController *examClassVC = [[ExamClassViewController alloc] init];
+            [self.navigationController pushViewController:examClassVC animated:YES];
+            
+        }
+        if (1 == indexPat.row) {
+            // 工作时间
+            WorkTimeViewController *worktimeVC = [[WorkTimeViewController alloc] init];
+            [self.navigationController pushViewController:worktimeVC animated:YES];
+            
+            
+        }
+    }
+    
+    
+    
     if (1 == indexPat.section) {
         if (0 == indexPat.row) {
             // 休假
@@ -197,10 +244,120 @@
     return 1;
 }
 
+#pragma mark --- 授课班型和工作时间改变的通知
+- (void)classTypeChange{
+    // 授课班型
+    NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:0];
+    [self.collectionView reloadItemsAtIndexPaths:@[path]];
+}
+- (void)worktimeChange{
+    // 工作时间
+    NSIndexPath *path = [NSIndexPath indexPathForItem:1 inSection:0];
+    [self.collectionView reloadItemsAtIndexPaths:@[path]];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
 }
+#pragma mark ---- 工作时间相关排序
+
+- (NSString *)workTimeData{
+    // 工作时间
+    NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
+    
+    NSLog(@"weekArray:%@",weekArray);
+    NSLog(@"weekArray.count:%lu",weekArray.count);
+    
+    BOOL isInclude = [weekArray containsObject:@(7)];
+    NSLog(@"isInclude:%d",isInclude);
+    if (isInclude) {
+        NSMutableArray *tempArray = [NSMutableArray arrayWithArray:weekArray];
+        [tempArray removeObject:@(7)];
+        weekArray = tempArray;
+        [UserInfoModel defaultUserInfo].workweek = weekArray;
+    }
+    
+    NSString * workSetDes = @"未设置";
+    
+    if (weekArray) {
+        
+        NSArray *newArray = [self bubbleSort:weekArray];
+        NSLog(@"newArray:%@",newArray);
+        for (int i = 0;i<newArray.count;i++) {
+            NSLog(@"i:%d",[newArray[i] intValue]);
+        }
+        
+        if (newArray && newArray.count>0) {
+            
+            NSMutableString *mutableStr = [NSMutableString string];
+            
+            if (newArray.count==7) {
+                
+                [mutableStr appendString:@"周一至周日"];
+                
+            }else{
+                
+                for (int i = 0; i<newArray.count; i++) {
+                    
+                    NSString *endDate = [NSString stringWithFormat:@"%@",[self dateStringWithDateNumber:[newArray[i] integerValue]]];
+                    [mutableStr appendString:endDate];
+                    
+                }
+                
+            }
+            
+            workSetDes = mutableStr;
+            
+        }
+        
+    }
+    return workSetDes;
+
+}
+- (NSArray *)bubbleSort:(NSArray *)arg{//冒泡排序算法
+    
+    NSMutableArray *args = [NSMutableArray arrayWithArray:arg];
+    
+    for(int i=0;i<args.count-1;i++){
+        
+        for(int j=i+1;j<args.count;j++){
+            
+            if (args[i]>args[j]){
+                
+                int temp = [args[i] intValue];
+                
+                [args replaceObjectAtIndex:i withObject:args[j]];
+                
+                args[j] = @(temp);
+                
+            }
+        }
+    }
+    return args;
+}
+
+
+- (NSString *)dateStringWithDateNumber:(NSInteger)number
+{
+    if (number==0) {
+        return @"周日";
+    }else if (number==1){
+        return @"周一";
+    }else if (number==2){
+        return @"周二";
+    }else if (number==3){
+        return @"周三";
+    }else if (number==4){
+        return @"周四";
+    }else if (number==5){
+        return @"周五";
+    }else if (number==6){
+        return @"周六";
+    }
+    return nil;
+}
+
+#pragma mark ---- Lazy 加载
 
 - (UICollectionView *)collectionView{
     if (!_collectionView) {
@@ -221,8 +378,8 @@
         _signatureImgView = [[UIImageView alloc] init];
         _signatureImgView.image = [UIImage imageNamed:@"edit"];
         _signatureImgView.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signatureSetUp)];
-        [_signatureImgView addGestureRecognizer:tapGes];
+//        UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signatureSetUp)];
+//        [_signatureImgView addGestureRecognizer:tapGes];
     }
     return _signatureImgView;
 }

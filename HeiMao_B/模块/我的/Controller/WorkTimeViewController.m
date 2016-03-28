@@ -291,6 +291,7 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
             [UserInfoModel defaultUserInfo].workweek = [ws upDateArray];
             [UserInfoModel defaultUserInfo].beginTime = [first firstObject];
             [UserInfoModel defaultUserInfo].endTime = [second firstObject];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kworktimeChange object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }else {
             [self showTotasViewWithMes:msg];
