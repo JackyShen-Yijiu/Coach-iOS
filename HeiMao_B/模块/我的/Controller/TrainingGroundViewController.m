@@ -119,7 +119,9 @@ static NSString *const kTrainingGround = @"getschooltrainingfield?schoolid=%@";
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"上传成功" controller:self];
             
             [alerview show];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ktrainGroundKey object:nil];
             [self.navigationController popViewControllerAnimated:YES];
+
         }else {
             return;
         }

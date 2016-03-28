@@ -38,9 +38,10 @@
 static NSString *const ktagArrChange = @"ktagArrChange";
 
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
+#define KpickViewH  200
 
 
-@interface EditorUserViewController ()<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface EditorUserViewController ()<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 
 @property (strong, nonatomic) NSArray *dataArray;
@@ -63,6 +64,15 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 
 @property (nonatomic, strong) UILabel *footerLabel;
 
+// 教龄选择器
+@property (nonatomic, strong) UIView *bgView;
+
+@property (nonatomic, strong) UIPickerView *pickerView;
+
+@property (nonatomic, strong) NSArray *teachAgeArray;
+
+@property (nonatomic, strong) NSString *resultAgeStr;
+
 @end
 
 @implementation EditorUserViewController
@@ -77,6 +87,23 @@ static NSString *const ktagArrChange = @"ktagArrChange";
         _imgArray = @[@[@""],@[@"name.png",@"sex",@"card",@"phone"],@[@"permit",@"age",@"work",@"teach",@"site"],@[@"explain"]];
     }
     return _imgArray;
+}
+- (NSArray *)teachAgeArray{
+    if (_teachAgeArray == nil) {
+        _teachAgeArray = @[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40"];
+    }
+    return _teachAgeArray;
+}
+- (UIView *)bgView{
+    if (_bgView == nil) {
+        _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - KpickViewH)];
+        _bgView.backgroundColor = [UIColor blackColor];
+        _bgView.alpha = 0.32;
+        _bgView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tapGe = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeView)];
+        [_bgView addGestureRecognizer:tapGe];
+    }
+    return _bgView;
 }
 - (NSMutableArray *)systemTagArray {
     if (!_systemTagArray) {
@@ -107,6 +134,16 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     }
     return _footerLabel;
 }
+- (UIPickerView *)pickerView {
+    if (_pickerView == nil) {
+        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0 , self.view.height - KpickViewH, self.view.width, KpickViewH)];
+        _pickerView.delegate = self;
+        _pickerView.dataSource = self;
+        _pickerView.backgroundColor = [UIColor whiteColor];
+    }
+    return _pickerView;
+}
+
 - (NSArray *)detailDataArray {
     /*
      {
@@ -277,8 +314,9 @@ static NSString *const ktagArrChange = @"ktagArrChange";
                         [self strTolerance:coachNumber],
                         [self strTolerance:seniority],
                         [self strTolerance:workWay],
-                        [self strTolerance:trainName],
-                        [self strTolerance:string]
+                        [self strTolerance:string],
+                        [self strTolerance:trainName]
+                        
                     
                         ];
     // 数组四
@@ -323,19 +361,29 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     
     [self.view addSubview:self.tableView];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(genderChange) name:kGenderChange object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signatureChange) name:kSignatureChange object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nameChange) name:kmodifyNameChange object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nickNameChange) name:kIDCardChange object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addAddressChange) name:kPhoneNumChange object:nil];
+    // 手机号码改变
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(phoneNumChange) name:kPhoneNumChange object:nil];
+    // 教练证改变
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(drivingNumChange) name:kDrivingNumChange object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagArrayChange) name:ktagArrChange object:nil];
-    
+    // 教龄改变
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modifyjialinKey) name:modifyjialinKey object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trainGroundKey) name:ktrainGroundKey object:nil]; // 训练场地
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(worktimeKey) name:kworktimeKey object:nil]; // 工作时间
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(teachSubjectKey) name:kteachSubjectKey object:nil]; // 可授科目
-
+    // 可授科目改变
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(teachSubjectKey) name:kteachSubjectKey object:nil];
+    // 训练场地改变
+         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trainGroundKey) name:ktrainGroundKey object:nil];
+    
+    // 个性说明在视图将要显示的时候进行重新加载数据,所以不需添加通知了
+}
+#pragma mark --- 手势方法
+- (void)removeView{
+    
+    // 当教龄改变时向服务器提交修改数据
+    if ([self.resultAgeStr integerValue] != [UserInfoModel defaultUserInfo].Seniority) {
+        [self commintCoachAgeData];
+    }
+    [self.bgView removeFromSuperview];
+    [self.pickerView removeFromSuperview];
+    
 }
 - (void)startAddData{
     // 训练场地
@@ -451,57 +499,44 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     }
     return nil;
 }
-
-- (void)nameChange {          //名字改变
-    NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:0];
+// 手机号码改名
+- (void)phoneNumChange{
+    NSIndexPath *path  =  [NSIndexPath indexPathForRow:3 inSection:1];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 }
-
-- (void)nickNameChange {      //身份证改变
-    NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:1];
+//  教练证改变
+- (void)drivingNumChange {
+    
+    NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:2];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 }
-
-- (void)drivingNumChange {    //驾驶证改变
-    NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:1];
-    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
-}
+ //教龄
 -(void)modifyjialinKey
-{    //驾龄
-    NSIndexPath *path = [NSIndexPath indexPathForRow:3 inSection:1];
+{
+    NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:2];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 }
-- (void)addAddressChange {
-    NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:1];
+ //可授科目
+- (void)teachSubjectKey {
+    NSIndexPath *path = [NSIndexPath indexPathForRow:3 inSection:2];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 }
-
-
-- (void)genderChange {        //性别改变
-    NSIndexPath *path = [NSIndexPath indexPathForRow:4 inSection:1];
+ //训练场地
+- (void)trainGroundKey {
+    NSIndexPath *path = [NSIndexPath indexPathForRow:4 inSection:2];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 }
-//- (void)trainGroundKey {        //训练场地
-//    NSIndexPath *path = [NSIndexPath indexPathForRow:5 inSection:1];
-//    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
-//}
-//- (void)worktimeKey {        //工作时间
-//    NSIndexPath *path = [NSIndexPath indexPathForRow:6 inSection:1];
-//    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
-//}
-//- (void)teachSubjectKey {        //可授科目
-//    NSIndexPath *path = [NSIndexPath indexPathForRow:7 inSection:1];
-//    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
-//}
-- (void)signatureChange {     //个人说明改变
+//个人说明改变
+- (void)signatureChange {
     NSIndexPath *path = [NSIndexPath indexPathForItem:1 inSection:2];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 }
 
-- (void)tagArrayChange {     //标签数组改变
-    NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:2];
-    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
-}
+//- (void)worktimeKey {        //工作时间
+//    NSIndexPath *path = [NSIndexPath indexPathForRow:6 inSection:1];
+//    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+//}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 4;
 }
@@ -512,24 +547,10 @@ static NSString *const ktagArrChange = @"ktagArrChange";
         return 80;
     }
     return 44;
-//    if (indexPath.section == 2 && indexPath.row == 1) {
-//        NSString *string = self.detailDataArray[indexPath.section][indexPath.row];
-//        CGRect bounds = [string boundingRectWithSize:
-//                         CGSizeMake([[UIScreen mainScreen] bounds].size.width - 30, 10000) options:
-//                         NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.f]} context:nil];
-//        return 20+bounds.size.height+10;
-//    }
-//    return 44;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 10;
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-////    if (section == 0) {
-////        return 0;
-////    }
-////    return 20;
-//}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSArray *array = self.dataArray[section];
     return array.count;
@@ -576,59 +597,6 @@ static NSString *const ktagArrChange = @"ktagArrChange";
         return editorBottomCell;
 
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    if (indexPath.section == 2 && indexPath.row == 1) {
-//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"yy_1"];
-//        if (!cell) {
-//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"yy_1"];
-//        }
-//        cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
-//        cell.textLabel.font = [UIFont systemFontOfSize:14];
-//        cell.detailTextLabel.text = self.detailDataArray[indexPath.section][indexPath.row];
-//        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
-//        cell.detailTextLabel.numberOfLines = 0;
-//        return cell;
-//    }
-//    static NSString *cellId = @"cell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-//    if (!cell) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    }
-//    if ((indexPath.row == 5 && indexPath.section == 1) || (indexPath.row == 6 && indexPath.section == 1) || (indexPath.row == 7 && indexPath.section == 1)) {
-//        NSLog(@"indexPath.section = %lu,indexPath.row= %lu",indexPath.section,indexPath.row);
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//        cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
-//        cell.textLabel.textColor = [UIColor blackColor];
-//        cell.textLabel.font = [UIFont systemFontOfSize:14];
-//        cell.detailTextLabel.text = self.strArray[indexPath.row - 5];
-//        cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
-//
-//    }
-//    else{
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//        cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
-//        cell.textLabel.textColor = [UIColor blackColor];
-//        cell.textLabel.font = [UIFont systemFontOfSize:14];
-//        cell.detailTextLabel.text = self.detailDataArray[indexPath.section][indexPath.row];
-//        cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
-//
-//    }
-//    return cell;
     return nil;
 }
 
@@ -654,18 +622,18 @@ static NSString *const ktagArrChange = @"ktagArrChange";
         
     }
     if (2 == indexPath.section && 1 == indexPath.row) {
-        // 教龄
-        modifyjialinViewController *vc = [[modifyjialinViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.view addSubview:self.pickerView];
+        [self.view addSubview:self.bgView];
+
         
     }
-    if (2 == indexPath.section && 2 == indexPath.row) {
-        // 工作性质
-        
-        WorkNatureController *workNatureVC = [[WorkNatureController alloc] init];
-        [self.navigationController pushViewController:workNatureVC animated:YES];
-        
-    }
+//    if (2 == indexPath.section && 2 == indexPath.row) {
+//        // 工作性质
+//        
+//        WorkNatureController *workNatureVC = [[WorkNatureController alloc] init];
+//        [self.navigationController pushViewController:workNatureVC animated:YES];
+//        
+//    }
     if (2 == indexPath.section && 3 == indexPath.row) {
         // 可授科目
         TeachSubjectViewController *teach = [[TeachSubjectViewController alloc] init];
@@ -688,26 +656,10 @@ static NSString *const ktagArrChange = @"ktagArrChange";
         
     }
     
-    
-    
-//    }else if (indexPath.section == 1 && indexPath.row == 2) {
-//        
-//    }else if (indexPath.section == 2 && indexPath.row == 0) {
-//        PersonaizeLabelController *plc = [[PersonaizeLabelController alloc] init];
-//        plc.systemTagArray = self.systemTagArray;
-//        plc.customTagArray = self.customTagArray;
-//        [self.navigationController pushViewController:plc animated:YES];
-//    }else if (indexPath.section==1&&indexPath.row==3){
-//        
-//    }else if (indexPath.section==1&&indexPath.row==5)
-//    { // 训练场地
 //            }else if (indexPath.section==1&&indexPath.row==6){ // 工作时间
 //        WorkTimeViewController *workTime = [[WorkTimeViewController alloc] init];
 //        [self.navigationController pushViewController:workTime animated:YES];
-//    }else if (indexPath.section==1&&indexPath.row==7){ // 可授科目
-//        
-//
-//    }
+
 }
 #pragma mark - delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -778,11 +730,68 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     viewController.navigationItem.rightBarButtonItem = rightItem;
     
 }
+
+#pragma mark - pickerView data source and delegate
+
+// returns the number of 'columns' to display.
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+// returns the # of rows in each component..
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return self.teachAgeArray.count;
+}
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return self.teachAgeArray[row];
+}
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    NSString *resultString = _teachAgeArray[row];
+    self.resultAgeStr = resultString;
+
+}
+
 - (void)clickCancel:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+#pragma mark -- 向服务器提交 教龄修改后的数据
+- (void)commintCoachAgeData {
+    
+    
+    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
+    
+    NSDictionary *dicParam = @{@"Seniority":self.resultAgeStr,@"coachid":[UserInfoModel defaultUserInfo].userID};
+    
+    [JENetwoking startDownLoadWithUrl:updateUserInfoUrl postParam:dicParam WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+        
+        if (!data) {
+            [self showTotasViewWithMes:@"网络连接错误，请稍后再试"];
+            return ;
+        }
+        
+        NSDictionary *dataParam = data;
+        NSNumber *messege = dataParam[@"type"];
+        NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
+        
+        if (messege.intValue == 1) {
+            
+            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
+            [alerview show];
+            [UserInfoModel defaultUserInfo].Seniority = [self.resultAgeStr integerValue];
+            NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:2];
+            [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+
+            
+        }else {
+            if(msg){
+                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
+                [alerview show];
+            }
+        }
+        
+    }];
 }
 
 @end

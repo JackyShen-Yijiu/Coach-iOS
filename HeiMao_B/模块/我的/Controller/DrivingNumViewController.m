@@ -1,38 +1,39 @@
 //
-//  PhoneNumViewController.m
+//  DrivingNumViewController.m
 //  HeiMao_B
 //
 //  Created by bestseller on 15/11/16.
 //  Copyright © 2015年 ke. All rights reserved.
 //
 
-#import "PhoneNumViewController.h"
+#import "DrivingNumViewController.h"
 #import "UIDevice+JEsystemVersion.h"
 #import "ToolHeader.h"
 //static NSString *const kupdateUserInfo = @"userinfo/updatecoachinfo";
-
-@interface PhoneNumViewController ()
+@interface DrivingNumViewController ()
 @property (strong, nonatomic) UITextField *modifyNameTextField;
 @property (strong, nonatomic) UIButton *naviBarRightButton;
 @property (strong, nonatomic) UIButton *naviBarLeftButton;
 @end
 
-@implementation PhoneNumViewController
+@implementation DrivingNumViewController
+
 
 - (UITextField *)modifyNameTextField {
     if (_modifyNameTextField == nil) {
-        _modifyNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 20, kSystemWide, 44)];
+        _modifyNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 10, kSystemWide, 44)];
         _modifyNameTextField.backgroundColor = [UIColor whiteColor];
-        _modifyNameTextField.keyboardType = UIKeyboardTypeNumberPad;
+        _modifyNameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+//        _modifyNameTextField.keyboardType = UIKeyboardTypeNumberPad;
         if ([UserInfoModel defaultUserInfo].name) {
-            _modifyNameTextField.text = [UserInfoModel defaultUserInfo].tel;
+            _modifyNameTextField.text = [NSString stringWithFormat:@"%lu",[UserInfoModel defaultUserInfo].coachNumber];
         }
     }
     return _modifyNameTextField;
 }
 - (UIButton *)naviBarRightButton {
     if (_naviBarRightButton == nil) {
-        _naviBarRightButton = [WMUITool initWithTitle:@"完成" withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont systemFontOfSize:16]];
+        _naviBarRightButton = [WMUITool initWithTitle:@"保存" withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont systemFontOfSize:16]];
         _naviBarRightButton.frame = CGRectMake(0, 0, 44, 44);
         [_naviBarRightButton addTarget:self action:@selector(clickRight:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -52,14 +53,14 @@
     if ([UIDevice jeSystemVersion] >= 7.0) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    self.title = @"手机号";
-    self.view.backgroundColor = RGBColor(245, 247, 250);
+    self.title = @"教练证";
+    self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.naviBarRightButton];
     self.navigationItem.rightBarButtonItem = rightItem;
-//    
+    
 //    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:self.naviBarLeftButton];
 //    self.navigationItem.leftBarButtonItem = leftItem;
-    
+//    
     
     [self.view addSubview:self.modifyNameTextField];
     
@@ -70,29 +71,21 @@
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
-- (BOOL)isValidateMobile:(NSString *)mobile
-{
-    //    NSString *regex = @"^((17[0-9])|(13[0-9])|(147)|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
-    NSString *regex = @"^(1[0-9])\\d{9}$";
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    BOOL isMatch = [pred evaluateWithObject:mobile];
-    return isMatch;
-}
 - (void)clickRight:(UIButton *)sender {
     //
-    BOOL isRight = [self isValidateMobile:_modifyNameTextField.text];
-    if (!isRight) {
-        [self showTotasViewWithMes:@"请输入正确的手机号码"];
-        return;
-    }
     DYNSLog(@"userid = %@",self.modifyNameTextField.text);
     NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
     
-    NSDictionary *dicParam = @{@"mobile":self.modifyNameTextField.text,@"coachid":[UserInfoModel defaultUserInfo].userID};
+    NSDictionary *dicParam = @{@"drivinglicensenumber":self.modifyNameTextField.text,@"coachid":[UserInfoModel defaultUserInfo].userID};
     
     
     [JENetwoking startDownLoadWithUrl:updateUserInfoUrl postParam:dicParam WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
        
+        if (!data) {
+            [self showTotasViewWithMes:@"网络连接错误，请稍后再试"];
+            return ;
+        }
+
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
@@ -100,12 +93,14 @@
         if (messege.intValue == 1) {
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
             [alerview show];
-            [UserInfoModel defaultUserInfo].tel = self.modifyNameTextField.text;
-            [[NSNotificationCenter defaultCenter] postNotificationName:kPhoneNumChange object:nil];
+            [UserInfoModel defaultUserInfo].coachNumber  = [self.modifyNameTextField.text integerValue];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDrivingNumChange object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }else {
-            ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
-            [alerview show];
+            if(msg){
+                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
+                [alerview show];
+            }
         }
         
     }];

@@ -33,8 +33,8 @@
 - (UIButton *)selectedButton {
     if (_selectedButton == nil) {
         _selectedButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_selectedButton setImage:[UIImage imageNamed:@"cancelSelect"] forState:UIControlStateNormal];
-        [_selectedButton setImage:[UIImage imageNamed:@"cancelSelect_click"] forState:UIControlStateSelected];
+        [_selectedButton setImage:[UIImage imageNamed:@"JZCoursechoose"] forState:UIControlStateNormal];
+        [_selectedButton setImage:[UIImage imageNamed:@"JZCoursesure"] forState:UIControlStateSelected];
     }
     return _selectedButton;
 }
