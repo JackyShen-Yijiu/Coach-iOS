@@ -184,7 +184,8 @@
 #pragma mark LoadDayData
 - (void)fdCalendar:(FDCalendar *)calendar didSelectedDate:(NSDate *)date
 {
-    NSLog(@"切换日历代理方法 %s",__func__);
+    NSLog(@"切换日历代理方法 %s date:%@",__func__,date);
+
     self.selectDate = date;
     self.ybCalendarHeadView.selectDate = self.selectDate;
 
@@ -193,6 +194,7 @@
         [self.dateFormattor setDateFormat:@"yyyy-M-d"];
     }
     NSString * dataStr = [self.dateFormattor stringFromDate:date];
+    NSLog(@"切换日历代理方法 dataStr:%@",dataStr);
     
     // 加载底部预约列表数据
     [self loadFootListData:dataStr];
@@ -204,8 +206,11 @@
     NSLog(@"切换日历代理方法 %s",__func__);
     
     self.selectDate = date;
-    self.calendarHeadView.selectDate = self.selectDate;
-    [self.calendarHeadView setCurrentDate:self.selectDate];
+//    self.calendarHeadView.selectDate = self.selectDate;
+    [self.calendarHeadView changeDate:self.selectDate];
+    
+//    [self.calendarHeadView setCurrentDate:self.selectDate];
+//    [self fdCalendar:self.calendarHeadView didSelectedDate:self.selectDate];
     
     // 隐藏展开更多
     if (self.isOpen) {
@@ -217,6 +222,7 @@
         [self.dateFormattor setDateFormat:@"yyyy-M-d"];
     }
     NSString * dataStr = [self.dateFormattor stringFromDate:date];
+    NSLog(@"YBFDCalendar切换日历代理方法 dataStr:%@",dataStr);
     
     // 加载底部预约列表数据
     [self loadFootListData:dataStr];
@@ -260,6 +266,8 @@
 
 - (void)loadFootListData:(NSString *)dataStr
 {
+    
+    NSLog(@"loadFootListData dataStr:%@",dataStr);
     
     NSString *  userId = [[UserInfoModel defaultUserInfo] userID];
     if (userId==nil) {

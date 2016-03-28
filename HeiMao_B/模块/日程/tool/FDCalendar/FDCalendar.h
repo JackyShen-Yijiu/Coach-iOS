@@ -19,6 +19,7 @@
 @property(nonatomic,weak)id<FDCalendarDelegate>delegate;
 
 - (void)setCurrentDate:(NSDate *)date;
+- (void)changeDate:(NSDate *)date;
 
 @property (nonatomic,strong) NSDate *selectDate;
 

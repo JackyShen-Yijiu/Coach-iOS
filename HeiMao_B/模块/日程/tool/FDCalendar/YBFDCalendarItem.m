@@ -91,7 +91,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     flowLayot.sectionInset = UIEdgeInsetsZero;
     flowLayot.itemSize = CGSizeMake(itemWidth, itemHeight);
     flowLayot.minimumLineSpacing = 0;
-    flowLayot.minimumInteritemSpacing = 1;
+    flowLayot.minimumInteritemSpacing = 0;
     flowLayot.scrollDirection = UICollectionViewScrollDirectionVertical;
     CGRect collectionViewFrame = CGRectMake(CollectionViewHorizonMargin, CollectionViewVerticalMargin, DeviceWidth-30, YBFDCalendarH-topTitleH-ITEMHEIGTH);
     self.collectionView = [[UICollectionView alloc] initWithFrame:collectionViewFrame collectionViewLayout:flowLayot];
@@ -339,8 +339,6 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     return (components1.year == components2.year) && (components1.month == components2.month) && (components1.day == components2.day);
 }
 
-#pragma mark - UICollectionViewDelegate
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:self.seletedDate];
@@ -349,8 +347,13 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     
     [components setDay:indexPath.row - firstWeekday + 1];
     
+    NSDate *selectDate = [self getCurrentData:indexPath];
+    NSLog(@"didSelectItemAtIndexPath selectDate:%@",selectDate);
+    
     NSDate *selectedDate = [[NSCalendar currentCalendar] dateFromComponents:components];
 //    self.seletedDate = selectedDate;
+    
+    NSLog(@"didSelectItemAtIndexPath selectedDate:%@",selectedDate);
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(YBCalendarItem:didSelectedDate:)]) {
         [self.delegate YBCalendarItem:self didSelectedDate:selectedDate];

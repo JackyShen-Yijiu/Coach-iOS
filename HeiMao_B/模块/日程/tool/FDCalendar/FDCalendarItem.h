@@ -37,7 +37,11 @@ typedef NS_ENUM(NSInteger,KCellStation){
 /*
  *  刷新界面
  */
-- (void)reloadData;
+- (void)reloadDate;
+/*
+ *  刷新界面
+ */
+- (void)changeDate;
 
 @end
 
