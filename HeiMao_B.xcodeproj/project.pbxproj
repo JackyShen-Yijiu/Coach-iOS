@@ -23,6 +23,7 @@
 		06DB70C21CA909DC00A6AC9D /* ExamClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70C11CA909DC00A6AC9D /* ExamClassModel.m */; };
 		06DB70C51CA90E3800A6AC9D /* WorkTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70C41CA90E3800A6AC9D /* WorkTimeViewController.m */; };
 		06DB70C91CA91D4200A6AC9D /* JZHomeStudentToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70C81CA91D4200A6AC9D /* JZHomeStudentToolBarView.m */; };
+		06DB70CC1CA942F400A6AC9D /* JZHomeStudentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70CB1CA942F400A6AC9D /* JZHomeStudentListCell.m */; };
 		A34DBFD2C488A5CB6E7E2EFC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2823AFD5ABA09767DD4F0623 /* libPods.a */; };
 		B253C2CD1C3FA742001AF771 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BD1C3FA742001AF771 /* bitstream.c */; };
 		B253C2CE1C3FA742001AF771 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = B253C2BF1C3FA742001AF771 /* mask.c */; };
@@ -538,6 +539,8 @@
 		06DB70C41CA90E3800A6AC9D /* WorkTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkTimeViewController.m; sourceTree = "<group>"; };
 		06DB70C71CA91D4200A6AC9D /* JZHomeStudentToolBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentToolBarView.h; sourceTree = "<group>"; };
 		06DB70C81CA91D4200A6AC9D /* JZHomeStudentToolBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentToolBarView.m; sourceTree = "<group>"; };
+		06DB70CA1CA942F400A6AC9D /* JZHomeStudentListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentListCell.h; sourceTree = "<group>"; };
+		06DB70CB1CA942F400A6AC9D /* JZHomeStudentListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentListCell.m; sourceTree = "<group>"; };
 		1371250ABB78626F8329AC98 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2823AFD5ABA09767DD4F0623 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61865CEFE68BFD5A7D344240 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -1464,6 +1467,8 @@
 			children = (
 				06DB70C71CA91D4200A6AC9D /* JZHomeStudentToolBarView.h */,
 				06DB70C81CA91D4200A6AC9D /* JZHomeStudentToolBarView.m */,
+				06DB70CA1CA942F400A6AC9D /* JZHomeStudentListCell.h */,
+				06DB70CB1CA942F400A6AC9D /* JZHomeStudentListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3617,6 +3622,7 @@
 				B2BA432A1CA5041100926584 /* CourseDetailView.m in Sources */,
 				B2BA42A61CA5035700926584 /* EaseChatToolbar.m in Sources */,
 				B2BA42871CA5035700926584 /* JGUserTools.m in Sources */,
+				06DB70CC1CA942F400A6AC9D /* JZHomeStudentListCell.m in Sources */,
 				B2BA41B31CA5035700926584 /* VacationViewController.m in Sources */,
 				B253C2D11C3FA742001AF771 /* qrinput.c in Sources */,
 				B2BA41A91CA5035700926584 /* StudentListCell.m in Sources */,
