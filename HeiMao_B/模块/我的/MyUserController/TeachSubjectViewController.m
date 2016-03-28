@@ -37,12 +37,13 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kSystemWide, kSystemHeight-64) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor clearColor];
     }
     return _tableView;
 }
 - (UIButton *)naviBarRightButton {
     if (_naviBarRightButton == nil) {
-        _naviBarRightButton = [WMUITool initWithTitle:@"完成" withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont systemFontOfSize:16]];
+        _naviBarRightButton = [WMUITool initWithTitle:@"保存" withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont systemFontOfSize:16]];
         _naviBarRightButton.frame = CGRectMake(0, 0, 44, 44);
         [_naviBarRightButton addTarget:self action:@selector(clickRight:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -52,7 +53,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"可授科目";
-    self.view.backgroundColor = RGB_Color(245, 247, 250);
+    self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     self.automaticallyAdjustsScrollViewInsets = NO;
     if ([UIDevice jeSystemVersion] >= 7.0f) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -130,8 +131,8 @@
 
                 [[UserInfoModel defaultUserInfo] setSubject:subject];
                 [self showTotasViewWithMes:@"设置成功"];
-                [self.navigationController popViewControllerAnimated:YES];
-
+            [[NSNotificationCenter defaultCenter] postNotificationName:kteachSubjectKey object:nil];
+            [self.navigationController popViewControllerAnimated:YES];
             
         }else {
             [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
@@ -147,6 +148,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellId = @"cell";
 //    UITableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:cellId];
@@ -160,9 +164,9 @@
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 15, 15);
-    [button setBackgroundImage:[UIImage imageNamed:@"cancelSelect"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"JZCoursechoose"] forState:UIControlStateNormal];
     button.tag = 100 + indexPath.row;
-    [button setBackgroundImage:[UIImage imageNamed:@"cancelSelect_click"] forState:UIControlStateSelected];
+    [button setBackgroundImage:[UIImage imageNamed:@"JZCoursesure"] forState:UIControlStateSelected];
     [button addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     cell.accessoryView = button;
     [self.buttonArray addObject:button];
