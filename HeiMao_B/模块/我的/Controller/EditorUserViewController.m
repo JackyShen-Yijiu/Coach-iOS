@@ -376,6 +376,8 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 }
 #pragma mark --- 手势方法
 - (void)removeView{
+    
+    // 当教龄改变时向服务器提交修改数据
     if ([self.resultAgeStr integerValue] != [UserInfoModel defaultUserInfo].Seniority) {
         [self commintCoachAgeData];
     }
@@ -620,9 +622,6 @@ static NSString *const ktagArrChange = @"ktagArrChange";
         
     }
     if (2 == indexPath.section && 1 == indexPath.row) {
-        // 教龄
-//        modifyjialinViewController *vc = [[modifyjialinViewController alloc] init];
-//        [self.navigationController pushViewController:vc animated:YES];
         [self.view addSubview:self.pickerView];
         [self.view addSubview:self.bgView];
 
@@ -657,26 +656,10 @@ static NSString *const ktagArrChange = @"ktagArrChange";
         
     }
     
-    
-    
-//    }else if (indexPath.section == 1 && indexPath.row == 2) {
-//        
-//    }else if (indexPath.section == 2 && indexPath.row == 0) {
-//        PersonaizeLabelController *plc = [[PersonaizeLabelController alloc] init];
-//        plc.systemTagArray = self.systemTagArray;
-//        plc.customTagArray = self.customTagArray;
-//        [self.navigationController pushViewController:plc animated:YES];
-//    }else if (indexPath.section==1&&indexPath.row==3){
-//        
-//    }else if (indexPath.section==1&&indexPath.row==5)
-//    { // 训练场地
 //            }else if (indexPath.section==1&&indexPath.row==6){ // 工作时间
 //        WorkTimeViewController *workTime = [[WorkTimeViewController alloc] init];
 //        [self.navigationController pushViewController:workTime animated:YES];
-//    }else if (indexPath.section==1&&indexPath.row==7){ // 可授科目
-//        
-//
-//    }
+
 }
 #pragma mark - delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {

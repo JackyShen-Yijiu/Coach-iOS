@@ -10,6 +10,11 @@
 		061F56481CA682DD0052BEA9 /* EditorUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061F56471CA682DD0052BEA9 /* EditorUserViewController.m */; };
 		061F564B1CA686060052BEA9 /* EditorUseTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061F564A1CA686060052BEA9 /* EditorUseTopCell.m */; };
 		061F564E1CA689890052BEA9 /* EditorUseBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061F564D1CA689890052BEA9 /* EditorUseBottomCell.m */; };
+		06234CA01CA8E5D100007DB7 /* PhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06234C9F1CA8E5D100007DB7 /* PhoneNumViewController.m */; };
+		06234CA31CA8E60800007DB7 /* DrivingNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06234CA21CA8E60800007DB7 /* DrivingNumViewController.m */; };
+		06234CA61CA8E64200007DB7 /* TeachSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06234CA51CA8E64200007DB7 /* TeachSubjectViewController.m */; };
+		06234CA91CA8E66A00007DB7 /* TrainingGroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06234CA81CA8E66A00007DB7 /* TrainingGroundViewController.m */; };
+		06234CAC1CA8E69200007DB7 /* SignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06234CAB1CA8E69200007DB7 /* SignatureViewController.m */; };
 		06361A4E1CA51AB8002708F2 /* JZMyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A4D1CA51AB8002708F2 /* JZMyController.m */; };
 		06361A511CA51DF1002708F2 /* TopCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A501CA51DF1002708F2 /* TopCollectionCell.m */; };
 		06361A541CA51E12002708F2 /* BottomCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A531CA51E12002708F2 /* BottomCollectionCell.m */; };
@@ -95,7 +100,6 @@
 		B2BA417D1CA5035700926584 /* AffiliatedSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F0A1CA5035700926584 /* AffiliatedSchoolViewController.m */; };
 		B2BA417E1CA5035700926584 /* ButtonSelectedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F0C1CA5035700926584 /* ButtonSelectedCell.m */; };
 		B2BA417F1CA5035700926584 /* buttonSelectedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F0E1CA5035700926584 /* buttonSelectedModel.m */; };
-		B2BA41801CA5035700926584 /* DrivingNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F101CA5035700926584 /* DrivingNumViewController.m */; };
 		B2BA41821CA5035700926584 /* ExamClassCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F141CA5035700926584 /* ExamClassCollectionViewCell.m */; };
 		B2BA41831CA5035700926584 /* ExamClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F161CA5035700926584 /* ExamClassModel.m */; };
 		B2BA41841CA5035700926584 /* ExamClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F181CA5035700926584 /* ExamClassViewController.m */; };
@@ -132,15 +136,11 @@
 		B2BA41A31CA5035700926584 /* PersonalizeLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F541CA5035700926584 /* PersonalizeLabelCell.m */; };
 		B2BA41A41CA5035700926584 /* PersonlizeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F561CA5035700926584 /* PersonlizeModel.m */; };
 		B2BA41A51CA5035700926584 /* PFActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F581CA5035700926584 /* PFActionSheetView.m */; };
-		B2BA41A61CA5035700926584 /* PhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F5A1CA5035700926584 /* PhoneNumViewController.m */; };
 		B2BA41A71CA5035700926584 /* SetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F5C1CA5035700926584 /* SetupViewController.m */; };
-		B2BA41A81CA5035700926584 /* SignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F5E1CA5035700926584 /* SignatureViewController.m */; };
 		B2BA41A91CA5035700926584 /* StudentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F601CA5035700926584 /* StudentListCell.m */; };
 		B2BA41AA1CA5035700926584 /* StudentListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F621CA5035700926584 /* StudentListModel.m */; };
 		B2BA41AB1CA5035700926584 /* StudentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F641CA5035700926584 /* StudentListViewController.m */; };
 		B2BA41AC1CA5035700926584 /* TeacherCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F661CA5035700926584 /* TeacherCenterController.m */; };
-		B2BA41AD1CA5035700926584 /* TeachSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F681CA5035700926584 /* TeachSubjectViewController.m */; };
-		B2BA41AE1CA5035700926584 /* TrainingGroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F6B1CA5035700926584 /* TrainingGroundViewController.m */; };
 		B2BA41AF1CA5035700926584 /* UIDevice+JEsystemVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F6D1CA5035700926584 /* UIDevice+JEsystemVersion.m */; };
 		B2BA41B01CA5035700926584 /* UIView+CalculateUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F6F1CA5035700926584 /* UIView+CalculateUIView.m */; };
 		B2BA41B11CA5035700926584 /* UserCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F711CA5035700926584 /* UserCenterCell.m */; };
@@ -511,6 +511,16 @@
 		061F564A1CA686060052BEA9 /* EditorUseTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorUseTopCell.m; sourceTree = "<group>"; };
 		061F564C1CA689890052BEA9 /* EditorUseBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorUseBottomCell.h; sourceTree = "<group>"; };
 		061F564D1CA689890052BEA9 /* EditorUseBottomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorUseBottomCell.m; sourceTree = "<group>"; };
+		06234C9E1CA8E5D100007DB7 /* PhoneNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumViewController.h; sourceTree = "<group>"; };
+		06234C9F1CA8E5D100007DB7 /* PhoneNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumViewController.m; sourceTree = "<group>"; };
+		06234CA11CA8E60800007DB7 /* DrivingNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrivingNumViewController.h; sourceTree = "<group>"; };
+		06234CA21CA8E60800007DB7 /* DrivingNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrivingNumViewController.m; sourceTree = "<group>"; };
+		06234CA41CA8E64200007DB7 /* TeachSubjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachSubjectViewController.h; sourceTree = "<group>"; };
+		06234CA51CA8E64200007DB7 /* TeachSubjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachSubjectViewController.m; sourceTree = "<group>"; };
+		06234CA71CA8E66A00007DB7 /* TrainingGroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingGroundViewController.h; sourceTree = "<group>"; };
+		06234CA81CA8E66A00007DB7 /* TrainingGroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingGroundViewController.m; sourceTree = "<group>"; };
+		06234CAA1CA8E69200007DB7 /* SignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignatureViewController.h; sourceTree = "<group>"; };
+		06234CAB1CA8E69200007DB7 /* SignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignatureViewController.m; sourceTree = "<group>"; };
 		06361A4C1CA51AB8002708F2 /* JZMyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZMyController.h; sourceTree = "<group>"; };
 		06361A4D1CA51AB8002708F2 /* JZMyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZMyController.m; sourceTree = "<group>"; };
 		06361A4F1CA51DF1002708F2 /* TopCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopCollectionCell.h; sourceTree = "<group>"; };
@@ -671,8 +681,6 @@
 		B2BA3F0C1CA5035700926584 /* ButtonSelectedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonSelectedCell.m; sourceTree = "<group>"; };
 		B2BA3F0D1CA5035700926584 /* buttonSelectedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buttonSelectedModel.h; sourceTree = "<group>"; };
 		B2BA3F0E1CA5035700926584 /* buttonSelectedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = buttonSelectedModel.m; sourceTree = "<group>"; };
-		B2BA3F0F1CA5035700926584 /* DrivingNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrivingNumViewController.h; sourceTree = "<group>"; };
-		B2BA3F101CA5035700926584 /* DrivingNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrivingNumViewController.m; sourceTree = "<group>"; };
 		B2BA3F131CA5035700926584 /* ExamClassCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamClassCollectionViewCell.h; sourceTree = "<group>"; };
 		B2BA3F141CA5035700926584 /* ExamClassCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamClassCollectionViewCell.m; sourceTree = "<group>"; };
 		B2BA3F151CA5035700926584 /* ExamClassModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamClassModel.h; sourceTree = "<group>"; };
@@ -742,12 +750,8 @@
 		B2BA3F561CA5035700926584 /* PersonlizeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonlizeModel.m; sourceTree = "<group>"; };
 		B2BA3F571CA5035700926584 /* PFActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFActionSheetView.h; sourceTree = "<group>"; };
 		B2BA3F581CA5035700926584 /* PFActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFActionSheetView.m; sourceTree = "<group>"; };
-		B2BA3F591CA5035700926584 /* PhoneNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumViewController.h; sourceTree = "<group>"; };
-		B2BA3F5A1CA5035700926584 /* PhoneNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumViewController.m; sourceTree = "<group>"; };
 		B2BA3F5B1CA5035700926584 /* SetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupViewController.h; sourceTree = "<group>"; };
 		B2BA3F5C1CA5035700926584 /* SetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupViewController.m; sourceTree = "<group>"; };
-		B2BA3F5D1CA5035700926584 /* SignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignatureViewController.h; sourceTree = "<group>"; };
-		B2BA3F5E1CA5035700926584 /* SignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignatureViewController.m; sourceTree = "<group>"; };
 		B2BA3F5F1CA5035700926584 /* StudentListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentListCell.h; sourceTree = "<group>"; };
 		B2BA3F601CA5035700926584 /* StudentListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentListCell.m; sourceTree = "<group>"; };
 		B2BA3F611CA5035700926584 /* StudentListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentListModel.h; sourceTree = "<group>"; };
@@ -756,11 +760,7 @@
 		B2BA3F641CA5035700926584 /* StudentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentListViewController.m; sourceTree = "<group>"; };
 		B2BA3F651CA5035700926584 /* TeacherCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherCenterController.h; sourceTree = "<group>"; };
 		B2BA3F661CA5035700926584 /* TeacherCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherCenterController.m; sourceTree = "<group>"; };
-		B2BA3F671CA5035700926584 /* TeachSubjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachSubjectViewController.h; sourceTree = "<group>"; };
-		B2BA3F681CA5035700926584 /* TeachSubjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachSubjectViewController.m; sourceTree = "<group>"; };
 		B2BA3F691CA5035700926584 /* ToolHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolHeader.h; sourceTree = "<group>"; };
-		B2BA3F6A1CA5035700926584 /* TrainingGroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingGroundViewController.h; sourceTree = "<group>"; };
-		B2BA3F6B1CA5035700926584 /* TrainingGroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingGroundViewController.m; sourceTree = "<group>"; };
 		B2BA3F6C1CA5035700926584 /* UIDevice+JEsystemVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+JEsystemVersion.h"; sourceTree = "<group>"; };
 		B2BA3F6D1CA5035700926584 /* UIDevice+JEsystemVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+JEsystemVersion.m"; sourceTree = "<group>"; };
 		B2BA3F6E1CA5035700926584 /* UIView+CalculateUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CalculateUIView.h"; sourceTree = "<group>"; };
@@ -1405,6 +1405,16 @@
 				06361A4D1CA51AB8002708F2 /* JZMyController.m */,
 				061F56461CA682DD0052BEA9 /* EditorUserViewController.h */,
 				061F56471CA682DD0052BEA9 /* EditorUserViewController.m */,
+				06234C9E1CA8E5D100007DB7 /* PhoneNumViewController.h */,
+				06234C9F1CA8E5D100007DB7 /* PhoneNumViewController.m */,
+				06234CA11CA8E60800007DB7 /* DrivingNumViewController.h */,
+				06234CA21CA8E60800007DB7 /* DrivingNumViewController.m */,
+				06234CA41CA8E64200007DB7 /* TeachSubjectViewController.h */,
+				06234CA51CA8E64200007DB7 /* TeachSubjectViewController.m */,
+				06234CA71CA8E66A00007DB7 /* TrainingGroundViewController.h */,
+				06234CA81CA8E66A00007DB7 /* TrainingGroundViewController.m */,
+				06234CAA1CA8E69200007DB7 /* SignatureViewController.h */,
+				06234CAB1CA8E69200007DB7 /* SignatureViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1756,8 +1766,6 @@
 				B2BA3F0C1CA5035700926584 /* ButtonSelectedCell.m */,
 				B2BA3F0D1CA5035700926584 /* buttonSelectedModel.h */,
 				B2BA3F0E1CA5035700926584 /* buttonSelectedModel.m */,
-				B2BA3F0F1CA5035700926584 /* DrivingNumViewController.h */,
-				B2BA3F101CA5035700926584 /* DrivingNumViewController.m */,
 				B2BA3F131CA5035700926584 /* ExamClassCollectionViewCell.h */,
 				B2BA3F141CA5035700926584 /* ExamClassCollectionViewCell.m */,
 				B2BA3F151CA5035700926584 /* ExamClassModel.h */,
@@ -1795,12 +1803,8 @@
 				B2BA3F561CA5035700926584 /* PersonlizeModel.m */,
 				B2BA3F571CA5035700926584 /* PFActionSheetView.h */,
 				B2BA3F581CA5035700926584 /* PFActionSheetView.m */,
-				B2BA3F591CA5035700926584 /* PhoneNumViewController.h */,
-				B2BA3F5A1CA5035700926584 /* PhoneNumViewController.m */,
 				B2BA3F5B1CA5035700926584 /* SetupViewController.h */,
 				B2BA3F5C1CA5035700926584 /* SetupViewController.m */,
-				B2BA3F5D1CA5035700926584 /* SignatureViewController.h */,
-				B2BA3F5E1CA5035700926584 /* SignatureViewController.m */,
 				B2BA3F5F1CA5035700926584 /* StudentListCell.h */,
 				B2BA3F601CA5035700926584 /* StudentListCell.m */,
 				B2BA3F611CA5035700926584 /* StudentListModel.h */,
@@ -1809,11 +1813,7 @@
 				B2BA3F641CA5035700926584 /* StudentListViewController.m */,
 				B2BA3F651CA5035700926584 /* TeacherCenterController.h */,
 				B2BA3F661CA5035700926584 /* TeacherCenterController.m */,
-				B2BA3F671CA5035700926584 /* TeachSubjectViewController.h */,
-				B2BA3F681CA5035700926584 /* TeachSubjectViewController.m */,
 				B2BA3F691CA5035700926584 /* ToolHeader.h */,
-				B2BA3F6A1CA5035700926584 /* TrainingGroundViewController.h */,
-				B2BA3F6B1CA5035700926584 /* TrainingGroundViewController.m */,
 				B2BA3F6C1CA5035700926584 /* UIDevice+JEsystemVersion.h */,
 				B2BA3F6D1CA5035700926584 /* UIDevice+JEsystemVersion.m */,
 				B2BA3F6E1CA5035700926584 /* UIView+CalculateUIView.h */,
@@ -3388,7 +3388,6 @@
 				B2BA41861CA5035700926584 /* GenderViewController.m in Sources */,
 				B2BA429B1CA5035700926584 /* EaseUserCell.m in Sources */,
 				B2BA3EDE1CA5003B00926584 /* HMSchoolInfoModel.m in Sources */,
-				B2BA41A61CA5035700926584 /* PhoneNumViewController.m in Sources */,
 				B8C458731BDB59AC00901F71 /* UIView+TKCategory.m in Sources */,
 				B2BA42A71CA5035700926584 /* EaseChatToolbarItem.m in Sources */,
 				B2BA429A1CA5035700926584 /* EaseRefreshTableViewController.m in Sources */,
@@ -3429,6 +3428,7 @@
 				B2BA3E951CA4F44E00926584 /* CourseRatingCell.m in Sources */,
 				B2BA419B1CA5035700926584 /* JEPhotoPickManger.m in Sources */,
 				B2BA428B1CA5035700926584 /* NSDate+Category.m in Sources */,
+				06234CA01CA8E5D100007DB7 /* PhoneNumViewController.m in Sources */,
 				B2BA432C1CA5041100926584 /* CourseDetailViewController.m in Sources */,
 				B2BA41A11CA5035700926584 /* NSUserStoreTool.m in Sources */,
 				B2BA41D51CA5035700926584 /* MWZoomingScrollView.m in Sources */,
@@ -3443,7 +3443,6 @@
 				B8C458721BDB59AC00901F71 /* UIView+Sizes.m in Sources */,
 				B2BA434B1CA5041100926584 /* YBSignUpStudentListViewModel.m in Sources */,
 				B253C2CE1C3FA742001AF771 /* mask.c in Sources */,
-				B28D5DDA1C62357B00D9E9E1 /* NSString+CurrentTimeDay.m in Sources */,
 				061F564E1CA689890052BEA9 /* EditorUseBottomCell.m in Sources */,
 				B2BA41891CA5035700926584 /* InfoModel.m in Sources */,
 				B2BA43321CA5041100926584 /* InformationMessageController.m in Sources */,
@@ -3487,7 +3486,7 @@
 				B2BA42AF1CA5035700926584 /* DVVSendMessageToStudentCell.m in Sources */,
 				B2BA42A11CA5035700926584 /* EaseBubbleView+Location.m in Sources */,
 				B2BA43501CA5041100926584 /* YBUserInfoModel.m in Sources */,
-				B2BA41A81CA5035700926584 /* SignatureViewController.m in Sources */,
+				06234CAC1CA8E69200007DB7 /* SignatureViewController.m in Sources */,
 				B2BA41E61CA5035700926584 /* UIView+EMWebCacheOperation.m in Sources */,
 				B253C2F61C43C960001AF771 /* PermissiveScoringMatrix.m in Sources */,
 				B8C458801BDB5B5C00901F71 /* ToastAlertView.m in Sources */,
@@ -3540,6 +3539,7 @@
 				B8C458711BDB59AC00901F71 /* RFSegmentView.m in Sources */,
 				B2BA42AE1CA5035700926584 /* EaseConversationCell.m in Sources */,
 				B2BA428C1CA5035700926584 /* NSDateFormatter+Category.m in Sources */,
+				06234CA91CA8E66A00007DB7 /* TrainingGroundViewController.m in Sources */,
 				B28D5E431C64857000D9E9E1 /* pinyin.m in Sources */,
 				B2BA41A01CA5035700926584 /* NSString+CurrentTimeDay.m in Sources */,
 				B2BA3E501CA4E6BA00926584 /* AppDelegate.m in Sources */,
@@ -3598,9 +3598,9 @@
 				B2BA41C61CA5035700926584 /* MJRefreshGifFooter.m in Sources */,
 				B2BA43311CA5041100926584 /* InformationMessageCell.m in Sources */,
 				B2BA3E8C1CA4F3D900926584 /* PickerItemView.m in Sources */,
-				B2BA41AD1CA5035700926584 /* TeachSubjectViewController.m in Sources */,
 				B2BA41D61CA5035700926584 /* DACircularProgressView.m in Sources */,
 				B2BA41B21CA5035700926584 /* UserCenterHeadView.m in Sources */,
+				06234CA61CA8E64200007DB7 /* TeachSubjectViewController.m in Sources */,
 				B2BA41CD1CA5035700926584 /* UIView+MJExtension.m in Sources */,
 				B2BA41921CA5035700926584 /* PrivateMessageCell.m in Sources */,
 				B2BA41A51CA5035700926584 /* PFActionSheetView.m in Sources */,
@@ -3635,6 +3635,7 @@
 				B2BA43371CA5041100926584 /* JGAppointMentFootCell.m in Sources */,
 				B2BA43441CA5041100926584 /* SystemMessageDetailCell.m in Sources */,
 				B2BA41DD1CA5035700926584 /* EMSDWebImagePrefetcher.m in Sources */,
+				06234CA31CA8E60800007DB7 /* DrivingNumViewController.m in Sources */,
 				B2BA42A91CA5035700926584 /* EaseTextView.m in Sources */,
 				B2BA3EE11CA5003B00926584 /* HMTrainaddressModel.m in Sources */,
 				B2BA42921CA5035700926584 /* EaseConvertToCommonEmoticonsHelper.m in Sources */,
@@ -3678,10 +3679,8 @@
 				B2BA41CE1CA5035700926584 /* MWCaptionView.m in Sources */,
 				B2BA42B21CA5035700926584 /* DVVSendMessageToStudentView.m in Sources */,
 				B2BA416E1CA5035700926584 /* ForgetViewController.m in Sources */,
-				B2BA41801CA5035700926584 /* DrivingNumViewController.m in Sources */,
 				B2BA41CC1CA5035700926584 /* UIScrollView+MJRefresh.m in Sources */,
 				B2BA42BB1CA5035700926584 /* DVVStudentListController.m in Sources */,
-				B2BA41AE1CA5035700926584 /* TrainingGroundViewController.m in Sources */,
 				B2BA42AB1CA5035700926584 /* EaseFacialView.m in Sources */,
 				B2BA41C51CA5035700926584 /* MJRefreshFooter.m in Sources */,
 				B2BA43531CA5050F00926584 /* YBStudentHomeController.m in Sources */,
