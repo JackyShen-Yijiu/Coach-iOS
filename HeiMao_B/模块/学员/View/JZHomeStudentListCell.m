@@ -38,6 +38,7 @@
     return self;
 }
 - (void)initUI{
+    self.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:self.iconImageView];
         [self.contentView addSubview:self.nameLabel];
         [self.contentView addSubview:self.studyConLabel];
@@ -114,6 +115,7 @@
     if (_iconImageView == nil) {
         _iconImageView = [[UIImageView alloc] init];
         _iconImageView.backgroundColor = [UIColor clearColor];
+        _iconImageView.image = [UIImage imageNamed:@"call_out"];
         _iconImageView.layer.masksToBounds = YES;
         _iconImageView.layer.cornerRadius = 24;
     }

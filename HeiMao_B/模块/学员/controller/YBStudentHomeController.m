@@ -9,14 +9,35 @@
 #import "YBStudentHomeController.h"
 #import "JZHomeStudentToolBarView.h"
 
+#import "JZHomeStudentSubjectOneView.h"
+#import "JZHomeStudentSubjectTwoView.h"
+#import "JZHomeStudentSubjectThreeView.h"
+#import "JZHomeStudentSubjectFourView.h"
+
 #define YBRatio 1.15
 #define ScreenWidthIs_6Plus_OrWider [UIScreen mainScreen].bounds.size.width >= 414
 
-@interface YBStudentHomeController ()
+#define ktopWith 112
+
+#define kbottmWith 44
+
+@interface YBStudentHomeController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIView *bgView;
 @property (nonatomic, strong) UISegmentedControl *segment;
+
 @property (nonatomic, strong) JZHomeStudentToolBarView *toolBarView;
+
+@property (nonatomic, strong) UIScrollView *scrollView;
+
+@property (nonatomic, strong) JZHomeStudentSubjectOneView *subjectOneView; // 科目一
+
+@property (nonatomic, strong) JZHomeStudentSubjectTwoView *subjectTwoView; // 科目二
+
+@property (nonatomic, strong) JZHomeStudentSubjectThreeView *subjectThreeView; // 科目三
+
+@property (nonatomic, strong) JZHomeStudentSubjectFourView *subjectFourView; // 科目四
+
 @end
 
 @implementation YBStudentHomeController
@@ -25,9 +46,17 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self setNavBar];
     self.myNavigationItem.title = @"学员";
+    [self.view addSubview:self.scrollView];
+    [self.scrollView addSubview:self.subjectOneView];
+    [self.scrollView addSubview:self.subjectTwoView];
+    [self.scrollView addSubview:self.subjectThreeView];
+    [self.scrollView addSubview:self.subjectFourView];
+    
     
 
 }
@@ -70,7 +99,7 @@
 }
 - (UIView *)bgView{
     if (_bgView == nil) {
-        _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, 112)];
+        _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, ktopWith)];
         _bgView.backgroundColor = [UIColor whiteColor];
     }
     return _bgView;
@@ -114,6 +143,45 @@
         }
     }
     return _toolBarView;
+}
+- (UIScrollView *)scrollView{
+    if (_scrollView == nil) {
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ktopWith + 64,self.view.width, self.view.height - ktopWith )];
+        _scrollView.delegate = self;
+        _scrollView.contentSize = CGSizeMake(4 * self.view.width, 0);
+        _scrollView.pagingEnabled = YES;
+        _scrollView.backgroundColor = [UIColor cyanColor];
+    }
+    return _scrollView;
+}
+- (JZHomeStudentSubjectOneView *)subjectOneView{
+    if (_subjectOneView == nil) {
+        _subjectOneView = [[JZHomeStudentSubjectOneView alloc] initWithFrame:CGRectMake(0,0,self.view.width, self.scrollView.frame.size.height)];
+    }
+    return _subjectOneView;
+}
+- (JZHomeStudentSubjectTwoView *)subjectTwoView{
+    if (_subjectTwoView == nil) {
+        CGFloat systemW = self.view.width;
+        _subjectTwoView = [[JZHomeStudentSubjectTwoView alloc] initWithFrame:CGRectMake(systemW,0,self.view.width, self.scrollView.frame.size.height)];
+    }
+    return _subjectTwoView;
+}
+
+- (JZHomeStudentSubjectThreeView *)subjectThreeView{
+    if (_subjectThreeView == nil) {
+        CGFloat systemW = self.view.width;
+        _subjectThreeView = [[JZHomeStudentSubjectThreeView alloc] initWithFrame:CGRectMake(systemW * 2,0,self.view.width, self.scrollView.frame.size.height)];
+    }
+    return _subjectThreeView;
+}
+
+- (JZHomeStudentSubjectFourView *)subjectFourView{
+    if (_subjectFourView == nil) {
+        CGFloat systemW = self.view.width;
+        _subjectFourView = [[JZHomeStudentSubjectFourView alloc] initWithFrame:CGRectMake(systemW * 3,0,self.view.width, self.scrollView.frame.size.height)];
+    }
+    return _subjectFourView;
 }
 
 @end
