@@ -204,9 +204,9 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 15, 15);
-    [button setBackgroundImage:[UIImage imageNamed:@"cancelSelect"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"JZCoursechoose"] forState:UIControlStateNormal];
     button.tag = 1000 + indexPath.row;
-    [button setBackgroundImage:[UIImage imageNamed:@"cancelSelect_click"] forState:UIControlStateSelected];
+    [button setBackgroundImage:[UIImage imageNamed:@"JZCoursesure"] forState:UIControlStateSelected];
     [button setSelected:[self hasSeleted:indexPath.row]];
     
     cell.accessoryView = button;
