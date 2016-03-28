@@ -42,6 +42,11 @@ typedef void(^JZHomeStudentToolBarViewBlock)(UIButton *button);
 
 @property (nonatomic,assign) NSTextAlignment textAlignment;
 
+// 正常情况下图片
+@property (nonatomic, strong) NSArray *imgNormalArray;
+// 选中情况下图片
+@property (nonatomic, strong) NSArray *imgSelectArray;
+
 //模拟点击一项的方法(参数为一个Block)
 - (void)dvvToolBarViewItemSelected:(JZHomeStudentToolBarViewBlock)handle;
 

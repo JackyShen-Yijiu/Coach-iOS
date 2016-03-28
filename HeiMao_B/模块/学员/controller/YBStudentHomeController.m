@@ -20,13 +20,15 @@
 @end
 
 @implementation YBStudentHomeController
-
+- (void)viewWillAppear:(BOOL)animated{
+    [self initUI];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self setNavBar];
     self.myNavigationItem.title = @"学员";
-    [self initUI];
+    
 
 }
 - (void)initUI{
@@ -89,8 +91,7 @@
 - (JZHomeStudentToolBarView *)toolBarView {
     if (!_toolBarView) {
         _toolBarView = [JZHomeStudentToolBarView new];
-        
-        _toolBarView.frame = CGRectMake(0, CGRectGetMaxY(self.segment.frame) + 14, self.view.width, 48);
+        _toolBarView.frame = CGRectMake(0, CGRectGetMaxY(self.segment.frame) + 14, self.view.width, 52);
         _toolBarView.titleNormalColor = JZ_FONTCOLOR_LIGHT;
         _toolBarView.titleSelectColor = JZ_MAIN_COLOR;
         _toolBarView.followBarColor = JZ_MAIN_COLOR;
@@ -101,6 +102,8 @@
         _toolBarView.layer.shadowRadius = 2;
         _toolBarView.titleFont = [UIFont systemFontOfSize:12];
         _toolBarView.titleArray = @[ @"全部", @"未考",@"约考", @"补考",@"通过" ];
+        _toolBarView.imgNormalArray = @[@"student_all_off",@"student_study_off",@"student_exam_off",@"student_examed_off",@"student_pass_off"];
+        _toolBarView.imgSelectArray = @[@"student_all_on",@"student_study_on",@"student_exam_on",@"student_examed_on",@"student_pass_on"];
         __weak typeof(self) ws = self;
         [_toolBarView dvvToolBarViewItemSelected:^(UIButton *button) {
             [ws dvvToolBarViewItemSelectedAction:button.tag];

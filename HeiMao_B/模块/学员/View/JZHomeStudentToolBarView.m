@@ -46,6 +46,11 @@
     
     //标题
     _titleArray=[NSArray new];
+    // 正常图片
+    _imgNormalArray = [NSArray new];
+    // 选中图片
+    _imgSelectArray = [NSArray new];
+    
     _titleArray = @[ @"标题1", @"标题2", @"..." ];
     _titleFont = [UIFont systemFontOfSize:14];
     if (_titleNormalColor==nil) {
@@ -89,7 +94,9 @@
                     //上次按下的背景色为正常情况下的颜色
                     button.backgroundColor = _buttonNormalColor;
                     //上次按下的字体色为正常情况下的颜色
+
                     [button setTitleColor:_titleNormalColor forState:UIControlStateNormal];
+                    [button setImage:[UIImage imageNamed:_imgNormalArray[_selectButtonInteger]] forState:UIControlStateNormal];
                 }
             }
         }
@@ -116,13 +123,14 @@
 #pragma mark - 选中一个按钮
 
 - (void)selectOneButton:(NSInteger)tag {
-    
     for (UIButton *button in self.subviews) {
         
         if (button.tag == tag && [button isKindOfClass:[UIButton class]]) {
             //改变背景色和字体颜色为选中时的颜色
             button.backgroundColor=_buttonSelectColor;
             [button setTitleColor:_titleSelectColor forState:UIControlStateNormal];
+            
+            [button setImage:[UIImage imageNamed:_imgSelectArray[(int)tag]] forState:UIControlStateNormal];
         }
     }
     //更改当前选中的按钮tag值
@@ -149,7 +157,7 @@
     //循环创建所有的按钮
     for (int i = 0; i < _titleArray.count; i++) {
         
-        UIButton *itemButton = [self createOneButtonWithTitle:_titleArray[i] Size:buttonSize MinX:i*buttonSize.width Tag:i titleArray:_titleArray];
+        UIButton *itemButton = [self createOneButtonWithTitle:_titleArray[i] Size:buttonSize MinX:i*buttonSize.width Tag:i titleArray:_titleArray imgNormalArray:_imgNormalArray[i] imgSelectArray:_imgSelectArray[i]];
         
         [self addSubview:itemButton];
     }
@@ -181,7 +189,7 @@
 }
 
 #pragma mark 创建一个按钮
-- (UIButton *)createOneButtonWithTitle:(NSString *)title Size:(CGSize)size MinX:(CGFloat)mimX Tag:(NSInteger)tag titleArray:(NSArray *)titleArray{
+- (UIButton *)createOneButtonWithTitle:(NSString *)title Size:(CGSize)size MinX:(CGFloat)mimX Tag:(NSInteger)tag titleArray:(NSArray *)titleArray imgNormalArray:(NSString *)imgNormalArray imgSelectArray:(NSString *)imgSelectArray{
     
     UIButton *btn = [UIButton new];
     
@@ -202,6 +210,17 @@
     [btn setTitle:title forState:UIControlStateNormal];
     //显示文字颜色
     [btn setTitleColor:_titleNormalColor forState:UIControlStateNormal];
+    
+    // 显示正常情况下图片
+    if (![imgNormalArray isEqualToString:@""] && imgNormalArray != nil ) {
+        CGFloat imgW = 18;
+        CGFloat imgH = 20;
+        CGFloat titleW = 2 * 12;
+        [btn setImage:[UIImage imageNamed:imgNormalArray] forState:UIControlStateNormal];
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(0, (size.width - imgW) / 2, 26, (size.width - imgW) / 2)];
+        [btn setTitleEdgeInsets:UIEdgeInsetsMake(26, (size.width - titleW) / 2 - 20, 0, 20)];
+    }
+
     //tag值
     btn.tag=tag;
     //点击事件
