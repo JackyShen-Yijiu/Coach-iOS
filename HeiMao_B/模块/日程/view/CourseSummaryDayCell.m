@@ -147,7 +147,8 @@
     
     self.coureEndTime.text = [NSString getHourLocalDateFormateUTCDate:_model.courseendtime];
     
-    int compareDataNum = [YBObjectTool compareHMSDateWithBegintime:[NSString getHLocalDateFormateUTCDate:_model.coursebegintime] endtime:[NSString getHLocalDateFormateUTCDate:_model.courseendtime]];
+    int compareDataNum = [YBObjectTool compareHMSDateWithSelectDateStr:[NSString getLocalDateFormateUTCDate:_model.coursebegintime]];
+    
     NSLog(@"compareDataNum:%d",compareDataNum);
     
     NSInteger leftStr;
@@ -225,6 +226,8 @@
     self.coureBeginTime.backgroundColor = self.contentView.backgroundColor;
     self.coureEndTime.backgroundColor = self.contentView.backgroundColor;
     
+    [self.coureStudentCollectionView reloadData];
+    
 }
 
 #pragma mark - Common
@@ -262,6 +265,9 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
+    NSLog(@"_model.coursestudentcount:%ld",(long)_model.coursestudentcount);
+    NSLog(@"_model.coursereservationdetial:%@",_model.coursereservationdetial);
+    
     return _model.coursestudentcount;// 2
 }
 
@@ -269,20 +275,34 @@
     
     static NSString *cellId = @"YBAppointMentUserCell";
     YBAppointMentUserCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
+    cell.userInteractionEnabled = YES;
+    cell.iconImageView.image = [UIImage imageNamed:@""];
     
-    if (_model.coursereservationdetial && _model.coursereservationdetial.count<indexPath.row) {
+    if (_model.coursereservationdetial && _model.coursereservationdetial.count>indexPath.row) {
         
-        NSDictionary *dict = _model.coursereservationdetial[indexPath.row];// 1
+        NSDictionary *dict = _model.coursereservationdetial[indexPath.row];
         
-        [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dict[@"userid"][@"headportrait"][@"originalpic"]]] placeholderImage:[UIImage imageNamed:@"JZCourseadd_student"]];
+        [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dict[@"userid"][@"headportrait"][@"originalpic"]]] placeholderImage:[UIImage imageNamed:@"JZCoursenull_student"]];
         
         cell.nameLabel.text = [NSString stringWithFormat:@"%@",dict[@"userid"][@"name"]];
         
     }else{
         
-        cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
+        // 1:大于当前日期 -1:小于当前时间 0:等于当前时间
+        int compareDataNum = [YBObjectTool compareHMSDateWithSelectDateStr:[NSString getLocalDateFormateUTCDate:_model.coursebegintime]];
+        NSLog(@"cellForItemAtIndexPath compareDataNum:%d",compareDataNum);
         
-//        cell.nameLabel.text = @"姓名";
+        if (compareDataNum==0) {
+            cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
+        }else if (compareDataNum==-1){
+            cell.iconImageView.image = [UIImage imageNamed:@"JZCoursenull_student"];
+            cell.userInteractionEnabled = NO;
+        }else if (compareDataNum==1){
+            cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
+            cell.userInteractionEnabled = YES;
+        }
+        
+        
     }
     
     

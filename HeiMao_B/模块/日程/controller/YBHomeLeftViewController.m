@@ -8,7 +8,7 @@
 
 #import "YBHomeLeftViewController.h"
 #import "FDCalendar.h"
-#import "NoContentTipView.h"
+#import "FDCalendarItem.h"
 #import "CourseSummaryDayCell.h"
 #import "CourseDetailViewController.h"
 #import "RefreshTableView.h"
@@ -16,40 +16,88 @@
 #import "YBFDCalendar.h"
 #import "YYModel.h"
 #import "YBCourseData.h"
+#import "YBCourseTableView.h"
 
-#define calendarH 55
-#define YBFDCalendarH 228
+@interface YBHomeLeftViewController ()<FDCalendarDelegate,YBFDCalendarDelegate,UIScrollViewDelegate>
+{
+    CGFloat startContentOffsetX;
+    CGFloat willEndContentOffsetX;
+    CGFloat endContentOffsetX;
+}
 
-@interface YBHomeLeftViewController ()<UITableViewDataSource,UITableViewDelegate,FDCalendarDelegate,YBFDCalendarDelegate>
+@property(nonatomic,strong) NSMutableArray * leftTableDataArray;
+@property(nonatomic,strong) NSMutableArray * centerTableDataArray;
+@property(nonatomic,strong) NSMutableArray * rightTableDataArray;
 
-// 底部tableview
-@property(nonatomic,strong) UITableView * courseDayTableView;
+@property (nonatomic,strong) YBCourseTableView *leftCourseTableView;
+@property (nonatomic,strong) YBCourseTableView *centerCourseTableView;
+@property (nonatomic,strong) YBCourseTableView *rightCourseTableView;
 
 @property (nonatomic,strong) UIView *headView;
 
 @property(nonatomic,strong) FDCalendar *calendarHeadView;
 @property(nonatomic,strong) YBFDCalendar *ybCalendarHeadView;
 
-@property(nonatomic,strong)NSMutableArray * courseDayTableData;
+@property(nonatomic,strong) NSDateFormatter *dateFormattor;
 
-@property(nonatomic,strong)NSDateFormatter *dateFormattor;
-
-@property(nonatomic,strong)NoContentTipView * tipView2;
 
 @property (nonatomic,assign) BOOL isOpen;
 
 @property (nonatomic,strong) NSDate *selectDate;
 
+@property (nonatomic,strong) UIScrollView *mainScrollView;
+
 @end
 
 @implementation YBHomeLeftViewController
 
-- (NSMutableArray *)courseDayTableData
+- (NSMutableArray *)leftTableDataArray
 {
-    if (_courseDayTableData==nil) {
-        _courseDayTableData = [NSMutableArray array];
+    if (_leftTableDataArray==nil) {
+        _leftTableDataArray = [NSMutableArray array];
     }
-    return _courseDayTableData;
+    return _leftTableDataArray;
+}
+- (NSMutableArray *)centerTableDataArray
+{
+    if (_centerTableDataArray==nil) {
+        _centerTableDataArray = [NSMutableArray array];
+    }
+    return _centerTableDataArray;
+}
+- (NSMutableArray *)rightTableDataArray
+{
+    if (_rightTableDataArray==nil) {
+        _rightTableDataArray = [NSMutableArray array];
+    }
+    return _rightTableDataArray;
+}
+- (YBCourseTableView *)leftCourseTableView
+{
+    if (_leftCourseTableView==nil) {
+        _leftCourseTableView = [[YBCourseTableView alloc] init];
+        _leftCourseTableView.backgroundColor = [UIColor redColor];
+        _leftCourseTableView.parentViewController = self;
+    }
+    return _leftCourseTableView;
+}
+- (YBCourseTableView *)rightCourseTableView
+{
+    if (_rightCourseTableView==nil) {
+        _rightCourseTableView = [[YBCourseTableView alloc] init];
+        _rightCourseTableView.backgroundColor = [UIColor redColor];
+        _rightCourseTableView.parentViewController = self;
+    }
+    return _rightCourseTableView;
+}
+- (YBCourseTableView *)centerCourseTableView
+{
+    if (_centerCourseTableView==nil) {
+        _centerCourseTableView = [[YBCourseTableView alloc] initWithFrame:CGRectMake(self.view.width, 0, self.view.width, self.view.height-calendarH-64)];
+        _centerCourseTableView.backgroundColor = [UIColor whiteColor];
+        _centerCourseTableView.parentViewController = self;
+    }
+    return _centerCourseTableView;
 }
 
 - (void)hiddenOpenCalendar
@@ -58,7 +106,7 @@
     if (self.isOpen) {
         [self xialaBtnDidClick];
     }
-
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -76,14 +124,17 @@
     self.view.backgroundColor = RGB_Color(253, 253, 253);
     self.selectDate = [NSDate date];
     
-    // 底部预约列表
-    self.courseDayTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64+calendarH, self.view.width, self.view.height-calendarH-64) style:UITableViewStylePlain];
-    self.courseDayTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.courseDayTableView.delegate = self;
-    self.courseDayTableView.dataSource = self;
-    self.courseDayTableView.contentInset = UIEdgeInsetsMake(0, 0, calendarH, 0);
-    [self.view addSubview:self.courseDayTableView];
-    self.courseDayTableView.backgroundColor = [UIColor whiteColor];
+    self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64+calendarH, self.view.width, self.view.height-calendarH-64)];
+    self.mainScrollView.backgroundColor = [UIColor whiteColor];
+    self.mainScrollView.contentSize = CGSizeMake(self.view.width, self.mainScrollView.height);
+    self.mainScrollView.contentOffset = CGPointMake(self.mainScrollView.width, 0);
+    self.mainScrollView.pagingEnabled = YES;
+    self.mainScrollView.delegate = self;
+    [self.view addSubview:self.mainScrollView];
+    
+//    [self.mainScrollView addSubview:self.leftTableView];
+    [self.mainScrollView addSubview:self.centerCourseTableView];
+//    [self.mainScrollView addSubview:self.rightTableView];
     
     self.headView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, calendarH)];
     self.headView.backgroundColor = [UIColor whiteColor];
@@ -106,15 +157,65 @@
     [xialaBtn addTarget:self action:@selector(xialaBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
     [self.calendarHeadView addSubview:xialaBtn];
     
-    // 占位图
-    self.tipView2 = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有预约"];
-    [self.tipView2 setHidden:YES];
-    [self.courseDayTableView addSubview:self.tipView2];
-    self.tipView2.center = CGPointMake(self.courseDayTableView .width/2.f, CGRectGetMaxY(self.view.frame)+self.tipView2.height);
-    
     // 刷新当前界面
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefresh:) name:KCourseViewController_NeedRefresh object:nil];
+    // 隐藏展开日历
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hiddenOpenCalendar) name:@"hiddenOpenCalendar" object:nil];
     
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{    //拖动前的起始坐标
+    
+//    startContentOffsetX = scrollView.contentOffset.x;
+    
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{//将要停止前的坐标
+    
+//    willEndContentOffsetX = scrollView.contentOffset.x;
+    
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+//    endContentOffsetX = scrollView.contentOffset.x;
+//    
+//    if (endContentOffsetX < willEndContentOffsetX && willEndContentOffsetX < startContentOffsetX) { // 画面从右往左移动，前一页
+//        [self setPreviousMonthDate];
+//        NSLog(@"画面从右往左移动，前一页");
+//    } else if (endContentOffsetX > willEndContentOffsetX && willEndContentOffsetX > startContentOffsetX) {// 画面从左往右移动，后一页
+//        [self setNextMonthDate];
+//        NSLog(@"画面从左往右移动，后一页");
+//    }
+//    
+//    // 重置
+//    self.mainScrollView.contentOffset = CGPointMake(self.mainScrollView.width, 0);
+    
+}
+
+// 跳到上一个月
+- (void)setPreviousMonthDate
+{
+    NSDate *previousDate = [self.calendarHeadView.centerCalendarItem previousDayDate];
+    NSLog(@"previousDate:%@",previousDate);
+    
+    [self.calendarHeadView setCurrentDate:previousDate];
+   
+    [self fdCalendar:self.calendarHeadView didSelectedDate:previousDate];
+    
+}
+
+// 跳到下一个月
+- (void)setNextMonthDate {
+    
+    NSDate *nextDayDate = [self.calendarHeadView.centerCalendarItem nextDayDate];
+    
+    NSLog(@"nextDayDate:%@",nextDayDate);
+    
+    [self.calendarHeadView setCurrentDate:nextDayDate];
+    
+    [self fdCalendar:self.calendarHeadView didSelectedDate:nextDayDate];
+
 }
 
 - (void)xialaBtnDidClick
@@ -157,12 +258,6 @@
     }
 
     self.isOpen = !self.isOpen;
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
 }
 
@@ -267,7 +362,7 @@
         
         if (type == 1) {
             
-            [ws.courseDayTableData removeAllObjects];
+            [ws.centerTableDataArray removeAllObjects];
             
             NSArray *dataArray = responseObject[@"data"];
             
@@ -292,13 +387,15 @@
     
                 dataModel.appointMentViewH = coureStudentCollectionViewH;
                 
-                [ws.courseDayTableData addObject:dataModel];
+                [ws.centerTableDataArray addObject:dataModel];
             }
             
-            NSLog(@"ws.courseDayTableData:%lu",(unsigned long)ws.courseDayTableData.count);
+            ws.centerCourseTableView.dataArray = ws.centerTableDataArray;
+            
+            NSLog(@"ws.centerTableDataArray.count:%lu",(unsigned long)ws.centerTableDataArray.count);
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [ws.courseDayTableView reloadData];
+                [ws.centerCourseTableView reloadData];
             });
             
         }else{
@@ -312,59 +409,7 @@
     
 }
 
-#pragma mark - DataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSInteger count = 0;
-    count =  self.courseDayTableData.count;
-    [self.tipView2 setHidden:count];
-    return count;
-}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [CourseSummaryDayCell cellHeightWithModel:self.courseDayTableData[indexPath.row]];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    CourseSummaryDayCell * dayCell = [tableView dequeueReusableCellWithIdentifier:@"dayCell"];
-    if (!dayCell) {
-        dayCell = [[CourseSummaryDayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dayCell"];
-    }
-    dayCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    if (indexPath.row < self.courseDayTableData.count)
-        [dayCell setModel:self.courseDayTableData[indexPath.row]];
-    
-    dayCell.parentViewController = self;
-    dayCell.backgroundColor = RGB_Color(255, 255, 255);
-    
-    return dayCell;
-    
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    YBCourseData  * courseModel = nil;
-    courseModel = [[self courseDayTableData] objectAtIndex:indexPath.row];
-    if (courseModel) {
-        CourseDetailViewController * decv = [[CourseDetailViewController alloc] init];
-        decv.couresID = courseModel.coachid;
-        [self.navigationController pushViewController:decv animated:YES];
-    }
-    
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView==self.courseDayTableView) {
-        [self hiddenOpenCalendar];
-    }
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -23,7 +23,6 @@ static NSDateFormatter *dateFormattor;
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) FDCalendarItem *leftCalendarItem;
-@property (strong, nonatomic) FDCalendarItem *centerCalendarItem;
 @property (strong, nonatomic) FDCalendarItem *rightCalendarItem;
 @property (strong, nonatomic) UIDatePicker *datePicker;
 
@@ -133,6 +132,22 @@ static NSDateFormatter *dateFormattor;
     self.rightCalendarItem.backgroundColor = [UIColor clearColor];
     [self.scrollView addSubview:self.rightCalendarItem];
     
+}
+
+- (void)changeDayDate:(NSDate *)date
+{
+    self.centerCalendarItem.seletedDate = date;
+    
+    self.leftCalendarItem.seletedDate = [self.centerCalendarItem previousDayDate];
+    
+    self.rightCalendarItem.seletedDate = [self.centerCalendarItem nextDayDate];
+    
+    if ([_delegate respondsToSelector:@selector(fdCalendar:didSelectedDate:)]) {
+        [_delegate fdCalendar:self didSelectedDate:self.centerCalendarItem.seletedDate];
+    }
+    
+    [self.centerCalendarItem reloadDate];
+
 }
 
 - (void)changeDate:(NSDate *)date
@@ -261,15 +276,12 @@ static NSDateFormatter *dateFormattor;
 - (void)setPreviousMonthDate
 {
     [self setCurrentDate:[self.centerCalendarItem previousMonthDate]];
-//    self.selectDate = [self.centerCalendarItem previousMonthDate];
 }
 // 跳到下一个月
 - (void)setNextMonthDate {
     [self setCurrentDate:[self.centerCalendarItem nextMonthDate]];
-//    self.selectDate = [self.centerCalendarItem nextMonthDate];
 }
 
-#pragma mark - FDCalendarItemDelegate
 - (void)calendarItem:(FDCalendarItem *)item didSelectedDate:(NSDate *)date
 {
     

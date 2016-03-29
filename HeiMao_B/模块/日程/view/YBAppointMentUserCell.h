@@ -11,5 +11,4 @@
 @interface YBAppointMentUserCell : UICollectionViewCell
 @property (strong, nonatomic) UIImageView *iconImageView;
 @property (strong, nonatomic) UILabel *nameLabel;
-
 @end

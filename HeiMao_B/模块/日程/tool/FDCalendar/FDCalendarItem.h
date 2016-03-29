@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 typedef NS_ENUM(NSInteger,KCellStation){
     KCellStationLeft,
     KCellStationCenter,
@@ -25,6 +24,11 @@ typedef NS_ENUM(NSInteger,KCellStation){
 
 - (NSDate *)nextMonthDate;
 - (NSDate *)previousMonthDate;
+
+// 获取date的下一天
+- (NSDate *)nextDayDate;
+// 获取date的前一天
+- (NSDate *)previousDayDate;
 
 /*
  *  当月预约时间
