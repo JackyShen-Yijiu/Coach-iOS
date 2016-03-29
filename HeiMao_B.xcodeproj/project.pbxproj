@@ -515,6 +515,9 @@
 		B8C458801BDB5B5C00901F71 /* ToastAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587F1BDB5B5C00901F71 /* ToastAlertView.m */; };
 		D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */; };
 		D9ABF86D1C896463001B6930 /* BLPFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ABF86C1C896463001B6930 /* BLPFAlertView.m */; };
+		D9D607D81CAA7D3800B61874 /* LKAddStudentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */; };
+		D9D607D91CAA7D3800B61874 /* LKAddStudentTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */; };
+		D9D607DC1CAA7D4800B61874 /* LKAddStudentTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1409,6 +1412,12 @@
 		D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVLocationStatus.m; sourceTree = "<group>"; };
 		D9ABF86B1C896463001B6930 /* BLPFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLPFAlertView.h; sourceTree = "<group>"; };
 		D9ABF86C1C896463001B6930 /* BLPFAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLPFAlertView.m; sourceTree = "<group>"; };
+		D9D607D41CAA7D3800B61874 /* LKAddStudentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTableViewCell.h; sourceTree = "<group>"; };
+		D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTableViewCell.m; sourceTree = "<group>"; };
+		D9D607D61CAA7D3800B61874 /* LKAddStudentTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTimeView.h; sourceTree = "<group>"; };
+		D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTimeView.m; sourceTree = "<group>"; };
+		D9D607DA1CAA7D4800B61874 /* LKAddStudentTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTimeViewController.h; sourceTree = "<group>"; };
+		D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTimeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1789,6 +1798,8 @@
 				B2BA435B1CA51DE600926584 /* YBHomeLeftViewController.m */,
 				B2BA435D1CA51DF600926584 /* YBHomeRightViewController.h */,
 				B2BA435E1CA51DF600926584 /* YBHomeRightViewController.m */,
+				D9D607DA1CAA7D4800B61874 /* LKAddStudentTimeViewController.h */,
+				D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1817,6 +1828,10 @@
 		B2BA3F021CA5035700926584 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				D9D607D41CAA7D3800B61874 /* LKAddStudentTableViewCell.h */,
+				D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */,
+				D9D607D61CAA7D3800B61874 /* LKAddStudentTimeView.h */,
+				D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */,
 				B2BA43C41CA8E9DB00926584 /* CourseSummaryDayCell.h */,
 				B2BA43C51CA8E9DB00926584 /* CourseSummaryDayCell.m */,
 				B2BA43C71CA9125000926584 /* YBAppointMentUserCell.h */,
@@ -3476,6 +3491,7 @@
 				B2BA41861CA5035700926584 /* GenderViewController.m in Sources */,
 				B2BA429B1CA5035700926584 /* EaseUserCell.m in Sources */,
 				B2BA3EDE1CA5003B00926584 /* HMSchoolInfoModel.m in Sources */,
+				D9D607D81CAA7D3800B61874 /* LKAddStudentTableViewCell.m in Sources */,
 				B8C458731BDB59AC00901F71 /* UIView+TKCategory.m in Sources */,
 				B2BA42A71CA5035700926584 /* EaseChatToolbarItem.m in Sources */,
 				B2BA429A1CA5035700926584 /* EaseRefreshTableViewController.m in Sources */,
@@ -3498,6 +3514,7 @@
 				B2BA42C31CA5035700926584 /* DVVTheoreticalStudentListView.m in Sources */,
 				B2BA42971CA5035700926584 /* EaseEmotionManager.m in Sources */,
 				B2BA41DB1CA5035700926584 /* EMSDWebImageDownloaderOperation.m in Sources */,
+				D9D607DC1CAA7D4800B61874 /* LKAddStudentTimeViewController.m in Sources */,
 				B2BA433B1CA5041100926584 /* JGSubjectthreeModel.m in Sources */,
 				B2BA42A21CA5035700926584 /* EaseBubbleView+Text.m in Sources */,
 				B2BA41B91CA5035700926584 /* EMCDDeviceManager+Microphone.m in Sources */,
@@ -3621,6 +3638,7 @@
 				B2BA42C41CA5035700926584 /* DVVToast.m in Sources */,
 				B2BA3EB61CA4FF9800926584 /* HMButton.m in Sources */,
 				B253C2D41C3FA742001AF771 /* split.c in Sources */,
+				D9D607D91CAA7D3800B61874 /* LKAddStudentTimeView.m in Sources */,
 				B2BA41821CA5035700926584 /* ExamClassCollectionViewCell.m in Sources */,
 				B2BA41BA1CA5035700926584 /* EMCDDeviceManager+ProximitySensor.m in Sources */,
 				B2BA43C91CA9125000926584 /* YBAppointMentUserCell.m in Sources */,
