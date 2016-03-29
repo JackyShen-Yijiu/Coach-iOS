@@ -29,27 +29,27 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"添加学员";
-    
+   
     
     // Do any additional setup after loading the view, typically from a nib.
     [self.tableView registerClass:[LKAddStudentTableViewCell class] forCellReuseIdentifier:@"cell"];
     self.tableView.rowHeight = 80;
     self.tableView.sectionIndexBackgroundColor = [UIColor clearColor];
-//    self.edgesForExtendedLayout = UIRectEdgeNone;
+    //    self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(testLog)];
-
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(addStudent)];
+    
     rightItem.tintColor = [UIColor whiteColor];
     
-
-
+    
+    
     self.navigationItem.rightBarButtonItem = rightItem;
     
 #pragma mark - 顶部时间按钮栏
-
+    
     UIView *timeView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 92)];
     self.timeView = timeView;
-//    self.timeView.backgroundColor = [UIColor yellowColor];
+    //    self.timeView.backgroundColor = [UIColor yellowColor];
     
     CGFloat y = 0;
     CGFloat w = [UIScreen mainScreen].bounds.size.width/4;
@@ -58,36 +58,52 @@
         
         
         LKAddStudentTimeView *timeViewItem = [[LKAddStudentTimeView alloc]initWithFrame:CGRectMake(i*w, y, w, h)];
-
-//        timeViewItem.starTimeLabel.text = [NSString stringWithFormat:@"%@"];
-//        timeViewItem.finishTimeLabel.text = [NSString stringWithFormat:@"%@"];
+        timeViewItem.tag = 2000 + i;
+        timeViewItem.selectButton.tag = 1000 + i;
+        [timeViewItem.selectButton addTarget:self action:@selector(clickSelectBtn:) forControlEvents:UIControlEventTouchUpInside];
         
+        
+        NSString *starTimeText = [self.starTimeText substringWithRange:NSMakeRange(11, 5)];
+        
+        timeViewItem.starTimeLabel.text = starTimeText;
+        
+        NSString *finishTimeText = [self.finishTimeText substringWithRange:NSMakeRange(11, 5)];
+        timeViewItem.finishTimeLabel.text = finishTimeText;
         
         [self.timeView addSubview:timeViewItem];
         
-        
     }
     
-//    self.timeView.backgroundColor = [UIColor orangeColor];
+//        self.timeView.backgroundColor = [UIColor orangeColor];
     
     
     self.timeView = timeView;
 
-
-   
-
     self.tableView.tableHeaderView = self.timeView;
+ 
+}
+
+#pragma mark - 点击选择时间的按钮
+-(void)clickSelectBtn:(UIButton *)sender{
     
-
-
-
+    NSLog(@"--第%zd个按钮--",sender.tag);
+    LKAddStudentTimeView *lkView = [_timeView viewWithTag:2001];
+    NSLog(@"%@",lkView.starTimeLabel.text);
+    
+    
+    
     
 }
+
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
     return  92;
 }
--(void)testLog {
+
+#pragma mark - 点击右侧添加学员
+-(void)addStudent {
     
     NSLog(@"点击了右侧添加学员");
 }
@@ -96,9 +112,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-//    return [[self.arrayList[section] Students] count];
+    //    return [[self.arrayList[section] Students] count];
     
-    return 10;
+    return 100;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -108,9 +124,9 @@
         cell = [[LKAddStudentTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
         
     }
-//    StudentGroup *stuGroup = self.arrayList[indexPath.section];
-//    Student *stu = stuGroup.Students[indexPath.row];
-//    cell.studentNameLabel.text = stu.studentNameLabel;
+    //    StudentGroup *stuGroup = self.arrayList[indexPath.section];
+    //    Student *stu = stuGroup.Students[indexPath.row];
+    //    cell.studentNameLabel.text = stu.studentNameLabel;
     //    [cell setStudentModel:stu];
     //    cell.studentModel = stuGroup.Students[indexPath.row];
     
@@ -131,41 +147,12 @@
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
     //   NSArray *indexArr = [self.groupes valueForKeyPath:@"title"];
     NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:self.arrayList.count];
-//    for (StudentGroup *group in self.arrayList) {
-//        [arrM addObject:group.title];
-//    }
+    //    for (StudentGroup *group in self.arrayList) {
+    //        [arrM addObject:group.title];
+    //    }
     return arrM;
 }
 
-//-(UIView *)timeView{
-//    
-//    
-//    if (!_timeView) {
-//        
-////        UIView *timeView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 92)];
-//        
-//        CGFloat y = 0;
-//        CGFloat w = [UIScreen mainScreen].bounds.size.width *0.25;
-//        CGFloat h = 184;
-//        for (NSInteger i=0; i<4; i++) {
-//            
-//            
-//            LKAddStudentTimeView *timeViewItem = [[LKAddStudentTimeView alloc]initWithFrame:CGRectMake(i*w, y, w, h)];
-//            
-//            
-//            timeViewItem.backgroundColor = [UIColor colorWithRed:((float)arc4random_uniform(256) / 255.0)green:((float)arc4random_uniform(256) / 255.0)blue:((float)arc4random_uniform(256) / 255.0)alpha:
-//                                            1.0];
-//            
-//            [self.timeView addSubview:timeViewItem];
-//
-//        }
-//        
-//        
-//    }
-//    return _timeView;
-//    
-//    
-//}
 -(NSArray *)arrayList
 {
     if (_arrayList == nil) {
@@ -175,17 +162,17 @@
         for (NSDictionary *dict in dictArr) {
             
             
-//            StudentGroup *stuGroup = [StudentGroup groupWithDict:dict];
-//            
-//            NSArray *students = stuGroup.Students;
-//            
-//            NSMutableArray *stuGrouM = [NSMutableArray array];
-//            for (NSDictionary *stuDict in students) {
-//                Student *student = [Student studentWithDict:stuDict];
-//                [stuGrouM addObject:student];
-//            }
-//            stuGroup.Students = stuGrouM;
-//            [arrM addObject:stuGroup];
+            //            StudentGroup *stuGroup = [StudentGroup groupWithDict:dict];
+            //
+            //            NSArray *students = stuGroup.Students;
+            //
+            //            NSMutableArray *stuGrouM = [NSMutableArray array];
+            //            for (NSDictionary *stuDict in students) {
+            //                Student *student = [Student studentWithDict:stuDict];
+            //                [stuGrouM addObject:student];
+            //            }
+            //            stuGroup.Students = stuGrouM;
+            //            [arrM addObject:stuGroup];
             
         }
         _arrayList = arrM;

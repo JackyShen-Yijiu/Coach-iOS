@@ -321,23 +321,25 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-
-
-
     
-    NSString *timeStr = self.model.coursebegintime;
-    
-    NSString *timeText = [timeStr substringWithRange:NSMakeRange(11, 5)];
-    NSLog(@"%@",timeText);
+//    NSString *timeStr = self.model.coursebegintime;
+//
+//    NSString *timeText = [timeStr substringWithRange:NSMakeRange(11, 5)];
+//    NSLog(@"%@",timeText);
 
     //    NSLog(@"%s",__func__);
+    
     LKAddStudentTimeViewController *addStuVC = [[LKAddStudentTimeViewController alloc] init];
     
+
+    
+    addStuVC.starTimeText = self.model.coursebegintime;
+    addStuVC.finishTimeText = self.model.courseendtime;
 //    LKTestViewController *addStuVC = [[LKTestViewController alloc]init];
     [self.parentViewController.navigationController pushViewController:addStuVC animated:YES];
- 
     
     
+
   
 }
 
