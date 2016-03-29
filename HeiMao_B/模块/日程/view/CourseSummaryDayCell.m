@@ -11,6 +11,9 @@
 #import "YBObjectTool.h"
 #import "LKAddStudentTimeViewController.h"
 #import "LKTestViewController.h"
+
+
+
 @interface CourseSummaryDayCell ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (nonatomic,strong) UIView *coureleftTopDelive;
@@ -38,6 +41,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self initUI];
+        
+        
     }
     return self;
 }
@@ -297,12 +302,21 @@
 {
     
 
+
+
+    
+    NSString *timeStr = self.model.coursebegintime;
+    
+    NSString *timeText = [timeStr substringWithRange:NSMakeRange(11, 5)];
+    NSLog(@"%@",timeText);
+
     //    NSLog(@"%s",__func__);
     LKAddStudentTimeViewController *addStuVC = [[LKAddStudentTimeViewController alloc] init];
     
 //    LKTestViewController *addStuVC = [[LKTestViewController alloc]init];
     [self.parentViewController.navigationController pushViewController:addStuVC animated:YES];
  
+    
     
   
 }

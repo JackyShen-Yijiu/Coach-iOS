@@ -92,10 +92,10 @@
         
         
         
-        self.starTimeLabel.text = @"11:00";
+//        self.starTimeLabel.text = @"11:00";
         self.starTimeLabel.textAlignment = UITextAlignmentCenter;
         [self.starTimeLabel setFont:[UIFont systemFontOfSize:15]];
-        self.finishTimeLabel.text = @"12:00";
+//        self.finishTimeLabel.text = @"12:00";
         self.finishTimeLabel.textAlignment = UITextAlignmentCenter;
         [self.finishTimeLabel setFont:[UIFont systemFontOfSize:13]];
         [self.finishTimeLabel setTextColor:[UIColor lightGrayColor]];

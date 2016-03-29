@@ -13,6 +13,7 @@
 #import "LKAddStudentTimeView.h"
 
 
+
 @interface LKAddStudentTimeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSArray *arrayList;
 @property (nonatomic, strong) LKAddStudentTimeView *timeViewItem;
@@ -57,7 +58,10 @@
         
         
         LKAddStudentTimeView *timeViewItem = [[LKAddStudentTimeView alloc]initWithFrame:CGRectMake(i*w, y, w, h)];
-//        timeViewItem.backgroundColor = [UIColor colorWithRed:((float)arc4random_uniform(256) / 255.0)green:((float)arc4random_uniform(256) / 255.0)blue:((float)arc4random_uniform(256) / 255.0)alpha:1.0];
+
+//        timeViewItem.starTimeLabel.text = [NSString stringWithFormat:@"%@"];
+//        timeViewItem.finishTimeLabel.text = [NSString stringWithFormat:@"%@"];
+        
         
         [self.timeView addSubview:timeViewItem];
         
@@ -68,6 +72,7 @@
     
     
     self.timeView = timeView;
+
 
    
 
