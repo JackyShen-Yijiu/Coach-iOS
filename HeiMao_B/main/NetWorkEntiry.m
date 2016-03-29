@@ -561,6 +561,30 @@
     
     [self POST:urlStr parameters:dict success:success failure:failure];
 }
+
+/**
+ *
+ * 学员模块学员列表
+ *
+ */
++ (void)coachStudentListWithCoachId:(NSString *)coachId
+                          subjectID:(NSString *)subjectID
+                          studentID:(NSString *)studentID
+                              index:(NSInteger)index
+                              count:(NSInteger)count
+                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure {
+    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmystudentlist",[self domain]];
+    NSDictionary *paramterDict = @{ @"coachid": coachId,
+                                    @"subjectid": subjectID,
+                                    @"studentstate":subjectID,
+                                    @"count": [NSString stringWithFormat:@"%lu", count],
+                                    @"index": [NSString stringWithFormat:@"%lu", index]
+                                    };
+    [self GET:urlStr parameters:paramterDict success:success failure:failure];
+}
+
+
 #pragma mark 学员签到
 + (void)studentSignInWithUserId:(NSString *)userId
                         coachId:(NSString *)coachId

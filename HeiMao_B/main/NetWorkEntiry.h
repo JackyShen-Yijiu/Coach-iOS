@@ -323,5 +323,15 @@
                               index:(NSUInteger)index
                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-
+/*
+ *  学员模块 学员列表
+ *
+ */
++ (void)coachStudentListWithCoachId:(NSString *)coachId
+                          subjectID:(NSString *)subjectID
+                          studentID:(NSString *)studentID
+                              index:(NSInteger)index
+                              count:(NSInteger)count
+                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;
 @end

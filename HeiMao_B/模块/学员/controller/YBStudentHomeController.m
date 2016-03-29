@@ -13,6 +13,8 @@
 #import "JZHomeStudentSubjectTwoView.h"
 #import "JZHomeStudentSubjectThreeView.h"
 #import "JZHomeStudentSubjectFourView.h"
+#import "JZHomeStudentViewModel.h"
+//#import <MJRefresh/MJRefresh.h>
 
 #define YBRatio 1.15
 #define ScreenWidthIs_6Plus_OrWider [UIScreen mainScreen].bounds.size.width >= 414
@@ -46,6 +48,18 @@
 @property (nonatomic, assign) BOOL isshowSegment; // 是否显示segment控件,当授课科目只有一个时,不显示
 
 @property (nonatomic, assign) CGFloat bgH;
+
+
+@property (nonatomic, strong) NSString *oneStr;
+
+@property (nonatomic, strong) NSString *twoStr;
+
+@property (nonatomic, strong) NSString *threeStr;
+
+@property (nonatomic, strong) NSString *fourStr;
+
+@property (nonatomic, strong) JZHomeStudentViewModel *studentViewModel;
+
 
 @end
 
@@ -94,18 +108,22 @@
         for (NSNumber *_id in resultArray) {
             if ( [_id isEqualToNumber:@1]) {
                 str = @"科目一";
+                _oneStr = str;
                 [resultMustArray addObject:str];
             }
             if ( [_id isEqualToNumber:@2]) {
                 str = @"科目二";
+                _twoStr = str;
                 [resultMustArray addObject:str];
             }
             if ( [_id isEqualToNumber:@3]) {
                 str = @"科目三";
+                _threeStr = str;
                 [resultMustArray addObject:str];
             }
             if ( [_id isEqualToNumber:@4]) {
                 str = @"科目四";
+                _fourStr = str;
                 [resultMustArray addObject:str];
             }
         }
@@ -124,8 +142,50 @@
     }
     [self.bgView addSubview:self.toolBarView];
     [self.view addSubview:self.bgView];
+    
     // 动态调整UIScroller的frame
+    if (!_isshowSegment) {
         
+        // 有授课一个科目
+        NSLog(@"x = %f,y = %f, w= %f,h = %f",self.view.frame.origin.x,self.view.frame.origin.x,self.view.frame.size.width,self.view.frame.size.height);
+        _scrollView.frame = CGRectMake(0, ktopSmallWith, self.view.width, self.view.height - 49);
+        _scrollView.contentSize = CGSizeMake(self.view.width, 0);
+        _subjectOneView.frame = CGRectMake(0,0,self.view.width, _scrollView.height );
+        
+    }
+    if (_isshowSegment) {
+        
+        // 授课多个科目
+        NSArray *array = [UserInfoModel defaultUserInfo].subject;
+        CGFloat systemW = self.view.width;
+        
+        _scrollView.frame = CGRectMake(0, ktopWith,self.view.width, self.view.height - ktopWith);
+        _scrollView.contentSize = CGSizeMake(array.count * self.view.width, 0);
+        
+        if (4 == array.count) {
+            // 授课四个科目
+            _subjectOneView.frame = CGRectMake(0,0,self.view.width, self.view.height - ktopWith );
+            _subjectTwoView.frame = CGRectMake(systemW,0,self.view.width, self.view.height - ktopWith );
+            _subjectThreeView.frame = CGRectMake(2 * systemW,0,self.view.width, self.view.height - ktopWith );
+            _subjectFourView.frame = CGRectMake(3 * systemW,0,self.view.width, self.view.height - ktopWith );
+
+        }
+        if (3 == array.count) {
+            // 授课三个科目
+            _subjectOneView.frame = CGRectMake(0,0,self.view.width, self.view.height - ktopWith );
+            _subjectTwoView.frame = CGRectMake(systemW,0,self.view.width, self.view.height - ktopWith );
+            _subjectThreeView.frame = CGRectMake(2 * systemW,0,self.view.width, self.view.height - ktopWith );
+        }
+        if (2 == array.count) {
+            // 授课二个科目
+            _subjectOneView.frame = CGRectMake(0,0,self.view.width, self.view.height - ktopWith );
+            _subjectTwoView.frame = CGRectMake(systemW,0,self.view.width, self.view.height - ktopWith );
+            
+        }
+
+    
+    }
+    
 }
 - (void)setNavBar{
     self.myNavigationItem.title = nil;
@@ -149,6 +209,51 @@
     _isshowSegment ? (_bgH = ktopWith) : (_bgH = ktopSmallWith);
     [self initUI];
 }
+
+
+
+#pragma mark - config view model
+- (void)configSchoolViewModel {
+    
+    __weak typeof(self) ws = self;
+    _studentViewModel = [JZHomeStudentViewModel new];
+    
+    [_studentViewModel dvv_setRefreshSuccessBlock:^{
+        [ws.subjectOneView.tableView reloadData];
+    }];
+    [_studentViewModel dvv_setLoadMoreSuccessBlock:^{
+        
+        [ws.subjectOneView.tableView reloadData];
+    }];
+    [_studentViewModel dvv_setNilResponseObjectBlock:^{
+        if (ws.studentViewModel.dataArray.count) {
+            
+//            [ws obj_showTotasViewWithMes:@"已经全部加载完毕"];
+//            ws.subjectOneView.tableView.mj_footer.state = MJRefreshStateNoMoreData;
+        }else {
+            //            if (!((NSMutableArray *)[ws dvv_unarchiveFromCacheWithFileName:ArchiverName_SchoolDataArray]).count) {
+            //                ws.noDataPromptView.titleLabel.text = @"暂无合作驾校信息";
+            //                ws.noDataPromptView.subTitleLabel.text = @"请切换合作城市";
+            //                [ws.tableView addSubview:ws.noDataPromptView];
+            //            }
+        
+        }
+    }];
+    [_studentViewModel dvv_setNetworkCallBackBlock:^{
+//        [ws.subjectOneView.tableView.mj_header endRefreshing];
+//        [ws.subjectOneView.tableView.mj_footer endRefreshing];
+       
+    }];
+    [_studentViewModel dvv_setNetworkErrorBlock:^{
+//        if (!((NSMutableArray *)[ws dvv_unarchiveFromCacheWithFileName:ArchiverName_SchoolDataArray]).count) {
+//            ws.noDataPromptView.titleLabel.text = @"网络错误";
+//            ws.noDataPromptView.subTitleLabel.text = @"";
+//            [ws.tableView addSubview:ws.noDataPromptView];
+//        }
+//        [ws obj_showTotasViewWithMes:@"网络错误"];
+    }];
+}
+
 - (void)didClicksegmentedControlAction:(UISegmentedControl *)Seg {
     NSInteger index = Seg.selectedSegmentIndex;
     if (0 == index) {
@@ -238,15 +343,18 @@
     if (width == scrollView.contentOffset.x) {
         // 科目二
         _segment.selectedSegmentIndex = 1;
+        [_toolBarView selectItem:0];
     
     }
     if (2 * width == scrollView.contentOffset.x) {
         // 科目三
          _segment.selectedSegmentIndex = 2;
+        [_toolBarView selectItem:0];
     }
     if (3 * width == scrollView.contentOffset.x) {
         // 科目四
          _segment.selectedSegmentIndex = 3;
+        [_toolBarView selectItem:0];
     }
     
 }
