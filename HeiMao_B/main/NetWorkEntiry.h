@@ -311,7 +311,7 @@
  * 教练获取某一节课的课程详情
  *
  */
-+ (void)getcoursereservationlistWithUserId:(NSString *)userId  courseid:(NSString *)courseid
++ (void)getcoursereservationlistWithUserId:(NSString *)userId  date:(NSString *)date
                                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 /*

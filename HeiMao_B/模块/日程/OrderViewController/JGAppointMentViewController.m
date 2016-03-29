@@ -11,7 +11,6 @@
 #import "HMCourseModel.h"
 #import "CourseSummaryListCell.h"
 #import "FDCalendar.h"
-#import "CourseSummaryDayCell.h"
 #import "CourseDetailViewController.h"
 #import "NoContentTipView.h"
 #import "VacationViewController.h"

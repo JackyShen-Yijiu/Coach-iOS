@@ -14,6 +14,8 @@
 #import "RefreshTableView.h"
 #import "AppointmentCoachTimeInfoModel.h"
 #import "YBFDCalendar.h"
+#import "YYModel.h"
+#import "YBCourseData.h"
 
 #define calendarH 55
 #define YBFDCalendarH 228
@@ -22,6 +24,8 @@
 
 // 底部tableview
 @property(nonatomic,strong) UITableView * courseDayTableView;
+
+@property (nonatomic,strong) UIView *headView;
 
 @property(nonatomic,strong) FDCalendar *calendarHeadView;
 @property(nonatomic,strong) YBFDCalendar *ybCalendarHeadView;
@@ -40,6 +44,31 @@
 
 @implementation YBHomeLeftViewController
 
+- (NSMutableArray *)courseDayTableData
+{
+    if (_courseDayTableData==nil) {
+        _courseDayTableData = [NSMutableArray array];
+    }
+    return _courseDayTableData;
+}
+
+- (void)hiddenOpenCalendar
+{
+    // 隐藏展开更多
+    if (self.isOpen) {
+        [self xialaBtnDidClick];
+    }
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self hiddenOpenCalendar];
+    
+}
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -47,15 +76,28 @@
     self.view.backgroundColor = RGB_Color(253, 253, 253);
     self.selectDate = [NSDate date];
     
+    // 底部预约列表
+    self.courseDayTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64+calendarH, self.view.width, self.view.height-calendarH-64) style:UITableViewStylePlain];
+    self.courseDayTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.courseDayTableView.delegate = self;
+    self.courseDayTableView.dataSource = self;
+    self.courseDayTableView.contentInset = UIEdgeInsetsMake(0, 0, calendarH, 0);
+    [self.view addSubview:self.courseDayTableView];
+    self.courseDayTableView.backgroundColor = [UIColor whiteColor];
+    
+    self.headView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, calendarH)];
+    self.headView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.headView];
+    self.headView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.headView.layer.shadowOffset = CGSizeMake(0, 2);
+    self.headView.layer.shadowOpacity = 0.036;
+    self.headView.layer.shadowRadius = 2;
+    
     // 顶部日历
     self.calendarHeadView = [[FDCalendar alloc] initWithCurrentDate:[NSDate date]];
     self.calendarHeadView.delegate = self;
-    self.calendarHeadView.frame = CGRectMake(0, 64, self.view.width, calendarH);
-    [self.view addSubview:self.calendarHeadView];
-    self.calendarHeadView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.calendarHeadView.layer.shadowOffset = CGSizeMake(0, 2);
-    self.calendarHeadView.layer.shadowOpacity = 0.036;
-    self.calendarHeadView.layer.shadowRadius = 2;
+    self.calendarHeadView.frame = CGRectMake(0, 0, self.view.width, calendarH);
+    [self.headView addSubview:self.calendarHeadView];
     
     // 添加右边下拉按钮
     UIButton *xialaBtn = [[UIButton alloc] init];
@@ -63,15 +105,6 @@
     [xialaBtn setImage:[UIImage imageNamed:@"JZCoursefold_down"] forState:UIControlStateNormal];
     [xialaBtn addTarget:self action:@selector(xialaBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
     [self.calendarHeadView addSubview:xialaBtn];
-    
-    // 底部预约列表
-    self.courseDayTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.calendarHeadView.frame), self.view.width, self.view.height-self.calendarHeadView.height-64) style:UITableViewStylePlain];
-    self.courseDayTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.courseDayTableView.delegate = self;
-    self.courseDayTableView.dataSource = self;
-    self.courseDayTableView.contentInset = UIEdgeInsetsMake(0, 0, self.calendarHeadView.height, 0);
-    [self.view addSubview:self.courseDayTableView];
-    self.courseDayTableView.backgroundColor = RGB_Color(253, 253, 253);
     
     // 占位图
     self.tipView2 = [[NoContentTipView alloc] initWithContetntTip:@"您现在没有预约"];
@@ -130,16 +163,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    // 隐藏展开更多
-    if (self.isOpen) {
-        [self xialaBtnDidClick];
-    }
     
 }
 
@@ -197,7 +220,7 @@
     NSLog(@"切换日历代理方法 dataStr:%@",dataStr);
     
     // 加载底部预约列表数据
-    [self loadFootListData:dataStr];
+    [self loadFootListDataWithinfoId:dataStr];
     
 }
 
@@ -225,7 +248,7 @@
     NSLog(@"YBFDCalendar切换日历代理方法 dataStr:%@",dataStr);
     
     // 加载底部预约列表数据
-    [self loadFootListData:dataStr];
+    [self loadFootListDataWithinfoId:dataStr];
     
 }
 
@@ -239,7 +262,7 @@
     
     WS(ws);
     // 加载底部预约列表数据
-    [NetWorkEntiry getcoursereservationlistWithUserId:userId courseid:infoId  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry getcoursereservationlistWithUserId:userId date:infoId  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"切换日历获取最新数据:responseObject:%@",responseObject);
         
@@ -247,7 +270,25 @@
         
         if (type == 1) {
             
-            ws.courseDayTableData = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
+            [ws.courseDayTableData removeAllObjects];
+            
+            NSArray *dataArray = responseObject[@"data"];
+            
+            for (NSDictionary *dict in dataArray) {
+                YBCourseData *dataModel = [YBCourseData yy_modelWithDictionary:dict];
+                
+                NSInteger studentCount = 10;//dataModel.coursestudentcount;
+                NSInteger hangshu = studentCount / 5;
+                NSLog(@"hangshu:%ld",(long)hangshu);
+                CGFloat coureStudentCollectionViewH = (coureSundentCollectionH + 16) * hangshu + coureSundentCollectionH;
+                NSLog(@"setModel coureStudentCollectionViewH:%f",coureStudentCollectionViewH);
+    
+                dataModel.appointMentViewH = coureStudentCollectionViewH;
+                
+                [ws.courseDayTableData addObject:dataModel];
+            }
+            
+            NSLog(@"ws.courseDayTableData:%lu",(unsigned long)ws.courseDayTableData.count);
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [ws.courseDayTableView reloadData];
@@ -260,45 +301,8 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [ws netErrorWithTableView:nil];
-        
     }];
-}
-
-- (void)loadFootListData:(NSString *)dataStr
-{
     
-    NSLog(@"loadFootListData dataStr:%@",dataStr);
-    
-    NSString *  userId = [[UserInfoModel defaultUserInfo] userID];
-    if (userId==nil) {
-        return;
-    }
-    
-    WS(ws);
-    // 加载底部预约列表数据
-    [NetWorkEntiry getAllCourseInfoWithUserId:userId DayTime:dataStr  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"切换日历获取最新数据:responseObject:%@",responseObject);
-        
-        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
-        
-        if (type == 1) {
-            
-            ws.courseDayTableData = [[BaseModelMethod getCourseListArrayFormDicInfo:[responseObject objectArrayForKey:@"data"]] mutableCopy];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [ws.courseDayTableView reloadData];
-            });
-            
-        }else{
-            
-            [ws dealErrorResponseWithTableView:nil info:responseObject];
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [ws netErrorWithTableView:nil];
-        
-    }];
 }
 
 #pragma mark - DataSource
@@ -307,13 +311,12 @@
     NSInteger count = 0;
     count =  self.courseDayTableData.count;
     [self.tipView2 setHidden:count];
-    return 10;
+    return count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [CourseSummaryDayCell cellHeight];
-    
+    return [CourseSummaryDayCell cellHeightWithModel:self.courseDayTableData[indexPath.row]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -323,24 +326,33 @@
     if (!dayCell) {
         dayCell = [[CourseSummaryDayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dayCell"];
     }
-//    if (indexPath.row < self.courseDayTableData.count)
-//        [dayCell setModel:self.courseDayTableData[indexPath.row]];
+    if (indexPath.row < self.courseDayTableData.count)
+        [dayCell setModel:self.courseDayTableData[indexPath.row]];
+    
+    dayCell.backgroundColor = RGB_Color(255, 255, 255);
     
     return dayCell;
     
-    return [UITableViewCell new];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    HMCourseModel  * courseModel = nil;
+    YBCourseData  * courseModel = nil;
     courseModel = [[self courseDayTableData] objectAtIndex:indexPath.row];
     if (courseModel) {
         CourseDetailViewController * decv = [[CourseDetailViewController alloc] init];
-        decv.couresID = courseModel.courseId;
+        decv.couresID = courseModel.coachid;
         [self.navigationController pushViewController:decv animated:YES];
+    }
+    
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView==self.courseDayTableView) {
+        [self hiddenOpenCalendar];
     }
 }
 
@@ -348,15 +360,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

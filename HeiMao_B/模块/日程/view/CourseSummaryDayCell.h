@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HMCourseModel.h"
+#import "YBCourseData.h"
 
 @interface CourseSummaryDayCell : UITableViewCell
 
-@property(nonatomic,strong)HMCourseModel * model;
+@property(nonatomic,strong)YBCourseData * model;
 
-+ (CGFloat)cellHeight;
+@property (nonatomic,strong) UIViewController *parentViewController;
+
++ (CGFloat)cellHeightWithModel:(YBCourseData *)model;
 
 @end
