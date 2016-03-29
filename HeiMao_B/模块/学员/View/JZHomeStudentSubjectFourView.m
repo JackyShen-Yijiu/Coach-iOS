@@ -12,7 +12,6 @@
 
 @interface JZHomeStudentSubjectFourView ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, assign) CGRect frame;
 @end
 
 @implementation JZHomeStudentSubjectFourView

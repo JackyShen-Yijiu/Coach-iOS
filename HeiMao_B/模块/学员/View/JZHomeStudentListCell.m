@@ -84,12 +84,21 @@
     }];
     [self.phoneButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
-        make.right.mas_equalTo(self.contentView.mas_right).offset(16);
+        make.right.mas_equalTo(self.contentView.mas_right).offset(-16);
         make.height.mas_equalTo(@16);
          make.width.mas_equalTo(@16);
         
         
     }];
+    [self.messageButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.contentView.mas_centerY);
+        make.right.mas_equalTo(self.phoneButton.mas_left).offset(-16);
+        make.height.mas_equalTo(@16);
+        make.width.mas_equalTo(@16);
+        
+        
+    }];
+
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(0);
         make.right.mas_equalTo(self.contentView.mas_right).offset(0);

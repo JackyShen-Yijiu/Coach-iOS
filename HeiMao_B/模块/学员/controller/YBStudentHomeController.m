@@ -51,12 +51,12 @@
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self setNavBar];
     self.myNavigationItem.title = @"学员";
-    [self.view addSubview:self.scrollView];
+    
     [self.scrollView addSubview:self.subjectOneView];
     [self.scrollView addSubview:self.subjectTwoView];
     [self.scrollView addSubview:self.subjectThreeView];
     [self.scrollView addSubview:self.subjectFourView];
-    
+    [self.view addSubview:self.scrollView];
     
 
 }
@@ -76,6 +76,8 @@
 
 }
 - (void)didClicksegmentedControlAction:(UISegmentedControl *)Seg {
+    NSInteger index = Seg.selectedSegmentIndex;
+    
 }
 #pragma mark 筛选条件
 - (void)dvvToolBarViewItemSelectedAction:(NSInteger)index {
@@ -97,6 +99,28 @@
     [super didReceiveMemoryWarning];
     
 }
+#pragma mark -- UIScrollerView 的代理方法
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGFloat width = self.view.frame.size.width;
+    if (0 == scrollView.contentOffset.x) {
+        // 科目一
+        
+    }
+    if (width == scrollView.contentOffset.x) {
+        // 科目二
+    
+    }
+    if (2 * width == scrollView.contentOffset.x) {
+        // 科目三
+        
+    }
+    if (3 * width == scrollView.contentOffset.x) {
+        // 科目四
+        
+    }
+    
+}
+
 - (UIView *)bgView{
     if (_bgView == nil) {
         _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, ktopWith)];
@@ -146,7 +170,7 @@
 }
 - (UIScrollView *)scrollView{
     if (_scrollView == nil) {
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ktopWith + 64,self.view.width, self.view.height - ktopWith )];
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ktopWith,self.view.width, self.view.height - ktopWith - 64)];
         _scrollView.delegate = self;
         _scrollView.contentSize = CGSizeMake(4 * self.view.width, 0);
         _scrollView.pagingEnabled = YES;
@@ -156,14 +180,14 @@
 }
 - (JZHomeStudentSubjectOneView *)subjectOneView{
     if (_subjectOneView == nil) {
-        _subjectOneView = [[JZHomeStudentSubjectOneView alloc] initWithFrame:CGRectMake(0,0,self.view.width, self.scrollView.frame.size.height)];
+        _subjectOneView = [[JZHomeStudentSubjectOneView alloc] initWithFrame:CGRectMake(0,0,self.view.width, self.view.height - ktopWith - 64 - 54 )];
     }
     return _subjectOneView;
 }
 - (JZHomeStudentSubjectTwoView *)subjectTwoView{
     if (_subjectTwoView == nil) {
         CGFloat systemW = self.view.width;
-        _subjectTwoView = [[JZHomeStudentSubjectTwoView alloc] initWithFrame:CGRectMake(systemW,0,self.view.width, self.scrollView.frame.size.height)];
+        _subjectTwoView = [[JZHomeStudentSubjectTwoView alloc] initWithFrame:CGRectMake(systemW,0,self.view.width, self.view.height - ktopWith - 64 - 54)];
     }
     return _subjectTwoView;
 }
@@ -171,7 +195,7 @@
 - (JZHomeStudentSubjectThreeView *)subjectThreeView{
     if (_subjectThreeView == nil) {
         CGFloat systemW = self.view.width;
-        _subjectThreeView = [[JZHomeStudentSubjectThreeView alloc] initWithFrame:CGRectMake(systemW * 2,0,self.view.width, self.scrollView.frame.size.height)];
+        _subjectThreeView = [[JZHomeStudentSubjectThreeView alloc] initWithFrame:CGRectMake(systemW * 2,0,self.view.width, self.view.height - ktopWith - 64 - 54)];
     }
     return _subjectThreeView;
 }
@@ -179,7 +203,8 @@
 - (JZHomeStudentSubjectFourView *)subjectFourView{
     if (_subjectFourView == nil) {
         CGFloat systemW = self.view.width;
-        _subjectFourView = [[JZHomeStudentSubjectFourView alloc] initWithFrame:CGRectMake(systemW * 3,0,self.view.width, self.scrollView.frame.size.height)];
+        _subjectFourView = [[JZHomeStudentSubjectFourView alloc] initWithFrame:CGRectMake(systemW * 3,0,self.view.width, self.view.height - ktopWith - 64 - 54)];
+
     }
     return _subjectFourView;
 }
