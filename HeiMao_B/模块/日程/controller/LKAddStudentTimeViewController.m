@@ -8,8 +8,8 @@
 
 #import "LKAddStudentTimeViewController.h"
 #import "LKAddStudentTableViewCell.h"
-#import "Student.h"
-#import "StudentGroup.h"
+//#import "Student.h"
+//#import "StudentGroup.h"
 #import "LKAddStudentTimeView.h"
 
 
@@ -87,8 +87,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return [[self.arrayList[section] Students] count];
+//    return [[self.arrayList[section] Students] count];
     
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -98,9 +99,9 @@
         cell = [[LKAddStudentTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
         
     }
-    StudentGroup *stuGroup = self.arrayList[indexPath.section];
-    Student *stu = stuGroup.Students[indexPath.row];
-    cell.studentNameLabel.text = stu.studentNameLabel;
+//    StudentGroup *stuGroup = self.arrayList[indexPath.section];
+//    Student *stu = stuGroup.Students[indexPath.row];
+//    cell.studentNameLabel.text = stu.studentNameLabel;
     //    [cell setStudentModel:stu];
     //    cell.studentModel = stuGroup.Students[indexPath.row];
     
@@ -121,9 +122,9 @@
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
     //   NSArray *indexArr = [self.groupes valueForKeyPath:@"title"];
     NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:self.arrayList.count];
-    for (StudentGroup *group in self.arrayList) {
-        [arrM addObject:group.title];
-    }
+//    for (StudentGroup *group in self.arrayList) {
+//        [arrM addObject:group.title];
+//    }
     return arrM;
 }
 
@@ -165,17 +166,17 @@
         for (NSDictionary *dict in dictArr) {
             
             
-            StudentGroup *stuGroup = [StudentGroup groupWithDict:dict];
-            
-            NSArray *students = stuGroup.Students;
-            
-            NSMutableArray *stuGrouM = [NSMutableArray array];
-            for (NSDictionary *stuDict in students) {
-                Student *student = [Student studentWithDict:stuDict];
-                [stuGrouM addObject:student];
-            }
-            stuGroup.Students = stuGrouM;
-            [arrM addObject:stuGroup];
+//            StudentGroup *stuGroup = [StudentGroup groupWithDict:dict];
+//            
+//            NSArray *students = stuGroup.Students;
+//            
+//            NSMutableArray *stuGrouM = [NSMutableArray array];
+//            for (NSDictionary *stuDict in students) {
+//                Student *student = [Student studentWithDict:stuDict];
+//                [stuGrouM addObject:student];
+//            }
+//            stuGroup.Students = stuGrouM;
+//            [arrM addObject:stuGroup];
             
         }
         _arrayList = arrM;

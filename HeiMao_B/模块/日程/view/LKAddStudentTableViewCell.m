@@ -97,27 +97,7 @@
     }];
 
 }
-//-(void)setStudentModel:(Student *)studentModel
-//{
-////    _studentModel = studentModel;
-////    /// 学员名称 -- UILabel
-////    @property (nonatomic, weak) UILabel *studentNameLabel;
-////    /// 学员学习详情 -- UILabel
-////    @property (nonatomic, weak) UILabel *studyDetilsLabel;
-////    /// 学员头像 -- UIImageView
-////    @property (nonatomic, weak) UIImageView *studentIconView;
-////    /// 拨打学员电话按钮 -- UIButton
-////    @property (nonatomic, weak) UIButton *callStudentButton;
-////    /// 选择学员的按钮 -- UIButton
-////    @property (nonatomic, weak) UIImageView *selectImageView;
-//    
-//    _studentNameLabel.text = studentModel.studentNameLabel;
-//    
-//    
-//    
-//
-//    
-//}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

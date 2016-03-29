@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Student.h"
+//#import "Student.h"
 
 @interface LKAddStudentTableViewCell : UITableViewCell
 /// 学员名称 -- UILabel
