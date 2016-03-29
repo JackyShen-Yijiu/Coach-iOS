@@ -29,5 +29,6 @@
 @property (nonatomic, assign) NSInteger signinstudentcount;
 
 @property (nonatomic,assign) CGFloat appointMentViewH;
+@property (nonatomic,assign) NSInteger appointMentCount;
 
 @end

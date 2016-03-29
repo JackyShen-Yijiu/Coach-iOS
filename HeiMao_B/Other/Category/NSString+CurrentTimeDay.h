@@ -18,5 +18,5 @@
 + (NSString *)getHourLocalDateFormateUTCDate:(NSString *)utcDate ;
 + (NSString *)getLitteLocalDateFormateUTCDate:(NSString *)utcDate;
 + (NSString *)getHMSHourLocalDateFormateUTCDate:(NSString *)utcDate;
-
++ (NSString *)getHLocalDateFormateUTCDate:(NSString *)utcDate;
 @end
