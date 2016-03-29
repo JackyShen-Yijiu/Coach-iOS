@@ -272,14 +272,14 @@
     if (self.isOpen) {
 
         // 设置当前日期
-        [self.ybCalendarHeadView setCurrentDate:[NSDate date]];
-        [self YBFDCalendar:self.ybCalendarHeadView didSelectedDate:[NSDate date]];
+        [self.ybCalendarHeadView setCurrentDate:self.selectDate];
+        [self YBFDCalendar:self.ybCalendarHeadView didSelectedDate:self.selectDate];
         
     }else{
         
         // 设置当前日期
-        [self.calendarHeadView setCurrentDate:[NSDate date]];
-        [self fdCalendar:self.calendarHeadView didSelectedDate:[NSDate date]];
+        [self.calendarHeadView setCurrentDate:self.selectDate];
+        [self fdCalendar:self.calendarHeadView didSelectedDate:self.selectDate];
         
     }
     
