@@ -20,7 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - BaiduMapKit (2.10.0)
+  - BaiduMapKit (2.10.2)
   - ChameleonFramework (2.0.4):
     - ChameleonFramework/Default (= 2.0.4)
   - ChameleonFramework/Default (2.0.4)
@@ -60,7 +60,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  BaiduMapKit: 5df028c6b455d29e68e89694adbcf9d37a4bcc99
+  BaiduMapKit: b1706a062597c70ec62a0cca93212cba1d3017e1
   ChameleonFramework: 5abe69b1f2a6cc79c3c435fcd9d3d855748225ee
   EaseMobSDKFull: 43858ca9a62bbe1fa4c7c006f944a3e52a4bff48
   HappyDNS: 6d85942e64c28b4fa61f8c76580398f52d6d1d11

@@ -14,6 +14,8 @@
 #import "JZHomeStudentSubjectThreeView.h"
 #import "JZHomeStudentSubjectFourView.h"
 #import "JZHomeStudentViewModel.h"
+//#import <MJRefreshHeader.h>
+//#import <MJRefreshFooter.h>
 //#import <MJRefresh/MJRefresh.h>
 
 #define YBRatio 1.15
@@ -242,7 +244,7 @@
     [_studentViewModel dvv_setNetworkCallBackBlock:^{
 //        [ws.subjectOneView.tableView.mj_header endRefreshing];
 //        [ws.subjectOneView.tableView.mj_footer endRefreshing];
-       
+//
     }];
     [_studentViewModel dvv_setNetworkErrorBlock:^{
 //        if (!((NSMutableArray *)[ws dvv_unarchiveFromCacheWithFileName:ArchiverName_SchoolDataArray]).count) {
