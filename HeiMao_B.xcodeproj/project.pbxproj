@@ -148,7 +148,6 @@
 		B2BA419D1CA5035700926584 /* modifyjialinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F481CA5035700926584 /* modifyjialinViewController.m */; };
 		B2BA419E1CA5035700926584 /* ModifyNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F4A1CA5035700926584 /* ModifyNameViewController.m */; };
 		B2BA419F1CA5035700926584 /* MyWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F4C1CA5035700926584 /* MyWalletViewController.m */; };
-		B2BA41A01CA5035700926584 /* NSString+CurrentTimeDay.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F4E1CA5035700926584 /* NSString+CurrentTimeDay.m */; };
 		B2BA41A11CA5035700926584 /* NSUserStoreTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F501CA5035700926584 /* NSUserStoreTool.m */; };
 		B2BA41A21CA5035700926584 /* PersonaizeLabelController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F521CA5035700926584 /* PersonaizeLabelController.m */; };
 		B2BA41A31CA5035700926584 /* PersonalizeLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F541CA5035700926584 /* PersonalizeLabelCell.m */; };
@@ -486,7 +485,6 @@
 		B2BA435F1CA51DF600926584 /* YBHomeRightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA435E1CA51DF600926584 /* YBHomeRightViewController.m */; };
 		B2BA436A1CA5324000926584 /* FDCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43631CA5324000926584 /* FDCalendar.m */; };
 		B2BA436B1CA5324000926584 /* FDCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43651CA5324000926584 /* FDCalendarItem.m */; };
-		B2BA436C1CA5324000926584 /* NSString+CurrentTimeDay.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43671CA5324000926584 /* NSString+CurrentTimeDay.m */; };
 		B2BA436D1CA5324000926584 /* YBObjectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43691CA5324000926584 /* YBObjectTool.m */; };
 		B2BA43721CA62ECD00926584 /* YBFDCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43711CA62ECD00926584 /* YBFDCalendar.m */; };
 		B2BA43791CA6424B00926584 /* YBFDCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43781CA6424B00926584 /* YBFDCalendarItem.m */; };
@@ -500,7 +498,7 @@
 		B2BA43DC1CA951A200926584 /* YBCourseRootClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43D31CA951A200926584 /* YBCourseRootClass.m */; };
 		B2BA43DD1CA951A200926584 /* YBCourseSubject.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43D51CA951A200926584 /* YBCourseSubject.m */; };
 		B2BA43DE1CA951A200926584 /* YBCourseUserid.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43D71CA951A200926584 /* YBCourseUserid.m */; };
-		B2BA43E11CA962A600926584 /* YBCourseAppointMentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43E01CA962A600926584 /* YBCourseAppointMentView.m */; };
+		B2BA43E71CAA2F0700926584 /* NSString+CurrentTimeDay.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43E51CAA2F0700926584 /* NSString+CurrentTimeDay.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
 		B80003CC1BEFACA50099D194 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003CB1BEFACA50099D194 /* CoreFoundation.framework */; };
@@ -528,6 +526,9 @@
 		B8C458801BDB5B5C00901F71 /* ToastAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587F1BDB5B5C00901F71 /* ToastAlertView.m */; };
 		D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */; };
 		D9ABF86D1C896463001B6930 /* BLPFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ABF86C1C896463001B6930 /* BLPFAlertView.m */; };
+		D9D607D81CAA7D3800B61874 /* LKAddStudentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */; };
+		D9D607D91CAA7D3800B61874 /* LKAddStudentTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */; };
+		D9D607DC1CAA7D4800B61874 /* LKAddStudentTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -799,8 +800,6 @@
 		B2BA3F4A1CA5035700926584 /* ModifyNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyNameViewController.m; sourceTree = "<group>"; };
 		B2BA3F4B1CA5035700926584 /* MyWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWalletViewController.h; sourceTree = "<group>"; };
 		B2BA3F4C1CA5035700926584 /* MyWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWalletViewController.m; sourceTree = "<group>"; };
-		B2BA3F4D1CA5035700926584 /* NSString+CurrentTimeDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CurrentTimeDay.h"; sourceTree = "<group>"; };
-		B2BA3F4E1CA5035700926584 /* NSString+CurrentTimeDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CurrentTimeDay.m"; sourceTree = "<group>"; };
 		B2BA3F4F1CA5035700926584 /* NSUserStoreTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUserStoreTool.h; sourceTree = "<group>"; };
 		B2BA3F501CA5035700926584 /* NSUserStoreTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUserStoreTool.m; sourceTree = "<group>"; };
 		B2BA3F511CA5035700926584 /* PersonaizeLabelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonaizeLabelController.h; sourceTree = "<group>"; };
@@ -1370,8 +1369,6 @@
 		B2BA43631CA5324000926584 /* FDCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendar.m; sourceTree = "<group>"; };
 		B2BA43641CA5324000926584 /* FDCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCalendarItem.h; sourceTree = "<group>"; };
 		B2BA43651CA5324000926584 /* FDCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCalendarItem.m; sourceTree = "<group>"; };
-		B2BA43661CA5324000926584 /* NSString+CurrentTimeDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CurrentTimeDay.h"; sourceTree = "<group>"; };
-		B2BA43671CA5324000926584 /* NSString+CurrentTimeDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CurrentTimeDay.m"; sourceTree = "<group>"; };
 		B2BA43681CA5324000926584 /* YBObjectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBObjectTool.h; sourceTree = "<group>"; };
 		B2BA43691CA5324000926584 /* YBObjectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBObjectTool.m; sourceTree = "<group>"; };
 		B2BA43701CA62ECD00926584 /* YBFDCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBFDCalendar.h; sourceTree = "<group>"; };
@@ -1399,8 +1396,8 @@
 		B2BA43D51CA951A200926584 /* YBCourseSubject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseSubject.m; sourceTree = "<group>"; };
 		B2BA43D61CA951A200926584 /* YBCourseUserid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBCourseUserid.h; sourceTree = "<group>"; };
 		B2BA43D71CA951A200926584 /* YBCourseUserid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseUserid.m; sourceTree = "<group>"; };
-		B2BA43DF1CA962A600926584 /* YBCourseAppointMentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBCourseAppointMentView.h; sourceTree = "<group>"; };
-		B2BA43E01CA962A600926584 /* YBCourseAppointMentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseAppointMentView.m; sourceTree = "<group>"; };
+		B2BA43E41CAA2F0700926584 /* NSString+CurrentTimeDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CurrentTimeDay.h"; sourceTree = "<group>"; };
+		B2BA43E51CAA2F0700926584 /* NSString+CurrentTimeDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CurrentTimeDay.m"; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		B80003C91BEFAC9C0099D194 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -1447,6 +1444,12 @@
 		D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVLocationStatus.m; sourceTree = "<group>"; };
 		D9ABF86B1C896463001B6930 /* BLPFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLPFAlertView.h; sourceTree = "<group>"; };
 		D9ABF86C1C896463001B6930 /* BLPFAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLPFAlertView.m; sourceTree = "<group>"; };
+		D9D607D41CAA7D3800B61874 /* LKAddStudentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTableViewCell.h; sourceTree = "<group>"; };
+		D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTableViewCell.m; sourceTree = "<group>"; };
+		D9D607D61CAA7D3800B61874 /* LKAddStudentTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTimeView.h; sourceTree = "<group>"; };
+		D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTimeView.m; sourceTree = "<group>"; };
+		D9D607DA1CAA7D4800B61874 /* LKAddStudentTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTimeViewController.h; sourceTree = "<group>"; };
+		D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTimeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1877,6 +1880,8 @@
 				B2BA435B1CA51DE600926584 /* YBHomeLeftViewController.m */,
 				B2BA435D1CA51DF600926584 /* YBHomeRightViewController.h */,
 				B2BA435E1CA51DF600926584 /* YBHomeRightViewController.m */,
+				D9D607DA1CAA7D4800B61874 /* LKAddStudentTimeViewController.h */,
+				D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1905,10 +1910,12 @@
 		B2BA3F021CA5035700926584 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				D9D607D41CAA7D3800B61874 /* LKAddStudentTableViewCell.h */,
+				D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */,
+				D9D607D61CAA7D3800B61874 /* LKAddStudentTimeView.h */,
+				D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */,
 				B2BA43C41CA8E9DB00926584 /* CourseSummaryDayCell.h */,
 				B2BA43C51CA8E9DB00926584 /* CourseSummaryDayCell.m */,
-				B2BA43DF1CA962A600926584 /* YBCourseAppointMentView.h */,
-				B2BA43E01CA962A600926584 /* YBCourseAppointMentView.m */,
 				B2BA43C71CA9125000926584 /* YBAppointMentUserCell.h */,
 				B2BA43C81CA9125000926584 /* YBAppointMentUserCell.m */,
 			);
@@ -1959,8 +1966,6 @@
 				B2BA3F4A1CA5035700926584 /* ModifyNameViewController.m */,
 				B2BA3F4B1CA5035700926584 /* MyWalletViewController.h */,
 				B2BA3F4C1CA5035700926584 /* MyWalletViewController.m */,
-				B2BA3F4D1CA5035700926584 /* NSString+CurrentTimeDay.h */,
-				B2BA3F4E1CA5035700926584 /* NSString+CurrentTimeDay.m */,
 				B2BA3F4F1CA5035700926584 /* NSUserStoreTool.h */,
 				B2BA3F501CA5035700926584 /* NSUserStoreTool.m */,
 				B2BA3F511CA5035700926584 /* PersonaizeLabelController.h */,
@@ -3069,8 +3074,6 @@
 				B2BA43631CA5324000926584 /* FDCalendar.m */,
 				B2BA43641CA5324000926584 /* FDCalendarItem.h */,
 				B2BA43651CA5324000926584 /* FDCalendarItem.m */,
-				B2BA43661CA5324000926584 /* NSString+CurrentTimeDay.h */,
-				B2BA43671CA5324000926584 /* NSString+CurrentTimeDay.m */,
 				B2BA43681CA5324000926584 /* YBObjectTool.h */,
 				B2BA43691CA5324000926584 /* YBObjectTool.m */,
 				B2BA43761CA6413600926584 /* YBUIMacro.h */,
@@ -3078,6 +3081,31 @@
 				B2BA43C21CA6678E00926584 /* FDCalendarCell.m */,
 			);
 			path = FDCalendar;
+			sourceTree = "<group>";
+		};
+		B2BA43E21CAA2F0700926584 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				B2BA43E31CAA2F0700926584 /* Category */,
+				B2BA43E61CAA2F0700926584 /* Tool */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		B2BA43E31CAA2F0700926584 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				B2BA43E41CAA2F0700926584 /* NSString+CurrentTimeDay.h */,
+				B2BA43E51CAA2F0700926584 /* NSString+CurrentTimeDay.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		B2BA43E61CAA2F0700926584 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		B636E4EC57D3A22E3FC68559 /* Frameworks */ = {
@@ -3133,6 +3161,7 @@
 		B86EB3531BDB50EB0014EBD7 /* HeiMao_B */ = {
 			isa = PBXGroup;
 			children = (
+				B2BA43E21CAA2F0700926584 /* Other */,
 				B2BA3A011CA4E6B900926584 /* 模块 */,
 				B2BA3CCA1CA4E6BA00926584 /* main */,
 				B8C4584C1BDB571A00901F71 /* PrefixHeader.pch */,
@@ -3540,6 +3569,7 @@
 				B2BA41861CA5035700926584 /* GenderViewController.m in Sources */,
 				B2BA429B1CA5035700926584 /* EaseUserCell.m in Sources */,
 				B2BA3EDE1CA5003B00926584 /* HMSchoolInfoModel.m in Sources */,
+				D9D607D81CAA7D3800B61874 /* LKAddStudentTableViewCell.m in Sources */,
 				B8C458731BDB59AC00901F71 /* UIView+TKCategory.m in Sources */,
 				B2BA42A71CA5035700926584 /* EaseChatToolbarItem.m in Sources */,
 				B2BA429A1CA5035700926584 /* EaseRefreshTableViewController.m in Sources */,
@@ -3555,12 +3585,14 @@
 				B2BA3EE01CA5003B00926584 /* HMSubjectModel.m in Sources */,
 				B2BA3EDF1CA5003B00926584 /* HMStudentModel.m in Sources */,
 				B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */,
+				B2BA43E71CAA2F0700926584 /* NSString+CurrentTimeDay.m in Sources */,
 				B2BA42991CA5035700926584 /* EaseConversationListViewController.m in Sources */,
 				B28D5E411C64857000D9E9E1 /* ChineseString.m in Sources */,
 				B2BA42B71CA5035700926584 /* DVVDrivingStudentListCell.m in Sources */,
 				B2BA42C31CA5035700926584 /* DVVTheoreticalStudentListView.m in Sources */,
 				B2BA42971CA5035700926584 /* EaseEmotionManager.m in Sources */,
 				B2BA41DB1CA5035700926584 /* EMSDWebImageDownloaderOperation.m in Sources */,
+				D9D607DC1CAA7D4800B61874 /* LKAddStudentTimeViewController.m in Sources */,
 				B2BA433B1CA5041100926584 /* JGSubjectthreeModel.m in Sources */,
 				B2BA42A21CA5035700926584 /* EaseBubbleView+Text.m in Sources */,
 				B2BA41B91CA5035700926584 /* EMCDDeviceManager+Microphone.m in Sources */,
@@ -3571,7 +3603,6 @@
 				B2BA43351CA5041100926584 /* InformationMessageModelRootClass.m in Sources */,
 				0608CA531CAA7C670068A18B /* YYClassInfo.m in Sources */,
 				B2BA41B61CA5035700926584 /* EMAudioPlayerUtil.m in Sources */,
-				B2BA436C1CA5324000926584 /* NSString+CurrentTimeDay.m in Sources */,
 				B2BA41C91CA5035700926584 /* MJRefreshLegendFooter.m in Sources */,
 				B2BA41E11CA5035700926584 /* UIImage+EMGIF.m in Sources */,
 				B2BA41BF1CA5035700926584 /* EMVoiceConverter.mm in Sources */,
@@ -3689,6 +3720,7 @@
 				B2BA42C41CA5035700926584 /* DVVToast.m in Sources */,
 				B2BA3EB61CA4FF9800926584 /* HMButton.m in Sources */,
 				B253C2D41C3FA742001AF771 /* split.c in Sources */,
+				D9D607D91CAA7D3800B61874 /* LKAddStudentTimeView.m in Sources */,
 				B2BA41821CA5035700926584 /* ExamClassCollectionViewCell.m in Sources */,
 				B2BA41BA1CA5035700926584 /* EMCDDeviceManager+ProximitySensor.m in Sources */,
 				B2BA43C91CA9125000926584 /* YBAppointMentUserCell.m in Sources */,
@@ -3724,7 +3756,6 @@
 				B2BA433C1CA5041100926584 /* JGYuYueHeadView.m in Sources */,
 				B2BA43DC1CA951A200926584 /* YBCourseRootClass.m in Sources */,
 				B2BA42851CA5035700926584 /* EaseSDKHelper.m in Sources */,
-				B2BA43E11CA962A600926584 /* YBCourseAppointMentView.m in Sources */,
 				B2BA43461CA5041100926584 /* SystemMessageModelRootClass.m in Sources */,
 				0608CA521CAA7C670068A18B /* NSObject+YYModel.m in Sources */,
 				B253C2DA1C3FA901001AF771 /* UIView+SDExtension.m in Sources */,

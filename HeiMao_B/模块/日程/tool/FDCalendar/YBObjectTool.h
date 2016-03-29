@@ -31,4 +31,6 @@
  */
 +(int)compareDateWithSelectDateStr:(NSString *)selectDate;
 
++(int)compareHMSDateWithBegintime:(NSString *)begintime endtime:(NSString *)endtime;
+
 @end

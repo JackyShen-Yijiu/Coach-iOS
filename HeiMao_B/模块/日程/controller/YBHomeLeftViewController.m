@@ -232,9 +232,6 @@
 //    self.calendarHeadView.selectDate = self.selectDate;
     [self.calendarHeadView changeDate:self.selectDate];
     
-//    [self.calendarHeadView setCurrentDate:self.selectDate];
-//    [self fdCalendar:self.calendarHeadView didSelectedDate:self.selectDate];
-    
     // 隐藏展开更多
     if (self.isOpen) {
         [self xialaBtnDidClick];
@@ -276,11 +273,21 @@
             
             for (NSDictionary *dict in dataArray) {
                 YBCourseData *dataModel = [YBCourseData yy_modelWithDictionary:dict];
+                                
+                NSInteger studentCount = dataModel.coursestudentcount;
+                NSInteger hangshu = studentCount / 4;
+                NSInteger yushu = studentCount % 4;
+
+                if (YBIphone6 || YBIphone6Plus) {
+                    hangshu = studentCount / 5;
+                    yushu = studentCount % 5;
+                }
+                NSLog(@"hangshu:%ld yushu:%ld",(long)hangshu,(long)yushu);
                 
-                NSInteger studentCount = 10;//dataModel.coursestudentcount;
-                NSInteger hangshu = studentCount / 5;
-                NSLog(@"hangshu:%ld",(long)hangshu);
-                CGFloat coureStudentCollectionViewH = (coureSundentCollectionH + 16) * hangshu + coureSundentCollectionH;
+                CGFloat coureStudentCollectionViewH = (coureSundentCollectionH + 8) * hangshu;
+                if (yushu!=0) {
+                    coureStudentCollectionViewH = (coureSundentCollectionH + 8) * (hangshu + 1);
+                }
                 NSLog(@"setModel coureStudentCollectionViewH:%f",coureStudentCollectionViewH);
     
                 dataModel.appointMentViewH = coureStudentCollectionViewH;
@@ -326,9 +333,12 @@
     if (!dayCell) {
         dayCell = [[CourseSummaryDayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dayCell"];
     }
+    dayCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     if (indexPath.row < self.courseDayTableData.count)
         [dayCell setModel:self.courseDayTableData[indexPath.row]];
     
+    dayCell.parentViewController = self;
     dayCell.backgroundColor = RGB_Color(255, 255, 255);
     
     return dayCell;

@@ -7,13 +7,13 @@
 //
 
 #import "CourseSummaryDayCell.h"
-#import "PortraitView.h"
 #import "YBAppointMentUserCell.h"
+#import "YBObjectTool.h"
 
 @interface CourseSummaryDayCell ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (nonatomic,strong) UIView *coureleftTopDelive;
-@property (nonatomic,strong) UIView *coureleftBottomDelive;
+
 @property (nonatomic,strong) UIImageView *coureleftStateImgView;
 // 开始时间
 @property (nonatomic,strong) UILabel * coureBeginTime;
@@ -45,10 +45,6 @@
     self.coureleftTopDelive = [[UIView alloc] init];
     self.coureleftTopDelive.backgroundColor = JZ_BlueColor;
     [self.contentView addSubview:self.coureleftTopDelive];
-    
-    self.coureleftBottomDelive = [[UIView alloc] init];
-    self.coureleftBottomDelive.backgroundColor = JZ_BlueColor;
-    [self.contentView addSubview:self.coureleftBottomDelive];
 
     self.coureleftStateImgView = [[UIImageView alloc] init];
     [self.contentView addSubview:self.coureleftStateImgView];
@@ -79,56 +75,48 @@
 
     // 中间预约学员
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.minimumInteritemSpacing = 5;
-    flowLayout.minimumLineSpacing = 10;
+    flowLayout.minimumInteritemSpacing = 8;
+    flowLayout.minimumLineSpacing = 8;
     flowLayout.itemSize = CGSizeMake(coureSundentCollectionW, coureSundentCollectionH);
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
     self.coureStudentCollectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
-    self.coureStudentCollectionView.backgroundColor = [UIColor redColor];
+    self.coureStudentCollectionView.backgroundColor = [UIColor clearColor];
     self.coureStudentCollectionView.delegate = self;
     self.coureStudentCollectionView.dataSource = self;
     [self.coureStudentCollectionView registerClass:[YBAppointMentUserCell class] forCellWithReuseIdentifier:@"YBAppointMentUserCell"];
+    self.coureStudentCollectionView.scrollEnabled = NO;
     [self.contentView addSubview:self.coureStudentCollectionView];
 
     // 底部分割线
     self.bottomLine = [self getOnelineView];
     [self.contentView addSubview:self.bottomLine];
-
-    [self updateConstraints];
-    
-}
-
-#pragma mark Layout
-- (void)updateConstraints
-{
-    [super updateConstraints];
     
     self.coureleftTopDelive.translatesAutoresizingMaskIntoConstraints = NO;
     [self.coureleftTopDelive mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.left.mas_equalTo(28);
         make.width.mas_equalTo(1);
-        make.height.mas_equalTo(70);
+        make.bottom.mas_equalTo(self.mas_top);
     }];
     
     self.coureleftStateImgView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.coureleftStateImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(14);
-        make.width.mas_equalTo(14);
-        make.height.mas_equalTo(14);
-        make.left.mas_equalTo(35);
+        make.top.mas_equalTo(12);
+        make.width.mas_equalTo(26);
+        make.height.mas_equalTo(26);
+        make.centerX.mas_equalTo(self.coureleftTopDelive.mas_centerX);
     }];
-
+    
     // 开始时间
     self.coureBeginTime.translatesAutoresizingMaskIntoConstraints = NO;
     [self.coureBeginTime mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.coureleftTopDelive.mas_bottom).offset(5);
+        make.top.mas_equalTo(self.coureStudentCollectionView.mas_top).offset(5);
         make.left.mas_equalTo(5);
         make.width.mas_equalTo(50);
         make.height.mas_equalTo(20);
     }];
-
+    
     // 结束时间
     self.coureEndTime.translatesAutoresizingMaskIntoConstraints = NO;
     [self.coureEndTime mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -137,25 +125,17 @@
         make.width.mas_equalTo(50);
         make.height.mas_equalTo(20);
     }];
-
-    self.coureleftBottomDelive.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.coureleftBottomDelive mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.coureEndTime.mas_bottom).offset(10);
-        make.bottom.mas_equalTo(0);
-        make.left.mas_equalTo(self.coureleftTopDelive.mas_left);
-        make.width.mas_equalTo(1);
-    }];
-
+    
     // 已约、剩余名额
     self.coureTopCountLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self.coureTopCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(12);
         make.left.mas_equalTo(self.coureleftTopDelive.mas_right).offset(36);
-        make.top.mas_equalTo(24);// margin
     }];
-
+    
     self.coureStudentCollectionView.translatesAutoresizingMaskIntoConstraints = NO;
     self.bottomLine.translatesAutoresizingMaskIntoConstraints = NO;
-
+    
 }
 
 #pragma mark - Data
@@ -167,29 +147,62 @@
     
     self.coureEndTime.text = [NSString getHourLocalDateFormateUTCDate:_model.courseendtime];
     
-    // 判断是否是当前时间之前、之后
-    BOOL isCurrent = NO;
+    int compareDataNum = [YBObjectTool compareHMSDateWithBegintime:[NSString getHLocalDateFormateUTCDate:_model.coursebegintime] endtime:[NSString getHLocalDateFormateUTCDate:_model.courseendtime]];
+    NSLog(@"compareDataNum:%d",compareDataNum);
+    
     NSInteger leftStr;
     NSInteger rightStr;
-    if (isCurrent) {// 当前时间之前
+    
+    if (compareDataNum==0) {// 当前
+        self.coureleftStateImgView.image = [UIImage imageNamed:@"JZCoursenode_now"];
         // 已约、剩余名额
         leftStr = _model.selectedstudentcount;
         rightStr = _model.coursestudentcount - _model.selectedstudentcount;
         self.coureTopCountLabel.text = [NSString stringWithFormat:@"已约%ld     剩余名额%ld",(long)leftStr,(long)rightStr];
+        self.coureTopCountLabel.textColor = JZ_BlueColor;
+        
+        self.contentView.backgroundColor = RGB_Color(255, 255, 255);
+        self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.contentView.layer.shadowOffset = CGSizeMake(0, 2);
+        self.contentView.layer.shadowOpacity = 0.036;
+        self.contentView.layer.shadowRadius = 2;
+        
+    }else if (compareDataNum==1){// 大于当前日期
+        self.coureleftStateImgView.image = [UIImage imageNamed:@"JZCoursenode_future"];
+        // 已约、剩余名额
+        leftStr = _model.selectedstudentcount;
+        rightStr = _model.coursestudentcount - _model.selectedstudentcount;
+        self.coureTopCountLabel.text = [NSString stringWithFormat:@"已约%ld     剩余名额%ld",(long)leftStr,(long)rightStr];
+        self.coureTopCountLabel.textColor = [UIColor lightGrayColor];
 
-    }else{// 当前时间之后
+        self.contentView.backgroundColor = RGB_Color(255, 255, 255);
+        self.contentView.layer.shadowColor = [UIColor clearColor].CGColor;
+        self.contentView.layer.shadowOffset = CGSizeMake(0, 0);
+        self.contentView.layer.shadowOpacity = 0;
+        self.contentView.layer.shadowRadius = 0;
+        
+    }else if (compareDataNum==-1){// 小于当前日期
+        self.coureleftStateImgView.image = [UIImage imageNamed:@"JZCoursenode_past"];
+        
+        self.contentView.backgroundColor = RGB_Color(243, 243, 246);
+        self.contentView.layer.shadowColor = [UIColor clearColor].CGColor;
+        self.contentView.layer.shadowOffset = CGSizeMake(0, 0);
+        self.contentView.layer.shadowOpacity = 0;
+        self.contentView.layer.shadowRadius = 0;
+        
         // 已学、漏课
         leftStr = _model.signinstudentcount;
         rightStr = _model.coursestudentcount - _model.signinstudentcount;
         self.coureTopCountLabel.text = [NSString stringWithFormat:@"已学%ld     漏课%ld",(long)leftStr,(long)rightStr];
+        self.coureTopCountLabel.textColor = [UIColor lightGrayColor];
 
     }
-       
+    
     // 中间预约学员
     CGFloat height = _model.appointMentViewH;
     NSLog(@"中间预约学员height:%f",height);
     [self.coureStudentCollectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.coureTopCountLabel.mas_bottom).offset(24);
+        make.top.mas_equalTo(self.coureTopCountLabel.mas_bottom).offset(12);
         make.height.mas_equalTo(height);
         make.left.mas_equalTo(self.coureTopCountLabel.mas_left);
         make.right.mas_equalTo(self).offset(-10);
@@ -198,9 +211,19 @@
     [self.bottomLine mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(self);
         make.height.equalTo(@(HM_LINE_HEIGHT));
-        make.left.equalTo(self);
-        make.top.mas_equalTo(self.coureStudentCollectionView.mas_bottom).offset(24);
+        make.left.equalTo(self.coureTopCountLabel.mas_left);
+        make.top.mas_equalTo(self.coureStudentCollectionView.mas_bottom).offset(12);
     }];
+    
+    [self.coureleftTopDelive mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.left.mas_equalTo(28);
+        make.width.mas_equalTo(1);
+        make.bottom.mas_equalTo(self.bottomLine.mas_bottom);
+    }];
+    
+    self.coureBeginTime.backgroundColor = self.contentView.backgroundColor;
+    self.coureEndTime.backgroundColor = self.contentView.backgroundColor;
     
 }
 
@@ -233,15 +256,13 @@
     
     [cell layoutIfNeeded];
     
-    return cell.coureTopCountLabel.height + cell.coureStudentCollectionView.height + 24 * 3 + 1;
+    return cell.coureTopCountLabel.height + cell.coureStudentCollectionView.height + 12 * 3 + 1;
     
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return 10;
-    
-    return _model.coursestudentcount;
+    return _model.coursestudentcount;// 2
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -249,25 +270,21 @@
     static NSString *cellId = @"YBAppointMentUserCell";
     YBAppointMentUserCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     
-    cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
-    
-    cell.nameLabel.text = @"姓名";
-    
-//    if (_model.coursereservationdetial.count<indexPath.row) {
-//        
-//        NSDictionary *dict = _model.coursereservationdetial[indexPath.row];
-//        
-//        [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dict[@"userid"][@"headportrait"][@"originalpic"]]] placeholderImage:[UIImage imageNamed:@"JZCourseadd_student"]];
-//        
-//        cell.nameLabel.text = [NSString stringWithFormat:@"%@",dict[@"userid"][@"name"]];
-//        
-//    }else{
-//        
-//        cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
-//        
+    if (_model.coursereservationdetial && _model.coursereservationdetial.count<indexPath.row) {
+        
+        NSDictionary *dict = _model.coursereservationdetial[indexPath.row];// 1
+        
+        [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dict[@"userid"][@"headportrait"][@"originalpic"]]] placeholderImage:[UIImage imageNamed:@"JZCourseadd_student"]];
+        
+        cell.nameLabel.text = [NSString stringWithFormat:@"%@",dict[@"userid"][@"name"]];
+        
+    }else{
+        
+        cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
+        
 //        cell.nameLabel.text = @"姓名";
-//    }
-//    
+    }
+    
     
     return cell;
     
@@ -276,6 +293,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%s",__func__);
+    
 }
 
 @end

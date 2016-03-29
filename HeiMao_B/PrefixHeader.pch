@@ -49,7 +49,7 @@
 #define  HOST_TEST_DAMIAN  @"http://jzapi.yibuxueche.com/api/v1"
 
 //#define  HOST_LINE_DOMAIN  @"http://123.57.63.15:8181/api/v1"
-#define  HOST_LINE_DOMAIN  @"http://jzapi.yibuxueche.com/api/v1"
+#define  HOST_LINE_DOMAIN  @"http://jzapi.yibuxueche.com/api/v2"
 
 //#define QA_TEST
 
@@ -70,6 +70,11 @@
 
 // 蓝色
 #define JZ_BlueColor RGB_Color(31, 124, 235)
+
+#define YBIphone6Plus [UIScreen mainScreen].bounds.size.height==736
+#define YBIphone6 [UIScreen mainScreen].bounds.size.height==667
+#define YBIphone5 [UIScreen mainScreen].bounds.size.height==568
+#define YBIphone4 [UIScreen mainScreen].bounds.size.height==480
 
 // 环信appKey
 #define easeMobAPPkey @"black-cat#jizhijaifu"
