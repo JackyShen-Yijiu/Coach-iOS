@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		0608CA411CAA71CF0068A18B /* JZHomeStudentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA401CAA71CF0068A18B /* JZHomeStudentViewModel.m */; };
 		0608CA441CAA732F0068A18B /* JZHomeStudetModelClassRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA431CAA732F0068A18B /* JZHomeStudetModelClassRoot.m */; };
-		0608CA501CAA7C670068A18B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0608CA481CAA7C670068A18B /* LICENSE */; };
-		0608CA511CAA7C670068A18B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA491CAA7C670068A18B /* README.md */; };
-		0608CA521CAA7C670068A18B /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA4C1CAA7C670068A18B /* NSObject+YYModel.m */; };
-		0608CA531CAA7C670068A18B /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA4E1CAA7C670068A18B /* YYClassInfo.m */; };
 		0608CA561CAA7CDE0068A18B /* JZResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA551CAA7CDE0068A18B /* JZResultModel.m */; };
 		0608CA5D1CAA7FC90068A18B /* Applyclasstypeinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA581CAA7FC90068A18B /* Applyclasstypeinfo.m */; };
 		0608CA5E1CAA7FC90068A18B /* Courseinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA5A1CAA7FC90068A18B /* Courseinfo.m */; };
@@ -536,13 +532,6 @@
 		0608CA401CAA71CF0068A18B /* JZHomeStudentViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentViewModel.m; sourceTree = "<group>"; };
 		0608CA421CAA732F0068A18B /* JZHomeStudetModelClassRoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudetModelClassRoot.h; sourceTree = "<group>"; };
 		0608CA431CAA732F0068A18B /* JZHomeStudetModelClassRoot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudetModelClassRoot.m; sourceTree = "<group>"; };
-		0608CA481CAA7C670068A18B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		0608CA491CAA7C670068A18B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		0608CA4B1CAA7C670068A18B /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
-		0608CA4C1CAA7C670068A18B /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
-		0608CA4D1CAA7C670068A18B /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
-		0608CA4E1CAA7C670068A18B /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
-		0608CA4F1CAA7C670068A18B /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
 		0608CA541CAA7CDE0068A18B /* JZResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZResultModel.h; sourceTree = "<group>"; };
 		0608CA551CAA7CDE0068A18B /* JZResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZResultModel.m; sourceTree = "<group>"; };
 		0608CA571CAA7FC90068A18B /* Applyclasstypeinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Applyclasstypeinfo.h; sourceTree = "<group>"; };
@@ -1504,28 +1493,6 @@
 				0608CA551CAA7CDE0068A18B /* JZResultModel.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		0608CA471CAA7C670068A18B /* YYModel */ = {
-			isa = PBXGroup;
-			children = (
-				0608CA481CAA7C670068A18B /* LICENSE */,
-				0608CA491CAA7C670068A18B /* README.md */,
-				0608CA4A1CAA7C670068A18B /* YYModel */,
-			);
-			path = YYModel;
-			sourceTree = "<group>";
-		};
-		0608CA4A1CAA7C670068A18B /* YYModel */ = {
-			isa = PBXGroup;
-			children = (
-				0608CA4B1CAA7C670068A18B /* NSObject+YYModel.h */,
-				0608CA4C1CAA7C670068A18B /* NSObject+YYModel.m */,
-				0608CA4D1CAA7C670068A18B /* YYClassInfo.h */,
-				0608CA4E1CAA7C670068A18B /* YYClassInfo.m */,
-				0608CA4F1CAA7C670068A18B /* YYModel.h */,
-			);
-			path = YYModel;
 			sourceTree = "<group>";
 		};
 		06361A481CA51A4C002708F2 /* Controller */ = {
@@ -2848,7 +2815,6 @@
 		B2BA413A1CA5035700926584 /* 学员 */ = {
 			isa = PBXGroup;
 			children = (
-				0608CA471CAA7C670068A18B /* YYModel */,
 				0608CA3E1CAA71780068A18B /* Model */,
 				0608CA3D1CAA716D0068A18B /* ViewModel */,
 				06DB70C61CA91CD200A6AC9D /* View */,
@@ -3431,7 +3397,6 @@
 				B2BA42341CA5035700926584 /* chat_location_annotation_someone.png in Resources */,
 				B2BA427F1CA5035700926584 /* chat_sender_audio_playing_full@2x.png in Resources */,
 				B2BA421F1CA5035700926584 /* VoiceSearchFeedback020@2x.png in Resources */,
-				0608CA501CAA7C670068A18B /* LICENSE in Resources */,
 				B2BA42011CA5035700926584 /* VoiceSearchFeedback005@2x.png in Resources */,
 				B2BA42361CA5035700926584 /* chat_location_detail_disclosure.png in Resources */,
 				B2BA42781CA5035700926584 /* chat_receiver_audio_playing_full@2x.png in Resources */,
@@ -3601,7 +3566,6 @@
 				B2BA42AC1CA5035700926584 /* EaseChatBarMoreView.m in Sources */,
 				B2BA3EE21CA5003B00926584 /* UserInfoModel.m in Sources */,
 				B2BA43351CA5041100926584 /* InformationMessageModelRootClass.m in Sources */,
-				0608CA531CAA7C670068A18B /* YYClassInfo.m in Sources */,
 				B2BA41B61CA5035700926584 /* EMAudioPlayerUtil.m in Sources */,
 				B2BA41C91CA5035700926584 /* MJRefreshLegendFooter.m in Sources */,
 				B2BA41E11CA5035700926584 /* UIImage+EMGIF.m in Sources */,
@@ -3742,7 +3706,6 @@
 				B28D5E431C64857000D9E9E1 /* pinyin.m in Sources */,
 				06DB70C51CA90E3800A6AC9D /* WorkTimeViewController.m in Sources */,
 				0608CA411CAA71CF0068A18B /* JZHomeStudentViewModel.m in Sources */,
-				B2BA41A01CA5035700926584 /* NSString+CurrentTimeDay.m in Sources */,
 				B2BA3E501CA4E6BA00926584 /* AppDelegate.m in Sources */,
 				D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */,
 				B2BA41B01CA5035700926584 /* UIView+CalculateUIView.m in Sources */,
@@ -3757,7 +3720,6 @@
 				B2BA43DC1CA951A200926584 /* YBCourseRootClass.m in Sources */,
 				B2BA42851CA5035700926584 /* EaseSDKHelper.m in Sources */,
 				B2BA43461CA5041100926584 /* SystemMessageModelRootClass.m in Sources */,
-				0608CA521CAA7C670068A18B /* NSObject+YYModel.m in Sources */,
 				B253C2DA1C3FA901001AF771 /* UIView+SDExtension.m in Sources */,
 				B2BA41981CA5035700926584 /* WalletModel.m in Sources */,
 				B2BA42821CA5035700926584 /* EaseLocationViewController.m in Sources */,
@@ -3869,7 +3831,6 @@
 				06361A4E1CA51AB8002708F2 /* JZMyController.m in Sources */,
 				B2BA42B41CA5035700926584 /* StudentHomeUserBasicInfoCell.m in Sources */,
 				B2BA42891CA5035700926584 /* EaseMessageModel.m in Sources */,
-				0608CA511CAA7C670068A18B /* README.md in Sources */,
 				B2BA42B91CA5035700926584 /* DVVDrivingStudentListView.m in Sources */,
 				B2BA436A1CA5324000926584 /* FDCalendar.m in Sources */,
 				B2BA43421CA5041100926584 /* StudentSignInStatusView.m in Sources */,
