@@ -14,6 +14,13 @@
 #import "JZHomeStudentSubjectThreeView.h"
 #import "JZHomeStudentSubjectFourView.h"
 #import "JZHomeStudentViewModel.h"
+#import "RefreshTableView.h"
+#import "JZHomeStudentListCell.h"
+#import "MJRefreshFooter.h"
+#import "MJRefreshHeader.h"
+#import "MJRefresh.h"
+#import "JZResultModel.h"
+#import <YYModel.h>
 //#import <MJRefreshHeader.h>
 //#import <MJRefreshFooter.h>
 //#import <MJRefresh/MJRefresh.h>
@@ -21,15 +28,17 @@
 #define YBRatio 1.15
 #define ScreenWidthIs_6Plus_OrWider [UIScreen mainScreen].bounds.size.width >= 414
 
-#define ktopWith 112
+#define ktopHight 112
 
-#define ktopSmallWith 65
+#define ktopSmallHight 65
 
 #define kbottmWith 44
 
 #define ksegmentH 36
 
-@interface YBStudentHomeController ()<UIScrollViewDelegate>
+@interface YBStudentHomeController ()<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic, strong) RefreshTableView *tableView;
 
 @property (nonatomic, strong) UIView *bgView;
 
@@ -37,15 +46,6 @@
 
 @property (nonatomic, strong) JZHomeStudentToolBarView *toolBarView;
 
-@property (nonatomic, strong) UIScrollView *scrollView;
-
-@property (nonatomic, strong) JZHomeStudentSubjectOneView *subjectOneView; // 科目一
-
-@property (nonatomic, strong) JZHomeStudentSubjectTwoView *subjectTwoView; // 科目二
-
-@property (nonatomic, strong) JZHomeStudentSubjectThreeView *subjectThreeView; // 科目三
-
-@property (nonatomic, strong) JZHomeStudentSubjectFourView *subjectFourView; // 科目四
 
 @property (nonatomic, assign) BOOL isshowSegment; // 是否显示segment控件,当授课科目只有一个时,不显示
 
@@ -62,6 +62,12 @@
 
 @property (nonatomic, strong) JZHomeStudentViewModel *studentViewModel;
 
+@property (nonatomic, assign) NSInteger subjectID;  // 科目的选择
+
+@property (nonatomic, assign) NSInteger studentState; // 学员状态的选择
+
+@property (nonatomic, strong) NSMutableArray *resultDataArray;
+
 
 @end
 
@@ -69,25 +75,55 @@
 - (void)viewWillAppear:(BOOL)animated{
     // 设置里面可以更改授课科目 所以在这里要动态的改变segment 和 toolBarView 的位置坐标
     [self changeBgViewFrame];
+    [self initRefreshView];
     
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     _isshowSegment = YES;
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    _resultDataArray = [NSMutableArray array]
+    ;    self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self setNavBar];
     self.myNavigationItem.title = @"学员";
-    [self.scrollView addSubview:self.subjectOneView];
-    [self.scrollView addSubview:self.subjectTwoView];
-    [self.scrollView addSubview:self.subjectThreeView];
-    [self.scrollView addSubview:self.subjectFourView];
-    [self.view addSubview:self.scrollView];
+    [self.view addSubview:self.tableView];
     
-    
+    if (![_oneStr isEqualToString:@""] && _oneStr != nil) {
+        _subjectID = 1;
+        _studentState = 0;
+    }
 
+    if (![_twoStr isEqualToString:@""] && _twoStr != nil) {
+        _subjectID = 2;
+        _studentState = 0;
+    }
+    if (![_threeStr isEqualToString:@""] && _threeStr != nil) {
+        _subjectID = 3;
+        _studentState = 0;
+    }
+    if (![_fourStr isEqualToString:@""] && _fourStr != nil) {
+        _subjectID = 4;
+        _studentState = 0;
+    }
+//    [self configStudetListViewModel];
+    [self.tableView.refreshHeader  beginRefreshing];
+    
 }
+- (void)changeBgViewFrame{
+    _isshowSegment = YES;
+    self.myNavigationItem.title = @"学员";
+    NSArray *sujectArray = [UserInfoModel defaultUserInfo].subject;
+    if (sujectArray.count == 1) {
+        _isshowSegment = NO;
+        NSDictionary *dic = sujectArray.firstObject;
+        self.myNavigationItem.title = dic[@"name"];
+        
+    }
+    _isshowSegment ? (_bgH = ktopHight) : (_bgH = ktopSmallHight);
+    [self initUI];
+}
+
 - (void)initUI{
     
     [_bgView removeFromSuperview];
@@ -145,48 +181,8 @@
     [self.bgView addSubview:self.toolBarView];
     [self.view addSubview:self.bgView];
     
-    // 动态调整UIScroller的frame
-    if (!_isshowSegment) {
-        
-        // 有授课一个科目
-        NSLog(@"x = %f,y = %f, w= %f,h = %f",self.view.frame.origin.x,self.view.frame.origin.x,self.view.frame.size.width,self.view.frame.size.height);
-        _scrollView.frame = CGRectMake(0, ktopSmallWith, self.view.width, self.view.height - 49);
-        _scrollView.contentSize = CGSizeMake(self.view.width, 0);
-        _subjectOneView.frame = CGRectMake(0,0,self.view.width, _scrollView.height );
-        
-    }
-    if (_isshowSegment) {
-        
-        // 授课多个科目
-        NSArray *array = [UserInfoModel defaultUserInfo].subject;
-        CGFloat systemW = self.view.width;
-        
-        _scrollView.frame = CGRectMake(0, ktopWith,self.view.width, self.view.height - ktopWith);
-        _scrollView.contentSize = CGSizeMake(array.count * self.view.width, 0);
-        
-        if (4 == array.count) {
-            // 授课四个科目
-            _subjectOneView.frame = CGRectMake(0,0,self.view.width, self.view.height - ktopWith );
-            _subjectTwoView.frame = CGRectMake(systemW,0,self.view.width, self.view.height - ktopWith );
-            _subjectThreeView.frame = CGRectMake(2 * systemW,0,self.view.width, self.view.height - ktopWith );
-            _subjectFourView.frame = CGRectMake(3 * systemW,0,self.view.width, self.view.height - ktopWith );
-
-        }
-        if (3 == array.count) {
-            // 授课三个科目
-            _subjectOneView.frame = CGRectMake(0,0,self.view.width, self.view.height - ktopWith );
-            _subjectTwoView.frame = CGRectMake(systemW,0,self.view.width, self.view.height - ktopWith );
-            _subjectThreeView.frame = CGRectMake(2 * systemW,0,self.view.width, self.view.height - ktopWith );
-        }
-        if (2 == array.count) {
-            // 授课二个科目
-            _subjectOneView.frame = CGRectMake(0,0,self.view.width, self.view.height - ktopWith );
-            _subjectTwoView.frame = CGRectMake(systemW,0,self.view.width, self.view.height - ktopWith );
-            
-        }
-
     
-    }
+ 
     
 }
 - (void)setNavBar{
@@ -198,114 +194,155 @@
     self.myNavigationItem.leftBarButtonItems = nil;
 
 }
-- (void)changeBgViewFrame{
-    _isshowSegment = YES;
-    self.myNavigationItem.title = @"学员";
-    NSArray *sujectArray = [UserInfoModel defaultUserInfo].subject;
-    if (sujectArray.count == 1) {
-        _isshowSegment = NO;
-        NSDictionary *dic = sujectArray.firstObject;
-        self.myNavigationItem.title = dic[@"name"];
 
-            }
-    _isshowSegment ? (_bgH = ktopWith) : (_bgH = ktopSmallWith);
-    [self initUI];
+
+#pragma mark Load Data
+- (void)dealErrorResponseWithTableView:(RefreshTableView *)tableview info:(NSDictionary *)dic
+{
+    [self showTotasViewWithMes:[dic objectForKey:@"msg"]];
+    [tableview.refreshHeader endRefreshing];
+    [tableview.refreshFooter endRefreshing];
 }
 
+- (void)netErrorWithTableView:(RefreshTableView*)tableView
+{
+    [self showTotasViewWithMes:@"网络异常，稍后重试"];
+    [tableView.refreshHeader endRefreshing];
+    [tableView.refreshFooter endRefreshing];
+}
 
-
-#pragma mark - config view model
-- (void)configSchoolViewModel {
-    
-    __weak typeof(self) ws = self;
-    _studentViewModel = [JZHomeStudentViewModel new];
-    
-    [_studentViewModel dvv_setRefreshSuccessBlock:^{
-        [ws.subjectOneView.tableView reloadData];
-    }];
-    [_studentViewModel dvv_setLoadMoreSuccessBlock:^{
+- (void)initRefreshView
+    {
         
-        [ws.subjectOneView.tableView reloadData];
-    }];
-    [_studentViewModel dvv_setNilResponseObjectBlock:^{
-        if (ws.studentViewModel.dataArray.count) {
+        WS(ws);
+        self.tableView.refreshHeader.beginRefreshingBlock = ^(){
+            [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(ws.subjectID) studentID:(NSString *)@(ws.studentState) index:1 count:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+                NSArray *data = [responseObject objectArrayForKey:@"data"];
+                if (type == 1) {
+                    [ws.resultDataArray removeAllObjects];
+                    for (NSDictionary *dic in data) {
+                        JZResultModel *model = [JZResultModel yy_modelWithDictionary:dic];
+                        [ws.resultDataArray addObject:model];
+                    }
+                    
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [ws.tableView.refreshHeader endRefreshing];
+                        
+                        [ws.tableView reloadData];
+                        
+                        if (data.count>=10) {
+                            ws.tableView.refreshFooter.scrollView = ws.tableView;
+                        }else{
+                            ws.tableView.refreshFooter.scrollView = nil;
+                        }
+                        
+                    });
+                    
+                }else{
+                    [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
+                }
+
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [ws netErrorWithTableView:ws.tableView];
+            }];
             
-//            [ws obj_showTotasViewWithMes:@"已经全部加载完毕"];
-//            ws.subjectOneView.tableView.mj_footer.state = MJRefreshStateNoMoreData;
-        }else {
-            //            if (!((NSMutableArray *)[ws dvv_unarchiveFromCacheWithFileName:ArchiverName_SchoolDataArray]).count) {
-            //                ws.noDataPromptView.titleLabel.text = @"暂无合作驾校信息";
-            //                ws.noDataPromptView.subTitleLabel.text = @"请切换合作城市";
-            //                [ws.tableView addSubview:ws.noDataPromptView];
-            //            }
+        };
         
-        }
-    }];
-    [_studentViewModel dvv_setNetworkCallBackBlock:^{
-//        [ws.subjectOneView.tableView.mj_header endRefreshing];
-//        [ws.subjectOneView.tableView.mj_footer endRefreshing];
-//
-    }];
-    [_studentViewModel dvv_setNetworkErrorBlock:^{
-//        if (!((NSMutableArray *)[ws dvv_unarchiveFromCacheWithFileName:ArchiverName_SchoolDataArray]).count) {
-//            ws.noDataPromptView.titleLabel.text = @"网络错误";
-//            ws.noDataPromptView.subTitleLabel.text = @"";
-//            [ws.tableView addSubview:ws.noDataPromptView];
-//        }
-//        [ws obj_showTotasViewWithMes:@"网络错误"];
-    }];
-}
+        ws.tableView.refreshFooter.beginRefreshingBlock = ^(){
+                        NSArray *dataArray = [NSArray array];
+        
+                        if(dataArray.count % RELOADDATACOUNT){
+                            [ws showTotasViewWithMes:@"已经加载所有数据"];
+                            if (ws.tableView.refreshFooter) {
+                                [ws.tableView.refreshFooter endRefreshing];
+                                ws.tableView.refreshFooter.scrollView = nil;
+                            }
+                            return ;
+                        }
+            
+            [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(ws.subjectID) studentID:(NSString *)@(ws.studentState) index:dataArray.count / RELOADDATACOUNT count:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
+                                if (type == 1) {
+                                    if (responseObject[@"data"]) {
+                                        for (NSDictionary *dic in responseObject[@"data"]) {
+                                            JZResultModel *model = [JZResultModel yy_modelWithDictionary:dic];
+                                            [ws.resultDataArray addObject:model];
+                                            [ws.tableView reloadData];
+                                        }
+
+                                    }else{
+                                        [ws showTotasViewWithMes:@"已经加载所有数据"];
+                                    }
+                                    [ws.tableView.refreshFooter endRefreshing];
+                                    
+                                } else{
+                                     [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
+                                }
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [ws netErrorWithTableView:ws.tableView];
+            }];
+            
+            
+
+        };
+        
+    }
+
 
 - (void)didClicksegmentedControlAction:(UISegmentedControl *)Seg {
     NSInteger index = Seg.selectedSegmentIndex;
     if (0 == index) {
         // 科目一
-        CGFloat contentOffsetX = 0;
-        [UIView animateWithDuration:0.5 animations:^{
-            _scrollView.contentOffset = CGPointMake(contentOffsetX, -64);
-        }];
+        [_toolBarView selectItem:0];
+        _subjectID = index + 1;
+
 
     }
     if (1 == index) {
         // 科目二
-        CGFloat contentOffsetX = self.view.width;
-        [UIView animateWithDuration:0.5 animations:^{
-            _scrollView.contentOffset = CGPointMake(contentOffsetX, -64);
-        }];
-
+        [_toolBarView selectItem:0];
+        _subjectID = index + 1;
+        
     }
     if (2 == index) {
         // 科目三
-        CGFloat contentOffsetX = 2 * self.view.width;
-        [UIView animateWithDuration:0.5 animations:^{
-            _scrollView.contentOffset = CGPointMake(contentOffsetX, -64);
-        }];
+            [_toolBarView selectItem:0];
+        _subjectID = index + 1;
 
     }
     if (3 == index) {
         // 科目四
-        CGFloat contentOffsetX = 3 * self.view.width;
-        [UIView animateWithDuration:0.5 animations:^{
-            _scrollView.contentOffset = CGPointMake(contentOffsetX, -64);
-        }];
+        [_toolBarView selectItem:0];
+        _subjectID = index + 1;
+        
 
     }
-    
+     [self.tableView.refreshHeader  beginRefreshing];
 }
 #pragma mark 筛选条件
 - (void)dvvToolBarViewItemSelectedAction:(NSInteger)index {
-    NSInteger orderType;
+    
     if (0 == index) {
-        orderType = 2;
+        _studentState = index;
+        
     }else if (1 == index) {
-        orderType = 3;
+        _studentState = index;
+       
     }else if (2 == index) {
-        orderType = 0;
+        _studentState = index;
+        
     }
-//    _schoolViewModel.orderType = orderType;
-//    _coachViewModel.orderType = orderType;
-//    [self cancelSearch];
-//    [self beginRefresh];
+    else if (3 == index) {
+        _studentState = index;
+        
+    }else if (4 == index) {
+        _studentState = index;
+        
+    }
+   [self initRefreshView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -333,46 +370,23 @@
     }
     return args;
 }
-
-#pragma mark -- UIScrollerView 的代理方法
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    CGFloat width = self.view.frame.size.width;
-    if (0 == scrollView.contentOffset.x) {
-        // 科目一
-        _segment.selectedSegmentIndex = 0;
-        
-    }
-    if (width == scrollView.contentOffset.x) {
-        // 科目二
-        _segment.selectedSegmentIndex = 1;
-        [_toolBarView selectItem:0];
-    
-    }
-    if (2 * width == scrollView.contentOffset.x) {
-        // 科目三
-         _segment.selectedSegmentIndex = 2;
-        [_toolBarView selectItem:0];
-    }
-    if (3 * width == scrollView.contentOffset.x) {
-        // 科目四
-         _segment.selectedSegmentIndex = 3;
-        [_toolBarView selectItem:0];
-    }
+#pragma mark ---- UITableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 10;
     
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 98;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *IDCell = @"cellID";
+    JZHomeStudentListCell *listCell = [tableView dequeueReusableCellWithIdentifier:IDCell];
+    if (!listCell) {
+        listCell = [[JZHomeStudentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDCell];
+    }
+    return listCell;
+}
 
-//- (UIView *)bgView{
-//    if (_bgView == nil) {
-//       
-//    }
-//    return _bgView;
-//}
-//- (UISegmentedControl *)segment {
-//    if (!_segment) {
-//       
-//    }
-//    return _segment;
-//}
 - (JZHomeStudentToolBarView *)toolBarView {
     
     // 这里没有用懒加载, 因为当设置里面的科目相应更改后, 这样要动态的调整
@@ -406,46 +420,15 @@
         }
     return _toolBarView;
 }
-- (UIScrollView *)scrollView{
-    if (_scrollView == nil) {
-        
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ktopWith,self.view.width, self.view.height - ktopWith - 64)];
-        _scrollView.delegate = self;
-        _scrollView.contentSize = CGSizeMake(4 * self.view.width, 0);
-        _scrollView.pagingEnabled = YES;
-        _scrollView.backgroundColor = [UIColor cyanColor];
+- (RefreshTableView *)tableView{
+    if (_tableView == nil) {
+        _tableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, ktopHight, self.view.width, self.view.height - 45 - ktopHight) style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
     }
-    return _scrollView;
-}
-- (JZHomeStudentSubjectOneView *)subjectOneView{
-    if (_subjectOneView == nil) {
-        _subjectOneView = [[JZHomeStudentSubjectOneView alloc] initWithFrame:CGRectMake(0,0,self.view.width, self.view.height - ktopWith - 64 - 54 )];
-    }
-    return _subjectOneView;
-}
-- (JZHomeStudentSubjectTwoView *)subjectTwoView{
-    if (_subjectTwoView == nil) {
-        CGFloat systemW = self.view.width;
-        _subjectTwoView = [[JZHomeStudentSubjectTwoView alloc] initWithFrame:CGRectMake(systemW,0,self.view.width, self.view.height - ktopWith - 64 - 54)];
-    }
-    return _subjectTwoView;
-}
-
-- (JZHomeStudentSubjectThreeView *)subjectThreeView{
-    if (_subjectThreeView == nil) {
-        CGFloat systemW = self.view.width;
-        _subjectThreeView = [[JZHomeStudentSubjectThreeView alloc] initWithFrame:CGRectMake(systemW * 2,0,self.view.width, self.view.height - ktopWith - 64 - 54)];
-    }
-    return _subjectThreeView;
-}
-
-- (JZHomeStudentSubjectFourView *)subjectFourView{
-    if (_subjectFourView == nil) {
-        CGFloat systemW = self.view.width;
-        _subjectFourView = [[JZHomeStudentSubjectFourView alloc] initWithFrame:CGRectMake(systemW * 3,0,self.view.width, self.view.height - ktopWith - 64 - 54)];
-
-    }
-    return _subjectFourView;
+    return _tableView;
 }
 
 @end

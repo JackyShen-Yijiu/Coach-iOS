@@ -20,5 +20,6 @@
 @property (nonatomic, strong) NSString *subjectid;
 @property (nonatomic, strong) NSString *studentState;
 
-
+- (void)dvv_networkRequestRefreshwithSubjectID:(NSString *)subjectid withStudentState:(NSString *)studentState;
+- (void)dvv_networkRequestLoadMorewithSubjectID:(NSString *)subjectid withStudentState:(NSString *)studentState;
 @end
