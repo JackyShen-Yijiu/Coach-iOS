@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0608CA411CAA71CF0068A18B /* JZHomeStudentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA401CAA71CF0068A18B /* JZHomeStudentViewModel.m */; };
+		0608CA441CAA732F0068A18B /* JZHomeStudetModelClassRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA431CAA732F0068A18B /* JZHomeStudetModelClassRoot.m */; };
+		0608CA561CAA7CDE0068A18B /* JZResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA551CAA7CDE0068A18B /* JZResultModel.m */; };
+		0608CA671CAA89E90068A18B /* Applyclasstypeinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA661CAA89E90068A18B /* Applyclasstypeinfo.m */; };
+		0608CA711CAA8A2E0068A18B /* Headportrait.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA701CAA8A2E0068A18B /* Headportrait.m */; };
+		0608CA741CAA8A3B0068A18B /* Courseinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA731CAA8A3B0068A18B /* Courseinfo.m */; };
+		0608CA771CAA8A6C0068A18B /* Subject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA761CAA8A6C0068A18B /* Subject.m */; };
 		061F56481CA682DD0052BEA9 /* EditorUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061F56471CA682DD0052BEA9 /* EditorUserViewController.m */; };
 		061F564B1CA686060052BEA9 /* EditorUseTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061F564A1CA686060052BEA9 /* EditorUseTopCell.m */; };
 		061F564E1CA689890052BEA9 /* EditorUseBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061F564D1CA689890052BEA9 /* EditorUseBottomCell.m */; };
@@ -516,9 +523,27 @@
 		B8C458801BDB5B5C00901F71 /* ToastAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587F1BDB5B5C00901F71 /* ToastAlertView.m */; };
 		D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */; };
 		D9ABF86D1C896463001B6930 /* BLPFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ABF86C1C896463001B6930 /* BLPFAlertView.m */; };
+		D9D607D81CAA7D3800B61874 /* LKAddStudentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */; };
+		D9D607D91CAA7D3800B61874 /* LKAddStudentTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */; };
+		D9D607DC1CAA7D4800B61874 /* LKAddStudentTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */; };
+		D9F4B9F81CAA967E00326556 /* LKTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F4B9F71CAA967E00326556 /* LKTestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0608CA3F1CAA71C60068A18B /* JZHomeStudentViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentViewModel.h; sourceTree = "<group>"; };
+		0608CA401CAA71CF0068A18B /* JZHomeStudentViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentViewModel.m; sourceTree = "<group>"; };
+		0608CA421CAA732F0068A18B /* JZHomeStudetModelClassRoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudetModelClassRoot.h; sourceTree = "<group>"; };
+		0608CA431CAA732F0068A18B /* JZHomeStudetModelClassRoot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudetModelClassRoot.m; sourceTree = "<group>"; };
+		0608CA541CAA7CDE0068A18B /* JZResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZResultModel.h; sourceTree = "<group>"; };
+		0608CA551CAA7CDE0068A18B /* JZResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZResultModel.m; sourceTree = "<group>"; };
+		0608CA661CAA89E90068A18B /* Applyclasstypeinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Applyclasstypeinfo.m; sourceTree = "<group>"; };
+		0608CA681CAA89F20068A18B /* Applyclasstypeinfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Applyclasstypeinfo.h; sourceTree = "<group>"; };
+		0608CA6F1CAA8A230068A18B /* Headportrait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Headportrait.h; sourceTree = "<group>"; };
+		0608CA701CAA8A2E0068A18B /* Headportrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Headportrait.m; sourceTree = "<group>"; };
+		0608CA721CAA8A360068A18B /* Courseinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Courseinfo.h; sourceTree = "<group>"; };
+		0608CA731CAA8A3B0068A18B /* Courseinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Courseinfo.m; sourceTree = "<group>"; };
+		0608CA751CAA8A670068A18B /* Subject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Subject.h; sourceTree = "<group>"; };
+		0608CA761CAA8A6C0068A18B /* Subject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Subject.m; sourceTree = "<group>"; };
 		061F56461CA682DD0052BEA9 /* EditorUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorUserViewController.h; sourceTree = "<group>"; };
 		061F56471CA682DD0052BEA9 /* EditorUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorUserViewController.m; sourceTree = "<group>"; };
 		061F56491CA686060052BEA9 /* EditorUseTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorUseTopCell.h; sourceTree = "<group>"; };
@@ -1412,6 +1437,14 @@
 		D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVLocationStatus.m; sourceTree = "<group>"; };
 		D9ABF86B1C896463001B6930 /* BLPFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLPFAlertView.h; sourceTree = "<group>"; };
 		D9ABF86C1C896463001B6930 /* BLPFAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLPFAlertView.m; sourceTree = "<group>"; };
+		D9D607D41CAA7D3800B61874 /* LKAddStudentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTableViewCell.h; sourceTree = "<group>"; };
+		D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTableViewCell.m; sourceTree = "<group>"; };
+		D9D607D61CAA7D3800B61874 /* LKAddStudentTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTimeView.h; sourceTree = "<group>"; };
+		D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTimeView.m; sourceTree = "<group>"; };
+		D9D607DA1CAA7D4800B61874 /* LKAddStudentTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTimeViewController.h; sourceTree = "<group>"; };
+		D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTimeViewController.m; sourceTree = "<group>"; };
+		D9F4B9F61CAA967E00326556 /* LKTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKTestViewController.h; sourceTree = "<group>"; };
+		D9F4B9F71CAA967E00326556 /* LKTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKTestViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1440,6 +1473,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0608CA3D1CAA716D0068A18B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0608CA3F1CAA71C60068A18B /* JZHomeStudentViewModel.h */,
+				0608CA401CAA71CF0068A18B /* JZHomeStudentViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0608CA3E1CAA71780068A18B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0608CA761CAA8A6C0068A18B /* Subject.m */,
+				0608CA751CAA8A670068A18B /* Subject.h */,
+				0608CA731CAA8A3B0068A18B /* Courseinfo.m */,
+				0608CA721CAA8A360068A18B /* Courseinfo.h */,
+				0608CA6F1CAA8A230068A18B /* Headportrait.h */,
+				0608CA701CAA8A2E0068A18B /* Headportrait.m */,
+				0608CA681CAA89F20068A18B /* Applyclasstypeinfo.h */,
+				0608CA661CAA89E90068A18B /* Applyclasstypeinfo.m */,
+				0608CA421CAA732F0068A18B /* JZHomeStudetModelClassRoot.h */,
+				0608CA431CAA732F0068A18B /* JZHomeStudetModelClassRoot.m */,
+				0608CA541CAA7CDE0068A18B /* JZResultModel.h */,
+				0608CA551CAA7CDE0068A18B /* JZResultModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		06361A481CA51A4C002708F2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1792,6 +1853,10 @@
 				B2BA435B1CA51DE600926584 /* YBHomeLeftViewController.m */,
 				B2BA435D1CA51DF600926584 /* YBHomeRightViewController.h */,
 				B2BA435E1CA51DF600926584 /* YBHomeRightViewController.m */,
+				D9D607DA1CAA7D4800B61874 /* LKAddStudentTimeViewController.h */,
+				D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */,
+				D9F4B9F61CAA967E00326556 /* LKTestViewController.h */,
+				D9F4B9F71CAA967E00326556 /* LKTestViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1820,6 +1885,10 @@
 		B2BA3F021CA5035700926584 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				D9D607D41CAA7D3800B61874 /* LKAddStudentTableViewCell.h */,
+				D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */,
+				D9D607D61CAA7D3800B61874 /* LKAddStudentTimeView.h */,
+				D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */,
 				B2BA43C41CA8E9DB00926584 /* CourseSummaryDayCell.h */,
 				B2BA43C51CA8E9DB00926584 /* CourseSummaryDayCell.m */,
 				B2BA43C71CA9125000926584 /* YBAppointMentUserCell.h */,
@@ -2756,9 +2825,10 @@
 		B2BA413A1CA5035700926584 /* 学员 */ = {
 			isa = PBXGroup;
 			children = (
+				0608CA3E1CAA71780068A18B /* Model */,
+				0608CA3D1CAA716D0068A18B /* ViewModel */,
 				06DB70C61CA91CD200A6AC9D /* View */,
 				B2BA413B1CA5035700926584 /* controller */,
-				B2BA413C1CA5035700926584 /* model */,
 				B2BA413D1CA5035700926584 /* SendMessageToStudent */,
 				B2BA41451CA5035700926584 /* StudentHomeController */,
 				B2BA414E1CA5035700926584 /* StudentList */,
@@ -2774,13 +2844,6 @@
 				B2BA43521CA5050F00926584 /* YBStudentHomeController.m */,
 			);
 			path = controller;
-			sourceTree = "<group>";
-		};
-		B2BA413C1CA5035700926584 /* model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = model;
 			sourceTree = "<group>";
 		};
 		B2BA413D1CA5035700926584 /* SendMessageToStudent */ = {
@@ -3481,6 +3544,7 @@
 				B2BA41861CA5035700926584 /* GenderViewController.m in Sources */,
 				B2BA429B1CA5035700926584 /* EaseUserCell.m in Sources */,
 				B2BA3EDE1CA5003B00926584 /* HMSchoolInfoModel.m in Sources */,
+				D9D607D81CAA7D3800B61874 /* LKAddStudentTableViewCell.m in Sources */,
 				B8C458731BDB59AC00901F71 /* UIView+TKCategory.m in Sources */,
 				B2BA42A71CA5035700926584 /* EaseChatToolbarItem.m in Sources */,
 				B2BA429A1CA5035700926584 /* EaseRefreshTableViewController.m in Sources */,
@@ -3503,6 +3567,7 @@
 				B2BA42C31CA5035700926584 /* DVVTheoreticalStudentListView.m in Sources */,
 				B2BA42971CA5035700926584 /* EaseEmotionManager.m in Sources */,
 				B2BA41DB1CA5035700926584 /* EMSDWebImageDownloaderOperation.m in Sources */,
+				D9D607DC1CAA7D4800B61874 /* LKAddStudentTimeViewController.m in Sources */,
 				B2BA433B1CA5041100926584 /* JGSubjectthreeModel.m in Sources */,
 				B2BA42A21CA5035700926584 /* EaseBubbleView+Text.m in Sources */,
 				B2BA41B91CA5035700926584 /* EMCDDeviceManager+Microphone.m in Sources */,
@@ -3558,6 +3623,7 @@
 				B2BA41F61CA5035700926584 /* EMBubbleView+Gif.m in Sources */,
 				B2BA3EDA1CA5003B00926584 /* HMClassInfoModel.m in Sources */,
 				B2BA41D81CA5035700926584 /* EMSDWebImageCompat.m in Sources */,
+				D9F4B9F81CAA967E00326556 /* LKTestViewController.m in Sources */,
 				B2BA3ED81CA5003B00926584 /* BaseModelMethod.m in Sources */,
 				B2BA434F1CA5041100926584 /* YBTrainfieldlinfoModel.m in Sources */,
 				B2BA41961CA5035700926584 /* ShopModel.m in Sources */,
@@ -3597,6 +3663,7 @@
 				B2BA41F21CA5035700926584 /* PSTGridLayoutRow.m in Sources */,
 				B2BA3EDC1CA5003B00926584 /* HMPortraitInfoModel.m in Sources */,
 				B2BA42861CA5035700926584 /* JGUserModel.m in Sources */,
+				0608CA711CAA8A2E0068A18B /* Headportrait.m in Sources */,
 				B2BA43D81CA951A200926584 /* YBCourseCoursereservationdetial.m in Sources */,
 				B2BA41F01CA5035700926584 /* PSTGridLayoutInfo.m in Sources */,
 				B2BA42A81CA5035700926584 /* EaseImageView.m in Sources */,
@@ -3616,6 +3683,7 @@
 				B2BA43411CA5041100926584 /* StudentSignInDataModel.m in Sources */,
 				B2BA42961CA5035700926584 /* EaseEmotionEscape.m in Sources */,
 				B2BA43261CA5041100926584 /* AppointmentCoachTimeInfoModel.m in Sources */,
+				0608CA441CAA732F0068A18B /* JZHomeStudetModelClassRoot.m in Sources */,
 				B2BA417F1CA5035700926584 /* buttonSelectedModel.m in Sources */,
 				B2BA41851CA5035700926584 /* FeedBackViewController.m in Sources */,
 				B2BA43401CA5041100926584 /* StudentSignInController.m in Sources */,
@@ -3626,6 +3694,7 @@
 				B2BA42C41CA5035700926584 /* DVVToast.m in Sources */,
 				B2BA3EB61CA4FF9800926584 /* HMButton.m in Sources */,
 				B253C2D41C3FA742001AF771 /* split.c in Sources */,
+				D9D607D91CAA7D3800B61874 /* LKAddStudentTimeView.m in Sources */,
 				B2BA41821CA5035700926584 /* ExamClassCollectionViewCell.m in Sources */,
 				B2BA41BA1CA5035700926584 /* EMCDDeviceManager+ProximitySensor.m in Sources */,
 				B2BA43C91CA9125000926584 /* YBAppointMentUserCell.m in Sources */,
@@ -3635,6 +3704,7 @@
 				B2BA41F51CA5035700926584 /* CustomMessageCell.m in Sources */,
 				B2BA41E01CA5035700926584 /* UIButton+EMWebCache.m in Sources */,
 				B8C458741BDB59AC00901F71 /* UIViewAdditions.m in Sources */,
+				0608CA741CAA8A3B0068A18B /* Courseinfo.m in Sources */,
 				B2BA43D91CA951A200926584 /* YBCourseCoursetime.m in Sources */,
 				B2BA41731CA5035700926584 /* ProtocalViewController.m in Sources */,
 				B253C2CF1C3FA742001AF771 /* QRCodeGenerator.m in Sources */,
@@ -3646,6 +3716,7 @@
 				06234CA91CA8E66A00007DB7 /* TrainingGroundViewController.m in Sources */,
 				B28D5E431C64857000D9E9E1 /* pinyin.m in Sources */,
 				06DB70C51CA90E3800A6AC9D /* WorkTimeViewController.m in Sources */,
+				0608CA411CAA71CF0068A18B /* JZHomeStudentViewModel.m in Sources */,
 				B2BA3E501CA4E6BA00926584 /* AppDelegate.m in Sources */,
 				D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */,
 				B2BA41B01CA5035700926584 /* UIView+CalculateUIView.m in Sources */,
@@ -3653,6 +3724,8 @@
 				B2BA41D01CA5035700926584 /* MWGridViewController.m in Sources */,
 				B2BA418A1CA5035700926584 /* JGvalidationView.m in Sources */,
 				B2BA41A71CA5035700926584 /* SetupViewController.m in Sources */,
+				0608CA671CAA89E90068A18B /* Applyclasstypeinfo.m in Sources */,
+				0608CA561CAA7CDE0068A18B /* JZResultModel.m in Sources */,
 				B2BA416F1CA5035700926584 /* GainPasswordViewController.m in Sources */,
 				B2BA433C1CA5041100926584 /* JGYuYueHeadView.m in Sources */,
 				B2BA43DC1CA951A200926584 /* YBCourseRootClass.m in Sources */,
@@ -3701,6 +3774,7 @@
 				B2BA42C11CA5035700926584 /* DVVTheoreticalStudentListCell.m in Sources */,
 				B2BA41E71CA5035700926584 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				B2BA41EF1CA5035700926584 /* PSTCollectionViewUpdateItem.m in Sources */,
+				0608CA771CAA8A6C0068A18B /* Subject.m in Sources */,
 				B2BA41C61CA5035700926584 /* MJRefreshGifFooter.m in Sources */,
 				B2BA43311CA5041100926584 /* InformationMessageCell.m in Sources */,
 				B2BA3E8C1CA4F3D900926584 /* PickerItemView.m in Sources */,

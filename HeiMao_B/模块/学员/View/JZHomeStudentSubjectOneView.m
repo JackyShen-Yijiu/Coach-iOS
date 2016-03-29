@@ -10,7 +10,7 @@
 #import "JZHomeStudentListCell.h"
 
 @interface JZHomeStudentSubjectOneView ()<UITableViewDataSource,UITableViewDelegate>
-@property (nonatomic, strong) UITableView *tableView;
+
 @end
 
 @implementation JZHomeStudentSubjectOneView

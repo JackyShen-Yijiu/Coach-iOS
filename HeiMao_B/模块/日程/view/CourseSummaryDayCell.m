@@ -9,6 +9,10 @@
 #import "CourseSummaryDayCell.h"
 #import "YBAppointMentUserCell.h"
 #import "YBObjectTool.h"
+#import "LKAddStudentTimeViewController.h"
+#import "LKTestViewController.h"
+
+
 
 @interface CourseSummaryDayCell ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -26,6 +30,8 @@
 // 底部分割线
 @property(nonatomic,strong)UIView * bottomLine;
 
+
+
 @end
 
 @implementation CourseSummaryDayCell
@@ -35,6 +41,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self initUI];
+        
+        
     }
     return self;
 }
@@ -312,8 +320,25 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%s",__func__);
     
+
+
+
+    
+    NSString *timeStr = self.model.coursebegintime;
+    
+    NSString *timeText = [timeStr substringWithRange:NSMakeRange(11, 5)];
+    NSLog(@"%@",timeText);
+
+    //    NSLog(@"%s",__func__);
+    LKAddStudentTimeViewController *addStuVC = [[LKAddStudentTimeViewController alloc] init];
+    
+//    LKTestViewController *addStuVC = [[LKTestViewController alloc]init];
+    [self.parentViewController.navigationController pushViewController:addStuVC animated:YES];
+ 
+    
+    
+  
 }
 
 @end

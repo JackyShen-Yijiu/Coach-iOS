@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "YBCourseData.h"
-
 @interface CourseSummaryDayCell : UITableViewCell
 
-@property(nonatomic,strong)YBCourseData * model;
 
+@property(nonatomic,strong)YBCourseData * model;
 @property (nonatomic,strong) UIViewController *parentViewController;
+
 
 + (CGFloat)cellHeightWithModel:(YBCourseData *)model;
 

@@ -93,7 +93,7 @@
 - (YBCourseTableView *)centerCourseTableView
 {
     if (_centerCourseTableView==nil) {
-        _centerCourseTableView = [[YBCourseTableView alloc] initWithFrame:CGRectMake(self.view.width, 0, self.view.width, self.view.height-calendarH-64)];
+        _centerCourseTableView = [[YBCourseTableView alloc] initWithFrame:CGRectMake(0, 0, self.mainScrollView.width, self.mainScrollView.height-64)];
         _centerCourseTableView.backgroundColor = [UIColor whiteColor];
         _centerCourseTableView.parentViewController = self;
     }
@@ -124,10 +124,10 @@
     self.view.backgroundColor = RGB_Color(253, 253, 253);
     self.selectDate = [NSDate date];
     
-    self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64+calendarH, self.view.width, self.view.height-calendarH-64)];
+    self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, calendarH, self.view.width, self.view.height-calendarH)];
     self.mainScrollView.backgroundColor = [UIColor whiteColor];
-    self.mainScrollView.contentSize = CGSizeMake(self.view.width, self.mainScrollView.height);
-    self.mainScrollView.contentOffset = CGPointMake(self.mainScrollView.width, 0);
+//    self.mainScrollView.contentSize = CGSizeMake(self.mainScrollView.width, self.mainScrollView.height);
+//    self.mainScrollView.contentOffset = CGPointMake(0, 0);
     self.mainScrollView.pagingEnabled = YES;
     self.mainScrollView.delegate = self;
     [self.view addSubview:self.mainScrollView];
@@ -408,8 +408,6 @@
     }];
     
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

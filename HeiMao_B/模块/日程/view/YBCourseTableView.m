@@ -50,7 +50,7 @@
 {
     NSInteger count = 0;
     count =  self.dataArray.count;
-//    [self.tipView2 setHidden:count];
+    [self.tipView2 setHidden:count];
     return count;
 }
 
@@ -97,7 +97,6 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollView==self.dataTabelView) {
-//        [self hiddenOpenCalendar];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"hiddenOpenCalendar" object:self];
     }
 }
