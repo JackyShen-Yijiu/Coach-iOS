@@ -53,7 +53,6 @@
     self.coureBeginTime = [self getOnePropertyLabel];
     self.coureBeginTime.font = [UIFont systemFontOfSize:14];
     self.coureBeginTime.textColor = JZ_BlueColor;
-    self.coureBeginTime.backgroundColor = RGB_Color(255, 255, 255);
     self.coureBeginTime.textAlignment = NSTextAlignmentCenter;
     self.coureBeginTime.text = @"开始开始";
     [self.contentView addSubview:self.coureBeginTime];
@@ -63,7 +62,6 @@
     self.coureEndTime.font = [UIFont systemFontOfSize:12];
     self.coureEndTime.textColor = JZ_BlueColor;
     self.coureEndTime.textAlignment = NSTextAlignmentCenter;
-    self.coureEndTime.backgroundColor = RGB_Color(255, 255, 255);
     self.coureEndTime.text = @"结束结束";
     [self.contentView addSubview:self.coureEndTime];
 
@@ -224,6 +222,9 @@
         make.bottom.mas_equalTo(self.bottomLine.mas_bottom);
     }];
     
+    self.coureBeginTime.backgroundColor = self.contentView.backgroundColor;
+    self.coureEndTime.backgroundColor = self.contentView.backgroundColor;
+    
 }
 
 #pragma mark - Common
@@ -261,7 +262,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return _model.appointMentCount;
+    return _model.coursestudentcount;// 2
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -269,25 +270,21 @@
     static NSString *cellId = @"YBAppointMentUserCell";
     YBAppointMentUserCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     
-    cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
-    
-    cell.nameLabel.text = @"姓名";
-    
-//    if (_model.coursereservationdetial.count<indexPath.row) {
-//        
-//        NSDictionary *dict = _model.coursereservationdetial[indexPath.row];
-//        
-//        [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dict[@"userid"][@"headportrait"][@"originalpic"]]] placeholderImage:[UIImage imageNamed:@"JZCourseadd_student"]];
-//        
-//        cell.nameLabel.text = [NSString stringWithFormat:@"%@",dict[@"userid"][@"name"]];
-//        
-//    }else{
-//        
-//        cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
-//        
+    if (_model.coursereservationdetial && _model.coursereservationdetial.count<indexPath.row) {
+        
+        NSDictionary *dict = _model.coursereservationdetial[indexPath.row];// 1
+        
+        [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dict[@"userid"][@"headportrait"][@"originalpic"]]] placeholderImage:[UIImage imageNamed:@"JZCourseadd_student"]];
+        
+        cell.nameLabel.text = [NSString stringWithFormat:@"%@",dict[@"userid"][@"name"]];
+        
+    }else{
+        
+        cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
+        
 //        cell.nameLabel.text = @"姓名";
-//    }
-//    
+    }
+    
     
     return cell;
     

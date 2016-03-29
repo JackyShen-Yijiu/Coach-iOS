@@ -273,10 +273,8 @@
             
             for (NSDictionary *dict in dataArray) {
                 YBCourseData *dataModel = [YBCourseData yy_modelWithDictionary:dict];
-                
-                dataModel.appointMentCount = 10;//dataModel.coursestudentcount;
-                
-                NSInteger studentCount = dataModel.appointMentCount;
+                                
+                NSInteger studentCount = dataModel.coursestudentcount;
                 NSInteger hangshu = studentCount / 4;
                 NSInteger yushu = studentCount % 4;
 
