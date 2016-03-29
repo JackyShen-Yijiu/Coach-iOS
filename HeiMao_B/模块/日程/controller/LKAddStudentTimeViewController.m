@@ -61,13 +61,24 @@
         timeViewItem.tag = 2000 + i;
         timeViewItem.selectButton.tag = 1000 + i;
         [timeViewItem.selectButton addTarget:self action:@selector(clickSelectBtn:) forControlEvents:UIControlEventTouchUpInside];
+        // 2016-03-29T22:00:00.000Z
+        //11 5
+        NSString *starTimeText1 = [self.starTimeText substringWithRange:NSMakeRange(11, 2)];
+        NSString *starTimeText2 = [self.finishTimeText substringWithRange:NSMakeRange(13, 3)];
         
-        
-        NSString *starTimeText = [self.starTimeText substringWithRange:NSMakeRange(11, 5)];
+        NSString *starTimeText = [NSString stringWithFormat:@"%zd\%@",starTimeText1.integerValue + i ,starTimeText2];
         
         timeViewItem.starTimeLabel.text = starTimeText;
         
-        NSString *finishTimeText = [self.finishTimeText substringWithRange:NSMakeRange(11, 5)];
+        
+        NSString *finishTimeText1 = [self.finishTimeText substringWithRange:NSMakeRange(11, 2)];
+        
+        NSString *finishTimeText2 = [self.finishTimeText substringWithRange:NSMakeRange(13, 3)];
+        
+
+        
+        NSString *finishTimeText = [NSString stringWithFormat:@"%zd\%@",finishTimeText1.integerValue+i,finishTimeText2];
+        
         timeViewItem.finishTimeLabel.text = finishTimeText;
         
         [self.timeView addSubview:timeViewItem];

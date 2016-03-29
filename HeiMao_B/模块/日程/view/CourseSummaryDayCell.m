@@ -323,9 +323,9 @@
     
     
 //    NSString *timeStr = self.model.coursebegintime;
-//
-//    NSString *timeText = [timeStr substringWithRange:NSMakeRange(11, 5)];
-//    NSLog(@"%@",timeText);
+////
+////    NSString *timeText = [timeStr substringWithRange:NSMakeRange(11, 5)];
+//    NSLog(@"%@",timeStr);
 
     //    NSLog(@"%s",__func__);
     
