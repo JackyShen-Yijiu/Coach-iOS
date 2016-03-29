@@ -9,7 +9,8 @@
 #import "CourseSummaryDayCell.h"
 #import "YBAppointMentUserCell.h"
 #import "YBObjectTool.h"
-
+#import "LKAddStudentTimeViewController.h"
+#import "LKTestViewController.h"
 @interface CourseSummaryDayCell ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (nonatomic,strong) UIView *coureleftTopDelive;
@@ -25,6 +26,8 @@
 @property (nonatomic,strong) UICollectionView *coureStudentCollectionView;
 // 底部分割线
 @property(nonatomic,strong)UIView * bottomLine;
+
+
 
 @end
 
@@ -292,8 +295,16 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%s",__func__);
     
+
+    //    NSLog(@"%s",__func__);
+    LKAddStudentTimeViewController *addStuVC = [[LKAddStudentTimeViewController alloc] init];
+    
+//    LKTestViewController *addStuVC = [[LKTestViewController alloc]init];
+    [self.parentViewController.navigationController pushViewController:addStuVC animated:YES];
+ 
+    
+  
 }
 
 @end

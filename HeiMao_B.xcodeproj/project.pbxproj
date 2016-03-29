@@ -525,6 +525,7 @@
 		D9D607D81CAA7D3800B61874 /* LKAddStudentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */; };
 		D9D607D91CAA7D3800B61874 /* LKAddStudentTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */; };
 		D9D607DC1CAA7D4800B61874 /* LKAddStudentTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */; };
+		D9F4B9F81CAA967E00326556 /* LKTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F4B9F71CAA967E00326556 /* LKTestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1439,6 +1440,8 @@
 		D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTimeView.m; sourceTree = "<group>"; };
 		D9D607DA1CAA7D4800B61874 /* LKAddStudentTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTimeViewController.h; sourceTree = "<group>"; };
 		D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTimeViewController.m; sourceTree = "<group>"; };
+		D9F4B9F61CAA967E00326556 /* LKTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKTestViewController.h; sourceTree = "<group>"; };
+		D9F4B9F71CAA967E00326556 /* LKTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKTestViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1849,6 +1852,8 @@
 				B2BA435E1CA51DF600926584 /* YBHomeRightViewController.m */,
 				D9D607DA1CAA7D4800B61874 /* LKAddStudentTimeViewController.h */,
 				D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */,
+				D9F4B9F61CAA967E00326556 /* LKTestViewController.h */,
+				D9F4B9F71CAA967E00326556 /* LKTestViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3613,6 +3618,7 @@
 				B2BA41F61CA5035700926584 /* EMBubbleView+Gif.m in Sources */,
 				B2BA3EDA1CA5003B00926584 /* HMClassInfoModel.m in Sources */,
 				B2BA41D81CA5035700926584 /* EMSDWebImageCompat.m in Sources */,
+				D9F4B9F81CAA967E00326556 /* LKTestViewController.m in Sources */,
 				B2BA3ED81CA5003B00926584 /* BaseModelMethod.m in Sources */,
 				B2BA434F1CA5041100926584 /* YBTrainfieldlinfoModel.m in Sources */,
 				B2BA41961CA5035700926584 /* ShopModel.m in Sources */,

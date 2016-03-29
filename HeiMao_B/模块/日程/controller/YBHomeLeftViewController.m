@@ -338,7 +338,7 @@
     if (indexPath.row < self.courseDayTableData.count)
         [dayCell setModel:self.courseDayTableData[indexPath.row]];
     
-    dayCell.parentViewController = self;
+    dayCell.parentViewController = self.parentViewController;
     dayCell.backgroundColor = RGB_Color(255, 255, 255);
     
     return dayCell;

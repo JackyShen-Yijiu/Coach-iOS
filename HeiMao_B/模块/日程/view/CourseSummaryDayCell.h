@@ -15,6 +15,8 @@
 
 @property (nonatomic,strong) UIViewController *parentViewController;
 
+
+
 + (CGFloat)cellHeightWithModel:(YBCourseData *)model;
 
 @end

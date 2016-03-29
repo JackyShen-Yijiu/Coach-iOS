@@ -29,6 +29,7 @@
     
     self.navigationItem.title = @"添加学员";
     
+    
     // Do any additional setup after loading the view, typically from a nib.
     [self.tableView registerClass:[LKAddStudentTableViewCell class] forCellReuseIdentifier:@"cell"];
     self.tableView.rowHeight = 80;
@@ -36,7 +37,11 @@
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(testLog)];
+
+    rightItem.tintColor = [UIColor whiteColor];
     
+
+
     self.navigationItem.rightBarButtonItem = rightItem;
     
 #pragma mark - 顶部时间按钮栏
@@ -52,8 +57,7 @@
         
         
         LKAddStudentTimeView *timeViewItem = [[LKAddStudentTimeView alloc]initWithFrame:CGRectMake(i*w, y, w, h)];
-        timeViewItem.backgroundColor = [UIColor colorWithRed:((float)arc4random_uniform(256) / 255.0)green:((float)arc4random_uniform(256) / 255.0)blue:((float)arc4random_uniform(256) / 255.0)alpha:
-                                        1.0];
+//        timeViewItem.backgroundColor = [UIColor colorWithRed:((float)arc4random_uniform(256) / 255.0)green:((float)arc4random_uniform(256) / 255.0)blue:((float)arc4random_uniform(256) / 255.0)alpha:1.0];
         
         [self.timeView addSubview:timeViewItem];
         

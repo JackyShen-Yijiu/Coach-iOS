@@ -49,7 +49,7 @@
     
     if (self) {
 
-        self.backgroundColor = [UIColor redColor];
+//        self.backgroundColor = [UIColor redColor];
         
         UILabel *starTimeLabel = [[UILabel alloc]init];
         UILabel *finishTimeLabel = [[UILabel alloc]init];

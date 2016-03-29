@@ -14,4 +14,6 @@
 
 - (void)hiddenOpenCalendar;
 
+@property (nonatomic,strong) UIViewController *parentViewController;
+
 @end

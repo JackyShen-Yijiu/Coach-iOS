@@ -50,6 +50,7 @@ typedef NS_ENUM(NSInteger, kControllerType) {
     
     self.leftVc = [[YBHomeLeftViewController alloc] init];
     self.leftVc.view.frame = self.view.bounds;
+    self.leftVc.parentViewController = self;
     [self.view addSubview:self.leftVc.view];
     
     self.rightVc = [[YBHomeRightViewController alloc] init];
