@@ -65,7 +65,7 @@
     
     NSLog(@"scrollToRowAtIndex:%ld",(long)index);
     
-    if (self.dataArray.count >= index) {
+    if (self.dataArray && self.dataArray.count > index) {
        NSInteger scrollToRowAtIndex = index - 1;
         if (index==0) {
             scrollToRowAtIndex = 0;

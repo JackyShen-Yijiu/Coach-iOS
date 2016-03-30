@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, kControllerType) {
 
 - (UISegmentedControl *)segment {
     if (!_segment) {
-        _segment = [[UISegmentedControl alloc] initWithItems:@[ @"左边", @"右边" ]];
+        _segment = [[UISegmentedControl alloc] initWithItems:@[ @"时间", @"列表 " ]];
         _segment.frame = CGRectMake(100, 100, 100, 30);
         _segment.tintColor = [UIColor whiteColor];
         [_segment addTarget:self action:@selector(didClicksegmentedControlAction:) forControlEvents:UIControlEventValueChanged];
