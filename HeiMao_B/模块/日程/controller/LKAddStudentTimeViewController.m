@@ -8,18 +8,28 @@
 
 #import "LKAddStudentTimeViewController.h"
 #import "LKAddStudentTableViewCell.h"
-//#import "Student.h"
-//#import "StudentGroup.h"
 #import "LKAddStudentTimeView.h"
+#import "YYModel.h"
+#import "LKAddStudentData.h"
 
 static NSString *addStuCellID = @"addStuCellID";
 
 @interface LKAddStudentTimeViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic, strong) NSArray *arrayList;
+
 @property (nonatomic, strong) LKAddStudentTimeView *timeViewItem;
 @property (nonatomic, strong) UIView *timeView;
 ///  记录选中的cell
 @property (nonatomic, strong) NSMutableArray *selectedRows;
+
+@property (nonatomic, strong) NSMutableArray *stundentDataArrM;
+
+@property (nonatomic, strong) UITableView *tableView;
+
+
+
+
+
+
 
 
 
@@ -29,7 +39,13 @@ static NSString *addStuCellID = @"addStuCellID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initData];
+    
+    
+    UITableView  *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 92)];
+    
+    self.tableView = tableView;
+    
+
 //    [UserInfoModel defaultUserInfo].subject 
     
     self.navigationItem.title = @"添加学员";
@@ -51,6 +67,14 @@ static NSString *addStuCellID = @"addStuCellID";
     
     
     self.navigationItem.rightBarButtonItem = rightItem;
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        
+         [self initData];
+    });
+    
+    
     
 #pragma mark - 顶部时间按钮栏
     
@@ -95,6 +119,7 @@ static NSString *addStuCellID = @"addStuCellID";
     
     //        self.timeView.backgroundColor = [UIColor orangeColor];
     
+    NSLog(@"%@",self.studentDataM);
     
     self.timeView = timeView;
     
@@ -111,20 +136,39 @@ static NSString *addStuCellID = @"addStuCellID";
     //如果取消已选择的cell,从记录移除
     [self.selectedRows removeObject:indexPath];
     
-    cell.backgroundColor = [UIColor whiteColor];
+//    cell.backgroundColor = [UIColor whiteColor];
     
-    NSLog(@"%@",indexPath);
+//    NSLog(@"%@",indexPath);
 }
 - (void)initData{
 //如果教练是什么都交  返回 -1   不是返回交的课程
     
-    [NetWorkEntiry addstudentsListwithCoachid:self.coachidStr subjectID:-1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry addstudentsListwithCoachid:self.coachidStr subjectID:(NSString *)@(-1) success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         id result = responseObject;
         
-        NSLog(@"类型----%@",[result class]);
+//        NSLog(@"类型----%@",[result class]);
         
-        NSLog(@"返回的数据%@",result);
+//        NSLog(@"返回的数据%@",result);
+        
+        
+        NSArray *stundentData = result[@"data"];
+        
+        for (NSDictionary *dict in stundentData) {
+            
+            LKAddStudentData *data = [LKAddStudentData yy_modelWithDictionary:dict];
+            
+            NSLog(@"名字 ==== == = %@",data.name);
+            
+            
+            [self.stundentDataArrM addObject:data];
+            
+        }
+        [self.tableView reloadData];
+        
+//        NSLog(@"数组-----%@",stundentData);
+//        NSLog(@"名字=====%@",stundentData[0][@"name"]);
+  
         
         
         
@@ -141,7 +185,7 @@ static NSString *addStuCellID = @"addStuCellID";
     
     if (![self.selectedRows containsObject:indexPath] && self.selectedRows.count < 7) {
         
-        cell.backgroundColor = [UIColor grayColor];
+//        cell.backgroundColor = [UIColor grayColor];
         
         [self.selectedRows addObject:indexPath];
     }
@@ -185,11 +229,14 @@ static NSString *addStuCellID = @"addStuCellID";
         cell = [[LKAddStudentTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:addStuCellID];
         
     }
-    //        StudentGroup *stuGroup = self.arrayList[indexPath.section];
-    //        Student *stu = stuGroup.Students[indexPath.row];
-    //        cell.studentNameLabel.text = stu.studentNameLabel;
-    //        [cell setStudentModel:stu];
-    //        cell.studentModel = stuGroup.Students[indexPath.row];
+    
+    
+//            cell.studentNameLabel.text = stu.studentNameLabel;
+//            [cell setStudentModel:stu];
+//            cell.studentModel = stuGroup.Students[indexPath.row];
+    
+    
+
     
     return cell;
 }
@@ -197,7 +244,9 @@ static NSString *addStuCellID = @"addStuCellID";
 #pragma mark - 返回的组数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.arrayList count];
+//    return [self.arrayList count];
+    
+    return 100;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -206,48 +255,37 @@ static NSString *addStuCellID = @"addStuCellID";
 }
 
 #pragma mark - 返回tableView右边索引栏
-- (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+//- (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
     //   NSArray *indexArr = [self.groupes valueForKeyPath:@"title"];
-    NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:self.arrayList.count];
+//    NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:self.arrayList.count];
     //    for (StudentGroup *group in self.arrayList) {
     //        [arrM addObject:group.title];
     //    }
-    return arrM;
-}
+//    return arrM;
+//}
 
--(NSArray *)arrayList
-{
-    if (_arrayList == nil) {
-        NSString *path=[[NSBundle mainBundle]pathForResource:@"addStudent.plist" ofType:nil];
-        NSMutableArray *arrM = [NSMutableArray array];
-        NSArray *dictArr = [NSArray arrayWithContentsOfFile:path];
-        for (NSDictionary *dict in dictArr) {
-            
-            
-            //                        StudentGroup *stuGroup = [StudentGroup groupWithDict:dict];
-            //
-            //                        NSArray *students = stuGroup.Students;
-            //
-            //                        NSMutableArray *stuGrouM = [NSMutableArray array];
-            //                        for (NSDictionary *stuDict in students) {
-            //                            Student *student = [Student studentWithDict:stuDict];
-            //                            [stuGrouM addObject:student];
-            //                        }
-            //                        stuGroup.Students = stuGrouM;
-            //                        [arrM addObject:stuGroup];
-            
-        }
-        _arrayList = arrM;
-        
-    }
-    return _arrayList;
-}
+
+
 
 
 #pragma mark - 返回每一组的头部标题
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [self.arrayList[section] title];
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+////    return [self.arrayList[section] title];
+//}
+
+#pragma mark - 懒加载数据
+//-(NSMutableDictionary *)studentDataM {
+//    
+//    if (!_studentDataM) {
+//
+//
+//        _studentDataM = [[NSMutableDictionary alloc]init];
+//        
+//    }
+//    
+//    return _studentDataM;
+//}
+
 
 
 

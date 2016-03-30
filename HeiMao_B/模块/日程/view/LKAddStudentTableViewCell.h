@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LKAddStudentData.h"
 //#import "Student.h"
 
 @interface LKAddStudentTableViewCell : UITableViewCell
@@ -21,5 +22,8 @@
 /// 选择学员的按钮 -- UIButton
 @property (nonatomic, weak) UIImageView *selectImageView;
 //@property (nonatomic, strong) Student *studentModel;
+
+@property (nonatomic, strong) LKAddStudentData *model;
+
 
 @end

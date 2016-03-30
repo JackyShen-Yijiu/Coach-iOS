@@ -48,7 +48,7 @@
 
 #define  HOST_TEST_DAMIAN  @"http://jzapi.yibuxueche.com/api/v1"
 
-//#define  HOST_LINE_DOMAIN  @"http://123.57.63.15:8181/api/v1"
+//#define  HOST_LINE_DOMAIN  @"http://123.56.185.59:8183/api/v1"
 #define  HOST_LINE_DOMAIN  @"http://jzapi.yibuxueche.com/api/v2"
 
 //#define QA_TEST

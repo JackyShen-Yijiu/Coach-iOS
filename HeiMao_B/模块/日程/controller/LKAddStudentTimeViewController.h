@@ -9,17 +9,18 @@
 #import <UIKit/UIKit.h>
 
 
-@interface LKAddStudentTimeViewController : UITableViewController
+@interface LKAddStudentTimeViewController : UIViewController
 /// 开始时间
 @property(nonatomic,copy)NSString *starTimeText;
 /// 结束时间
 @property (nonatomic ,copy) NSString *finishTimeText;
 
-@property (nonatomic, strong) NSString *coursestudentcount;
+@property (nonatomic, assign) NSInteger courseStudentCountInt;
 
 ///  教练id
 @property (nonatomic, strong) NSString *coachidStr;
-
+#pragma mark - 加载数据
+@property (nonatomic, strong) NSMutableDictionary *studentDataM;
 
 @end
 

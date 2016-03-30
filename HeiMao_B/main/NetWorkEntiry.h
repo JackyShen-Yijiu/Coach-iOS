@@ -339,7 +339,7 @@
  *
  */
 + (void)addstudentsListwithCoachid:(NSString *)coachId
-                         subjectID:(NSUInteger)subjectID
+                         subjectID:(NSString *)subjectID
 
                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;

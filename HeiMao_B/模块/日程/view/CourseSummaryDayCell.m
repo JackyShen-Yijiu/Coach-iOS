@@ -340,6 +340,9 @@
     
     addStuVC.coachidStr = self.model.coachid;
     
+    addStuVC.courseStudentCountInt = self.model.coursestudentcount;
+    
+    
 //    LKTestViewController *addStuVC = [[LKTestViewController alloc]init];
     [self.parentViewController.navigationController pushViewController:addStuVC animated:YES];
     
