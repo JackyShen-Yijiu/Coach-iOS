@@ -11,3 +11,4 @@
 @interface YBStudentDetailsViewController : JGBaseViewController
 
 @end
+
