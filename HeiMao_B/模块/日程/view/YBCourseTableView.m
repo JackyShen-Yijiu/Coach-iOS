@@ -95,6 +95,7 @@
 {
     
     CourseSummaryDayCell * dayCell = [tableView dequeueReusableCellWithIdentifier:@"dayCell"];
+    
     if (!dayCell) {
         dayCell = [[CourseSummaryDayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dayCell"];
     }
@@ -103,6 +104,8 @@
     if (indexPath.row < self.dataArray.count)
         [dayCell setModel:self.dataArray[indexPath.row]];
     
+    dayCell.selectIndex = indexPath.row;
+    dayCell.dataArray = self.dataArray;
     dayCell.parentViewController = self.parentViewController;
     dayCell.backgroundColor = RGB_Color(255, 255, 255);
     
