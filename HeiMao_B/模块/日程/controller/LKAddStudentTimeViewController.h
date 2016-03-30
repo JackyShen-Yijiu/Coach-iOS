@@ -10,7 +10,15 @@
 
 
 @interface LKAddStudentTimeViewController : UITableViewController
+/// 开始时间
+@property(nonatomic,copy)NSString *starTimeText;
+/// 结束时间
+@property (nonatomic ,copy) NSString *finishTimeText;
 
+@property (nonatomic, strong) NSString *coursestudentcount;
+
+///  教练id
+@property (nonatomic, strong) NSString *coachidStr;
 
 
 @end

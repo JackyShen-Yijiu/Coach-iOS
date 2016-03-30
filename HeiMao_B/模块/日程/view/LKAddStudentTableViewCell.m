@@ -32,6 +32,9 @@
         UIButton *callStudentButton = [[UIButton alloc]init];
         self.callStudentButton = callStudentButton;
         
+        
+        [callStudentButton setImage:[UIImage imageNamed:@"call_icon"] forState:UIControlStateNormal];
+        
         UIImageView *selectImageView = [[UIImageView alloc]init];
         
         self.selectImageView = selectImageView;
