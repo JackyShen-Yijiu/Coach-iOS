@@ -10,10 +10,8 @@
 
 
 @interface LKAddStudentTimeViewController : UIViewController
-/// 开始时间
-@property(nonatomic,copy)NSString *starTimeText;
-/// 结束时间
-@property (nonatomic ,copy) NSString *finishTimeText;
+
+@property (nonatomic, strong) NSArray *dataArray;
 
 @property (nonatomic, assign) NSInteger courseStudentCountInt;
 

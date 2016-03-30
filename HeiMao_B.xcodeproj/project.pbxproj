@@ -1967,7 +1967,6 @@
 				B2BA445E1CABC15C00926584 /* YBStudentDetailsSubjectthree.m */,
 				B2BA445F1CABC15C00926584 /* YBStudentDetailsSubjecttwo.h */,
 				B2BA44601CABC15C00926584 /* YBStudentDetailsSubjecttwo.m */,
->>>>>>> d3cb08ecf7005dc20d7d940b163f8e908d83bbf2
 				B2BA43D21CA951A200926584 /* YBCourseRootClass.h */,
 				B2BA43D31CA951A200926584 /* YBCourseRootClass.m */,
 				B2BA43CE1CA951A200926584 /* YBCourseData.h */,

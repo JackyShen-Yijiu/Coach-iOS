@@ -329,30 +329,35 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
-//    NSString *timeStr = self.model.coursebegintime;
-////
-////    NSString *timeText = [timeStr substringWithRange:NSMakeRange(11, 5)];
-//    NSLog(@"%@",timeStr);
-
-    //    NSLog(@"%s",__func__);
-    
-    LKAddStudentTimeViewController *addStuVC = [[LKAddStudentTimeViewController alloc] init];
-    
-
-    NSLog(@"self.model.coursebegintime:%@",self.model.coursebegintime);
-    NSLog(@"self.model.courseendtime:%@",self.model.courseendtime);
-    
-    addStuVC.starTimeText = self.model.coursebegintime;
-    addStuVC.finishTimeText = self.model.courseendtime;
-    
-    addStuVC.coachidStr = self.model.coachid;
-    
-    addStuVC.courseStudentCountInt = self.model.coursestudentcount;
-    
-    
-//    LKTestViewController *addStuVC = [[LKTestViewController alloc]init];
-    [self.parentViewController.navigationController pushViewController:addStuVC animated:YES];
+    if (_model.coursereservationdetial && _model.coursereservationdetial.count>indexPath.row) {
+        
+        NSLog(@"跳转学员详情");
+        
+    }else{
+       
+        
+        NSMutableArray *tempArray = [NSMutableArray array];
+        for (NSInteger i = self.selectIndex; i<self.dataArray.count; i++) {
+            YBCourseData *data = self.dataArray[i];
+            NSLog(@"传递数据data.coursebegintime:%@ data.courseendtime:%@",[NSString getHourLocalDateFormateUTCDate:data.coursebegintime],[NSString getHourLocalDateFormateUTCDate:data.courseendtime]);
+            [tempArray addObject:data];
+        }
+        
+        LKAddStudentTimeViewController *addStuVC = [[LKAddStudentTimeViewController alloc] init];
+        addStuVC.dataArray = tempArray;
+        
+        NSLog(@"self.model.coursebegintime:%@",self.model.coursebegintime);
+        NSLog(@"self.model.courseendtime:%@",self.model.courseendtime);
+        
+        addStuVC.coachidStr = self.model.coachid;
+        
+        addStuVC.courseStudentCountInt = self.model.coursestudentcount;
+        
+        //    LKTestViewController *addStuVC = [[LKTestViewController alloc]init];
+        [self.parentViewController.navigationController pushViewController:addStuVC animated:YES];
+        
+        
+    }
     
     
 

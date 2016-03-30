@@ -11,33 +11,29 @@
 
 @implementation LKAddStudentTableViewCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier {
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UILabel *studentNameLabel = [[UILabel alloc]init];
         
-        self.studentNameLabel = studentNameLabel;
+        self.studentNameLabel = [[UILabel alloc]init];
+        self.studentNameLabel.backgroundColor = [UIColor whiteColor];
+        self.studentNameLabel.text = @"studentNameLabel";
         
-        UILabel *studyDetilsLabel = [[UILabel alloc]init];
-        self.studyDetilsLabel = studyDetilsLabel;
+        self.studyDetilsLabel = [[UILabel alloc]init];
+        self.studyDetilsLabel.text = @"studyDetilsLabel";
         
-        UIImageView *studentIconView = [[UIImageView alloc]init];
-        self.studentIconView = studentIconView;
-        
-        UIButton *callStudentButton = [[UIButton alloc]init];
-        self.callStudentButton = callStudentButton;
+        self.studentIconView = [[UIImageView alloc]init];
+        self.studentIconView.image = [UIImage imageNamed:@"JZCoursenull_student"];
         
         
-        [callStudentButton setImage:[UIImage imageNamed:@"call_icon"] forState:UIControlStateNormal];
         
-        UIImageView *selectImageView = [[UIImageView alloc]init];
+        self.callStudentButton = [[UIButton alloc]init];
+        self.callStudentButton.backgroundColor = [UIColor orangeColor];
+        [self.callStudentButton setImage:[UIImage imageNamed:@"call_icon"] forState:UIControlStateNormal];
         
-        self.selectImageView = selectImageView;
+        self.selectImageView = [[UIImageView alloc]init];
+        self.selectImageView.image = [UIImage imageNamed:@"ImageSelectedSmallOff"];
         
         [self.contentView addSubview:self.selectImageView];
         [self.contentView addSubview:self.studentIconView];
@@ -45,68 +41,60 @@
         [self.contentView addSubview:self.callStudentButton];
         [self.contentView addSubview:self.studentNameLabel];
         
-
+        [self.selectImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.mas_equalTo(self.contentView.mas_left).offset(16);
+            make.top.mas_equalTo(self.contentView.mas_top).offset(30);
+            make.width.mas_equalTo(48);
+            make.height.mas_equalTo(48);
+            
+        }];
+        
+        [self.studentIconView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.mas_equalTo(self.selectImageView).offset(16);
+            make.top.mas_equalTo(self.contentView.mas_top).offset(16);
+            make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(16);
+            
+            
+        }];
+        
+        [self.studentNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.mas_equalTo(self.contentView.mas_top).offset(21);
+            make.left.mas_equalTo(self.studentIconView.mas_right).offset(16);
+            //            make.height.mas_equalTo(14);
+            
+        }];
+        
+        [self.studyDetilsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.mas_equalTo(self.studentNameLabel.mas_bottom).offset(12);
+            make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(21);
+            make.height.mas_equalTo(12);
+            
+        }];
+        
+        [self.callStudentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.right.mas_equalTo(self.contentView.mas_right).offset(24);
+            make.height.mas_equalTo(16);
+            make.centerY.mas_equalTo(self.contentView.mas_centerY);
+            
+        }];
+        
+        
     }
     return self;
-
-
 }
--(void)layoutSubviews
+
+
+- (void)setModel:(LKAddStudentData *)model
 {
+    _model = model;
     
-    [self.selectImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.mas_equalTo(self.contentView.mas_left).offset(16);
-        make.top.mas_equalTo(self.contentView.mas_top).offset(30);
-        
-       
-    }];
-    
-    
-    [self.studentIconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.mas_equalTo(self.selectImageView).offset(16);
-        make.top.mas_equalTo(self.contentView.mas_top).offset(16);
-        make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(16);
-        
-        
-    }];
-    
-    [self.studentNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.mas_equalTo(self.contentView.mas_top).offset(21);
-        make.left.mas_equalTo(self.studentIconView.mas_right).offset(16);
-        make.height.mas_equalTo(14);
-        
-        
-        
-    }];
-    
-    [self.studyDetilsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.mas_equalTo(self.studentNameLabel.mas_bottom).offset(12);
-        make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(21);
-        make.height.mas_equalTo(12);
-        
-        
-    }];
-    
-    [self.callStudentButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.right.mas_equalTo(self.contentView.mas_right).offset(24);
-        make.height.mas_equalTo(16);
-        make.centerY.mas_equalTo(self.contentView.mas_centerY);
-        
-    }];
-
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-- (void)setModel:(LKAddStudentData *)model{
+    self.studentNameLabel.text = [NSString stringWithFormat:@"%@",_model.name];
     
 }
+
 @end
