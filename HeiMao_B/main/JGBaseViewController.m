@@ -19,12 +19,16 @@
 
 @implementation JGBaseViewController
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 
     [self loadMessageData];
-    
+   
+    //设置状态栏的字体颜色模式
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+   
 }
 
 - (void)viewDidLoad
@@ -32,7 +36,7 @@
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveMainChatMessage) name:@"receiveMainChatMessage" object:nil];
-    
+        
 }
 
 - (void)receiveMainChatMessage

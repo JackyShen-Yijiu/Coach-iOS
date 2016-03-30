@@ -564,7 +564,7 @@
 
 /**
  *
- * 学员模块学员列表
+ * 学员模块学员列表  v2 接口  courseinfo/getmystudentcount
  *
  */
 + (void)coachStudentListWithCoachId:(NSString *)coachId
@@ -581,6 +581,27 @@
                                     @"count": [NSString stringWithFormat:@"%lu", count],
                                     @"index": [NSString stringWithFormat:@"%lu", index]
                                     };
+    NSLog(@"urlStr = urlStr %@",urlStr);
+    NSLog(@"paramterDict = %@",paramterDict);
+    [self GET:urlStr parameters:paramterDict success:success failure:failure];
+}
+
+/**
+ *
+ * 统计各个状态的学员数量  v2 接口
+ *
+ */
++ (void)getAllSubjectNumberStateWithCoachId:(NSString *)coachId
+                          subjectID:(NSString *)subjectID
+                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure {
+    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmystudentcount",[self domain]];
+    NSDictionary *paramterDict = @{ @"coachid": coachId,
+                                    @"subjectid": subjectID,
+                                    
+                                    };
+    NSLog(@"urlStr = urlStr %@",urlStr);
+    NSLog(@"paramterDict = %@",paramterDict);
     [self GET:urlStr parameters:paramterDict success:success failure:failure];
 }
 
@@ -645,6 +666,19 @@
 //    NSLog(@"urlStr = %@",urlStr);
 //    NSLog(@"paramterDict = %@",paramterDict);
     [self GET:urlStr parameters:paramterDict success:success failure:failure];
+}
+
+/*
+ *  学员详情
+ *
+ */
++ (void)getStudentDetailswithuserid:(NSString *)userid
+                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure
+{
+    NSString *url = [NSString stringWithFormat:@"http://jzapi.yibuxueche.com/api/v2/courseinfo/studentdetialinfo?userid=%@",userid];
+    
+    [self GET:url parameters:nil success:success failure:failure];
 }
 
 #pragma mark - Common Method

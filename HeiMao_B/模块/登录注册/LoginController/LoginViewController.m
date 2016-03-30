@@ -46,11 +46,10 @@ static NSString *const kuserType = @"usertype";
 
 @implementation LoginViewController
 
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [self.myNavController.navigationBar setHidden:YES];
     [[self.myNavController navigationBar] setBarTintColor:[UIColor clearColor]];
 }
@@ -59,7 +58,7 @@ static NSString *const kuserType = @"usertype";
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 
 - (NSMutableDictionary *)userParam {

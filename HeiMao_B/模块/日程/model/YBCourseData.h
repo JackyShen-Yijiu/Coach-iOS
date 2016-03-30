@@ -31,5 +31,6 @@
 @property (nonatomic, assign) NSInteger signinstudentcount;
 
 @property (nonatomic,assign) CGFloat appointMentViewH;
+@property (nonatomic,assign) NSInteger passTimeCount;// 过期时间的个数
 
 @end

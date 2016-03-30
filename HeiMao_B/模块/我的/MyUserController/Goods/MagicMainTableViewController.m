@@ -145,8 +145,4 @@ static NSString *kMagicShop = @"/getmailproduct?index=1&count=10&producttype=0";
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
-
 @end

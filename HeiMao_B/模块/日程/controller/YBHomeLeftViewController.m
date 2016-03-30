@@ -17,6 +17,7 @@
 #import "YYModel.h"
 #import "YBCourseData.h"
 #import "YBCourseTableView.h"
+#import "YBObjectTool.h"
 
 @interface YBHomeLeftViewController ()<FDCalendarDelegate,YBFDCalendarDelegate,UIScrollViewDelegate>
 {
@@ -152,7 +153,7 @@
     
     // 添加右边下拉按钮
     UIButton *xialaBtn = [[UIButton alloc] init];
-    xialaBtn.frame = CGRectMake(self.calendarHeadView.width-20, -7, 15, 44);
+    xialaBtn.frame = CGRectMake(self.calendarHeadView.width-20, -10, 20, 44);
     [xialaBtn setImage:[UIImage imageNamed:@"JZCoursefold_down"] forState:UIControlStateNormal];
     [xialaBtn addTarget:self action:@selector(xialaBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
     [self.calendarHeadView addSubview:xialaBtn];
@@ -245,7 +246,7 @@
         
         // 添加右边下拉按钮
         UIButton *openXialaBtn = [[UIButton alloc] init];
-        openXialaBtn.frame = CGRectMake(self.ybCalendarHeadView.width-20, -7, 15, 44);
+        openXialaBtn.frame = CGRectMake(self.ybCalendarHeadView.width-20, -10, 20, 44);
         [openXialaBtn setImage:[UIImage imageNamed:@"JZCoursefold_up"] forState:UIControlStateNormal];
         [openXialaBtn addTarget:self action:@selector(xialaBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
         [self.ybCalendarHeadView addSubview:openXialaBtn];
@@ -273,13 +274,13 @@
 
         // 设置当前日期
         [self.ybCalendarHeadView setCurrentDate:self.selectDate];
-        [self YBFDCalendar:self.ybCalendarHeadView didSelectedDate:self.selectDate];
+//        [self YBFDCalendar:self.ybCalendarHeadView didSelectedDate:self.selectDate];
         
     }else{
         
         // 设置当前日期
         [self.calendarHeadView setCurrentDate:self.selectDate];
-        [self fdCalendar:self.calendarHeadView didSelectedDate:self.selectDate];
+//        [self fdCalendar:self.calendarHeadView didSelectedDate:self.selectDate];
         
     }
     

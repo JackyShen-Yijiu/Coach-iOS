@@ -155,7 +155,7 @@
     
     self.coureEndTime.text = [NSString getHourLocalDateFormateUTCDate:_model.courseendtime];
     
-    int compareDataNum = [YBObjectTool compareHMSDateWithSelectDateStr:[NSString getLocalDateFormateUTCDate:_model.coursebegintime]];
+    int compareDataNum = [YBObjectTool compareHMSDateWithBegintime:[NSString getLocalDateFormateUTCDate:_model.coursebegintime] endtime:[NSString getLocalDateFormateUTCDate:_model.courseendtime]];
     
     NSLog(@"compareDataNum:%d",compareDataNum);
     
@@ -169,6 +169,9 @@
         rightStr = _model.coursestudentcount - _model.selectedstudentcount;
         self.coureTopCountLabel.text = [NSString stringWithFormat:@"已约%ld     剩余名额%ld",(long)leftStr,(long)rightStr];
         self.coureTopCountLabel.textColor = JZ_BlueColor;
+        self.coureleftTopDelive.backgroundColor = JZ_BlueColor;
+        self.coureBeginTime.textColor = JZ_BlueColor;
+        self.coureEndTime.textColor = JZ_BlueColor;
         
         self.contentView.backgroundColor = RGB_Color(255, 255, 255);
         self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -183,7 +186,10 @@
         rightStr = _model.coursestudentcount - _model.selectedstudentcount;
         self.coureTopCountLabel.text = [NSString stringWithFormat:@"已约%ld     剩余名额%ld",(long)leftStr,(long)rightStr];
         self.coureTopCountLabel.textColor = [UIColor lightGrayColor];
-
+        self.coureleftTopDelive.backgroundColor = JZ_BlueColor;
+        self.coureBeginTime.textColor = [UIColor colorWithHexString:@"6e6e6e"];
+        self.coureEndTime.textColor = [UIColor lightGrayColor];
+        
         self.contentView.backgroundColor = RGB_Color(255, 255, 255);
         self.contentView.layer.shadowColor = [UIColor clearColor].CGColor;
         self.contentView.layer.shadowOffset = CGSizeMake(0, 0);
@@ -204,7 +210,10 @@
         rightStr = _model.coursestudentcount - _model.signinstudentcount;
         self.coureTopCountLabel.text = [NSString stringWithFormat:@"已学%ld     漏课%ld",(long)leftStr,(long)rightStr];
         self.coureTopCountLabel.textColor = [UIColor lightGrayColor];
-
+        self.coureleftTopDelive.backgroundColor = [UIColor lightGrayColor];
+        self.coureBeginTime.textColor = [UIColor lightGrayColor];
+        self.coureEndTime.textColor = [UIColor lightGrayColor];
+        
     }
     
     // 中间预约学员
@@ -297,8 +306,7 @@
     }else{
         
         // 1:大于当前日期 -1:小于当前时间 0:等于当前时间
-        int compareDataNum = [YBObjectTool compareHMSDateWithSelectDateStr:[NSString getLocalDateFormateUTCDate:_model.coursebegintime]];
-        NSLog(@"cellForItemAtIndexPath compareDataNum:%d",compareDataNum);
+        int compareDataNum = [YBObjectTool compareHMSDateWithBegintime:[NSString getLocalDateFormateUTCDate:_model.coursebegintime] endtime:[NSString getLocalDateFormateUTCDate:_model.courseendtime]];
         
         if (compareDataNum==0) {
             cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];

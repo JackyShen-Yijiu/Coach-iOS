@@ -61,7 +61,7 @@
 {
     [super viewWillAppear:animated];
     
-//    [self initNavBar];
+    [self initNavBar];
     
     [_bgView removeFromSuperview];
     if ([UserInfoModel defaultUserInfo].userID && [UserInfoModel defaultUserInfo].is_validation==NO) {
@@ -71,21 +71,13 @@
     }
 }
 
-
-- (void)setUpRightNavBar
-{
-    self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"群发短信" highTitle:@"群发短信" target:self action:@selector(clickRight) isRightItem:YES];
-}
-
 #pragma mark - initUI
 
 - (void)initNavBar
 {
     [self resetNavBar];
-    
+    self.myNavigationItem.leftBarButtonItem = nil;
      self.myNavigationItem.title = @"消息";
-    
-    [self setUpRightNavBar];
 }
 
 - (void)removeEmptyConversationsFromDB
@@ -254,11 +246,5 @@
         self.tableView.tableHeaderView = nil;
     }
 }
-
-- (void)clickRight{
-            DVVSendMessageToStudentController *sendMsgVC = [DVVSendMessageToStudentController new];
-            [self.navigationController pushViewController:sendMsgVC animated:YES];
-}
-
 
 @end
