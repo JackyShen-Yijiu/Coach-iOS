@@ -27,6 +27,8 @@
 #import "NSString+CurrentTimeDay.h"
 #import "YBUIMacro.h"
 #import "UIColor+Hex.h"
+#import "UIImage+DVVEffects.h"
+
 #endif
 
 // Include any system framework and library headers here that should be included in all compilation units.
