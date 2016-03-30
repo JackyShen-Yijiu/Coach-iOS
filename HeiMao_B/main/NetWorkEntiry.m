@@ -581,6 +581,7 @@
                                     @"count": [NSString stringWithFormat:@"%lu", count],
                                     @"index": [NSString stringWithFormat:@"%lu", index]
                                     };
+    NSLog(@"urlStr = urlStr %@",urlStr);
     [self GET:urlStr parameters:paramterDict success:success failure:failure];
 }
 

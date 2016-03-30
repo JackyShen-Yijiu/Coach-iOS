@@ -77,6 +77,12 @@
     [self changeBgViewFrame];
     [self initRefreshView];
     
+    
+    
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.tableView.header beginRefreshing];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -89,25 +95,8 @@
     self.myNavigationItem.title = @"学员";
     [self.view addSubview:self.tableView];
     
-    if (![_oneStr isEqualToString:@""] && _oneStr != nil) {
-        _subjectID = 1;
-        _studentState = 0;
-    }
-
-    if (![_twoStr isEqualToString:@""] && _twoStr != nil) {
-        _subjectID = 2;
-        _studentState = 0;
-    }
-    if (![_threeStr isEqualToString:@""] && _threeStr != nil) {
-        _subjectID = 3;
-        _studentState = 0;
-    }
-    if (![_fourStr isEqualToString:@""] && _fourStr != nil) {
-        _subjectID = 4;
-        _studentState = 0;
-    }
-//    [self configStudetListViewModel];
-    [self.tableView.refreshHeader  beginRefreshing];
+//    [self.tableView.header beginRefreshing];
+    
     
 }
 - (void)changeBgViewFrame{
@@ -141,9 +130,12 @@
         
         // 冒泡排序后将_id转化为相应的科目文字
         NSArray *resultArray = [self bubbleSort:titleArray];
+        _subjectID = [[resultArray firstObject] integerValue];
+        _studentState = 0;
         NSMutableArray *resultMustArray = [NSMutableArray array];
         NSString *str = nil;
         for (NSNumber *_id in resultArray) {
+            
             if ( [_id isEqualToNumber:@1]) {
                 str = @"科目一";
                 _oneStr = str;
@@ -175,9 +167,12 @@
         _segment.tintColor = JZ_MAIN_COLOR;
         [_segment addTarget:self action:@selector(didClicksegmentedControlAction:) forControlEvents:UIControlEventValueChanged];
         _segment.selectedSegmentIndex = 0;
+        
+        // 添加segment 控件
         [_bgView addSubview:_segment];
         
     }
+    // 不显示时不添加 segment 控件
     [self.bgView addSubview:self.toolBarView];
     [self.view addSubview:self.bgView];
     
@@ -213,14 +208,24 @@
 
 - (void)initRefreshView
     {
+        NSLog(@"self.subjectID = %@",(NSString *)@(self.subjectID));
         
+         NSLog(@"self.studentState = %@",(NSString *)@(self.studentState));
         WS(ws);
         self.tableView.refreshHeader.beginRefreshingBlock = ^(){
             [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(ws.subjectID) studentID:(NSString *)@(ws.studentState) index:1 count:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"responseObject == 0 %@",responseObject);
                 NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
                 NSArray *data = [responseObject objectArrayForKey:@"data"];
                 if (type == 1) {
+                    NSLog(@"responseObject == 1 %@",responseObject);
                     [ws.resultDataArray removeAllObjects];
+                    
+                    if (data.count == 0) {
+                        [ws showTotasViewWithMes:@"暂无数据"];
+                        [ws.tableView.refreshHeader endRefreshing];
+                        return ;
+                    }
                     for (NSDictionary *dic in data) {
                         JZResultModel *model = [JZResultModel yy_modelWithDictionary:dic];
                         [ws.resultDataArray addObject:model];
@@ -342,7 +347,7 @@
         _studentState = index;
         
     }
-   [self initRefreshView];
+   [self.tableView.refreshHeader  beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -372,7 +377,7 @@
 }
 #pragma mark ---- UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _resultDataArray.count;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
