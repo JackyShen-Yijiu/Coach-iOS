@@ -332,6 +332,8 @@
     LKAddStudentTimeViewController *addStuVC = [[LKAddStudentTimeViewController alloc] init];
     
 
+    NSLog(@"self.model.coursebegintime:%@",self.model.coursebegintime);
+    NSLog(@"self.model.courseendtime:%@",self.model.courseendtime);
     
     addStuVC.starTimeText = self.model.coursebegintime;
     addStuVC.finishTimeText = self.model.courseendtime;

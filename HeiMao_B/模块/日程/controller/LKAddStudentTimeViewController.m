@@ -12,7 +12,7 @@
 //#import "StudentGroup.h"
 #import "LKAddStudentTimeView.h"
 
-
+static NSString *addStuCellID = @"addStuCellID";
 
 @interface LKAddStudentTimeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSArray *arrayList;
@@ -28,8 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
     self.navigationItem.title = @"添加学员";
-   
+    
     
     // Do any additional setup after loading the view, typically from a nib.
     [self.tableView registerClass:[LKAddStudentTableViewCell class] forCellReuseIdentifier:@"cell"];
@@ -61,23 +63,24 @@
         timeViewItem.tag = 2000 + i;
         timeViewItem.selectButton.tag = 1000 + i;
         [timeViewItem.selectButton addTarget:self action:@selector(clickSelectBtn:) forControlEvents:UIControlEventTouchUpInside];
+        
+#pragma mark - 时间逻辑处理
         // 2016-03-29T22:00:00.000Z
         //11 5
-        NSString *starTimeText1 = [self.starTimeText substringWithRange:NSMakeRange(11, 2)];
-        NSString *starTimeText2 = [self.finishTimeText substringWithRange:NSMakeRange(13, 3)];
-        
+        NSString *starTimeTextData = [NSString getHourLocalDateFormateUTCDate:self.starTimeText];
+        NSString *starTimeText1 = [starTimeTextData substringWithRange:NSMakeRange(0, 2)];
+        NSString *starTimeText2 = [starTimeTextData substringWithRange:NSMakeRange(2, 3)];
         NSString *starTimeText = [NSString stringWithFormat:@"%zd\%@",starTimeText1.integerValue + i ,starTimeText2];
         
         timeViewItem.starTimeLabel.text = starTimeText;
         
         
-        NSString *finishTimeText1 = [self.finishTimeText substringWithRange:NSMakeRange(11, 2)];
+        NSString *finishTimeTextData = [NSString getHourLocalDateFormateUTCDate:self.finishTimeText];
+        NSString *finishTimeText1 = [finishTimeTextData substringWithRange:NSMakeRange(0, 2)];
         
-        NSString *finishTimeText2 = [self.finishTimeText substringWithRange:NSMakeRange(13, 3)];
         
-
-        
-        NSString *finishTimeText = [NSString stringWithFormat:@"%zd\%@",finishTimeText1.integerValue+i,finishTimeText2];
+        NSString *finishTimeText2 = [finishTimeTextData substringWithRange:NSMakeRange(2, 3)];
+        NSString *finishTimeText = [NSString stringWithFormat:@"%zd\%@",(finishTimeText1.integerValue+i+24)%24,finishTimeText2];
         
         timeViewItem.finishTimeLabel.text = finishTimeText;
         
@@ -85,13 +88,17 @@
         
     }
     
-//        self.timeView.backgroundColor = [UIColor orangeColor];
+    //        self.timeView.backgroundColor = [UIColor orangeColor];
     
     
     self.timeView = timeView;
-
+    
     self.tableView.tableHeaderView = self.timeView;
- 
+    
+    
+    
+    
+    
 }
 
 #pragma mark - 点击选择时间的按钮
@@ -107,7 +114,7 @@
 }
 
 
-
+#pragma mark - 选择时间界面的行高
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
     return  92;
@@ -120,41 +127,42 @@
 }
 
 
-
+#pragma mark - 返回的行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     //    return [[self.arrayList[section] Students] count];
     
     return 100;
 }
-
+#pragma mark - 返回的cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    LKAddStudentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    LKAddStudentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:addStuCellID];
     if (!cell) {
-        cell = [[LKAddStudentTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+        cell = [[LKAddStudentTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:addStuCellID];
         
     }
-    //    StudentGroup *stuGroup = self.arrayList[indexPath.section];
-    //    Student *stu = stuGroup.Students[indexPath.row];
-    //    cell.studentNameLabel.text = stu.studentNameLabel;
-    //    [cell setStudentModel:stu];
-    //    cell.studentModel = stuGroup.Students[indexPath.row];
+    //        StudentGroup *stuGroup = self.arrayList[indexPath.section];
+    //        Student *stu = stuGroup.Students[indexPath.row];
+    //        cell.studentNameLabel.text = stu.studentNameLabel;
+    //        [cell setStudentModel:stu];
+    //        cell.studentModel = stuGroup.Students[indexPath.row];
     
     return cell;
 }
 
-
+#pragma mark - 返回的组数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [self.arrayList count];
-}// Default is 1 if not implemented
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-// 返回tableView右边索引栏
+#pragma mark - 返回tableView右边索引栏
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
     //   NSArray *indexArr = [self.groupes valueForKeyPath:@"title"];
     NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:self.arrayList.count];
@@ -173,17 +181,17 @@
         for (NSDictionary *dict in dictArr) {
             
             
-            //            StudentGroup *stuGroup = [StudentGroup groupWithDict:dict];
+            //                        StudentGroup *stuGroup = [StudentGroup groupWithDict:dict];
             //
-            //            NSArray *students = stuGroup.Students;
+            //                        NSArray *students = stuGroup.Students;
             //
-            //            NSMutableArray *stuGrouM = [NSMutableArray array];
-            //            for (NSDictionary *stuDict in students) {
-            //                Student *student = [Student studentWithDict:stuDict];
-            //                [stuGrouM addObject:student];
-            //            }
-            //            stuGroup.Students = stuGrouM;
-            //            [arrM addObject:stuGroup];
+            //                        NSMutableArray *stuGrouM = [NSMutableArray array];
+            //                        for (NSDictionary *stuDict in students) {
+            //                            Student *student = [Student studentWithDict:stuDict];
+            //                            [stuGrouM addObject:student];
+            //                        }
+            //                        stuGroup.Students = stuGrouM;
+            //                        [arrM addObject:stuGroup];
             
         }
         _arrayList = arrM;
@@ -193,8 +201,7 @@
 }
 
 
-
-// 返回每一组的头部标题
+#pragma mark - 返回每一组的头部标题
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return [self.arrayList[section] title];
 }
