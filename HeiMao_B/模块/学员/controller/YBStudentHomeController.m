@@ -21,6 +21,7 @@
 #import "MJRefresh.h"
 #import "JZResultModel.h"
 #import <YYModel.h>
+#import "BLPFAlertView.h"
 //#import <MJRefreshHeader.h>
 //#import <MJRefreshFooter.h>
 //#import <MJRefresh/MJRefresh.h>
@@ -389,7 +390,53 @@
     if (!listCell) {
         listCell = [[JZHomeStudentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDCell];
     }
+    listCell.studentListMessageAndCall = ^(NSInteger tag){
+        if (500 == tag) {
+            // 信息
+            JZResultModel *model = _resultDataArray[indexPath.row];
+            [self messageWithModel:model];
+        }
+        if (501 == tag) {
+            // 电话
+            JZResultModel *model = _resultDataArray[indexPath.row];
+            [self callPhonewithModel:model];
+        }
+    };
     return listCell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+#pragma mark ---- 电话
+- (void)callPhonewithModel:(JZResultModel *)model{
+    
+        if (model.mobile == nil ||[model.mobile isEqualToString:@""]) {
+            [self showTotasViewWithMes:@"该教练未录入电话!"];
+            return;
+        }
+        
+        [BLPFAlertView showAlertWithTitle:@"电话号码" message:model.mobile cancelButtonTitle:@"取消" otherButtonTitles:@[@"确定"] completion:^(NSUInteger selectedOtherButtonIndex) {
+            
+            NSUInteger indexAlert = selectedOtherButtonIndex + 1;
+            if (indexAlert == 1) {
+                
+                NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",model.mobile];
+                UIWebView * callWebview = [[UIWebView alloc] init];
+                [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+                [self.view addSubview:callWebview];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+            }else {
+                return ;
+            }
+            
+        }];
+}
+
+#pragma mark ---- 信息
+- (void)messageWithModel:(JZResultModel *)model{
+    
+    
 }
 
 - (JZHomeStudentToolBarView *)toolBarView {

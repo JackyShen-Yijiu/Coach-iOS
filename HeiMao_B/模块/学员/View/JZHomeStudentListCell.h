@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JZResultModel.h"
+
+typedef void (^JZHomeStudentListMessageAndCall) (NSInteger tag);
 
 @interface JZHomeStudentListCell : UITableViewCell
 
+@property (nonatomic, strong) JZResultModel *listModel;
+
+@property (nonatomic, assign) JZHomeStudentListMessageAndCall  studentListMessageAndCall;
 @end
