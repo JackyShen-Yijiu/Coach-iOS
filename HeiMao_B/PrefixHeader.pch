@@ -26,6 +26,7 @@
 #import "Mantle.h"
 #import "NSString+CurrentTimeDay.h"
 #import "YBUIMacro.h"
+#import "UIColor+Hex.h"
 
 #endif
 

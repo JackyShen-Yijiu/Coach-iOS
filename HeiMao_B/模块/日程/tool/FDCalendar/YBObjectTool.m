@@ -100,36 +100,7 @@ static NSDateFormatter *sharedDateFormatter;
     NSDate *date=[fomatter dateFromString:selectDate];
 
     int result = [date compare:currentDate];
-    NSLog(@"result:%d",result);
-    if(result == NSOrderedDescending)
-    {
-        return 1;
-    }
-    else if(result == NSOrderedAscending)
-    {
-        return -1;
-    }
-    return 0;
-}
-
-/**
- *  判断传入的日期和当前日期比较
- *  @parma selectDate:选择的日期 yyyy-mm-dd hh:mm:ss
- *  @return 1:大于当前日期 -1:小于当前时间 0:等于当前时间
- */
-+(int)compareHMSDateWithSelectDateStr:(NSString *)selectDate
-{
-    NSDateFormatter *fomatter = [self sharedDateFormatter];
-    
-    [fomatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *currentDate = [NSDate date];
-    NSString *curentDateStr = [fomatter stringFromDate:currentDate];
-    currentDate = [fomatter dateFromString:curentDateStr];
-    
-    NSDate *date=[fomatter dateFromString:selectDate];
-    
-    int result = [date compare:currentDate];
-    NSLog(@"result:%d",result);
+    NSLog(@"++++++++++++result:%d",result);
     if(result == NSOrderedDescending)
     {
         return 1;
@@ -149,23 +120,37 @@ static NSDateFormatter *sharedDateFormatter;
 +(int)compareHMSDateWithBegintime:(NSString *)begintime endtime:(NSString *)endtime
 {
     NSDateFormatter *fomatter = [self sharedDateFormatter];
-    [fomatter setDateFormat:@"hh"];
+    
+    [fomatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *currentDate = [NSDate date];
     NSString *curentDateStr = [fomatter stringFromDate:currentDate];
+    currentDate = [fomatter dateFromString:curentDateStr];
     
-    NSLog(@"compareHMSDateWithBegintime curentDateStr:%@ begintime:%@ endtime:%@",curentDateStr,begintime,endtime);
+    NSDate *begintimeDate = [fomatter dateFromString:begintime];
+    NSDate *endtimeDate = [fomatter dateFromString:endtime];
     
-    if ([curentDateStr integerValue]>=[begintime integerValue]&& [curentDateStr integerValue]<=[endtime integerValue]) {
+    int beginResult = [begintimeDate compare:currentDate];
+    int endResult = [endtimeDate compare:currentDate];
+
+    NSLog(@"判断传入的日期和当前日期比较beginResult:%d begintime:%@ endResult:%d endtime:%@",beginResult,begintime,endResult,endtime);
+
+    if (beginResult == -1 && endResult == 1) {
         return 0;
-    }else if ([endtime integerValue] < [curentDateStr integerValue]){
+    }
+    
+    if (beginResult == -1 && endResult == -1) {
         return -1;
-    }else if ([begintime integerValue] > [curentDateStr integerValue]){
+    }
+    
+    if (beginResult == 1 && endResult == 1) {
         return 1;
     }
     
     return 0;
     
 }
+
+
 
 
 @end

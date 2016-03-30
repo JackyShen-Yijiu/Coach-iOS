@@ -17,6 +17,7 @@
 #import "YYModel.h"
 #import "YBCourseData.h"
 #import "YBCourseTableView.h"
+#import "YBObjectTool.h"
 
 @interface YBHomeLeftViewController ()<FDCalendarDelegate,YBFDCalendarDelegate,UIScrollViewDelegate>
 {
@@ -273,13 +274,13 @@
 
         // 设置当前日期
         [self.ybCalendarHeadView setCurrentDate:self.selectDate];
-        [self YBFDCalendar:self.ybCalendarHeadView didSelectedDate:self.selectDate];
+//        [self YBFDCalendar:self.ybCalendarHeadView didSelectedDate:self.selectDate];
         
     }else{
         
         // 设置当前日期
         [self.calendarHeadView setCurrentDate:self.selectDate];
-        [self fdCalendar:self.calendarHeadView didSelectedDate:self.selectDate];
+//        [self fdCalendar:self.calendarHeadView didSelectedDate:self.selectDate];
         
     }
     
