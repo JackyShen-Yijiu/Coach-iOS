@@ -83,7 +83,77 @@
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+    // 开始是全部置为可点击状态,
+    NSArray *viewArray = [_toolBarView subviews];
+    for (UIView *view in viewArray) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            view.userInteractionEnabled = YES;
+        }
+    }
+    [NetWorkEntiry getAllSubjectNumberStateWithCoachId:[UserInfoModel defaultUserInfo].userID subjectID:[NSString stringWithFormat:@"%lu",_subjectID] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *param = responseObject;
+        if (1 == [param[@"type"] integerValue]) {
+            /*
+             {
+             "type": 1,
+             "msg": "",
+             "data": {
+             "studentcount": 26, // 全部学员
+             "onstudystudentcount": 21, // 在学学员
+             "noexamstudentcount": 0, // 未考学员
+             "reservationstudentcount": 0, // 约考学员
+             "nopassstudentcount": 0, // 补考学员
+             "passstudentcount": 4 // 通过学员
+             }
+             }
+             */
+            NSDictionary *data = param[@"data"];
+            if (0 == [data[@"studentcount"] integerValue]) {
+                [self showBgTitleWith:0];
+            }
+            if (0 == [data[@"noexamstudentcount"] integerValue]) {
+                [self showBgTitleWith:1];
+            }
+            if (0 == [data[@"reservationstudentcount"] integerValue]) {
+                [self showBgTitleWith:2];
+            }
+            if (0 == [data[@"nopassstudentcount"] integerValue]) {
+                [self showBgTitleWith:3];
+            }
+            if (0 == [data[@"passstudentcount"] integerValue]) {
+                [self showBgTitleWith:4];
+            }
+
+        }
+        else {
+            [self showTotasViewWithMes:param[@"msg"]];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showTotasViewWithMes:@"网络错误"];
+    }];
+    
+    
     [self.tableView.header beginRefreshing];
+    
+}
+#pragma mark ---- 根据数据判断是否显示暂无字样
+- (void)showBgTitleWith:(NSInteger )tag{
+    
+    NSArray *viewArray = [_toolBarView subviews];
+    for (UIView *view in viewArray) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            if (view.tag == tag) {
+                view.userInteractionEnabled = NO;
+                CGRect rect = view.bounds;
+                UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(rect.origin.x + 20, rect.origin.y + 10, 40, 27)];
+                
+                img.image = [UIImage imageNamed:@"flage_null"];
+                [view addSubview:img];
+                
+            }
+        }
+    }
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -223,7 +293,7 @@
                     [ws.resultDataArray removeAllObjects];
                     
                     if (data.count == 0) {
-                        [ws showTotasViewWithMes:@"暂无数据"];
+                        [ws showTotasViewWithMes:@"暂无"];
                         [ws.tableView.refreshHeader endRefreshing];
                         return ;
                     }
@@ -406,13 +476,15 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // 跳转学员详情页
+    JZResultModel *model = _resultDataArray[indexPath.row];
     
 }
 #pragma mark ---- 电话
 - (void)callPhonewithModel:(JZResultModel *)model{
     
         if (model.mobile == nil ||[model.mobile isEqualToString:@""]) {
-            [self showTotasViewWithMes:@"该教练未录入电话!"];
+            [self showTotasViewWithMes:@"该学员未录入电话!"];
             return;
         }
         
@@ -461,7 +533,8 @@
         _toolBarView.titleFont = [UIFont systemFontOfSize:12];
         _toolBarView.titleArray = @[ @"全部", @"未考",@"约考", @"补考",@"通过" ];
         _toolBarView.imgNormalArray = @[@"student_all_off",@"student_study_off",@"student_exam_off",@"student_examed_off",@"student_pass_off"];
-        _toolBarView.imgSelectArray = @[@"student_all_on",@"student_study_on",@"student_exam_on",@"student_examed_on",@"student_pass_on"];
+    _toolBarView.imgSelectArray = @[@"student_all_on",@"student_study_on",@"student_exam_on",@"student_examed_on",@"student_pass_on"];
+    
         __weak typeof(self) ws = self;
         [_toolBarView dvvToolBarViewItemSelected:^(UIButton *button) {
             [ws dvvToolBarViewItemSelectedAction:button.tag];

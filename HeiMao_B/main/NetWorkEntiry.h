@@ -334,6 +334,15 @@
                               count:(NSInteger)count
                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;
+/**
+ *
+ * 统计各个状态的学员数量  v2 接口
+ *
+ */
++ (void)getAllSubjectNumberStateWithCoachId:(NSString *)coachId
+                                  subjectID:(NSString *)subjectID
+                                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;
 /*
  *  添加学员列表
  *
