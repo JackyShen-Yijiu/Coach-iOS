@@ -9,6 +9,7 @@
 #import "YBCourseTableView.h"
 #import "CourseSummaryDayCell.h"
 #import "NoContentTipView.h"
+#import "YBObjectTool.h"
 
 @interface YBCourseTableView() <UITableViewDataSource, UITableViewDelegate>
 
@@ -41,8 +42,38 @@
 
 - (void)reloadData
 {    
-    NSLog(@"reloadData dataArray:%@",_dataArray);
+    NSLog(@"reloadData dataArray:%@ reloadData dataArray.count:%lu",_dataArray,self.dataArray.count);
+    
     [self.dataTabelView reloadData];
+    
+    // 取得当前时间之前的个数
+    NSInteger index = 0;
+    for (NSInteger i = 0;i < self.dataArray.count;i++) {
+        
+        YBCourseData *data = self.dataArray[i];
+        
+        // 1:大于当前日期 -1:小于当前时间 0:等于当前时间
+        int compareDataNum = [YBObjectTool compareHMSDateWithBegintime:[NSString getLocalDateFormateUTCDate:data.coursebegintime] endtime:[NSString getLocalDateFormateUTCDate:data.courseendtime]];
+        
+        NSInteger result = [YBObjectTool compareDateWithSelectDateStr:[NSString getYearLocalDateFormateUTCDate:data.coursebegintime]];
+        
+        if (result != 1 && (compareDataNum==0 || compareDataNum==1)) {
+            index++;
+        }
+        
+    }
+    
+    NSLog(@"scrollToRowAtIndex:%ld",(long)index);
+    
+    if (self.dataArray.count >= index) {
+       NSInteger scrollToRowAtIndex = index - 1;
+        if (index==0) {
+            scrollToRowAtIndex = 0;
+        }
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:scrollToRowAtIndex inSection:0];
+        [self.dataTabelView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    
 }
 
 #pragma mark - DataSource

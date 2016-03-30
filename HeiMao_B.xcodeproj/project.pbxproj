@@ -496,6 +496,7 @@
 		B2BA43DE1CA951A200926584 /* YBCourseUserid.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43D71CA951A200926584 /* YBCourseUserid.m */; };
 		B2BA43E71CAA2F0700926584 /* NSString+CurrentTimeDay.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43E51CAA2F0700926584 /* NSString+CurrentTimeDay.m */; };
 		B2BA43EA1CAA805F00926584 /* YBCourseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43E91CAA805F00926584 /* YBCourseTableView.m */; };
+		B2BA43ED1CAB7CC600926584 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43EC1CAB7CC600926584 /* UIColor+Hex.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
 		B80003CC1BEFACA50099D194 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003CB1BEFACA50099D194 /* CoreFoundation.framework */; };
@@ -1391,6 +1392,8 @@
 		B2BA43E51CAA2F0700926584 /* NSString+CurrentTimeDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CurrentTimeDay.m"; sourceTree = "<group>"; };
 		B2BA43E81CAA805F00926584 /* YBCourseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBCourseTableView.h; sourceTree = "<group>"; };
 		B2BA43E91CAA805F00926584 /* YBCourseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseTableView.m; sourceTree = "<group>"; };
+		B2BA43EB1CAB7CC600926584 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		B2BA43EC1CAB7CC600926584 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		B80003C91BEFAC9C0099D194 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -3071,6 +3074,8 @@
 		B2BA43E31CAA2F0700926584 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				B2BA43EB1CAB7CC600926584 /* UIColor+Hex.h */,
+				B2BA43EC1CAB7CC600926584 /* UIColor+Hex.m */,
 				B2BA43E41CAA2F0700926584 /* NSString+CurrentTimeDay.h */,
 				B2BA43E51CAA2F0700926584 /* NSString+CurrentTimeDay.m */,
 			);
@@ -3861,6 +3866,7 @@
 				B2BA42B21CA5035700926584 /* DVVSendMessageToStudentView.m in Sources */,
 				B2BA416E1CA5035700926584 /* ForgetViewController.m in Sources */,
 				B2BA41CC1CA5035700926584 /* UIScrollView+MJRefresh.m in Sources */,
+				B2BA43ED1CAB7CC600926584 /* UIColor+Hex.m in Sources */,
 				B2BA42BB1CA5035700926584 /* DVVStudentListController.m in Sources */,
 				B2BA42AB1CA5035700926584 /* EaseFacialView.m in Sources */,
 				B2BA41C51CA5035700926584 /* MJRefreshFooter.m in Sources */,
