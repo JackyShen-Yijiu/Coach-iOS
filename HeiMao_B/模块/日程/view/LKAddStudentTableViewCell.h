@@ -12,15 +12,26 @@
 
 @interface LKAddStudentTableViewCell : UITableViewCell
 /// 学员名称 -- UILabel
-@property (nonatomic, strong) UILabel *studentNameLabel;
+//@property (nonatomic, strong) UILabel *studentNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentNameLabel;
+
+
 /// 学员学习详情 -- UILabel
-@property (nonatomic, strong) UILabel *studyDetilsLabel;
+//@property (nonatomic, strong) UILabel *studyDetilsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studyDetilsLabel;
+
 /// 学员头像 -- UIImageView
-@property (nonatomic, strong) UIImageView *studentIconView;
+//@property (nonatomic, strong) UIImageView *studentIconView;
+@property (weak, nonatomic) IBOutlet UIImageView *studentIconView;
+
 /// 拨打学员电话按钮 -- UIButton
-@property (nonatomic, strong) UIButton *callStudentButton;
-/// 选择学员的按钮 -- UIButton
-@property (nonatomic, strong) UIImageView *selectImageView;
+//@property (nonatomic, strong) UIButton *callStudentButton;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *callStudentButton;
+
+/// 选择学员的按钮 -- UIImageView
+@property (weak, nonatomic) IBOutlet UIImageView *selectImageView;
+//@property (nonatomic, strong) UIImageView *selectImageView;
 //@property (nonatomic, strong) Student *studentModel;
 
 @property (nonatomic, strong) LKAddStudentData *model;

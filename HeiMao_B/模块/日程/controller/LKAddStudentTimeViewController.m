@@ -119,7 +119,7 @@ _stundentDataArrM = [NSMutableArray array];
     [self.selectedRows removeObject:indexPath];
 
     
-    NSLog(@"%@",indexPath);
+//    NSLog(@"%@",indexPath);
 }
 - (void)initData{
 //如果教练是什么都交  返回 -1   不是返回交的课程
@@ -224,10 +224,12 @@ _stundentDataArrM = [NSMutableArray array];
     cell.backgroundColor = [UIColor whiteColor];
     
     NSLog(@"%@",self.stundentDataArrM);
-        LKAddStudentData *data = self.stundentDataArrM[indexPath.row];
-    NSLog(@"名字333333 ==== == = %@",data.name);
     
-//    cell.studentNameLabel.text = data.name;
+        LKAddStudentData *data = self.stundentDataArrM[indexPath.row];
+//    NSLog(@"名字333333 ==== == = %@",data.name);
+    
+    cell.studentNameLabel.text = data.name;
+    cell.studyDetilsLabel.text = @"科目";
     
     
         
