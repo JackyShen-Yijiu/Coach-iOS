@@ -15,6 +15,7 @@
 #import "ScanViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "BLPFAlertView.h"
+#import "YBStudentDetailsViewController.h"
 
 #import "YBHomeLeftViewController.h"
 #import "YBHomeRightViewController.h"
@@ -37,9 +38,34 @@ typedef NS_ENUM(NSInteger, kControllerType) {
 
 @property (nonatomic,assign) kControllerType controllerType;
 
+@property (nonatomic,strong) UIButton *confimBtn;
+
 @end
 
 @implementation ScheduleViewController
+
+- (UIButton *)confimBtn
+{
+    if (_confimBtn==nil) {
+        
+        CGFloat confimBtnW = 48;
+        CGFloat confimBtnH = confimBtnW;
+        CGFloat confimBtnX = 6;
+        CGFloat confimBtnY = self.view.height - 64 - 4 - confimBtnW;
+        _confimBtn = [[UIButton alloc] initWithFrame:CGRectMake(confimBtnX, confimBtnY, confimBtnW, confimBtnH)];
+        _confimBtn.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"JZCoursebutton_time"]];
+        [_confimBtn addTarget:self action:@selector(confimBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _confimBtn;
+}
+
+- (void)confimBtnDidClick
+{
+    NSLog(@"%s",__func__);
+    YBStudentDetailsViewController *vc = [[YBStudentDetailsViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,6 +82,8 @@ typedef NS_ENUM(NSInteger, kControllerType) {
     self.rightVc = [[YBHomeRightViewController alloc] init];
     self.rightVc.view.frame = self.view.bounds;
     [self.view addSubview:self.rightVc.view];
+    
+    [self.view addSubview:self.confimBtn];
     
 }
 

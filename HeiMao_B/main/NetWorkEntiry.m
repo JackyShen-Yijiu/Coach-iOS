@@ -646,6 +646,19 @@
     [self GET:urlStr parameters:paramterDict success:success failure:failure];
 }
 
+/*
+ *  学员详情
+ *
+ */
++ (void)getStudentDetailswithuserid:(NSString *)userid
+                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure
+{
+    NSString *url = [NSString stringWithFormat:@"http://jzapi.yibuxueche.com/api/v2/courseinfo/studentdetialinfo?userid=%@",userid];
+    
+    [self GET:url parameters:nil success:success failure:failure];
+}
+
 #pragma mark - Common Method
 
 + (NSString *)domain

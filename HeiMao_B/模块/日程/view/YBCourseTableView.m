@@ -56,6 +56,7 @@
         int compareDataNum = [YBObjectTool compareHMSDateWithBegintime:[NSString getLocalDateFormateUTCDate:data.coursebegintime] endtime:[NSString getLocalDateFormateUTCDate:data.courseendtime]];
         
         NSInteger result = [YBObjectTool compareDateWithSelectDateStr:[NSString getYearLocalDateFormateUTCDate:data.coursebegintime]];
+        NSLog(@"****************result:%ld compareDataNum:%d",(long)result,compareDataNum);
         
         if (result != 1 && (compareDataNum==0 || compareDataNum==1)) {
             index++;
@@ -63,15 +64,15 @@
         
     }
     
-    NSLog(@"scrollToRowAtIndex:%ld",(long)index);
+    NSLog(@"self.dataArray.count:%lu scrollToRowAtIndex:%ld",self.dataArray.count,(long)index);
     
     if (self.dataArray && self.dataArray.count > index) {
-       NSInteger scrollToRowAtIndex = index - 1;
+       NSInteger scrollToRowAtIndex = self.dataArray.count - index - 1;
         if (index==0) {
             scrollToRowAtIndex = 0;
         }
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:scrollToRowAtIndex inSection:0];
-        [self.dataTabelView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self.dataTabelView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
     
 }
