@@ -15,6 +15,11 @@
 /// 结束时间
 @property (nonatomic ,copy) NSString *finishTimeText;
 
+@property (nonatomic, strong) NSString *coursestudentcount;
+
+///  教练id
+@property (nonatomic, strong) NSString *coachidStr;
+
 
 @end
 

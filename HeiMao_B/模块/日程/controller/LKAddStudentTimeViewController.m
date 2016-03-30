@@ -18,6 +18,8 @@ static NSString *addStuCellID = @"addStuCellID";
 @property (nonatomic, strong) NSArray *arrayList;
 @property (nonatomic, strong) LKAddStudentTimeView *timeViewItem;
 @property (nonatomic, strong) UIView *timeView;
+///  记录选中的cell
+@property (nonatomic, strong) NSMutableArray *selectedRows;
 
 
 
@@ -27,11 +29,14 @@ static NSString *addStuCellID = @"addStuCellID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    [self initData];
+//    [UserInfoModel defaultUserInfo].subject 
     
     self.navigationItem.title = @"添加学员";
+///  允许cell对选
+    self.tableView.allowsMultipleSelection = YES;
     
+    self.selectedRows = [NSMutableArray array];
     
     // Do any additional setup after loading the view, typically from a nib.
     [self.tableView registerClass:[LKAddStudentTableViewCell class] forCellReuseIdentifier:@"cell"];
@@ -94,11 +99,52 @@ static NSString *addStuCellID = @"addStuCellID";
     self.timeView = timeView;
     
     self.tableView.tableHeaderView = self.timeView;
+   
+}
+
+#pragma mark - 取消选择的cell
+
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
+    LKAddStudentTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    //如果取消已选择的cell,从记录移除
+    [self.selectedRows removeObject:indexPath];
     
+    cell.backgroundColor = [UIColor whiteColor];
     
+    NSLog(@"%@",indexPath);
+}
+- (void)initData{
+//如果教练是什么都交  返回 -1   不是返回交的课程
     
+    [NetWorkEntiry addstudentsListwithCoachid:self.coachidStr subjectID:-1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        id result = responseObject;
+        
+        NSLog(@"类型----%@",[result class]);
+        
+        NSLog(@"返回的数据%@",result);
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+    }
+#pragma mark - 选择cell
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    LKAddStudentTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if (![self.selectedRows containsObject:indexPath] && self.selectedRows.count < 7) {
+        
+        cell.backgroundColor = [UIColor grayColor];
+        
+        [self.selectedRows addObject:indexPath];
+    }
 }
 
 #pragma mark - 点击选择时间的按钮
@@ -107,10 +153,7 @@ static NSString *addStuCellID = @"addStuCellID";
     NSLog(@"--第%zd个按钮--",sender.tag);
     LKAddStudentTimeView *lkView = [_timeView viewWithTag:2001];
     NSLog(@"%@",lkView.starTimeLabel.text);
-    
-    
-    
-    
+
 }
 
 

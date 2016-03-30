@@ -337,6 +337,9 @@
     
     addStuVC.starTimeText = self.model.coursebegintime;
     addStuVC.finishTimeText = self.model.courseendtime;
+    
+    addStuVC.coachidStr = self.model.coachid;
+    
 //    LKTestViewController *addStuVC = [[LKTestViewController alloc]init];
     [self.parentViewController.navigationController pushViewController:addStuVC animated:YES];
     

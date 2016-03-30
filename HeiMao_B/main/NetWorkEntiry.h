@@ -334,4 +334,13 @@
                               count:(NSInteger)count
                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;
+/*
+ *  添加学员列表
+ *
+ */
++ (void)addstudentsListwithCoachid:(NSString *)coachId
+                         subjectID:(NSUInteger)subjectID
+
+                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;
 @end
