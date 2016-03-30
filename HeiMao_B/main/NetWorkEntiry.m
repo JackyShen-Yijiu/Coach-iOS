@@ -649,21 +649,36 @@
                             failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
     NSString *urlStr = [NSString stringWithFormat:@"%@/userinfo/coachstudentlist",[self domain]];
     NSDictionary *paramterDict = @{ @"coachid": coachId,
-                                    @"studenttype": [NSString stringWithFormat:@"%d", type],
-                                    @"index": [NSString stringWithFormat:@"%d", index] };
+                                    @"studenttype": [NSString stringWithFormat:@"%zd", type],
+                                    @"index": [NSString stringWithFormat:@"%zd", index] };
     [self GET:urlStr parameters:paramterDict success:success failure:failure];
 }
 // 添加学员列表
 + (void)addstudentsListwithCoachid:(NSString *)coachId
-                         subjectID:(NSUInteger)subjectID
+                         subjectID:(NSString *)subjectID
 
                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure{
     NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getureservationuserlist",[self domain]];
     NSDictionary *paramterDict = @{ @"coachid": coachId,
-                                    @"subjectid": [NSString stringWithFormat:@"%lu", subjectID],
+                                    @"subjectid": subjectID
                                    };
+//    NSLog(@"urlStr = %@",urlStr);
+//    NSLog(@"paramterDict = %@",paramterDict);
     [self GET:urlStr parameters:paramterDict success:success failure:failure];
+}
+
+/*
+ *  学员详情
+ *
+ */
++ (void)getStudentDetailswithuserid:(NSString *)userid
+                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure
+{
+    NSString *url = [NSString stringWithFormat:@"http://jzapi.yibuxueche.com/api/v2/courseinfo/studentdetialinfo?userid=%@",userid];
+    
+    [self GET:url parameters:nil success:success failure:failure];
 }
 
 #pragma mark - Common Method

@@ -7,19 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LKAddStudentData.h"
 //#import "Student.h"
 
 @interface LKAddStudentTableViewCell : UITableViewCell
 /// 学员名称 -- UILabel
-@property (nonatomic, weak) UILabel *studentNameLabel;
+@property (nonatomic, strong) UILabel *studentNameLabel;
 /// 学员学习详情 -- UILabel
-@property (nonatomic, weak) UILabel *studyDetilsLabel;
+@property (nonatomic, strong) UILabel *studyDetilsLabel;
 /// 学员头像 -- UIImageView
-@property (nonatomic, weak) UIImageView *studentIconView;
+@property (nonatomic, strong) UIImageView *studentIconView;
 /// 拨打学员电话按钮 -- UIButton
-@property (nonatomic, weak) UIButton *callStudentButton;
+@property (nonatomic, strong) UIButton *callStudentButton;
 /// 选择学员的按钮 -- UIButton
-@property (nonatomic, weak) UIImageView *selectImageView;
+@property (nonatomic, strong) UIImageView *selectImageView;
 //@property (nonatomic, strong) Student *studentModel;
+
+@property (nonatomic, strong) LKAddStudentData *model;
+
 
 @end

@@ -10,10 +10,11 @@
 #import "YBCourseData.h"
 @interface CourseSummaryDayCell : UITableViewCell
 
+@property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, assign) NSInteger selectIndex;
 
 @property(nonatomic,strong)YBCourseData * model;
 @property (nonatomic,strong) UIViewController *parentViewController;
-
 
 + (CGFloat)cellHeightWithModel:(YBCourseData *)model;
 

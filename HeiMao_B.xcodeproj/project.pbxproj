@@ -500,6 +500,21 @@
 		B2BA43E71CAA2F0700926584 /* NSString+CurrentTimeDay.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43E51CAA2F0700926584 /* NSString+CurrentTimeDay.m */; };
 		B2BA43EA1CAA805F00926584 /* YBCourseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43E91CAA805F00926584 /* YBCourseTableView.m */; };
 		B2BA43ED1CAB7CC600926584 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43EC1CAB7CC600926584 /* UIColor+Hex.m */; };
+		B2BA43F01CABA06800926584 /* YBStudentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43EF1CABA06700926584 /* YBStudentDetailsViewController.m */; };
+		B2BA44611CABC15C00926584 /* YBStudentDetailsApplyclasstypeinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44461CABC15C00926584 /* YBStudentDetailsApplyclasstypeinfo.m */; };
+		B2BA44621CABC15C00926584 /* YBStudentDetailsCoachcomment.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44481CABC15C00926584 /* YBStudentDetailsCoachcomment.m */; };
+		B2BA44631CABC15C00926584 /* YBStudentDetailsCoachcommentinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA444A1CABC15C00926584 /* YBStudentDetailsCoachcommentinfo.m */; };
+		B2BA44641CABC15C00926584 /* YBStudentDetailsCoachid.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA444C1CABC15C00926584 /* YBStudentDetailsCoachid.m */; };
+		B2BA44651CABC15C00926584 /* YBStudentDetailsData.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA444E1CABC15C00926584 /* YBStudentDetailsData.m */; };
+		B2BA44661CABC15C00926584 /* YBStudentDetailsExaminationinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44501CABC15C00926584 /* YBStudentDetailsExaminationinfo.m */; };
+		B2BA44671CABC15C00926584 /* YBStudentDetailsHeadportrait.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44521CABC15C00926584 /* YBStudentDetailsHeadportrait.m */; };
+		B2BA44681CABC15C00926584 /* YBStudentDetailsRootClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44541CABC15C00926584 /* YBStudentDetailsRootClass.m */; };
+		B2BA44691CABC15C00926584 /* YBStudentDetailsStudentinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44561CABC15C00926584 /* YBStudentDetailsStudentinfo.m */; };
+		B2BA446A1CABC15C00926584 /* YBStudentDetailsSubject.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44581CABC15C00926584 /* YBStudentDetailsSubject.m */; };
+		B2BA446B1CABC15C00926584 /* YBStudentDetailsSubjectfour.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA445A1CABC15C00926584 /* YBStudentDetailsSubjectfour.m */; };
+		B2BA446C1CABC15C00926584 /* YBStudentDetailsSubjectone.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA445C1CABC15C00926584 /* YBStudentDetailsSubjectone.m */; };
+		B2BA446D1CABC15C00926584 /* YBStudentDetailsSubjectthree.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA445E1CABC15C00926584 /* YBStudentDetailsSubjectthree.m */; };
+		B2BA446E1CABC15C00926584 /* YBStudentDetailsSubjecttwo.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44601CABC15C00926584 /* YBStudentDetailsSubjecttwo.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
 		B80003CC1BEFACA50099D194 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003CB1BEFACA50099D194 /* CoreFoundation.framework */; };
@@ -525,6 +540,11 @@
 		B8C458741BDB59AC00901F71 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4586D1BDB59AC00901F71 /* UIViewAdditions.m */; };
 		B8C4587C1BDB5ABB00901F71 /* NSDictionary+StrDic.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587B1BDB5ABB00901F71 /* NSDictionary+StrDic.m */; };
 		B8C458801BDB5B5C00901F71 /* ToastAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587F1BDB5B5C00901F71 /* ToastAlertView.m */; };
+		BE46C1171CABBCC4003F9A20 /* LKAddStudentData.m in Sources */ = {isa = PBXBuildFile; fileRef = BE46C10E1CABBCC4003F9A20 /* LKAddStudentData.m */; };
+		BE46C1181CABBCC4003F9A20 /* LKAddStudentHeadportrait.m in Sources */ = {isa = PBXBuildFile; fileRef = BE46C1101CABBCC4003F9A20 /* LKAddStudentHeadportrait.m */; };
+		BE46C1191CABBCC4003F9A20 /* LKAddStudentRootClass.m in Sources */ = {isa = PBXBuildFile; fileRef = BE46C1121CABBCC4003F9A20 /* LKAddStudentRootClass.m */; };
+		BE46C11A1CABBCC4003F9A20 /* LKAddStudentSubject.m in Sources */ = {isa = PBXBuildFile; fileRef = BE46C1141CABBCC4003F9A20 /* LKAddStudentSubject.m */; };
+		BE46C11B1CABBCC4003F9A20 /* LKAddStudentSubjectthree.m in Sources */ = {isa = PBXBuildFile; fileRef = BE46C1161CABBCC4003F9A20 /* LKAddStudentSubjectthree.m */; };
 		D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */; };
 		D9ABF86D1C896463001B6930 /* BLPFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ABF86C1C896463001B6930 /* BLPFAlertView.m */; };
 		D9D607D81CAA7D3800B61874 /* LKAddStudentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */; };
@@ -1403,6 +1423,36 @@
 		B2BA43E91CAA805F00926584 /* YBCourseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseTableView.m; sourceTree = "<group>"; };
 		B2BA43EB1CAB7CC600926584 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		B2BA43EC1CAB7CC600926584 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+		B2BA43EE1CABA06700926584 /* YBStudentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsViewController.h; sourceTree = "<group>"; };
+		B2BA43EF1CABA06700926584 /* YBStudentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsViewController.m; sourceTree = "<group>"; };
+		B2BA44451CABC15C00926584 /* YBStudentDetailsApplyclasstypeinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsApplyclasstypeinfo.h; sourceTree = "<group>"; };
+		B2BA44461CABC15C00926584 /* YBStudentDetailsApplyclasstypeinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsApplyclasstypeinfo.m; sourceTree = "<group>"; };
+		B2BA44471CABC15C00926584 /* YBStudentDetailsCoachcomment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsCoachcomment.h; sourceTree = "<group>"; };
+		B2BA44481CABC15C00926584 /* YBStudentDetailsCoachcomment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsCoachcomment.m; sourceTree = "<group>"; };
+		B2BA44491CABC15C00926584 /* YBStudentDetailsCoachcommentinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsCoachcommentinfo.h; sourceTree = "<group>"; };
+		B2BA444A1CABC15C00926584 /* YBStudentDetailsCoachcommentinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsCoachcommentinfo.m; sourceTree = "<group>"; };
+		B2BA444B1CABC15C00926584 /* YBStudentDetailsCoachid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsCoachid.h; sourceTree = "<group>"; };
+		B2BA444C1CABC15C00926584 /* YBStudentDetailsCoachid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsCoachid.m; sourceTree = "<group>"; };
+		B2BA444D1CABC15C00926584 /* YBStudentDetailsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsData.h; sourceTree = "<group>"; };
+		B2BA444E1CABC15C00926584 /* YBStudentDetailsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsData.m; sourceTree = "<group>"; };
+		B2BA444F1CABC15C00926584 /* YBStudentDetailsExaminationinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsExaminationinfo.h; sourceTree = "<group>"; };
+		B2BA44501CABC15C00926584 /* YBStudentDetailsExaminationinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsExaminationinfo.m; sourceTree = "<group>"; };
+		B2BA44511CABC15C00926584 /* YBStudentDetailsHeadportrait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsHeadportrait.h; sourceTree = "<group>"; };
+		B2BA44521CABC15C00926584 /* YBStudentDetailsHeadportrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsHeadportrait.m; sourceTree = "<group>"; };
+		B2BA44531CABC15C00926584 /* YBStudentDetailsRootClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsRootClass.h; sourceTree = "<group>"; };
+		B2BA44541CABC15C00926584 /* YBStudentDetailsRootClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsRootClass.m; sourceTree = "<group>"; };
+		B2BA44551CABC15C00926584 /* YBStudentDetailsStudentinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsStudentinfo.h; sourceTree = "<group>"; };
+		B2BA44561CABC15C00926584 /* YBStudentDetailsStudentinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsStudentinfo.m; sourceTree = "<group>"; };
+		B2BA44571CABC15C00926584 /* YBStudentDetailsSubject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsSubject.h; sourceTree = "<group>"; };
+		B2BA44581CABC15C00926584 /* YBStudentDetailsSubject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsSubject.m; sourceTree = "<group>"; };
+		B2BA44591CABC15C00926584 /* YBStudentDetailsSubjectfour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsSubjectfour.h; sourceTree = "<group>"; };
+		B2BA445A1CABC15C00926584 /* YBStudentDetailsSubjectfour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsSubjectfour.m; sourceTree = "<group>"; };
+		B2BA445B1CABC15C00926584 /* YBStudentDetailsSubjectone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsSubjectone.h; sourceTree = "<group>"; };
+		B2BA445C1CABC15C00926584 /* YBStudentDetailsSubjectone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsSubjectone.m; sourceTree = "<group>"; };
+		B2BA445D1CABC15C00926584 /* YBStudentDetailsSubjectthree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsSubjectthree.h; sourceTree = "<group>"; };
+		B2BA445E1CABC15C00926584 /* YBStudentDetailsSubjectthree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsSubjectthree.m; sourceTree = "<group>"; };
+		B2BA445F1CABC15C00926584 /* YBStudentDetailsSubjecttwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsSubjecttwo.h; sourceTree = "<group>"; };
+		B2BA44601CABC15C00926584 /* YBStudentDetailsSubjecttwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsSubjecttwo.m; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		B80003C91BEFAC9C0099D194 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -1445,6 +1495,16 @@
 		B8C4587B1BDB5ABB00901F71 /* NSDictionary+StrDic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+StrDic.m"; sourceTree = "<group>"; };
 		B8C4587E1BDB5B5C00901F71 /* ToastAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToastAlertView.h; sourceTree = "<group>"; };
 		B8C4587F1BDB5B5C00901F71 /* ToastAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToastAlertView.m; sourceTree = "<group>"; };
+		BE46C10D1CABBCC4003F9A20 /* LKAddStudentData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentData.h; sourceTree = "<group>"; };
+		BE46C10E1CABBCC4003F9A20 /* LKAddStudentData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentData.m; sourceTree = "<group>"; };
+		BE46C10F1CABBCC4003F9A20 /* LKAddStudentHeadportrait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentHeadportrait.h; sourceTree = "<group>"; };
+		BE46C1101CABBCC4003F9A20 /* LKAddStudentHeadportrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentHeadportrait.m; sourceTree = "<group>"; };
+		BE46C1111CABBCC4003F9A20 /* LKAddStudentRootClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentRootClass.h; sourceTree = "<group>"; };
+		BE46C1121CABBCC4003F9A20 /* LKAddStudentRootClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentRootClass.m; sourceTree = "<group>"; };
+		BE46C1131CABBCC4003F9A20 /* LKAddStudentSubject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentSubject.h; sourceTree = "<group>"; };
+		BE46C1141CABBCC4003F9A20 /* LKAddStudentSubject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentSubject.m; sourceTree = "<group>"; };
+		BE46C1151CABBCC4003F9A20 /* LKAddStudentSubjectthree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentSubjectthree.h; sourceTree = "<group>"; };
+		BE46C1161CABBCC4003F9A20 /* LKAddStudentSubjectthree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentSubjectthree.m; sourceTree = "<group>"; };
 		D978ACD31C47B38A00D633B4 /* DVVLocationStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVLocationStatus.h; sourceTree = "<group>"; };
 		D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVLocationStatus.m; sourceTree = "<group>"; };
 		D9ABF86B1C896463001B6930 /* BLPFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLPFAlertView.h; sourceTree = "<group>"; };
@@ -1878,6 +1938,44 @@
 		B2BA3F001CA5035700926584 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				BE46C10D1CABBCC4003F9A20 /* LKAddStudentData.h */,
+				BE46C10E1CABBCC4003F9A20 /* LKAddStudentData.m */,
+				BE46C10F1CABBCC4003F9A20 /* LKAddStudentHeadportrait.h */,
+				BE46C1101CABBCC4003F9A20 /* LKAddStudentHeadportrait.m */,
+				BE46C1111CABBCC4003F9A20 /* LKAddStudentRootClass.h */,
+				BE46C1121CABBCC4003F9A20 /* LKAddStudentRootClass.m */,
+				BE46C1131CABBCC4003F9A20 /* LKAddStudentSubject.h */,
+				BE46C1141CABBCC4003F9A20 /* LKAddStudentSubject.m */,
+				BE46C1151CABBCC4003F9A20 /* LKAddStudentSubjectthree.h */,
+				BE46C1161CABBCC4003F9A20 /* LKAddStudentSubjectthree.m */,
+				B2BA44451CABC15C00926584 /* YBStudentDetailsApplyclasstypeinfo.h */,
+				B2BA44461CABC15C00926584 /* YBStudentDetailsApplyclasstypeinfo.m */,
+				B2BA44471CABC15C00926584 /* YBStudentDetailsCoachcomment.h */,
+				B2BA44481CABC15C00926584 /* YBStudentDetailsCoachcomment.m */,
+				B2BA44491CABC15C00926584 /* YBStudentDetailsCoachcommentinfo.h */,
+				B2BA444A1CABC15C00926584 /* YBStudentDetailsCoachcommentinfo.m */,
+				B2BA444B1CABC15C00926584 /* YBStudentDetailsCoachid.h */,
+				B2BA444C1CABC15C00926584 /* YBStudentDetailsCoachid.m */,
+				B2BA444D1CABC15C00926584 /* YBStudentDetailsData.h */,
+				B2BA444E1CABC15C00926584 /* YBStudentDetailsData.m */,
+				B2BA444F1CABC15C00926584 /* YBStudentDetailsExaminationinfo.h */,
+				B2BA44501CABC15C00926584 /* YBStudentDetailsExaminationinfo.m */,
+				B2BA44511CABC15C00926584 /* YBStudentDetailsHeadportrait.h */,
+				B2BA44521CABC15C00926584 /* YBStudentDetailsHeadportrait.m */,
+				B2BA44531CABC15C00926584 /* YBStudentDetailsRootClass.h */,
+				B2BA44541CABC15C00926584 /* YBStudentDetailsRootClass.m */,
+				B2BA44551CABC15C00926584 /* YBStudentDetailsStudentinfo.h */,
+				B2BA44561CABC15C00926584 /* YBStudentDetailsStudentinfo.m */,
+				B2BA44571CABC15C00926584 /* YBStudentDetailsSubject.h */,
+				B2BA44581CABC15C00926584 /* YBStudentDetailsSubject.m */,
+				B2BA44591CABC15C00926584 /* YBStudentDetailsSubjectfour.h */,
+				B2BA445A1CABC15C00926584 /* YBStudentDetailsSubjectfour.m */,
+				B2BA445B1CABC15C00926584 /* YBStudentDetailsSubjectone.h */,
+				B2BA445C1CABC15C00926584 /* YBStudentDetailsSubjectone.m */,
+				B2BA445D1CABC15C00926584 /* YBStudentDetailsSubjectthree.h */,
+				B2BA445E1CABC15C00926584 /* YBStudentDetailsSubjectthree.m */,
+				B2BA445F1CABC15C00926584 /* YBStudentDetailsSubjecttwo.h */,
+				B2BA44601CABC15C00926584 /* YBStudentDetailsSubjecttwo.m */,
 				B2BA43D21CA951A200926584 /* YBCourseRootClass.h */,
 				B2BA43D31CA951A200926584 /* YBCourseRootClass.m */,
 				B2BA43CE1CA951A200926584 /* YBCourseData.h */,
@@ -3567,6 +3665,7 @@
 				B2BA3EDE1CA5003B00926584 /* HMSchoolInfoModel.m in Sources */,
 				D9D607D81CAA7D3800B61874 /* LKAddStudentTableViewCell.m in Sources */,
 				B8C458731BDB59AC00901F71 /* UIView+TKCategory.m in Sources */,
+				B2BA44611CABC15C00926584 /* YBStudentDetailsApplyclasstypeinfo.m in Sources */,
 				B2BA42A71CA5035700926584 /* EaseChatToolbarItem.m in Sources */,
 				B2BA429A1CA5035700926584 /* EaseRefreshTableViewController.m in Sources */,
 				B2BA433D1CA5041100926584 /* ScanViewController.m in Sources */,
@@ -3579,6 +3678,7 @@
 				B2BA43DB1CA951A200926584 /* YBCourseHeadportrait.m in Sources */,
 				B2BA41E51CA5035700926584 /* UIImageView+EMWebCache.m in Sources */,
 				B2BA3EE01CA5003B00926584 /* HMSubjectModel.m in Sources */,
+				B2BA44641CABC15C00926584 /* YBStudentDetailsCoachid.m in Sources */,
 				B2BA3EDF1CA5003B00926584 /* HMStudentModel.m in Sources */,
 				B8C4586F1BDB59AC00901F71 /* YiRefreshFooter.m in Sources */,
 				B2BA43E71CAA2F0700926584 /* NSString+CurrentTimeDay.m in Sources */,
@@ -3594,7 +3694,9 @@
 				B2BA42A21CA5035700926584 /* EaseBubbleView+Text.m in Sources */,
 				B2BA41B91CA5035700926584 /* EMCDDeviceManager+Microphone.m in Sources */,
 				B253C2F41C43C960001AF771 /* PermissiveOperations.m in Sources */,
+				B2BA446B1CABC15C00926584 /* YBStudentDetailsSubjectfour.m in Sources */,
 				B2BA43471CA5041100926584 /* SystemMessageViewModel.m in Sources */,
+				BE46C11A1CABBCC4003F9A20 /* LKAddStudentSubject.m in Sources */,
 				B2BA42AC1CA5035700926584 /* EaseChatBarMoreView.m in Sources */,
 				B2BA3EE21CA5003B00926584 /* UserInfoModel.m in Sources */,
 				B2BA43351CA5041100926584 /* InformationMessageModelRootClass.m in Sources */,
@@ -3628,6 +3730,7 @@
 				B2BA434B1CA5041100926584 /* YBSignUpStudentListViewModel.m in Sources */,
 				B253C2CE1C3FA742001AF771 /* mask.c in Sources */,
 				061F564E1CA689890052BEA9 /* EditorUseBottomCell.m in Sources */,
+				BE46C11B1CABBCC4003F9A20 /* LKAddStudentSubjectthree.m in Sources */,
 				B2BA41891CA5035700926584 /* InfoModel.m in Sources */,
 				B2BA43321CA5041100926584 /* InformationMessageController.m in Sources */,
 				B2BA41991CA5035700926584 /* IDCardNumViewController.m in Sources */,
@@ -3648,10 +3751,14 @@
 				D9F4B9F81CAA967E00326556 /* LKTestViewController.m in Sources */,
 				B2BA3ED81CA5003B00926584 /* BaseModelMethod.m in Sources */,
 				B2BA434F1CA5041100926584 /* YBTrainfieldlinfoModel.m in Sources */,
+				BE46C1171CABBCC4003F9A20 /* LKAddStudentData.m in Sources */,
 				B2BA41961CA5035700926584 /* ShopModel.m in Sources */,
 				B2BA434D1CA5041100926584 /* YBSignUpStuentListModelRootClass.m in Sources */,
+				B2BA446D1CABC15C00926584 /* YBStudentDetailsSubjectthree.m in Sources */,
+				B2BA44651CABC15C00926584 /* YBStudentDetailsData.m in Sources */,
 				B2BA41F71CA5035700926584 /* ChatViewController.m in Sources */,
 				06DB70BE1CA906C500A6AC9D /* ExamClassViewController.m in Sources */,
+				B2BA446E1CABC15C00926584 /* YBStudentDetailsSubjecttwo.m in Sources */,
 				B2BA43271CA5041100926584 /* AppointmentCollectionViewCell.m in Sources */,
 				B2BA432F1CA5041100926584 /* CourseTimeModel.m in Sources */,
 				B2BA43341CA5041100926584 /* InformationMessageModel.m in Sources */,
@@ -3684,6 +3791,7 @@
 				B2BA41EB1CA5035700926584 /* PSTCollectionViewData.m in Sources */,
 				B2BA41F21CA5035700926584 /* PSTGridLayoutRow.m in Sources */,
 				B2BA3EDC1CA5003B00926584 /* HMPortraitInfoModel.m in Sources */,
+				B2BA44661CABC15C00926584 /* YBStudentDetailsExaminationinfo.m in Sources */,
 				B2BA42861CA5035700926584 /* JGUserModel.m in Sources */,
 				0608CA711CAA8A2E0068A18B /* Headportrait.m in Sources */,
 				B2BA43D81CA951A200926584 /* YBCourseCoursereservationdetial.m in Sources */,
@@ -3696,6 +3804,7 @@
 				B2BA42A01CA5035700926584 /* EaseBubbleView+Image.m in Sources */,
 				B2BA43DE1CA951A200926584 /* YBCourseUserid.m in Sources */,
 				B2BA42B31CA5035700926584 /* StudentHomeRecomendCell.m in Sources */,
+				B2BA44671CABC15C00926584 /* YBStudentDetailsHeadportrait.m in Sources */,
 				B2BA41911CA5035700926584 /* MyWallet.m in Sources */,
 				B2BA43381CA5041100926584 /* JGAppointMentFootView.m in Sources */,
 				B2BA3E891CA4F3D900926584 /* CourseCancelController.m in Sources */,
@@ -3721,6 +3830,7 @@
 				B2BA41BA1CA5035700926584 /* EMCDDeviceManager+ProximitySensor.m in Sources */,
 				B2BA43C91CA9125000926584 /* YBAppointMentUserCell.m in Sources */,
 				B2BA42881CA5035700926584 /* EaseConversationModel.m in Sources */,
+				BE46C1191CABBCC4003F9A20 /* LKAddStudentRootClass.m in Sources */,
 				B2BA432E1CA5041100926584 /* CourseSummaryListCell.m in Sources */,
 				B2BA419A1CA5035700926584 /* JENetwoking.m in Sources */,
 				B2BA41F51CA5035700926584 /* CustomMessageCell.m in Sources */,
@@ -3761,6 +3871,7 @@
 				B2BA43241CA5041100926584 /* CourEnsureItemView.m in Sources */,
 				06361A511CA51DF1002708F2 /* TopCollectionCell.m in Sources */,
 				B2BA3E661CA4E70300926584 /* SMPageControl.m in Sources */,
+				B2BA44621CABC15C00926584 /* YBStudentDetailsCoachcomment.m in Sources */,
 				B2BA42941CA5035700926584 /* EaseEmoji.m in Sources */,
 				B2BA435C1CA51DE600926584 /* YBHomeLeftViewController.m in Sources */,
 				B2BA3EB71CA4FF9800926584 /* NGOSegmentControl.m in Sources */,
@@ -3797,6 +3908,7 @@
 				B2BA41E71CA5035700926584 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				B2BA41EF1CA5035700926584 /* PSTCollectionViewUpdateItem.m in Sources */,
 				0608CA771CAA8A6C0068A18B /* Subject.m in Sources */,
+				B2BA44631CABC15C00926584 /* YBStudentDetailsCoachcommentinfo.m in Sources */,
 				B2BA41C61CA5035700926584 /* MJRefreshGifFooter.m in Sources */,
 				B2BA43311CA5041100926584 /* InformationMessageCell.m in Sources */,
 				B2BA3E8C1CA4F3D900926584 /* PickerItemView.m in Sources */,
@@ -3823,9 +3935,12 @@
 				B2BA41EC1CA5035700926584 /* PSTCollectionViewFlowLayout.m in Sources */,
 				B2BA3E531CA4E6D400926584 /* JGBaseViewController.m in Sources */,
 				B2BA42841CA5035700926584 /* EaseViewController.m in Sources */,
+				B2BA446C1CABC15C00926584 /* YBStudentDetailsSubjectone.m in Sources */,
 				B2BA436D1CA5324000926584 /* YBObjectTool.m in Sources */,
 				B2BA43431CA5041100926584 /* StudentSignInViewModel.m in Sources */,
+				B2BA446A1CABC15C00926584 /* YBStudentDetailsSubject.m in Sources */,
 				B2BA41DA1CA5035700926584 /* EMSDWebImageDownloader.m in Sources */,
+				B2BA43F01CABA06800926584 /* YBStudentDetailsViewController.m in Sources */,
 				B2BA41C41CA5035700926584 /* MJRefreshConst.m in Sources */,
 				B2BA3E651CA4E70300926584 /* ProjectGuideView.m in Sources */,
 				B2BA43561CA5065700926584 /* ScheduleViewController.m in Sources */,
@@ -3850,17 +3965,20 @@
 				B253C2D31C3FA742001AF771 /* rscode.c in Sources */,
 				B2BA41EA1CA5035700926584 /* PSTCollectionViewController.m in Sources */,
 				B2BA42A51CA5035700926584 /* EaseBubbleView.m in Sources */,
+				B2BA44681CABC15C00926584 /* YBStudentDetailsRootClass.m in Sources */,
 				B2BA41721CA5035700926584 /* NSString+DY_MD5.m in Sources */,
 				0670B5551CABCEAF00D34731 /* JZCompletionConfirmationCell.m in Sources */,
 				B2BA429D1CA5035700926584 /* EaseMessageCell.m in Sources */,
 				B2BA41C71CA5035700926584 /* MJRefreshGifHeader.m in Sources */,
 				B2BA42A41CA5035700926584 /* EaseBubbleView+Voice.m in Sources */,
 				B2BA41701CA5035700926584 /* LoginViewController.m in Sources */,
+				B2BA44691CABC15C00926584 /* YBStudentDetailsStudentinfo.m in Sources */,
 				B2BA3EE31CA5003B00926584 /* WorkTypeModel.m in Sources */,
 				B2BA43DD1CA951A200926584 /* YBCourseSubject.m in Sources */,
 				B2BA3E8A1CA4F3D900926584 /* CourseEnsureCell.m in Sources */,
 				B2BA433F1CA5041100926584 /* SearchCourseViewController.m in Sources */,
 				B2BA434E1CA5041100926584 /* YBSubjectMoel.m in Sources */,
+				BE46C1181CABBCC4003F9A20 /* LKAddStudentHeadportrait.m in Sources */,
 				B2BA3E4F1CA4E6BA00926584 /* AppDelegate+YJPush.m in Sources */,
 				B2BA3EDD1CA5003B00926584 /* HMRecomendModel.m in Sources */,
 				06361A4E1CA51AB8002708F2 /* JZMyController.m in Sources */,

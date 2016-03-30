@@ -17,6 +17,10 @@
 
 @interface DVVTheoreticalStudentListView ()<UITableViewDataSource, UITableViewDelegate>
 
+/// 添加学员数据
+@property (nonatomic, strong) NSMutableArray *arrMData;
+
+
 @property(nonatomic,strong)NSMutableArray *indexArray;
 
 @property(nonatomic,retain)NSMutableArray *LetterResultArr;

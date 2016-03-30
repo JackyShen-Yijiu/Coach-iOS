@@ -51,7 +51,7 @@
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     }
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    
+
     LoginViewController * loginViewC = [[LoginViewController alloc] init];
     loginViewC.delegate = self;
     self.navController = [[HMNagationController alloc] initWithRootViewController:loginViewC];
