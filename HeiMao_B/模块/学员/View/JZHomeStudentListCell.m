@@ -9,6 +9,7 @@
 #import "JZHomeStudentListCell.h"
 
 @interface JZHomeStudentListCell ()
+
 @property (nonatomic, strong) UIImageView *iconImageView;
 
 @property (nonatomic, strong) UILabel *nameLabel;
@@ -113,12 +114,13 @@
 
 }
 #pragma makk ----- Action
-- (void)didClickMessage:(UIButton *)btn{
-    // 消息
+- (void)didClickStudentListCell:(UIButton *)btn{
+    if (_studentListMessageAndCall) {
+        
+        _studentListMessageAndCall(btn.tag);
+    }
 }
-- (void)didClickPhone:(UIButton *)btn{
-    // 电话
-}
+
 #pragma mark --- Lazy 加载
 - (UIImageView *)iconImageView{
     if (_iconImageView == nil) {
@@ -161,7 +163,8 @@
     if (_messageButton == nil) {
         _messageButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_messageButton setImage:[UIImage imageNamed:@"chat"] forState:UIControlStateNormal];
-        [_messageButton addTarget:self action:@selector(didClickMessage:) forControlEvents:UIControlEventTouchUpInside];
+        [_messageButton addTarget:self action:@selector(didClickStudentListCell:) forControlEvents:UIControlEventTouchUpInside];
+        _messageButton.tag = 500;
     }
     return _messageButton;
 }
@@ -169,7 +172,8 @@
     if (_phoneButton == nil) {
         _phoneButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_phoneButton setImage:[UIImage imageNamed:@"JZCoursephone"] forState:UIControlStateNormal];
-        [_phoneButton addTarget:self action:@selector(didClickPhone:) forControlEvents:UIControlEventTouchUpInside];
+        [_phoneButton addTarget:self action:@selector(didClickStudentListCell:) forControlEvents:UIControlEventTouchUpInside];
+        _phoneButton.tag = 501;
     }
     return _phoneButton;
 }
@@ -180,5 +184,23 @@
     }
     return _lineView;
 }
-
+#pragma mark --- 数据
+- (void)setListModel:(JZResultModel *)listModel{
+     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:listModel.headportrait.originalpic ]
+                           placeholderImage:[UIImage imageNamed:@"call_out"]];
+    self.nameLabel.text = listModel.name;
+    self.studyConLabel.text = listModel.courseinfo.progress;
+    // 剩余17课时,已漏课2课时
+    
+    // 剩余课时
+    NSInteger surplusClassTnteger = listModel.courseinfo.totalcourse - listModel.courseinfo.finishcourse;
+    NSString *surplusClass = [NSString stringWithFormat:@"剩余%lu课时",surplusClassTnteger];
+    
+    // 漏课课时
+    NSString *missClass = [NSString stringWithFormat:@"%lu",listModel.courseinfo.missingcourse];
+    
+    self.classTimeLable.text = [NSString stringWithFormat:@"%@ %@",surplusClass,missClass];
+    
+   
+}
 @end
