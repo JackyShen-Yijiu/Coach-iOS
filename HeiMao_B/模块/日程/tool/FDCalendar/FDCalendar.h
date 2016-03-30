@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class FDCalendar;
+@class FDCalendar,FDCalendarItem;
+
 @protocol FDCalendarDelegate <NSObject>
 - (void)fdCalendar:(FDCalendar *)calendar didSelectedDate:(NSDate *)date;
 @end
 @interface FDCalendar : UIView
+
+@property (strong, nonatomic) FDCalendarItem *centerCalendarItem;
 
 - (instancetype)initWithCurrentDate:(NSDate *)date;
 
@@ -20,6 +23,7 @@
 
 - (void)setCurrentDate:(NSDate *)date;
 - (void)changeDate:(NSDate *)date;
+- (void)changeDayDate:(NSDate *)date;
 
 @property (nonatomic,strong) NSDate *selectDate;
 

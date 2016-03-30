@@ -117,6 +117,35 @@ static NSDateFormatter *sharedDateFormatter;
  *  @parma selectDate:选择的日期 yyyy-mm-dd hh:mm:ss
  *  @return 1:大于当前日期 -1:小于当前时间 0:等于当前时间
  */
++(int)compareHMSDateWithSelectDateStr:(NSString *)selectDate
+{
+    NSDateFormatter *fomatter = [self sharedDateFormatter];
+    
+    [fomatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *currentDate = [NSDate date];
+    NSString *curentDateStr = [fomatter stringFromDate:currentDate];
+    currentDate = [fomatter dateFromString:curentDateStr];
+    
+    NSDate *date=[fomatter dateFromString:selectDate];
+    
+    int result = [date compare:currentDate];
+    NSLog(@"result:%d",result);
+    if(result == NSOrderedDescending)
+    {
+        return 1;
+    }
+    else if(result == NSOrderedAscending)
+    {
+        return -1;
+    }
+    return 0;
+}
+
+/**
+ *  判断传入的日期和当前日期比较
+ *  @parma selectDate:选择的日期 yyyy-mm-dd hh:mm:ss
+ *  @return 1:大于当前日期 -1:小于当前时间 0:等于当前时间
+ */
 +(int)compareHMSDateWithBegintime:(NSString *)begintime endtime:(NSString *)endtime
 {
     NSDateFormatter *fomatter = [self sharedDateFormatter];

@@ -495,6 +495,7 @@
 		B2BA43DD1CA951A200926584 /* YBCourseSubject.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43D51CA951A200926584 /* YBCourseSubject.m */; };
 		B2BA43DE1CA951A200926584 /* YBCourseUserid.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43D71CA951A200926584 /* YBCourseUserid.m */; };
 		B2BA43E71CAA2F0700926584 /* NSString+CurrentTimeDay.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43E51CAA2F0700926584 /* NSString+CurrentTimeDay.m */; };
+		B2BA43EA1CAA805F00926584 /* YBCourseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43E91CAA805F00926584 /* YBCourseTableView.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
 		B80003CC1BEFACA50099D194 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003CB1BEFACA50099D194 /* CoreFoundation.framework */; };
@@ -525,6 +526,7 @@
 		D9D607D81CAA7D3800B61874 /* LKAddStudentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */; };
 		D9D607D91CAA7D3800B61874 /* LKAddStudentTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */; };
 		D9D607DC1CAA7D4800B61874 /* LKAddStudentTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */; };
+		D9F4B9F81CAA967E00326556 /* LKTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F4B9F71CAA967E00326556 /* LKTestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1387,6 +1389,8 @@
 		B2BA43D71CA951A200926584 /* YBCourseUserid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseUserid.m; sourceTree = "<group>"; };
 		B2BA43E41CAA2F0700926584 /* NSString+CurrentTimeDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CurrentTimeDay.h"; sourceTree = "<group>"; };
 		B2BA43E51CAA2F0700926584 /* NSString+CurrentTimeDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CurrentTimeDay.m"; sourceTree = "<group>"; };
+		B2BA43E81CAA805F00926584 /* YBCourseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBCourseTableView.h; sourceTree = "<group>"; };
+		B2BA43E91CAA805F00926584 /* YBCourseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseTableView.m; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		B80003C91BEFAC9C0099D194 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -1439,6 +1443,8 @@
 		D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTimeView.m; sourceTree = "<group>"; };
 		D9D607DA1CAA7D4800B61874 /* LKAddStudentTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTimeViewController.h; sourceTree = "<group>"; };
 		D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTimeViewController.m; sourceTree = "<group>"; };
+		D9F4B9F61CAA967E00326556 /* LKTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKTestViewController.h; sourceTree = "<group>"; };
+		D9F4B9F71CAA967E00326556 /* LKTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKTestViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1849,6 +1855,8 @@
 				B2BA435E1CA51DF600926584 /* YBHomeRightViewController.m */,
 				D9D607DA1CAA7D4800B61874 /* LKAddStudentTimeViewController.h */,
 				D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */,
+				D9F4B9F61CAA967E00326556 /* LKTestViewController.h */,
+				D9F4B9F71CAA967E00326556 /* LKTestViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1885,6 +1893,8 @@
 				B2BA43C51CA8E9DB00926584 /* CourseSummaryDayCell.m */,
 				B2BA43C71CA9125000926584 /* YBAppointMentUserCell.h */,
 				B2BA43C81CA9125000926584 /* YBAppointMentUserCell.m */,
+				B2BA43E81CAA805F00926584 /* YBCourseTableView.h */,
+				B2BA43E91CAA805F00926584 /* YBCourseTableView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3613,6 +3623,7 @@
 				B2BA41F61CA5035700926584 /* EMBubbleView+Gif.m in Sources */,
 				B2BA3EDA1CA5003B00926584 /* HMClassInfoModel.m in Sources */,
 				B2BA41D81CA5035700926584 /* EMSDWebImageCompat.m in Sources */,
+				D9F4B9F81CAA967E00326556 /* LKTestViewController.m in Sources */,
 				B2BA3ED81CA5003B00926584 /* BaseModelMethod.m in Sources */,
 				B2BA434F1CA5041100926584 /* YBTrainfieldlinfoModel.m in Sources */,
 				B2BA41961CA5035700926584 /* ShopModel.m in Sources */,
@@ -3734,6 +3745,7 @@
 				B2BA3E971CA4F44E00926584 /* CWStarRateView.m in Sources */,
 				B2BA43451CA5041100926584 /* SystemMessageModel.m in Sources */,
 				B2BA41DF1CA5035700926584 /* NSData+EMImageContentType.m in Sources */,
+				B2BA43EA1CAA805F00926584 /* YBCourseTableView.m in Sources */,
 				B2BA41941CA5035700926584 /* PrivateMessageController.m in Sources */,
 				B253C2D01C3FA742001AF771 /* qrencode.c in Sources */,
 				D9ABF86D1C896463001B6930 /* BLPFAlertView.m in Sources */,

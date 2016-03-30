@@ -19,7 +19,6 @@
 {
     if (_iconImageView==nil) {
         _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.image = [UIImage imageNamed:@"coach_man_default_icon"];
         _iconImageView.layer.masksToBounds = YES;
         _iconImageView.layer.cornerRadius = 22;
     }

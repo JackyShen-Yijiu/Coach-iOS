@@ -633,6 +633,18 @@
                                     @"index": [NSString stringWithFormat:@"%d", index] };
     [self GET:urlStr parameters:paramterDict success:success failure:failure];
 }
+// 添加学员列表
++ (void)addstudentsListwithCoachid:(NSString *)coachId
+                         subjectID:(NSUInteger)subjectID
+
+                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure{
+    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getureservationuserlist",[self domain]];
+    NSDictionary *paramterDict = @{ @"coachid": coachId,
+                                    @"subjectid": [NSString stringWithFormat:@"%lu", subjectID],
+                                   };
+    [self GET:urlStr parameters:paramterDict success:success failure:failure];
+}
 
 #pragma mark - Common Method
 
