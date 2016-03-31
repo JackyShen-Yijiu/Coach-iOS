@@ -23,5 +23,4 @@ NSString *const kYBStudentDetailsSubjectfourTotalcourse = @"totalcourse";
 @end
 @implementation YBStudentDetailsSubjectfour
 
-
 @end

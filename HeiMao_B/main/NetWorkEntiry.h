@@ -322,7 +322,7 @@
                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 /*
- *  学员模块 学员列表
+ *  学员模块 学员列表 v2 接口
  *
  */
 + (void)coachStudentListWithCoachId:(NSString *)coachId
@@ -334,13 +334,21 @@
                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;
 /**
  *
- * 统计各个状态的学员数量  v2 接口
+ * 统计各个状态的学员数量  v2 接口 trainingcontent
  *
  */
 + (void)getAllSubjectNumberStateWithCoachId:(NSString *)coachId
                                   subjectID:(NSString *)subjectID
                                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;
+/**
+ *
+ * 获取科二科三学习内容  v2 接口 trainingcontent
+ *
+ */
++ (void)getSubjectTwoAndSubjectThreeContentsuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;
+
 /*
  *  添加学员列表
  *

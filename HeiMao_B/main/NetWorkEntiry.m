@@ -681,6 +681,18 @@
     [self GET:url parameters:nil success:success failure:failure];
 }
 
+/**
+ *
+ * 获取科二科三学习内容  v2 接口
+ *
+ */
++ (void)getSubjectTwoAndSubjectThreeContentsuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure{
+    NSString *urlStr = [NSString stringWithFormat:@"%@/trainingcontent",[self domain]];
+    [self GET:urlStr parameters:nil success:success failure:failure];
+    
+}
+
 #pragma mark - Common Method
 
 + (void)missParagramercallBackFailure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure

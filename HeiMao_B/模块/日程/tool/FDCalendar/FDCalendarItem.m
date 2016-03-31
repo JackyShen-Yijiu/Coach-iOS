@@ -228,6 +228,8 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     
     if (indexPath.row < firstWeekday) {// 小于这个月的第一天
         
+        cell.userInteractionEnabled = NO;
+
         cell.dayLabel.textColor = [UIColor blackColor];
         cell.dayLabel.text = nil;
         cell.pointView.hidden = YES;
@@ -242,6 +244,8 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
         
     } else if (indexPath.row >= totalDaysOfMonth + firstWeekday) {    // 大于这个月的最后一天
         
+        cell.userInteractionEnabled = NO;
+
 //        NSInteger day = indexPath.row - totalDaysOfMonth - firstWeekday + 1;
 //        cell.dayLabel.text = [NSString stringWithFormat:@"%ld", day];
 //        cell.dayLabel.textColor = [UIColor grayColor];
@@ -256,6 +260,8 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
 
     } else {// 属于当前选择的这个月
         
+        cell.userInteractionEnabled = YES;
+
         NSInteger day = indexPath.row - firstWeekday + 1;
         
         cell.dayLabel.text= [NSString stringWithFormat:@"%ld", day];
