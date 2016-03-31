@@ -140,7 +140,7 @@
     }
 
     NSDictionary *param = @{@"userid":[UserInfoModel defaultUserInfo].userID ,@"feedbackmessage":self.textView.text,@"mobileversion":[self getAppversion],@"resolution":[self getResolution]};
-    NSString *url = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],@"userfeedback"];
+    NSString *url = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,@"userfeedback"];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     

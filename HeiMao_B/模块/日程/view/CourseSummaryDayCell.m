@@ -11,8 +11,7 @@
 #import "YBObjectTool.h"
 #import "LKAddStudentTimeViewController.h"
 #import "LKTestViewController.h"
-
-
+#import "YBStudentDetailsViewController.h"
 
 @interface CourseSummaryDayCell ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -294,6 +293,7 @@
     YBAppointMentUserCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     cell.userInteractionEnabled = YES;
     cell.iconImageView.image = [UIImage imageNamed:@""];
+    cell.nameLabel.text = nil;
     cell.stateImageView.hidden = YES;
     cell.alphaView.hidden = YES;
     
@@ -346,7 +346,12 @@
     
     if (_model.coursereservationdetial && _model.coursereservationdetial.count>indexPath.row) {
         
+        NSDictionary *dict = _model.coursereservationdetial[indexPath.row];
+
         NSLog(@"跳转学员详情");
+        YBStudentDetailsViewController *vc = [[YBStudentDetailsViewController alloc] init];
+        vc.studentID = dict[@"userid"][@"_id"];
+        [self.parentViewController.navigationController pushViewController:vc animated:YES];
         
     }else{
        
@@ -362,14 +367,14 @@
         
         addStuVC.dataArray = tempArray;
         
-//        NSLog(@"self.model.coursebegintime:%@",self.model.coursebegintime);
-//        NSLog(@"self.model.courseendtime:%@",self.model.courseendtime);
-        
-        addStuVC.coachidStr = self.model.coachid;
-        
+        addStuVC.selectData = self.selectData;
         addStuVC.courseStudentCountInt = self.model.coursestudentcount;
         
-        //    LKTestViewController *addStuVC = [[LKTestViewController alloc]init];
+        addStuVC.selectedstudentconutInt = self.model.selectedstudentcount;
+        
+        addStuVC.coachidStr = self.model.coachid;
+        addStuVC.courseList = self.model._id;
+        
         [self.parentViewController.navigationController pushViewController:addStuVC animated:YES];
         
         

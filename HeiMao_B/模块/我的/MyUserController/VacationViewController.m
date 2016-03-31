@@ -264,7 +264,7 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
         [self showTotasViewWithMes:@"结束时间必须大于开始时间"];
         return;
     }
-    NSString *urlstring = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kVacationUrl];
+    NSString *urlstring = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,kVacationUrl];
     
     NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"begintime":beginString,@"endtime":endString};
     

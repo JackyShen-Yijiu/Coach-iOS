@@ -13,6 +13,8 @@
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, assign) NSInteger selectIndex;
 
+@property (nonatomic, copy) NSString *selectData;
+
 @property(nonatomic,strong)YBCourseData * model;
 @property (nonatomic,strong) UIViewController *parentViewController;
 

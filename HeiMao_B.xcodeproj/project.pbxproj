@@ -523,6 +523,11 @@
 		B2BA446E1CABC15C00926584 /* YBStudentDetailsSubjecttwo.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44601CABC15C00926584 /* YBStudentDetailsSubjecttwo.m */; };
 		B2BA44711CABD88100926584 /* YBStudentDetailHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44701CABD88100926584 /* YBStudentDetailHeadView.m */; };
 		B2BA44741CABDB3A00926584 /* UIImage+DVVEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44731CABDB3A00926584 /* UIImage+DVVEffects.m */; };
+		B2BA44781CACFA2A00926584 /* YBStudentDetailsStudyProgressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44761CACFA2A00926584 /* YBStudentDetailsStudyProgressCell.m */; };
+		B2BA44791CACFA2A00926584 /* YBStudentDetailsStudyProgressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2BA44771CACFA2A00926584 /* YBStudentDetailsStudyProgressCell.xib */; };
+		B2BA447D1CACFCBD00926584 /* YBStudentDetailsExamMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA447B1CACFCBD00926584 /* YBStudentDetailsExamMessageCell.m */; };
+		B2BA447E1CACFCBD00926584 /* YBStudentDetailsExamMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2BA447C1CACFCBD00926584 /* YBStudentDetailsExamMessageCell.xib */; };
+		B2BA44811CACFE7300926584 /* YBStudentDetailsCommentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44801CACFE7300926584 /* YBStudentDetailsCommentListCell.m */; };
 		B80003C81BEFAC720099D194 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */; };
 		B80003CA1BEFAC9C0099D194 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003C91BEFAC9C0099D194 /* CFNetwork.framework */; };
 		B80003CC1BEFACA50099D194 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80003CB1BEFACA50099D194 /* CoreFoundation.framework */; };
@@ -1478,6 +1483,14 @@
 		B2BA44701CABD88100926584 /* YBStudentDetailHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailHeadView.m; sourceTree = "<group>"; };
 		B2BA44721CABDB3A00926584 /* UIImage+DVVEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+DVVEffects.h"; sourceTree = "<group>"; };
 		B2BA44731CABDB3A00926584 /* UIImage+DVVEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+DVVEffects.m"; sourceTree = "<group>"; };
+		B2BA44751CACFA2A00926584 /* YBStudentDetailsStudyProgressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsStudyProgressCell.h; sourceTree = "<group>"; };
+		B2BA44761CACFA2A00926584 /* YBStudentDetailsStudyProgressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsStudyProgressCell.m; sourceTree = "<group>"; };
+		B2BA44771CACFA2A00926584 /* YBStudentDetailsStudyProgressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBStudentDetailsStudyProgressCell.xib; sourceTree = "<group>"; };
+		B2BA447A1CACFCBD00926584 /* YBStudentDetailsExamMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsExamMessageCell.h; sourceTree = "<group>"; };
+		B2BA447B1CACFCBD00926584 /* YBStudentDetailsExamMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsExamMessageCell.m; sourceTree = "<group>"; };
+		B2BA447C1CACFCBD00926584 /* YBStudentDetailsExamMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBStudentDetailsExamMessageCell.xib; sourceTree = "<group>"; };
+		B2BA447F1CACFE7300926584 /* YBStudentDetailsCommentListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsCommentListCell.h; sourceTree = "<group>"; };
+		B2BA44801CACFE7300926584 /* YBStudentDetailsCommentListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsCommentListCell.m; sourceTree = "<group>"; };
 		B80003C61BEFAC720099D194 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		B80003C71BEFAC720099D194 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		B80003C91BEFAC9C0099D194 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -2052,6 +2065,15 @@
 				B2BA44701CABD88100926584 /* YBStudentDetailHeadView.m */,
 				065E82C01CAD677300D98BFA /* YBConfimContentView.h */,
 				065E82C11CAD677300D98BFA /* YBConfimContentView.m */,
+				B2BA44751CACFA2A00926584 /* YBStudentDetailsStudyProgressCell.h */,
+				B2BA44761CACFA2A00926584 /* YBStudentDetailsStudyProgressCell.m */,
+				B2BA44771CACFA2A00926584 /* YBStudentDetailsStudyProgressCell.xib */,
+				B2BA447A1CACFCBD00926584 /* YBStudentDetailsExamMessageCell.h */,
+				B2BA447B1CACFCBD00926584 /* YBStudentDetailsExamMessageCell.m */,
+				B2BA447C1CACFCBD00926584 /* YBStudentDetailsExamMessageCell.xib */,
+				B2BA447F1CACFE7300926584 /* YBStudentDetailsCommentListCell.h */,
+				B2BA44801CACFE7300926584 /* YBStudentDetailsCommentListCell.m */,
+>>>>>>> 351cead41e6905b9cb232ea6e9d565be7d31dab1
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3590,6 +3612,7 @@
 				B2BA425B1CA5035700926584 /* chatBar_colorMore_photo@2x.png in Resources */,
 				B2BA420C1CA5035700926584 /* VoiceSearchFeedback011.png in Resources */,
 				B2BA420B1CA5035700926584 /* VoiceSearchFeedback010@2x.png in Resources */,
+				B2BA447E1CACFCBD00926584 /* YBStudentDetailsExamMessageCell.xib in Resources */,
 				B2BA420A1CA5035700926584 /* VoiceSearchFeedback010.png in Resources */,
 				B2BA42061CA5035700926584 /* VoiceSearchFeedback008.png in Resources */,
 				B2BA42C21CA5035700926584 /* DVVTheoreticalStudentListCell.xib in Resources */,
@@ -3617,6 +3640,7 @@
 				B2BA427A1CA5035700926584 /* chat_receiver_bg@2x.png in Resources */,
 				B2BA42181CA5035700926584 /* VoiceSearchFeedback017.png in Resources */,
 				B2BA42001CA5035700926584 /* VoiceSearchFeedback005.png in Resources */,
+				B2BA44791CACFA2A00926584 /* YBStudentDetailsStudyProgressCell.xib in Resources */,
 				B2BA42141CA5035700926584 /* VoiceSearchFeedback015.png in Resources */,
 				B2BA42581CA5035700926584 /* chatBar_colorMore_cameraSelected@2x.png in Resources */,
 				B2BA421D1CA5035700926584 /* VoiceSearchFeedback019@2x.png in Resources */,
@@ -3694,6 +3718,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2BA447D1CACFCBD00926584 /* YBStudentDetailsExamMessageCell.m in Sources */,
 				B2BA42BD1CA5035700926584 /* DVVStudentListDMHeadPortrait.m in Sources */,
 				B2BA42951CA5035700926584 /* EaseEmojiEmoticons.m in Sources */,
 				B2BA43281CA5041100926584 /* BLInformationManager.m in Sources */,
@@ -3798,6 +3823,7 @@
 				B2BA41D81CA5035700926584 /* EMSDWebImageCompat.m in Sources */,
 				D9F4B9F81CAA967E00326556 /* LKTestViewController.m in Sources */,
 				B2BA3ED81CA5003B00926584 /* BaseModelMethod.m in Sources */,
+				B2BA44811CACFE7300926584 /* YBStudentDetailsCommentListCell.m in Sources */,
 				B2BA434F1CA5041100926584 /* YBTrainfieldlinfoModel.m in Sources */,
 				BE46C1171CABBCC4003F9A20 /* LKAddStudentData.m in Sources */,
 				B2BA41961CA5035700926584 /* ShopModel.m in Sources */,
@@ -3902,6 +3928,7 @@
 				B28D5E431C64857000D9E9E1 /* pinyin.m in Sources */,
 				06DB70C51CA90E3800A6AC9D /* WorkTimeViewController.m in Sources */,
 				0608CA411CAA71CF0068A18B /* JZHomeStudentViewModel.m in Sources */,
+				B2BA44781CACFA2A00926584 /* YBStudentDetailsStudyProgressCell.m in Sources */,
 				B2BA3E501CA4E6BA00926584 /* AppDelegate.m in Sources */,
 				D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */,
 				B2BA41B01CA5035700926584 /* UIView+CalculateUIView.m in Sources */,

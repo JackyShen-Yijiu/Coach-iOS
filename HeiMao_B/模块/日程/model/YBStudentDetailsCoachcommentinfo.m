@@ -9,15 +9,8 @@
 
 #import "YBStudentDetailsCoachcommentinfo.h"
 
-NSString *const kYBStudentDetailsCoachcommentinfoIdField = @"_id";
-NSString *const kYBStudentDetailsCoachcommentinfoCoachcomment = @"coachcomment";
-NSString *const kYBStudentDetailsCoachcommentinfoCoachid = @"coachid";
-NSString *const kYBStudentDetailsCoachcommentinfoFinishtime = @"finishtime";
-NSString *const kYBStudentDetailsCoachcommentinfoTimestamp = @"timestamp";
-
 @interface YBStudentDetailsCoachcommentinfo ()
 @end
 @implementation YBStudentDetailsCoachcommentinfo
-
 
 @end

@@ -104,6 +104,7 @@
     if (indexPath.row < self.dataArray.count)
         [dayCell setModel:self.dataArray[indexPath.row]];
     
+    dayCell.selectData = self.selectData;
     dayCell.selectIndex = indexPath.row;
     dayCell.dataArray = self.dataArray;
     dayCell.parentViewController = self.parentViewController;

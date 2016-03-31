@@ -63,8 +63,7 @@ typedef NS_ENUM(NSInteger, kControllerType) {
 - (void)confimBtnDidClick
 {
     NSLog(@"%s",__func__);
-    YBStudentDetailsViewController *vc = [[YBStudentDetailsViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)viewDidLoad {

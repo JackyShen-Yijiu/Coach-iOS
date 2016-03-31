@@ -31,4 +31,5 @@
 @property (nonatomic, strong) YBStudentDetailsSubjectfour * subjectthree;
 @property (nonatomic, strong) YBStudentDetailsSubjectfour * subjecttwo;
 @property (nonatomic, strong) NSString * userid;
+
 @end

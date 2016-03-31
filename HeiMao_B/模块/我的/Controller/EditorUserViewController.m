@@ -581,7 +581,7 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     
     __weak EditorUserViewController *weakself = self;
     __block NSData *gcdPhotoData = photeoData;
-    NSString *qiniuUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kQiniuUpdateUrl];
+    NSString *qiniuUrl = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,kQiniuUpdateUrl];
     [JENetwoking startDownLoadWithUrl:qiniuUrl postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
         
         NSDictionary *dataDic = data;
@@ -593,7 +593,7 @@ static NSString *const ktagArrChange = @"ktagArrChange";
             if (info) {
                 NSLog(@"key = %@",key);
                 NSString *upImageUrl = [NSString stringWithFormat:kQiniuImageUrl,key];
-                NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
+                NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,kupdateUserInfo];
                 NSDictionary *headPortrait  = @{@"originalpic":upImageUrl,@"thumbnailpic":@"",@"width":@"",@"height":@""};
                 
                 NSDictionary *dicParam = @{@"headportrait":headPortrait,@"coachid":[UserInfoModel defaultUserInfo].userID};
@@ -668,7 +668,7 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 - (void)commintCoachAgeData {
     
     
-    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
+    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,kupdateUserInfo];
     
     NSDictionary *dicParam = @{@"Seniority":self.resultAgeStr,@"coachid":[UserInfoModel defaultUserInfo].userID};
     

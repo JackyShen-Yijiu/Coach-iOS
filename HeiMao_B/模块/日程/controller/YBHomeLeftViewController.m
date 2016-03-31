@@ -9,7 +9,6 @@
 #import "YBHomeLeftViewController.h"
 #import "FDCalendar.h"
 #import "FDCalendarItem.h"
-#import "CourseSummaryDayCell.h"
 #import "CourseDetailViewController.h"
 #import "RefreshTableView.h"
 #import "AppointmentCoachTimeInfoModel.h"
@@ -316,7 +315,7 @@
     NSLog(@"切换日历代理方法 dataStr:%@",dataStr);
     
     // 加载底部预约列表数据
-    [self loadFootListDataWithinfoId:dataStr];
+    [self loadFootListDataWithdataStr:dataStr];
     
 }
 
@@ -341,21 +340,21 @@
     NSLog(@"YBFDCalendar切换日历代理方法 dataStr:%@",dataStr);
     
     // 加载底部预约列表数据
-    [self loadFootListDataWithinfoId:dataStr];
+    [self loadFootListDataWithdataStr:dataStr];
     
 }
 
-- (void)loadFootListDataWithinfoId:(NSString *)infoId
+- (void)loadFootListDataWithdataStr:(NSString *)dataStr
 {
     
     NSString *  userId = [[UserInfoModel defaultUserInfo] userID];
-    if (userId==nil && infoId==nil) {
+    if (userId==nil && dataStr==nil) {
         return;
     }
     
     WS(ws);
     // 加载底部预约列表数据
-    [NetWorkEntiry getcoursereservationlistWithUserId:userId date:infoId  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry getcoursereservationlistWithUserId:userId date:dataStr  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"切换日历获取最新数据:responseObject:%@",responseObject);
         
@@ -391,6 +390,8 @@
                 [ws.centerTableDataArray addObject:dataModel];
             }
             
+            
+            ws.centerCourseTableView.selectData = dataStr;
             ws.centerCourseTableView.dataArray = ws.centerTableDataArray;
             
             NSLog(@"ws.centerTableDataArray.count:%lu",(unsigned long)ws.centerTableDataArray.count);

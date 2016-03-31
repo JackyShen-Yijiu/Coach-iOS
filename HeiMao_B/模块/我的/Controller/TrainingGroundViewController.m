@@ -72,7 +72,7 @@ static NSString *const kTrainingGround = @"getschooltrainingfield?schoolid=%@";
 - (void)startDownLoad
 {
     NSString *urlString = [NSString stringWithFormat:kTrainingGround,[UserInfoModel defaultUserInfo].schoolId];
-    NSString *url = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],urlString];
+    NSString *url = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,urlString];
     [JENetwoking startDownLoadWithUrl:url postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
         NSDictionary *param = data;
         NSArray *array = param[@"data"];
@@ -102,7 +102,7 @@ static NSString *const kTrainingGround = @"getschooltrainingfield?schoolid=%@";
         return;
     }
     
-    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
+    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,kupdateUserInfo];
     
     NSDictionary *dicParam = @{@"trainfield":self.model.infoId,@"coachid":[UserInfoModel defaultUserInfo].userID};
     

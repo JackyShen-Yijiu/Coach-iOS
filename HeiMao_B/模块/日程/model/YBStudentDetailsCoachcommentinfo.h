@@ -14,8 +14,8 @@
 @interface YBStudentDetailsCoachcommentinfo : NSObject
 
 @property (nonatomic, strong) NSString * idField;
-@property (nonatomic, strong) YBStudentDetailsCoachcomment * coachcomment;
-@property (nonatomic, strong) YBStudentDetailsCoachid * coachid;
+@property (nonatomic, strong) NSDictionary * coachcomment;
+@property (nonatomic, strong) NSDictionary * coachid;
 @property (nonatomic, strong) NSString * finishtime;
 @property (nonatomic, assign) NSInteger timestamp;
 @end

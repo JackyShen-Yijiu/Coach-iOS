@@ -11,21 +11,27 @@
 @class YBStudentDetailsRootClass;
 
 @interface YBStudentDetailHeadView : UIView
-
-@property (nonatomic, strong) UIView *alphaView;
-
-@property (nonatomic, strong) UIImageView *maskView;
-
-@property (nonatomic, copy) NSString *studentID;
-
-@property (nonatomic, strong) UIImageView *iconImageView;
-
-@property (nonatomic, strong) UILabel *nameLabel;
-
+// 大背景
 @property (nonatomic, strong) UIImageView *bgImageView;
+// 阴影
+@property (nonatomic, strong) UIImageView *alphaView;
+// 头像
+@property (nonatomic, strong) UIImageView *iconImageView;
+// 浅色条目
+@property (nonatomic, strong) UIView *midView;
+// 全周班
+@property (nonatomic, strong) UILabel *classLabel;
+// 聊天
+@property (nonatomic,strong) UIButton *chatBtn;
+// 打电话
+@property (nonatomic,strong) UIButton *callBtn;
+// 状态
+@property (nonatomic, strong) UIImageView *stateImageView;
+
+@property (nonatomic,strong) YBStudentDetailsRootClass *dmData;
+
+@property (nonatomic,weak) UIViewController *parentViewController;
 
 - (void)refreshData:(YBStudentDetailsRootClass *)dmData;
-
-+ (CGFloat)defaultHeight;
 
 @end

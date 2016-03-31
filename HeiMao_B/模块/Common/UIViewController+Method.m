@@ -106,8 +106,6 @@
     
     NSLog(@"controllers.count:%lu",(unsigned long)controllers.count);
     
-//    self.myNavigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.createBackButton];
-    
     [[[self myNavController] navigationBar] setBarTintColor:RGB_Color(31, 124, 235)];
     NSDictionary *textAttributes1 = @{NSFontAttributeName: [UIFont systemFontOfSize:16.f],
                                       NSForegroundColorAttributeName: [UIColor whiteColor]

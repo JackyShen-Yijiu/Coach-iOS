@@ -89,7 +89,7 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
         
         NSInteger startSeqix = 1;
         NSString *url = [NSString stringWithFormat:kstudentList,[UserInfoModel defaultUserInfo].userID,startSeqix];
-        NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],url];
+        NSString *urlString = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,url];
 
         [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data)
         {
@@ -135,7 +135,7 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
         }
         NSInteger seqix = ws.dataArray.count / RELOADDATACOUNT + 1;
         NSString *url = [NSString stringWithFormat:kstudentList,[UserInfoModel defaultUserInfo].userID,seqix];
-        NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],url];
+        NSString *urlString = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,url];
 
         [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data)
          {

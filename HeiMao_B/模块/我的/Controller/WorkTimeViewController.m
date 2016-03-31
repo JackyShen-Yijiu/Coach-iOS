@@ -241,7 +241,7 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
         return;
     }
  
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kchangeWorkTime];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,kchangeWorkTime];
     
     NSMutableString *workweek = [[NSMutableString alloc] init];
     

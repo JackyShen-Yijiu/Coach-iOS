@@ -9,16 +9,27 @@
 #import "NSString+CurrentTimeDay.h"
 //    [dateFormatter setDateFormat:@yyyy-MM-dd'T'HH:mm:ssZ];
 
+static NSDateFormatter *sharedDateFormatter;
+
 @implementation NSString (CurrentTimeDay)
+
++ (NSDateFormatter *)sharedDateFormatter
+{
+    if (sharedDateFormatter==nil) {
+        sharedDateFormatter = [[NSDateFormatter alloc] init];
+    }
+    return sharedDateFormatter;
+}
+
 + (NSString *)currentTimeDay {
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [self sharedDateFormatter];
     [dateFormatter setDateFormat:@"yyyyMMdd/HHmmss"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
     return dateString;
 }
 + (NSString *)currentDay {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [self sharedDateFormatter];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
     return dateString;
@@ -49,7 +60,7 @@
 //输入的UTC日期格式2013-08-03T04:53:51+0000
 + (NSString *)getLocalDateFormateUTCDate:(NSString *)utcDate {
     //    NSLog(@"utc = %@",utcDate);
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [self sharedDateFormatter];
     //输入格式
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
     NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
@@ -63,7 +74,7 @@
     return dateString;
 }
 + (NSString *)getYearLocalDateFormateUTCDate:(NSString *)utcDate {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [self sharedDateFormatter];
     //输入格式
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
     NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
@@ -76,7 +87,7 @@
     return dateString;
 }
 + (NSString *)getHourLocalDateFormateUTCDate:(NSString *)utcDate {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [self sharedDateFormatter];
     //输入格式
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
     NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
@@ -89,7 +100,7 @@
     return dateString;
 }
 + (NSString *)getHLocalDateFormateUTCDate:(NSString *)utcDate {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [self sharedDateFormatter];
     //输入格式
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
     NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
@@ -102,7 +113,7 @@
     return dateString;
 }
 + (NSString *)getHMSHourLocalDateFormateUTCDate:(NSString *)utcDate {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [self sharedDateFormatter];
     //输入格式
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
     NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
@@ -115,7 +126,7 @@
     return dateString;
 }
 + (NSString *)getLitteLocalDateFormateUTCDate:(NSString *)utcDate {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [self sharedDateFormatter];
     //输入格式
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
     NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];

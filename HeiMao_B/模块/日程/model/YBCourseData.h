@@ -13,7 +13,7 @@
 
 @interface YBCourseData : NSObject
 
-@property (nonatomic, strong) NSString * idField;
+@property (nonatomic, strong) NSString * _id;
 ///  教练id
 @property (nonatomic, strong) NSString * coachid;
 @property (nonatomic, strong) NSString * coursebegintime;
@@ -32,5 +32,9 @@
 
 @property (nonatomic,assign) CGFloat appointMentViewH;
 @property (nonatomic,assign) NSInteger passTimeCount;// 过期时间的个数
+
+// 是否是已选择预约学员
+@property (assign, nonatomic, readwrite) BOOL is_selected;
+@property (assign, nonatomic, readwrite) NSInteger indexPath;
 
 @end
