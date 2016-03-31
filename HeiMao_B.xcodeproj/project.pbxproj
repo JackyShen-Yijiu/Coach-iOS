@@ -26,6 +26,7 @@
 		06361A511CA51DF1002708F2 /* TopCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A501CA51DF1002708F2 /* TopCollectionCell.m */; };
 		06361A541CA51E12002708F2 /* BottomCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A531CA51E12002708F2 /* BottomCollectionCell.m */; };
 		06361A571CA53511002708F2 /* MyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A561CA53511002708F2 /* MyHeaderView.m */; };
+		0658E11E1CAC13DD00BAA01F /* YBStudentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0658E11D1CAC13DD00BAA01F /* YBStudentDetailsViewController.m */; };
 		0670B54F1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = 0670B54E1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m */; };
 		0670B5551CABCEAF00D34731 /* JZCompletionConfirmationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0670B5541CABCEAF00D34731 /* JZCompletionConfirmationCell.m */; };
 		0670B55A1CABF74F00D34731 /* RatingBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0670B5591CABF74F00D34731 /* RatingBar.m */; };
@@ -594,6 +595,8 @@
 		06361A531CA51E12002708F2 /* BottomCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomCollectionCell.m; sourceTree = "<group>"; };
 		06361A551CA53511002708F2 /* MyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeaderView.h; sourceTree = "<group>"; };
 		06361A561CA53511002708F2 /* MyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHeaderView.m; sourceTree = "<group>"; };
+		0658E11C1CAC13DD00BAA01F /* YBStudentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsViewController.h; sourceTree = "<group>"; };
+		0658E11D1CAC13DD00BAA01F /* YBStudentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsViewController.m; sourceTree = "<group>"; };
 		0670B54D1CABC2BA00D34731 /* JZCompletionConfirmationContriller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZCompletionConfirmationContriller.h; sourceTree = "<group>"; };
 		0670B54E1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZCompletionConfirmationContriller.m; sourceTree = "<group>"; };
 		0670B5531CABCEAF00D34731 /* JZCompletionConfirmationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZCompletionConfirmationCell.h; sourceTree = "<group>"; };
@@ -1425,7 +1428,6 @@
 		B2BA43E91CAA805F00926584 /* YBCourseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseTableView.m; sourceTree = "<group>"; };
 		B2BA43EB1CAB7CC600926584 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		B2BA43EC1CAB7CC600926584 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
-		B2BA43EE1CABA06700926584 /* YBStudentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsViewController.h; sourceTree = "<group>"; };
 		B2BA43EF1CABA06700926584 /* YBStudentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsViewController.m; sourceTree = "<group>"; };
 		B2BA44451CABC15C00926584 /* YBStudentDetailsApplyclasstypeinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsApplyclasstypeinfo.h; sourceTree = "<group>"; };
 		B2BA44461CABC15C00926584 /* YBStudentDetailsApplyclasstypeinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsApplyclasstypeinfo.m; sourceTree = "<group>"; };
@@ -1923,6 +1925,8 @@
 		B2BA3EFF1CA5035700926584 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				0658E11C1CAC13DD00BAA01F /* YBStudentDetailsViewController.h */,
+				0658E11D1CAC13DD00BAA01F /* YBStudentDetailsViewController.m */,
 				B2BA43571CA5153000926584 /* CourseViewController.h */,
 				B2BA43581CA5153000926584 /* CourseViewController.m */,
 				B2BA43541CA5065700926584 /* ScheduleViewController.h */,
@@ -2017,7 +2021,7 @@
 				0670B5541CABCEAF00D34731 /* JZCompletionConfirmationCell.m */,
 				B2BA446F1CABD88100926584 /* YBStudentDetailHeadView.h */,
 				B2BA44701CABD88100926584 /* YBStudentDetailHeadView.m */,
-);
+			);
 			path = view;
 			sourceTree = "<group>";
 		};
@@ -3753,6 +3757,7 @@
 				B2BA41951CA5035700926584 /* ShopMainModel.m in Sources */,
 				B2BA42981CA5035700926584 /* ConversationListController.m in Sources */,
 				B2BA41871CA5035700926584 /* finishMessageView.m in Sources */,
+				0658E11E1CAC13DD00BAA01F /* YBStudentDetailsViewController.m in Sources */,
 				B2BA43591CA5153000926584 /* CourseViewController.m in Sources */,
 				B2BA434A1CA5041100926584 /* YBSignUpStudentListController.m in Sources */,
 				B2BA41F61CA5035700926584 /* EMBubbleView+Gif.m in Sources */,
