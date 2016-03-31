@@ -10,4 +10,8 @@
 
 @interface JZCompletionConfirmationCell : UITableViewCell
 
+@property (nonatomic , strong) NSArray *subjectArray;
+
+- (CGFloat)cellHeihtWith:(NSArray *)dataArray;
+
 @end
