@@ -8,6 +8,8 @@
 
 #import "JZCompletionConfirmationContriller.h"
 #import "JZCompletionConfirmationCell.h"
+#import <YYModel.h>
+#import "JZData.h"
 
 @interface JZCompletionConfirmationContriller () <UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -15,19 +17,42 @@
 @property (nonatomic, strong) NSArray *subjectTwoArray;
 
 @property (nonatomic, strong) NSArray *subjectThreeArray;
+
+@property (nonatomic, strong) NSMutableArray *listStudentArray;
 @end
 
 @implementation JZCompletionConfirmationContriller
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _listStudentArray = [NSMutableArray array];
     self.title = @"确认完成";
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self.view addSubview:self.tableView];
-    self.subjectTwoArray = [NSArray array];
-    [self initData];
+    [self initSubjectData];
+
    }
-- (void)initData{
+- (void)initListData{
+    [NetWorkEntiry getCoachOfFinishStudentWihtCoachID:[UserInfoModel defaultUserInfo].userID success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"initListData responseObject:%@",responseObject);
+        
+        NSDictionary *param = responseObject;
+        if ([param[@"type"] integerValue] == 1) {
+            NSArray *resultArray = param[@"data"];
+            if (resultArray.count) {
+                for (NSDictionary *dic in resultArray) {
+                    JZData *listModel = [JZData yy_modelWithDictionary:dic];
+                    [_listStudentArray addObject:listModel];
+                }
+            }
+            [self.tableView reloadData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+- (void)initSubjectData{
     [NetWorkEntiry getSubjectTwoAndSubjectThreeContentsuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
        /* 
         
@@ -66,13 +91,14 @@
             NSArray *subjectTwo = param[@"data"][@"subjecttwo"];
             NSArray *subjectThree = param[@"data"][@"subjectthree"];
             if ( subjectTwo.count) {
+                
                 _subjectTwoArray =  subjectTwo;
                 NSLog(@"_subjectTwoArray = %@",_subjectTwoArray);
             }
             if ( subjectThree.count) {
                 _subjectThreeArray =  subjectThree;
             }
-            [self.tableView reloadData];
+            [self initListData];
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -81,38 +107,49 @@
 }
 #pragma mark ---- UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return self.listStudentArray.count;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    JZData *listModel = self.listStudentArray[indexPath.row];
+    NSLog(@"heightForRowAtIndexPath _subjectTwoArray:%@",_subjectTwoArray);
     
-//    JZCompletionConfirmationCell *completionConfirmationCell = (JZCompletionConfirmationCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath ];
-//    
-//    return [completionConfirmationCell cellHeihtWith:_subjectTwoArray];
-    return 410;
+    NSLog(@"indexPathrow:%ld data.isOpen:%d [JZCompletionConfirmationCell cellHeihtWithlistData:listModel]:%f",(long)indexPath.row,listModel.isOpen,[JZCompletionConfirmationCell cellHeihtWithlistData:listModel subjectArray:_subjectTwoArray]);
+    
+    return [JZCompletionConfirmationCell cellHeihtWithlistData:listModel subjectArray:_subjectTwoArray];
+
 }
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 20;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    static NSString *IDCompletionConfirmationCell = @"cellID";
-    JZCompletionConfirmationCell *completionConfirmationCell = [tableView dequeueReusableCellWithIdentifier:IDCompletionConfirmationCell];
+    static NSString *IDCompletionConfirmationCell = @"JZCompletionConfirmationCell";
+    JZCompletionConfirmationCell *cell = [tableView dequeueReusableCellWithIdentifier:IDCompletionConfirmationCell];
     
-    if (!completionConfirmationCell) {
+    if (!cell) {
         
-        completionConfirmationCell = [[JZCompletionConfirmationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDCompletionConfirmationCell];
+        cell = [[JZCompletionConfirmationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDCompletionConfirmationCell];
     }
-    completionConfirmationCell.subjectArray = _subjectTwoArray;
-    return completionConfirmationCell;
-}
+    cell.subjectArray = _subjectTwoArray;
+    cell.parentViewController = self;
     
+    JZData *listModel = self.listStudentArray[indexPath.row];
+    
+    cell.listModel = listModel;
+    
+    return cell;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
+    JZData *listModel = self.listStudentArray[indexPath.row];
+    listModel.isOpen = !listModel.isOpen;
+    [self.listStudentArray replaceObjectAtIndex:indexPath.row withObject:listModel];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+
 }
 
 - (void)didReceiveMemoryWarning {

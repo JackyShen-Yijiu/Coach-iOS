@@ -692,7 +692,18 @@
     [self GET:urlStr parameters:nil success:success failure:failure];
     
 }
-
+/*
+ *  确认学完  courseinfo/getuconfirmcourse v2
+ *
+ */
++ (void)getCoachOfFinishStudentWihtCoachID:(NSString *)coachid
+                                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure{
+    NSString *url = [NSString stringWithFormat:@"http://jzapi.yibuxueche.com/api/v2/courseinfo/getuconfirmcourse?coachid=%@",coachid];
+//    http://jzapi.yibuxueche.com/api/v2/courseinfo/getuconfirmcourse?coachid=5666365ef14c20d07ffa6ae8
+    [self GET:url parameters:nil success:success failure:failure];
+    
+}
 #pragma mark - Common Method
 
 + (NSString *)domain
