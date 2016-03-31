@@ -76,7 +76,7 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
     
     [self.dataArray removeAllObjects];
 
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kExamClassType];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,kExamClassType];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
         

@@ -22,6 +22,8 @@
 @property (nonatomic, strong) LKAddStudentSubjectthree * subjecttwo;
 @property (nonatomic, strong) NSString * userid;
 
+@property (nonatomic,assign) BOOL isSelect;
+
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 -(NSDictionary *)toDictionary;

@@ -202,7 +202,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
     ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"修改成功" controller:self];
     [alerview show];
     NSMutableDictionary *mubdic = [[NSMutableDictionary alloc] initWithDictionary:@{@"userid":[UserInfoModel defaultUserInfo].userID,@"usertype":@"2"}];
-    NSString *url =[NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kSettingUrl];
+    NSString *url =[NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,kSettingUrl];
     if (sender.tag - 100 == 0) {
         if (sender.on == YES) {
             DYNSLog(@"sender.on = %d",sender.on);

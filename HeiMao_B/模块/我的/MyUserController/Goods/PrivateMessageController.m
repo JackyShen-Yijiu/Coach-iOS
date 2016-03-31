@@ -79,7 +79,7 @@ static NSString *const kBuyproduct =  @"userinfo/buyproduct";
 
 - (void)startDownLoad {
     NSString *url = [NSString stringWithFormat:kMyInfotUrl,[UserInfoModel defaultUserInfo].userID];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],url];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,url];
     [JENetwoking startDownLoadWithUrl:urlString postParam:nil WithMethod:JENetworkingRequestMethodGet withCompletion:^(id data) {
         DYNSLog(@"data = %@",data);
         
@@ -277,7 +277,7 @@ static NSString *const kBuyproduct =  @"userinfo/buyproduct";
     UITextField *textFiledThree = [_textFiledArray objectAtIndex:2];
 
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kBuyproduct];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,kBuyproduct];
     NSLog(@"urlString = %@",urlString);
 
     NSString *  userId = [[UserInfoModel defaultUserInfo] userID];

@@ -56,7 +56,7 @@ static NSString *kMagicShop = @"/getmailproduct?index=1&count=10&producttype=0";
 
 - (void)startDownLoad {
     
-    NSString *urlString = [NSString stringWithFormat:@"%@%@",[NetWorkEntiry  domain],kMagicShop];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@",HOST_TEST_DAMIAN,kMagicShop];
     NSLog(@"%@",urlString);
     NSDictionary *parm = @{@"cityname":@"北京"};
 //    NSLog(@"%@",[AcountManager manager].userCity);

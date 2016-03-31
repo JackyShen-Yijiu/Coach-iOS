@@ -91,7 +91,7 @@
     //
     DYNSLog(@"userid = %@",self.signatureTextField.text)
     ;
-    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
+    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,kupdateUserInfo];
     
     NSDictionary *dicParam = @{@"introduction":self.signatureTextField.text,@"coachid":[UserInfoModel defaultUserInfo].userID};
     

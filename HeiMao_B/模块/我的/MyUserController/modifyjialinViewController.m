@@ -76,7 +76,7 @@
     //
     DYNSLog(@"userid = %@",self.modifyNameTextField.text);
     
-    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kupdateUserInfo];
+    NSString *updateUserInfoUrl = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,kupdateUserInfo];
     
     NSDictionary *dicParam = @{@"Seniority":self.modifyNameTextField.text,@"coachid":[UserInfoModel defaultUserInfo].userID};
     

@@ -25,7 +25,7 @@
     if(!number){
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlString = [NSString stringWithFormat:@"%@/code/%@",[self domain],number];
+    NSString * urlString = [NSString stringWithFormat:@"%@/code/%@",HOST_TEST_DAMIAN,number];
     [self GET:urlString parameters:nil success:success failure:failure];
 }
 
@@ -45,7 +45,7 @@
         [dic setObject:referrerCode forKey:@"referrerCode"];
     }
     
-    NSString * urlStr = [NSString stringWithFormat:@"%@//userinfo/signup",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@//userinfo/signup",HOST_TEST_DAMIAN];
     [self POST:urlStr parameters:dic success:success failure:failure];
 }
 
@@ -65,7 +65,7 @@
                            @"usertype":@"2"
                            };
     
-    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/userlogin",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/userlogin",HOST_TEST_DAMIAN];
     [self POST:urlStr parameters:dic success:success failure:failure];
 }
 
@@ -85,7 +85,7 @@
                            @"smscode":smsCode
                            };
     
-    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/updatepwd",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/updatepwd",HOST_TEST_DAMIAN];
     [self POST:urlStr parameters:dic success:success failure:failure];
 }
 
@@ -99,7 +99,7 @@
     if (!userId) {
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getuserinfo/%@/userid/%@",[self domain],type,userId];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getuserinfo/%@/userid/%@",HOST_TEST_DAMIAN,type,userId];
     [self GET:urlStr parameters:nil success:success failure:failure];
 }
 
@@ -110,7 +110,7 @@
     if (!schoolId) {
         [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/getschooltrainingfield",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/getschooltrainingfield",HOST_TEST_DAMIAN];
     [self GET:urlStr parameters:nil success:success failure:failure];
 }
 
@@ -122,7 +122,7 @@
         return [self missParagramercallBackFailure:failure];
     }
     
-    NSString * urlStr = [NSString stringWithFormat:@"%@/userfeedback",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userfeedback",HOST_TEST_DAMIAN];
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:0];
     
     if (userId) {
@@ -177,7 +177,7 @@
     if (!userId) {
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coachreservationlist",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coachreservationlist",HOST_TEST_DAMIAN];
     NSDictionary * dic = @{
                             @"coachid":userId,
                             @"index":@(pageIndex),
@@ -196,7 +196,7 @@
     if (!userId) {
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/searchreservationlist",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/searchreservationlist",HOST_TEST_DAMIAN];
     NSDictionary * dic = @{
                            @"coachid":userId,
                            @"index":@(pageIndex),
@@ -220,7 +220,7 @@
     if (!userId || !yearTime || !monthTime) {
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmonthapplydata",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmonthapplydata",HOST_TEST_DAMIAN];
     NSDictionary * dic = @{
                            @"coachid":userId,
                            @"year":yearTime,
@@ -237,7 +237,7 @@
     if (!userId || !dayTime) {
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/daysreservationlist",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/daysreservationlist",HOST_TEST_DAMIAN];
     NSDictionary * dic = @{
                            @"coachid":userId,
                            @"date":dayTime,
@@ -255,7 +255,7 @@
     
     // http://127.0.0.1:8183/api/v2/courseinfo/daytimelysreservation?coachid=5666365ef14c20d07ffa6ae8&date=2016-03-25
     
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/daytimelysreservation?coachid=%@&date=%@",[self domain],userId,date];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/daytimelysreservation?coachid=%@&date=%@",HOST_TEST_DAMIAN,userId,date];
     
     [self GET:urlStr parameters:nil success:success failure:failure];
     
@@ -267,7 +267,7 @@
     if (!userId || !dayTime) {
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/getcoursebycoach?coachid=%@&date=%@",[self domain],userId,dayTime];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/getcoursebycoach?coachid=%@&date=%@",HOST_TEST_DAMIAN,userId,dayTime];
 
     [self GET:urlStr parameters:nil success:success failure:failure];
     
@@ -279,7 +279,7 @@
     if (!couresId) {
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/reservationinfo/%@",[self domain],couresId];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/reservationinfo/%@",HOST_TEST_DAMIAN,couresId];
     [self GET:urlStr parameters:nil success:success failure:failure];
 }
 
@@ -289,7 +289,7 @@
 + (void)getTrainContentSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-    NSString * urlStr = [NSString stringWithFormat:@"%@/trainingcontent",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/trainingcontent",HOST_TEST_DAMIAN];
     [self GET:urlStr parameters:nil success:success failure:failure];
 }
 
@@ -303,7 +303,7 @@
     NSDictionary * dic = @{
                            @"userid":studentId,
                            };
-    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/studentinfo",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/studentinfo",HOST_TEST_DAMIAN];
     [self GET:urlStr parameters:dic success:success failure:failure];
 }
 
@@ -318,7 +318,7 @@
     if(!coachidId || !courseID){
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coachhandleinfo",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coachhandleinfo",HOST_TEST_DAMIAN];
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:0];
     [dic setValue:coachidId forKey:@"coachid"];
     [dic setValue:courseID forKey:@"reservationid"];
@@ -347,7 +347,7 @@
     if(!coachidId || !courseID){
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coachcommentv2",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coachcommentv2",HOST_TEST_DAMIAN];
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:0];
     [dic setValue:coachidId forKey:@"coachid"];
     [dic setValue:courseID forKey:@"reservationid"];
@@ -376,7 +376,7 @@
     if(!coachidId || !userid){
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/remindexam",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/remindexam",HOST_TEST_DAMIAN];
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:0];
     [dic setValue:coachidId forKey:@"coachid"];
     [dic setValue:userid forKey:@"userid"];
@@ -394,7 +394,7 @@
     if (pageIndex <= 0 || !userId) {
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/getusercomment/1/%@/%ld",[self domain],userId,pageIndex];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/getusercomment/1/%@/%ld",HOST_TEST_DAMIAN,userId,pageIndex];
     [self GET:urlStr parameters:nil success:success failure:failure];
 }
 
@@ -411,7 +411,7 @@
     if (!coachid || !reservationid) {
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * strUrl = [NSString stringWithFormat:@"%@/courseinfo/coachcomment",[self domain]];
+    NSString * strUrl = [NSString stringWithFormat:@"%@/courseinfo/coachcomment",HOST_TEST_DAMIAN];
     NSDictionary * dic = @{
                            @"coachid":coachid,
                            @"reservationid":reservationid,
@@ -442,7 +442,7 @@
                                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     
-    NSString *urlStr = [NSString stringWithFormat:@"%@/userinfo/buyproduct",[self domain]];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/userinfo/buyproduct",HOST_TEST_DAMIAN];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:@"2"forKey:@"usertype"];
     [dic setValue:userid forKey:@"userid"];
@@ -463,7 +463,7 @@
     if (!params) {
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/userreservationcourse",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/userreservationcourse",HOST_TEST_DAMIAN];
     
     [self POST:urlStr parameters:params success:success failure:failure];
     
@@ -478,7 +478,7 @@
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
    
-    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getmessagecount",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getmessagecount",HOST_TEST_DAMIAN];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:[UserInfoModel defaultUserInfo].userID forKey:@"coachid"];
@@ -501,7 +501,7 @@
     if (count < 0 || seqindex < 0) {
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getnews?seqindex=%li&count=%ld",[self domain],seqindex,count];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getnews?seqindex=%li&count=%ld",HOST_TEST_DAMIAN,seqindex,count];
     
     [self GET:urlStr parameters:nil success:success failure:failure];
 }
@@ -520,7 +520,7 @@
     
 //    http://101.200.204.240:8181/api/v1/userinfo/getsysteminfo?coachid=5616352721ec29041a9af889&index=1&count=10
     
-    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getsysteminfo?coachid=%@&index=%lu&count=%lu",[self domain],coachid,seqindex,count];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getsysteminfo?coachid=%@&index=%lu&count=%lu",HOST_TEST_DAMIAN,coachid,seqindex,count];
     
     [self GET:urlStr parameters:nil success:success failure:failure];
 }
@@ -535,7 +535,7 @@
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     
-    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/updatecoachinfo",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/updatecoachinfo",HOST_TEST_DAMIAN];
    
     NSMutableDictionary*dict = [NSMutableDictionary dictionary];
     dict[@"coachid"] = coachid;
@@ -553,7 +553,7 @@
                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     
-    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/coachsetclass",[self domain]];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/coachsetclass",HOST_TEST_DAMIAN];
     
     NSMutableDictionary*dict = [NSMutableDictionary dictionary];
     dict[@"coachid"] = coachid;
@@ -574,7 +574,7 @@
                               count:(NSInteger)count
                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure {
-    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmystudentlist",[self domain]];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmystudentlist",HOST_TEST_DAMIAN];
     NSDictionary *paramterDict = @{ @"coachid": coachId,
                                     @"subjectid": subjectID,
                                     @"studentstate":subjectID,
@@ -595,7 +595,7 @@
                           subjectID:(NSString *)subjectID
                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure {
-    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmystudentcount",[self domain]];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmystudentcount",HOST_TEST_DAMIAN];
     NSDictionary *paramterDict = @{ @"coachid": coachId,
                                     @"subjectid": subjectID,
                                     
@@ -618,7 +618,7 @@
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     
-    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/coursesignin",[self domain]];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/coursesignin",HOST_TEST_DAMIAN];
     
     //    {
     //        "userid": "String,学员id",
@@ -647,7 +647,7 @@
                               index:(NSUInteger)index
                             success:(void (^)(AFHTTPRequestOperation *, id))success
                             failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
-    NSString *urlStr = [NSString stringWithFormat:@"%@/userinfo/coachstudentlist",[self domain]];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/userinfo/coachstudentlist",HOST_TEST_DAMIAN];
     NSDictionary *paramterDict = @{ @"coachid": coachId,
                                     @"studenttype": [NSString stringWithFormat:@"%zd", type],
                                     @"index": [NSString stringWithFormat:@"%zd", index] };
@@ -659,7 +659,7 @@
 
                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure{
-    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getureservationuserlist",[self domain]];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getureservationuserlist",HOST_TEST_DAMIAN];
     NSDictionary *paramterDict = @{ @"coachid": coachId,
                                     @"subjectid": subjectID
                                    };
@@ -694,15 +694,6 @@
 }
 
 #pragma mark - Common Method
-
-+ (NSString *)domain
-{
-#ifdef QA_TEST
-    return HOST_TEST_DAMIAN;
-#else
-    return HOST_LINE_DOMAIN;
-#endif
-}
 
 + (void)missParagramercallBackFailure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
