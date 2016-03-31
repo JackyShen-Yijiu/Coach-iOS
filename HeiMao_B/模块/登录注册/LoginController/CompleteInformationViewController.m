@@ -12,7 +12,7 @@
 #import "QueryViewController.h"
 #import "WorkTypeListController.h"
 
-#define url [NSString stringWithFormat:@"%@/userinfo/applyverification",[NetWorkEntiry domain]]
+#define url [NSString stringWithFormat:@"%@/userinfo/applyverification",HOST_TEST_DAMIAN]
 
 @interface CompleteInformationViewController ()<QueryViewControllerDelegate,WorkTypeListControllerDelegate>
 @property (strong, nonatomic) UIView *navImage;

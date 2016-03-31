@@ -104,7 +104,7 @@
         return;
     }
 
-    NSString *coachTags = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kchooseTag];
+    NSString *coachTags = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,kchooseTag];
     NSString *tagslist = @"";
     NSMutableArray *strArray = [[NSMutableArray alloc] init];
     for (int i = 0;i<self.systemTagColorArray.count;i++) {
@@ -191,7 +191,7 @@
         cell = [[PersonalizeLabelCell alloc] initWithStyle:0 reuseIdentifier:@"yy"];
     }
     cell.addTag = ^(NSString *str) {
-        NSString *coachTags = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kaddTag];
+        NSString *coachTags = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,kaddTag];
         [JENetwoking startDownLoadWithUrl:coachTags postParam:@{@"coachid":[UserInfoModel defaultUserInfo].userID,@"tagname":str} WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
             NSDictionary *dic = data;
             if ([[dic objectForKey:@"type"] integerValue] == 1) {
@@ -225,7 +225,7 @@
         NSLog(@"cancal");
     }else {
         PersonlizeModel *model = self.customTagArray[_tag];
-        NSString *delegateCoachTags = [NSString stringWithFormat:@"%@/%@",[NetWorkEntiry domain],kdelegateTag];
+        NSString *delegateCoachTags = [NSString stringWithFormat:@"%@/%@",HOST_TEST_DAMIAN,kdelegateTag];
         [JENetwoking startDownLoadWithUrl:delegateCoachTags postParam:@{@"coachid":[UserInfoModel defaultUserInfo].userID,@"tagid":model._id} WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
             NSDictionary *dic = data;
             if ([[dic objectForKey:@"type"] integerValue] == 1) {

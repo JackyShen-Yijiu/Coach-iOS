@@ -13,7 +13,7 @@
 
 @interface YBCourseData : NSObject
 
-@property (nonatomic, strong) NSString * idField;
+@property (nonatomic, strong) NSString * _id;
 ///  教练id
 @property (nonatomic, strong) NSString * coachid;
 @property (nonatomic, strong) NSString * coursebegintime;
