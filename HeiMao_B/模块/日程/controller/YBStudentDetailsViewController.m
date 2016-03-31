@@ -106,7 +106,7 @@
 - (void)loadData
 {
     
-    [NetWorkEntiry getStudentDetailswithuserid:@"564229d81eb4017436ade69e" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry getStudentDetailswithuserid:_studentID success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         self.rootClass = [YBStudentDetailsRootClass yy_modelWithJSON:responseObject];
         
