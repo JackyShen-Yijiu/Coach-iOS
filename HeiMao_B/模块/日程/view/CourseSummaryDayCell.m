@@ -11,8 +11,7 @@
 #import "YBObjectTool.h"
 #import "LKAddStudentTimeViewController.h"
 #import "LKTestViewController.h"
-
-
+#import "YBStudentDetailsViewController.h"
 
 @interface CourseSummaryDayCell ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -346,7 +345,12 @@
     
     if (_model.coursereservationdetial && _model.coursereservationdetial.count>indexPath.row) {
         
+        NSDictionary *dict = _model.coursereservationdetial[indexPath.row];
+
         NSLog(@"跳转学员详情");
+        YBStudentDetailsViewController *vc = [[YBStudentDetailsViewController alloc] init];
+        vc.studentID = dict[@"userid"][@"_id"];
+        [self.parentViewController.navigationController pushViewController:vc animated:YES];
         
     }else{
        
