@@ -688,7 +688,7 @@
  */
 + (void)getSubjectTwoAndSubjectThreeContentsuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure{
-    NSString *urlStr = [NSString stringWithFormat:@"%@/trainingcontent",[self domain]];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/trainingcontent",HOST_TEST_DAMIAN];
     [self GET:urlStr parameters:nil success:success failure:failure];
     
 }
