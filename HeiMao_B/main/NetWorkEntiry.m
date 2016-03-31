@@ -659,7 +659,7 @@
 
                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure{
-    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getureservationuserlist",HOST_TEST_DAMIAN];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getureservationuserlist",HOST_LINE_DOMAIN];
     NSDictionary *paramterDict = @{ @"coachid": coachId,
                                     @"subjectid": subjectID
                                    };

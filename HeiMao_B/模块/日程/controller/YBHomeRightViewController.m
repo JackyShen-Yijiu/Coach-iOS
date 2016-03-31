@@ -141,7 +141,7 @@
     [self.view addSubview:self.segController];
     
     // 预约
-    self.courseSummaryTableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.segController.frame), self.view.width, self.view.height-64-40) style:UITableViewStylePlain];
+    self.courseSummaryTableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.segController.frame), self.view.width, self.view.height-64-40-50) style:UITableViewStylePlain];
     self.courseSummaryTableView.backgroundColor = RGB_Color(251, 251, 251);
     self.courseSummaryTableView.delegate = self;
     self.courseSummaryTableView.dataSource = self;

@@ -12,6 +12,7 @@
 #import "YYModel.h"
 #import "LKAddStudentData.h"
 #import "YBCourseData.h"
+#import "ChineseString.h"
 
 static NSString *addStuCellID = @"addStuCellID";
 
@@ -43,11 +44,40 @@ static NSString *addStuCellID = @"addStuCellID";
 
 
 
+/// 添加学员数据
+@property (nonatomic, strong) NSMutableArray *arrMData;
+
+@property(nonatomic,strong)NSMutableArray *indexArray;
+
+@property(nonatomic,retain)NSMutableArray *LetterResultArr;
+
+@property(nonatomic,retain) NSMutableDictionary *dataDict;
 
 
 @end
 
 @implementation LKAddStudentTimeViewController
+- (NSMutableArray *)indexArray
+{
+    if (_indexArray==nil) {
+        _indexArray = [NSMutableArray array];
+    }
+    return _indexArray;
+}
+- (NSMutableArray *)LetterResultArr
+{
+    if (_LetterResultArr==nil) {
+        _LetterResultArr = [NSMutableArray array];
+    }
+    return _LetterResultArr;
+}
+- (NSMutableDictionary *)dataDict
+{
+    if (_dataDict==nil) {
+        _dataDict = [NSMutableDictionary dictionary];
+    }
+    return _dataDict;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -88,18 +118,14 @@ static NSString *addStuCellID = @"addStuCellID";
     //    self.tableView.sectionIndexBackgroundColor = [UIColor clearColor];
     //    //    self.edgesForExtendedLayout = UIRectEdgeNone;
     //
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(addStudent)];
-    
-    rightItem.tintColor = [UIColor whiteColor];
-    
-    
-    
-    self.navigationItem.rightBarButtonItem = rightItem;
+
+    self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"添加" highTitle:@"添加" target:self action:@selector(addStudent) isRightItem:YES];
+
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
-        
         [self initData];
+        
     });
     
 #pragma mark - 顶部时间按钮栏
@@ -183,6 +209,21 @@ static NSString *addStuCellID = @"addStuCellID";
             
         }
         
+        NSMutableArray *nameArray = [NSMutableArray array];
+        for (LKAddStudentData *data in self.stundentDataArrM) {
+            
+            [nameArray addObject:data.name];
+            
+            [self.dataDict setObject:data forKey:data.name];
+            
+        }
+        
+        // 返回tableview右方 indexArray
+        self.indexArray = [ChineseString IndexArray:nameArray];
+        
+        // 返回联系人
+        self.LetterResultArr = [ChineseString LetterSortArray:nameArray];
+        
         [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -192,11 +233,73 @@ static NSString *addStuCellID = @"addStuCellID";
     }];
     
 }
-#pragma mark - 选择cell
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    LKAddStudentData *data = self.stundentDataArrM[indexPath.row];
 
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.indexArray.count;
+}
+
+#pragma mark - table view
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return [[self.LetterResultArr objectAtIndex:section] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    LKAddStudentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:addStuCellID];
+    if (!cell) {
+        cell = [[LKAddStudentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:addStuCellID];
+        
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    
+    NSLog(@"%@",self.stundentDataArrM);
+    
+    
+//    LKAddStudentData *data = self.stundentDataArrM[indexPath.row];
+    
+    NSString *str = [[self.LetterResultArr objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    
+    LKAddStudentData *data = [self.dataDict objectForKey:str];
+    
+    if (data.isSelect) {
+        
+        cell.selectImageView.image = [UIImage imageNamed:@"sendmsg_selected_icon"];
+        
+    }else{
+        
+        cell.selectImageView.image = [UIImage imageNamed:@"sendmsg_normal_icon"];
+        
+    }
+    
+    cell.studentNameLabel.text = data.name;
+    
+    if (data.subject.subjectid == 2) {
+        cell.studyDetilsLabel.text = data.subjecttwo.progress;
+        
+    } else if (data.subject.subjectid == 3) {
+        cell.studyDetilsLabel.text = data.subjectthree.progress;
+        
+    }
+    
+    
+    NSURL *iconUrl = [NSURL URLWithString:data.headportrait.originalpic];
+    NSLog(@"bfsbff%@",iconUrl);
+    
+    [cell.studentIconView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"JZCoursenull_student"]];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSString *str = [[self.LetterResultArr objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    
+    LKAddStudentData *data = [self.dataDict objectForKey:str];
+    
     if (!data.isSelect) {
         // 继续选择
         if (self.selectedIndexPaths.count>=1) {
@@ -205,16 +308,12 @@ static NSString *addStuCellID = @"addStuCellID";
         }
     }
     
-    
-//    NSLog(@"%@",data.userid);
-    
     self.userid = data.userid.copy;
     
     data.isSelect = !data.isSelect;
     
+    [self.dataDict setObject:data forKey:str];
     
-    
-    [self.stundentDataArrM replaceObjectAtIndex:indexPath.row withObject:data];
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     
     if (data.isSelect) {
@@ -223,7 +322,56 @@ static NSString *addStuCellID = @"addStuCellID";
         [self.selectedIndexPaths removeAllObjects];
     }
     
+    
 }
+
+#pragma mark -Section的Header的值
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20;
+}
+#pragma mark - Section header view
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 20)];
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(14, 0, 320, 20)];
+    [view addSubview:lab];
+    view.backgroundColor = RGB_Color(239, 239, 243);
+    
+    if (self.indexArray.count==section) {
+        
+    }
+    else
+    {
+        lab.text = [self.indexArray objectAtIndex:section];
+    }
+    
+    lab.textColor = [UIColor lightGrayColor];
+    
+    return view;
+}
+
+#pragma mark -设置右方表格的索引数组
+-(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return self.indexArray;
+}
+
+#pragma mark -
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
+{
+    return index;
+}
+
+
+
+
+
+
+
+
+
+
 
 #pragma mark - 点击选择时间的按钮
 -(void)clickSelectBtn:(UIButton *)sender{
@@ -237,8 +385,6 @@ static NSString *addStuCellID = @"addStuCellID";
 //    NSLog(@"--第%zd个按钮--",sender.tag);
     LKAddStudentTimeView *lkView = [_timeView viewWithTag:2001];
 
-    
-    
     self.begintime =lkView.starTimeLabel.text;
     self.endtime = lkView.finishTimeLabel.text;
 
@@ -293,6 +439,14 @@ static NSString *addStuCellID = @"addStuCellID";
     [NetWorkEntiry postcourseinfoUserreservationcourseWithParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"LKAddStudentTimeViewController--添加学员成功");
+        NSInteger type = [responseObject[@"type"] integerValue];
+        if (type) {
+            [self showTotasViewWithMes:@"添加成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            NSString *message = [NSString stringWithFormat:@"%@",responseObject[@"msg"]];
+            [self showTotasViewWithMes:message];
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"LKAddStudentTimeViewController--添加学员失败--error:%@",error);
@@ -303,92 +457,61 @@ static NSString *addStuCellID = @"addStuCellID";
 }
 
 
-
-#pragma mark - tableView数据源方法
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    
-    return self.stundentDataArrM.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    LKAddStudentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:addStuCellID];
-    if (!cell) {
-        cell = [[LKAddStudentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:addStuCellID];
-        
-    }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    
-    NSLog(@"%@",self.stundentDataArrM);
-    
-    
-    LKAddStudentData *data = self.stundentDataArrM[indexPath.row];
-    
-    if (data.isSelect) {
-        
-        cell.selectImageView.image = [UIImage imageNamed:@"sendmsg_selected_icon"];
-        
-    }else{
-        
-        cell.selectImageView.image = [UIImage imageNamed:@"sendmsg_normal_icon"];
-        
-    }
-    
-    cell.studentNameLabel.text = data.name;
-    
-    if (data.subject.subjectid == 2) {
-        cell.studyDetilsLabel.text = data.subjecttwo.progress;
-        
-    } else if (data.subject.subjectid == 3) {
-        cell.studyDetilsLabel.text = data.subjectthree.progress;
-        
-    }
-    
-    
-    NSURL *iconUrl = [NSURL URLWithString:data.headportrait.originalpic];
-    NSLog(@"bfsbff%@",iconUrl);
-    
-    [cell.studentIconView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"JZCoursenull_student"]];
-    
-    
-    
-    return cell;
-}
-
-
-
-
-#pragma mark - 返回tableView右边索引栏
-//- (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-//   NSArray *indexArr = [self.groupes valueForKeyPath:@"title"];
-//    NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:self.arrayList.count];
-//    for (StudentGroup *group in self.arrayList) {
-//        [arrM addObject:group.title];
-//    }
-//    return arrM;
-//}
-
-#pragma mark - 返回每一组的头部标题
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-////    return [self.arrayList[section] title];
-//}
-#pragma mark - 返回的行数
+//
+//#pragma mark - tableView数据源方法
 //- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//
-//    //    return [[self.arrayList[section] Students] count];
-//
-//    return 100;
+//    
+//    
+//    return self.stundentDataArrM.count;
 //}
 //
-#pragma mark - 返回的组数
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//        return [self.studentDataM count];
-//
-//    return 1;
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    LKAddStudentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:addStuCellID];
+//    if (!cell) {
+//        cell = [[LKAddStudentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:addStuCellID];
+//        
+//    }
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    
+//    
+//    NSLog(@"%@",self.stundentDataArrM);
+//    
+//    
+//    LKAddStudentData *data = self.stundentDataArrM[indexPath.row];
+//    
+//    if (data.isSelect) {
+//        
+//        cell.selectImageView.image = [UIImage imageNamed:@"sendmsg_selected_icon"];
+//        
+//    }else{
+//        
+//        cell.selectImageView.image = [UIImage imageNamed:@"sendmsg_normal_icon"];
+//        
+//    }
+//    
+//    cell.studentNameLabel.text = data.name;
+//    
+//    if (data.subject.subjectid == 2) {
+//        cell.studyDetilsLabel.text = data.subjecttwo.progress;
+//        
+//    } else if (data.subject.subjectid == 3) {
+//        cell.studyDetilsLabel.text = data.subjectthree.progress;
+//        
+//    }
+//    
+//    
+//    NSURL *iconUrl = [NSURL URLWithString:data.headportrait.originalpic];
+//    NSLog(@"bfsbff%@",iconUrl);
+//    
+//    [cell.studentIconView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"JZCoursenull_student"]];
+//    
+//    
+//    
+//    return cell;
 //}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

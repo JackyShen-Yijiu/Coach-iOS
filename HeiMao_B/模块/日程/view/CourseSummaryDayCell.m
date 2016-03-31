@@ -293,6 +293,7 @@
     YBAppointMentUserCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     cell.userInteractionEnabled = YES;
     cell.iconImageView.image = [UIImage imageNamed:@""];
+    cell.nameLabel.text = nil;
     cell.stateImageView.hidden = YES;
     cell.alphaView.hidden = YES;
     
