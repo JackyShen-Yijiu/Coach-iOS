@@ -182,6 +182,7 @@
             }
         }
     }
+    
     if (offsetY < 0 ) {
         NSLog(@"offsetY小于0");
         if (_tableView.frame.origin.y < height - 64) {

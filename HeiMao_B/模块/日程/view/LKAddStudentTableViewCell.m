@@ -30,6 +30,10 @@
         
         self.studentIconView.image = [UIImage imageNamed:@"JZCoursenull_student"];
         
+        self.studentIconView.layer.cornerRadius = 24;
+        
+        self.studentIconView.layer.masksToBounds = YES;
+        
       
     }
     return self;
