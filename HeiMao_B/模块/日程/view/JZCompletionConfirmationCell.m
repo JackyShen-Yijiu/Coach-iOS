@@ -22,7 +22,6 @@
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIView *bgContentView; // 背景
 @property (nonatomic, strong) UILabel *tittleContentLabel;
-@property (nonatomic, strong) UIButton *contentButton;
 
 @property (nonatomic, strong) UIView *bgRateView; // 背景
 @property (nonatomic, strong) UILabel *rateLabel;
@@ -30,7 +29,9 @@
 @property (nonatomic, strong) UITextView *contentTextView;
 @property (nonatomic, strong) UIButton *commitButton;
 
+@property (nonatomic, strong) NSMutableArray *btnArray;
 
+@property (nonatomic, assign) CGFloat lastY;
 
 
 @end
@@ -43,7 +44,9 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self initUI];
+        self.btnArray = [NSMutableArray array];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+//        [self initButton];
     }
     return self;
 }
@@ -64,14 +67,91 @@
     
     // 教学内容视图
     [self.bgContentView addSubview:self.tittleContentLabel];
-    [self.bgContentView addSubview:self.contentButton];
-    
+       
     // 评分视图
     [self.bgContentView addSubview:self.bgRateView];
     [self.bgRateView addSubview:self.rateLabel];
     [self.bgRateView addSubview:self.ratingBar];
     [self.bgRateView addSubview:self.contentTextView];
     [self.bgRateView addSubview:self.commitButton];
+}
+- (void)initButton{
+   
+    CGFloat width = CGRectGetMinX(self.tittleContentLabel.frame);
+    CGFloat lineNum = 1;
+    NSMutableArray *widthArray = [[NSMutableArray alloc] init];    //存宽度
+    for (int i = 0;i < _subjectArray.count;i++) {
+        NSString *str = self.subjectArray[i];
+        CGSize size = [self getLabelWidthWithString:str];
+        CGFloat widthSum = 0;
+        for (NSNumber *contentWidth in widthArray) {
+            widthSum += contentWidth.floatValue;
+        }
+        if (lineNum == 1) {
+            
+            //            CGFloat right = [UIScreen mainScreen].bounds.size.width;
+            //            CGFloat left = widthSum + labelSize.width + (widthArray.count)*24.f + 100.f;
+            
+            if (widthSum + size.width + (widthArray.count)*24 + 100 > [UIScreen mainScreen].bounds.size.width) {
+                lineNum += 1;
+                width = 15;
+                [widthArray removeAllObjects];
+                [widthArray addObject:@(size.width)];
+            }else {
+                width = widthArray.count*24 +widthSum +16; // 首行 第一个buttond X 的位置
+                [widthArray addObject:@(size.width)];
+            }
+        }else {
+            if (widthSum + size.width + (widthArray.count+1)*24 > [UIScreen mainScreen].bounds.size.width) {
+                lineNum +=1;
+                width = 15;
+                [widthArray removeAllObjects];
+                [widthArray addObject:@(size.width)];
+            }else {
+                width = 15+widthArray.count*24 +widthSum ;
+                [widthArray addObject:@(size.width)];
+            }
+        }
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        if (lineNum == 1) {
+            // 开始是btnY值
+            btn.frame = CGRectMake(width,46,size.width , size.height);
+        }else {
+            btn.frame = CGRectMake(width,(lineNum - 1)*15 +14*(lineNum -1) + 46,size.width , size.height);
+        }
+        btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [btn setTitle:str forState:UIControlStateNormal];
+        btn.backgroundColor = [UIColor redColor];
+        btn.tag = 500 + i;
+        [_btnArray addObject:btn];
+        [self.bgContentView addSubview:btn];
+        // 存储最后一个button的Y
+        if (i == _subjectArray.count - 1) {
+            _lastY = btn.frame.origin.y;
+        }
+
+    }
+    
+    // 动态改变
+    [self.bgContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        CGFloat bgcontentViewH = _lastY + 24;
+        make.top.mas_equalTo(self.bgBottomView.mas_top).offset(0);
+        make.left.mas_equalTo(self.contentView.mas_left).offset(0);
+        make.right.mas_equalTo(self.contentView.mas_right).offset(0);
+        make.height.mas_equalTo(bgcontentViewH);
+    }];
+    
+    [self.bgBottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        
+        CGFloat bgBotomH = CGRectGetHeight(self.bgContentView.frame) + 200;
+        make.top.mas_equalTo(self.bgTopView.mas_bottom).offset(0);
+        make.left.mas_equalTo(self.contentView.mas_left).offset(0);
+        make.right.mas_equalTo(self.contentView.mas_right).offset(0);
+        make.height.mas_equalTo(bgBotomH); // 330
+
+    }];
+    
+    
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
@@ -113,7 +193,7 @@
         make.top.mas_equalTo(self.bgTopView.mas_bottom).offset(0);
         make.left.mas_equalTo(self.contentView.mas_left).offset(0);
         make.right.mas_equalTo(self.contentView.mas_right).offset(0);
-        make.height.mas_equalTo(@200); // 200
+        make.height.mas_equalTo(@330); // 330
     }];
 
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -129,7 +209,7 @@
         make.top.mas_equalTo(self.bgBottomView.mas_top).offset(0);
         make.left.mas_equalTo(self.contentView.mas_left).offset(0);
         make.right.mas_equalTo(self.contentView.mas_right).offset(0);
-        make.height.mas_equalTo(@80);
+        make.height.mas_equalTo(@110); //110
     }];
     [self.tittleContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.bgContentView.mas_top).offset(16);
@@ -137,19 +217,13 @@
         make.width.mas_equalTo(@100);
         make.height.mas_equalTo(@32);
     }];
-    [self.contentButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.tittleContentLabel.mas_bottom).offset(18);
-        make.left.mas_equalTo(self.tittleContentLabel.mas_left);
-        make.width.mas_equalTo(@100);
-        make.height.mas_equalTo(@32);
-    }];
-
+    
     // 评分视图
     [self.bgRateView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.bgContentView.mas_bottom).offset(0);
         make.left.mas_equalTo(self.contentView.mas_left).offset(0);
         make.right.mas_equalTo(self.contentView.mas_right).offset(0);
-        make.height.mas_equalTo(@200);
+        make.height.mas_equalTo(@200); // 200
     }];
     
     [self.rateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -178,7 +252,7 @@
     }];
 
 
-
+ [self initButton];
 
     
 }
@@ -249,7 +323,7 @@
 - (UIView *)bgContentView{
     if (_bgContentView == nil) {
         _bgContentView = [[UIView alloc] init];
-        _bgContentView.backgroundColor = [UIColor whiteColor];
+        _bgContentView.backgroundColor = [UIColor grayColor];
     }
     return _bgContentView;
 }
@@ -262,14 +336,6 @@
         _tittleContentLabel.textColor = RGB_Color(230, 46, 72);
     }
     return _tittleContentLabel;
-}
-- (UIButton *)contentButton{
-    if (_contentButton == nil) {
-        _contentButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _contentButton.backgroundColor = [UIColor cyanColor];
-        
-    }
-    return _contentButton;
 }
 
 - (UIView *)bgRateView{
@@ -293,6 +359,9 @@
 - (RatingBar *)ratingBar{
     if (_ratingBar == nil) {
         _ratingBar = [[RatingBar alloc] init];
+        [_ratingBar setImageDeselected:@"YBAppointMentDetailsstar.png" halfSelected:nil fullSelected:@"YBAppointMentDetailsstar_fill.png" andDelegate:nil];
+        _ratingBar.isIndicator = YES;
+
     }
     return _ratingBar;
 }
@@ -313,4 +382,52 @@
     }
     return _commitButton;
 }
+- (CGFloat)cellHeihtWith:(NSArray *)dataArray{
+    _subjectArray = dataArray;
+    NSLog(@"_suc  ======= %@",_subjectArray);
+    
+    JZCompletionConfirmationCell *JZCompletonCell = [[JZCompletionConfirmationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
+    [self initButton];
+    [JZCompletonCell layoutIfNeeded];
+   
+//    //设置按钮背景的宽度
+//    CGFloat margin = 16;
+//    CGFloat width = self.frame.size.height - margin * 2;
+//     CGFloat lineNum = 1;
+//     NSMutableArray *widthArray = [[NSMutableArray alloc] init];    //存宽度
+//    for (int i = 0;i < dataArray.count;i++) {
+//        NSString *str = dataArray[i];
+//        CGSize labelSize = [self  getLabelWidthWithString:str];
+//        CGFloat widthSum = 0;
+//        for (NSNumber *contentWidth in widthArray) {
+//            widthSum += contentWidth.floatValue;
+//        }
+//        if (widthSum + labelSize.width + (widthArray.count+1)*24 > [UIScreen mainScreen].bounds.size.width) {
+//            lineNum +=1;
+//            width = 15;
+//            [widthArray removeAllObjects];
+//            [widthArray addObject:@(labelSize.width)];
+//        }else {
+//            width = 15+widthArray.count*24 +widthSum ;
+//            [widthArray addObject:@(labelSize.width)];
+//        }
+//    }
+////    if (isExist) {
+////        return 45 + 30 +15*(lineNum-1) +lineNum*14;
+////    }
+//    
+    CGFloat bgBotomH = CGRectGetHeight(self.bgContentView.frame) + 200 + 80;
+    
+    
+    return bgBotomH;
+}
+#pragma mark - getSize
+
+- (CGSize)getLabelWidthWithString:(NSString *)string {
+    CGRect bounds = [string boundingRectWithSize:
+                     CGSizeMake([[UIScreen mainScreen] bounds].size.width - 30, 10000) options:
+                     NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.f]} context:nil];
+    return bounds.size;
+}
+
 @end
