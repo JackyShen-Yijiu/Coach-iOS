@@ -11,6 +11,7 @@
 
 @interface LKAddStudentTimeViewController : UIViewController
 
+/// 顶部时间view数组
 @property (nonatomic, strong) NSArray *dataArray;
 
 @property (nonatomic, assign) NSInteger courseStudentCountInt;

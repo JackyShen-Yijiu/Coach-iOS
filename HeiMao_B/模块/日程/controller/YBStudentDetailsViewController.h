@@ -11,3 +11,4 @@
 @interface YBStudentDetailsViewController : JGBaseViewController
 @property (nonatomic, copy) NSString *studentID;
 @end
+
