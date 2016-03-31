@@ -294,6 +294,8 @@
     YBAppointMentUserCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     cell.userInteractionEnabled = YES;
     cell.iconImageView.image = [UIImage imageNamed:@""];
+    cell.stateImageView.hidden = YES;
+    cell.alphaView.hidden = YES;
     
     if (_model.coursereservationdetial && _model.coursereservationdetial.count>indexPath.row) {
         
@@ -302,6 +304,19 @@
         [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dict[@"userid"][@"headportrait"][@"originalpic"]]] placeholderImage:[UIImage imageNamed:@"JZCoursenull_student"]];
         
         cell.nameLabel.text = [NSString stringWithFormat:@"%@",dict[@"userid"][@"name"]];
+        
+        // "预约状态 预约状态 1 预约中 2 取消预约 3 已确认 4 已拒绝 5课程结束）待确认完成课程 6已完成待评价 7评价完成 9 签到 10 未签到",
+        NSInteger reservationstate = [dict[@"reservationstate"] integerValue];
+        
+        if (reservationstate==9) {
+            cell.stateImageView.hidden = NO;
+            cell.stateImageView.image = [UIImage imageNamed:@"JZCourseregister"];
+        }else if (reservationstate==6){
+            cell.stateImageView.hidden = NO;
+            cell.stateImageView.image = [UIImage imageNamed:@"JZCoursecomplete"];
+        }else if(reservationstate==10){
+            cell.alphaView.hidden = NO;
+        }
         
     }else{
         
