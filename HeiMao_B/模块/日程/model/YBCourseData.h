@@ -33,4 +33,8 @@
 @property (nonatomic,assign) CGFloat appointMentViewH;
 @property (nonatomic,assign) NSInteger passTimeCount;// 过期时间的个数
 
+// 是否是已选择预约学员
+@property (assign, nonatomic, readwrite) BOOL is_selected;
+@property (assign, nonatomic, readwrite) NSInteger indexPath;
+
 @end

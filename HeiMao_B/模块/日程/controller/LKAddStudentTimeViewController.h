@@ -12,7 +12,7 @@
 @interface LKAddStudentTimeViewController : UIViewController
 
 /// 顶部时间view数组
-@property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 
 /// 总共的名额
 @property (nonatomic, assign) NSInteger courseStudentCountInt;
@@ -29,7 +29,7 @@
 @property (nonatomic ,copy) NSString  *courseList;
 
 
-@property (nonatomic, copy) NSString *UTCData;
+@property (nonatomic, copy) NSString *selectData;
 
 /// 学员id
 @property (nonatomic, strong) NSMutableString *userid;

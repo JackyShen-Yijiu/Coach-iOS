@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface YBCourseTableView : UIView
+@property (nonatomic, copy) NSString *selectData;
 @property (nonatomic, strong) UITableView *dataTabelView;
 @property (nonatomic,strong) NSArray *dataArray;
 @property (nonatomic,strong) UIViewController *parentViewController;

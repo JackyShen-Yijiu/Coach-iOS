@@ -13,6 +13,7 @@
 #import "LKAddStudentData.h"
 #import "YBCourseData.h"
 #import "ChineseString.h"
+#import "BLInformationManager.h"
 
 static NSString *addStuCellID = @"addStuCellID";
 
@@ -53,10 +54,22 @@ static NSString *addStuCellID = @"addStuCellID";
 
 @property(nonatomic,retain) NSMutableDictionary *dataDict;
 
+@property (strong, nonatomic) NSMutableArray *upDateArray;
+@property (nonatomic ,strong) NSString *startTimeStr;
+@property (nonatomic ,strong) NSString *endTimeStr;
 
 @end
 
 @implementation LKAddStudentTimeViewController
+
+
+- (NSMutableArray *)upDateArray {
+    if (_upDateArray == nil) {
+        _upDateArray = [[NSMutableArray alloc] init];
+    }
+    return _upDateArray;
+}
+
 - (NSMutableArray *)indexArray
 {
     if (_indexArray==nil) {
@@ -144,7 +157,7 @@ static NSString *addStuCellID = @"addStuCellID";
         
         YBCourseData *data = self.dataArray[i];
         
-    
+        data.indexPath = i;
         
         if ((self.courseStudentCountInt - self.selectedstudentconutInt) > 0) {
             
@@ -158,6 +171,11 @@ static NSString *addStuCellID = @"addStuCellID";
             [timeViewItem.selectButton setTitle:@"已满" forState:UIControlStateNormal];
             [timeViewItem.selectButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
 
+            self.navigationItem.hidesBackButton = YES;
+            self.navigationItem.rightBarButtonItem.customView.hidden=YES;
+            
+        
+            [self.tableView setUserInteractionEnabled:NO];
         }
 
         
@@ -303,7 +321,7 @@ static NSString *addStuCellID = @"addStuCellID";
     if (!data.isSelect) {
         // 继续选择
         if (self.selectedIndexPaths.count>=1) {
-            [self showPopAlerViewWithMes:@"您最多可以添加一名学员"];
+            [self showPopAlerViewWithMes:@"您每次最多可以添加一名学员"];
             return;
         }
     }
@@ -376,66 +394,154 @@ static NSString *addStuCellID = @"addStuCellID";
 #pragma mark - 点击选择时间的按钮
 -(void)clickSelectBtn:(UIButton *)sender{
     
-    self.selectBtn.selected = !self.selectBtn;
+    YBCourseData *model = self.dataArray[sender.tag-1000];
     
-    sender.selected = !sender.selected;
-    
-    self.selectBtn = sender;
-    
-//    NSLog(@"--第%zd个按钮--",sender.tag);
-    LKAddStudentTimeView *lkView = [_timeView viewWithTag:2001];
-
-    self.begintime =lkView.starTimeLabel.text;
-    self.endtime = lkView.finishTimeLabel.text;
-
-    //点击时间按钮后，刷新表格数据
-    [self.tableView reloadData];
+    if (model.is_selected == NO) {
+        
+        if (self.upDateArray.count == 0) {
+            
+            sender.selected = !sender.selected;
+            model.is_selected = YES;
+            [self.upDateArray addObject:model];
+            [self.dataArray replaceObjectAtIndex:sender.tag-1000 withObject:model];
+            [BLInformationManager sharedInstance].appointmentData = self.upDateArray;
+            
+            return;
+        }
+        
+        for (YBCourseData *UpDatemodel in self.upDateArray) {
+            
+            if ((model.indexPath + 1 == UpDatemodel.indexPath )|| (model.indexPath-1 == UpDatemodel.indexPath)) {
+                
+                sender.selected = !sender.selected;
+                model.is_selected = YES;
+                [self.upDateArray addObject:model];
+                [self.dataArray replaceObjectAtIndex:sender.tag-1000 withObject:model];
+                [BLInformationManager sharedInstance].appointmentData = self.upDateArray;
+                
+                return;
+            }
+        }
+        
+        
+        ToastAlertView * alertView = [[ToastAlertView alloc] initWithTitle:@"请选择连续的时间"];
+        [alertView show];
+        
+    }else if (model.is_selected == YES) {
+        
+        NSArray *array = [BLInformationManager sharedInstance].appointmentData;
+        
+        NSArray *resultArray = [array sortedArrayUsingComparator:^NSComparisonResult(YBCourseData *  _Nonnull obj1, YBCourseData *  _Nonnull obj2) {
+            //obj1.coursetime.numMark < obj2.coursetime.numMark
+            return obj1.coursetime.timeid > obj2.coursetime.timeid ;
+        }];
+        YBCourseData *fistModel = resultArray.firstObject;
+        YBCourseData *lastModel = resultArray.lastObject;
+        
+        if ([fistModel._id isEqualToString:model._id]||[lastModel._id isEqualToString:model._id]) {
+            
+            sender.selected = !sender.selected;
+            model.is_selected = NO;
+            [self.upDateArray removeObject:model];
+            [self.dataArray replaceObjectAtIndex:sender.tag-1000 withObject:model];
+            [BLInformationManager sharedInstance].appointmentData = self.upDateArray;
+            
+            return;
+            
+        }else {
+            
+            ToastAlertView * alertView = [[ToastAlertView alloc] initWithTitle:@"操作会造成预约时间不连续"];
+            [alertView show];
+            
+            return;
+        }
+       
+        sender.selected = !sender.selected;
+        model.is_selected = NO;
+        [self.upDateArray removeObject:model];
+        [self.dataArray replaceObjectAtIndex:sender.tag-1000 withObject:model];
+        [BLInformationManager sharedInstance].appointmentData = self.upDateArray;
+        
+    }
     
 }
 
-
+- (int)chagetime:(NSString *)timeStr data:(NSString *)dataStr {
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    
+    //设置格式
+    df.dateFormat = @"yyyy-MM-dd HH:mm:ss.0";
+    
+    //将符合格式的字符串转成NSDate对象
+    NSDate *date = [df dateFromString:[NSString stringWithFormat:@"%@ %@",dataStr,timeStr]];
+    NSLog(@"chagetime date:%@",date);
+    
+    //计算一个时间和系统当前时间的时间差
+    int second = [date timeIntervalSince1970];
+    
+    return second;
+    
+}
 
 #pragma mark - 点击右侧添加学员
 -(void)addStudent {
     
-//    NSLog(@"点击了右侧添加学员");
     
     
-    NSString *dataSring = [self.UTCData substringWithRange:NSMakeRange(0, 10)];
-/// 开始时间
-    NSString *bjBeginDataStr = [NSString stringWithFormat:@"%@ %@",dataSring,self.begintime];
-/// 结束时间
-    NSString *bjEndDataStr = [NSString stringWithFormat:@"%@ %@",dataSring,self.endtime];
-
-    NSString *courseListID = self.courseList;
+    NSArray *array = [BLInformationManager sharedInstance].appointmentData;
+    NSLog(@"%@",array);
+    if (array&&array.count==0) {
+        [self showTotasViewWithMes:@"请选择预约时间"];
+        
+        
+        
+        return;
+    }
     
-
-    NSString *userID = self.userid;
+    // 数组排序
+    NSArray *resultArray = [array sortedArrayUsingComparator:^NSComparisonResult(YBCourseData *  _Nonnull obj1, YBCourseData *  _Nonnull obj2) {
+        
+        return obj1.coursetime.timeid > obj2.coursetime.timeid ;
+        
+    }];
+    NSLog(@"appointmentData resultArray:%@",resultArray);
     
+    YBCourseData *firstModel = resultArray.firstObject;
+    YBCourseData *lastModel = resultArray.lastObject;
     
-//    if ((self.courseStudentCountInt - self.selectedstudentconutInt) <= 0) {
-         if (self.selectedRows.count > 1) {
+    NSLog(@"firstModel.coursetime.begintime:%@",firstModel.coursetime.begintime);
+    NSLog(@"lastModel.coursetime.endtime:%@",lastModel.coursetime.endtime);
     
-    [self showPopAlerViewWithMes:@"您最多可以添加一名学员"];
-
-         }
-
+    NSMutableString *courselistStr = [NSMutableString string];
+    for (int i = 0; i<resultArray.count; i++) {
+        
+        YBCourseData *model = resultArray[i];
+        
+        NSString *courseID = model._id;
+        NSLog(@"courseID:%@",courseID);
+        
+        if (i==resultArray.count-1) {
+            NSString *lastID = ((YBCourseData *)[resultArray lastObject])._id;
+            [courselistStr appendString:[NSString stringWithFormat:@"%@",lastID]];
+        }else{
+            [courselistStr appendString:[NSString stringWithFormat:@"%@,",courseID]];
+        }
+        
+    }
 
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
 
-    
-    
-    
-    params[@"userid"] = userID;
+    params[@"userid"] = self.userid;
     params[@"coachid"] = [[UserInfoModel defaultUserInfo] userID];
-    params[@"courselist"] = courseListID;
+    params[@"courselist"] = courselistStr;
     params[@"is_shuttle"] = @"1";
     params[@"address"] = @"";
-    params[@"begintime"] = bjBeginDataStr;
-    params[@"endtime"] = bjEndDataStr;
+    params[@"begintime"] = [NSString stringWithFormat:@"%@ %@",self.selectData,firstModel.coursetime.begintime];//[NSString stringWithFormat:@"%d",[self chagetime:firstModel.coursetime.begintime data:self.selectData]];
+    params[@"endtime"] = [NSString stringWithFormat:@"%@ %@",self.selectData,lastModel.coursetime.endtime];//[NSString stringWithFormat:@"%d",[self chagetime:lastModel.coursetime.endtime data:self.selectData]];
 
-//    NSLog(@"返回给后台的数据=====%@=====",params);
-//
+    NSLog(@"返回给后台的数据=====%@=====",params);
+
     [NetWorkEntiry postcourseinfoUserreservationcourseWithParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"LKAddStudentTimeViewController--添加学员成功");
@@ -455,62 +561,6 @@ static NSString *addStuCellID = @"addStuCellID";
 
 
 }
-
-
-//
-//#pragma mark - tableView数据源方法
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    
-//    
-//    return self.stundentDataArrM.count;
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    LKAddStudentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:addStuCellID];
-//    if (!cell) {
-//        cell = [[LKAddStudentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:addStuCellID];
-//        
-//    }
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    
-//    
-//    NSLog(@"%@",self.stundentDataArrM);
-//    
-//    
-//    LKAddStudentData *data = self.stundentDataArrM[indexPath.row];
-//    
-//    if (data.isSelect) {
-//        
-//        cell.selectImageView.image = [UIImage imageNamed:@"sendmsg_selected_icon"];
-//        
-//    }else{
-//        
-//        cell.selectImageView.image = [UIImage imageNamed:@"sendmsg_normal_icon"];
-//        
-//    }
-//    
-//    cell.studentNameLabel.text = data.name;
-//    
-//    if (data.subject.subjectid == 2) {
-//        cell.studyDetilsLabel.text = data.subjecttwo.progress;
-//        
-//    } else if (data.subject.subjectid == 3) {
-//        cell.studyDetilsLabel.text = data.subjectthree.progress;
-//        
-//    }
-//    
-//    
-//    NSURL *iconUrl = [NSURL URLWithString:data.headportrait.originalpic];
-//    NSLog(@"bfsbff%@",iconUrl);
-//    
-//    [cell.studentIconView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"JZCoursenull_student"]];
-//    
-//    
-//    
-//    return cell;
-//}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

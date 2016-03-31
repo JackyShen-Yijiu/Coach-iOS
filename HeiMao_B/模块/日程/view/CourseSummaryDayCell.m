@@ -367,22 +367,14 @@
         
         addStuVC.dataArray = tempArray;
         
-//        NSLog(@"self.model.coursebegintime:%@",self.model.coursebegintime);
-//        NSLog(@"self.model.courseendtime:%@",self.model.courseendtime);
-        
-        
-        addStuVC.UTCData = self.model.coursebegintime;
+        addStuVC.selectData = self.selectData;
         addStuVC.courseStudentCountInt = self.model.coursestudentcount;
         
         addStuVC.selectedstudentconutInt = self.model.selectedstudentcount;
         
         addStuVC.coachidStr = self.model.coachid;
-//        addStuVC.begintime = self.model.coursetime.begintime;
-//        addStuVC.endtime = self.model.coursetime.endtime;
         addStuVC.courseList = self.model._id;
         
-        
-        //    LKTestViewController *addStuVC = [[LKTestViewController alloc]init];
         [self.parentViewController.navigationController pushViewController:addStuVC animated:YES];
         
         
