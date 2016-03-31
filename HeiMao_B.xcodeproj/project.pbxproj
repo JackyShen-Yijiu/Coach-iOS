@@ -14,6 +14,7 @@
 		0608CA711CAA8A2E0068A18B /* Headportrait.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA701CAA8A2E0068A18B /* Headportrait.m */; };
 		0608CA741CAA8A3B0068A18B /* Courseinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA731CAA8A3B0068A18B /* Courseinfo.m */; };
 		0608CA771CAA8A6C0068A18B /* Subject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA761CAA8A6C0068A18B /* Subject.m */; };
+		0616413A1CACB622001B77F5 /* YBStudentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061641391CACB622001B77F5 /* YBStudentDetailsViewController.m */; };
 		061F56481CA682DD0052BEA9 /* EditorUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061F56471CA682DD0052BEA9 /* EditorUserViewController.m */; };
 		061F564B1CA686060052BEA9 /* EditorUseTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061F564A1CA686060052BEA9 /* EditorUseTopCell.m */; };
 		061F564E1CA689890052BEA9 /* EditorUseBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061F564D1CA689890052BEA9 /* EditorUseBottomCell.m */; };
@@ -500,7 +501,6 @@
 		B2BA43E71CAA2F0700926584 /* NSString+CurrentTimeDay.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43E51CAA2F0700926584 /* NSString+CurrentTimeDay.m */; };
 		B2BA43EA1CAA805F00926584 /* YBCourseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43E91CAA805F00926584 /* YBCourseTableView.m */; };
 		B2BA43ED1CAB7CC600926584 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43EC1CAB7CC600926584 /* UIColor+Hex.m */; };
-		B2BA43F01CABA06800926584 /* YBStudentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA43EF1CABA06700926584 /* YBStudentDetailsViewController.m */; };
 		B2BA44611CABC15C00926584 /* YBStudentDetailsApplyclasstypeinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44461CABC15C00926584 /* YBStudentDetailsApplyclasstypeinfo.m */; };
 		B2BA44621CABC15C00926584 /* YBStudentDetailsCoachcomment.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA44481CABC15C00926584 /* YBStudentDetailsCoachcomment.m */; };
 		B2BA44631CABC15C00926584 /* YBStudentDetailsCoachcommentinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA444A1CABC15C00926584 /* YBStudentDetailsCoachcommentinfo.m */; };
@@ -571,6 +571,8 @@
 		0608CA731CAA8A3B0068A18B /* Courseinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Courseinfo.m; sourceTree = "<group>"; };
 		0608CA751CAA8A670068A18B /* Subject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Subject.h; sourceTree = "<group>"; };
 		0608CA761CAA8A6C0068A18B /* Subject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Subject.m; sourceTree = "<group>"; };
+		061641381CACB622001B77F5 /* YBStudentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsViewController.h; sourceTree = "<group>"; };
+		061641391CACB622001B77F5 /* YBStudentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsViewController.m; sourceTree = "<group>"; };
 		061F56461CA682DD0052BEA9 /* EditorUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorUserViewController.h; sourceTree = "<group>"; };
 		061F56471CA682DD0052BEA9 /* EditorUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorUserViewController.m; sourceTree = "<group>"; };
 		061F56491CA686060052BEA9 /* EditorUseTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorUseTopCell.h; sourceTree = "<group>"; };
@@ -1426,8 +1428,6 @@
 		B2BA43E91CAA805F00926584 /* YBCourseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCourseTableView.m; sourceTree = "<group>"; };
 		B2BA43EB1CAB7CC600926584 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		B2BA43EC1CAB7CC600926584 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
-		B2BA43EE1CABA06700926584 /* YBStudentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsViewController.h; sourceTree = "<group>"; };
-		B2BA43EF1CABA06700926584 /* YBStudentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsViewController.m; sourceTree = "<group>"; };
 		B2BA44451CABC15C00926584 /* YBStudentDetailsApplyclasstypeinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsApplyclasstypeinfo.h; sourceTree = "<group>"; };
 		B2BA44461CABC15C00926584 /* YBStudentDetailsApplyclasstypeinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBStudentDetailsApplyclasstypeinfo.m; sourceTree = "<group>"; };
 		B2BA44471CABC15C00926584 /* YBStudentDetailsCoachcomment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBStudentDetailsCoachcomment.h; sourceTree = "<group>"; };
@@ -1925,6 +1925,8 @@
 		B2BA3EFF1CA5035700926584 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				061641381CACB622001B77F5 /* YBStudentDetailsViewController.h */,
+				061641391CACB622001B77F5 /* YBStudentDetailsViewController.m */,
 				B2BA43571CA5153000926584 /* CourseViewController.h */,
 				B2BA43581CA5153000926584 /* CourseViewController.m */,
 				B2BA43541CA5065700926584 /* ScheduleViewController.h */,
@@ -3757,6 +3759,7 @@
 				B2BA41951CA5035700926584 /* ShopMainModel.m in Sources */,
 				B2BA42981CA5035700926584 /* ConversationListController.m in Sources */,
 				B2BA41871CA5035700926584 /* finishMessageView.m in Sources */,
+				0616413A1CACB622001B77F5 /* YBStudentDetailsViewController.m in Sources */,
 				B2BA43591CA5153000926584 /* CourseViewController.m in Sources */,
 				B2BA434A1CA5041100926584 /* YBSignUpStudentListController.m in Sources */,
 				B2BA41F61CA5035700926584 /* EMBubbleView+Gif.m in Sources */,
@@ -3955,7 +3958,6 @@
 				B2BA43431CA5041100926584 /* StudentSignInViewModel.m in Sources */,
 				B2BA446A1CABC15C00926584 /* YBStudentDetailsSubject.m in Sources */,
 				B2BA41DA1CA5035700926584 /* EMSDWebImageDownloader.m in Sources */,
-				B2BA43F01CABA06800926584 /* YBStudentDetailsViewController.m in Sources */,
 				B2BA41C41CA5035700926584 /* MJRefreshConst.m in Sources */,
 				B2BA3E651CA4E70300926584 /* ProjectGuideView.m in Sources */,
 				B2BA43561CA5065700926584 /* ScheduleViewController.m in Sources */,
