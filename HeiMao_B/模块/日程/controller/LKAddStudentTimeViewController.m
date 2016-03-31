@@ -26,6 +26,13 @@ static NSString *addStuCellID = @"addStuCellID";
 
 @property (nonatomic, strong) UITableView *tableView;
 
+/// 选择按钮的数组
+@property (nonatomic, strong) NSMutableArray *selectBtnArrM;
+
+///按钮状态
+@property (nonatomic, assign) BOOL buttonType;
+
+
 @end
 
 @implementation LKAddStudentTimeViewController
@@ -96,6 +103,32 @@ _stundentDataArrM = [NSMutableArray array];
 
         YBCourseData *data = self.dataArray[i];
         
+        
+        NSLog(@"%zd",self.courseStudentCountInt);
+        
+        if (self.courseStudentCountInt < 7) {
+            
+            [timeViewItem.selectButton setImage:[UIImage imageNamed:@"sendmsg_normal_icon"]  forState:UIControlStateNormal];
+
+            
+            [timeViewItem.selectButton setImage:[UIImage imageNamed:@"sendmsg_selected_icon"] forState:UIControlStateSelected];
+            
+            
+        }else if (self.courseStudentCountInt >= 7){
+            
+            [timeViewItem.selectButton setTitle:@"休息" forState:UIControlStateNormal];
+            [timeViewItem.selectButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+
+        }else {
+            [timeViewItem.selectButton setTitle:@"已满" forState:UIControlStateNormal];
+            [timeViewItem.selectButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+            
+        }
+        
+        
+        
+        
+        
         timeViewItem.starTimeLabel.text = [NSString getHourLocalDateFormateUTCDate:data.coursebegintime];
         
         timeViewItem.finishTimeLabel.text = [NSString getHourLocalDateFormateUTCDate:data.courseendtime];
@@ -140,16 +173,22 @@ _stundentDataArrM = [NSMutableArray array];
             
             LKAddStudentData *data = [LKAddStudentData yy_modelWithDictionary:dict];
             
-            NSLog(@"名字 ==== == = %@",data.name);
+//            NSLog(@"名字 ==== == = %@",data.name);
             
+           
+//             NSLog(@"%@",data.name);
+
+//            NSLog(@"data.headportrait.thumbnailpic = %@",data.headportrait.originalpic);
+            
+           
             
             [self.stundentDataArrM addObject:data];
             
         }
         [self.tableView reloadData];
         
-//        NSLog(@"数组-----%@",stundentData);
-//        NSLog(@"名字=====%@",stundentData[0][@"name"]);
+
+        
   
         
         
@@ -163,11 +202,11 @@ _stundentDataArrM = [NSMutableArray array];
 #pragma mark - 选择cell
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    LKAddStudentTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    LKAddStudentTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     if (![self.selectedRows containsObject:indexPath] && self.selectedRows.count < 7) {
         
-//        cell.backgroundColor = [UIColor grayColor];
+       cell.backgroundColor = [UIColor whiteColor];
         
         [self.selectedRows addObject:indexPath];
     }
@@ -175,6 +214,10 @@ _stundentDataArrM = [NSMutableArray array];
 
 #pragma mark - 点击选择时间的按钮
 -(void)clickSelectBtn:(UIButton *)sender{
+    
+
+    sender.selected = !sender.selected;
+    
     
     NSLog(@"--第%zd个按钮--",sender.tag);
     LKAddStudentTimeView *lkView = [_timeView viewWithTag:2001];
@@ -225,11 +268,32 @@ _stundentDataArrM = [NSMutableArray array];
     
     NSLog(@"%@",self.stundentDataArrM);
     
+    
+    
         LKAddStudentData *data = self.stundentDataArrM[indexPath.row];
 //    NSLog(@"名字333333 ==== == = %@",data.name);
     
     cell.studentNameLabel.text = data.name;
-    cell.studyDetilsLabel.text = @"科目";
+    
+    if (data.subject.subjectid == 2) {
+        cell.studyDetilsLabel.text = data.subjecttwo.progress;
+        
+    } else if (data.subject.subjectid == 3) {
+        cell.studyDetilsLabel.text = data.subjectthree.progress;
+  
+    }
+    
+    
+//    NSLog(@"%zd",data.subject.subjectid);
+    
+
+    
+    
+    
+    NSURL *iconUrl = [NSURL URLWithString:data.headportrait.originalpic];
+    NSLog(@"bfsbff%@",iconUrl);
+    
+    [cell.studentIconView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"JZCoursenull_student"]];
     
     
         

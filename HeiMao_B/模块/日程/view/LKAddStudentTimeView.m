@@ -103,10 +103,7 @@
         
 //        self.selectButton.backgroundColor = [UIColor orangeColor];
         
-        [self.selectButton setTitle:@"休息" forState:UIControlStateNormal];
-        [self.selectButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        
-        
+                
         [selectButton sizeToFit];
         selectButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 
@@ -119,8 +116,6 @@
     return self;
  
 }
-
-
 
 
 
