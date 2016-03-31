@@ -2016,13 +2016,10 @@
 				B2BA43C81CA9125000926584 /* YBAppointMentUserCell.m */,
 				B2BA43E81CAA805F00926584 /* YBCourseTableView.h */,
 				B2BA43E91CAA805F00926584 /* YBCourseTableView.m */,
-<<<<<<< HEAD
 				0670B5531CABCEAF00D34731 /* JZCompletionConfirmationCell.h */,
 				0670B5541CABCEAF00D34731 /* JZCompletionConfirmationCell.m */,
-=======
 				B2BA446F1CABD88100926584 /* YBStudentDetailHeadView.h */,
 				B2BA44701CABD88100926584 /* YBStudentDetailHeadView.m */,
->>>>>>> 27e0ae0be0f99aec889d8223ce6182fc31a15e9d
 			);
 			path = view;
 			sourceTree = "<group>";
