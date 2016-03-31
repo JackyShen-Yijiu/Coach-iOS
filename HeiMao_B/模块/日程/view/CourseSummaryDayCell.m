@@ -344,10 +344,11 @@
         }
         
         LKAddStudentTimeViewController *addStuVC = [[LKAddStudentTimeViewController alloc] init];
+        
         addStuVC.dataArray = tempArray;
         
-        NSLog(@"self.model.coursebegintime:%@",self.model.coursebegintime);
-        NSLog(@"self.model.courseendtime:%@",self.model.courseendtime);
+//        NSLog(@"self.model.coursebegintime:%@",self.model.coursebegintime);
+//        NSLog(@"self.model.courseendtime:%@",self.model.courseendtime);
         
         addStuVC.coachidStr = self.model.coachid;
         
