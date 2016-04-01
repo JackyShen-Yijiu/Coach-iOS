@@ -32,16 +32,20 @@
 }
 - (void)layoutSubviews{
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.mas_top).offset(20);
+        if (_isNoShowLabel) {
+            make.centerY.mas_equalTo(self.mas_centerY);
+        } else {
+            make.top.mas_equalTo(self.mas_top).offset(20);
+        }
         make.centerX.mas_equalTo(self.mas_centerX);
-        make.width.mas_equalTo(@24);
+        make.width.mas_equalTo(@30);
         make.height.mas_equalTo(@24);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.imgView.mas_bottom).offset(12);
         make.centerX.mas_equalTo(self.mas_centerX);
-        make.width.mas_equalTo(@24);
-        make.height.mas_equalTo(@24);
+        make.width.mas_equalTo(self.frame.size.width);
+        make.height.mas_equalTo(@14);
     }];
     
 }
@@ -59,6 +63,7 @@
         _titleLabel.text = @"休假";
         _titleLabel.font = [UIFont systemFontOfSize:12];
         _titleLabel.textColor = JZ_FONTCOLOR_DRAK;
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
         
     }
     return _titleLabel;

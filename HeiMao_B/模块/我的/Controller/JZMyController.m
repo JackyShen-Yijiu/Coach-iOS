@@ -19,6 +19,7 @@
 #import "WorkTimeViewController.h"
 #import "LKTestViewController.h"
 #import "JZExamSummaryInfoController.h"
+#import "ComingSoonController.h"
 
 #define kHeight 216
 @interface JZMyController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
@@ -98,8 +99,8 @@
     
     self.topDetailArray = @[classTypeStr,workTimeStr];
     
-    self.bottomImgArray = @[@"rest",@"wallet",@"Information",@"set",@""];
-    self.bottomTitleArray = @[@"休假",@"钱包",@"资讯",@"设置",@"考试信息"];
+    self.bottomImgArray = @[@"rest",@"test",@"Information",@"set",@"add_tool"];
+    self.bottomTitleArray = @[@"休假",@"考试信息",@"资讯",@"设置",@""];
 }
 - (void)initUI{
     self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -kHeight, self.view.frame.size.width, kHeight) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%ld",[UserInfoModel defaultUserInfo].fcode]];
@@ -163,6 +164,10 @@
         static NSString * CellIdentifier = @"bottomCell";
         [_collectionView registerClass:[BottomCollectionCell class] forCellWithReuseIdentifier:CellIdentifier];
         BottomCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+        if (4 == indexPath.row) {
+            // + 图片显示
+            cell.isNoShowLabel = YES;
+                    }
         cell.imgView.image = [UIImage imageNamed:self.bottomImgArray[indexPath.row]];
         cell.titleLabel.text = self.bottomTitleArray[indexPath.row];
         return cell;
@@ -198,9 +203,9 @@
             [self.navigationController pushViewController:vacation animated:YES];
         }
         if (1 == indexPat.row) {
-            // 钱包
-            MyWalletViewController *myWallet = [[MyWalletViewController alloc] init];
-            [self.navigationController pushViewController:myWallet animated:YES];
+            // 考试信息
+            JZExamSummaryInfoController *examInfoVC = [[JZExamSummaryInfoController alloc] init];
+            [self.navigationController pushViewController:examInfoVC animated:YES];
         }
         if (2 == indexPat.row) {
             // 资讯
@@ -214,9 +219,9 @@
             [self.navigationController pushViewController:setUp animated:YES];
         }
         if (4 == indexPat.row) {
-            // 考试信息
-            JZExamSummaryInfoController *examInfoVC = [[JZExamSummaryInfoController alloc] init];
-            [self.navigationController pushViewController:examInfoVC animated:YES];
+            // + 为敬请期待 ComingSoonController
+            ComingSoonController *comingSoonVC = [[ComingSoonController alloc] init];
+            [self.navigationController pushViewController:comingSoonVC animated:YES];
         }
 
 
