@@ -62,7 +62,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     NSInteger firstWeekday = [self weekdayOfFirstDayInDate];
     NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
     [fomatter setDateFormat:@"dd"];
-    NSInteger dateStr = [[fomatter stringFromDate:self.seletedDate] integerValue] + firstWeekday;
+    NSInteger dateStr = [[fomatter stringFromDate:self.seletedDate] integerValue];//-firstWeekday;
     NSLog(@"reloadData dateStr:%ld",(long)dateStr);
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:dateStr-1 inSection:0];
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
@@ -81,7 +81,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     NSString *dateStr = [fomatter stringFromDate:date];
 
     NSLog(@"[YBObjectTool compareMonthDateWithSelectDate:date]:%d",[YBObjectTool compareMonthDateWithSelectDate:date]);
-
+    
     // 1:大于当前日期 -1:小于当前时间 0:等于当前时间
     if ([YBObjectTool compareMonthDateWithSelectDate:date]!=1) {
         return [dateStr integerValue] / 7 * self.collectionView.width;
@@ -415,7 +415,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     }
     
     self.selectIndex = indexPath.row;
-    [self reloadDate];
+    [self changeDate];
 
 }
 
