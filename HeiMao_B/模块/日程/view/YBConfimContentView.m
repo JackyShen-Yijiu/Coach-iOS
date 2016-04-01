@@ -9,7 +9,7 @@
 #import "YBConfimContentView.h"
 #import "RatingBar.h"
 
-@interface YBConfimContentView()
+@interface YBConfimContentView()<UITextViewDelegate,RatingBarDelegate>
 
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIView *bgContentView; // 背景
@@ -21,11 +21,19 @@
 @property (nonatomic, strong) UITextView *contentTextView;
 @property (nonatomic, strong) UIButton *commitButton;
 
+@property (nonatomic, strong) UILabel *placeTextLabel;
+
 @property (nonatomic, strong) NSMutableArray *btnArray;
 
 @property (nonatomic, assign) CGFloat lastY;
 
 @property (nonatomic , strong) NSArray *subjectArray;
+
+@property (nonatomic, strong) NSString *textViewStr;
+
+@property (nonatomic, assign) NSInteger stareLever;
+
+@property (nonatomic, strong) JZData *dataModel;
 
 @end
 
@@ -34,7 +42,8 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        
+        self.userInteractionEnabled = YES;
+        self.contentTextView.delegate = self;
         self.btnArray = [NSMutableArray array];
         
         //    教学内容视图
@@ -48,6 +57,7 @@
         [self.bgRateView addSubview:self.rateLabel];
         [self.bgRateView addSubview:self.ratingBar];
         [self.bgRateView addSubview:self.contentTextView];
+        [self.contentTextView addSubview:self.placeTextLabel];
         [self.bgRateView addSubview:self.commitButton];
         
         [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -97,6 +107,12 @@
             make.left.mas_equalTo(self.bgRateView.mas_left).offset(16);
             make.height.mas_equalTo(@100);
         }];
+        [self.placeTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.contentTextView.mas_top).offset(10);
+            make.left.mas_equalTo(self.contentTextView.mas_left).offset(12);
+            make.height.mas_equalTo(@14);
+        
+        }];
         [self.commitButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.contentTextView.mas_bottom).offset(16);
             make.right.mas_equalTo(self.bgRateView.mas_right).offset(-16);
@@ -137,6 +153,7 @@
     if (_bgRateView == nil) {
         _bgRateView = [[UIView alloc] init];
         _bgRateView.backgroundColor = [UIColor whiteColor];
+        _bgRateView.userInteractionEnabled = YES;
     }
     return _bgRateView;
 }
@@ -154,8 +171,9 @@
 - (RatingBar *)ratingBar{
     if (_ratingBar == nil) {
         _ratingBar = [[RatingBar alloc] init];
-        [_ratingBar setImageDeselected:@"YBAppointMentDetailsstar.png" halfSelected:nil fullSelected:@"YBAppointMentDetailsstar_fill.png" andDelegate:nil];
-        _ratingBar.isIndicator = YES;
+        [_ratingBar setImageDeselected:@"YBAppointMentDetailsstar.png" halfSelected:nil fullSelected:@"YBAppointMentDetailsstar_fill.png" andDelegate:self];
+        _ratingBar.isIndicator = NO;
+        [_ratingBar displayRating:3];
         
     }
     return _ratingBar;
@@ -163,7 +181,7 @@
 - (UITextView *)contentTextView{
     if (_contentTextView == nil) {
         _contentTextView = [[UITextView alloc] init];
-        _contentTextView.backgroundColor = [UIColor cyanColor];
+        _contentTextView.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     }
     return _contentTextView;
 }
@@ -172,10 +190,20 @@
         _commitButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _commitButton.backgroundColor = JZ_BlueColor;
         [_commitButton setTitle:@"提交" forState:UIControlStateNormal];
+        [_commitButton addTarget:self action:@selector(commitContent:) forControlEvents:UIControlEventTouchUpInside];
         _commitButton.layer.masksToBounds = YES;
         _commitButton.layer.cornerRadius = 5;
     }
     return _commitButton;
+}
+- (UILabel *)placeTextLabel{
+    if (_placeTextLabel == nil) {
+        _placeTextLabel = [[UILabel alloc] init];
+        _placeTextLabel.text = @"写点儿点评(选填)";
+        _placeTextLabel.font = [UIFont systemFontOfSize:14];
+        _placeTextLabel.textColor = JZ_FONTCOLOR_LIGHT;
+    }
+    return _placeTextLabel;
 }
 
 #pragma mark - getSize
@@ -187,10 +215,10 @@
     return bounds.size;
 }
 
-- (CGFloat)confimContentView:(NSArray *)dataArray
-{
+- (CGFloat)confimContentView:(NSArray *)dataArray model:(JZData *)model{
     
     _subjectArray = dataArray;
+    _dataModel = model;
   
     for (UIButton *btn in self.bgContentView.subviews) {
         [btn removeFromSuperview];
@@ -273,6 +301,9 @@
     
     return bgcontentViewH + 200;
 }
+
+#pragma mark -- Action
+  // 学习内容点击事件
 - (void)didClickBtn:(UIButton *)btn{
     if (btn.selected) {
         btn.backgroundColor = [UIColor whiteColor];
@@ -284,5 +315,48 @@
         btn.selected = YES;
     }
    
+}
+// 提交评价内容
+- (void)commitContent:(UIButton *)btn{
+    
+    // 学习内容
+    NSString *resultStudyContent = @"";
+    for (UIButton *btn in _btnArray) {
+        if (btn.selected) {
+            resultStudyContent = [resultStudyContent stringByAppendingString:_subjectArray[btn.tag - 500]];
+            NSLog(@"resultStudyContent = %@",resultStudyContent);
+        }
+    }
+    if (resultStudyContent == nil || [resultStudyContent isEqualToString:@""]) {
+        [self.parentViewController showTotasViewWithMes:@"请选择学习内容"];
+        return;
+    }
+    
+    [NetWorkEntiry postToEnstureDoneofCourseWithCoachid:[UserInfoModel defaultUserInfo].userID coureseID:_dataModel.idField learningcontent:resultStudyContent contentremarks:_textViewStr startLevel:_stareLever success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *param = responseObject;
+        if ([param[@"type"] integerValue] == 1) {
+            [self.parentViewController showTotasViewWithMes:@"评论成功"];
+            
+        }else{
+            [self.parentViewController showTotasViewWithMes:@"网络错误"];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.parentViewController showTotasViewWithMes:@"网络错误"];
+    }];
+}
+#pragma mark ---- UItextView的代理方法
+- (void)textViewDidChange:(UITextView *)textView{
+    if (_contentTextView.text.length == 0) {
+        _placeTextLabel.hidden = NO;
+    }else{
+        _placeTextLabel.hidden = YES;
+    }
+}
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    _textViewStr = textView.text;
+}
+#pragma mark ------ Ratingbar 代理方法
+- (void)ratingChanged:(CGFloat)newRating{
+    _stareLever = (NSInteger)newRating;
 }
 @end

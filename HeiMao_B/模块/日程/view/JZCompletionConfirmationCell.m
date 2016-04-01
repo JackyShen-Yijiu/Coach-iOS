@@ -147,11 +147,17 @@
     
     self.nameLabel.text = _listModel.userid.name;
     
+    // 开始时间
+    NSString *stareTime = [self getLocalDateFormateUTCDate:_listModel.begintime];
+    // 结束数据
+    NSString *endTime = [self getLocalDateFormateUTCDate:_listModel.endtime];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@-%@",stareTime,endTime];
+    
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",_listModel.userid.headportrait.originalpic]] placeholderImage:[UIImage imageNamed:@""]];
     
     self.confimContentView.parentViewController = self.parentViewController;
     self.confimContentView.hidden = !listModel.isOpen;
-    CGFloat height = [self.confimContentView confimContentView:_subjectArray];
+    CGFloat height = [self.confimContentView confimContentView:_subjectArray model:_listModel];
     NSLog(@"setListModel height:%f",height);
     [self.confimContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(0);
@@ -169,12 +175,27 @@
     [JZCompletonCell layoutIfNeeded]; 
    
     if (data.isOpen) {
-        CGFloat height = [JZCompletonCell.confimContentView confimContentView:subjectArray];
+        CGFloat height = [JZCompletonCell.confimContentView confimContentView:subjectArray model:data];
         return height + 80;
     }
     return 80;
     
 }
 
+// UTC转化
+- (NSString *)getLocalDateFormateUTCDate:(NSString *)utcDate {
+    //    NSLog(@"utc = %@",utcDate);
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //输入格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
+    [dateFormatter setTimeZone:localTimeZone];
+    
+    NSDate *dateFormatted = [dateFormatter dateFromString:utcDate];
+    //输出格式
+        [dateFormatter setDateFormat:@"HH:mm"];
+    NSString *dateString = [dateFormatter stringFromDate:dateFormatted];
+    return dateString;
+}
 
 @end

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JZData.h"
 
 @interface YBConfimContentView : UIView
 @property (nonatomic,strong) UIViewController *parentViewController;
-- (CGFloat)confimContentView:(NSArray *)dataArray;
+- (CGFloat)confimContentView:(NSArray *)dataArray model:(JZData *)model;
 @end
