@@ -44,7 +44,5 @@ static CGFloat EaseConversationCellMinHeight = 60;
 
 @property (strong, nonatomic) EaseConversationModel *topModel;
 
-@property (nonatomic, strong) UIImageView *arrowimgView;
-
 
 @end
