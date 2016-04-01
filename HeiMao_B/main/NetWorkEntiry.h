@@ -386,5 +386,11 @@
 
 
 
-
+/*
+ *  通过学员列表  courseinfo/getexamstudentlist v2
+ *
+ */
++ (void)getPassListStudentWihtCoachID:(NSString *)coachid subjectID:(NSString *)subjectID examDate:(NSString *)examDate examState:(NSString *)examState
+                                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;
 @end

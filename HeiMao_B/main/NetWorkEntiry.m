@@ -704,6 +704,28 @@
     [self GET:url parameters:nil success:success failure:failure];
     
 }
+/*
+ *  通过学员列表  courseinfo/getexamstudentlist v2
+ *
+ */
++ (void)getPassListStudentWihtCoachID:(NSString *)coachid subjectID:(NSString *)subjectID examDate:(NSString *)examDate examState:(NSString *)examState
+                                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure{
+    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getexamstudentlist",HOST_LINE_DOMAIN];
+    NSDictionary *paramterDict = @{ @"coachid": coachid,
+                                    @"subjectid": subjectID,
+                                    @"examdate":examDate,
+                                    @"examstate":examState
+                                    };
+    [self GET:urlStr parameters:paramterDict success:success failure:failure];
+
+    
+}
+
+
+
+
+
 
 #pragma mark - 获取学员的考试信息
 + (void)getExamSummaryInfoDataWihtCoachID:(NSString *)coachid index:(NSUInteger)index count:(NSUInteger)count
