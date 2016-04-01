@@ -90,7 +90,12 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self initShowNOBG];
     
+}
+
+#pragma mark ---- 根据数据判断是否显示暂无字样
+- (void)initShowNOBG{
     // 开始是全部置为可点击状态,
     NSArray *viewArray = [_toolBarView subviews];
     for (UIView *view in viewArray) {
@@ -131,7 +136,7 @@
             if (0 == [data[@"passstudentcount"] integerValue]) {
                 [self showBgTitleWith:4];
             }
-
+            
         }
         else {
             [self showTotasViewWithMes:param[@"msg"]];
@@ -141,10 +146,9 @@
     }];
     
     
-    [self.tableView.header beginRefreshing];
-    
+    [self.tableView.refreshHeader beginRefreshing];
+
 }
-#pragma mark ---- 根据数据判断是否显示暂无字样
 - (void)showBgTitleWith:(NSInteger )tag{
     
     NSArray *viewArray = [_toolBarView subviews];
@@ -255,8 +259,6 @@
     [self.view addSubview:self.bgView];
     
     
- 
-    
 }
 - (void)setNavBar{
     self.myNavigationItem.title = nil;
@@ -302,6 +304,7 @@
                     if (data.count == 0) {
                         [ws showTotasViewWithMes:@"暂无"];
                         [ws.tableView.refreshHeader endRefreshing];
+                        [ws.tableView reloadData];
                         return ;
                     }
                     for (NSDictionary *dic in data) {
@@ -467,6 +470,7 @@
     if (!listCell) {
         listCell = [[JZHomeStudentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDCell];
     }
+    listCell.listModel = _resultDataArray[indexPath.row];
     listCell.studentListMessageAndCall = ^(NSInteger tag){
         if (500 == tag) {
             // 信息
