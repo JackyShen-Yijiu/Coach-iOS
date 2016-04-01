@@ -257,6 +257,11 @@
     // 不显示时不添加 segment 控件
     [self.bgView addSubview:self.toolBarView];
     [self.view addSubview:self.bgView];
+    if (!_isshowSegment) {
+        _tableView.frame = CGRectMake(0, _bgH + 64, self.view.width, self.view.height - _bgH - 45);
+    }else{
+        _tableView.frame = CGRectMake(0, ktopHight + 64, self.view.width, self.view.height - ktopHight - 64);
+    }
     
     
 }
@@ -558,7 +563,7 @@
 }
 - (RefreshTableView *)tableView{
     if (_tableView == nil) {
-        _tableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, ktopHight, self.view.width, self.view.height - 45 - ktopHight) style:UITableViewStylePlain];
+        _tableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, ktopHight + 64, self.view.width, self.view.height - 45 - ktopHight - 64) style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.dataSource = self;
