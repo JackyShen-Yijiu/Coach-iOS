@@ -7,9 +7,13 @@
 //
 
 #import "JZExamSummaryInfoController.h"
+#import "JZExamHeaderView.h"
+#import "JZExamSummaryInfoData.h"
+#import "YYModel.h"
+
 
 @interface JZExamSummaryInfoController ()
-
+@property (nonatomic, strong) NSMutableArray *examInfoData;
 @end
 
 @implementation JZExamSummaryInfoController
@@ -24,11 +28,100 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.navigationItem.title = @"考试信息";
-    
+    self.tableView.sectionHeaderHeight = 142;
+
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.showsHorizontalScrollIndicator = NO;
+    
+    JZExamHeaderView *headerView = [[JZExamHeaderView alloc]init];
+    
+    self.tableView.tableHeaderView = headerView;
+//    self.tableView.tableHeaderView.height = 142;
+    
+    // 隐藏没有数据的表格
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    
+    // 如果tableView设置为grouped样式时,返回每一组的头部视图的代理方法是从第1组开始的,它把第0组的头部视图留给tableView的tableHeaderView这个属性
+//    JZExamHeaderView *headerView = (JZExamHeaderView *)[self tableView:self.tableView viewForHeaderInSection:0];
+    headerView.bounds = CGRectMake(0, 0, self.tableView.bounds.size.width, 44);
+    self.tableView.tableHeaderView = headerView;
+    
+    
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+       
+        [self loadData];
+        
+        
+    });
+   
+    
+    
+    
+    
+}
 
-    self.tableView.backgroundColor = [UIColor cyanColor];
+//// 用来返回每一组的头部视图
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    // 1.创建headerView
+//    JZExamHeaderView *heaerView = [JZExamHeaderView headerViewWithTableView:tableView];
+//    
+//    NSLog(@"-----%ld", section);
+//    // 2.给headerView传递模型
+//    heaerView.group = self.groups[section];
+//    // 3.设置代理
+//    heaerView.delegate = self;
+//    // 给每一个headerView设置一个标识
+//    heaerView.tag = section;
+//    // 4.返回haderView
+//    return heaerView;
+//}
+
+#pragma mark - 加载数据
+
+-(void)loadData {
+    
+    
+    [NetWorkEntiry getExamSummaryInfoDataWihtCoachID:[UserInfoModel defaultUserInfo].userID index:1 count:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        id result = responseObject;
+        
+        NSLog(@"result = %@",result);
+        
+        
+        NSArray *stundentData = result[@"data"];
+        
+        NSLog(@"数组===%@",stundentData);
+        
+        
+        for (NSDictionary *dict in stundentData) {
+            
+         JZExamSummaryInfoData *data = [JZExamSummaryInfoData yy_modelWithDictionary:dict];
+            
+            [self.examInfoData addObject:data];
+            
+//            NSLog(@"%ld",(long)data.passrate);
+
+            
+            
+            
+            
+        }
+        
+        NSLog(@"======%@=======",self.examInfoData);
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+       
+        
+        NSLog(@"获取学员的考试消息出错啦，错误信息：%@",error);
+        
+    }];
+    
+    
+    
+    
 }
 
 
@@ -42,7 +135,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 0;
+    return 1;
 }
 
 /*

@@ -704,6 +704,26 @@
     [self GET:url parameters:nil success:success failure:failure];
     
 }
+
+#pragma mark - 获取学员的考试信息
++ (void)getExamSummaryInfoDataWihtCoachID:(NSString *)coachid index:(NSUInteger)index count:(NSUInteger)count
+                                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure {
+    
+    NSString *url = @"http://jzapi.yibuxueche.com/api/v2/courseinfo/getexamsummaryinfo";
+    
+    NSDictionary *paramterDict = @{ @"coachid": coachid,
+                                    @"index":[NSString stringWithFormat:@"%zd",index],
+                                    @"count":[NSString stringWithFormat:@"%zd",count]
+                                    };
+    
+    [self GET:url parameters:paramterDict success:success failure:failure];
+
+    
+    
+}
+
+
 #pragma mark - Common Method
 
 + (void)missParagramercallBackFailure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
