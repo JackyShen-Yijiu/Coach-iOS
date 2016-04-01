@@ -161,7 +161,8 @@ static NSString *addStuCellID = @"addStuCellID";
         
         if ((self.courseStudentCountInt - self.selectedstudentconutInt) > 0) {
             
-            [timeViewItem.selectButton setImage:[UIImage imageNamed:@"sendmsg_normal_icon"]  forState:UIControlStateNormal];
+
+            [timeViewItem.selectButton setImage:[UIImage imageNamed:@"sendmsg_normal_icon"] forState:UIControlStateNormal];
             
             
             [timeViewItem.selectButton setImage:[UIImage imageNamed:@"sendmsg_selected_icon"] forState:UIControlStateSelected];
@@ -380,15 +381,6 @@ static NSString *addStuCellID = @"addStuCellID";
 {
     return index;
 }
-
-
-
-
-
-
-
-
-
 
 
 #pragma mark - 点击选择时间的按钮
