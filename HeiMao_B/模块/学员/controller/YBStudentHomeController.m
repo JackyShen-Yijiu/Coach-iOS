@@ -48,11 +48,9 @@
 
 @property (nonatomic, strong) JZHomeStudentToolBarView *toolBarView;
 
-
 @property (nonatomic, assign) BOOL isshowSegment; // 是否显示segment控件,当授课科目只有一个时,不显示
 
 @property (nonatomic, assign) CGFloat bgH;
-
 
 @property (nonatomic, strong) NSString *oneStr;
 
@@ -70,20 +68,29 @@
 
 @property (nonatomic, strong) NSMutableArray *resultDataArray;
 
-
 @end
 
 @implementation YBStudentHomeController
 - (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    self.myNavigationItem.rightBarButtonItem = nil;
+    self.myNavigationItem.leftBarButtonItem = nil;
+    self.myNavigationItem.title = nil;
+    self.myNavigationItem.titleView = nil;
+    
     // 设置里面可以更改授课科目 所以在这里要动态的改变segment 和 toolBarView 的位置坐标
     [self changeBgViewFrame];
+    
     [self initRefreshView];
     
-    
-    
 }
+
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     // 开始是全部置为可点击状态,
     NSArray *viewArray = [_toolBarView subviews];
     for (UIView *view in viewArray) {
@@ -175,7 +182,6 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self setNavBar];
-    self.myNavigationItem.title = @"学员";
     [self.view addSubview:self.tableView];
     
 //    [self.tableView.header beginRefreshing];
