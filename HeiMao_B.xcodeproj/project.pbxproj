@@ -29,6 +29,11 @@
 		06361A571CA53511002708F2 /* MyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A561CA53511002708F2 /* MyHeaderView.m */; };
 		065E82C21CAD677300D98BFA /* YBConfimContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 065E82C11CAD677300D98BFA /* YBConfimContentView.m */; };
 		0663FACF1CAE3B830076E384 /* ComingSoonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0663FACE1CAE3B830076E384 /* ComingSoonController.m */; };
+		0663FAD21CAE7DCF0076E384 /* JZPassStudentListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0663FAD11CAE7DCF0076E384 /* JZPassStudentListController.m */; };
+		0663FAD51CAE7EF00076E384 /* JZStudentPassListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0663FAD41CAE7EF00076E384 /* JZStudentPassListCell.m */; };
+		0663FADD1CAE8A820076E384 /* JZPassListData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0663FAD81CAE8A820076E384 /* JZPassListData.m */; };
+		0663FADE1CAE8A820076E384 /* JZPassListHeadportrait.m in Sources */ = {isa = PBXBuildFile; fileRef = 0663FADA1CAE8A820076E384 /* JZPassListHeadportrait.m */; };
+		0663FADF1CAE8A820076E384 /* JZPassListUserid.m in Sources */ = {isa = PBXBuildFile; fileRef = 0663FADC1CAE8A820076E384 /* JZPassListUserid.m */; };
 		0670B54F1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = 0670B54E1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m */; };
 		0670B5551CABCEAF00D34731 /* JZCompletionConfirmationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0670B5541CABCEAF00D34731 /* JZCompletionConfirmationCell.m */; };
 		0670B55A1CABF74F00D34731 /* RatingBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0670B5591CABF74F00D34731 /* RatingBar.m */; };
@@ -623,6 +628,16 @@
 		065E82C11CAD677300D98BFA /* YBConfimContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBConfimContentView.m; sourceTree = "<group>"; };
 		0663FACD1CAE3B830076E384 /* ComingSoonController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComingSoonController.h; sourceTree = "<group>"; };
 		0663FACE1CAE3B830076E384 /* ComingSoonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComingSoonController.m; sourceTree = "<group>"; };
+		0663FAD01CAE7DCF0076E384 /* JZPassStudentListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZPassStudentListController.h; sourceTree = "<group>"; };
+		0663FAD11CAE7DCF0076E384 /* JZPassStudentListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZPassStudentListController.m; sourceTree = "<group>"; };
+		0663FAD31CAE7EF00076E384 /* JZStudentPassListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZStudentPassListCell.h; sourceTree = "<group>"; };
+		0663FAD41CAE7EF00076E384 /* JZStudentPassListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZStudentPassListCell.m; sourceTree = "<group>"; };
+		0663FAD71CAE8A720076E384 /* JZPassListData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZPassListData.h; sourceTree = "<group>"; };
+		0663FAD81CAE8A820076E384 /* JZPassListData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZPassListData.m; sourceTree = "<group>"; };
+		0663FAD91CAE8A820076E384 /* JZPassListHeadportrait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZPassListHeadportrait.h; sourceTree = "<group>"; };
+		0663FADA1CAE8A820076E384 /* JZPassListHeadportrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZPassListHeadportrait.m; sourceTree = "<group>"; };
+		0663FADB1CAE8A820076E384 /* JZPassListUserid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZPassListUserid.h; sourceTree = "<group>"; };
+		0663FADC1CAE8A820076E384 /* JZPassListUserid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZPassListUserid.m; sourceTree = "<group>"; };
 		0670B54D1CABC2BA00D34731 /* JZCompletionConfirmationContriller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZCompletionConfirmationContriller.h; sourceTree = "<group>"; };
 		0670B54E1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZCompletionConfirmationContriller.m; sourceTree = "<group>"; };
 		0670B5531CABCEAF00D34731 /* JZCompletionConfirmationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZCompletionConfirmationCell.h; sourceTree = "<group>"; };
@@ -1649,6 +1664,8 @@
 			children = (
 				06361A4C1CA51AB8002708F2 /* JZMyController.h */,
 				06361A4D1CA51AB8002708F2 /* JZMyController.m */,
+				0663FAD01CAE7DCF0076E384 /* JZPassStudentListController.h */,
+				0663FAD11CAE7DCF0076E384 /* JZPassStudentListController.m */,
 				0663FACD1CAE3B830076E384 /* ComingSoonController.h */,
 				0663FACE1CAE3B830076E384 /* ComingSoonController.m */,
 				BECA64081CAE112D00FAE001 /* JZExamSummaryInfoController.h */,
@@ -1691,6 +1708,8 @@
 				061F564A1CA686060052BEA9 /* EditorUseTopCell.m */,
 				061F564C1CA689890052BEA9 /* EditorUseBottomCell.h */,
 				061F564D1CA689890052BEA9 /* EditorUseBottomCell.m */,
+				0663FAD31CAE7EF00076E384 /* JZStudentPassListCell.h */,
+				0663FAD41CAE7EF00076E384 /* JZStudentPassListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1702,9 +1721,23 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		0663FAD61CAE89750076E384 /* JZPassListModel */ = {
+			isa = PBXGroup;
+			children = (
+				0663FAD71CAE8A720076E384 /* JZPassListData.h */,
+				0663FAD81CAE8A820076E384 /* JZPassListData.m */,
+				0663FAD91CAE8A820076E384 /* JZPassListHeadportrait.h */,
+				0663FADA1CAE8A820076E384 /* JZPassListHeadportrait.m */,
+				0663FADB1CAE8A820076E384 /* JZPassListUserid.h */,
+				0663FADC1CAE8A820076E384 /* JZPassListUserid.m */,
+			);
+			path = JZPassListModel;
+			sourceTree = "<group>";
+		};
 		06DB70BF1CA909DC00A6AC9D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0663FAD61CAE89750076E384 /* JZPassListModel */,
 				06DB70C01CA909DC00A6AC9D /* ExamClassModel.h */,
 				06DB70C11CA909DC00A6AC9D /* ExamClassModel.m */,
 				BECA640B1CAE15CD00FAE001 /* JZExamStudentListModel */,
@@ -3829,6 +3862,7 @@
 				B2BA42B71CA5035700926584 /* DVVDrivingStudentListCell.m in Sources */,
 				B2BA42C31CA5035700926584 /* DVVTheoreticalStudentListView.m in Sources */,
 				B2BA42971CA5035700926584 /* EaseEmotionManager.m in Sources */,
+				0663FAD51CAE7EF00076E384 /* JZStudentPassListCell.m in Sources */,
 				B2BA41DB1CA5035700926584 /* EMSDWebImageDownloaderOperation.m in Sources */,
 				D9D607DC1CAA7D4800B61874 /* LKAddStudentTimeViewController.m in Sources */,
 				B2BA433B1CA5041100926584 /* JGSubjectthreeModel.m in Sources */,
@@ -3854,6 +3888,7 @@
 				B2BA436B1CA5324000926584 /* FDCalendarItem.m in Sources */,
 				B2BA419F1CA5035700926584 /* MyWalletViewController.m in Sources */,
 				B2BA3E951CA4F44E00926584 /* CourseRatingCell.m in Sources */,
+				0663FAD21CAE7DCF0076E384 /* JZPassStudentListController.m in Sources */,
 				B2BA419B1CA5035700926584 /* JEPhotoPickManger.m in Sources */,
 				B2BA428B1CA5035700926584 /* NSDate+Category.m in Sources */,
 				06234CA01CA8E5D100007DB7 /* PhoneNumViewController.m in Sources */,
@@ -3883,6 +3918,7 @@
 				B2BA41BC1CA5035700926584 /* EMCDDeviceManagerBase.m in Sources */,
 				B2BA417D1CA5035700926584 /* AffiliatedSchoolViewController.m in Sources */,
 				B2BA42C01CA5035700926584 /* DVVStudentListViewModel.m in Sources */,
+				0663FADD1CAE8A820076E384 /* JZPassListData.m in Sources */,
 				B2BA41AF1CA5035700926584 /* UIDevice+JEsystemVersion.m in Sources */,
 				B2BA41951CA5035700926584 /* ShopMainModel.m in Sources */,
 				B2BA42981CA5035700926584 /* ConversationListController.m in Sources */,
@@ -3902,6 +3938,7 @@
 				B2BA41961CA5035700926584 /* ShopModel.m in Sources */,
 				B2BA434D1CA5041100926584 /* YBSignUpStuentListModelRootClass.m in Sources */,
 				B2BA446D1CABC15C00926584 /* YBStudentDetailsSubjectthree.m in Sources */,
+				0663FADF1CAE8A820076E384 /* JZPassListUserid.m in Sources */,
 				B2BA44651CABC15C00926584 /* YBStudentDetailsData.m in Sources */,
 				B2BA41F71CA5035700926584 /* ChatViewController.m in Sources */,
 				BECA641B1CAE15CD00FAE001 /* JZExamStudentListRootClass.m in Sources */,
@@ -4089,6 +4126,7 @@
 				B2BA41D11CA5035700926584 /* MWPhoto.m in Sources */,
 				B2BA41CF1CA5035700926584 /* MWGridCell.m in Sources */,
 				B2BA41B41CA5035700926584 /* WMUITool.m in Sources */,
+				0663FADE1CAE8A820076E384 /* JZPassListHeadportrait.m in Sources */,
 				B2BA41A21CA5035700926584 /* PersonaizeLabelController.m in Sources */,
 				B2BA41EC1CA5035700926584 /* PSTCollectionViewFlowLayout.m in Sources */,
 				B2BA3E531CA4E6D400926584 /* JGBaseViewController.m in Sources */,

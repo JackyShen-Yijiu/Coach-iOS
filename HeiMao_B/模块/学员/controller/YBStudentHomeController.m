@@ -23,6 +23,7 @@
 #import <YYModel.h>
 #import "BLPFAlertView.h"
 #import "JZCompletionConfirmationContriller.h"
+#import "YBStudentDetailsViewController.h"
 //#import <MJRefreshHeader.h>
 //#import <MJRefreshFooter.h>
 //#import <MJRefresh/MJRefresh.h>
@@ -342,9 +343,9 @@
         };
         
         ws.tableView.refreshFooter.beginRefreshingBlock = ^(){
-                        NSArray *dataArray = [NSArray array];
+//                        NSArray *dataArray = [NSArray array];
         
-                        if(dataArray.count % RELOADDATACOUNT){
+                        if(_resultDataArray.count % RELOADDATACOUNT){
                             [ws showTotasViewWithMes:@"已经加载所有数据"];
                             if (ws.tableView.refreshFooter) {
                                 [ws.tableView.refreshFooter endRefreshing];
@@ -353,7 +354,7 @@
                             return ;
                         }
             
-            [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(ws.subjectID) studentID:(NSString *)@(ws.studentState) index:dataArray.count / RELOADDATACOUNT count:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(ws.subjectID) studentID:(NSString *)@(ws.studentState) index:_resultDataArray.count / RELOADDATACOUNT count:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
                                 if (type == 1) {
                                     if (responseObject[@"data"]) {
@@ -494,7 +495,9 @@
 {
     // 跳转学员详情页
     JZResultModel *model = _resultDataArray[indexPath.row];
-    
+    YBStudentDetailsViewController *studentDetailVC = [[YBStudentDetailsViewController alloc] init];
+    studentDetailVC.studentID = model.userid;
+    [self.navigationController pushViewController:studentDetailVC animated:YES];
 }
 #pragma mark ---- 电话
 - (void)callPhonewithModel:(JZResultModel *)model{
