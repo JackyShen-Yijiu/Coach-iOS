@@ -376,4 +376,15 @@
                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;
 
+
+/**
+ *  获取学员的考试信息
+ */
++ (void)getExamSummaryInfoDataWihtCoachID:(NSString *)coachid index:(NSUInteger)index count:(NSUInteger)count
+                                                                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                                                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;
+
+
+
+
 @end
