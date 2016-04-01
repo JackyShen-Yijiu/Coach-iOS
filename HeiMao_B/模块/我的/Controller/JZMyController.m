@@ -17,6 +17,8 @@
 #import "EditorUserViewController.h"
 #import "ExamClassViewController.h"
 #import "WorkTimeViewController.h"
+#import "LKTestViewController.h"
+#import "JZExamSummaryInfoController.h"
 
 #define kHeight 216
 @interface JZMyController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
@@ -96,8 +98,8 @@
     
     self.topDetailArray = @[classTypeStr,workTimeStr];
     
-    self.bottomImgArray = @[@"rest",@"wallet",@"Information",@"set"];
-    self.bottomTitleArray = @[@"休假",@"钱包",@"资讯",@"设置"];
+    self.bottomImgArray = @[@"rest",@"wallet",@"Information",@"set",@""];
+    self.bottomTitleArray = @[@"休假",@"钱包",@"资讯",@"设置",@"考试信息"];
 }
 - (void)initUI{
     self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -kHeight, self.view.frame.size.width, kHeight) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%ld",[UserInfoModel defaultUserInfo].fcode]];
@@ -129,7 +131,7 @@
     if (0 == section) {
         return 2 ;
     } else if (1 == section){
-        return 4;
+        return 5;
     }
     return 0;
     
@@ -211,6 +213,12 @@
             SetupViewController *setUp = [[SetupViewController alloc] init];
             [self.navigationController pushViewController:setUp animated:YES];
         }
+        if (4 == indexPat.row) {
+            // 考试信息
+            JZExamSummaryInfoController *examInfoVC = [[JZExamSummaryInfoController alloc] init];
+            [self.navigationController pushViewController:examInfoVC animated:YES];
+        }
+
 
     }
     
