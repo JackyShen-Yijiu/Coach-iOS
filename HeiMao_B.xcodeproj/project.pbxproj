@@ -28,6 +28,7 @@
 		06361A541CA51E12002708F2 /* BottomCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A531CA51E12002708F2 /* BottomCollectionCell.m */; };
 		06361A571CA53511002708F2 /* MyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A561CA53511002708F2 /* MyHeaderView.m */; };
 		065E82C21CAD677300D98BFA /* YBConfimContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 065E82C11CAD677300D98BFA /* YBConfimContentView.m */; };
+		0663FACF1CAE3B830076E384 /* ComingSoonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0663FACE1CAE3B830076E384 /* ComingSoonController.m */; };
 		0670B54F1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = 0670B54E1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m */; };
 		0670B5551CABCEAF00D34731 /* JZCompletionConfirmationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0670B5541CABCEAF00D34731 /* JZCompletionConfirmationCell.m */; };
 		0670B55A1CABF74F00D34731 /* RatingBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0670B5591CABF74F00D34731 /* RatingBar.m */; };
@@ -619,6 +620,8 @@
 		06361A561CA53511002708F2 /* MyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHeaderView.m; sourceTree = "<group>"; };
 		065E82C01CAD677300D98BFA /* YBConfimContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBConfimContentView.h; sourceTree = "<group>"; };
 		065E82C11CAD677300D98BFA /* YBConfimContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBConfimContentView.m; sourceTree = "<group>"; };
+		0663FACD1CAE3B830076E384 /* ComingSoonController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComingSoonController.h; sourceTree = "<group>"; };
+		0663FACE1CAE3B830076E384 /* ComingSoonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComingSoonController.m; sourceTree = "<group>"; };
 		0670B54D1CABC2BA00D34731 /* JZCompletionConfirmationContriller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZCompletionConfirmationContriller.h; sourceTree = "<group>"; };
 		0670B54E1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZCompletionConfirmationContriller.m; sourceTree = "<group>"; };
 		0670B5531CABCEAF00D34731 /* JZCompletionConfirmationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZCompletionConfirmationCell.h; sourceTree = "<group>"; };
@@ -1643,6 +1646,8 @@
 			children = (
 				06361A4C1CA51AB8002708F2 /* JZMyController.h */,
 				06361A4D1CA51AB8002708F2 /* JZMyController.m */,
+				0663FACD1CAE3B830076E384 /* ComingSoonController.h */,
+				0663FACE1CAE3B830076E384 /* ComingSoonController.m */,
 				BECA64081CAE112D00FAE001 /* JZExamSummaryInfoController.h */,
 				BECA64091CAE112D00FAE001 /* JZExamSummaryInfoController.m */,
 				061F56461CA682DD0052BEA9 /* EditorUserViewController.h */,
@@ -4086,6 +4091,7 @@
 				B2BA446C1CABC15C00926584 /* YBStudentDetailsSubjectone.m in Sources */,
 				B2BA436D1CA5324000926584 /* YBObjectTool.m in Sources */,
 				B2BA43431CA5041100926584 /* StudentSignInViewModel.m in Sources */,
+				0663FACF1CAE3B830076E384 /* ComingSoonController.m in Sources */,
 				B2BA446A1CABC15C00926584 /* YBStudentDetailsSubject.m in Sources */,
 				B2BA41DA1CA5035700926584 /* EMSDWebImageDownloader.m in Sources */,
 				B2BA41C41CA5035700926584 /* MJRefreshConst.m in Sources */,
