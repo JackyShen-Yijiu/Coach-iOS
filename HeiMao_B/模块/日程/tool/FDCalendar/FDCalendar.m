@@ -269,17 +269,16 @@ static NSDateFormatter *dateFormattor;
     
 }
 
-#pragma mark - UIScrollViewDelegate
-
-#pragma mark - SEL
 // 跳到上一个月
 - (void)setPreviousMonthDate
 {
-    [self setCurrentDate:[self.centerCalendarItem previousMonthDate]];
+//    [self setCurrentDate:[self.centerCalendarItem previousMonthDate]];
+    [self setCurrentDate:[self.centerCalendarItem previousDayDate]];
 }
 // 跳到下一个月
 - (void)setNextMonthDate {
-    [self setCurrentDate:[self.centerCalendarItem nextMonthDate]];
+//    [self setCurrentDate:[self.centerCalendarItem nextMonthDate]];
+    [self setCurrentDate:[self.centerCalendarItem nextDayDate]];
 }
 
 - (void)calendarItem:(FDCalendarItem *)item didSelectedDate:(NSDate *)date
