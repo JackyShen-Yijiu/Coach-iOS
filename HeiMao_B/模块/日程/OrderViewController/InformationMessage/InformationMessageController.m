@@ -12,6 +12,7 @@
 #import "RefreshTableView.h"
 #import "InformationMessageDetailController.h"
 
+
 @interface InformationMessageController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) RefreshTableView  *tableView;
@@ -48,6 +49,7 @@
     [self.view addSubview:self.tableView];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self initData];
     
 
@@ -56,11 +58,13 @@
     _informationMessageViewModel = [[InformationMessageViewModel alloc] init];
     WS(ws);
     _informationMessageViewModel.tableViewNeedReLoad = ^{
+         [MBProgressHUD hideHUDForView:ws.view animated:YES];
         [ws.tableView reloadData];
         [ws.tableView.refreshHeader endRefreshing];
         [ws.tableView.refreshFooter endRefreshing];
     };
     _informationMessageViewModel.showToast = ^{
+         [MBProgressHUD hideHUDForView:ws.view animated:YES];
         ToastAlertView *tav = [[ToastAlertView alloc] initWithTitle:@"网络连接失败，请检查网络连接"];
         [tav show];
     };
