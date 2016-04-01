@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class JZData;
 @interface JZCompletionConfirmationCell : UITableViewCell
+
+@property (nonatomic,strong) UIViewController *parentViewController;
 
 @property (nonatomic , strong) NSArray *subjectArray;
 
-- (CGFloat)cellHeihtWith:(NSArray *)dataArray;
+@property (nonatomic,strong) JZData *listModel;
+
++ (CGFloat)cellHeihtWithlistData:(JZData *)data subjectArray:(NSArray *)subjectArray;
 
 @end

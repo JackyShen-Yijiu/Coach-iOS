@@ -13,8 +13,6 @@
 
 @property (nonatomic,copy)NSString *systemBadgeStr;
 
-@property (nonatomic,copy)NSString *zixunBadgeStr;
-
 @end
 
 @implementation JGBaseViewController
@@ -60,16 +58,13 @@
         NSDictionary *data = [responseObject objectInfoForKey:@"data"];
         
         NSDictionary *messageinfo = [data objectInfoForKey:@"messageinfo"];
-        NSDictionary *Newsinfo = [data objectInfoForKey:@"Newsinfo"];
         
         if (type == 1) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 ws.systemBadgeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagecount"]];
-             
-                ws.zixunBadgeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"newscount"]];
-            
+                
                 [self setupUnreadMessageCount];
                 
             });
@@ -89,7 +84,7 @@
 {
     
     NSArray *conversations = [[[EaseMob sharedInstance] chatManager] conversations];
-    NSInteger unreadCount = [self.systemBadgeStr integerValue] + [self.zixunBadgeStr integerValue];
+    NSInteger unreadCount = [self.systemBadgeStr integerValue];
     for (EMConversation *conversation in conversations) {
         unreadCount += conversation.unreadMessagesCount;
     }
