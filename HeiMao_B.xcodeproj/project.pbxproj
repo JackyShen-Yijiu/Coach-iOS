@@ -2073,7 +2073,6 @@
 				B2BA447C1CACFCBD00926584 /* YBStudentDetailsExamMessageCell.xib */,
 				B2BA447F1CACFE7300926584 /* YBStudentDetailsCommentListCell.h */,
 				B2BA44801CACFE7300926584 /* YBStudentDetailsCommentListCell.m */,
->>>>>>> 351cead41e6905b9cb232ea6e9d565be7d31dab1
 			);
 			path = view;
 			sourceTree = "<group>";
