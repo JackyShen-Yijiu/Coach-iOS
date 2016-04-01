@@ -58,8 +58,8 @@ CGFloat const EaseConversationCellPadding = 10;
 - (void)_setupSubview
 {
     _avatarView = [[EaseImageView alloc] init];
-    _avatarView.layer.masksToBounds = YES;
-    _avatarView.layer.cornerRadius = 20;
+//    _avatarView.layer.masksToBounds = YES;
+//    _avatarView.layer.cornerRadius = 20;
     _avatarView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_avatarView];
     
@@ -85,15 +85,6 @@ CGFloat const EaseConversationCellPadding = 10;
     _detailLabel.font = [UIFont systemFontOfSize:12];
     _detailLabel.textColor = JZ_FONTCOLOR_LIGHT;
     [self.contentView addSubview:_detailLabel];
-    
-    // 添加右侧箭头
-    CGFloat margin = 16;
-    CGFloat arrowW = 10;
-    CGFloat arrowH = 14;
-
-    _arrowimgView = [[UIImageView alloc] initWithFrame:CGRectMake( [UIScreen mainScreen].bounds.size.width - margin - arrowW , (self.frame.size.height - arrowH) / 2, arrowW, arrowH)];
-    _arrowimgView.image = [UIImage imageNamed:@"more_right"];
-    [self.contentView addSubview:_arrowimgView];
     
     [self _setupAvatarViewConstraints];
     [self _setupTimeLabelConstraints];
