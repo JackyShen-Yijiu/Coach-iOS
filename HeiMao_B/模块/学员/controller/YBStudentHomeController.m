@@ -90,7 +90,12 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self initShowNOBG];
     
+}
+
+#pragma mark ---- 根据数据判断是否显示暂无字样
+- (void)initShowNOBG{
     // 开始是全部置为可点击状态,
     NSArray *viewArray = [_toolBarView subviews];
     for (UIView *view in viewArray) {
@@ -131,7 +136,7 @@
             if (0 == [data[@"passstudentcount"] integerValue]) {
                 [self showBgTitleWith:4];
             }
-
+            
         }
         else {
             [self showTotasViewWithMes:param[@"msg"]];
@@ -141,10 +146,9 @@
     }];
     
     
-    [self.tableView.header beginRefreshing];
-    
+    [self.tableView.refreshHeader beginRefreshing];
+
 }
-#pragma mark ---- 根据数据判断是否显示暂无字样
 - (void)showBgTitleWith:(NSInteger )tag{
     
     NSArray *viewArray = [_toolBarView subviews];
@@ -164,17 +168,6 @@
 
 }
 - (void)viewDidLoad {
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                JZCompletionConfirmationContriller *vc = [JZCompletionConfirmationContriller new];
-                vc.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:vc animated:YES];
-    });
-    
-    
-    
-    
-    
     [super viewDidLoad];
     _isshowSegment = YES;
     _resultDataArray = [NSMutableArray array]
@@ -264,9 +257,12 @@
     // 不显示时不添加 segment 控件
     [self.bgView addSubview:self.toolBarView];
     [self.view addSubview:self.bgView];
+    if (!_isshowSegment) {
+        _tableView.frame = CGRectMake(0, _bgH + 64, self.view.width, self.view.height - _bgH - 45);
+    }else{
+        _tableView.frame = CGRectMake(0, ktopHight + 64, self.view.width, self.view.height - ktopHight - 64);
+    }
     
-    
- 
     
 }
 - (void)setNavBar{
@@ -313,6 +309,7 @@
                     if (data.count == 0) {
                         [ws showTotasViewWithMes:@"暂无"];
                         [ws.tableView.refreshHeader endRefreshing];
+                        [ws.tableView reloadData];
                         return ;
                     }
                     for (NSDictionary *dic in data) {
@@ -478,6 +475,7 @@
     if (!listCell) {
         listCell = [[JZHomeStudentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDCell];
     }
+    listCell.listModel = _resultDataArray[indexPath.row];
     listCell.studentListMessageAndCall = ^(NSInteger tag){
         if (500 == tag) {
             // 信息
@@ -565,7 +563,7 @@
 }
 - (RefreshTableView *)tableView{
     if (_tableView == nil) {
-        _tableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, ktopHight, self.view.width, self.view.height - 45 - ktopHight) style:UITableViewStylePlain];
+        _tableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, ktopHight + 64, self.view.width, self.view.height - 45 - ktopHight - 64) style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.dataSource = self;

@@ -12,4 +12,7 @@
 @property (nonatomic, strong) UIImageView *imgView;
 
 @property (nonatomic, strong) UILabel *titleLabel;
+
+@property (nonatomic, assign) BOOL isNoShowLabel;
+
 @end

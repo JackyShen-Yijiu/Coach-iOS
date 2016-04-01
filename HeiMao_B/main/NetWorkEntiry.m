@@ -574,7 +574,7 @@
                               count:(NSInteger)count
                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure {
-    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmystudentlist",HOST_TEST_DAMIAN];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmystudentlist",HOST_LINE_DOMAIN];
     NSDictionary *paramterDict = @{ @"coachid": coachId,
                                     @"subjectid": subjectID,
                                     @"studentstate":subjectID,
@@ -595,7 +595,7 @@
                           subjectID:(NSString *)subjectID
                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure {
-    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmystudentcount",HOST_TEST_DAMIAN];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmystudentcount",HOST_LINE_DOMAIN];
     NSDictionary *paramterDict = @{ @"coachid": coachId,
                                     @"subjectid": subjectID,
                                     

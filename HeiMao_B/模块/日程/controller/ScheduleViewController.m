@@ -19,6 +19,7 @@
 
 #import "YBHomeLeftViewController.h"
 #import "YBHomeRightViewController.h"
+#import "JZCompletionConfirmationContriller.h"
 
 typedef NS_ENUM(NSInteger, kControllerType) {
     leftVc,
@@ -62,7 +63,10 @@ typedef NS_ENUM(NSInteger, kControllerType) {
 
 - (void)confimBtnDidClick
 {
-    NSLog(@"%s",__func__);
+
+    JZCompletionConfirmationContriller *vc = [JZCompletionConfirmationContriller new];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
