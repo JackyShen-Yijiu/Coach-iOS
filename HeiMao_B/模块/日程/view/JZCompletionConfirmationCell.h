@@ -16,6 +16,8 @@
 
 @property (nonatomic,strong) JZData *listModel;
 
+@property (nonatomic, strong) UIImageView *arrowImageView;
+
 + (CGFloat)cellHeihtWithlistData:(JZData *)data subjectArray:(NSArray *)subjectArray;
 
 @end

@@ -24,6 +24,7 @@
 #import "BLPFAlertView.h"
 #import "JZCompletionConfirmationContriller.h"
 #import "YBStudentDetailsViewController.h"
+#import "ChatViewController.h"
 //#import <MJRefreshHeader.h>
 //#import <MJRefreshFooter.h>
 //#import <MJRefresh/MJRefresh.h>
@@ -69,6 +70,8 @@
 
 @property (nonatomic, strong) NSMutableArray *resultDataArray;
 
+
+@property (nonatomic, strong) NSArray *subjectIDArray;   // 根据教练授课科目 排序好的subjectID
 @end
 
 @implementation YBStudentHomeController
@@ -106,6 +109,7 @@
     }
     [NetWorkEntiry getAllSubjectNumberStateWithCoachId:[UserInfoModel defaultUserInfo].userID subjectID:[NSString stringWithFormat:@"%lu",_subjectID] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *param = responseObject;
+        NSLog(@"pass= responseObject= %@ _subjectID=%lu",responseObject, _subjectID);
         if (1 == [param[@"type"] integerValue]) {
             /*
              {
@@ -190,6 +194,7 @@
         _isshowSegment = NO;
         NSDictionary *dic = sujectArray.firstObject;
         self.myNavigationItem.title = dic[@"name"];
+        _subjectID = [dic[@"subjectid"] integerValue];
         
     }
     _isshowSegment ? (_bgH = ktopHight) : (_bgH = ktopSmallHight);
@@ -212,12 +217,12 @@
         }
         
         // 冒泡排序后将_id转化为相应的科目文字
-        NSArray *resultArray = [self bubbleSort:titleArray];
-        _subjectID = [[resultArray firstObject] integerValue];
+        _subjectIDArray = [self bubbleSort:titleArray];
+        _subjectID = [[_subjectIDArray firstObject] integerValue];
         _studentState = 0;
         NSMutableArray *resultMustArray = [NSMutableArray array];
         NSString *str = nil;
-        for (NSNumber *_id in resultArray) {
+        for (NSNumber *_id in _subjectIDArray) {
             
             if ( [_id isEqualToNumber:@1]) {
                 str = @"科目一";
@@ -300,11 +305,11 @@
         WS(ws);
         self.tableView.refreshHeader.beginRefreshingBlock = ^(){
             [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(ws.subjectID) studentID:(NSString *)@(ws.studentState) index:1 count:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"responseObject == 0 %@",responseObject);
+                NSLog(@"responseObject=%@ subjectID=%@ State == %@  ",responseObject, (NSString *)@(ws.subjectID),(NSString *)@(ws.studentState) );
                 NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
                 NSArray *data = [responseObject objectArrayForKey:@"data"];
                 if (type == 1) {
-                    NSLog(@"responseObject == 1 %@",responseObject);
+        
                     [ws.resultDataArray removeAllObjects];
                     
                     if (data.count == 0) {
@@ -383,36 +388,14 @@
         
     }
 
-
+#pragma mark ---- segment的点击事件
 - (void)didClicksegmentedControlAction:(UISegmentedControl *)Seg {
     NSInteger index = Seg.selectedSegmentIndex;
-    if (0 == index) {
-        // 科目一
-        [_toolBarView selectItem:0];
-        _subjectID = index + 1;
-
-
-    }
-    if (1 == index) {
-        // 科目二
-        [_toolBarView selectItem:0];
-        _subjectID = index + 1;
-        
-    }
-    if (2 == index) {
-        // 科目三
-            [_toolBarView selectItem:0];
-        _subjectID = index + 1;
-
-    }
-    if (3 == index) {
-        // 科目四
-        [_toolBarView selectItem:0];
-        _subjectID = index + 1;
-        
-
-    }
-     [self.tableView.refreshHeader  beginRefreshing];
+     _subjectID = [_subjectIDArray[index] integerValue];
+    [_toolBarView selectItem:0];
+    [self initShowNOBG];
+    [self.tableView.refreshHeader  beginRefreshing];
+    
 }
 #pragma mark 筛选条件
 - (void)dvvToolBarViewItemSelectedAction:(NSInteger)index {
@@ -526,7 +509,12 @@
 
 #pragma mark ---- 信息
 - (void)messageWithModel:(JZResultModel *)model{
+    NSLog(@"%s self.dmData.data.studentinfo.userid:%@",__func__,model.userid);
     
+    ChatViewController *chatController = [[ChatViewController alloc] initWithConversationChatter:model.userid conversationType:eConversationTypeChat];
+    chatController.title = model.name;
+    [self.parentViewController.navigationController pushViewController:chatController animated:YES];
+
     
 }
 
