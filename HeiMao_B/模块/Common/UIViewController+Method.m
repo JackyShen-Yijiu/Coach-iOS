@@ -106,7 +106,8 @@
     
     NSLog(@"controllers.count:%lu",(unsigned long)controllers.count);
     
-    [[[self myNavController] navigationBar] setBarTintColor:RGB_Color(31, 124, 235)];
+    // RGB_Color(31, 124, 235)
+    [[[self myNavController] navigationBar] setBarTintColor:JZ_BlueColor];
     NSDictionary *textAttributes1 = @{NSFontAttributeName: [UIFont systemFontOfSize:16.f],
                                       NSForegroundColorAttributeName: [UIColor whiteColor]
                                       };    

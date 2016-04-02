@@ -44,7 +44,9 @@ static NSString *kGroupName = @"GroupName";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
+
     [self registerNotifications];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoaded) name:KNOTIFICATION_USERLOADED object:nil];
