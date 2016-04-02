@@ -76,7 +76,7 @@
         
     }];
     [self.soreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(42);
+        make.top.mas_equalTo(self.contentView.mas_top).offset(24);
         make.left.mas_equalTo(self.nameLabel.mas_right).offset(12);
         make.height.mas_equalTo(@12);
         make.width.mas_equalTo(@80);

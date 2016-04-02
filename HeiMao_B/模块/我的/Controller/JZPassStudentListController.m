@@ -15,7 +15,7 @@
 #import "ChatViewController.h"
 @interface JZPassStudentListController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic, strong) RefreshTableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
@@ -91,9 +91,9 @@
 }
 
 
-- (RefreshTableView *)tableView{
+- (UITableView *)tableView{
     if (_tableView == nil) {
-        _tableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height  - 64) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.dataSource = self;
