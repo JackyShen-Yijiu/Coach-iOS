@@ -72,11 +72,7 @@
         self.studentCountLabel.text = @"报考\n100人";
 //        self.nopassCountLabel.text = @"7人未通过";
         self.missExamStudentLabel.text = @"缺考\n100人";
-        
-        
-        
-        
-        
+  
     }
     return self;
 }
@@ -90,15 +86,6 @@
 
 
 
-// 当点击headerView中的按钮时会调用此方法
-
-- (void)headerBtnClick:(UIButton *)headerBtn {
-    
-    
-    
-    
-    
-}
 
 // 布局"设置"子控件
 - (void)layoutSubviews {
@@ -220,6 +207,8 @@
 - (void)didMoveToSuperview {
     NSLog(@"%s", __FUNCTION__);
 }
+
+
 
 
 

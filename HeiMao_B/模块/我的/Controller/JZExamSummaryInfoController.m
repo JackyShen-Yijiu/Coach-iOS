@@ -29,21 +29,32 @@
     
     self.navigationItem.title = @"考试信息";
     self.tableView.sectionHeaderHeight = 142;
+    self.tableView.sectionFooterHeight = 10;
+    
+    
+    UIView *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 10)];
+    
+    footView.backgroundColor = JZ_FONTCOLOR_DRAK;
+    
+    self.tableView.tableFooterView = footView;
+    self.tableView.tableFooterView.height = 10;
+
+    
+    // 监听名字为openGroup的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(haderViewDidOpenGroup:) name:@"openGroup" object:nil];
 
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.showsHorizontalScrollIndicator = NO;
     
     JZExamHeaderView *headerView = [[JZExamHeaderView alloc]init];
     
-    self.tableView.tableHeaderView = headerView;
-//    self.tableView.tableHeaderView.height = 142;
     
     // 隐藏没有数据的表格
     self.tableView.tableFooterView = [[UIView alloc] init];
     
     // 如果tableView设置为grouped样式时,返回每一组的头部视图的代理方法是从第1组开始的,它把第0组的头部视图留给tableView的tableHeaderView这个属性
-//    JZExamHeaderView *headerView = (JZExamHeaderView *)[self tableView:self.tableView viewForHeaderInSection:0];
-    headerView.bounds = CGRectMake(0, 0, self.tableView.bounds.size.width, 44);
+    headerView.bounds = CGRectMake(0, 0, self.tableView.bounds.size.width, 142);
+    
     self.tableView.tableHeaderView = headerView;
     
     
@@ -62,21 +73,35 @@
     
 }
 
-//// 用来返回每一组的头部视图
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    // 1.创建headerView
-//    JZExamHeaderView *heaerView = [JZExamHeaderView headerViewWithTableView:tableView];
-//    
-//    NSLog(@"-----%ld", section);
-//    // 2.给headerView传递模型
-//    heaerView.group = self.groups[section];
-//    // 3.设置代理
-//    heaerView.delegate = self;
-//    // 给每一个headerView设置一个标识
+
+
+// 用来返回每一组的头部视图
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    // 1.创建headerView
+    JZExamHeaderView *heaerView = [JZExamHeaderView examHeaderViewWithTableView:tableView];
+    
+    NSLog(@"-----%ld", section);
+    // 2.给headerView传递模型
+    heaerView.modelGrop = self.examInfoData[section];
+    // 3.设置代理
+    
+    // 给每一个headerView设置一个标识
 //    heaerView.tag = section;
-//    // 4.返回haderView
-//    return heaerView;
-//}
+    
+    
+    
+    // 4.返回haderView
+    return heaerView;
+    
+}
+-(NSMutableArray *)examInfoData {
+    
+    if (_examInfoData ==  nil) {
+        
+        _examInfoData = [[NSMutableArray alloc]init];
+    }
+    return _examInfoData;
+}
 
 #pragma mark - 加载数据
 
@@ -102,12 +127,14 @@
             [self.examInfoData addObject:data];
             
 //            NSLog(@"%ld",(long)data.passrate);
+           
 
             
             
             
             
         }
+        [self.tableView reloadData];
         
         NSLog(@"======%@=======",self.examInfoData);
         
@@ -121,76 +148,34 @@
     
     
     
-    
 }
+
+- (void)haderViewDidOpenGroup:(NSNotification *)note {
+    // 刷新表格
+    //    [self.tableView reloadData];
+    JZExamHeaderView *headerView = note.object;
+    // 创建表示第几组的索引集合
+    NSLog(@"%ld", headerView.tag);
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:headerView.tag];
+    // 刷新指定的组
+    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+}
+
 
 
 
 #pragma mark - Table view 数据源方法
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 1;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
     
-    return cell;
+    NSLog(@"%zd",self.examInfoData.count);
+    return self.examInfoData.count;
+    
+    
+    
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
