@@ -15,5 +15,5 @@ typedef void (^JZHomeStudentListMessageAndCall) (NSInteger tag);
 
 @property (nonatomic, strong) JZResultModel *listModel;
 
-@property (nonatomic, assign) JZHomeStudentListMessageAndCall  studentListMessageAndCall;
+@property (nonatomic, copy) JZHomeStudentListMessageAndCall  studentListMessageAndCall;
 @end
