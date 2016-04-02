@@ -38,9 +38,15 @@
             NSArray *array = param[@"data"];
             if (array.count) {
                 for (NSDictionary *dic in array) {
+                    
+                    
                     JZPassListData *listModel = [JZPassListData yy_modelWithDictionary:dic];
+                    
                     [self.dataArray addObject:listModel];
+                    
                 }
+                JZPassListData *listModel = [self.dataArray firstObject];
+                NSLog(@"listModel.idField  =%@",listModel.idField);
                 [self.tableView reloadData];
             }else{
                 [self showTotasViewWithMes:@"暂无数据"];
@@ -84,9 +90,6 @@
     return listCell;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
 - (RefreshTableView *)tableView{
     if (_tableView == nil) {

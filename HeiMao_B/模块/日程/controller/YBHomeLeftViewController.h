@@ -10,10 +10,11 @@
 #import "FDCalendar.h"
 
 @interface YBHomeLeftViewController : JGBaseViewController
+
 - (void)modifyVacation;
 
 - (void)hiddenOpenCalendar;
 
-@property (nonatomic,strong) UIViewController *parentViewController;
+@property (nonatomic,weak) UIViewController *parentViewController;
 
 @end

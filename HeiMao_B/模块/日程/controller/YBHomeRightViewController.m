@@ -100,7 +100,6 @@
 #pragma mark - Action
 - (void)segmentViewSelectIndex:(NSInteger)index
 {
-    
     self.segController.selIndex = index;
     
     NSLog(@"刷新数据segmentViewSelectIndex:%ld",(long)index);
@@ -119,16 +118,6 @@
     
     [self.courseSummaryTableView.refreshHeader beginRefreshing];
     
-}
-
-- (void)rightBarBtnWithSearchDidClick
-{
-    NSLog(@"搜索");
-    SearchCourseViewController *vc = [[SearchCourseViewController alloc] init];
-    
-    vc.reservationstate = self.reservationstate;
-    
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)initUI
@@ -399,7 +388,7 @@
     }
     if (courseModel) {
         decv.couresID = courseModel.courseId;
-        [self.navigationController pushViewController:decv animated:YES];
+        [self.parentViewController.navigationController pushViewController:decv animated:YES];
     }
 }
 

@@ -70,7 +70,6 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
 //    self.collectionView.contentOffset = CGPointMake([self getCurrentDataOffsetWithData:self.seletedDate], 0);
     
     [self.collectionView reloadData];
-    
 }
 
 - (CGFloat)getCurrentDataOffsetWithData:(NSDate *)date
