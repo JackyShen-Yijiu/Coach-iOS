@@ -194,6 +194,7 @@
         _isshowSegment = NO;
         NSDictionary *dic = sujectArray.firstObject;
         self.myNavigationItem.title = dic[@"name"];
+        _subjectID = [dic[@"subjectid"] integerValue];
         
     }
     _isshowSegment ? (_bgH = ktopHight) : (_bgH = ktopSmallHight);
