@@ -722,6 +722,30 @@
     
 }
 
+/*
+ *  我的界面用户更改手机号  userinfo/updatemobile v1
+ *
+ */
++ (void)coachChangePhoneNumber:(NSString *)mobile smscode:(NSString *)code userType:(NSInteger)userType
+                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure{
+    
+    NSString *urlStr = [NSString stringWithFormat:@"%@/userinfo/updatemobile",HOST_TEST_DAMIAN];
+    
+//    {
+//        "smscode": "123456",
+//        "mobile": "15652305651",
+//        "usertype": 1
+//    }
+    NSDictionary *paramtersDict = @{ @"mobile": mobile,
+                                     @"smscode": code,
+                                     @"usertype": [NSString stringWithFormat:@"%lu",userType]
+                                     };
+    
+    [self POST:urlStr parameters:paramtersDict success:success failure:failure];
+
+    
+}
 
 
 

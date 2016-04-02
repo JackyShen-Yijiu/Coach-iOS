@@ -393,4 +393,14 @@
 + (void)getPassListStudentWihtCoachID:(NSString *)coachid subjectID:(NSString *)subjectID examDate:(NSString *)examDate examState:(NSString *)examState
                                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;
+
+/*
+ *  我的界面用户更改手机号  userinfo/updatemobile v1
+ *
+ */
++ (void)coachChangePhoneNumber:(NSString *)mobile smscode:(NSString *)code userType:(NSInteger)userType
+                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;
+
+
 @end
