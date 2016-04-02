@@ -72,27 +72,33 @@
     
     [NetWorkEntiry getExamSummaryInfoDataWihtCoachID:[UserInfoModel defaultUserInfo].userID index:1 count:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        id result = responseObject;
+        NSDictionary *param = responseObject;
         
-        NSLog(@"result = %@",result);
-        
-        NSArray *stundentData = result[@"data"];
-        
-        NSLog(@"数组===%@",stundentData);
-        
-        
-        for (NSDictionary *dict in stundentData) {
+        if ([param[@"type"] integerValue] == 1) {
+            NSArray *array = param[@"data"];
+            if (array.count) {
+                
+                NSLog(@"result = %@",param);
+                
+                NSArray *stundentData = param[@"data"];
+                
+                for (NSDictionary *dict in stundentData) {
+                    
+                    JZExamSummaryInfoData *data = [JZExamSummaryInfoData yy_modelWithDictionary:dict];
+                    
+                    [self.examInfoData addObject:data];
+                    
+                }
+                [self.tableView reloadData];
+                
+            }else{
+                [self showTotasViewWithMes:@"暂无数据"];
+            }
             
-         JZExamSummaryInfoData *data = [JZExamSummaryInfoData yy_modelWithDictionary:dict];
-            
-            [self.examInfoData addObject:data];
-            
+        }else{
+            [self showTotasViewWithMes:@"网络错误"];
         }
-        [self.tableView reloadData];
-        
-        NSLog(@"======%@=======",self.examInfoData);
-        
-        NSLog(@"%@",self.examInfoData);
+
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        
@@ -169,7 +175,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     // 1.创建headerView
-    JZExamHeaderView *infoHeaerView = [JZExamHeaderView examHeaderViewWithTableView:tableView];
+    JZExamHeaderView *infoHeaerView = [JZExamHeaderView examHeaderViewWithTableView:tableView withTag:section];
     
     // 2.给headerView传递模型
     infoHeaerView.modelGrop = self.examInfoData[section];
@@ -191,10 +197,10 @@
     
 }
 /// 跳转控制器
--(void)pushPassStudentVC:(NSInteger)buttonTag {
+-(void)pushPassStudentVC:(UIButton *)button {
     
-    JZExamSummaryInfoData *data = self.examInfoData[buttonTag];
-
+    JZExamSummaryInfoData *data = self.examInfoData[button.tag];
+    NSLog(@"self.examInfoData[buttonTag] = %@",self.examInfoData[button.tag]);
     
     JZPassStudentListController *passVC = [[JZPassStudentListController alloc]init];
     

@@ -10,7 +10,7 @@
 #import "JZPassStudentListController.h"
 @interface JZExamHeaderView ()
 
-
+@property (nonatomic, assign) NSInteger Buttontag;
 
 @end
 
@@ -18,7 +18,7 @@
 
 
 /// 创建examHeaderView
-+ (instancetype)examHeaderViewWithTableView:(UITableView *)tableView {
++ (instancetype)examHeaderViewWithTableView:(UITableView *)tableView withTag:(NSInteger)tag {
     
     // 1.定义一个重用标识
     static NSString *ID = @"JZExamHeader";
@@ -32,6 +32,7 @@
     if (headerView == nil) {
         headerView = [[JZExamHeaderView alloc] initWithReuseIdentifier:ID];
     }
+    
     return headerView;
     
 }
@@ -249,12 +250,5 @@
     //
 
 }
-
-
-
-
-
-
-
 
 @end

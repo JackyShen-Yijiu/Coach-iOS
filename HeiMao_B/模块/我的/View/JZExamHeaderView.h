@@ -52,7 +52,7 @@
 
 
 /// 创建examHeaderView
-+ (instancetype)examHeaderViewWithTableView:(UITableView *)tableView;
++ (instancetype)examHeaderViewWithTableView:(UITableView *)tableView withTag:(NSInteger)tag ;
 
 
 
