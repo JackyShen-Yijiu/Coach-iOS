@@ -347,7 +347,7 @@
     if(!coachidId || !courseID){
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coachcommentv2",HOST_TEST_DAMIAN];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coachcommentv2",HOST_LINE_DOMAIN];
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:0];
     [dic setValue:coachidId forKey:@"coachid"];
     [dic setValue:courseID forKey:@"reservationid"];

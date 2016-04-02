@@ -16,7 +16,7 @@
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
-@property (nonatomic, strong) UIImageView *arrowImageView;
+
 
 @property (nonatomic,strong) YBConfimContentView *confimContentView;
 
@@ -111,7 +111,8 @@
         _iconImageView = [[UIImageView alloc] init];
         _iconImageView.layer.masksToBounds = YES;
         _iconImageView.layer.cornerRadius = 24;
-        _iconImageView.backgroundColor = [UIColor clearColor];
+        _iconImageView.image = [UIImage imageNamed:@"student_all_on"];
+        
     }
     return _iconImageView;
 }
@@ -153,7 +154,7 @@
     NSString *endTime = [self getLocalDateFormateUTCDate:_listModel.endtime];
     self.timeLabel.text = [NSString stringWithFormat:@"%@-%@",stareTime,endTime];
     
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",_listModel.userid.headportrait.originalpic]] placeholderImage:[UIImage imageNamed:@""]];
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",_listModel.userid.headportrait.originalpic]] placeholderImage:[UIImage imageNamed:@"student_all_on"]];
     
     self.confimContentView.parentViewController = self.parentViewController;
     self.confimContentView.hidden = !listModel.isOpen;
