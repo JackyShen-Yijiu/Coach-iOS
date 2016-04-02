@@ -48,11 +48,6 @@
 /// 未通过人数
 @property (weak, nonatomic) IBOutlet UILabel *nopassCountLabel;
 
-
-
-
-
-
 @property (nonatomic, strong) JZExamSummaryInfoData *modelGrop;
 
 

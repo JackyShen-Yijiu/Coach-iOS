@@ -10,7 +10,7 @@
 /// 成绩
 @property (nonatomic, strong) NSString * score;
 /// 学员id :   idField  headportrait--originalpic  name
-@property (nonatomic, strong) JZExamStudentListUserid * userid;
+@property (nonatomic, strong) NSDictionary * userid;
 @end
 
 

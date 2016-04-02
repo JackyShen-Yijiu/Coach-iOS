@@ -7,6 +7,8 @@
 //
 
 #import "JZNopassStudentCell.h"
+#import "JZExamStudentListUserid.h"
+#import "YYModel.h"
 
 @implementation JZNopassStudentCell
 
@@ -23,6 +25,10 @@
 }
 
 - (void)initUI{
+    
+    self.studentIcon = [[UIImageView alloc]init];
+    self.studentName = [[UILabel alloc]init];
+    self.StudentScore = [[UILabel alloc]init];
     
     [self.contentView addSubview:self.studentIcon];
     [self.contentView addSubview:self.studentName];
@@ -45,8 +51,8 @@
    [self.studentIcon mas_makeConstraints:^(MASConstraintMaker *make) {
       
        
-       make.left.mas_equalTo(self.contentView.left).offset(16);
-       make.top.mas_equalTo(self.contentView.top).offset(12);
+       make.left.mas_equalTo(self.contentView.mas_left).offset(16);
+       make.top.mas_equalTo(self.contentView.mas_top).offset(12);
        make.width.mas_equalTo(36);
        make.height.mas_equalTo(36);
        
@@ -55,17 +61,18 @@
     
     [self.studentName mas_makeConstraints:^(MASConstraintMaker *make) {
        
-        make.left.mas_equalTo(self.studentIcon.left).offset(16);
-        make.centerY.mas_equalTo(self.contentView.centerY);
+        
+        make.left.mas_equalTo(self.studentIcon.mas_right).offset(16);
+        make.centerY.mas_equalTo(self.contentView.mas_centerY);
         make.height.mas_equalTo(14);
         
     }];
     
     [self.StudentScore mas_makeConstraints:^(MASConstraintMaker *make) {
        
-        make.right.mas_equalTo(self.contentView.right).offset(16);
-        make.height.mas_equalTo(12);
-        make.centerY.mas_equalTo(self.contentView.centerY);
+        make.right.mas_equalTo(self.contentView.mas_right).offset(-16);
+        make.height.mas_equalTo(14);
+        make.centerY.mas_equalTo(self.contentView.mas_centerY);
         
     }];
 }
@@ -73,15 +80,30 @@
 -(void)setExamListData:(JZExamStudentListData *)examListData{
 
     _examListData = examListData;
+    NSLog(@"_examListData.userid:%@",_examListData.userid);
     
-    NSURL *iconUrl = [NSURL URLWithString:examListData.userid.headportrait.originalpic];
+    JZExamStudentListUserid *userData = [JZExamStudentListUserid yy_modelWithDictionary:_examListData.userid];
+    
+    NSURL *iconUrl = [NSURL URLWithString:userData.headportrait.originalpic];
 
     [self.studentIcon sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"defoult_por"]];
 
-    self.studentName.text = examListData.userid.name;
-    self.StudentScore.text = examListData.score;
+    self.StudentScore.textColor = RGB_Color(110, 110, 110);
     
-
+    self.studentName.text = userData.name;
+    self.StudentScore.font = [UIFont systemFontOfSize:12];
+    if (examListData.score.length > 0) {
+        
+        
+        self.StudentScore.text = examListData.score;
+      
+    }else{
+          self.StudentScore.text = @"暂无成绩";
+    }
+    
+    self.studentName.font = [UIFont systemFontOfSize:14];
+    
+    
 }
 
 

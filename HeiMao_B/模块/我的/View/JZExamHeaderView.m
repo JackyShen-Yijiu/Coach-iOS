@@ -7,32 +7,10 @@
 //
 
 #import "JZExamHeaderView.h"
-
+#import "JZPassStudentListController.h"
 @interface JZExamHeaderView ()
 
-///// 日期控件
-//@property (nonatomic, weak) UILabel *examDataLabel;
-//
-///// 考试科目控件
-//@property (nonatomic, strong) UILabel *subjectLabel;
-//
-///// 通过率 “百分比”
-//@property (nonatomic, weak) UILabel *passrateCountLabel;
-//
-///// 通过率 文字“通过率”
-//@property (nonatomic, weak) UILabel *passrateLabel;
-//
-///// 报考数量
-//@property (nonatomic, weak) UILabel *studentCountLabel;
-//
-///// 通过数量--按钮
-//@property (nonatomic, weak) UIButton *passCountButton;
-//
-///// 未通过数量--按钮
-//@property (nonatomic, weak) UIButton *nopassCountButton;
-//
-///// 缺考学生数量
-//@property (nonatomic, weak) UILabel *missExamStudentLabel;
+
 
 @end
 
@@ -47,6 +25,9 @@
     
     // 2.通过重用标识先去缓存池找找可以重用的HaderView
     JZExamHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:ID];
+    
+    headerView.contentView.backgroundColor = [UIColor whiteColor];
+    
     // 3.如果缓存池中没有可重用的haderView时,手动创建headerView,并绑定重用标识
     if (headerView == nil) {
         headerView = [[JZExamHeaderView alloc] initWithReuseIdentifier:ID];
@@ -74,6 +55,9 @@
         self.missExamStudentButton.titleLabel.numberOfLines = 0;
         
         self.missExamStudentButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        
+      
+        
   
     }
     return self;
@@ -81,9 +65,6 @@
 
 -(void)setModelGrop:(JZExamSummaryInfoData *)modelGrop {
     _modelGrop = modelGrop;
-    
-
-    self.backgroundColor = [UIColor whiteColor];
     
     NSString *dateYear = [_modelGrop.examdate substringWithRange:NSMakeRange(0, 4)];
     //日期
@@ -126,20 +107,20 @@
     //通过率
     self.passrateCountLabel.text = [NSString stringWithFormat:@"%zd%%",_modelGrop.passrate];
     
-    self.nopassView.backgroundColor = RGB_Color(244, 244, 244);
+    self.nopassView.backgroundColor = RGB_Color(242, 242, 242);
     
 
     
     // 判断当前组是否打开或关闭,对头上的图片是否旋转做判断
     // 如果是打开了,让按钮图片旋转
-    if (self.modelGrop.isOpenGroup == YES) {
+    if (self.modelGrop.openGroup == YES) {
         
         // 让按钮中的小图片旋转正的90度
-        self.nopassView.transform = CGAffineTransformMakeRotation(M_PI);
+        self.nopassDownImg.transform = CGAffineTransformMakeRotation(M_PI);
         
     } else {
         // 关闭让图片再还原
-        self.nopassView.transform = CGAffineTransformMakeRotation(0);
+        self.nopassDownImg.transform = CGAffineTransformMakeRotation(0);
         
     }
 
@@ -147,7 +128,19 @@
     
 }
 
-
+//@property (nonatomic, strong) NSString *examDate;
+//
+//@property (nonatomic, strong) NSString *subjectID;
+//-(void)toPassStudent {
+//    
+//    
+//    JZPassStudentListController *VC = [[JZPassStudentListController alloc]init];
+//    
+//    
+//    
+//    
+//    
+//}
 
 
 

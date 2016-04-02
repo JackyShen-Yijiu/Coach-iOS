@@ -14,5 +14,5 @@
 
 
 /** 用来标识当前组是否打开或关闭 */
-@property (nonatomic, assign, getter=isOpenGroup) BOOL openGroup;
+@property (nonatomic, assign) BOOL openGroup;
 @end
