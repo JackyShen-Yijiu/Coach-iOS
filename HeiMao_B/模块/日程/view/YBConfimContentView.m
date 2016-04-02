@@ -75,10 +75,10 @@
             make.height.mas_equalTo(@110); //110
         }];
         [self.tittleContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.bgContentView.mas_top).offset(16);
+            make.top.mas_equalTo(self.bgContentView.mas_top).offset(0);
             make.left.mas_equalTo(self.bgContentView.mas_left).offset(16);
             make.width.mas_equalTo(@100);
-            make.height.mas_equalTo(@16);
+            make.height.mas_equalTo(@12);
         }];
 
         // 评分视图
@@ -298,6 +298,7 @@
         make.right.mas_equalTo(self.mas_right).offset(0);
         make.height.mas_equalTo(bgcontentViewH);
     }];
+    
     
     return bgcontentViewH + 200;
 }

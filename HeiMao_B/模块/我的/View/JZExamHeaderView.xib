@@ -82,7 +82,7 @@
                             <rect key="frame" x="371" y="15" width="14" height="9"/>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="0.792156862745098" green="0.792156862745098" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="dvZ-Vz-R1Y" secondAttribute="trailing" constant="16" id="0G7-70-d4x"/>
                         <constraint firstItem="7lv-mG-w6y" firstAttribute="leading" secondItem="ujr-Vc-x7u" secondAttribute="leading" constant="16" id="NZf-x3-2wa"/>
