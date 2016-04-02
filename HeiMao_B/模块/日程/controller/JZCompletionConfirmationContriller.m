@@ -45,6 +45,8 @@
                     JZData *listModel = [JZData yy_modelWithDictionary:dic];
                     [_listStudentArray addObject:listModel];
                 }
+            }else{
+                [self showTotasViewWithMes:@"暂无学员"];
             }
             [self.tableView reloadData];
         }
@@ -138,6 +140,16 @@
     JZData *listModel = self.listStudentArray[indexPath.row];
     
     cell.listModel = listModel;
+    
+    // 展开箭头的方向
+    if (listModel.isOpen) {
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            cell.arrowImageView.transform = CGAffineTransformMakeRotation(M_PI / 2);
+        } completion:^(BOOL finished) {
+        }];
+
+    }
     
     return cell;
 }

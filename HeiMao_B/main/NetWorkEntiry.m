@@ -347,7 +347,7 @@
     if(!coachidId || !courseID){
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coachcommentv2",HOST_TEST_DAMIAN];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/courseinfo/coachcommentv2",HOST_LINE_DOMAIN];
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:0];
     [dic setValue:coachidId forKey:@"coachid"];
     [dic setValue:courseID forKey:@"reservationid"];
@@ -704,6 +704,54 @@
     [self GET:url parameters:nil success:success failure:failure];
     
 }
+/*
+ *  通过学员列表  courseinfo/getexamstudentlist v2
+ *
+ */
++ (void)getPassListStudentWihtCoachID:(NSString *)coachid subjectID:(NSString *)subjectID examDate:(NSString *)examDate examState:(NSString *)examState
+                                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure{
+    NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getexamstudentlist",HOST_LINE_DOMAIN];
+    NSDictionary *paramterDict = @{ @"coachid": coachid,
+                                    @"subjectid": subjectID,
+                                    @"examdate":examDate,
+                                    @"examstate":examState
+                                    };
+    [self GET:urlStr parameters:paramterDict success:success failure:failure];
+
+    
+}
+
+/*
+ *  我的界面用户更改手机号  userinfo/updatemobile v1
+ *
+ */
++ (void)coachChangePhoneNumber:(NSString *)mobile smscode:(NSString *)code userType:(NSInteger)userType
+                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure{
+    
+    NSString *urlStr = [NSString stringWithFormat:@"%@/userinfo/updatemobile",HOST_TEST_DAMIAN];
+    
+//    {
+//        "smscode": "123456",
+//        "mobile": "15652305651",
+//        "usertype": 1
+//    }
+    NSDictionary *paramtersDict = @{ @"mobile": mobile,
+                                     @"smscode": code,
+                                     @"usertype": [NSString stringWithFormat:@"%lu",userType]
+                                     };
+    
+    [self POST:urlStr parameters:paramtersDict success:success failure:failure];
+
+    
+}
+
+
+
+
+
+
 
 #pragma mark - 获取学员的考试信息
 + (void)getExamSummaryInfoDataWihtCoachID:(NSString *)coachid index:(NSUInteger)index count:(NSUInteger)count

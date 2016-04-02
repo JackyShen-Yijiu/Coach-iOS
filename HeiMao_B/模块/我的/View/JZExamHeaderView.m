@@ -63,20 +63,18 @@
         
         self = [[NSBundle mainBundle]loadNibNamed:@"JZExamHeaderView" owner:self options:nil].lastObject;
         
-        self.examDataLabel.text = @"2016年10日10kjffbeuiwffefe";
-        self.subjectLabel.text = @"科目二fkewnioeoiervoerovir";
-        [self.passCountButton setTitle:@"通过\n51人" forState:UIControlStateNormal];
+        self.passCountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         
         self.passCountButton.titleLabel.numberOfLines = 0;
-        self.passrateCountLabel.text = @"80%";
-        self.studentCountLabel.text = @"报考\n100人";
-//        self.nopassCountLabel.text = @"7人未通过";
-        self.missExamStudentLabel.text = @"缺考\n100人";
+      
+        self.studentCountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         
+        self.studentCountButton.titleLabel.numberOfLines = 0;
         
+        self.missExamStudentButton.titleLabel.numberOfLines = 0;
         
-        
-        
+        self.missExamStudentButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+  
     }
     return self;
 }
@@ -84,35 +82,79 @@
 -(void)setModelGrop:(JZExamSummaryInfoData *)modelGrop {
     _modelGrop = modelGrop;
     
-    self.nopassCountLabel.text = [NSString stringWithFormat:@"%zd",_modelGrop.nopassstudent];
+
+    self.backgroundColor = [UIColor whiteColor];
+    
+    NSString *dateYear = [_modelGrop.examdate substringWithRange:NSMakeRange(0, 4)];
+    //日期
+    if (_modelGrop.examdate.length == 9) {
+        
+        NSString *dateMonth = [_modelGrop.examdate substringWithRange:NSMakeRange(5, 1)];
+        NSString *dateDay = [_modelGrop.examdate substringWithRange:NSMakeRange(7, 2)];
+        self.examDataLabel.text = [NSString stringWithFormat:@"%@年%@月%@日",dateYear,dateMonth,dateDay];
+    }else {
+        
+        NSString *dateMonth = [_modelGrop.examdate substringWithRange:NSMakeRange(5, 2)];
+        NSString *dateDay = [_modelGrop.examdate substringWithRange:NSMakeRange(8, 2)];
+        self.examDataLabel.text = [NSString stringWithFormat:@"%@年%@月%@日",dateYear,dateMonth,dateDay];
+        
+    }
+
+    //科目
+    if ([_modelGrop.subject isEqualToString:@"1"]) {
+        
+         self.subjectLabel.text = @"科目一考试";
+        
+    }else if ([_modelGrop.subject isEqualToString:@"2"]) {
+        self.subjectLabel.text = @"科目二考试";
+
+        
+    }else if ([_modelGrop.subject isEqualToString:@"3"]) {
+        self.subjectLabel.text = @"科目三考试";
+    }else if ([_modelGrop.subject isEqualToString:@"4"]) {
+        self.subjectLabel.text = @"科目四考试";
+    }
+    
+    //报考
+    [self.studentCountButton setTitle:[NSString stringWithFormat:@"报考\n%zd人",_modelGrop.studentcount] forState:UIControlStateNormal];
+    //缺考
+    [self.missExamStudentButton setTitle:[NSString stringWithFormat:@"缺考\n%zd人",_modelGrop.missexamstudent] forState:UIControlStateNormal];
+    //通过
+    [self.passCountButton setTitle:[NSString stringWithFormat:@"通过\n%zd人",_modelGrop.passstudent] forState:UIControlStateNormal];
+    //未通过
+    self.nopassCountLabel.text = [NSString stringWithFormat:@"%zd人未通过",_modelGrop.nopassstudent];
+    //通过率
+    self.passrateCountLabel.text = [NSString stringWithFormat:@"%zd%%",_modelGrop.passrate];
+    
+    self.nopassView.backgroundColor = RGB_Color(244, 244, 244);
+    
+
+    
+    // 判断当前组是否打开或关闭,对头上的图片是否旋转做判断
+    // 如果是打开了,让按钮图片旋转
+    if (self.modelGrop.isOpenGroup == YES) {
+        
+        // 让按钮中的小图片旋转正的90度
+        self.nopassView.transform = CGAffineTransformMakeRotation(M_PI);
+        
+    } else {
+        // 关闭让图片再还原
+        self.nopassView.transform = CGAffineTransformMakeRotation(0);
+        
+    }
+
+    
+    
 }
 
 
 
 
-// 当点击headerView中的按钮时会调用此方法
-
-- (void)headerBtnClick:(UIButton *)headerBtn {
-    
-    
-    
-    
-    
-}
 
 // 布局"设置"子控件
 - (void)layoutSubviews {
 
     [super layoutSubviews];
-    
-
-    
-    
-
-
-    
-    
-    
 }
 
 //测试不用的代码
@@ -215,11 +257,9 @@
 
 }
 
-// 当子控件即将被添加到父控件中时会调用此方法
-// 子控件已经被添加到父控件中
-- (void)didMoveToSuperview {
-    NSLog(@"%s", __FUNCTION__);
-}
+
+
+
 
 
 

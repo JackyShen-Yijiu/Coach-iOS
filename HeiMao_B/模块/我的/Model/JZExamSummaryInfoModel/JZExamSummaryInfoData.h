@@ -9,6 +9,10 @@
 @property (nonatomic, assign) NSInteger passstudent;
 @property (nonatomic, assign) NSInteger studentcount;
 @property (nonatomic, strong) NSString * subject;
+
+@property (nonatomic, strong) NSArray *array;
+
+
 /** 用来标识当前组是否打开或关闭 */
 @property (nonatomic, assign, getter=isOpenGroup) BOOL openGroup;
 @end
