@@ -12,4 +12,5 @@
 @interface YBHomeRightViewController : JGBaseViewController
 @property(nonatomic,strong) RFSegmentView * segController;
 - (void)segmentViewSelectIndex:(NSInteger)index;
+@property (nonatomic,weak) UIViewController *parentViewController;
 @end

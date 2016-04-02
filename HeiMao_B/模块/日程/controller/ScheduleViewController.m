@@ -84,6 +84,7 @@ typedef NS_ENUM(NSInteger, kControllerType) {
     
     self.rightVc = [[YBHomeRightViewController alloc] init];
     self.rightVc.view.frame = self.view.bounds;
+    self.rightVc.parentViewController = self;
     [self.view addSubview:self.rightVc.view];
     
     [self.view addSubview:self.confimBtn];
