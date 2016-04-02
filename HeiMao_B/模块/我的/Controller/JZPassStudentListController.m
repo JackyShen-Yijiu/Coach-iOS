@@ -83,9 +83,6 @@
     return listCell;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
 - (RefreshTableView *)tableView{
     if (_tableView == nil) {

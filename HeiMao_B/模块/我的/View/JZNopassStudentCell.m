@@ -24,6 +24,10 @@
 
 - (void)initUI{
     
+    [self.contentView addSubview:self.studentIcon];
+    [self.contentView addSubview:self.studentName];
+    [self.contentView addSubview:self.StudentScore];
+    
     self.backgroundColor = [UIColor whiteColor];
     
     self.studentIcon.layer.cornerRadius = 18;
@@ -65,7 +69,20 @@
         
     }];
 }
+// 重写ExamListData属性的set方法组cell里面的子控件设置数据
+-(void)setExamListData:(JZExamStudentListData *)examListData{
 
+    _examListData = examListData;
+    
+    NSURL *iconUrl = [NSURL URLWithString:examListData.userid.headportrait.originalpic];
+
+    [self.studentIcon sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"defoult_por"]];
+
+    self.studentName.text = examListData.userid.name;
+    self.StudentScore.text = examListData.score;
+    
+
+}
 
 
 

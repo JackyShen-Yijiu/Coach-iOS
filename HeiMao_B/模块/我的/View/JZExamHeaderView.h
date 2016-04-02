@@ -14,26 +14,42 @@
 ///// 日期控件
 @property (weak, nonatomic) IBOutlet UILabel *examDataLabel;
 
+
 ///// 考试科目控件
 @property (weak, nonatomic) IBOutlet UILabel *subjectLabel;
+
 
 ///// 通过率 “百分比”
 @property (weak, nonatomic) IBOutlet UILabel *passrateCountLabel;
 
+
 ///// 报考数量
-@property (weak, nonatomic) IBOutlet UILabel *studentCountLabel;
+@property (weak, nonatomic) IBOutlet UIButton *studentCountButton;
+
+
+
 
 ///// 通过数量--按钮
 @property (weak, nonatomic) IBOutlet UIButton *passCountButton;
 
-///// 未通过数量
-@property (weak, nonatomic) IBOutlet UILabel *nopassCountLabel;
+
 
 ///// 缺考学生数量
-@property (weak, nonatomic) IBOutlet UILabel *missExamStudentLabel;
+@property (weak, nonatomic) IBOutlet UIButton *missExamStudentButton;
 
-///未通过下拉(需要添加点击事件)
-@property (weak, nonatomic) IBOutlet UIView *nopassDown;
+
+
+///未通过下拉
+@property (weak, nonatomic) IBOutlet UIView *nopassView;
+
+/// 未通过图片
+@property (weak, nonatomic) IBOutlet UIImageView *nopassDownImg;
+
+/// 未通过人数
+@property (weak, nonatomic) IBOutlet UILabel *nopassCountLabel;
+
+
+
 
 
 

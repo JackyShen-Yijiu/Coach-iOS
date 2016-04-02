@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "JZExamStudentListData.h"
 @interface JZNopassStudentCell : UITableViewCell
 
 /// 未通过学生头像
@@ -18,6 +18,10 @@
 
 /// 未通过学员姓名
 @property (nonatomic, strong) UILabel *StudentScore;
+@property (nonatomic, strong) JZExamStudentListData *examListData;
+
+
+
 
 
 @end
