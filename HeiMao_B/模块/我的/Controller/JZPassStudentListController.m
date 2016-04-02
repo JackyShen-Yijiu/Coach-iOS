@@ -12,6 +12,7 @@
 #import "JZPassListData.h"
 #import <YYModel.h>
 #import "BLPFAlertView.h"
+#import "ChatViewController.h"
 @interface JZPassStudentListController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) RefreshTableView *tableView;
@@ -125,7 +126,10 @@
 #pragma mark ---- 信息
 - (void)messageWithModel:(JZPassListData *)model{
     
-    
+    ChatViewController *chatController = [[ChatViewController alloc] initWithConversationChatter:model.userid.idField conversationType:eConversationTypeChat];
+    chatController.title = model.userid.name;
+    [self.parentViewController.navigationController pushViewController:chatController animated:YES];
+
 }
 
 @end

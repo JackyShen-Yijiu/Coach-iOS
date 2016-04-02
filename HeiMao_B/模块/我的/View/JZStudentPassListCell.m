@@ -214,6 +214,7 @@
         [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:passlistMoel.userid.headportrait.originalpic ]
                               placeholderImage:[UIImage imageNamed:@"call_out"]];
         self.nameLabel.text = passlistMoel.userid.name;
+    self.classTimeLable.text = [NSString getLitteLocalDateFormateUTCDate:passlistMoel.examinationdate];
 //        self.studyConLabel.text = listModel.courseinfo.progress;
 //        // 剩余17课时,已漏课2课时
 //    
