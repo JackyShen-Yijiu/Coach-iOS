@@ -33,6 +33,8 @@
 {
     [super viewDidLoad];
     
+    self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveMainChatMessage) name:@"receiveMainChatMessage" object:nil];
         
 }
