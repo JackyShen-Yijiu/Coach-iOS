@@ -40,6 +40,16 @@
 
 @implementation JZMyController
 
+-(NSArray *)topDetailArray {
+    
+    if (!_topimgArray) {
+        
+        
+        _topimgArray = [[NSArray alloc]init];
+    }
+    return _topimgArray;
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self initNarBar];
@@ -96,7 +106,7 @@
     self.topTitleArray = @[@"授课班型",@"工作时间"];
     
     // 授课班型数据
-    NSString *classTypeStr = nil;
+    NSString *classTypeStr = @"";
     NSLog(@"%@",[UserInfoModel defaultUserInfo].classModel);
     if ([UserInfoModel defaultUserInfo].setClassMode) {
         classTypeStr = @"已设置";
@@ -106,6 +116,8 @@
     
     // 工作时间数据
     NSString *workTimeStr = [self workTimeData];
+    
+
     
     self.topDetailArray = @[classTypeStr,workTimeStr];
     

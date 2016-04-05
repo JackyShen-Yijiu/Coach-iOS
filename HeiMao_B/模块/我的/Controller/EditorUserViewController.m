@@ -342,6 +342,8 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:YES];
 //    [self startAddData];
     self.footerLabel.text = [UserInfoModel defaultUserInfo].introduction;
 }
@@ -388,10 +390,12 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 - (void)startAddData{
     // 训练场地
     NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
-    NSLog(@"trainName:%@",trainName);
-    if (trainName==nil) {
+    
+    if (trainName == nil) {
         trainName = @"未设置";
     }
+    NSLog(@"trainName:%@",trainName);
+   
     
     //可授科目
     NSArray *array = [UserInfoModel defaultUserInfo].subject;

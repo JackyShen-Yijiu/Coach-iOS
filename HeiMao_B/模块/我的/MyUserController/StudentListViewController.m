@@ -48,6 +48,9 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
     return _tableView;
 }
 - (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:YES];
+    
     [self startDownLoad];
 }
 - (void)viewDidAppear:(BOOL)animated

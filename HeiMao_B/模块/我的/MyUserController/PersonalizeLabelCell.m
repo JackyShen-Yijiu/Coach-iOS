@@ -90,46 +90,46 @@
         [self.contentView addSubview:label];
     }
 }
-+ (CGFloat)cellHeightWithArray:(NSArray *)arr {
-    CGFloat width = 100;
-    CGFloat lineNum = 1;
-    NSMutableArray *widthArray = [[NSMutableArray alloc] init];    //存宽度
-    for (int i = 0;i < arr.count;i++) {
-        NSString *str = arr[i];
-        CGSize labelSize = [[self alloc] getLabelWidthWithString:str];
-        NSInteger widthSum = 0;
-        for (NSNumber *contentWidth in widthArray) {
-            widthSum += contentWidth.integerValue;
-        }
-        if (lineNum == 1) {
-            
-            //            NSInteger right = [UIScreen mainScreen].bounds.size.width;
-            //            NSInteger left = widthSum + labelSize.width + (widthArray.count)*24 + 100;
-            
-            if (widthSum + labelSize.width + (widthArray.count)*24 + 100 > [UIScreen mainScreen].bounds.size.width) {
-                lineNum += 1;
-                width = 15;
-                [widthArray removeAllObjects];
-                [widthArray addObject:@(labelSize.width)];
-            }else {
-                width = widthArray.count*24 +widthSum +100;
-                [widthArray addObject:@(labelSize.width)];
-            }
-        }else {
-            if (widthSum + labelSize.width + (widthArray.count+1)*24 > [UIScreen mainScreen].bounds.size.width) {
-                lineNum +=1;
-                width = 15;
-                [widthArray removeAllObjects];
-                [widthArray addObject:@(labelSize.width)];
-            }else {
-                width = 15+widthArray.count*24 +widthSum ;
-                [widthArray addObject:@(labelSize.width)];
-            }
-        }
-    }
-    NSLog(@"_______________%f",lineNum);
-    return 30 +15*(lineNum-1) +lineNum*14;
-}
+//+ (CGFloat)cellHeightWithArray:(NSArray *)arr {
+//    CGFloat width = 100;
+//    CGFloat lineNum = 1;
+//    NSMutableArray *widthArray = [[NSMutableArray alloc] init];    //存宽度
+//    for (int i = 0;i < arr.count;i++) {
+//        NSString *str = arr[i];
+//        CGSize labelSize = [[self alloc] getLabelWidthWithString:str];
+//        NSInteger widthSum = 0;
+//        for (NSNumber *contentWidth in widthArray) {
+//            widthSum += contentWidth.integerValue;
+//        }
+//        if (lineNum == 1) {
+//            
+//            //            NSInteger right = [UIScreen mainScreen].bounds.size.width;
+//            //            NSInteger left = widthSum + labelSize.width + (widthArray.count)*24 + 100;
+//            
+//            if (widthSum + labelSize.width + (widthArray.count)*24 + 100 > [UIScreen mainScreen].bounds.size.width) {
+//                lineNum += 1;
+////                width = 15;
+//                [widthArray removeAllObjects];
+//                [widthArray addObject:@(labelSize.width)];
+//            }else {
+////                width = widthArray.count*24 +widthSum +100;
+//                [widthArray addObject:@(labelSize.width)];
+//            }
+//        }else {
+//            if (widthSum + labelSize.width + (widthArray.count+1)*24 > [UIScreen mainScreen].bounds.size.width) {
+//                lineNum +=1;
+////                width = 15;
+//                [widthArray removeAllObjects];
+//                [widthArray addObject:@(labelSize.width)];
+//            }else {
+////                width = 15+widthArray.count*24 +widthSum ;
+//                [widthArray addObject:@(labelSize.width)];
+//            }
+//        }
+//    }
+//    NSLog(@"_______________%f",lineNum);
+//    return 30 +15*(lineNum-1) +lineNum*14;
+//}
 
 #pragma mark -  no titleLabel
 

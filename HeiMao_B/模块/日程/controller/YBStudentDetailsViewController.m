@@ -283,10 +283,10 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        NSInteger guidingStr;
-        NSInteger wanchengStr;
-        NSInteger goumaiStr;
-        NSInteger yixueStr;
+        NSInteger guidingStr = 0;
+        NSInteger wanchengStr = 0;
+        NSInteger goumaiStr = 0;
+        NSInteger yixueStr = 0;
         if (self.rootClass.data.studentinfo.subject.subjectid==1) {
             guidingStr = self.rootClass.data.studentinfo.subjectone.officialhours;
             wanchengStr = self.rootClass.data.studentinfo.subjectone.officialfinishhours;

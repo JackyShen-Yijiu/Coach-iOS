@@ -136,8 +136,8 @@
             NSDictionary * ext = [[conversationModel conversation] ext];
             NSLog(@"获取用户信息ext:%@",ext);
             NSString * title = [ext objectStringForKey:@"nickName"];
-            NSString * ava = [ext objectStringForKey:@"headUrl"];
-            NSString * userId = [ext objectStringForKey:@"userId"];
+//            NSString * ava = [ext objectStringForKey:@"headUrl"];
+//            NSString * userId = [ext objectStringForKey:@"userId"];
             chatController.title = title;
             [self.myNavController pushViewController:chatController animated:YES];
             

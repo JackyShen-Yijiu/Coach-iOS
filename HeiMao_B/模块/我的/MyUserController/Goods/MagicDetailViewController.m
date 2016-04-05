@@ -34,6 +34,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:YES];
     
     for (UIViewController *viewCon in self.navigationController.viewControllers) {
         if ([viewCon isKindOfClass:[MyWalletViewController class]]) {

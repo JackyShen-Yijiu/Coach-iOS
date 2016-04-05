@@ -129,9 +129,17 @@ static EaseMessageReadManager *detailInstance = nil;
             }
             else if ([object isKindOfClass:[NSString class]])
             {
+            
+            }
+            
+            if (photo) {
+                
+                 [photoArray addObject:photo];
                 
             }
-            [photoArray addObject:photo];
+            
+            
+           
         }
         
         self.photos = photoArray;
