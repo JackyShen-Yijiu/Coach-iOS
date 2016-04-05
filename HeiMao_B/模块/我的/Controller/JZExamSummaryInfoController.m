@@ -29,15 +29,15 @@
     
     self.navigationItem.title = @"考试信息";
     self.tableView.sectionHeaderHeight = 150.5;
+
     
     // 监听名字为openGroup的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(haderViewDidOpenGroup:) name:@"openGroup" object:nil];
 
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.showsHorizontalScrollIndicator = NO;
-    
-//    self.view.backgroundColor = RGB_Color(226, 226, 232);
-//    self.tableView.backgroundColor = RGB_Color(226, 226, 232);
+    self.view.backgroundColor = RGB_Color(226, 226, 232);
+    self.tableView.backgroundColor = RGB_Color(226, 226, 232);
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
        
@@ -92,7 +92,10 @@
                 [self.tableView reloadData];
                 
             }else{
-                [self showTotasViewWithMes:@"暂无数据"];
+    
+            [self showTotasViewWithMes:@"暂无数据"];
+
+                
             }
             
         }else{
@@ -177,6 +180,7 @@
     // 1.创建headerView
     JZExamHeaderView *infoHeaerView = [JZExamHeaderView examHeaderViewWithTableView:tableView withTag:section];
     
+    
     // 2.给headerView传递模型
     infoHeaerView.modelGrop = self.examInfoData[section];
     
@@ -184,7 +188,10 @@
     
     [infoHeaerView.passCountButton addTarget:self action:@selector(pushPassStudentVC:) forControlEvents:UIControlEventTouchUpInside];
     
-//    infoHeaerView.backgroundColor = [UIColor whiteColor];
+    UIView *bjView = [[UIView alloc]initWithFrame:infoHeaerView.bounds];
+    bjView.backgroundColor = [UIColor whiteColor];
+    
+    infoHeaerView.backgroundView = bjView;
     
     infoHeaerView.nopassView.tag = section;
     infoHeaerView.nopassView.userInteractionEnabled = YES;
@@ -195,6 +202,14 @@
     // 3.返回haderView
     return infoHeaerView;
     
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    UIView *infoFootView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 10)];
+    infoFootView.backgroundColor = RGB_Color(226, 226, 232);
+    
+    return infoFootView;
 }
 /// 跳转控制器
 -(void)pushPassStudentVC:(UIButton *)button {
