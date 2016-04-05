@@ -24,7 +24,7 @@
     if (_iconImageView==nil) {
         _iconImageView = [[UIImageView alloc] init];
         _iconImageView.layer.masksToBounds = YES;
-        _iconImageView.layer.cornerRadius = 22;
+        _iconImageView.layer.cornerRadius = 24;
     }
     return _iconImageView;
 }
@@ -59,7 +59,7 @@
         _alphaView.backgroundColor = [UIColor blackColor];
         _alphaView.alpha = 0.3;
         _alphaView.layer.masksToBounds = YES;
-        _alphaView.layer.cornerRadius = 22;
+        _alphaView.layer.cornerRadius = 24;
     }
     return _alphaView;
 }
@@ -98,7 +98,7 @@
         
         [self.contentView addSubview:self.stateImageView];
         
-        [self.iconImageView addSubview:self.alphaView];
+        [self.contentView addSubview:self.alphaView];
         [self.alphaView addSubview:self.bgView];
         [self.alphaView addSubview:self.stateLabel];
         
