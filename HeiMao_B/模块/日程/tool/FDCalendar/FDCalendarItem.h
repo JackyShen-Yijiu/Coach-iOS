@@ -25,10 +25,15 @@ typedef NS_ENUM(NSInteger,KCellStation){
 - (NSDate *)nextMonthDate;
 - (NSDate *)previousMonthDate;
 
-// 获取date的下一天
-- (NSDate *)nextDayDate;
-// 获取date的前一天
-- (NSDate *)previousDayDate;
+//// 获取date的下一天
+//- (NSDate *)nextDayDate;
+//// 获取date的前一天
+//- (NSDate *)previousDayDate;
+
+// 获得下个月第一天
+- (NSDate *)getNextMonthFitstDate;
+// 获得上个月最后一天
+- (NSDate *)previousMonthLastDate;
 
 /*
  *  当月预约时间

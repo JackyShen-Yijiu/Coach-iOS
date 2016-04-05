@@ -143,7 +143,7 @@ typedef NS_ENUM(NSInteger, kControllerType) {
         
         [self initNavigationItem];
         
-        [self.leftVc modifyVacation];
+        [self.leftVc modifyVacation:[NSDate date]];
         
     }else if (1 == seg.selectedSegmentIndex) {
         
@@ -183,7 +183,7 @@ typedef NS_ENUM(NSInteger, kControllerType) {
 
 - (void)leftBarBtnDidClick
 {
-    [self.leftVc modifyVacation];
+    [self.leftVc modifyVacation:[NSDate date]];
 }
 
 
