@@ -89,8 +89,6 @@
 - (void)loginViewControllerdidLoginSucess:(LoginViewController *)controller
 {
     
-    [[EaseMob sharedInstance].chatManager removeAllConversationsWithDeleteMessages:YES append2Chat:NO];
-
     //设置是否自动登录
     [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:NO];
     

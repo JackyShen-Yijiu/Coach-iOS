@@ -15,6 +15,7 @@
 #import "UIView+Sizes.h"
 #import "UserInfoModel.h"
 #import "APService.h"
+#import "EaseSDKHelper.h"
 
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 
@@ -275,6 +276,8 @@ static NSString *const kuserType = @"usertype";
             NSSet *set = [NSSet setWithObjects:JPushTag,coachID, nil];
             [APService setTags:set alias:[UserInfoModel defaultUserInfo].userID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
             
+            [[EaseMob sharedInstance].chatManager removeAllConversationsWithDeleteMessages:YES append2Chat:NO];
+
             if ([_delegate respondsToSelector:@selector(loginViewControllerdidLoginSucess:)]) {
                 [_delegate loginViewControllerdidLoginSucess:self];
                 self.passwordTextField.text = @"";
