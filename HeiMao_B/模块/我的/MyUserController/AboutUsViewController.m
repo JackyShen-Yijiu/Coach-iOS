@@ -9,49 +9,11 @@
 #import "AboutUsViewController.h"
 
 @interface AboutUsViewController ()
-//@property (strong, nonatomic) UIImageView *logoImageView;
-//@property (strong, nonatomic) UILabel *topLabel;
-//@property (strong, nonatomic) UILabel *topLabelOne;
-//@property (strong, nonatomic) UILabel *topLabelTwo;
 
 @property (strong, nonatomic) UIWebView * webView;
 @end
 
 @implementation AboutUsViewController
-//- (UIImageView *)logoImageView {
-//    if (_logoImageView == nil) {
-//        _logoImageView = [[UIImageView alloc] init];
-//        _logoImageView.image = [UIImage imageNamed:@"logoImage.png"];
-//    }
-//    return _logoImageView;
-//}
-//- (UILabel *)topLabel {
-//    if (_topLabel == nil) {
-//        _topLabel = [[UILabel alloc] init];
-//        _topLabel.textAlignment = NSTextAlignmentCenter;
-//        _topLabel.font = [UIFont boldSystemFontOfSize:14];
-//        _topLabel.text = @"极致";
-//    }
-//    return _topLabel;
-//}
-//- (UILabel *)topLabelOne {
-//    if (_topLabelOne == nil) {
-//        _topLabelOne = [[UILabel alloc] init];
-//        _topLabelOne.textAlignment = NSTextAlignmentCenter;
-//        _topLabelOne.font = [UIFont boldSystemFontOfSize:14];
-//        _topLabelOne.text = @"做有态度的培训驾校";
-//    }
-//    return _topLabelOne;
-//}
-//- (UILabel *)topLabelTwo {
-//    if (_topLabelTwo == nil) {
-//        _topLabelTwo = [[UILabel alloc] init];
-//        _topLabelTwo.textAlignment = NSTextAlignmentCenter;
-//        _topLabelTwo.font = [UIFont boldSystemFontOfSize:14];
-//        _topLabelTwo.text = @"V 1.0";
-//    }
-//    return _topLabelTwo;
-//}
 
 - (UIWebView * )webView
 {
