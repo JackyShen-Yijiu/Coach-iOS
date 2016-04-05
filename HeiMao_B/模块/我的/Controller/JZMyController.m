@@ -73,6 +73,7 @@
    
 }
 - (void)initNationcenter{
+    
     // 授课班型
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(classTypeChange) name:kclassTypeChange object:nil];
     
