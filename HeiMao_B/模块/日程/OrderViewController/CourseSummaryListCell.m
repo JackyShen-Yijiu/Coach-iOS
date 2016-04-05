@@ -46,7 +46,7 @@
 
 - (void)initUI
 {
-    self.contentView.backgroundColor  = RGB_Color(247, 249, 251);
+    self.contentView.backgroundColor  = JZ_BACKGROUNDCOLOR_COLOR;
     self.potraitView = [[PortraitView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
     self.potraitView.layer.cornerRadius = 1.f;
     self.potraitView.layer.shouldRasterize = YES;

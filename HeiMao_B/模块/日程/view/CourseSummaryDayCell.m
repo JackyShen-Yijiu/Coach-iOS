@@ -109,7 +109,7 @@
     
     self.coureleftStateImgView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.coureleftStateImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(12);
+        make.top.mas_equalTo(8);
         make.width.mas_equalTo(26);
         make.height.mas_equalTo(26);
         make.centerX.mas_equalTo(self.coureleftTopDelive.mas_centerX);
@@ -297,7 +297,7 @@
     cell.userInteractionEnabled = YES;
     cell.iconImageView.image = [UIImage imageNamed:@""];
     cell.nameLabel.text = nil;
-    cell.stateImageView.hidden = NO;
+    cell.stateImageView.hidden = YES;
     cell.alphaView.hidden = YES;
     
     if (_model.coursereservationdetial && _model.coursereservationdetial.count>indexPath.row) {

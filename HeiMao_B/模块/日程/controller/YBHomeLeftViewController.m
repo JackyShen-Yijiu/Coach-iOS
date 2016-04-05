@@ -74,7 +74,7 @@
 {
     
     JZCompletionConfirmationContriller *vc = [JZCompletionConfirmationContriller new];
-    vc.hidesBottomBarWhenPushed = YES;
+//    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -292,18 +292,34 @@
     NSLog(@"%s",__func__);
 }
 
+- (void)today
+{
+    if (self.isOpen) {
+        
+        // 设置当前日期
+        [self.ybCalendarHeadView setCurrentDate:[NSDate date]];
+        
+    }else{
+        
+        // 设置当前日期
+        [self.calendarHeadView setCurrentDate:[NSDate date]];
+
+    }
+    
+}
+
 - (void)modifyVacation:(NSDate *)date
 {
     
     if (self.isOpen) {
 
         // 设置当前日期
-        [self.ybCalendarHeadView setCurrentDate:date];
+        [self.ybCalendarHeadView setCurrentDate:self.selectDate];
         
     }else{
         
         // 设置当前日期
-        [self.calendarHeadView setCurrentDate:date];
+        [self.calendarHeadView setCurrentDate:self.selectDate];
 
     }
     
@@ -413,16 +429,13 @@
                 [ws.centerTableDataArray addObject:dataModel];
             }
             
-            
             ws.centerCourseTableView.selectData = dataStr;
             ws.centerCourseTableView.dataArray = ws.centerTableDataArray;
             
             NSLog(@"ws.centerTableDataArray.count:%lu",(unsigned long)ws.centerTableDataArray.count);
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [ws.centerCourseTableView reloadData];
-            });
-            
+            [ws.centerCourseTableView reloadData];
+
         }else{
             
             [ws dealErrorResponseWithTableView:nil info:responseObject];

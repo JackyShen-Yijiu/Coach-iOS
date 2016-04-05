@@ -182,7 +182,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     
     NSInteger firstWeekday = [self weekdayOfFirstDayInDate];
     NSInteger totalDaysOfMonth = [self totalDaysInMonthOfDate:self.seletedDate];
-    NSInteger totalDaysOfLastMonth = [self totalDaysInMonthOfDate:[self previousMonthDate]];
+//    NSInteger totalDaysOfLastMonth = [self totalDaysInMonthOfDate:[self previousMonthDate]];
     
     // cell点击变色
     UIView* selectedBGView = [[UIView alloc] initWithFrame:cell.bounds];

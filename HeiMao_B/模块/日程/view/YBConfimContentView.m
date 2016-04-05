@@ -225,7 +225,6 @@
     for (UIButton *btn in self.bgContentView.subviews) {
         [btn removeFromSuperview];
     }
-    
     CGFloat width = CGRectGetMinX(self.tittleContentLabel.frame);
     CGFloat lineNum = 1;
     NSMutableArray *widthArray = [[NSMutableArray alloc] init];    //存宽度
