@@ -10,7 +10,7 @@
 #import "JZCompletionConfirmationCell.h"
 #import <YYModel.h>
 #import "JZData.h"
-
+#import "YBConfimContentView.h"
 @interface JZCompletionConfirmationContriller () <UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -27,6 +27,7 @@
     [super viewDidLoad];
     _listStudentArray = [NSMutableArray array];
     self.title = @"确认完成";
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshListTable) name:kCompletionComfiromatton object:nil];
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self.view addSubview:self.tableView];
     [self initSubjectData];
@@ -41,6 +42,7 @@
         if ([param[@"type"] integerValue] == 1) {
             NSArray *resultArray = param[@"data"];
             if (resultArray.count) {
+                [self.listStudentArray removeAllObjects];
                 for (NSDictionary *dic in resultArray) {
                     JZData *listModel = [JZData yy_modelWithDictionary:dic];
                     [_listStudentArray addObject:listModel];
@@ -106,6 +108,11 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
+}
+#pragma mark ---- 通知方法
+- (void)refreshListTable{
+    [self initListData];
+    [self.tableView reloadData];
 }
 #pragma mark ---- UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
