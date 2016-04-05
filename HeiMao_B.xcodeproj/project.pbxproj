@@ -560,6 +560,7 @@
 		B8C4587C1BDB5ABB00901F71 /* NSDictionary+StrDic.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587B1BDB5ABB00901F71 /* NSDictionary+StrDic.m */; };
 		B8C458801BDB5B5C00901F71 /* ToastAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C4587F1BDB5B5C00901F71 /* ToastAlertView.m */; };
 		BE311C931CAE803600337C51 /* JZNopassStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE311C921CAE803600337C51 /* JZNopassStudentCell.m */; };
+		BE33069F1CB3CAE5007A7525 /* LKAddStudentNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE33069E1CB3CAE5007A7525 /* LKAddStudentNoDataView.m */; };
 		BE46C1171CABBCC4003F9A20 /* LKAddStudentData.m in Sources */ = {isa = PBXBuildFile; fileRef = BE46C10E1CABBCC4003F9A20 /* LKAddStudentData.m */; };
 		BE46C1181CABBCC4003F9A20 /* LKAddStudentHeadportrait.m in Sources */ = {isa = PBXBuildFile; fileRef = BE46C1101CABBCC4003F9A20 /* LKAddStudentHeadportrait.m */; };
 		BE46C1191CABBCC4003F9A20 /* LKAddStudentRootClass.m in Sources */ = {isa = PBXBuildFile; fileRef = BE46C1121CABBCC4003F9A20 /* LKAddStudentRootClass.m */; };
@@ -1563,6 +1564,8 @@
 		B8C4587F1BDB5B5C00901F71 /* ToastAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToastAlertView.m; sourceTree = "<group>"; };
 		BE311C911CAE803600337C51 /* JZNopassStudentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZNopassStudentCell.h; sourceTree = "<group>"; };
 		BE311C921CAE803600337C51 /* JZNopassStudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZNopassStudentCell.m; sourceTree = "<group>"; };
+		BE33069D1CB3CAE5007A7525 /* LKAddStudentNoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentNoDataView.h; sourceTree = "<group>"; };
+		BE33069E1CB3CAE5007A7525 /* LKAddStudentNoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentNoDataView.m; sourceTree = "<group>"; };
 		BE46C10D1CABBCC4003F9A20 /* LKAddStudentData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentData.h; sourceTree = "<group>"; };
 		BE46C10E1CABBCC4003F9A20 /* LKAddStudentData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentData.m; sourceTree = "<group>"; };
 		BE46C10F1CABBCC4003F9A20 /* LKAddStudentHeadportrait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentHeadportrait.h; sourceTree = "<group>"; };
@@ -2129,6 +2132,8 @@
 				BEB685AD1CAC1AD60068C7CB /* LKAddStudentTableViewCell.xib */,
 				D9D607D61CAA7D3800B61874 /* LKAddStudentTimeView.h */,
 				D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */,
+				BE33069D1CB3CAE5007A7525 /* LKAddStudentNoDataView.h */,
+				BE33069E1CB3CAE5007A7525 /* LKAddStudentNoDataView.m */,
 				B2BA43C41CA8E9DB00926584 /* CourseSummaryDayCell.h */,
 				B2BA43C51CA8E9DB00926584 /* CourseSummaryDayCell.m */,
 				B2BA43C71CA9125000926584 /* YBAppointMentUserCell.h */,
@@ -4024,6 +4029,7 @@
 				BE46C1191CABBCC4003F9A20 /* LKAddStudentRootClass.m in Sources */,
 				B2BA432E1CA5041100926584 /* CourseSummaryListCell.m in Sources */,
 				B2BA419A1CA5035700926584 /* JENetwoking.m in Sources */,
+				BE33069F1CB3CAE5007A7525 /* LKAddStudentNoDataView.m in Sources */,
 				B2BA41F51CA5035700926584 /* CustomMessageCell.m in Sources */,
 				B2BA41E01CA5035700926584 /* UIButton+EMWebCache.m in Sources */,
 				B8C458741BDB59AC00901F71 /* UIViewAdditions.m in Sources */,

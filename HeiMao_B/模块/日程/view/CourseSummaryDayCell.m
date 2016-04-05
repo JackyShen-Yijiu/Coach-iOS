@@ -369,8 +369,8 @@
         addStuVC.dataArray = tempArray;
         
         addStuVC.selectData = self.selectData;
-        addStuVC.courseStudentCountInt = self.model.coursestudentcount;
         
+        addStuVC.courseStudentCountInt = self.model.coursestudentcount;
         addStuVC.selectedstudentconutInt = self.model.selectedstudentcount;
         
         addStuVC.coachidStr = self.model.coachid;
