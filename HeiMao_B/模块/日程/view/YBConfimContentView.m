@@ -183,7 +183,7 @@
 - (UITextView *)contentTextView{
     if (_contentTextView == nil) {
         _contentTextView = [[UITextView alloc] init];
-        _contentTextView.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
+        _contentTextView.backgroundColor = [UIColor colorWithHexString:@"fcfcfc"];
     }
     return _contentTextView;
 }

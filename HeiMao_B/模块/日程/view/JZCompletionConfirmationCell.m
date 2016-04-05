@@ -162,7 +162,7 @@
     NSLog(@"setListModel height:%f",height);
     [self.confimContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(0);
-        make.top.mas_equalTo(80);
+        make.top.mas_equalTo(90);
         make.right.mas_equalTo(0);
         make.height.mas_equalTo(height);
     }];
@@ -177,9 +177,9 @@
    
     if (data.isOpen) {
         CGFloat height = [JZCompletonCell.confimContentView confimContentView:subjectArray model:data];
-        return height + 80;
+        return height + 90;
     }
-    return 80;
+    return 90;
     
 }
 
