@@ -292,18 +292,34 @@
     NSLog(@"%s",__func__);
 }
 
+- (void)today
+{
+    if (self.isOpen) {
+        
+        // 设置当前日期
+        [self.ybCalendarHeadView setCurrentDate:[NSDate date]];
+        
+    }else{
+        
+        // 设置当前日期
+        [self.calendarHeadView setCurrentDate:[NSDate date]];
+
+    }
+    
+}
+
 - (void)modifyVacation:(NSDate *)date
 {
     
     if (self.isOpen) {
 
         // 设置当前日期
-        [self.ybCalendarHeadView setCurrentDate:date];
+        [self.ybCalendarHeadView setCurrentDate:self.selectDate];
         
     }else{
         
         // 设置当前日期
-        [self.calendarHeadView setCurrentDate:date];
+        [self.calendarHeadView setCurrentDate:self.selectDate];
 
     }
     

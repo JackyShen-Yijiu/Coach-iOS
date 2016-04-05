@@ -153,7 +153,7 @@ typedef NS_ENUM(NSInteger, kControllerType) {
 
 - (void)leftBarBtnDidClick
 {
-    [self.leftVc modifyVacation:[NSDate date]];
+    [self.leftVc today];
 }
 
 
