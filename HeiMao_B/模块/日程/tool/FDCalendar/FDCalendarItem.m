@@ -39,16 +39,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     NSLog(@"reloadData.restArray:%@",self.restArray);
     NSLog(@"reloadData.bookArray:%@",self.bookArray);
     NSLog(@"self.seletedDate:%@",self.seletedDate);
-    
-//    NSInteger firstWeekday = [self weekdayOfFirstDayInDate];
-//    
-//    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
-//    [fomatter setDateFormat:@"dd"];
-//    NSInteger dateStr = [[fomatter stringFromDate:self.seletedDate] integerValue] + firstWeekday;
-//    NSLog(@"reloadData dateStr:%ld",(long)dateStr);
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:dateStr-1 inSection:0];
-//    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
-//   
+
     self.collectionView.contentOffset = CGPointMake([self getCurrentDataOffsetWithData:self.seletedDate], 0);
 
     [self.collectionView reloadData];
@@ -81,12 +72,6 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     
     return ([dateStr integerValue]+dayInDate-1) / 7 * self.collectionView.width;
 
-    // 1:大于当前日期 -1:小于当前时间 0:等于当前时间
-//    if ([YBObjectTool compareMonthDateWithSelectDate:date]!=1) {
-//    }else{
-//        return 0;
-//    }
-    
 }
 
 // 获取date的下个月日期
@@ -103,6 +88,48 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     NSDate *previousMonthDate = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:self.seletedDate options:NSCalendarMatchStrictly];
     return previousMonthDate;
 }
+
+// 获得下个月第一天
+- (NSDate *)getNextMonthFitstDate{
+
+    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
+    [fomatter setDateFormat:@"dd"];
+    NSString *dateStr = [fomatter stringFromDate:self.seletedDate];
+    
+    NSInteger totleDays = [self totalDaysInMonthOfDate:self.seletedDate];
+    NSLog(@"获得下个月第一天dateStr:%@ totleDays:%ld totleDays-[dateStr integerValue]:%ld",dateStr,(long)totleDays,totleDays - [dateStr integerValue]);
+    
+    // 获取date的下个月日期
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+//    components.month = 1;
+    components.day =  totleDays - [dateStr integerValue] + 1;
+    NSDate *nextMonthDate = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:self.seletedDate options:NSCalendarMatchStrictly];
+    NSLog(@"获得下个月nextMonthDate:%@",nextMonthDate);
+    
+    return nextMonthDate;
+
+}
+// 获得上个月最后一天
+- (NSDate *)previousMonthLastDate{
+
+    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
+    [fomatter setDateFormat:@"dd"];
+    NSString *dateStr = [fomatter stringFromDate:self.seletedDate];
+    
+    NSInteger totleDays = [self totalDaysInMonthOfDate:self.seletedDate];
+    NSLog(@"获得上个月最后一天dateStr:%@ totleDays:%ld totleDays-[dateStr integerValue]:%ld",dateStr,(long)totleDays,totleDays - [dateStr integerValue]);
+    
+    // 获取date的下个月日期
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    //    components.month = 1;
+    components.day = - [dateStr integerValue];
+    NSDate *nextMonthDate = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:self.seletedDate options:NSCalendarMatchStrictly];
+    NSLog(@"获得上个月最后一天:%@",nextMonthDate);
+    
+    // 返回该月的第一天
+    return nextMonthDate;
+}
+
 
 // collectionView显示日期单元，设置其属性
 - (void)setupCollectionView

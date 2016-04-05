@@ -272,13 +272,13 @@ static NSDateFormatter *dateFormattor;
 // 跳到上一个月
 - (void)setPreviousMonthDate
 {
-    [self setCurrentDate:[self.centerCalendarItem previousMonthDate]];
-//    [self setCurrentDate:[self.centerCalendarItem previousDayDate]];
+    // 获得上个月最后一天
+    [self setCurrentDate:[self.centerCalendarItem previousMonthLastDate]];
 }
 // 跳到下一个月
 - (void)setNextMonthDate {
-    [self setCurrentDate:[self.centerCalendarItem nextMonthDate]];
-//    [self setCurrentDate:[self.centerCalendarItem nextDayDate]];
+    // 获得下个月第一天
+    [self setCurrentDate:[self.centerCalendarItem getNextMonthFitstDate]];
 }
 
 - (void)calendarItem:(FDCalendarItem *)item didSelectedDate:(NSDate *)date
