@@ -333,8 +333,8 @@
         [self.parentViewController showTotasViewWithMes:@"请选择学习内容"];
         return;
     }
-    
-    [NetWorkEntiry postToEnstureDoneofCourseWithCoachid:[UserInfoModel defaultUserInfo].userID coureseID:_dataModel.idField learningcontent:resultStudyContent contentremarks:_textViewStr startLevel:_stareLever success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSLog(@"[UserInfoModel defaultUserInfo].userID = %@ _dataModel.idField =  %@",[UserInfoModel defaultUserInfo].userID,_dataModel._id);
+    [NetWorkEntiry postToEnstureDoneofCourseWithCoachid:[UserInfoModel defaultUserInfo].userID coureseID:_dataModel._id learningcontent:resultStudyContent contentremarks:_textViewStr startLevel:_stareLever success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *param = responseObject;
         if ([param[@"type"] integerValue] == 1) {
             [self.parentViewController showTotasViewWithMes:@"评论成功"];
