@@ -22,7 +22,6 @@
 @property(nonatomic,strong)UIView * topLine;
 @property(nonatomic,strong)UIView * midLine;
 @property(nonatomic,strong)UIView * bottomLine;
-@property(nonatomic,strong)UIView * rightLine;
 
 @end
 
@@ -97,9 +96,6 @@
     self.bottomLine = [self getOnelineView];
     [self.bgView addSubview:self.bottomLine];
 
-    self.rightLine = [[UIView alloc] init];
-    [self.bgView addSubview:self.rightLine];
-    
     [self updateConstraints];
 }
 
@@ -108,7 +104,7 @@
 {
     [super updateConstraints];
     
-    CGFloat leftOffsetSpacing = 15.f;
+    CGFloat leftOffsetSpacing = 16.f;
     
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView);
@@ -127,9 +123,11 @@
     
     [self.potraitView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView).offset(leftOffsetSpacing);
-        make.top.equalTo(self.bgView).offset(15.f);
-        make.size.mas_equalTo(CGSizeMake(60.f, 60.f));
+        make.top.equalTo(self.bgView).offset(16.f);
+        make.size.mas_equalTo(CGSizeMake(48.0f, 48.0f));
     }];
+    self.potraitView.layer.masksToBounds = YES;
+    self.potraitView.layer.cornerRadius = 24;
     
     [self.statueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bgView).offset(14.f);
@@ -140,7 +138,7 @@
     [self.mainTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.potraitView.mas_right).offset(12.f);
         make.height.equalTo(@(16.f));
-        make.top.equalTo(@((90 - 16 - 10 - 14)/2.f));
+        make.top.equalTo(@21);
     }];
     
     [self.subTitle mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -151,8 +149,8 @@
     }];
     
     [self.midLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bgView).offset(leftOffsetSpacing);
-        make.right.equalTo(self.bgView).offset(-leftOffsetSpacing);
+        make.left.equalTo(self.mainTitle.mas_left);
+        make.right.equalTo(self.bgView);
         make.top.equalTo(self.potraitView.mas_bottom).offset(15.f);
         make.height.equalTo(@(HM_LINE_HEIGHT));
     }];
@@ -181,13 +179,6 @@
         make.size.equalTo(self.topLine);
         make.left.equalTo(self.topLine);
         make.height.equalTo(@(HM_LINE_HEIGHT));
-    }];
-    
-    [self.rightLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bgView).offset(1);
-        make.bottom.equalTo(self.bgView).offset(-1);
-        make.width.equalTo(@(5));
-        make.height.equalTo(self.bgView);
     }];
     
 }
@@ -255,8 +246,6 @@
             break;
             
     }
-    
-    self.rightLine.backgroundColor = self.statueLabel.textColor;
     
     self.statueLabel.text = [_model getStatueString];
 

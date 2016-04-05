@@ -8,7 +8,6 @@
 
 #import "RFSegmentView.h"
 
-#define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 #define kLeftMargin         15
 #define kItemHeight         30
 #define kBorderLineWidth    0.5
@@ -140,7 +139,7 @@
                 
                 RFSegmentItem *item = [[RFSegmentItem alloc] initWithFrame:CGRectMake(init_x, init_y, itemWidth, itemHeight)
                                                                      index:i title:items[i]
-                                                                  norColor:kDefaultTintColor
+                                                                  norColor:JZ_BlueColor
                                                                   selColor:[UIColor whiteColor]
                                                                 isSelected:(i == 0)? YES: NO];
                 init_x += itemWidth;
@@ -164,7 +163,6 @@
                 init_x += itemWidth;
                 UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(init_x, 0, kBorderLineWidth, itemHeight)];
                 lineView.backgroundColor = [UIColor redColor];
-//                [self.bgView addSubview:lineView];
                 
                 //save all lines
                 if (!self.linesArray) {
@@ -179,7 +177,7 @@
                 RFSegmentItem *item = self.itemsArray[i];
 
                 // 横分割线
-                UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(item.origin.x+20, self.height-1, itemWidth-10, 1)];
+                UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(item.origin.x+20, self.height-2, itemWidth-10, 2)];
                 lineLabel.backgroundColor = [UIColor whiteColor];
                 [self addSubview:lineLabel];
                 
@@ -245,7 +243,7 @@
     
     // 底部分割线
     UILabel *deliveLabel = self.deliveArray[index];
-    deliveLabel.backgroundColor = kDefaultTintColor;
+    deliveLabel.backgroundColor = JZ_BlueColor;
     
     RFSegmentItem * currentItem = [self.itemsArray objectAtIndex:index];
     currentItem.isSelected = YES;
@@ -266,7 +264,7 @@
     }
     // 底部分割线
     UILabel *deliveLabel = self.deliveArray[index];
-    deliveLabel.backgroundColor = kDefaultTintColor;
+    deliveLabel.backgroundColor = JZ_BlueColor;
     
     if (self.itemsArray.count <2) {
         return;

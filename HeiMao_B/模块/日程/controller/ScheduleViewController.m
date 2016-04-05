@@ -19,7 +19,6 @@
 
 #import "YBHomeLeftViewController.h"
 #import "YBHomeRightViewController.h"
-#import "JZCompletionConfirmationContriller.h"
 
 typedef NS_ENUM(NSInteger, kControllerType) {
     leftVc,
@@ -39,36 +38,9 @@ typedef NS_ENUM(NSInteger, kControllerType) {
 
 @property (nonatomic,assign) kControllerType controllerType;
 
-@property (nonatomic,strong) UIButton *confimBtn;
-
 @end
 
 @implementation ScheduleViewController
-
-- (UIButton *)confimBtn
-{
-    if (_confimBtn==nil) {
-        
-        CGFloat confimBtnW = 48;
-        CGFloat confimBtnH = confimBtnW;
-        CGFloat confimBtnX = 6;
-        CGFloat confimBtnY = self.view.height - 64 - 4 - confimBtnW;
-        _confimBtn = [[UIButton alloc] initWithFrame:CGRectMake(confimBtnX, confimBtnY, confimBtnW, confimBtnH)];
-        _confimBtn.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"JZCoursebutton_time"]];
-        [_confimBtn addTarget:self action:@selector(confimBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
-        
-    }
-    return _confimBtn;
-}
-
-- (void)confimBtnDidClick
-{
-
-    JZCompletionConfirmationContriller *vc = [JZCompletionConfirmationContriller new];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-    
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -86,9 +58,7 @@ typedef NS_ENUM(NSInteger, kControllerType) {
     self.rightVc.view.frame = self.view.bounds;
     self.rightVc.parentViewController = self;
     [self.view addSubview:self.rightVc.view];
-    
-    [self.view addSubview:self.confimBtn];
-    
+        
 }
 
 #pragma mark Life Sycle
@@ -124,7 +94,7 @@ typedef NS_ENUM(NSInteger, kControllerType) {
 
 - (void)initNavigationItem
 {
-    self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"signBtnImg" highIcon:@"signBtnImg" target:self action:@selector(rightBarBtnDidClick)];
+    self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"JZCoursescan" highIcon:@"JZCoursescan" target:self action:@selector(rightBarBtnDidClick)];
     
     self.myNavigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTitle:@"今天" highTitle:@"今天" target:self action:@selector(leftBarBtnDidClick) isRightItem:NO];
     
