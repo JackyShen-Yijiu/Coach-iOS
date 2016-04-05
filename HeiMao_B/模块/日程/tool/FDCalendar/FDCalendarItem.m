@@ -59,17 +59,18 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     NSLog(@"reloadData.bookArray:%@",self.bookArray);
     NSLog(@"self.seletedDate:%@",self.seletedDate);
     
-    NSInteger firstWeekday = [self weekdayOfFirstDayInDate];
-    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
-    [fomatter setDateFormat:@"dd"];
-    NSInteger dateStr = [[fomatter stringFromDate:self.seletedDate] integerValue];//-firstWeekday;
-    NSLog(@"reloadData dateStr:%ld",(long)dateStr);
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:dateStr-1 inSection:0];
-    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+//    NSInteger firstWeekday = [self weekdayOfFirstDayInDate];
+//    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
+//    [fomatter setDateFormat:@"dd"];
+//    NSInteger dateStr = [[fomatter stringFromDate:self.seletedDate] integerValue];//-firstWeekday;
+//    NSLog(@"reloadData dateStr:%ld",(long)dateStr);
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:dateStr-1 inSection:0];
+//    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
 
-//    self.collectionView.contentOffset = CGPointMake([self getCurrentDataOffsetWithData:self.seletedDate], 0);
+    self.collectionView.contentOffset = CGPointMake([self getCurrentDataOffsetWithData:self.seletedDate], 0);
     
     [self.collectionView reloadData];
+    
 }
 
 - (CGFloat)getCurrentDataOffsetWithData:(NSDate *)date
@@ -229,55 +230,53 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     UIView* selectedBGView = [[UIView alloc] initWithFrame:cell.bounds];
     selectedBGView.backgroundColor = [UIColor clearColor];
     
-    // 点击选中的圆圈
-//    UIView *selVc = [[UIView alloc] initWithFrame:CGRectMake(cell.width/2-25/2,0,25,25)];
-//    selVc.layer.masksToBounds = YES;
-//    selVc.layer.cornerRadius = selVc.height / 2;
-//    selVc.backgroundColor = RGB_Color(31, 124, 235);
-//    [selectedBGView addSubview:selVc];
-//    cell.selectedBackgroundView = selectedBGView;
-    
     if (indexPath.row < firstWeekday) {// 小于这个月的第一天
 
-        cell.selectedBackgroundView = nil;
-
-        NSInteger day = totalDaysOfLastMonth - firstWeekday + indexPath.row + 1;
-        cell.dayLabel.text = [NSString stringWithFormat:@"%ld", day];
-
-        int compareDataNum = [YBObjectTool compareDateWithSelectDate:[self getCurrentData:indexPath]];
-        if (compareDataNum==0) {// 当前
-            
-            cell.dayLabel.textColor = RGB_Color(31, 124, 235);
-
-        }else if (compareDataNum==1){// 大于当前日期
-            
-            cell.dayLabel.textColor = [UIColor blackColor];
-            
-        }else if (compareDataNum==-1){// 小于当前日期
-            
-            cell.dayLabel.textColor = [UIColor grayColor];
-            
-        }
+        cell.dayLabel.text = nil;
+        cell.userInteractionEnabled = NO;
+        
+//        cell.selectedBackgroundView = nil;
+//
+//        NSInteger day = totalDaysOfLastMonth - firstWeekday + indexPath.row + 1;
+//        cell.dayLabel.text = [NSString stringWithFormat:@"%ld", day];
+//
+//        int compareDataNum = [YBObjectTool compareDateWithSelectDate:[self getCurrentData:indexPath]];
+//        if (compareDataNum==0) {// 当前
+//            
+//            cell.dayLabel.textColor = RGB_Color(31, 124, 235);
+//
+//        }else if (compareDataNum==1){// 大于当前日期
+//            
+//            cell.dayLabel.textColor = [UIColor blackColor];
+//            
+//        }else if (compareDataNum==-1){// 小于当前日期
+//            
+//            cell.dayLabel.textColor = [UIColor grayColor];
+//            
+//        }
         
     } else if (indexPath.row >= totalDaysOfMonth + firstWeekday) {    // 大于这个月的最后一天
         
-        NSInteger day = indexPath.row - totalDaysOfMonth - firstWeekday + 1;
-        cell.dayLabel.text = [NSString stringWithFormat:@"%ld", day];
-
-        int compareDataNum = [YBObjectTool compareDateWithSelectDate:[self getCurrentData:indexPath]];
-        if (compareDataNum==0) {// 当前
-            
-            cell.dayLabel.textColor = RGB_Color(31, 124, 235);
-
-        }else if (compareDataNum==1){// 大于当前日期
-            
-            cell.dayLabel.textColor = [UIColor blackColor];
-            
-        }else if (compareDataNum==-1){// 小于当前日期
-            
-            cell.dayLabel.textColor = [UIColor grayColor];
-            
-        }
+        cell.dayLabel.text = nil;
+        cell.userInteractionEnabled = NO;
+        
+//        NSInteger day = indexPath.row - totalDaysOfMonth - firstWeekday + 1;
+//        cell.dayLabel.text = [NSString stringWithFormat:@"%ld", day];
+//
+//        int compareDataNum = [YBObjectTool compareDateWithSelectDate:[self getCurrentData:indexPath]];
+//        if (compareDataNum==0) {// 当前
+//            
+//            cell.dayLabel.textColor = RGB_Color(31, 124, 235);
+//
+//        }else if (compareDataNum==1){// 大于当前日期
+//            
+//            cell.dayLabel.textColor = [UIColor blackColor];
+//            
+//        }else if (compareDataNum==-1){// 小于当前日期
+//            
+//            cell.dayLabel.textColor = [UIColor grayColor];
+//            
+//        }
 
     } else {// 属于当前选择的这个月
         
@@ -414,7 +413,8 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     }
     
     self.selectIndex = indexPath.row;
-    [self changeDate];
+//    [self changeDate];
+    [self.collectionView reloadData];
 
 }
 

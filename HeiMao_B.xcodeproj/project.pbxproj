@@ -36,7 +36,6 @@
 		0663FADF1CAE8A820076E384 /* JZPassListUserid.m in Sources */ = {isa = PBXBuildFile; fileRef = 0663FADC1CAE8A820076E384 /* JZPassListUserid.m */; };
 		0670B54F1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = 0670B54E1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m */; };
 		0670B5551CABCEAF00D34731 /* JZCompletionConfirmationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0670B5541CABCEAF00D34731 /* JZCompletionConfirmationCell.m */; };
-		0670B55A1CABF74F00D34731 /* RatingBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0670B5591CABF74F00D34731 /* RatingBar.m */; };
 		06DB70BE1CA906C500A6AC9D /* ExamClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70BD1CA906C500A6AC9D /* ExamClassViewController.m */; };
 		06DB70C21CA909DC00A6AC9D /* ExamClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70C11CA909DC00A6AC9D /* ExamClassModel.m */; };
 		06DB70C51CA90E3800A6AC9D /* WorkTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70C41CA90E3800A6AC9D /* WorkTimeViewController.m */; };
@@ -69,6 +68,7 @@
 		B28D5E411C64857000D9E9E1 /* ChineseString.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5E3A1C64857000D9E9E1 /* ChineseString.m */; };
 		B28D5E431C64857000D9E9E1 /* pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5E3E1C64857000D9E9E1 /* pinyin.m */; };
 		B28D5E441C64857000D9E9E1 /* WChineseSting.m in Sources */ = {isa = PBXBuildFile; fileRef = B28D5E401C64857000D9E9E1 /* WChineseSting.m */; };
+		B2A0B9641CB3571800E2008C /* RatingBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A0B9631CB3571800E2008C /* RatingBar.m */; };
 		B2BA3E4F1CA4E6BA00926584 /* AppDelegate+YJPush.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3CCC1CA4E6BA00926584 /* AppDelegate+YJPush.m */; };
 		B2BA3E501CA4E6BA00926584 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3CCE1CA4E6BA00926584 /* AppDelegate.m */; };
 		B2BA3E531CA4E6D400926584 /* JGBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3E521CA4E6D400926584 /* JGBaseViewController.m */; };
@@ -642,8 +642,6 @@
 		0670B54E1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZCompletionConfirmationContriller.m; sourceTree = "<group>"; };
 		0670B5531CABCEAF00D34731 /* JZCompletionConfirmationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZCompletionConfirmationCell.h; sourceTree = "<group>"; };
 		0670B5541CABCEAF00D34731 /* JZCompletionConfirmationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZCompletionConfirmationCell.m; sourceTree = "<group>"; };
-		0670B5581CABF74900D34731 /* RatingBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingBar.h; sourceTree = "<group>"; };
-		0670B5591CABF74F00D34731 /* RatingBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingBar.m; sourceTree = "<group>"; };
 		06DB70BC1CA906C500A6AC9D /* ExamClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamClassViewController.h; sourceTree = "<group>"; };
 		06DB70BD1CA906C500A6AC9D /* ExamClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamClassViewController.m; sourceTree = "<group>"; };
 		06DB70C01CA909DC00A6AC9D /* ExamClassModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamClassModel.h; sourceTree = "<group>"; };
@@ -709,6 +707,8 @@
 		B28D5E3E1C64857000D9E9E1 /* pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pinyin.m; sourceTree = "<group>"; };
 		B28D5E3F1C64857000D9E9E1 /* WChineseSting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WChineseSting.h; sourceTree = "<group>"; };
 		B28D5E401C64857000D9E9E1 /* WChineseSting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WChineseSting.m; sourceTree = "<group>"; };
+		B2A0B9621CB3571800E2008C /* RatingBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingBar.h; sourceTree = "<group>"; };
+		B2A0B9631CB3571800E2008C /* RatingBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingBar.m; sourceTree = "<group>"; };
 		B2BA3CCB1CA4E6BA00926584 /* AppDelegate+YJPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+YJPush.h"; sourceTree = "<group>"; };
 		B2BA3CCC1CA4E6BA00926584 /* AppDelegate+YJPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+YJPush.m"; sourceTree = "<group>"; };
 		B2BA3CCD1CA4E6BA00926584 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -3296,8 +3296,6 @@
 		B2BA43611CA5324000926584 /* FDCalendar */ = {
 			isa = PBXGroup;
 			children = (
-				0670B5581CABF74900D34731 /* RatingBar.h */,
-				0670B5591CABF74F00D34731 /* RatingBar.m */,
 				B2BA43701CA62ECD00926584 /* YBFDCalendar.h */,
 				B2BA43711CA62ECD00926584 /* YBFDCalendar.m */,
 				B2BA43771CA6424B00926584 /* YBFDCalendarItem.h */,
@@ -3340,6 +3338,8 @@
 		B2BA43E61CAA2F0700926584 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				B2A0B9621CB3571800E2008C /* RatingBar.h */,
+				B2A0B9631CB3571800E2008C /* RatingBar.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -3825,7 +3825,6 @@
 				B2BA42951CA5035700926584 /* EaseEmojiEmoticons.m in Sources */,
 				B2BA43281CA5041100926584 /* BLInformationManager.m in Sources */,
 				B253C2D21C3FA742001AF771 /* qrspec.c in Sources */,
-				0670B55A1CABF74F00D34731 /* RatingBar.m in Sources */,
 				B2BA41C31CA5035700926584 /* MJRefreshComponent.m in Sources */,
 				B2BA43251CA5041100926584 /* OrderCompleteViewController.m in Sources */,
 				B2BA42A31CA5035700926584 /* EaseBubbleView+Video.m in Sources */,
@@ -3979,6 +3978,7 @@
 				B2BA41F21CA5035700926584 /* PSTGridLayoutRow.m in Sources */,
 				B2BA3EDC1CA5003B00926584 /* HMPortraitInfoModel.m in Sources */,
 				B2BA44661CABC15C00926584 /* YBStudentDetailsExaminationinfo.m in Sources */,
+				B2A0B9641CB3571800E2008C /* RatingBar.m in Sources */,
 				B2BA42861CA5035700926584 /* JGUserModel.m in Sources */,
 				0608CA711CAA8A2E0068A18B /* Headportrait.m in Sources */,
 				B2BA43D81CA951A200926584 /* YBCourseCoursereservationdetial.m in Sources */,
