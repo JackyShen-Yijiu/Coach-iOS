@@ -30,6 +30,7 @@
     self.navigationItem.title = @"考试信息";
     self.tableView.sectionHeaderHeight = 150.5;
 
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // 监听名字为openGroup的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(haderViewDidOpenGroup:) name:@"openGroup" object:nil];
@@ -142,7 +143,9 @@
                 [self.tableView reloadData];
                 
             }else{
-                [self showTotasViewWithMes:@"暂无数据"];
+                
+               
+                
             }
             
         }else{
