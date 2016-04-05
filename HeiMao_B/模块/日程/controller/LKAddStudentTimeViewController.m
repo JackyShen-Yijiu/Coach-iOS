@@ -62,36 +62,6 @@ static NSString *addStuCellID = @"addStuCellID";
 
 @implementation LKAddStudentTimeViewController
 
-
-- (NSMutableArray *)upDateArray {
-    if (_upDateArray == nil) {
-        _upDateArray = [[NSMutableArray alloc] init];
-    }
-    return _upDateArray;
-}
-
-- (NSMutableArray *)indexArray
-{
-    if (_indexArray==nil) {
-        _indexArray = [NSMutableArray array];
-    }
-    return _indexArray;
-}
-- (NSMutableArray *)LetterResultArr
-{
-    if (_LetterResultArr==nil) {
-        _LetterResultArr = [NSMutableArray array];
-    }
-    return _LetterResultArr;
-}
-- (NSMutableDictionary *)dataDict
-{
-    if (_dataDict==nil) {
-        _dataDict = [NSMutableDictionary dictionary];
-    }
-    return _dataDict;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     _stundentDataArrM = [NSMutableArray array];
@@ -116,26 +86,20 @@ static NSString *addStuCellID = @"addStuCellID";
     
     [self.view addSubview:tableView];
     
-    
-    //    [UserInfoModel defaultUserInfo].subject
-    //
     self.navigationItem.title = @"添加学员";
-    /////  允许cell多选
-//    self.tableView.allowsMultipleSelection = YES;
-    //
+
     self.selectedRows = [NSMutableArray array];
-    //
-    //    // Do any additional setup after loading the view, typically from a nib.
-    //    [self.tableView registerClass:[LKAddStudentTableViewCell class] forCellReuseIdentifier:addStuCellID];
+
     self.tableView.rowHeight = 80;
-    //    self.tableView.sectionIndexBackgroundColor = [UIColor clearColor];
-    //    //    self.edgesForExtendedLayout = UIRectEdgeNone;
-    //
+
 
     self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"添加" highTitle:@"添加" target:self action:@selector(addStudent) isRightItem:YES];
 
     
+    [self showTotasViewWithMes:@"加载中"];
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
         
         [self initData];
         
@@ -217,37 +181,46 @@ static NSString *addStuCellID = @"addStuCellID";
         
         id result = responseObject;
         
-        
-        NSArray *stundentData = result[@"data"];
-        
-        for (NSDictionary *dict in stundentData) {
+        NSDictionary *param = responseObject;
+        if ([param[@"type"] integerValue] == 1) {
             
-            LKAddStudentData *data = [LKAddStudentData yy_modelWithDictionary:dict];
+            
+            NSArray *stundentData = result[@"data"];
+            
+            for (NSDictionary *dict in stundentData) {
+                
+                LKAddStudentData *data = [LKAddStudentData yy_modelWithDictionary:dict];
+                
+                [self.stundentDataArrM addObject:data];
+                
+            }
+            
+            NSMutableArray *nameArray = [NSMutableArray array];
+            for (LKAddStudentData *data in self.stundentDataArrM) {
+                
+                [nameArray addObject:data.name];
+                
+                [self.dataDict setObject:data forKey:data.name];
+                
+            }
+            
+            // 返回tableview右方 indexArray
+            self.indexArray = [ChineseString IndexArray:nameArray];
+            
+            // 返回联系人
+            self.LetterResultArr = [ChineseString LetterSortArray:nameArray];
+            
+            [self.tableView reloadData];
 
-            [self.stundentDataArrM addObject:data];
-            
-        }
-        
-        NSMutableArray *nameArray = [NSMutableArray array];
-        for (LKAddStudentData *data in self.stundentDataArrM) {
-            
-            [nameArray addObject:data.name];
-            
-            [self.dataDict setObject:data forKey:data.name];
-            
-        }
-        
-        // 返回tableview右方 indexArray
-        self.indexArray = [ChineseString IndexArray:nameArray];
-        
-        // 返回联系人
-        self.LetterResultArr = [ChineseString LetterSortArray:nameArray];
-        
-        [self.tableView reloadData];
-        
+            }else{
+                [self showTotasViewWithMes:@"暂无数据"];
+            }
+
+     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        NSLog(@"LKAddStudentTimeViewController--数据获取出错，错误:%@",error);
+           [self showTotasViewWithMes:@"网络错误"];
+    NSLog(@"LKAddStudentTimeViewController--数据获取出错，错误:%@",error);
         
     }];
     
@@ -306,11 +279,29 @@ static NSString *addStuCellID = @"addStuCellID";
     
     
     NSURL *iconUrl = [NSURL URLWithString:data.headportrait.originalpic];
-    NSLog(@"bfsbff%@",iconUrl);
+   
+    cell.callStudentButton.tag = data.mobile.integerValue;
+    
+    [cell.callStudentButton addTarget:self action:@selector(callStudentButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+   
     
     [cell.studentIconView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"JZCoursenull_student"]];
     
     return cell;
+}
+
+-(void)callStudentButtonClick:(UIButton*)sender {
+
+    if (sender.tag) {
+        NSString * telNum = [NSString stringWithFormat:@"telprompt://%zd",sender.tag];
+        
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telNum]];
+    
+    }else{
+            [self showTotasViewWithMes:@"无该用户手机号码"];
+    }
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -548,6 +539,7 @@ static NSString *addStuCellID = @"addStuCellID";
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"LKAddStudentTimeViewController--添加学员失败--error:%@",error);
+        [self showTotasViewWithMes:@"网络出错，添加失败"];
         
     }];
 
@@ -557,6 +549,35 @@ static NSString *addStuCellID = @"addStuCellID";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSMutableArray *)upDateArray {
+    if (_upDateArray == nil) {
+        _upDateArray = [[NSMutableArray alloc] init];
+    }
+    return _upDateArray;
+}
+
+- (NSMutableArray *)indexArray
+{
+    if (_indexArray==nil) {
+        _indexArray = [NSMutableArray array];
+    }
+    return _indexArray;
+}
+- (NSMutableArray *)LetterResultArr
+{
+    if (_LetterResultArr==nil) {
+        _LetterResultArr = [NSMutableArray array];
+    }
+    return _LetterResultArr;
+}
+- (NSMutableDictionary *)dataDict
+{
+    if (_dataDict==nil) {
+        _dataDict = [NSMutableDictionary dictionary];
+    }
+    return _dataDict;
 }
 
 

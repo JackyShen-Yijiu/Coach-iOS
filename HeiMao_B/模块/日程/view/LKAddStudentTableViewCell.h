@@ -27,7 +27,7 @@
 /// 拨打学员电话按钮 -- UIButton
 //@property (nonatomic, strong) UIButton *callStudentButton;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *callStudentButton;
+@property (weak, nonatomic) IBOutlet UIButton *callStudentButton;
 
 /// 选择学员的按钮 -- UIImageView
 @property (weak, nonatomic) IBOutlet UIImageView *selectImageView;
