@@ -28,8 +28,8 @@
                             <constraint firstAttribute="width" constant="48" id="hqG-tB-gpH"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7T2-WY-cJe">
-                        <rect key="frame" x="116" y="64.5" width="42" height="12"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7T2-WY-cJe">
+                        <rect key="frame" x="116" y="64" width="0.0" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="BLh-yS-NNp"/>
                         </constraints>
@@ -38,15 +38,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vpd-Tb-T8h">
-                        <rect key="frame" x="341" y="49" width="16" height="16"/>
+                        <rect key="frame" x="321" y="35" width="44" height="44"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="16" id="W1f-q4-7PQ"/>
-                            <constraint firstAttribute="width" constant="16" id="eTl-XX-bq6"/>
+                            <constraint firstAttribute="height" constant="44" id="WKt-UO-7Xu"/>
+                            <constraint firstAttribute="width" constant="44" id="xZQ-nR-LeA"/>
                         </constraints>
+                        <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="Button" image="JZCoursephone"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nl8-mK-0ms">
-                        <rect key="frame" x="116" y="38" width="42" height="14"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nl8-mK-0ms">
+                        <rect key="frame" x="116" y="38" width="0.0" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="HL5-p1-fWW"/>
                         </constraints>
@@ -62,7 +63,7 @@
                     <constraint firstItem="7T2-WY-cJe" firstAttribute="leading" secondItem="Y1a-Wu-kRO" secondAttribute="trailing" constant="16" id="ITL-d5-7FB"/>
                     <constraint firstItem="nl8-mK-0ms" firstAttribute="leading" secondItem="Y1a-Wu-kRO" secondAttribute="trailing" constant="16" id="MQl-3A-DuE"/>
                     <constraint firstItem="nl8-mK-0ms" firstAttribute="top" secondItem="2ro-p7-mcs" secondAttribute="top" constant="22" id="Vdg-qK-S13"/>
-                    <constraint firstAttribute="trailing" secondItem="Vpd-Tb-T8h" secondAttribute="trailing" constant="24" id="aWv-04-GHs"/>
+                    <constraint firstAttribute="trailing" secondItem="Vpd-Tb-T8h" secondAttribute="trailing" constant="16" id="aWv-04-GHs"/>
                     <constraint firstItem="Vpd-Tb-T8h" firstAttribute="centerY" secondItem="2ro-p7-mcs" secondAttribute="centerY" id="awF-EB-VQS"/>
                     <constraint firstItem="kmv-ae-eIA" firstAttribute="centerY" secondItem="2ro-p7-mcs" secondAttribute="centerY" id="fQr-fm-kxO"/>
                     <constraint firstItem="Y1a-Wu-kRO" firstAttribute="centerY" secondItem="2ro-p7-mcs" secondAttribute="centerY" id="nF7-cr-euP"/>
@@ -79,7 +80,7 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="callStudentButton" destination="9wm-iE-ujf" id="6QY-u7-Amz"/>
+                <outlet property="callStudentButton" destination="Vpd-Tb-T8h" id="BMW-Ag-SLo"/>
                 <outlet property="selectImageView" destination="kmv-ae-eIA" id="20L-55-YXc"/>
                 <outlet property="studentIconView" destination="Y1a-Wu-kRO" id="Bhs-xs-Mbx"/>
                 <outlet property="studentNameLabel" destination="nl8-mK-0ms" id="zpr-dr-8df"/>

@@ -177,6 +177,7 @@
         self.contentView.layer.shadowOffset = CGSizeMake(0, 2);
         self.contentView.layer.shadowOpacity = 0.036;
         self.contentView.layer.shadowRadius = 2;
+        self.bottomLine.hidden = YES;
         
     }else if (compareDataNum==1){// 大于当前日期
         self.coureleftStateImgView.image = [UIImage imageNamed:@"JZCoursenode_future"];
@@ -194,7 +195,8 @@
         self.contentView.layer.shadowOffset = CGSizeMake(0, 0);
         self.contentView.layer.shadowOpacity = 0;
         self.contentView.layer.shadowRadius = 0;
-        
+        self.bottomLine.hidden = NO;
+
     }else if (compareDataNum==-1){// 小于当前日期
         self.coureleftStateImgView.image = [UIImage imageNamed:@"JZCoursenode_past"];
         
@@ -212,7 +214,8 @@
         self.coureleftTopDelive.backgroundColor = [UIColor lightGrayColor];
         self.coureBeginTime.textColor = [UIColor lightGrayColor];
         self.coureEndTime.textColor = [UIColor lightGrayColor];
-        
+        self.bottomLine.hidden = NO;
+
     }
     
     // 中间预约学员
@@ -294,7 +297,7 @@
     cell.userInteractionEnabled = YES;
     cell.iconImageView.image = [UIImage imageNamed:@""];
     cell.nameLabel.text = nil;
-    cell.stateImageView.hidden = YES;
+    cell.stateImageView.hidden = NO;
     cell.alphaView.hidden = YES;
     
     if (_model.coursereservationdetial && _model.coursereservationdetial.count>indexPath.row) {
@@ -333,9 +336,7 @@
             cell.userInteractionEnabled = YES;
         }
         
-        
     }
-    
     
     return cell;
     

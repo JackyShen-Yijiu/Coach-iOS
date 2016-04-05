@@ -614,6 +614,8 @@ static NSString *const ktagArrChange = @"ktagArrChange";
                         [UserInfoModel defaultUserInfo].portrait =  upImageUrl;
 
                         [weakself.userHeadImage sd_setImageWithURL:[NSURL URLWithString:[UserInfoModel defaultUserInfo].portrait] placeholderImage:[UIImage imageWithData:gcdPhotoData]];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:kHeadImageChange object:nil];
+                        [self.tableView reloadData];
 
                     }else {
                         if (msg)

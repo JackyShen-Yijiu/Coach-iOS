@@ -17,6 +17,7 @@
 #import "YBCourseData.h"
 #import "YBCourseTableView.h"
 #import "YBObjectTool.h"
+#import "JZCompletionConfirmationContriller.h"
 
 @interface YBHomeLeftViewController ()<FDCalendarDelegate,YBFDCalendarDelegate,UIScrollViewDelegate>
 {
@@ -47,9 +48,36 @@
 
 @property (nonatomic,strong) UIScrollView *mainScrollView;
 
+@property (nonatomic,strong) UIButton *confimBtn;
+
 @end
 
 @implementation YBHomeLeftViewController
+
+- (UIButton *)confimBtn
+{
+    if (_confimBtn==nil) {
+        
+        CGFloat confimBtnW = 48;
+        CGFloat confimBtnH = confimBtnW;
+        CGFloat confimBtnX = 5;
+        CGFloat confimBtnY = self.view.height - 64 - confimBtnW;
+        _confimBtn = [[UIButton alloc] initWithFrame:CGRectMake(confimBtnX, confimBtnY, confimBtnW, confimBtnH)];
+        _confimBtn.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"JZCoursebutton_time"]];
+        [_confimBtn addTarget:self action:@selector(confimBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _confimBtn;
+}
+
+- (void)confimBtnDidClick
+{
+    
+    JZCompletionConfirmationContriller *vc = [JZCompletionConfirmationContriller new];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 
 - (NSMutableArray *)leftTableDataArray
 {
@@ -94,7 +122,7 @@
 {
     if (_centerCourseTableView==nil) {
         _centerCourseTableView = [[YBCourseTableView alloc] initWithFrame:CGRectMake(0, 0, self.mainScrollView.width, self.mainScrollView.height-64)];
-        _centerCourseTableView.backgroundColor = [UIColor whiteColor];
+        _centerCourseTableView.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
         _centerCourseTableView.parentViewController = self;
     }
     return _centerCourseTableView;
@@ -121,7 +149,7 @@
     
     [super viewDidLoad];
     
-    self.view.backgroundColor = RGB_Color(253, 253, 253);
+    self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     self.selectDate = [NSDate date];
     
     self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, calendarH, self.view.width, self.view.height-calendarH)];
@@ -157,6 +185,8 @@
     [xialaBtn addTarget:self action:@selector(xialaBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
     [self.calendarHeadView addSubview:xialaBtn];
     
+    [self.view addSubview:self.confimBtn];
+
     // 刷新当前界面
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefresh:) name:KCourseViewController_NeedRefresh object:nil];
     // 隐藏展开日历
@@ -196,26 +226,22 @@
 // 跳到上一个月
 - (void)setPreviousMonthDate
 {
-    NSDate *previousDate = [self.calendarHeadView.centerCalendarItem previousDayDate];
+    NSDate *previousDate = [self.calendarHeadView.centerCalendarItem previousMonthDate];
     NSLog(@"previousDate:%@",previousDate);
     
     [self.calendarHeadView setCurrentDate:previousDate];
-   
-    [self fdCalendar:self.calendarHeadView didSelectedDate:previousDate];
     
 }
 
 // 跳到下一个月
 - (void)setNextMonthDate {
     
-    NSDate *nextDayDate = [self.calendarHeadView.centerCalendarItem nextDayDate];
+    NSDate *nextDayDate = [self.calendarHeadView.centerCalendarItem nextMonthDate];
     
     NSLog(@"nextDayDate:%@",nextDayDate);
     
     [self.calendarHeadView setCurrentDate:nextDayDate];
     
-    [self fdCalendar:self.calendarHeadView didSelectedDate:nextDayDate];
-
 }
 
 - (void)xialaBtnDidClick
@@ -266,21 +292,19 @@
     NSLog(@"%s",__func__);
 }
 
-- (void)modifyVacation
+- (void)modifyVacation:(NSDate *)date
 {
     
     if (self.isOpen) {
 
         // 设置当前日期
-        [self.ybCalendarHeadView setCurrentDate:self.selectDate];
-//        [self YBFDCalendar:self.ybCalendarHeadView didSelectedDate:self.selectDate];
+        [self.ybCalendarHeadView setCurrentDate:date];
         
     }else{
         
         // 设置当前日期
-        [self.calendarHeadView setCurrentDate:self.selectDate];
-//        [self fdCalendar:self.calendarHeadView didSelectedDate:self.selectDate];
-        
+        [self.calendarHeadView setCurrentDate:date];
+
     }
     
 }
@@ -324,7 +348,6 @@
     NSLog(@"切换日历代理方法 %s",__func__);
     
     self.selectDate = date;
-//    self.calendarHeadView.selectDate = self.selectDate;
     [self.calendarHeadView changeDate:self.selectDate];
     
     // 隐藏展开更多

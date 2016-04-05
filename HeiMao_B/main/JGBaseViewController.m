@@ -49,10 +49,9 @@
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *lastmessage = [user objectForKey:@"lastmessage"];
-    NSString *lastnews = [user objectForKey:@"lastnews"];
     
     WS(ws);
-    [NetWorkEntiry getMessageUnReadCountlastmessage:lastmessage lastnews:lastnews success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry getMessageUnReadCountlastmessage:lastmessage success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"获取未读消息responseObject:%@",responseObject);
         

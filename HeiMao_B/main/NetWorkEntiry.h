@@ -255,7 +255,7 @@
  * 获取系统消息和咨询消息数量
  *
  */
-+ (void)getMessageUnReadCountlastmessage:(NSString *)lastmessage lastnews:(NSString*)lastnews
++ (void)getMessageUnReadCountlastmessage:(NSString *)lastmessage
                                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 /**

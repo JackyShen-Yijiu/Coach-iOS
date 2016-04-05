@@ -100,16 +100,16 @@
     [self.phoneButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
         make.right.mas_equalTo(self.contentView.mas_right).offset(-16);
-        make.height.mas_equalTo(@16);
-        make.width.mas_equalTo(@16);
+        make.height.mas_equalTo(@32);
+        make.width.mas_equalTo(@32);
         
         
     }];
     [self.messageButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
         make.right.mas_equalTo(self.phoneButton.mas_left).offset(-16);
-        make.height.mas_equalTo(@16);
-        make.width.mas_equalTo(@16);
+        make.height.mas_equalTo(@32);
+        make.width.mas_equalTo(@32);
         
         
     }];
@@ -189,6 +189,7 @@
         _messageButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_messageButton setImage:[UIImage imageNamed:@"chat"] forState:UIControlStateNormal];
         [_messageButton addTarget:self action:@selector(didClickStudentListCell:) forControlEvents:UIControlEventTouchUpInside];
+        [_messageButton setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
         _messageButton.tag = 500;
     }
     return _messageButton;
@@ -198,6 +199,7 @@
         _phoneButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_phoneButton setImage:[UIImage imageNamed:@"JZCoursephone"] forState:UIControlStateNormal];
         [_phoneButton addTarget:self action:@selector(didClickStudentListCell:) forControlEvents:UIControlEventTouchUpInside];
+        [_phoneButton setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
         _phoneButton.tag = 501;
     }
     return _phoneButton;
@@ -215,17 +217,5 @@
                               placeholderImage:[UIImage imageNamed:@"call_out"]];
         self.nameLabel.text = passlistMoel.userid.name;
     self.classTimeLable.text = [NSString getLitteLocalDateFormateUTCDate:passlistMoel.examinationdate];
-//        self.studyConLabel.text = listModel.courseinfo.progress;
-//        // 剩余17课时,已漏课2课时
-//    
-//        // 剩余课时
-//        NSInteger surplusClassTnteger = listModel.courseinfo.totalcourse - listModel.courseinfo.finishcourse;
-//        NSString *surplusClass = [NSString stringWithFormat:@"剩余%lu课时",surplusClassTnteger];
-//    
-//        // 漏课课时
-//        NSString *missClass = [NSString stringWithFormat:@"%lu",listModel.courseinfo.missingcourse];
-//    
-//        self.classTimeLable.text = [NSString stringWithFormat:@"%@ %@",surplusClass,missClass];
-
 }
 @end
