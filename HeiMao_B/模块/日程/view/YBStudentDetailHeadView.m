@@ -39,7 +39,7 @@
 {
     if (_iconImageView ==nil) {
         _iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.width/2-68/2, 64+16, 68, 68)];
-        _iconImageView.image = [UIImage imageNamed:@"studentList"];
+        _iconImageView.image = [UIImage imageNamed:@"user_seleted"];
         _iconImageView.layer.masksToBounds = YES;
         _iconImageView.layer.cornerRadius = _iconImageView.width/2;
         
@@ -135,7 +135,7 @@
    
     self.dmData = dmData;
     
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dmData.data.studentinfo.headportrait.originalpic]] placeholderImage:[UIImage imageNamed:@"studentList"]];
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dmData.data.studentinfo.headportrait.originalpic]] placeholderImage:[UIImage imageNamed:@"user_seleted"]];
 
     self.bgImageView.image = [[UIImage imageNamed:[NSString stringWithFormat:@"%@",dmData.data.studentinfo.headportrait.originalpic]] applyBlurWithRadius:10 tintColor:[UIColor clearColor] saturationDeltaFactor:1 maskImage:nil];
 
