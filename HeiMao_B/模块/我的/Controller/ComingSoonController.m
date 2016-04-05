@@ -16,11 +16,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"敬请期待";
-    UIImageView *bgImg  =[[UIImageView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height)];
-    bgImg.image = [ UIImage imageNamed:@"building_pic.jpg"];
     
-    [self.view addSubview:bgImg];
+    self.title = @"敬请期待";
+     self.view.layer.contents = (id)([UIImage imageNamed:@"building_pic.jpg"].CGImage);
+    
 }
 
 - (void)didReceiveMemoryWarning {
