@@ -43,6 +43,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self initNarBar];
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 }
@@ -55,6 +56,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self.view addSubview:self.collectionView];
+    
     [self initArray];
     [self initUI];
     [self initNationcenter];
@@ -88,12 +90,13 @@
     
     // 授课班型数据
     NSString *classTypeStr = nil;
-    if ([[UserInfoModel defaultUserInfo].classModel isEqualToString:@""] || [UserInfoModel defaultUserInfo].classModel == nil ) {
-        
+    NSLog(@"%@",[UserInfoModel defaultUserInfo].classModel);
+    if ([UserInfoModel defaultUserInfo].setClassMode) {
+        classTypeStr = @"已设置";
+    }else if (![UserInfoModel defaultUserInfo].setClassMode){
         classTypeStr = @"未设置";
-    }else{
-        classTypeStr = [UserInfoModel defaultUserInfo].classModel;
     }
+    
     // 工作时间数据
     NSString *workTimeStr = [self workTimeData];
     
@@ -154,7 +157,7 @@
          static NSString * CellIdentifier = @"topcell";
         [_collectionView registerClass:[TopCollectionCell class] forCellWithReuseIdentifier:CellIdentifier];
         TopCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-        
+        [self initArray];
         cell.imgView.image = [UIImage imageNamed:self.topimgArray[indexPath.row]];
         cell.classTypeLabel.text = self.topTitleArray[indexPath.row];
         cell.contentLabel.text = self.topDetailArray[indexPath.row];
@@ -391,10 +394,11 @@
         _signatureImgView = [[UIImageView alloc] init];
         _signatureImgView.image = [UIImage imageNamed:@"edit"];
         _signatureImgView.userInteractionEnabled = YES;
-//        UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signatureSetUp)];
-//        [_signatureImgView addGestureRecognizer:tapGes];
+
     }
     return _signatureImgView;
 }
-
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end
