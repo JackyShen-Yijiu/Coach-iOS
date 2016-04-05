@@ -27,12 +27,14 @@ static NSString *const kBuyproduct =  @"userinfo/buyproduct";
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:YES];
     [_bottomView removeFromSuperview];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 
 {
+    [super viewWillAppear:YES];
     [self addBottomView];
 }
 - (void)viewDidLoad {

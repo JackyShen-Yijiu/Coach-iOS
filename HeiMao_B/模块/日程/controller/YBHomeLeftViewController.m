@@ -74,7 +74,7 @@
 {
     
     JZCompletionConfirmationContriller *vc = [JZCompletionConfirmationContriller new];
-    vc.hidesBottomBarWhenPushed = YES;
+//    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -413,16 +413,13 @@
                 [ws.centerTableDataArray addObject:dataModel];
             }
             
-            
             ws.centerCourseTableView.selectData = dataStr;
             ws.centerCourseTableView.dataArray = ws.centerTableDataArray;
             
             NSLog(@"ws.centerTableDataArray.count:%lu",(unsigned long)ws.centerTableDataArray.count);
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [ws.centerCourseTableView reloadData];
-            });
-            
+            [ws.centerCourseTableView reloadData];
+
         }else{
             
             [ws dealErrorResponseWithTableView:nil info:responseObject];

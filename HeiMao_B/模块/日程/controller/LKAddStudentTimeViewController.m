@@ -157,21 +157,6 @@ static NSString *addStuCellID = @"addStuCellID";
     self.timeView = timeView;
     
 }
-#pragma mark - 取消选择的cell
-
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//   
-//    LKAddStudentTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    //如果取消已选择的cell,从记录移除
-//    [self.selectedRows removeObject:indexPath];
-//    
-//    [self.selectedIndexPaths removeObject:indexPath];
-//     [self.selectedRows replaceObjectAtIndex:indexPath.row withObject:self.selectedRows];
-//    
-    //    NSLog(@"%@",indexPath);
-}
-
 #pragma mark - 数据获取
 - (void)initData{
     //如果教练是什么都交  返回 -1   不是返回交的课程
