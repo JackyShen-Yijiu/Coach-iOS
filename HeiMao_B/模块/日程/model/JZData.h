@@ -13,7 +13,7 @@
 
 @interface JZData : NSObject
 
-@property (nonatomic, strong) NSString * idField;
+@property (nonatomic, strong) NSString * _id;
 @property (nonatomic, strong) NSString * begintime;
 @property (nonatomic, strong) NSString * endtime;
 @property (nonatomic, strong) NSString * reservationcreatetime;
@@ -23,7 +23,4 @@
 
 @property (nonatomic,assign) BOOL isOpen;
 
--(instancetype)initWithDictionary:(NSDictionary *)dictionary;
-
--(NSDictionary *)toDictionary;
 @end
