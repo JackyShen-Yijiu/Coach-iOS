@@ -28,8 +28,8 @@
                             <constraint firstAttribute="width" constant="48" id="hqG-tB-gpH"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7T2-WY-cJe">
-                        <rect key="frame" x="116" y="64" width="37.5" height="12"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7T2-WY-cJe">
+                        <rect key="frame" x="116" y="64" width="0.0" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="BLh-yS-NNp"/>
                         </constraints>
@@ -46,8 +46,8 @@
                         <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="Button" image="JZCoursephone"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nl8-mK-0ms">
-                        <rect key="frame" x="116" y="38" width="42" height="14"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nl8-mK-0ms">
+                        <rect key="frame" x="116" y="38" width="0.0" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="HL5-p1-fWW"/>
                         </constraints>

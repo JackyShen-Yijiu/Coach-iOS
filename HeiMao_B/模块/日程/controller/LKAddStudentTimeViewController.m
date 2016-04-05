@@ -322,7 +322,14 @@ static NSString *addStuCellID = @"addStuCellID";
     
     data.isSelect = !data.isSelect;
     
-    [self.dataDict setObject:data forKey:str];
+    if (data == nil) {
+        [self showTotasViewWithMes:@"该学员信息未完善"];
+        
+    }else{
+        [self.dataDict setObject:data forKey:str];
+    }
+    
+    
     
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     
