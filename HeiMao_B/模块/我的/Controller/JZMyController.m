@@ -34,20 +34,17 @@
 @property (nonatomic, strong) MyHeaderView *headerView;
 @property (nonatomic, strong) UIImageView *signatureImgView;
 
-
-
 @end
 
 @implementation JZMyController
 
 -(NSArray *)topDetailArray {
     
-    if (!_topimgArray) {
+    if (!_topDetailArray) {
         
-        
-        _topimgArray = [[NSArray alloc]init];
+        _topDetailArray = [[NSArray alloc]init];
     }
-    return _topimgArray;
+    return _topDetailArray;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -116,8 +113,6 @@
     
     // 工作时间数据
     NSString *workTimeStr = [self workTimeData];
-    
-
     
     self.topDetailArray = @[classTypeStr,workTimeStr];
     
