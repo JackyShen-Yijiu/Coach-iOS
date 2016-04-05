@@ -42,12 +42,13 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
         self.userInteractionEnabled = YES;
         self.contentTextView.delegate = self;
         self.btnArray = [NSMutableArray array];
         
         //    教学内容视图
-        [self.bgContentView addSubview:self.tittleContentLabel];
+        [self addSubview:self.tittleContentLabel];
         [self addSubview:self.bgContentView];
         [self addSubview:self.lineView];
         
@@ -67,20 +68,21 @@
             make.height.mas_equalTo(@0.5);
         }];
         
-        // 教学内容视图
-        [self.bgContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.mas_top).offset(0);
-            make.left.mas_equalTo(self.mas_left).offset(0);
-            make.right.mas_equalTo(self.mas_right).offset(0);
-            make.height.mas_equalTo(@110); //110
-        }];
         [self.tittleContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.bgContentView.mas_top).offset(0);
-            make.left.mas_equalTo(self.bgContentView.mas_left).offset(16);
+            make.top.mas_equalTo(self.lineView.mas_bottom).offset(16);
+            make.left.mas_equalTo(self.mas_left).offset(16);
             make.width.mas_equalTo(@100);
             make.height.mas_equalTo(@12);
         }];
 
+        // 教学内容视图
+        [self.bgContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.tittleContentLabel.mas_bottom).offset(0);
+            make.left.mas_equalTo(self.mas_left).offset(0);
+            make.right.mas_equalTo(self.mas_right).offset(0);
+            make.height.mas_equalTo(@110); //110
+        }];
+        
         // 评分视图
         [self.bgRateView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.bgContentView.mas_bottom).offset(0);
@@ -293,14 +295,14 @@
     
     // 动态改变
     [self.bgContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(0);
+        make.top.mas_equalTo(self.tittleContentLabel.mas_bottom).offset(0);
         make.left.mas_equalTo(self.mas_left).offset(0);
         make.right.mas_equalTo(self.mas_right).offset(0);
         make.height.mas_equalTo(bgcontentViewH);
     }];
     
     
-    return bgcontentViewH + 200;
+    return bgcontentViewH + 200 + 28;
 }
 
 #pragma mark -- Action

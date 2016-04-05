@@ -38,7 +38,7 @@
 
 - (void)initUI{
     
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
     
     // 顶部视图
     [self.contentView addSubview:self.bgTopView];
@@ -65,7 +65,7 @@
     
     // 顶部视图
     [self.bgTopView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentView.mas_top).offset(0);
+        make.top.mas_equalTo(self.contentView.mas_top).offset(10);
         make.left.mas_equalTo(self.contentView.mas_left).offset(0);
         make.right.mas_equalTo(self.contentView.mas_right).offset(0);
         make.height.mas_equalTo(@80); // 80
