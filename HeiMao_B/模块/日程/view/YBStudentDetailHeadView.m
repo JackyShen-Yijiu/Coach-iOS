@@ -22,7 +22,7 @@
 - (UIImageView *)bgImageView {
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        _bgImageView.image = [[UIImage imageNamed:@"studentList"] applyBlurWithRadius:10 tintColor:[UIColor clearColor] saturationDeltaFactor:1 maskImage:nil];
+        _bgImageView.image = [[UIImage imageNamed:@"JZCoursehead_null"] applyBlurWithRadius:10 tintColor:[UIColor clearColor] saturationDeltaFactor:1 maskImage:nil];
     }
     return _bgImageView;
 }
@@ -135,7 +135,7 @@
    
     self.dmData = dmData;
     
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dmData.data.studentinfo.headportrait.originalpic]] placeholderImage:[UIImage imageNamed:@"user_seleted"]];
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dmData.data.studentinfo.headportrait.originalpic]] placeholderImage:[UIImage imageNamed:@"JZCoursehead_null"]];
 
     self.bgImageView.image = [[UIImage imageNamed:[NSString stringWithFormat:@"%@",dmData.data.studentinfo.headportrait.originalpic]] applyBlurWithRadius:10 tintColor:[UIColor clearColor] saturationDeltaFactor:1 maskImage:nil];
 

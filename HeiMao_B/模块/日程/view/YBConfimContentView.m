@@ -42,12 +42,13 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
         self.userInteractionEnabled = YES;
         self.contentTextView.delegate = self;
         self.btnArray = [NSMutableArray array];
         
         //    教学内容视图
-        [self.bgContentView addSubview:self.tittleContentLabel];
+        [self addSubview:self.tittleContentLabel];
         [self addSubview:self.bgContentView];
         [self addSubview:self.lineView];
         
@@ -67,20 +68,21 @@
             make.height.mas_equalTo(@0.5);
         }];
         
-        // 教学内容视图
-        [self.bgContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.mas_top).offset(0);
-            make.left.mas_equalTo(self.mas_left).offset(0);
-            make.right.mas_equalTo(self.mas_right).offset(0);
-            make.height.mas_equalTo(@110); //110
-        }];
         [self.tittleContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.bgContentView.mas_top).offset(0);
-            make.left.mas_equalTo(self.bgContentView.mas_left).offset(16);
+            make.top.mas_equalTo(self.lineView.mas_bottom).offset(16);
+            make.left.mas_equalTo(self.mas_left).offset(16);
             make.width.mas_equalTo(@100);
             make.height.mas_equalTo(@12);
         }];
 
+        // 教学内容视图
+        [self.bgContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.tittleContentLabel.mas_bottom).offset(0);
+            make.left.mas_equalTo(self.mas_left).offset(0);
+            make.right.mas_equalTo(self.mas_right).offset(0);
+            make.height.mas_equalTo(@110); //110
+        }];
+        
         // 评分视图
         [self.bgRateView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.bgContentView.mas_bottom).offset(0);
@@ -181,7 +183,7 @@
 - (UITextView *)contentTextView{
     if (_contentTextView == nil) {
         _contentTextView = [[UITextView alloc] init];
-        _contentTextView.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
+        _contentTextView.backgroundColor = [UIColor colorWithHexString:@"fcfcfc"];
     }
     return _contentTextView;
 }
@@ -292,14 +294,14 @@
     
     // 动态改变
     [self.bgContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(0);
+        make.top.mas_equalTo(self.tittleContentLabel.mas_bottom).offset(0);
         make.left.mas_equalTo(self.mas_left).offset(0);
         make.right.mas_equalTo(self.mas_right).offset(0);
         make.height.mas_equalTo(bgcontentViewH);
     }];
     
     
-    return bgcontentViewH + 200;
+    return bgcontentViewH + 200 + 28;
 }
 
 #pragma mark -- Action
@@ -331,11 +333,12 @@
         [self.parentViewController showTotasViewWithMes:@"请选择学习内容"];
         return;
     }
-    
-    [NetWorkEntiry postToEnstureDoneofCourseWithCoachid:[UserInfoModel defaultUserInfo].userID coureseID:_dataModel.idField learningcontent:resultStudyContent contentremarks:_textViewStr startLevel:_stareLever success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSLog(@"[UserInfoModel defaultUserInfo].userID = %@ _dataModel.idField =  %@",[UserInfoModel defaultUserInfo].userID,_dataModel._id);
+    [NetWorkEntiry postToEnstureDoneofCourseWithCoachid:[UserInfoModel defaultUserInfo].userID coureseID:_dataModel._id learningcontent:resultStudyContent contentremarks:_textViewStr startLevel:_stareLever success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *param = responseObject;
         if ([param[@"type"] integerValue] == 1) {
             [self.parentViewController showTotasViewWithMes:@"评论成功"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kCompletionComfiromatton object:nil];
             
         }else{
             [self.parentViewController showTotasViewWithMes:@"网络错误"];

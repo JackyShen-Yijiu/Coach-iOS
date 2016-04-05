@@ -304,7 +304,7 @@
         
         NSDictionary *dict = _model.coursereservationdetial[indexPath.row];
         
-        [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dict[@"userid"][@"headportrait"][@"originalpic"]]] placeholderImage:[UIImage imageNamed:@"JZCoursenull_student"]];
+        [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",dict[@"userid"][@"headportrait"][@"originalpic"]]] placeholderImage:[UIImage imageNamed:@"JZCoursehead_null"]];
         
         cell.nameLabel.text = [NSString stringWithFormat:@"%@",dict[@"userid"][@"name"]];
         
