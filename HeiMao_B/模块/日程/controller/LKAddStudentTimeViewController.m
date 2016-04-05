@@ -302,7 +302,7 @@ static NSString *addStuCellID = @"addStuCellID";
     [cell.callStudentButton addTarget:self action:@selector(callStudentButtonClick:) forControlEvents:UIControlEventTouchUpInside];
    
     
-    [cell.studentIconView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"JZCoursenull_student"]];
+    [cell.studentIconView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"JZCoursehead_null"]];
     
     return cell;
 }
