@@ -63,10 +63,16 @@
    
 }
 - (void)initNationcenter{
+    // 授课班型
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(classTypeChange) name:kclassTypeChange object:nil];
     
+    // 工作时间
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(worktimeChange) name:kworktimeChange object: nil];
+    
+    // 用户头像 kHeadImageChange
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(iconImageChange) name:kHeadImageChange object: nil];
 }
+
 - (void)initNarBar{
     self.myNavigationItem.title = nil;
     self.myNavigationItem.titleView = nil;
@@ -270,6 +276,10 @@
     // 工作时间
     NSIndexPath *path = [NSIndexPath indexPathForItem:1 inSection:0];
     [self.collectionView reloadItemsAtIndexPaths:@[path]];
+}
+- (void)iconImageChange{
+    // 用户头像
+    [self.headerView.iconView sd_setImageWithURL:[NSURL URLWithString:[UserInfoModel defaultUserInfo].portrait] placeholderImage:[UIImage imageNamed:@"littleImage"]];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
