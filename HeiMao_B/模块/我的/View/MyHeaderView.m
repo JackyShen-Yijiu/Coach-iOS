@@ -50,7 +50,6 @@
     [self.bgView addSubview:self.iconView];
     [self.bgView addSubview:self.schoolLabel];
     [self.bgView addSubview:self.yLabel];
-    [self.bgView addSubview:self.lineView];
 }
 - (void)layoutSubviews{
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -64,56 +63,31 @@
         make.left.mas_equalTo(self.bgView.mas_left).offset(0);
         make.right.mas_equalTo(self.bgView.mas_right).offset(0);
         make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(0);
-//        make.height.mas_equalTo(@196);
-        
     }];
     [self.bottomImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(0);
         make.left.mas_equalTo(self.bgView.mas_left).offset(0);
         make.right.mas_equalTo(self.bgView.mas_right).offset(0);
-        make.height.mas_equalTo(@115);
-        
+        make.height.mas_equalTo(115);
     }];
     [self.yLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(-16);
         make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.height.mas_equalTo(@12);
-        make.width.mas_equalTo(@200);
-        
+        make.height.mas_equalTo(12);
+        make.width.mas_equalTo(200);
     }];
     [self.schoolLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.yLabel.mas_top).offset(-16);
         make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.height.mas_equalTo(@12);
-        make.width.mas_equalTo(@100);
-        
+        make.height.mas_equalTo(12);
+        make.width.mas_equalTo(100);
     }];
     [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.schoolLabel.mas_top).offset(-16);
         make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.height.mas_equalTo(@68);
-        make.width.mas_equalTo(@68);
-        
+        make.height.mas_equalTo(68);
+        make.width.mas_equalTo(68);
     }];
-
-//    [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.mas_equalTo(self.iconView.mas_top).offset(-25);
-//        make.centerX.mas_equalTo(self.bgView.mas_centerX);
-//        make.height.mas_equalTo(@14);
-//         make.width.mas_equalTo(@80);
-//        
-//    }];
-    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(0);
-        make.left.mas_equalTo(self.bgView.mas_left).offset(0);
-        make.right.mas_equalTo(self.bgView.mas_right).offset(0);
-        make.width.mas_equalTo(@0.5);
-        
-    }];
-
-
-
-    
 
 }
 // 头像设置
@@ -188,12 +162,5 @@
     }
     return _yLabel;
 }
-- (UIView *)lineView{
-    if (_lineView == nil) {
-        _lineView = [[UIView alloc] init];
-        _lineView.backgroundColor = HM_LINE_COLOR;
-        
-    }
-    return _lineView;
-}
+
 @end
