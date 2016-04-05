@@ -138,9 +138,9 @@ static NSDateFormatter *dateFormattor;
 {
     self.centerCalendarItem.seletedDate = date;
     
-    self.leftCalendarItem.seletedDate = [self.centerCalendarItem previousDayDate];
+    self.leftCalendarItem.seletedDate = [self.centerCalendarItem previousMonthDate];
     
-    self.rightCalendarItem.seletedDate = [self.centerCalendarItem nextDayDate];
+    self.rightCalendarItem.seletedDate = [self.centerCalendarItem nextMonthDate];
     
     if ([_delegate respondsToSelector:@selector(fdCalendar:didSelectedDate:)]) {
         [_delegate fdCalendar:self didSelectedDate:self.centerCalendarItem.seletedDate];

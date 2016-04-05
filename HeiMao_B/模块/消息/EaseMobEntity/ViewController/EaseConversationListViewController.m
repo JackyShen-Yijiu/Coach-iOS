@@ -149,6 +149,14 @@ static NSString *kGroupName = @"GroupName";
     return [EaseConversationCell cellHeightWithModel:nil];
 }
 
+- (void)SystemMessageDetailControllerGetMessagelastmessage:(NSString *)lastmessage
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setObject:lastmessage forKey:@"lastmessage"];
+    [user synchronize];
+    
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -169,9 +177,6 @@ static NSString *kGroupName = @"GroupName";
         
         id<IConversationModel> model = [self.dataArray objectAtIndex:indexPath.row];
 
-//        HMStudentModel *studenModel = [[HMStudentModel alloc] init];
-       // studenModel.userName = [NSString stringWithFormat:@"%@",[JGUserTools getNickNameByEMUserName:model.conversation.chatter]];
-    
         NSDictionary * ext = [[model conversation] ext];
         NSLog(@"获取用户信息ext:%@",ext);
         
@@ -210,10 +215,9 @@ static NSString *kGroupName = @"GroupName";
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *lastmessage = [user objectForKey:@"lastmessage"];
-    NSString *lastnews = [user objectForKey:@"lastnews"];
     
     WS(ws);
-    [NetWorkEntiry getMessageUnReadCountlastmessage:lastmessage lastnews:lastnews success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry getMessageUnReadCountlastmessage:lastmessage success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"获取未读消息responseObject:%@",responseObject);
         

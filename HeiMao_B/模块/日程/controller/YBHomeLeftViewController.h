@@ -11,7 +11,7 @@
 
 @interface YBHomeLeftViewController : JGBaseViewController
 
-- (void)modifyVacation;
+- (void)modifyVacation:(NSDate *)date;
 
 - (void)hiddenOpenCalendar;
 

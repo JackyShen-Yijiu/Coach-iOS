@@ -40,15 +40,17 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     NSLog(@"reloadData.bookArray:%@",self.bookArray);
     NSLog(@"self.seletedDate:%@",self.seletedDate);
     
-    NSInteger firstWeekday = [self weekdayOfFirstDayInDate];
-    
-    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
-    [fomatter setDateFormat:@"dd"];
-    NSInteger dateStr = [[fomatter stringFromDate:self.seletedDate] integerValue] + firstWeekday;
-    NSLog(@"reloadData dateStr:%ld",(long)dateStr);
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:dateStr-1 inSection:0];
-    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
-    
+//    NSInteger firstWeekday = [self weekdayOfFirstDayInDate];
+//    
+//    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
+//    [fomatter setDateFormat:@"dd"];
+//    NSInteger dateStr = [[fomatter stringFromDate:self.seletedDate] integerValue] + firstWeekday;
+//    NSLog(@"reloadData dateStr:%ld",(long)dateStr);
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:dateStr-1 inSection:0];
+//    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+//   
+    self.collectionView.contentOffset = CGPointMake([self getCurrentDataOffsetWithData:self.seletedDate], 0);
+
     [self.collectionView reloadData];
 }
 
@@ -58,15 +60,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     NSLog(@"reloadData.restArray:%@",self.restArray);
     NSLog(@"reloadData.bookArray:%@",self.bookArray);
     NSLog(@"self.seletedDate:%@",self.seletedDate);
-    
-//    NSInteger firstWeekday = [self weekdayOfFirstDayInDate];
-//    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
-//    [fomatter setDateFormat:@"dd"];
-//    NSInteger dateStr = [[fomatter stringFromDate:self.seletedDate] integerValue];//-firstWeekday;
-//    NSLog(@"reloadData dateStr:%ld",(long)dateStr);
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:dateStr-1 inSection:0];
-//    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
-
+  
     self.collectionView.contentOffset = CGPointMake([self getCurrentDataOffsetWithData:self.seletedDate], 0);
     
     [self.collectionView reloadData];
@@ -82,12 +76,16 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
 
     NSLog(@"[YBObjectTool compareMonthDateWithSelectDate:date]:%d",[YBObjectTool compareMonthDateWithSelectDate:date]);
     
+    NSInteger dayInDate = [self weekdayOfFirstDayInDate];
+    NSLog(@"dateStr:%@ dayInDate:%ld [dateStr integerValue] / 7 * self.collectionView.width:%f",dateStr,(long)dayInDate,([dateStr integerValue]+dayInDate-1) / 7 * self.collectionView.width);
+    
+    return ([dateStr integerValue]+dayInDate-1) / 7 * self.collectionView.width;
+
     // 1:大于当前日期 -1:小于当前时间 0:等于当前时间
-    if ([YBObjectTool compareMonthDateWithSelectDate:date]!=1) {
-        return [dateStr integerValue] / 7 * self.collectionView.width;
-    }else{
-        return 0;
-    }
+//    if ([YBObjectTool compareMonthDateWithSelectDate:date]!=1) {
+//    }else{
+//        return 0;
+//    }
     
 }
 
@@ -102,20 +100,6 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
 - (NSDate *)previousMonthDate {
     NSDateComponents *components = [[NSDateComponents alloc] init];
     components.month = -1;
-    NSDate *previousMonthDate = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:self.seletedDate options:NSCalendarMatchStrictly];
-    return previousMonthDate;
-}
-// 获取下一天
-- (NSDate *)nextDayDate {
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    components.day = 1;
-    NSDate *nextMonthDate = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:self.seletedDate options:NSCalendarMatchStrictly];
-    return nextMonthDate;
-}
-// 获取前一天
-- (NSDate *)previousDayDate {
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    components.day = -1;
     NSDate *previousMonthDate = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:self.seletedDate options:NSCalendarMatchStrictly];
     return previousMonthDate;
 }
@@ -208,7 +192,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
 #pragma mark - UICollectionDatasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    // 最多有31天、 展示5列数据 x 7天
+    // 最多有31天、 展示7列 * 5周
     return 35;
     
 }
@@ -222,8 +206,11 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     cell.dayLabel.textColor = [UIColor blackColor];
     cell.selectView.hidden = YES;
     
+    // 获取date当前月的第一天是星期几
     NSInteger firstWeekday = [self weekdayOfFirstDayInDate];
+    // 获取date当前月的第一天是星期几
     NSInteger totalDaysOfMonth = [self totalDaysInMonthOfDate:self.seletedDate];
+    //  获取date当前月的总天数
     NSInteger totalDaysOfLastMonth = [self totalDaysInMonthOfDate:[self previousMonthDate]];
     
     // cell点击变色
@@ -232,51 +219,51 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     
     if (indexPath.row < firstWeekday) {// 小于这个月的第一天
 
-        cell.dayLabel.text = nil;
-        cell.userInteractionEnabled = NO;
+//        cell.dayLabel.text = nil;
+//        cell.userInteractionEnabled = NO;
         
-//        cell.selectedBackgroundView = nil;
-//
-//        NSInteger day = totalDaysOfLastMonth - firstWeekday + indexPath.row + 1;
-//        cell.dayLabel.text = [NSString stringWithFormat:@"%ld", day];
-//
-//        int compareDataNum = [YBObjectTool compareDateWithSelectDate:[self getCurrentData:indexPath]];
-//        if (compareDataNum==0) {// 当前
-//            
-//            cell.dayLabel.textColor = RGB_Color(31, 124, 235);
-//
-//        }else if (compareDataNum==1){// 大于当前日期
-//            
-//            cell.dayLabel.textColor = [UIColor blackColor];
-//            
-//        }else if (compareDataNum==-1){// 小于当前日期
-//            
-//            cell.dayLabel.textColor = [UIColor grayColor];
-//            
-//        }
+        cell.selectedBackgroundView = nil;
+
+        NSInteger day = totalDaysOfLastMonth - firstWeekday + indexPath.row + 1;
+        cell.dayLabel.text= [NSString stringWithFormat:@"%ld\n%ld", day,(long)indexPath.row];
+
+        int compareDataNum = [YBObjectTool compareDateWithSelectDate:[self getCurrentData:indexPath]];
+        if (compareDataNum==0) {// 当前
+            
+            cell.dayLabel.textColor = RGB_Color(31, 124, 235);
+
+        }else if (compareDataNum==1){// 大于当前日期
+            
+            cell.dayLabel.textColor = [UIColor blackColor];
+            
+        }else if (compareDataNum==-1){// 小于当前日期
+            
+            cell.dayLabel.textColor = [UIColor grayColor];
+            
+        }
         
     } else if (indexPath.row >= totalDaysOfMonth + firstWeekday) {    // 大于这个月的最后一天
         
-        cell.dayLabel.text = nil;
-        cell.userInteractionEnabled = NO;
-        
-//        NSInteger day = indexPath.row - totalDaysOfMonth - firstWeekday + 1;
-//        cell.dayLabel.text = [NSString stringWithFormat:@"%ld", day];
-//
-//        int compareDataNum = [YBObjectTool compareDateWithSelectDate:[self getCurrentData:indexPath]];
-//        if (compareDataNum==0) {// 当前
-//            
-//            cell.dayLabel.textColor = RGB_Color(31, 124, 235);
-//
-//        }else if (compareDataNum==1){// 大于当前日期
-//            
-//            cell.dayLabel.textColor = [UIColor blackColor];
-//            
-//        }else if (compareDataNum==-1){// 小于当前日期
-//            
-//            cell.dayLabel.textColor = [UIColor grayColor];
-//            
-//        }
+//        cell.dayLabel.text = nil;
+//        cell.userInteractionEnabled = NO;
+
+        NSInteger day = indexPath.row - totalDaysOfMonth - firstWeekday + 1;
+        cell.dayLabel.text= [NSString stringWithFormat:@"%ld\n%ld", day,(long)indexPath.row];
+
+        int compareDataNum = [YBObjectTool compareDateWithSelectDate:[self getCurrentData:indexPath]];
+        if (compareDataNum==0) {// 当前
+            
+            cell.dayLabel.textColor = RGB_Color(31, 124, 235);
+
+        }else if (compareDataNum==1){// 大于当前日期
+            
+            cell.dayLabel.textColor = [UIColor blackColor];
+            
+        }else if (compareDataNum==-1){// 小于当前日期
+            
+            cell.dayLabel.textColor = [UIColor grayColor];
+            
+        }
 
     } else {// 属于当前选择的这个月
         
@@ -284,7 +271,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
 
         NSInteger day = indexPath.row - firstWeekday + 1;
         
-        cell.dayLabel.text= [NSString stringWithFormat:@"%ld", day];
+        cell.dayLabel.text= [NSString stringWithFormat:@"%ld\n%ld", day,(long)indexPath.row];
         
         int compareDataNum = [YBObjectTool compareDateWithSelectDate:[self getCurrentData:indexPath]];
         if (compareDataNum==0) {// 当前
@@ -413,8 +400,8 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
     }
     
     self.selectIndex = indexPath.row;
-//    [self changeDate];
-    [self.collectionView reloadData];
+    [self changeDate];
+//    [self.collectionView reloadData];
 
 }
 
