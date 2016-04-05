@@ -28,6 +28,9 @@
     
     headerView.contentView.backgroundColor = [UIColor whiteColor];
     
+    
+
+    
     // 3.如果缓存池中没有可重用的haderView时,手动创建headerView,并绑定重用标识
     if (headerView == nil) {
         headerView = [[JZExamHeaderView alloc] initWithReuseIdentifier:ID];
