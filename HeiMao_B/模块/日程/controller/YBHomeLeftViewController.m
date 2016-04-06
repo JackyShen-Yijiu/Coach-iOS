@@ -174,6 +174,7 @@
     self.headView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, calendarH)];
     self.headView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.headView];
+    
     self.headView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.headView.layer.shadowOffset = CGSizeMake(0, 2);
     self.headView.layer.shadowOpacity = 0.036;
