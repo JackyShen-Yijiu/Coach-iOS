@@ -82,7 +82,12 @@ static NSString *const kuserType = @"usertype";
 - (UIImageView *)logoImageView {
     if (_logoImageView == nil) {
         _logoImageView = [[UIImageView alloc] init];
-        _logoImageView.image = [UIImage imageNamed:@"YBLoginbg_image"];
+        NSString *names = [NSString stringWithFormat:@"YBLoginbg_image"];
+        if (YBIphone5) {
+            names = @"YBLoginbg_image5s";
+        }
+        _logoImageView.image = [UIImage imageNamed:names];
+//        _logoImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _logoImageView;
 }
@@ -378,7 +383,7 @@ static NSString *const kuserType = @"usertype";
 
     [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.backGroundView.mas_bottom).with.offset(11);
-        make.left.mas_equalTo(self.backGroundView.mas_left).offset(20);
+        make.left.mas_equalTo(self.backGroundView.mas_left).offset(30);
         make.right.mas_equalTo(self.backGroundView.mas_right);
     }];
     [self.messageImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -423,8 +428,10 @@ static NSString *const kuserType = @"usertype";
             NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
             
             if (type.integerValue != 1) {
-                ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
-                [alerview show];
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:msg delegate:self cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+                [alert show];
+                
             }else{
                 [ws.phoneNumTextField resignFirstResponder];
                 [ws.passwordTextField becomeFirstResponder];
