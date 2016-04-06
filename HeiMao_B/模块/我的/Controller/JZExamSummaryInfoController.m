@@ -127,7 +127,7 @@
            
             self.noDataView.hidden = NO;
             
-            self.noDataView.noDataLabel.text = @"网络错误";
+            self.noDataView.noDataLabel.text = @"网络出错啦，请查看网络后再次尝试";
 
         }
 
@@ -136,7 +136,7 @@
        
         self.noDataView.hidden = NO;
         
-        self.noDataView.noDataLabel.text = @"网络错误";
+        self.noDataView.noDataLabel.text = @"网络出错啦，请查看网络后再次尝试";
         
     }];
     

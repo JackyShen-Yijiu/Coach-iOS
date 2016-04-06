@@ -229,28 +229,32 @@ static NSString *addStuCellID = @"addStuCellID";
 
             }else{
                 
+                self.navigationItem.rightBarButtonItem.customView.hidden=YES;
 
                  self.tableView.hidden = YES;
                 
                 self.noDataView.hidden = NO;
+                self.noDataView.noDataLabel.text = @"您暂时没有可预约的学员";
 
             }
             
         }else{
+            self.navigationItem.rightBarButtonItem.customView.hidden=YES;
            
             self.tableView.hidden = YES;
             self.noDataView.hidden = NO;
+            self.noDataView.noDataLabel.text = @"您暂时没有可预约的学员";
         }
 
      
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
 //           [self showTotasViewWithMes:@"网络错误"];
-        
+        self.navigationItem.rightBarButtonItem.customView.hidden=YES;
 
         self.noDataView.hidden = NO;
          self.tableView.hidden = YES;
-        self.noDataView.noDataLabel.text = @"网络错误";
+        self.noDataView.noDataLabel.text = @"网络出错啦，请查看网络后再次尝试";
 
 
     NSLog(@"LKAddStudentTimeViewController--数据获取出错，错误:%@",error);
