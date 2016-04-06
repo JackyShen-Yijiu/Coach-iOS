@@ -84,10 +84,9 @@ static NSString *const kuserType = @"usertype";
         _logoImageView = [[UIImageView alloc] init];
         NSString *names = [NSString stringWithFormat:@"YBLoginbg_image"];
         if (YBIphone5) {
-            names = @"YBLoginbg_image5s";
+            names = [NSString stringWithFormat:@"%@",@"YBLoginbg_image5s"];
         }
         _logoImageView.image = [UIImage imageNamed:names];
-//        _logoImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _logoImageView;
 }
@@ -346,9 +345,13 @@ static NSString *const kuserType = @"usertype";
 #pragma make - 自动布局
     
     
+    CGFloat height = 275;
+    if (YBIphone5) {
+        height = 235;
+    }
     [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view.mas_top);
-        make.height.mas_equalTo(@275);
+        make.height.mas_equalTo(height);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
     }];
