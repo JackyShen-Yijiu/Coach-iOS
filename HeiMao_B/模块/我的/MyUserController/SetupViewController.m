@@ -320,6 +320,10 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
                             // 回到主线程进行显示
                             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"清除成功" controller:self];
                             [alerview show];
+                            NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:1];
+                           [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+                            
+
                         });
 
                     });
