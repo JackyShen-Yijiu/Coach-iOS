@@ -77,7 +77,8 @@
         _gainNum.backgroundColor = JZ_BlueColor;
         [_gainNum addTarget:self action:@selector(dealSend:) forControlEvents:UIControlEventTouchUpInside];
         _gainNum.titleLabel.font = [UIFont systemFontOfSize:14];
-        
+        _gainNum.layer.masksToBounds = YES;
+        _gainNum.layer.cornerRadius = 4;
         [_gainNum setTitle:@"获取验证码" forState:UIControlStateNormal];
     }
     return _gainNum;

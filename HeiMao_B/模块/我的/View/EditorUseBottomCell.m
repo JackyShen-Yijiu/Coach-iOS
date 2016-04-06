@@ -85,7 +85,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.text = @"更换头像";
         _titleLabel.font = [UIFont systemFontOfSize:14];
-        _titleLabel.textColor  = JZ_FONTCOLOR_LIGHT;
+        _titleLabel.textColor  = JZ_FONTCOLOR_DRAK;
     }
     return _titleLabel;
 }

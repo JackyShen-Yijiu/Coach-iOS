@@ -10,8 +10,6 @@
 #import "RefreshTableView.h"
 #import "HMCourseModel.h"
 #import "CourseSummaryListCell.h"
-#import "JGvalidationView.h"
-
 #import "CourseDetailViewController.h"
 #import "NoContentTipView.h"
 #import "WMUITool.h"
@@ -19,13 +17,11 @@
 #import "UINavigationBar+JGNavigationBar.h"
 #import "SearchCourseViewController.h"
 #import <AVFoundation/AVFoundation.h>
-
 #import "DVVStudentListController.h"
 #import "DVVSendMessageToStudentController.h"
 #import "BLPFAlertView.h"
 
 @interface YBHomeRightViewController () <UITableViewDataSource,UITableViewDelegate,RFSegmentViewDelegate>
-
 
 @property(nonatomic,strong)RefreshTableView * courseSummaryTableView;
 

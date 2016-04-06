@@ -119,7 +119,7 @@
     // 开始时间
     self.coureBeginTime.translatesAutoresizingMaskIntoConstraints = NO;
     [self.coureBeginTime mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.coureStudentCollectionView.mas_top).offset(5);
+        make.top.mas_equalTo(self.coureStudentCollectionView.mas_top).offset(10);
         make.left.mas_equalTo(5);
         make.width.mas_equalTo(50);
         make.height.mas_equalTo(20);
@@ -351,15 +351,13 @@
         int compareDataNum = [YBObjectTool compareHMSDateWithBegintime:[NSString getLocalDateFormateUTCDate:_model.coursebegintime] endtime:[NSString getLocalDateFormateUTCDate:_model.courseendtime]];
         
         if (compareDataNum==0) {
-//            cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
-            cell.iconImageView.image = [UIImage imageNamed:@"JZCoursenull_student"];
+            cell.iconImageView.image = [UIImage imageNamed:@""];
             cell.userInteractionEnabled = NO;
         }else if (compareDataNum==-1){
-            cell.iconImageView.image = [UIImage imageNamed:@"JZCoursenull_student"];
+            cell.iconImageView.image = [UIImage imageNamed:@""];
             cell.userInteractionEnabled = NO;
         }else if (compareDataNum==1){
             cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
-
         }
         
     }
