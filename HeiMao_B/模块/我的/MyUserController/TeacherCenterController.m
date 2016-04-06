@@ -49,9 +49,6 @@
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
        
-        //_dataArray = @[@[@"所属驾校",@"训练场地",@"工作时间",@"可授科目",@"班型设置"],@[@"休假",@"学员列表",@"钱包"],@[@"设置"]];
-        
-//        _dataArray = @[@[@"所属驾校",@"工作性质",@"训练场地",@"工作时间",@"可授科目",@"授课班型"],@[@"休假",@"学员列表",@"设置"],@[@"钱包"]];
          _dataArray = @[@[@"所属驾校",@"工作性质",@"授课班型"],@[@"休假",@"学员列表",@"设置"],@[@"钱包"]];
 
     }
@@ -60,7 +57,6 @@
 
 - (NSArray *)imageArray {
     if (_imageArray == nil) {
-//        _imageArray = @[@[@"dependSchool.png",@"workPropertyImg.png",@"studyGround.png",@"workTime.png",@"teachSubject.png",@"sendMeet.png"],@[@"rest.png",@"studentList.png",@"setting.png"],@[@"wallet.png"]];
          _imageArray = @[@[@"dependSchool.png",@"workPropertyImg.png",@"sendMeet.png"],@[@"rest.png",@"studentList.png",@"setting.png"],@[@"wallet.png"]];
     }
     return _imageArray;
@@ -155,18 +151,6 @@
             [self workTypeButtonClick];
             NSLog(@"工作性质");
         }
-//            else if (indexPath.section == 0 && indexPath.row == 2) {// @"训练场地"
-//            if ([UserInfoModel defaultUserInfo].schoolId) {
-//                TrainingGroundViewController *training = [[TrainingGroundViewController alloc] init];
-//                [self.navigationController pushViewController:training animated:YES];
-//            }
-//        }else if (indexPath.section == 0 && indexPath.row == 3) {// @"工作时间"
-//            WorkTimeViewController *workTime = [[WorkTimeViewController alloc] init];
-//            [self.navigationController pushViewController:workTime animated:YES];
-//        }else if (indexPath.section == 0 && indexPath.row == 4) {// @"可授科目"
-//            TeachSubjectViewController *teach = [[TeachSubjectViewController alloc] init];
-//            [self.navigationController pushViewController:teach animated:YES];
-//        }
             else if (indexPath.section == 0 && indexPath.row == 2) {// @"授课班型"
             ExamClassViewController *examClass = [[ExamClassViewController alloc] init];
             [self.navigationController pushViewController:examClass animated:YES];
@@ -183,8 +167,6 @@
         else if (indexPath.section == 2 && indexPath.row == 0) {// @"钱包"
             MyWalletViewController *myWallet = [[MyWalletViewController alloc] init];
             [self.navigationController pushViewController:myWallet animated:YES];
-//            YBSignUpStudentListController *myWallet = [[YBSignUpStudentListController alloc] init];
-//                        [self.navigationController pushViewController:myWallet animated:YES];
         }
         
     }
@@ -261,74 +243,6 @@
     NSString *workProperty = [WorkTypeModel converTypeToString:coachtype];
     NSLog(@"workProperty:%@",workProperty);
     
-//    // 训练场地
-//    NSString * trainName = [[UserInfoModel defaultUserInfo].trainfieldlinfo objectStringForKey:@"name"];
-//    NSLog(@"trainName:%@",trainName);
-//    if (trainName==nil) {
-//        trainName = @"未设置";
-//    }
-//    
-//    // 工作时间
-//    NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
-//    
-//    NSLog(@"weekArray:%@",weekArray);
-//    NSLog(@"weekArray.count:%lu",weekArray.count);
-//    
-//    BOOL isInclude = [weekArray containsObject:@(7)];
-//    NSLog(@"isInclude:%d",isInclude);
-//    if (isInclude) {
-//        NSMutableArray *tempArray = [NSMutableArray arrayWithArray:weekArray];
-//        [tempArray removeObject:@(7)];
-//        weekArray = tempArray;
-//        [UserInfoModel defaultUserInfo].workweek = weekArray;
-//    }
-//    
-//    NSString * workSetDes = @"未设置";
-//    
-//    if (weekArray) {
-//        
-//        NSArray *newArray = [self bubbleSort:weekArray];
-//        NSLog(@"newArray:%@",newArray);
-//        for (int i = 0;i<newArray.count;i++) {
-//            NSLog(@"i:%d",[newArray[i] intValue]);
-//        }
-//        
-//        if (newArray && newArray.count>0) {
-//            
-//            NSMutableString *mutableStr = [NSMutableString string];
-//            
-//            if (newArray.count==7) {
-//                
-//                [mutableStr appendString:@"周一至周日"];
-//                
-//            }else{
-//                
-//                for (int i = 0; i<newArray.count; i++) {
-//                    
-//                    NSString *endDate = [NSString stringWithFormat:@"%@",[self dateStringWithDateNumber:[newArray[i] integerValue]]];
-//                    [mutableStr appendString:endDate];
-//                    
-//                }
-//                
-//            }
-//            
-//            workSetDes = mutableStr;
-//            
-//        }
-//        
-//    }
-//    
-//    //可授科目
-//    NSArray *array = [UserInfoModel defaultUserInfo].subject;
-//    NSMutableString *string = [[NSMutableString alloc] init];
-//    if (array.count == 0) {
-//        [string appendString:@"未设置"];
-//    }else if(array.count == 1){
-//        [string appendString:[[array firstObject] objectForKey:@"name"]];
-//    }else{
-//        [string appendString:@"已设置"];
-//    }
-    
     //班型设置
     NSString * carName =  [[UserInfoModel defaultUserInfo] setClassMode] ? @"已设置" : @"未设置";
     NSDictionary *carmodel = [UserInfoModel defaultUserInfo].carmodel;
@@ -347,9 +261,6 @@
     self.displayArray = @[@[
                             [self strTolerance:driveSname],//"所属驾校"
                             [self strTolerance:workProperty],//new - "工作性质"
-//                            [self strTolerance:trainName],//"训练场地"
-//                            [self strTolerance:workSetDes],//"工作时间"
-//                            [self strTolerance:string],//"可授科目"
                             [self strTolerance:carName]//"班型设置"
                           ],
                           @[
