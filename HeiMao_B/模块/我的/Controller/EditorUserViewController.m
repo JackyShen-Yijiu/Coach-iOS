@@ -39,6 +39,7 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 #define KpickViewH  200
+#define ktitleViewH 45
 
 
 @interface EditorUserViewController ()<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
@@ -65,7 +66,16 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 @property (nonatomic, strong) UILabel *footerLabel;
 
 // 教龄选择器
+
 @property (nonatomic, strong) UIView *bgView;
+
+@property (nonatomic, strong) UIView *bgPick;
+
+@property (nonatomic, strong) UILabel *teachageLabel;
+
+@property (nonatomic, strong) UIButton *sureButton;
+
+@property (nonatomic, strong) UIView *lineView;
 
 @property (nonatomic, strong) UIPickerView *pickerView;
 
@@ -136,12 +146,49 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 }
 - (UIPickerView *)pickerView {
     if (_pickerView == nil) {
-        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0 , self.view.height - KpickViewH, self.view.width, KpickViewH)];
+        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0 , CGRectGetMaxY(self.bgPick.frame), self.view.width, KpickViewH - ktitleViewH)];
         _pickerView.delegate = self;
         _pickerView.dataSource = self;
         _pickerView.backgroundColor = [UIColor whiteColor];
     }
     return _pickerView;
+}
+- (UIView *)bgPick{
+    if (_bgPick == nil) {
+        _bgPick = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height - KpickViewH , self.view.width, ktitleViewH)];
+        _bgPick.backgroundColor = [UIColor whiteColor];
+        _bgPick.userInteractionEnabled = YES;
+    }
+    return _bgPick;
+}
+- (UILabel *)teachageLabel{
+    if (_teachageLabel == nil) {
+        _teachageLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, 44)];
+        _teachageLabel.font = [UIFont systemFontOfSize:14];
+        _teachageLabel.textColor  = JZ_FONTCOLOR_DRAK;
+        _teachageLabel.text = @"教龄";
+    }
+    return _teachageLabel;
+}
+- (UIButton *)sureButton{
+    if (_sureButton == nil) {
+        _sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _sureButton.frame = CGRectMake(self.view.width - 20 - 50, 0, 50, 44);
+        _sureButton.backgroundColor = [UIColor clearColor];
+        [_sureButton addTarget:self action:@selector(didClickSure:) forControlEvents:UIControlEventTouchUpInside];
+        [_sureButton setTitleColor:JZ_BlueColor forState:UIControlStateNormal];
+        [_sureButton setTitle:@"确定" forState:UIControlStateNormal];
+        _sureButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        
+    }
+    return _sureButton;
+}
+- (UIView *)lineView{
+    if (_lineView == nil) {
+        _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bgPick.height - 1, self.view.width, 1)];
+        _lineView.backgroundColor = HM_LINE_COLOR;
+    }
+    return _lineView;
 }
 
 - (NSArray *)detailDataArray {
@@ -378,13 +425,10 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 }
 #pragma mark --- 手势方法
 - (void)removeView{
-    
-    // 当教龄改变时向服务器提交修改数据
-    if ([self.resultAgeStr integerValue] != [UserInfoModel defaultUserInfo].Seniority) {
-        [self commintCoachAgeData];
-    }
     [self.bgView removeFromSuperview];
     [self.pickerView removeFromSuperview];
+    [self.bgPick removeFromSuperview];
+
     
 }
 - (void)startAddData{
@@ -448,6 +492,18 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 //    NSIndexPath *path = [NSIndexPath indexPathForRow:6 inSection:1];
 //    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 //}
+
+#pragma mark ---- Action
+- (void)didClickSure:(UIButton *)btn{
+    // 当教龄改变时向服务器提交修改数据
+    if ([self.resultAgeStr integerValue] != [UserInfoModel defaultUserInfo].Seniority) {
+        [self commintCoachAgeData];
+    }
+    [self.bgView removeFromSuperview];
+    [self.pickerView removeFromSuperview];
+    [self.bgPick removeFromSuperview];
+
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 4;
@@ -536,6 +592,11 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     if (2 == indexPath.section && 1 == indexPath.row) {
         [self.view addSubview:self.pickerView];
         [self.view addSubview:self.bgView];
+        [self.view addSubview:self.bgPick];
+        [self.bgPick addSubview:self.teachageLabel];
+        [self.bgPick addSubview:self.sureButton];
+        [self.bgPick addSubview:self.lineView];
+        
 
         
     }
