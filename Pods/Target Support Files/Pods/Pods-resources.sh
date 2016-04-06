@@ -60,10 +60,12 @@ install_resource()
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/Resources/mapapi.bundle"
   install_resource "EaseMobSDKFull/EaseMobSDKFull/resources/EaseMob.bundle"
+  install_resource "IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/Resources/mapapi.bundle"
   install_resource "EaseMobSDKFull/EaseMobSDKFull/resources/EaseMob.bundle"
+  install_resource "IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle"
 fi
 
 mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

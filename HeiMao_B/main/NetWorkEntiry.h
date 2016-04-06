@@ -13,6 +13,14 @@
 
 @interface NetWorkEntiry : NSObject
 
+// 发送验证码 GET /userinfo/coachmobileverification
++ (void)newGetSMSCodeWithPhotNUmber:(NSString *)number
+                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+// 登陆 POST /userinfo/coachloginbycode
++ (void)newloginWithPhotoNumber:(NSString *)photoNumber code:(NSString *)code
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  *  登陆模块

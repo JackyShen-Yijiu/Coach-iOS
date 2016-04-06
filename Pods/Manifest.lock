@@ -26,6 +26,7 @@ PODS:
   - ChameleonFramework/Default (2.0.4)
   - EaseMobSDKFull (2.1.7)
   - HappyDNS (0.2.3)
+  - IQKeyboardManager (3.3.7)
   - JSONKit (1.5pre)
   - Mantle (2.0.6):
     - Mantle/extobjc (= 2.0.6)
@@ -47,6 +48,7 @@ DEPENDENCIES:
   - BaiduMapKit
   - ChameleonFramework
   - EaseMobSDKFull
+  - IQKeyboardManager
   - JSONKit (~> 1.5pre)
   - Mantle (~> 2.0.5)
   - Masonry
@@ -64,6 +66,7 @@ SPEC CHECKSUMS:
   ChameleonFramework: 5abe69b1f2a6cc79c3c435fcd9d3d855748225ee
   EaseMobSDKFull: 43858ca9a62bbe1fa4c7c006f944a3e52a4bff48
   HappyDNS: 6d85942e64c28b4fa61f8c76580398f52d6d1d11
+  IQKeyboardManager: 249c3946acf61345c18b038eb50863fe2793e3a8
   JSONKit: bae313ce6a6c444f40489a6c0b023f399888871f
   Mantle: 299966b00759634931699f69cb6a30b9239b944d
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
