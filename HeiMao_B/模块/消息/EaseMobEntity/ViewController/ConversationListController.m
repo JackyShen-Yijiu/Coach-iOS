@@ -124,12 +124,13 @@
             
             ChatViewController *chatController = [[ChatViewController alloc] initWithConversationChatter:conversation.chatter conversationType:conversation.conversationType];
             
-            NSDictionary * ext = [[conversationModel conversation] ext];
-            NSLog(@"获取用户信息ext:%@",ext);
-            NSString * title = [ext objectStringForKey:@"nickName"];
+//            NSDictionary * ext = [[conversationModel conversation] ext];
+//            NSLog(@"获取用户信息ext:%@",ext);
+//            NSString * title = [ext objectStringForKey:@"nickName"];
 //            NSString * ava = [ext objectStringForKey:@"headUrl"];
 //            NSString * userId = [ext objectStringForKey:@"userId"];
-            chatController.title = title;
+            NSString *name = [JGUserTools getNickNameByEMUserName:conversation.chatter];
+            chatController.title = name;
             [self.myNavController pushViewController:chatController animated:YES];
             
         }

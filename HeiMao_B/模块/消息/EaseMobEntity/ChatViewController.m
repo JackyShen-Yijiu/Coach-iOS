@@ -147,7 +147,7 @@
         
         // Configure the cell...
         if (sendCell == nil) {
-            sendCell = [[CustomMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier model:model];
+            sendCell = [[CustomMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier  model:model];
             sendCell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         sendCell.model = model;

@@ -392,7 +392,7 @@ static NSString *const kuserType = @"usertype";
     
     [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.backGroundView.mas_bottom).with.offset(11);
-        make.left.mas_equalTo(self.messageImg.mas_right).offset(10);
+        make.left.mas_equalTo(self.messageImg.mas_right).offset(5);
         make.right.mas_equalTo(self.backGroundView.mas_right);
     }];
     
