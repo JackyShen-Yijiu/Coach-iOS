@@ -335,8 +335,11 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
         }
         if (1 == indexPath.row) {
             // 关于我们
-            AboutUsViewController *about = [[AboutUsViewController alloc] init];
-            [self.navigationController pushViewController:about animated:YES];
+            [self goToAppStore];
+//            NSString *str = @"https://itunes.apple.com/us/app/ji-zhi-jiao-lian/id1089530725?l=zh&ls=1&mt=8";
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+//            AboutUsViewController *about = [[AboutUsViewController alloc] init];
+//            [self.navigationController pushViewController:about animated:YES];
 
         }
         if (2 == indexPath.row) {
