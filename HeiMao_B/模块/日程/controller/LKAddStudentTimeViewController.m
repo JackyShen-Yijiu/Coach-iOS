@@ -149,11 +149,11 @@ static NSString *addStuCellID = @"addStuCellID";
             [timeViewItem.selectButton setTitle:@"已满" forState:UIControlStateNormal];
             [timeViewItem.selectButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
             
-            self.navigationItem.hidesBackButton = YES;
-            self.navigationItem.rightBarButtonItem.customView.hidden=YES;
+//            self.navigationItem.hidesBackButton = YES;
+//            self.navigationItem.rightBarButtonItem.customView.hidden=YES;
             
             
-            [self.tableView setUserInteractionEnabled:NO];
+//            [self.tableView setUserInteractionEnabled:NO];
         }
         
         
