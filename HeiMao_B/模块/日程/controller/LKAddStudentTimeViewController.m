@@ -128,20 +128,24 @@ static NSString *addStuCellID = @"addStuCellID";
         
         YBCourseData *data = self.dataArray[i];
         
+//        data.selectedstudentcount
+//        data.coursestudentcount
+
+        NSLog(@"data.selectedstudentcount==%zd,data.coursestudentcount==%zd",data.selectedstudentcount, data.coursestudentcount);
+        
+        
         data.indexPath = i;
         
-        if ((self.courseStudentCountInt - self.selectedstudentconutInt) > 0) {
+        if (( data.coursestudentcount - data.selectedstudentcount) > 0) {
             
             
             [timeViewItem.selectButton setImage:[UIImage imageNamed:@"sendmsg_normal_icon"] forState:UIControlStateNormal];
             
             
             [timeViewItem.selectButton setImage:[UIImage imageNamed:@"sendmsg_selected_icon"] forState:UIControlStateSelected];
+
             
-            NSLog(@"看看打印了什么%zd+++++++%zd",self.courseStudentCountInt,self.selectedstudentconutInt);
-            
-            
-        }else if ((self.courseStudentCountInt - self.selectedstudentconutInt) <= 0){
+        }else if ((data.coursestudentcount - data.selectedstudentcount) <= 0){
             [timeViewItem.selectButton setTitle:@"已满" forState:UIControlStateNormal];
             [timeViewItem.selectButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
             
