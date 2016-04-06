@@ -160,6 +160,21 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
     cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     cell.textLabel.textColor = [UIColor blackColor];
+    
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(150, 0, self.view.width - 150 - 30, 44)];
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES)lastObject];
+            CGFloat sizeF = [self folderSizeAtPath:path];
+            NSString *message = [NSString stringWithFormat:@"%.2fM",sizeF];
+            label.text = message;
+            label.textColor = [UIColor colorWithHexString:@"b7b7b7"];
+            label.font = [UIFont systemFontOfSize:12];
+            label.textAlignment = NSTextAlignmentRight;
+            [cell addSubview:label];
+        }
+    }
+
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.section == 0) {
         UISwitch *switchControl = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 45, 20)];
@@ -193,6 +208,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
             }
         }
         cell.accessoryView = switchControl;
+        
         [switchControl addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
 
     }
