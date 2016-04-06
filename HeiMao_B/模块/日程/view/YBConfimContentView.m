@@ -338,6 +338,7 @@
         NSDictionary *param = responseObject;
         if ([param[@"type"] integerValue] == 1) {
             [self.parentViewController showTotasViewWithMes:@"评论成功"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kCompletionComfiromatton object:nil];
             
         }else{
             [self.parentViewController showTotasViewWithMes:@"网络错误"];

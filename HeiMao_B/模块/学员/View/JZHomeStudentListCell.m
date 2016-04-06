@@ -86,7 +86,7 @@
     [self.phoneButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
         make.right.mas_equalTo(self.contentView.mas_right).offset(-16);
-        make.height.mas_equalTo(@32);
+        make.height.mas_equalTo(@64);
          make.width.mas_equalTo(@32);
         
         
@@ -175,7 +175,7 @@
         _phoneButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_phoneButton setImage:[UIImage imageNamed:@"JZCoursephone"] forState:UIControlStateNormal];
         [_phoneButton addTarget:self action:@selector(didClickStudentListCell:) forControlEvents:UIControlEventTouchUpInside];
-        [_phoneButton setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+        [_phoneButton setImageEdgeInsets:UIEdgeInsetsMake(24, 8, 24, 8)];
         _phoneButton.tag = 501;
 //        _phoneButton.backgroundColor = [UIColor grayColor];
     }

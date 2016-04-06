@@ -14,12 +14,17 @@
 #import "YBCourseData.h"
 #import "ChineseString.h"
 #import "BLInformationManager.h"
+#import "LKAddStudentNoDataView.h"
 
 static NSString *addStuCellID = @"addStuCellID";
 
 @interface LKAddStudentTimeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
+/// 时间小控件
 @property (nonatomic, strong) LKAddStudentTimeView *timeViewItem;
+
+@property (nonatomic, strong) LKAddStudentNoDataView *noDataView;
+
 @property (nonatomic, strong) UIView *timeView;
 ///  记录选中的cell
 @property (nonatomic, strong) NSMutableArray *selectedRows;
@@ -42,9 +47,6 @@ static NSString *addStuCellID = @"addStuCellID";
 @property (nonatomic, copy) NSString * begintime;
 /// 结束时间
 @property (nonatomic, copy) NSString * endtime;
-
-
-
 /// 添加学员数据
 @property (nonatomic, strong) NSMutableArray *arrMData;
 
@@ -68,8 +70,11 @@ static NSString *addStuCellID = @"addStuCellID";
     
     self.selectedIndexPaths = [NSMutableArray array];
     
+    
     self.view.backgroundColor = [UIColor whiteColor];
     UIView *timeView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, 92)];
+    
+    
     
     [self.view addSubview:timeView];
     
@@ -79,7 +84,6 @@ static NSString *addStuCellID = @"addStuCellID";
     UITableView  *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64 + 92, [UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height-64-92)];
     
     self.tableView = tableView;
-    
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -91,7 +95,12 @@ static NSString *addStuCellID = @"addStuCellID";
     self.selectedRows = [NSMutableArray array];
 
     self.tableView.rowHeight = 80;
+    
+    
+    self.noDataView = [[LKAddStudentNoDataView alloc]initWithFrame:CGRectMake(0, 64 + 92, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64 - 92)];
 
+    self.noDataView.hidden = YES;
+    [self.view addSubview:self.noDataView];
 
     self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"添加" highTitle:@"添加" target:self action:@selector(addStudent) isRightItem:YES];
 
@@ -181,11 +190,17 @@ static NSString *addStuCellID = @"addStuCellID";
         
         id result = responseObject;
         
+        NSLog(@"有数据吗有数据吗-%@",(NSDictionary *)result);
+        
         NSDictionary *param = responseObject;
         if ([param[@"type"] integerValue] == 1) {
             
             
             NSArray *stundentData = result[@"data"];
+            
+            if (stundentData.count) {
+                
+
             
             for (NSDictionary *dict in stundentData) {
                 
@@ -213,13 +228,31 @@ static NSString *addStuCellID = @"addStuCellID";
             [self.tableView reloadData];
 
             }else{
-                [self showTotasViewWithMes:@"暂无数据"];
+                
+
+                 self.tableView.hidden = YES;
+                
+                self.noDataView.hidden = NO;
+
             }
+            
+        }else{
+           
+            self.tableView.hidden = YES;
+            self.noDataView.hidden = NO;
+        }
 
      
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-           [self showTotasViewWithMes:@"网络错误"];
+//           [self showTotasViewWithMes:@"网络错误"];
+        
+
+        self.noDataView.hidden = NO;
+         self.tableView.hidden = YES;
+        self.noDataView.noDataLabel.text = @"网络错误";
+
+
     NSLog(@"LKAddStudentTimeViewController--数据获取出错，错误:%@",error);
         
     }];
@@ -285,7 +318,7 @@ static NSString *addStuCellID = @"addStuCellID";
     [cell.callStudentButton addTarget:self action:@selector(callStudentButtonClick:) forControlEvents:UIControlEventTouchUpInside];
    
     
-    [cell.studentIconView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"JZCoursenull_student"]];
+    [cell.studentIconView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"JZCoursehead_null"]];
     
     return cell;
 }
@@ -586,6 +619,7 @@ static NSString *addStuCellID = @"addStuCellID";
     }
     return _dataDict;
 }
+
 
 
 @end

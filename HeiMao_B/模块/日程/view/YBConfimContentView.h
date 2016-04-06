@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "JZData.h"
 
+static NSString *kCompletionComfiromatton = @"completionComfiromatton";
 @interface YBConfimContentView : UIView
 @property (nonatomic,strong) UIViewController *parentViewController;
 - (CGFloat)confimContentView:(NSArray *)dataArray model:(JZData *)model;

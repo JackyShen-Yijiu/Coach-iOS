@@ -13,16 +13,31 @@
 #import "JZNopassStudentCell.h"
 #import "JZExamStudentListData.h"
 #import "JZPassStudentListController.h"
+#import "LKAddStudentNoDataView.h"
 
-@interface JZExamSummaryInfoController ()
+@interface JZExamSummaryInfoController ()<UITableViewDelegate,UITableViewDataSource>
+
 @property (nonatomic, strong) NSMutableArray *examInfoData;
 @property (nonatomic, strong) NSMutableArray *examListData;
 
 @property (nonatomic,assign) NSInteger selectHeaderViewTag;
 
+@property (nonatomic, strong) LKAddStudentNoDataView *noDataView;
+
+@property (nonatomic,strong) UITableView *tableView;
+
 @end
 
 @implementation JZExamSummaryInfoController
+
+- (UITableView *)tableView
+{
+    if (_tableView==nil) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+        _tableView.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
+    }
+    return _tableView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,6 +45,9 @@
     self.navigationItem.title = @"考试信息";
     self.tableView.sectionHeaderHeight = 150.5;
 
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // 监听名字为openGroup的通知
@@ -39,6 +57,12 @@
     self.tableView.showsHorizontalScrollIndicator = NO;
     self.view.backgroundColor = RGB_Color(226, 226, 232);
     self.tableView.backgroundColor = RGB_Color(226, 226, 232);
+    [self.view addSubview:self.tableView];
+    
+    self.noDataView = [[LKAddStudentNoDataView alloc]initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)];
+//    self.noDataView.backgroundColor = [UIColor redColor];
+    self.noDataView.hidden = YES;
+    [self.view addSubview:self.noDataView];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
        
@@ -76,6 +100,7 @@
         NSDictionary *param = responseObject;
         
         if ([param[@"type"] integerValue] == 1) {
+            
             NSArray *array = param[@"data"];
             if (array.count) {
                 
@@ -93,22 +118,25 @@
                 [self.tableView reloadData];
                 
             }else{
-    
-            [self showTotasViewWithMes:@"暂无数据"];
-
+             
+                self.noDataView.hidden = NO;
                 
             }
             
         }else{
-            [self showTotasViewWithMes:@"网络错误"];
+           
+            self.noDataView.hidden = NO;
+            
+            self.noDataView.noDataLabel.text = @"网络错误";
+
         }
 
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        
-        [self showTotasViewWithMes:@"网络错误"];
+        self.noDataView.hidden = NO;
         
-        NSLog(@"获取学员的考试消息出错啦，错误信息：%@",error);
+        self.noDataView.noDataLabel.text = @"网络错误";
         
     }];
     

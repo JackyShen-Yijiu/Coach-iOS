@@ -25,7 +25,7 @@
         
 //        self.studyDetilsLabel.text = @"studyDetilsLabel";
         
-        self.studentIconView.image = [UIImage imageNamed:@"JZCoursenull_student"];
+        self.studentIconView.image = [UIImage imageNamed:@"JZCoursehead_null"];
         
         self.studentIconView.layer.cornerRadius = 24;
         
