@@ -142,4 +142,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"hiddenOpenCalendar" object:self];
+}
+
 @end

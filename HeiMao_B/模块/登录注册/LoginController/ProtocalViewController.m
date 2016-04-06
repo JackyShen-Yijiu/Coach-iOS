@@ -91,7 +91,7 @@
     }];
     
     [self.view addSubview:self.goBackButton];
-    NSString *urlString = @"http://www.ifanying.com/coachAgreement.html";
+    NSString *urlString = @"http://www.yibuxueche.com/jzjfcoachgreement.htm";
     
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     
