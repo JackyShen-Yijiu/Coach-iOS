@@ -86,7 +86,7 @@
     
     NSURL *iconUrl = [NSURL URLWithString:userData.headportrait.originalpic];
 
-    [self.studentIcon sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"defoult_por"]];
+    [self.studentIcon sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"JZCoursehead_null"]];
 
     self.StudentScore.textColor = RGB_Color(110, 110, 110);
     
