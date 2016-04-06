@@ -59,6 +59,7 @@
         _commentCountentLabel.textColor = [UIColor grayColor];
         _commentCountentLabel.textAlignment = NSTextAlignmentLeft;
         _commentCountentLabel.text = @"_commentCountentLabel";
+        _commentCountentLabel.numberOfLines = 2;
     }
     return _commentCountentLabel;
 }
@@ -111,6 +112,7 @@
         
         [self.studycountentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.nameLabel.mas_top);
+            make.left.mas_equalTo(self.nameLabel.mas_right).offset(10);
             make.right.mas_equalTo(self.contentView.mas_right).offset(-16);
         }];
         

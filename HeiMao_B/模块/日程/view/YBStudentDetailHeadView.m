@@ -142,10 +142,12 @@
     self.classLabel.text = dmData.data.studentinfo.applyclasstypeinfo.name;
     
     if (dmData.data.studentinfo.subject.subjectid==1) {
-        _stateImageView.image = [UIImage imageNamed:@"progress_bar1"];
+        _stateImageView.image = [UIImage imageNamed:@"progress_bar0"];
     }else if (dmData.data.studentinfo.subject.subjectid==2){
-        _stateImageView.image = [UIImage imageNamed:@"progress_bar2"];
+        _stateImageView.image = [UIImage imageNamed:@"progress_bar1"];
     }else if (dmData.data.studentinfo.subject.subjectid==3){
+        _stateImageView.image = [UIImage imageNamed:@"progress_bar2"];
+    }else if (dmData.data.studentinfo.subject.subjectid==4){
         _stateImageView.image = [UIImage imageNamed:@"progress_bar3"];
     }else if (dmData.data.studentinfo.subject.subjectid==4){
         _stateImageView.image = [UIImage imageNamed:@"progress_bar4"];
