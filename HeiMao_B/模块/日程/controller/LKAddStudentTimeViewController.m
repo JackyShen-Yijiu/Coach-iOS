@@ -235,6 +235,7 @@ static NSString *addStuCellID = @"addStuCellID";
                 
                 self.noDataView.hidden = NO;
                 self.noDataView.noDataLabel.text = @"您暂时没有可预约的学员";
+                self.noDataView.noDataImageView.image = [UIImage imageNamed:@"people_null"];
 
             }
             
@@ -244,6 +245,8 @@ static NSString *addStuCellID = @"addStuCellID";
             self.tableView.hidden = YES;
             self.noDataView.hidden = NO;
             self.noDataView.noDataLabel.text = @"您暂时没有可预约的学员";
+            self.noDataView.noDataImageView.image = [UIImage imageNamed:@"people_null"];
+
         }
 
      
@@ -254,7 +257,8 @@ static NSString *addStuCellID = @"addStuCellID";
 
         self.noDataView.hidden = NO;
          self.tableView.hidden = YES;
-        self.noDataView.noDataLabel.text = @"网络出错啦，请查看网络后再次尝试";
+        self.noDataView.noDataLabel.text = @"";
+        self.noDataView.noDataImageView.image = [UIImage imageNamed:@"net_null"];
 
 
     NSLog(@"LKAddStudentTimeViewController--数据获取出错，错误:%@",error);
@@ -514,15 +518,10 @@ static NSString *addStuCellID = @"addStuCellID";
 #pragma mark - 点击右侧添加学员
 -(void)addStudent {
     
-    
-    
     NSArray *array = [BLInformationManager sharedInstance].appointmentData;
     NSLog(@"%@",array);
     if (array&&array.count==0) {
         [self showTotasViewWithMes:@"请选择预约时间"];
-        
-        
-        
         return;
     }
     

@@ -92,6 +92,9 @@
     [self.coureStudentCollectionView registerClass:[YBAppointMentUserCell class] forCellWithReuseIdentifier:@"YBAppointMentUserCell"];
     self.coureStudentCollectionView.scrollEnabled = NO;
     [self.contentView addSubview:self.coureStudentCollectionView];
+    self.coureStudentCollectionView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hiddenOpenCalendar)];
+    [self.coureStudentCollectionView addGestureRecognizer:tap];
 
     // 底部分割线
     self.bottomLine = [self getOnelineView];
@@ -316,6 +319,11 @@
     cell.stateImageView.hidden = YES;
     cell.alphaView.hidden = YES;
     
+    cell.userInteractionEnabled = YES;
+    cell.tag = indexPath.row;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellDidClick:)];
+    [cell addGestureRecognizer:tap];
+    
     if (_model.coursereservationdetial && _model.coursereservationdetial.count>indexPath.row) {
         
         NSDictionary *dict = _model.coursereservationdetial[indexPath.row];
@@ -351,7 +359,6 @@
             cell.userInteractionEnabled = NO;
         }else if (compareDataNum==1){
             cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
-            cell.userInteractionEnabled = YES;
         }
         
     }
@@ -360,20 +367,22 @@
     
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)cellDidClick:(UITapGestureRecognizer *)tap
 {
     
-    if (_model.coursereservationdetial && _model.coursereservationdetial.count>indexPath.row) {
+    NSUInteger indexPath = tap.view.tag;
+    
+    if (_model.coursereservationdetial && _model.coursereservationdetial.count>indexPath) {
         
-        NSDictionary *dict = _model.coursereservationdetial[indexPath.row];
-
+        NSDictionary *dict = _model.coursereservationdetial[indexPath];
+        
         NSLog(@"跳转学员详情");
         YBStudentDetailsViewController *vc = [[YBStudentDetailsViewController alloc] init];
         vc.studentID = dict[@"userid"][@"_id"];
         [self.parentViewController.navigationController pushViewController:vc animated:YES];
         
     }else{
-       
+        
         
         NSMutableArray *tempArray = [NSMutableArray array];
         for (NSInteger i = self.selectIndex; i<self.dataArray.count; i++) {
@@ -398,9 +407,14 @@
         
         
     }
-  
+    
 }
 
+
+- (void)hiddenOpenCalendar
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"hiddenOpenCalendar" object:self];
+}
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"hiddenOpenCalendar" object:self];

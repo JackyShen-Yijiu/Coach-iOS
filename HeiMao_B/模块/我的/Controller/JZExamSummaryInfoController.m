@@ -126,8 +126,8 @@
         }else{
            
             self.noDataView.hidden = NO;
-            
-            self.noDataView.noDataLabel.text = @"网络出错啦，请查看网络后再次尝试";
+            self.noDataView.noDataLabel.text = @"";
+            self.noDataView.noDataImageView.image = [UIImage imageNamed:@"net_null"];
 
         }
 
@@ -135,9 +135,8 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        
         self.noDataView.hidden = NO;
-        
-        self.noDataView.noDataLabel.text = @"网络出错啦，请查看网络后再次尝试";
-        
+        self.noDataView.noDataLabel.text = @"";
+        self.noDataView.noDataImageView.image = [UIImage imageNamed:@"net_null"];
     }];
     
     
