@@ -175,6 +175,14 @@
         cell.imgView.image = [UIImage imageNamed:self.topimgArray[indexPath.row]];
         cell.classTypeLabel.text = self.topTitleArray[indexPath.row];
         cell.contentLabel.text = self.topDetailArray[indexPath.row];
+        if (YBIphone6Plus) {
+            if (0 == indexPath.section) {
+                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 10)];
+                view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
+                [cell addSubview:view];
+            }
+           
+        }
         return cell;
     }
     if (1 == indexPath.section) {
@@ -403,7 +411,7 @@
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         _collectionView.alwaysBounceVertical = YES;
-        _collectionView.contentInset = UIEdgeInsetsMake(kHeight, 0, 0, 0);;
+        _collectionView.contentInset = UIEdgeInsetsMake(kHeight, 0, 0, 0);
     }
     return _collectionView;
 }
