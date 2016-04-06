@@ -14,6 +14,7 @@
 #import "CourseDetailViewCell.h"
 #import "ChatViewController.h"
 #import "OrderCompleteViewController.h"
+#import "JZCompletionConfirmationContriller.h"
 
 @interface CourseDetailViewController()<CourseDetailViewDelegate,UITableViewDataSource,UITableViewDelegate,CourseCancelControllerDelegate,OrderCompleteViewControllerDelegate>
 @property(nonatomic,strong)RefreshTableView * tableView;
@@ -249,11 +250,15 @@
 
 - (void)courseDetailViewDidClickRecommentButton:(CourseDetailView *)view
 {
+    
+    JZCompletionConfirmationContriller *vc = [JZCompletionConfirmationContriller new];
+    [self.navigationController pushViewController:vc animated:YES];
+    
     //确认学完
-    OrderCompleteViewController * completeController = [[OrderCompleteViewController alloc] init];
-    completeController.courseModel = view.model;
-    completeController.delegate = self;
-    [self.navigationController pushViewController:completeController animated:YES];
+//    OrderCompleteViewController * completeController = [[OrderCompleteViewController alloc] init];
+//    completeController.courseModel = view.model;
+//    completeController.delegate = self;
+//    [self.navigationController pushViewController:completeController animated:YES];
 }
 //{
 //    //评论
@@ -263,7 +268,6 @@
 //    crc.delegate = self;
 //    [self.navigationController pushViewController:crc animated:YES];
 //}
-
 
 - (void)courseDetailViewDidClickStudentDetail:(CourseDetailView *)view
 {

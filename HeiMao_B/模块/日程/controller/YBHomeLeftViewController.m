@@ -77,7 +77,6 @@
 {
     
     JZCompletionConfirmationContriller *vc = [JZCompletionConfirmationContriller new];
-//    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -425,11 +424,15 @@
                 NSInteger hangshu = studentCount / 4;
                 NSInteger yushu = studentCount % 4;
 
-                if (YBIphone6 || YBIphone6Plus) {
+                if (YBIphone6) {
                     hangshu = studentCount / 5;
                     yushu = studentCount % 5;
                 }
-                NSLog(@"hangshu:%ld yushu:%ld",(long)hangshu,(long)yushu);
+                if (YBIphone6Plus) {
+                    hangshu = studentCount / 6;
+                    yushu = studentCount % 6;
+                }
+                NSLog(@"预约数据hangshu:%ld yushu:%ld",(long)hangshu,(long)yushu);
                 
                 CGFloat coureStudentCollectionViewH = (coureSundentCollectionH + 8) * hangshu;
                 if (yushu!=0) {
