@@ -21,7 +21,6 @@
 #import "AffiliatedSchoolViewController.h"
 #import "ExamClassViewController.h"
 #import "SetupViewController.h"
-#import "WorkNatureController.h"
 #import "JSONKit.h"
 #import "WorkTypeModel.h"
 #import "WorkTypeListController.h"

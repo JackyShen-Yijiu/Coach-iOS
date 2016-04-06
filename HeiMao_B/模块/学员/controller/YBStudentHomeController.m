@@ -25,9 +25,6 @@
 #import "JZCompletionConfirmationContriller.h"
 #import "YBStudentDetailsViewController.h"
 #import "ChatViewController.h"
-//#import <MJRefreshHeader.h>
-//#import <MJRefreshFooter.h>
-//#import <MJRefresh/MJRefresh.h>
 
 #define YBRatio 1.15
 #define ScreenWidthIs_6Plus_OrWider [UIScreen mainScreen].bounds.size.width >= 414

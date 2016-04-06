@@ -91,21 +91,21 @@ static NSString *addStuCellID = @"addStuCellID";
     [self.view addSubview:tableView];
     
     self.navigationItem.title = @"添加学员";
-
+    
     self.selectedRows = [NSMutableArray array];
-
+    
     self.tableView.rowHeight = 80;
     
     
     self.noDataView = [[LKAddStudentNoDataView alloc]initWithFrame:CGRectMake(0, 64 + 48, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64 - 48)];
-
+    
     self.noDataView.hidden = YES;
     [self.view addSubview:self.noDataView];
-
-    self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"添加" highTitle:@"添加" target:self action:@selector(addStudent) isRightItem:YES];
-
     
-//    [self showTotasViewWithMes:@"加载中"];
+    self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"添加" highTitle:@"添加" target:self action:@selector(addStudent) isRightItem:YES];
+    
+    
+    //    [self showTotasViewWithMes:@"加载中"];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
@@ -115,8 +115,6 @@ static NSString *addStuCellID = @"addStuCellID";
     });
     
 #pragma mark - 顶部时间按钮栏
-    
-    
     CGFloat y = 0;
     CGFloat w = [UIScreen mainScreen].bounds.size.width/4;
     CGFloat h = 92;
@@ -134,24 +132,26 @@ static NSString *addStuCellID = @"addStuCellID";
         
         if ((self.courseStudentCountInt - self.selectedstudentconutInt) > 0) {
             
-
+            
             [timeViewItem.selectButton setImage:[UIImage imageNamed:@"sendmsg_normal_icon"] forState:UIControlStateNormal];
             
             
             [timeViewItem.selectButton setImage:[UIImage imageNamed:@"sendmsg_selected_icon"] forState:UIControlStateSelected];
             
+            NSLog(@"看看打印了什么%zd+++++++%zd",self.courseStudentCountInt,self.selectedstudentconutInt);
+            
             
         }else if ((self.courseStudentCountInt - self.selectedstudentconutInt) <= 0){
             [timeViewItem.selectButton setTitle:@"已满" forState:UIControlStateNormal];
             [timeViewItem.selectButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-
+            
             self.navigationItem.hidesBackButton = YES;
             self.navigationItem.rightBarButtonItem.customView.hidden=YES;
             
-        
+            
             [self.tableView setUserInteractionEnabled:NO];
         }
-
+        
         
         timeViewItem.starTimeLabel.text = [NSString getHourLocalDateFormateUTCDate:data.coursebegintime];
         
@@ -170,14 +170,14 @@ static NSString *addStuCellID = @"addStuCellID";
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//   
-//    LKAddStudentTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    //如果取消已选择的cell,从记录移除
-//    [self.selectedRows removeObject:indexPath];
-//    
-//    [self.selectedIndexPaths removeObject:indexPath];
-//     [self.selectedRows replaceObjectAtIndex:indexPath.row withObject:self.selectedRows];
-//    
+    //
+    //    LKAddStudentTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    //    //如果取消已选择的cell,从记录移除
+    //    [self.selectedRows removeObject:indexPath];
+    //
+    //    [self.selectedIndexPaths removeObject:indexPath];
+    //     [self.selectedRows replaceObjectAtIndex:indexPath.row withObject:self.selectedRows];
+    //
     //    NSLog(@"%@",indexPath);
 }
 
@@ -200,68 +200,68 @@ static NSString *addStuCellID = @"addStuCellID";
             
             if (stundentData.count) {
                 
-
-            
-            for (NSDictionary *dict in stundentData) {
+                for (NSDictionary *dict in stundentData) {
+                    
+                    LKAddStudentData *data = [LKAddStudentData yy_modelWithDictionary:dict];
+                    
+                    [self.stundentDataArrM addObject:data];
+                    
+                }
                 
-                LKAddStudentData *data = [LKAddStudentData yy_modelWithDictionary:dict];
+                ///  添加到学员的数组
+                NSMutableArray *nameArray = [NSMutableArray array];
+                for (LKAddStudentData *data in self.stundentDataArrM) {
+                    
+                    [nameArray addObject:data.name];
+                    
+                    [self.dataDict setObject:data forKey:data.name];
+                    
+                }
                 
-                [self.stundentDataArrM addObject:data];
                 
-            }
-            
-            NSMutableArray *nameArray = [NSMutableArray array];
-            for (LKAddStudentData *data in self.stundentDataArrM) {
+                // 返回tableview右方 indexArray
+                self.indexArray = [ChineseString IndexArray:nameArray];
                 
-                [nameArray addObject:data.name];
+                // 返回联系人
+                self.LetterResultArr = [ChineseString LetterSortArray:nameArray];
                 
-                [self.dataDict setObject:data forKey:data.name];
+                [self.tableView reloadData];
                 
-            }
-            
-            // 返回tableview右方 indexArray
-            self.indexArray = [ChineseString IndexArray:nameArray];
-            
-            // 返回联系人
-            self.LetterResultArr = [ChineseString LetterSortArray:nameArray];
-            
-            [self.tableView reloadData];
-
             }else{
                 
                 self.navigationItem.rightBarButtonItem.customView.hidden=YES;
-
-                 self.tableView.hidden = YES;
+                
+                self.tableView.hidden = YES;
                 
                 self.noDataView.hidden = NO;
                 self.noDataView.noDataLabel.text = @"您暂时没有可预约的学员";
                 self.noDataView.noDataImageView.image = [UIImage imageNamed:@"people_null"];
-
+                
             }
             
         }else{
             self.navigationItem.rightBarButtonItem.customView.hidden=YES;
-           
+            
             self.tableView.hidden = YES;
             self.noDataView.hidden = NO;
             self.noDataView.noDataLabel.text = @"您暂时没有可预约的学员";
             self.noDataView.noDataImageView.image = [UIImage imageNamed:@"people_null"];
-
+            
         }
-
-     
+        
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-//           [self showTotasViewWithMes:@"网络错误"];
+        //           [self showTotasViewWithMes:@"网络错误"];
         self.navigationItem.rightBarButtonItem.customView.hidden=YES;
-
+        
         self.noDataView.hidden = NO;
-         self.tableView.hidden = YES;
+        self.tableView.hidden = YES;
         self.noDataView.noDataLabel.text = @"";
         self.noDataView.noDataImageView.image = [UIImage imageNamed:@"net_null"];
-
-
-    NSLog(@"LKAddStudentTimeViewController--数据获取出错，错误:%@",error);
+        
+        
+        NSLog(@"LKAddStudentTimeViewController--数据获取出错，错误:%@",error);
         
     }];
     
@@ -292,7 +292,7 @@ static NSString *addStuCellID = @"addStuCellID";
     NSLog(@"%@",self.stundentDataArrM);
     
     
-//    LKAddStudentData *data = self.stundentDataArrM[indexPath.row];
+    //    LKAddStudentData *data = self.stundentDataArrM[indexPath.row];
     
     NSString *str = [[self.LetterResultArr objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     
@@ -320,11 +320,11 @@ static NSString *addStuCellID = @"addStuCellID";
     
     
     NSURL *iconUrl = [NSURL URLWithString:data.headportrait.originalpic];
-   
+    
     cell.callStudentButton.tag = data.mobile.integerValue;
     
     [cell.callStudentButton addTarget:self action:@selector(callStudentButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-   
+    
     
     [cell.studentIconView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"JZCoursehead_null"]];
     
@@ -332,17 +332,17 @@ static NSString *addStuCellID = @"addStuCellID";
 }
 
 -(void)callStudentButtonClick:(UIButton*)sender {
-
+    
     if (sender.tag) {
         NSString * telNum = [NSString stringWithFormat:@"telprompt://%zd",sender.tag];
         
         
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telNum]];
-    
+        
     }else{
-            [self showTotasViewWithMes:@"无该用户手机号码"];
+        [self showTotasViewWithMes:@"无该用户手机号码"];
     }
-
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -369,8 +369,6 @@ static NSString *addStuCellID = @"addStuCellID";
     }else{
         [self.dataDict setObject:data forKey:str];
     }
-    
-    
     
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     
@@ -486,7 +484,7 @@ static NSString *addStuCellID = @"addStuCellID";
             
             return;
         }
-       
+        
         sender.selected = !sender.selected;
         model.is_selected = NO;
         [self.upDateArray removeObject:model];
@@ -555,9 +553,9 @@ static NSString *addStuCellID = @"addStuCellID";
         }
         
     }
-
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-
+    
     params[@"userid"] = self.userid;
     params[@"coachid"] = [[UserInfoModel defaultUserInfo] userID];
     params[@"courselist"] = courselistStr;
@@ -565,9 +563,9 @@ static NSString *addStuCellID = @"addStuCellID";
     params[@"address"] = @"";
     params[@"begintime"] = [NSString stringWithFormat:@"%@ %@",self.selectData,firstModel.coursetime.begintime];//[NSString stringWithFormat:@"%d",[self chagetime:firstModel.coursetime.begintime data:self.selectData]];
     params[@"endtime"] = [NSString stringWithFormat:@"%@ %@",self.selectData,lastModel.coursetime.endtime];//[NSString stringWithFormat:@"%d",[self chagetime:lastModel.coursetime.endtime data:self.selectData]];
-
+    
     NSLog(@"返回给后台的数据=====%@=====",params);
-
+    
     [NetWorkEntiry postcourseinfoUserreservationcourseWithParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"LKAddStudentTimeViewController--添加学员成功");
@@ -585,8 +583,8 @@ static NSString *addStuCellID = @"addStuCellID";
         [self showTotasViewWithMes:@"网络出错，添加失败"];
         
     }];
-
-
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

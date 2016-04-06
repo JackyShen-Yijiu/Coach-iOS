@@ -126,7 +126,7 @@
     if (_iconImageView == nil) {
         _iconImageView = [[UIImageView alloc] init];
         _iconImageView.backgroundColor = [UIColor clearColor];
-        _iconImageView.image = [UIImage imageNamed:@"call_out"];
+        _iconImageView.image = [UIImage imageNamed:@"JZCoursenull_student"];
         _iconImageView.layer.masksToBounds = YES;
         _iconImageView.layer.cornerRadius = 24;
     }
@@ -191,7 +191,7 @@
 #pragma mark --- 数据
 - (void)setListModel:(JZResultModel *)listModel{
      [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:listModel.headportrait.originalpic ]
-                           placeholderImage:[UIImage imageNamed:@"call_out"]];
+                           placeholderImage:[UIImage imageNamed:@"JZCoursenull_student"]];
     self.nameLabel.text = listModel.name;
     self.studyConLabel.text = listModel.courseinfo.progress;
     // 剩余17课时,已漏课2课时
