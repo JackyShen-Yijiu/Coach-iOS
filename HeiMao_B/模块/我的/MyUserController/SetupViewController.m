@@ -37,7 +37,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = RGBColor(245, 247, 250);
+        _tableView.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     }
     return _tableView;
 }
