@@ -14,7 +14,6 @@
 #import "CourseDetailViewController.h"
 #import "NoContentTipView.h"
 #import "VacationViewController.h"
-#import "JGvalidationView.h"
 #import "JGAppointMentMidView.h"
 #import "AppointmentCoachTimeInfoModel.h"
 #import "JGAppointMentViewController.h"

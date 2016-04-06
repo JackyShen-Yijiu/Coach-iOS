@@ -10,7 +10,6 @@
 #import "HMCourseModel.h"
 #import "CourseSummaryListCell.h"
 #import "VacationViewController.h"
-#import "JGvalidationView.h"
 #import "JGAppointMentViewController.h"
 #import "ScanViewController.h"
 #import <AVFoundation/AVFoundation.h>
@@ -26,9 +25,6 @@ typedef NS_ENUM(NSInteger, kControllerType) {
 };
 
 @interface ScheduleViewController () 
-
-// 教练资格审核提示框
-@property (nonatomic,strong)JGvalidationView*bgView;
 
 @property (nonatomic, strong) UISegmentedControl *segment;
 
@@ -73,11 +69,6 @@ typedef NS_ENUM(NSInteger, kControllerType) {
     self.myNavigationItem.titleView = self.segment;
 
     [self didClicksegmentedControlAction:self.segment];
-    
-    if ([UserInfoModel defaultUserInfo].userID && [UserInfoModel defaultUserInfo].is_validation==NO) {
-        _bgView = [[JGvalidationView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, 80)];
-        [self.myNavController.view addSubview:_bgView];
-    }
     
 }
 
