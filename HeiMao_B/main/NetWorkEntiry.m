@@ -29,6 +29,39 @@
     [self GET:urlString parameters:nil success:success failure:failure];
 }
 
+// 发送验证码 GET /userinfo/coachmobileverification
++ (void)newGetSMSCodeWithPhotNUmber:(NSString *)number
+                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    if(!number){
+        return [self missParagramercallBackFailure:failure];
+    }
+
+    NSString * urlString = [NSString stringWithFormat:@"%@/userinfo/coachmobileverification?mobile=%@",HOST_LINE_DOMAIN,number];
+
+    [self GET:urlString parameters:nil success:success failure:failure];
+    
+}
+// 登陆 POST /userinfo/coachloginbycode
++ (void)newloginWithPhotoNumber:(NSString *)photoNumber code:(NSString *)code
+                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    
+    if (!photoNumber || !code)  {
+        return [self missParagramercallBackFailure:failure];
+    };
+    NSDictionary * dic = @{@"mobile":photoNumber,
+                           @"smscode":code,
+                           };
+    
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/coachloginbycode",HOST_LINE_DOMAIN];
+    [self POST:urlStr parameters:dic success:success failure:failure];
+    
+}
+
+
 + (void)registereWithWithPhotoNumber:(NSString *)photoNumber password:(NSString *)password smsCode:(NSString *)smsCode referrerCode:(NSString *)referrerCode  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
