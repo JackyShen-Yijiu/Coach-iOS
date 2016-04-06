@@ -13,13 +13,13 @@
 
 /// 顶部时间view数组
 @property (nonatomic, strong) NSMutableArray *dataArray;
-
-/// 总共的名额
-@property (nonatomic, assign) NSInteger courseStudentCountInt;
-
-/// 已约名额
-@property (nonatomic, assign) NSInteger selectedstudentconutInt;
-
+//
+///// 总共的名额
+//@property (nonatomic, assign) NSInteger courseStudentCountInt;
+//
+///// 已约名额
+//@property (nonatomic, assign) NSInteger selectedstudentconutInt;
+//
 ///  教练id
 @property (nonatomic, strong) NSString *coachidStr;
 #pragma mark - 加载数据

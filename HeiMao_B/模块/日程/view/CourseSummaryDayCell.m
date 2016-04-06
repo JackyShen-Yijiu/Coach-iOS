@@ -397,8 +397,8 @@
         
         addStuVC.selectData = self.selectData;
         
-        addStuVC.courseStudentCountInt = self.model.coursestudentcount;
-        addStuVC.selectedstudentconutInt = self.model.selectedstudentcount;
+//        addStuVC.courseStudentCountInt = self.model.coursestudentcount;
+//        addStuVC.selectedstudentconutInt = self.model.selectedstudentcount;
         
         addStuVC.coachidStr = self.model.coachid;
         addStuVC.courseList = self.model._id;
