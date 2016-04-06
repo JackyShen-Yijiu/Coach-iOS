@@ -97,7 +97,7 @@ static NSString *addStuCellID = @"addStuCellID";
     self.tableView.rowHeight = 80;
     
     
-    self.noDataView = [[LKAddStudentNoDataView alloc]initWithFrame:CGRectMake(0, 64 + 92, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64 - 92)];
+    self.noDataView = [[LKAddStudentNoDataView alloc]initWithFrame:CGRectMake(0, 64 + 48, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64 - 48)];
 
     self.noDataView.hidden = YES;
     [self.view addSubview:self.noDataView];
@@ -105,7 +105,7 @@ static NSString *addStuCellID = @"addStuCellID";
     self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"添加" highTitle:@"添加" target:self action:@selector(addStudent) isRightItem:YES];
 
     
-    [self showTotasViewWithMes:@"加载中"];
+//    [self showTotasViewWithMes:@"加载中"];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
