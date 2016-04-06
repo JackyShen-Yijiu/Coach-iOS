@@ -138,7 +138,6 @@
 		B2BA41871CA5035700926584 /* finishMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F1F1CA5035700926584 /* finishMessageView.m */; };
 		B2BA41881CA5035700926584 /* finishMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2BA3F201CA5035700926584 /* finishMessageView.xib */; };
 		B2BA41891CA5035700926584 /* InfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F221CA5035700926584 /* InfoModel.m */; };
-		B2BA418A1CA5035700926584 /* JGvalidationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F241CA5035700926584 /* JGvalidationView.m */; };
 		B2BA418B1CA5035700926584 /* LTBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F261CA5035700926584 /* LTBottomView.m */; };
 		B2BA418C1CA5035700926584 /* LTBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2BA3F271CA5035700926584 /* LTBottomView.xib */; };
 		B2BA418D1CA5035700926584 /* MagicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA3F2A1CA5035700926584 /* MagicDetailViewController.m */; };
@@ -836,8 +835,6 @@
 		B2BA3F201CA5035700926584 /* finishMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = finishMessageView.xib; sourceTree = "<group>"; };
 		B2BA3F211CA5035700926584 /* InfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoModel.h; sourceTree = "<group>"; };
 		B2BA3F221CA5035700926584 /* InfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoModel.m; sourceTree = "<group>"; };
-		B2BA3F231CA5035700926584 /* JGvalidationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGvalidationView.h; sourceTree = "<group>"; };
-		B2BA3F241CA5035700926584 /* JGvalidationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGvalidationView.m; sourceTree = "<group>"; };
 		B2BA3F251CA5035700926584 /* LTBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTBottomView.h; sourceTree = "<group>"; };
 		B2BA3F261CA5035700926584 /* LTBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTBottomView.m; sourceTree = "<group>"; };
 		B2BA3F271CA5035700926584 /* LTBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LTBottomView.xib; sourceTree = "<group>"; };
@@ -2247,8 +2244,6 @@
 				B2BA3F201CA5035700926584 /* finishMessageView.xib */,
 				B2BA3F211CA5035700926584 /* InfoModel.h */,
 				B2BA3F221CA5035700926584 /* InfoModel.m */,
-				B2BA3F231CA5035700926584 /* JGvalidationView.h */,
-				B2BA3F241CA5035700926584 /* JGvalidationView.m */,
 				B2BA3F251CA5035700926584 /* LTBottomView.h */,
 				B2BA3F261CA5035700926584 /* LTBottomView.m */,
 				B2BA3F271CA5035700926584 /* LTBottomView.xib */,
@@ -4053,7 +4048,6 @@
 				B2BA41B01CA5035700926584 /* UIView+CalculateUIView.m in Sources */,
 				B2BA41BB1CA5035700926584 /* EMCDDeviceManager+Remind.m in Sources */,
 				B2BA41D01CA5035700926584 /* MWGridViewController.m in Sources */,
-				B2BA418A1CA5035700926584 /* JGvalidationView.m in Sources */,
 				B2BA41A71CA5035700926584 /* SetupViewController.m in Sources */,
 				0608CA671CAA89E90068A18B /* Applyclasstypeinfo.m in Sources */,
 				0608CA561CAA7CDE0068A18B /* JZResultModel.m in Sources */,

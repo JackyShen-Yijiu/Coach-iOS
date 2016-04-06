@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JGBaseViewController.h"
 
-@interface JZMyController : UIViewController
+@interface JZMyController : JGBaseViewController
 
 @end

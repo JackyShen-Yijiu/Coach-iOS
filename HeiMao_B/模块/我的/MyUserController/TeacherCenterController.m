@@ -24,7 +24,6 @@
 #import "JSONKit.h"
 #import "WorkTypeModel.h"
 #import "WorkTypeListController.h"
-#import "JGvalidationView.h"
 #import "YBSignUpStudentListController.h"
 #import "DVVStudentListController.h"
 
@@ -38,8 +37,6 @@
 @property (strong, nonatomic) NSArray *dataArray;
 @property (strong, nonatomic) NSArray *imageArray;
 @property (strong, nonatomic) NSArray *displayArray;
-
-@property (nonatomic,strong)JGvalidationView*bgView;
 
 @end
 @implementation TeacherCenterController
@@ -84,10 +81,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
-    
-    _bgView = [[JGvalidationView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, 80)];
-    [self.view addSubview:_bgView];
-    _bgView.hidden = YES;
     
     self.tableView.tableHeaderView = self.userCenterView;
     
@@ -201,7 +194,6 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        
     }];
     
 }
@@ -212,15 +204,6 @@
     [self resetNavBar];
     self.myNavigationItem.title = @"我的";
 
-    _bgView.hidden = YES;
-    
-    if ([UserInfoModel defaultUserInfo].userID && [UserInfoModel defaultUserInfo].is_validation==NO) {
-        
-        _bgView.hidden = NO;
-
-        return;
-    }
-    
 #pragma mark - 更新头像
     [self.userCenterView.userPortrait sd_setImageWithURL:[NSURL URLWithString:[UserInfoModel defaultUserInfo].portrait] placeholderImage:[UIImage imageNamed:@"littleImage.png"]];
     
