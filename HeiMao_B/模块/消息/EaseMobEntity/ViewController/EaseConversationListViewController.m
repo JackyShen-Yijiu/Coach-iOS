@@ -286,6 +286,10 @@ static NSString *kGroupName = @"GroupName";
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
+        [self showTotasViewWithMes:@"网络连接失败"];
+        
+         [ws tableViewDidFinishTriggerHeader:NO reload:NO];
+        
         NSLog(@"%@",error.debugDescription);
         
     }];
