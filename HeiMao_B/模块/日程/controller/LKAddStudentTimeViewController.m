@@ -85,7 +85,6 @@ static NSString *addStuCellID = @"addStuCellID";
     
     self.tableView = tableView;
     
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -98,7 +97,7 @@ static NSString *addStuCellID = @"addStuCellID";
     self.tableView.rowHeight = 80;
     
     
-    self.noDataView = [[LKAddStudentNoDataView alloc]initWithFrame:CGRectMake(0, 64 + 92, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64 - 92)];
+    self.noDataView = [[LKAddStudentNoDataView alloc]initWithFrame:CGRectMake(0, 64 + 48, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64 - 48)];
 
     self.noDataView.hidden = YES;
     [self.view addSubview:self.noDataView];
@@ -106,7 +105,7 @@ static NSString *addStuCellID = @"addStuCellID";
     self.myNavigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:@"添加" highTitle:@"添加" target:self action:@selector(addStudent) isRightItem:YES];
 
     
-    [self showTotasViewWithMes:@"加载中"];
+//    [self showTotasViewWithMes:@"加载中"];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
@@ -191,11 +190,17 @@ static NSString *addStuCellID = @"addStuCellID";
         
         id result = responseObject;
         
+        NSLog(@"有数据吗有数据吗-%@",(NSDictionary *)result);
+        
         NSDictionary *param = responseObject;
         if ([param[@"type"] integerValue] == 1) {
             
             
             NSArray *stundentData = result[@"data"];
+            
+            if (stundentData.count) {
+                
+
             
             for (NSDictionary *dict in stundentData) {
                 
@@ -224,17 +229,32 @@ static NSString *addStuCellID = @"addStuCellID";
 
             }else{
                 
+                self.navigationItem.rightBarButtonItem.customView.hidden=YES;
+
+                 self.tableView.hidden = YES;
+                
                 self.noDataView.hidden = NO;
+                self.noDataView.noDataLabel.text = @"您暂时没有可预约的学员";
 
             }
+            
+        }else{
+            self.navigationItem.rightBarButtonItem.customView.hidden=YES;
+           
+            self.tableView.hidden = YES;
+            self.noDataView.hidden = NO;
+            self.noDataView.noDataLabel.text = @"您暂时没有可预约的学员";
+        }
 
      
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
 //           [self showTotasViewWithMes:@"网络错误"];
-        
+        self.navigationItem.rightBarButtonItem.customView.hidden=YES;
+
         self.noDataView.hidden = NO;
-        self.noDataView.noDataLabel.text = @"网络错误";
+         self.tableView.hidden = YES;
+        self.noDataView.noDataLabel.text = @"网络出错啦，请查看网络后再次尝试";
 
 
     NSLog(@"LKAddStudentTimeViewController--数据获取出错，错误:%@",error);
