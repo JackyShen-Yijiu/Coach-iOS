@@ -111,6 +111,8 @@
 }
 #pragma mark ---- 通知方法
 - (void)refreshListTable{
+    
+    // 重新刷新列表
     [self initListData];
     [self.tableView reloadData];
 }
@@ -163,7 +165,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+
     JZData *listModel = self.listStudentArray[indexPath.row];
     listModel.isOpen = !listModel.isOpen;
     [self.listStudentArray replaceObjectAtIndex:indexPath.row withObject:listModel];
