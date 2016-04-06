@@ -336,7 +336,6 @@ static NSString *const kuserType = @"usertype";
     RegisterViewController *registerVc = [[RegisterViewController alloc]init];
     [self presentViewController:registerVc animated:YES completion:nil];
     
-    
 }
 
 - (void)viewWillLayoutSubviews {
@@ -383,17 +382,18 @@ static NSString *const kuserType = @"usertype";
         make.top.mas_equalTo(self.phoneNumTextField.mas_bottom).with.offset(15);
         make.height.mas_equalTo(@45);
     }];
-
-    [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.backGroundView.mas_bottom).with.offset(11);
-        make.left.mas_equalTo(self.backGroundView.mas_left).offset(30);
-        make.right.mas_equalTo(self.backGroundView.mas_right);
-    }];
+    
     [self.messageImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.messageLabel.mas_left).offset(-20);
+        make.left.mas_equalTo(self.backGroundView.mas_left);
         make.centerY.mas_equalTo(self.messageLabel.mas_centerY);
         make.width.mas_equalTo(16);
         make.height.mas_equalTo(16);
+    }];
+    
+    [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.backGroundView.mas_bottom).with.offset(11);
+        make.left.mas_equalTo(self.messageImg.mas_right).offset(10);
+        make.right.mas_equalTo(self.backGroundView.mas_right);
     }];
     
     [self.loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
