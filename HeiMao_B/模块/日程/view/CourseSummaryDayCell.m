@@ -243,7 +243,7 @@
     [self.coureStudentCollectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.coureTopCountLabel.mas_bottom).offset(12);
         make.height.mas_equalTo(height);
-        make.left.mas_equalTo(self.coureTopCountLabel.mas_left);
+        make.left.mas_equalTo(self.coureTopCountLabel.mas_left).offset(-5);
         make.right.mas_equalTo(self).offset(-10);
     }];
 
@@ -359,6 +359,7 @@
             cell.userInteractionEnabled = NO;
         }else if (compareDataNum==1){
             cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
+
         }
         
     }
@@ -397,8 +398,8 @@
         
         addStuVC.selectData = self.selectData;
         
-        addStuVC.courseStudentCountInt = self.model.coursestudentcount;
-        addStuVC.selectedstudentconutInt = self.model.selectedstudentcount;
+//        addStuVC.courseStudentCountInt = self.model.coursestudentcount;
+//        addStuVC.selectedstudentconutInt = self.model.selectedstudentcount;
         
         addStuVC.coachidStr = self.model.coachid;
         addStuVC.courseList = self.model._id;
