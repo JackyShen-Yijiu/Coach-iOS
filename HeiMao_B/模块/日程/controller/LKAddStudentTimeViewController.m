@@ -85,7 +85,6 @@ static NSString *addStuCellID = @"addStuCellID";
     
     self.tableView = tableView;
     
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -191,11 +190,17 @@ static NSString *addStuCellID = @"addStuCellID";
         
         id result = responseObject;
         
+        NSLog(@"有数据吗有数据吗-%@",(NSDictionary *)result);
+        
         NSDictionary *param = responseObject;
         if ([param[@"type"] integerValue] == 1) {
             
             
             NSArray *stundentData = result[@"data"];
+            
+            if (stundentData.count) {
+                
+
             
             for (NSDictionary *dict in stundentData) {
                 
@@ -224,16 +229,27 @@ static NSString *addStuCellID = @"addStuCellID";
 
             }else{
                 
+
+                 self.tableView.hidden = YES;
+                
                 self.noDataView.hidden = NO;
 
             }
+            
+        }else{
+           
+            self.tableView.hidden = YES;
+            self.noDataView.hidden = NO;
+        }
 
      
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
 //           [self showTotasViewWithMes:@"网络错误"];
         
+
         self.noDataView.hidden = NO;
+         self.tableView.hidden = YES;
         self.noDataView.noDataLabel.text = @"网络错误";
 
 
