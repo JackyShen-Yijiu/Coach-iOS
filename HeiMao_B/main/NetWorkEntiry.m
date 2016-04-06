@@ -579,7 +579,7 @@
     NSString *urlStr = [NSString stringWithFormat:@"%@/courseinfo/getmystudentlist",HOST_LINE_DOMAIN];
     NSDictionary *paramterDict = @{ @"coachid": coachId,
                                     @"subjectid": subjectID,
-                                    @"studentstate":subjectID,
+                                    @"studentstate":studentID,
                                     @"count": [NSString stringWithFormat:@"%lu", count],
                                     @"index": [NSString stringWithFormat:@"%lu", index]
                                     };

@@ -69,6 +69,8 @@
 
 
 @property (nonatomic, strong) NSArray *subjectIDArray;   // 根据教练授课科目 排序好的subjectID
+
+@property (nonatomic, strong) NSMutableArray *removeImgArray;
 @end
 
 @implementation YBStudentHomeController
@@ -94,7 +96,10 @@
     [self initShowNOBG];
     
 }
-
+- (void)viewWillDisappear:(BOOL)animated{
+    // 添加之前先移除背景图片
+    [self removeImage];
+}
 #pragma mark ---- 根据数据判断是否显示暂无字样
 - (void)initShowNOBG{
     // 开始是全部置为可点击状态,
@@ -152,7 +157,6 @@
 
 }
 - (void)showBgTitleWith:(NSInteger )tag{
-    
     NSArray *viewArray = [_toolBarView subviews];
     for (UIView *view in viewArray) {
         if ([view isKindOfClass:[UIButton class]]) {
@@ -162,6 +166,7 @@
                 UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(rect.origin.x + 20, rect.origin.y + 10, 40, 27)];
                 
                 img.image = [UIImage imageNamed:@"flage_null"];
+                [_removeImgArray addObject:img];
                 [view addSubview:img];
                 
             }
@@ -172,8 +177,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _isshowSegment = YES;
-    _resultDataArray = [NSMutableArray array]
-    ;    self.automaticallyAdjustsScrollViewInsets = NO;
+    _resultDataArray = [NSMutableArray array];
+    _removeImgArray = [NSMutableArray array];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self setNavBar];
@@ -301,6 +307,7 @@
          NSLog(@"self.studentState = %@",(NSString *)@(self.studentState));
         WS(ws);
         self.tableView.refreshHeader.beginRefreshingBlock = ^(){
+             NSLog(@" subjectID=%@ State == %@  ", (NSString *)@(ws.subjectID),(NSString *)@(ws.studentState) );
             [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(ws.subjectID) studentID:(NSString *)@(ws.studentState) index:1 count:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"responseObject=%@ subjectID=%@ State == %@  ",responseObject, (NSString *)@(ws.subjectID),(NSString *)@(ws.studentState) );
                 NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
@@ -387,6 +394,7 @@
 
 #pragma mark ---- segment的点击事件
 - (void)didClicksegmentedControlAction:(UISegmentedControl *)Seg {
+    [self removeImage];
     NSInteger index = Seg.selectedSegmentIndex;
      _subjectID = [_subjectIDArray[index] integerValue];
     [_toolBarView selectItem:0];
@@ -396,22 +404,25 @@
 }
 #pragma mark 筛选条件
 - (void)dvvToolBarViewItemSelectedAction:(NSInteger)index {
-    
+    /*
+     
+     学员状态：0 全部学员 1在学学员 2未考学员 3约考学员 4补考学员 5通过学员
+     */
     if (0 == index) {
         _studentState = index;
         
     }else if (1 == index) {
-        _studentState = index;
+        _studentState = index + 1;
        
     }else if (2 == index) {
-        _studentState = index;
+        _studentState = index + 1;
         
     }
     else if (3 == index) {
-        _studentState = index;
+        _studentState = index + 1;
         
     }else if (4 == index) {
-        _studentState = index;
+        _studentState = index + 1;
         
     }
    [self.tableView.refreshHeader  beginRefreshing];
@@ -514,7 +525,16 @@
 
     
 }
+#pragma mark --- 每次点击的时候移除
+- (void)removeImage{
+    // 添加之前先移除背景图片
+    if (_removeImgArray.count) {
+        for (UIImageView *imgView in _removeImgArray) {
+            [imgView removeFromSuperview];
+        }
+    }
 
+}
 - (JZHomeStudentToolBarView *)toolBarView {
     
     // 这里没有用懒加载, 因为当设置里面的科目相应更改后, 这样要动态的调整

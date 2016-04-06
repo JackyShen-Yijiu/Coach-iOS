@@ -549,7 +549,7 @@ static NSString *const ktagArrChange = @"ktagArrChange";
             }
         }
         if (2 == indexPath.section) {
-            if (2 == indexPath.row) {
+            if (2 == indexPath.row || 1 == indexPath.row) {
                 editorBottomCell.arrowImageView.hidden = YES;
             }
         }
@@ -590,12 +590,12 @@ static NSString *const ktagArrChange = @"ktagArrChange";
         
     }
     if (2 == indexPath.section && 1 == indexPath.row) {
-        [self.view addSubview:self.pickerView];
-        [self.view addSubview:self.bgView];
-        [self.view addSubview:self.bgPick];
-        [self.bgPick addSubview:self.teachageLabel];
-        [self.bgPick addSubview:self.sureButton];
-        [self.bgPick addSubview:self.lineView];
+//        [self.view addSubview:self.pickerView];
+//        [self.view addSubview:self.bgView];
+//        [self.view addSubview:self.bgPick];
+//        [self.bgPick addSubview:self.teachageLabel];
+//        [self.bgPick addSubview:self.sureButton];
+//        [self.bgPick addSubview:self.lineView];
         
 
         
