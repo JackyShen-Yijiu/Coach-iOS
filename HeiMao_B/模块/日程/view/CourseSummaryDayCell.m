@@ -29,8 +29,6 @@
 // 底部分割线
 @property(nonatomic,strong)UIView * bottomLine;
 
-
-
 @end
 
 @implementation CourseSummaryDayCell
@@ -162,22 +160,40 @@
     NSInteger rightStr;
     
     if (compareDataNum==0) {// 当前
-        self.coureleftStateImgView.image = [UIImage imageNamed:@"JZCoursenode_now"];
-        // 已约、剩余名额
-        leftStr = _model.selectedstudentcount;
-        rightStr = _model.coursestudentcount - _model.selectedstudentcount;
-        self.coureTopCountLabel.text = [NSString stringWithFormat:@"已约%ld     剩余名额%ld",(long)leftStr,(long)rightStr];
-        self.coureTopCountLabel.textColor = JZ_BlueColor;
-        self.coureleftTopDelive.backgroundColor = JZ_BlueColor;
-        self.coureBeginTime.textColor = JZ_BlueColor;
-        self.coureEndTime.textColor = JZ_BlueColor;
+//        self.coureleftStateImgView.image = [UIImage imageNamed:@"JZCoursenode_now"];
+//        // 已约、剩余名额
+//        leftStr = _model.selectedstudentcount;
+//        rightStr = _model.coursestudentcount - _model.selectedstudentcount;
+//        self.coureTopCountLabel.text = [NSString stringWithFormat:@"已约%ld     剩余名额%ld",(long)leftStr,(long)rightStr];
+//        self.coureTopCountLabel.textColor = JZ_BlueColor;
+//        self.coureleftTopDelive.backgroundColor = JZ_BlueColor;
+//        self.coureBeginTime.textColor = JZ_BlueColor;
+//        self.coureEndTime.textColor = JZ_BlueColor;
+//        
+//        self.contentView.backgroundColor = RGB_Color(255, 255, 255);
+//        self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
+//        self.contentView.layer.shadowOffset = CGSizeMake(0, 2);
+//        self.contentView.layer.shadowOpacity = 0.036;
+//        self.contentView.layer.shadowRadius = 2;
+//        self.bottomLine.hidden = YES;
+       
+        self.coureleftStateImgView.image = [UIImage imageNamed:@"JZCoursenode_past"];
         
-        self.contentView.backgroundColor = RGB_Color(255, 255, 255);
-        self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
-        self.contentView.layer.shadowOffset = CGSizeMake(0, 2);
-        self.contentView.layer.shadowOpacity = 0.036;
-        self.contentView.layer.shadowRadius = 2;
-        self.bottomLine.hidden = YES;
+        self.contentView.backgroundColor = RGB_Color(243, 243, 246);
+        self.contentView.layer.shadowColor = [UIColor clearColor].CGColor;
+        self.contentView.layer.shadowOffset = CGSizeMake(0, 0);
+        self.contentView.layer.shadowOpacity = 0;
+        self.contentView.layer.shadowRadius = 0;
+        
+        // 已学、漏课
+        leftStr = _model.signinstudentcount;
+        rightStr = _model.coursestudentcount - _model.signinstudentcount;
+        self.coureTopCountLabel.text = [NSString stringWithFormat:@"已学%ld     漏课%ld",(long)leftStr,(long)rightStr];
+        self.coureTopCountLabel.textColor = [UIColor lightGrayColor];
+        self.coureleftTopDelive.backgroundColor = [UIColor lightGrayColor];
+        self.coureBeginTime.textColor = [UIColor lightGrayColor];
+        self.coureEndTime.textColor = [UIColor lightGrayColor];
+        self.bottomLine.hidden = NO;
         
     }else if (compareDataNum==1){// 大于当前日期
         self.coureleftStateImgView.image = [UIImage imageNamed:@"JZCoursenode_future"];
@@ -327,7 +343,9 @@
         int compareDataNum = [YBObjectTool compareHMSDateWithBegintime:[NSString getLocalDateFormateUTCDate:_model.coursebegintime] endtime:[NSString getLocalDateFormateUTCDate:_model.courseendtime]];
         
         if (compareDataNum==0) {
-            cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
+//            cell.iconImageView.image = [UIImage imageNamed:@"JZCourseadd_student"];
+            cell.iconImageView.image = [UIImage imageNamed:@"JZCoursenull_student"];
+            cell.userInteractionEnabled = NO;
         }else if (compareDataNum==-1){
             cell.iconImageView.image = [UIImage imageNamed:@"JZCoursenull_student"];
             cell.userInteractionEnabled = NO;
@@ -380,10 +398,16 @@
         
         
     }
-    
-    
-
   
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"hiddenOpenCalendar" object:self];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end

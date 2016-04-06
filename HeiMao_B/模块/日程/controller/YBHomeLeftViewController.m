@@ -202,6 +202,11 @@
     
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self hiddenOpenCalendar];
+}
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{    //拖动前的起始坐标
     
 //    startContentOffsetX = scrollView.contentOffset.x;
