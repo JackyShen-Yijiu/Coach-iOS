@@ -7,6 +7,7 @@
 //
 
 #import "ComingSoonController.h"
+#define imgY 164
 
 @interface ComingSoonController ()
 
@@ -16,9 +17,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.title = @"敬请期待";
-     self.view.layer.contents = (id)([UIImage imageNamed:@"building_pic.jpg"].CGImage);
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"building_pic.jpg"]];
+    if (YBIphone6Plus) {
+        imgView.frame = CGRectMake(0, imgY, self.view.width, 331.2);
+    }
+    if (YBIphone6) {
+        imgView.frame = CGRectMake(0, imgY, self.view.width, 300);
+    }
+    if (YBIphone5) {
+        imgView.frame = CGRectMake(0, imgY, self.view.width, 256);
+    }
+    [self.view addSubview:imgView];
     
 }
 
