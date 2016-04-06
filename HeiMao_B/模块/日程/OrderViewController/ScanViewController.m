@@ -21,6 +21,7 @@ static const CGFloat kMargin = 30;
 @property (nonatomic, weak)   UIView *maskView;
 @property (nonatomic, strong) UIView *scanWindow;
 @property (nonatomic, strong) UIImageView *scanNetImageView;
+@property (nonatomic, weak) UIView *bottomView;
 
 @end
 
@@ -59,13 +60,13 @@ static const CGFloat kMargin = 30;
     //1.遮罩
     [self setupMaskView];
     //2.下边栏
-    [self setupBottomBar];
+//    [self setupBottomBar];
     //3.提示文本
     [self setupTipTitleView];
     //4.顶部导航
     [self setupNavView];
     //5.扫描区域
-//    [self setupScanWindowView];
+    [self setupScanWindowView];
     //6.开始动画
     [self beginScanning];
     
@@ -113,11 +114,12 @@ static const CGFloat kMargin = 30;
     //1.补充遮罩
     
     UIView*mask=[[UIView alloc]initWithFrame:CGRectMake(0, _maskView.sd_y+_maskView.sd_height, self.view.sd_width, kBorderW)];
-    mask.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+//    mask.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+//    mask.backgroundColor = [UIColor redColor];
     [self.view addSubview:mask];
     
     //2.操作提示
-    UILabel * tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.sd_height*0.9-kBorderW*2+60, self.view.bounds.size.width, kBorderW*0.25)];
+    UILabel * tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.sd_height*0.9-kBorderW*2, self.view.bounds.size.width, kBorderW)];
     tipLabel.text = @"将取景框对准二维码，即可自动扫描";
     tipLabel.textColor = [UIColor whiteColor];
     tipLabel.textAlignment = NSTextAlignmentCenter;
@@ -168,11 +170,26 @@ static const CGFloat kMargin = 30;
     mask.layer.borderColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7].CGColor;
     mask.layer.borderWidth = kBorderW;
     
-    mask.bounds = CGRectMake(0, 0, self.view.sd_width + kBorderW + kMargin , self.view.sd_width + kBorderW + kMargin + 8+8+8);
+
+    mask.bounds = CGRectMake(0, 0, self.view.sd_width + kBorderW + kMargin , self.view.sd_width + kBorderW + kMargin + 8);
     mask.center = CGPointMake(self.view.sd_width * 0.5, self.view.sd_height * 0.5);
     mask.sd_y = 0;
     
     [self.view addSubview:mask];
+    
+    
+    UIView *bottomView = [[UIView alloc]init];
+    
+//    bottomView.layer.borderColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7].CGColor;
+    bottomView.frame = CGRectMake(0, self.view.sd_width + kBorderW + kMargin + 8, self.view.sd_width + kBorderW + kMargin, self.view.bounds.size.height - self.view.sd_width + kBorderW + kMargin + 8);
+    bottomView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+    
+    
+    self.bottomView = bottomView;
+    [self.view addSubview:bottomView];
+    
+    
+    
 }
 
 - (void)setupBottomBar
@@ -183,7 +200,7 @@ static const CGFloat kMargin = 30;
     bottomBar.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
 //    bottomBar.backgroundColor = [UIColor orangeColor];
     
-//    [self.view addSubview:bottomBar];
+    [self.view addSubview:bottomBar];
     
     //2.我的二维码
     UIButton * myCodeBtn=[UIButton buttonWithType:UIButtonTypeCustom];
