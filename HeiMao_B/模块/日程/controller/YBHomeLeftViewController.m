@@ -18,6 +18,7 @@
 #import "YBCourseTableView.h"
 #import "YBObjectTool.h"
 #import "JZCompletionConfirmationContriller.h"
+#import "NoContentTipView.h"
 
 @interface YBHomeLeftViewController ()<FDCalendarDelegate,YBFDCalendarDelegate,UIScrollViewDelegate>
 {
@@ -49,6 +50,8 @@
 @property (nonatomic,strong) UIScrollView *mainScrollView;
 
 @property (nonatomic,strong) UIButton *confimBtn;
+
+@property(nonatomic,strong)NoContentTipView * tipView1;
 
 @end
 
@@ -164,6 +167,11 @@
     [self.mainScrollView addSubview:self.centerCourseTableView];
 //    [self.mainScrollView addSubview:self.rightTableView];
     
+    self.tipView1 = [[NoContentTipView alloc] initWithContetntTip:@"暂无数据"];
+    [self.tipView1 setHidden:YES];
+    [self.centerCourseTableView addSubview:self.tipView1];
+    self.tipView1.center = CGPointMake(self.centerCourseTableView.width/2.f, self.centerCourseTableView.height/2.f);
+    
     self.headView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, calendarH)];
     self.headView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.headView];
@@ -192,6 +200,11 @@
     // 隐藏展开日历
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hiddenOpenCalendar) name:@"hiddenOpenCalendar" object:nil];
     
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self hiddenOpenCalendar];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{    //拖动前的起始坐标
@@ -435,6 +448,8 @@
             NSLog(@"ws.centerTableDataArray.count:%lu",(unsigned long)ws.centerTableDataArray.count);
             
             [ws.centerCourseTableView reloadData];
+
+            [self.tipView1 setHidden:ws.centerTableDataArray.count];
 
         }else{
             
