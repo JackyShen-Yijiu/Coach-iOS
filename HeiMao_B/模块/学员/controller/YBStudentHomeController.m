@@ -25,6 +25,7 @@
 #import "JZCompletionConfirmationContriller.h"
 #import "YBStudentDetailsViewController.h"
 #import "ChatViewController.h"
+#import "JZNoDataShowBGView.h"
 
 #define YBRatio 1.15
 #define ScreenWidthIs_6Plus_OrWider [UIScreen mainScreen].bounds.size.width >= 414
@@ -71,6 +72,8 @@
 @property (nonatomic, strong) NSArray *subjectIDArray;   // 根据教练授课科目 排序好的subjectID
 
 @property (nonatomic, strong) NSMutableArray *removeImgArray;
+
+@property (nonatomic, strong) JZNoDataShowBGView *noDataShowBGView;
 @end
 
 @implementation YBStudentHomeController
@@ -184,7 +187,7 @@
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self setNavBar];
     [self.view addSubview:self.tableView];
-    
+    [self.view addSubview:self.noDataShowBGView];
 //    [self.tableView.header beginRefreshing];
     
     
@@ -318,6 +321,7 @@
                     
                     if (data.count == 0) {
                         [ws showTotasViewWithMes:@"暂无"];
+                        ws.noDataShowBGView.hidden = NO;
                         [ws.tableView.refreshHeader endRefreshing];
                         [ws.tableView reloadData];
                         return ;
@@ -399,6 +403,7 @@
      _subjectID = [_subjectIDArray[index] integerValue];
     [_toolBarView selectItem:0];
     [self initShowNOBG];
+    _noDataShowBGView.hidden = YES;
     [self.tableView.refreshHeader  beginRefreshing];
     
 }
@@ -425,6 +430,7 @@
         _studentState = index + 1;
         
     }
+    _noDataShowBGView.hidden = YES;
    [self.tableView.refreshHeader  beginRefreshing];
 }
 
@@ -579,5 +585,15 @@
     }
     return _tableView;
 }
-
+- (JZNoDataShowBGView *)noDataShowBGView{
+    if (_noDataShowBGView == nil) {
+        _noDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(0, ktopHight, self.view.width, self.view.height - ktopHight)];
+        _noDataShowBGView.imgStr = @"people_null";
+        _noDataShowBGView.titleStr = @"暂无数据";
+        _noDataShowBGView.titleColor  = JZ_FONTCOLOR_DRAK;
+        _noDataShowBGView.fontSize = 14.f;
+        _noDataShowBGView.hidden = YES;
+    }
+    return _noDataShowBGView;
+}
 @end

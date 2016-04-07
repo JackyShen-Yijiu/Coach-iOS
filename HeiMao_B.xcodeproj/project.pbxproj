@@ -36,6 +36,7 @@
 		0663FADF1CAE8A820076E384 /* JZPassListUserid.m in Sources */ = {isa = PBXBuildFile; fileRef = 0663FADC1CAE8A820076E384 /* JZPassListUserid.m */; };
 		0670B54F1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = 0670B54E1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m */; };
 		0670B5551CABCEAF00D34731 /* JZCompletionConfirmationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0670B5541CABCEAF00D34731 /* JZCompletionConfirmationCell.m */; };
+		067945AC1CB60B9C0010B6B2 /* JZNoDataShowBGView.m in Sources */ = {isa = PBXBuildFile; fileRef = 067945AB1CB60B9B0010B6B2 /* JZNoDataShowBGView.m */; };
 		06DB70BE1CA906C500A6AC9D /* ExamClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70BD1CA906C500A6AC9D /* ExamClassViewController.m */; };
 		06DB70C21CA909DC00A6AC9D /* ExamClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70C11CA909DC00A6AC9D /* ExamClassModel.m */; };
 		06DB70C51CA90E3800A6AC9D /* WorkTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70C41CA90E3800A6AC9D /* WorkTimeViewController.m */; };
@@ -642,6 +643,8 @@
 		0670B54E1CABC2BA00D34731 /* JZCompletionConfirmationContriller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZCompletionConfirmationContriller.m; sourceTree = "<group>"; };
 		0670B5531CABCEAF00D34731 /* JZCompletionConfirmationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZCompletionConfirmationCell.h; sourceTree = "<group>"; };
 		0670B5541CABCEAF00D34731 /* JZCompletionConfirmationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZCompletionConfirmationCell.m; sourceTree = "<group>"; };
+		067945AA1CB60B9B0010B6B2 /* JZNoDataShowBGView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZNoDataShowBGView.h; sourceTree = "<group>"; };
+		067945AB1CB60B9B0010B6B2 /* JZNoDataShowBGView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZNoDataShowBGView.m; sourceTree = "<group>"; };
 		06DB70BC1CA906C500A6AC9D /* ExamClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamClassViewController.h; sourceTree = "<group>"; };
 		06DB70BD1CA906C500A6AC9D /* ExamClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamClassViewController.m; sourceTree = "<group>"; };
 		06DB70C01CA909DC00A6AC9D /* ExamClassModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamClassModel.h; sourceTree = "<group>"; };
@@ -1761,6 +1764,8 @@
 				06DB70D71CA955C000A6AC9D /* JZHomeStudentSubjectFourView.m */,
 				06DB70CA1CA942F400A6AC9D /* JZHomeStudentListCell.h */,
 				06DB70CB1CA942F400A6AC9D /* JZHomeStudentListCell.m */,
+				067945AA1CB60B9B0010B6B2 /* JZNoDataShowBGView.h */,
+				067945AB1CB60B9B0010B6B2 /* JZNoDataShowBGView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4065,6 +4070,7 @@
 				BECA64191CAE15CD00FAE001 /* JZExamStudentListData.m in Sources */,
 				06361A511CA51DF1002708F2 /* TopCollectionCell.m in Sources */,
 				B2BA3E661CA4E70300926584 /* SMPageControl.m in Sources */,
+				067945AC1CB60B9C0010B6B2 /* JZNoDataShowBGView.m in Sources */,
 				B2BA44621CABC15C00926584 /* YBStudentDetailsCoachcomment.m in Sources */,
 				B2BA42941CA5035700926584 /* EaseEmoji.m in Sources */,
 				06EFEB0D1CAD57F2002B7E82 /* JZHeadportrait.m in Sources */,
@@ -4323,8 +4329,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Jizhi Driver Services Co., Ltd (2VG884M937)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Jizhi Driver Services Co., Ltd (2VG884M937)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
@@ -4342,7 +4348,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jizhijiafu.coach;
 				PRODUCT_NAME = "极致教练端";
-				PROVISIONING_PROFILE = "867132ac-aa6f-42e4-a860-c18fd954072a";
+				PROVISIONING_PROFILE = "a833d7d0-8104-4b15-974a-e704cd89ed5e";
 			};
 			name = Debug;
 		};
@@ -4353,8 +4359,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Jizhi Driver Services Co., Ltd (2VG884M937)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Jizhi Driver Services Co., Ltd (2VG884M937)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
@@ -4372,7 +4378,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jizhijiafu.coach;
 				PRODUCT_NAME = "极致教练端";
-				PROVISIONING_PROFILE = "867132ac-aa6f-42e4-a860-c18fd954072a";
+				PROVISIONING_PROFILE = "a833d7d0-8104-4b15-974a-e704cd89ed5e";
 			};
 			name = Release;
 		};

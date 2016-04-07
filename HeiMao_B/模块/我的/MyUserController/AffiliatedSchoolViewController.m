@@ -148,6 +148,8 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
         
         NSLog(@"修改所属驾校:data:%@",data);
         
+        
+        
         NSDictionary *dataParam = data;
         NSNumber *messege = dataParam[@"type"];
         NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
@@ -166,6 +168,7 @@ static NSString *const kAffiliatedSchool = @"getschoolbyname?schoolname=%@";
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     [self search:searchText];
+      
 }
 
 - (void)search:(NSString *)searchText

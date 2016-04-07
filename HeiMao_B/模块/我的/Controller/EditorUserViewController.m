@@ -345,13 +345,13 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     }
     //可授科目
     NSArray *array = [UserInfoModel defaultUserInfo].subject;
-    NSMutableString *string = [[NSMutableString alloc] init];
+   NSString *subjectStr = @"";
     if (array.count == 0) {
-        [string appendString:@"未设置"];
-    }else if(array.count == 1){
-        [string appendString:[[array firstObject] objectForKey:@"name"]];
-    }else{
-        [string appendString:@"已设置"];
+        subjectStr = @"未设置";
+    }else if(array.count){
+        for (NSDictionary *dic in array) {
+            subjectStr = [subjectStr stringByAppendingString:dic[@"name"]];
+        }
     }
 
     NSString *trainName = [UserInfoModel defaultUserInfo].trainfieldlinfo[@"name"]; // 训练场地
@@ -361,7 +361,7 @@ static NSString *const ktagArrChange = @"ktagArrChange";
                         [self strTolerance:coachNumber],
                         [self strTolerance:seniority],
                         [self strTolerance:workWay],
-                        [self strTolerance:string],
+                        [self strTolerance:subjectStr],
                         [self strTolerance:trainName]
                         
                     
