@@ -102,6 +102,8 @@
 - (void)viewWillDisappear:(BOOL)animated{
     // 添加之前先移除背景图片
     [self removeImage];
+    _noDataShowBGView.hidden = YES;
+
 }
 #pragma mark ---- 根据数据判断是否显示暂无字样
 - (void)initShowNOBG{
@@ -211,6 +213,10 @@
     
     [_bgView removeFromSuperview];
     _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, _bgH)];
+    _bgView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _bgView.layer.shadowOffset = CGSizeMake(0, 2);
+    _bgView.layer.shadowOpacity = 0.072;
+    _bgView.layer.shadowRadius = 2;
     _bgView.backgroundColor = [UIColor whiteColor];
     if (_isshowSegment) {
         
@@ -320,12 +326,12 @@
                     [ws.resultDataArray removeAllObjects];
                     
                     if (data.count == 0) {
-                        [ws showTotasViewWithMes:@"暂无"];
                         ws.noDataShowBGView.hidden = NO;
                         [ws.tableView.refreshHeader endRefreshing];
                         [ws.tableView reloadData];
                         return ;
                     }
+                    ws.noDataShowBGView.hidden = YES;
                     for (NSDictionary *dic in data) {
                         JZResultModel *model = [JZResultModel yy_modelWithDictionary:dic];
                         [ws.resultDataArray addObject:model];

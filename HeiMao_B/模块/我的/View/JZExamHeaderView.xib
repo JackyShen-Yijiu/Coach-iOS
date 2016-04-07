@@ -45,29 +45,29 @@
                         <constraint firstAttribute="height" constant="0.5" id="2OS-TG-JP3"/>
                     </constraints>
                 </view>
-                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZCC-XF-IPz" userLabel="报考">
-                    <rect key="frame" x="0.0" y="66" width="134" height="44"/>
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZCC-XF-IPz" userLabel="报考">
+                    <rect key="frame" x="0.0" y="67" width="133" height="44"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <state key="normal" title="Button">
                         <color key="titleColor" red="0.792156862745098" green="0.792156862745098" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a1j-k6-ZSI" userLabel="缺考">
-                    <rect key="frame" x="134" y="66" width="134" height="44"/>
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a1j-k6-ZSI" userLabel="缺考">
+                    <rect key="frame" x="134" y="67" width="133" height="44"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <state key="normal" title="Button">
                         <color key="titleColor" red="0.792156862745098" green="0.792156862745098" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Wj-EQ-6gW" userLabel="通过">
-                    <rect key="frame" x="267" y="66" width="134" height="44"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Wj-EQ-6gW" userLabel="通过">
+                    <rect key="frame" x="268" y="67" width="133" height="44"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <state key="normal" title="Button">
                         <color key="titleColor" red="0.35686274509803922" green="0.55686274509803924" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ujr-Vc-x7u" userLabel="未通过View">
-                    <rect key="frame" x="0.0" y="110" width="401" height="40"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujr-Vc-x7u" userLabel="未通过View">
+                    <rect key="frame" x="0.0" y="111" width="401" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7lv-mG-w6y" userLabel="未通过数量">
                             <rect key="frame" x="16" y="13" width="36" height="14"/>
@@ -91,15 +91,15 @@
                         <constraint firstAttribute="height" constant="40" id="xIa-6j-9Cy"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HbW-TJ-zWK" userLabel="间隔（左）">
-                    <rect key="frame" x="133" y="76" width="1" height="24"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HbW-TJ-zWK" userLabel="间隔（左）">
+                    <rect key="frame" x="133" y="77" width="1" height="24"/>
                     <color key="backgroundColor" red="0.792156862745098" green="0.792156862745098" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="0.5" id="EfF-3S-Eme"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xUb-ou-Cfl" userLabel="间隔（右）">
-                    <rect key="frame" x="267" y="76" width="1" height="24"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xUb-ou-Cfl" userLabel="间隔（右）">
+                    <rect key="frame" x="267" y="77" width="1" height="24"/>
                     <color key="backgroundColor" red="0.792156862745098" green="0.792156862745098" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="0.5" id="Ttd-8z-WqX"/>

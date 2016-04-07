@@ -86,7 +86,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString *cellID = @"cellID";
+    static NSString *cellID = @"messageCellID";
     InformationMessageCell *informationCell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (!informationCell) {
         informationCell = [[InformationMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
@@ -96,16 +96,10 @@
     return informationCell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    InformationMessageModel *model = _informationMessageViewModel.informationArray[indexPath.row];
-//    InformationMessageCell *cell = (InformationMessageCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-//    
-//    return [cell heightWithcell:model];
-    return 170;
+    return 158;
 
 };
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return 250;
-//}
+
 #pragma mark --- Lazy加载
 - (UITableView *)tableView{
     if (_tableView == nil) {
