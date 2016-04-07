@@ -102,6 +102,8 @@
 - (void)viewWillDisappear:(BOOL)animated{
     // 添加之前先移除背景图片
     [self removeImage];
+    _noDataShowBGView.hidden = YES;
+
 }
 #pragma mark ---- 根据数据判断是否显示暂无字样
 - (void)initShowNOBG{
@@ -320,12 +322,12 @@
                     [ws.resultDataArray removeAllObjects];
                     
                     if (data.count == 0) {
-                        [ws showTotasViewWithMes:@"暂无"];
                         ws.noDataShowBGView.hidden = NO;
                         [ws.tableView.refreshHeader endRefreshing];
                         [ws.tableView reloadData];
                         return ;
                     }
+                    ws.noDataShowBGView.hidden = YES;
                     for (NSDictionary *dic in data) {
                         JZResultModel *model = [JZResultModel yy_modelWithDictionary:dic];
                         [ws.resultDataArray addObject:model];

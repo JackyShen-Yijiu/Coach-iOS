@@ -11,6 +11,7 @@
 #import <YYModel.h>
 #import "JZData.h"
 #import "YBConfimContentView.h"
+#import "JZNoDataShowBGView.h"
 @interface JZCompletionConfirmationContriller () <UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -19,6 +20,9 @@
 @property (nonatomic, strong) NSArray *subjectThreeArray;
 
 @property (nonatomic, strong) NSMutableArray *listStudentArray;
+
+@property (nonatomic, strong) JZNoDataShowBGView *noDataShowBGView;
+
 @end
 
 @implementation JZCompletionConfirmationContriller
@@ -31,8 +35,12 @@
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self.view addSubview:self.tableView];
     [self initSubjectData];
+    [self.view addSubview:self.noDataShowBGView];
 
    }
+- (void)viewWillDisappear:(BOOL)animated{
+    self.noDataShowBGView.hidden = YES;
+}
 - (void)initListData{
     [NetWorkEntiry getCoachOfFinishStudentWihtCoachID:[UserInfoModel defaultUserInfo].userID success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -42,13 +50,15 @@
         if ([param[@"type"] integerValue] == 1) {
             NSArray *resultArray = param[@"data"];
             if (resultArray.count) {
+                self.noDataShowBGView.hidden = YES;
                 [self.listStudentArray removeAllObjects];
                 for (NSDictionary *dic in resultArray) {
                     JZData *listModel = [JZData yy_modelWithDictionary:dic];
                     [_listStudentArray addObject:listModel];
                 }
             }else{
-                [self showTotasViewWithMes:@"暂无学员"];
+                self.noDataShowBGView.hidden = NO;
+                
             }
             [self.tableView reloadData];
         }
@@ -186,6 +196,17 @@
         _tableView.delegate = self;
     }
     return _tableView;
+}
+- (JZNoDataShowBGView *)noDataShowBGView{
+    if (_noDataShowBGView == nil) {
+        _noDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 64)];
+        _noDataShowBGView.imgStr = @"people_null";
+        _noDataShowBGView.titleStr = @"暂无数据";
+        _noDataShowBGView.titleColor  = JZ_FONTCOLOR_DRAK;
+        _noDataShowBGView.fontSize = 14.f;
+        _noDataShowBGView.hidden = YES;
+    }
+    return _noDataShowBGView;
 }
 
 @end
