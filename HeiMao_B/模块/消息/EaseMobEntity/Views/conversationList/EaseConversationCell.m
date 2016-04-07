@@ -183,11 +183,11 @@ CGFloat const EaseConversationCellPadding = 10;
 {
     _model = model;
 
-//    NSDictionary * ext = [[_model conversation] ext];
-//    NSLog(@"setModel获取用户信息ext:%@",ext);
-//    NSString * title = [ext objectStringForKey:@"nickName"];
-//    NSString * ava = [ext objectStringForKey:@"headUrl"];
-    
+    NSDictionary * ext = [[_model conversation] ext];
+    NSString * title = [ext objectStringForKey:@"nickName"];
+    NSString * ava = [ext objectStringForKey:@"headUrl"];
+    NSLog(@"setModel获取用户信息ext:%@ title:%@ ava:%@",ext,title,ava);
+
     // 获取服务器用户名
     NSString *name = [JGUserTools getNickNameByEMUserName:_model.conversation.chatter];
 

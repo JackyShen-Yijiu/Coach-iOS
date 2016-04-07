@@ -12,12 +12,6 @@
 
 @implementation NSObject (EaseMob)
 
-- (void)registerEaseMobLiteNotification
-{
-    [[EaseMob sharedInstance].chatManager removeDelegate:self];
-    [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
-}
-
 - (void)unregisterEaseMobLiteNotification
 {
     [[EaseMob sharedInstance].chatManager removeDelegate:self];

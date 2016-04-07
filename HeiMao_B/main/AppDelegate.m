@@ -89,17 +89,15 @@
 - (void)loginViewControllerdidLoginSucess:(LoginViewController *)controller
 {
     
-    //设置是否自动登录
-    [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:NO];
-    
-    // 旧数据转换 (如果您的sdk是由2.1.2版本升级过来的，需要家这句话)
-    [[EaseMob sharedInstance].chatManager importDataToNewDatabase];
-    //获取数据库中数据
-    [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
-    
-    EMPushNotificationOptions *options = [[EaseMob sharedInstance].chatManager pushNotificationOptions];
-    options.nickname = [UserInfoModel defaultUserInfo].name;
-    options.displayStyle = ePushNotificationDisplayStyle_messageSummary;
+//    // 旧数据转换 (如果您的sdk是由2.1.2版本升级过来的，需要家这句话)
+//    [[EaseMob sharedInstance].chatManager importDataToNewDatabase];
+//    //获取数据库中数据
+//    [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
+
+//    [[EaseMob sharedInstance].chatManager setApnsNickname:[UserInfoModel defaultUserInfo].name];
+
+    NSArray *conversations = [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:YES];
+    NSLog(@"loginViewControllerdidLoginSucess 获取聊天会话列表conversations:%@",conversations);
     
     [self.navController.navigationBar setHidden:NO];
     
@@ -241,9 +239,22 @@
     [[EaseMob sharedInstance] application:application didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
+// App进入后台
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    [[EaseMob sharedInstance] applicationDidEnterBackground:application];
+
     [[NSNotificationCenter defaultCenter] postNotificationName:@"receiveMainChatMessage" object:self];
+}
+// App将要从后台返回
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    [[EaseMob sharedInstance] applicationWillEnterForeground:application];
+}
+// 申请处理时间
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    [[EaseMob sharedInstance] applicationWillTerminate:application];
 }
 
 //接受通知

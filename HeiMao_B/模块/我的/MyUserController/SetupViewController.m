@@ -14,6 +14,7 @@
 #import "NSUserStoreTool.h"
 #import "APService.h"
 #import "BLPFAlertView.h"
+#import "EaseMob.h"
 
 #define kDefaultTintColor   RGB_Color(0x28, 0x79, 0xF3)
 
@@ -90,12 +91,25 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 {
     if(alertView.tag == 200 && buttonIndex == 1){
         
-        //退出登陆
-        [[UserInfoModel defaultUserInfo] loginOut];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [[EaseMob sharedInstance].chatManager logoffWithUnbindDeviceToken:YES error:nil];
         
-        NSSet *set = [NSSet setWithObject:JPushTag];
-        [APService setTags:set alias:@"" callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+        [[EaseMob sharedInstance].chatManager asyncLogoffWithUnbindDeviceToken:YES];
+        
+        [[EaseMob sharedInstance].chatManager asyncLogoffWithUnbindDeviceToken:YES completion:^(NSDictionary *info, EMError *error) {
+            DYNSLog(@"asyncLogoffWithUnbindDeviceToken%@",error);
+        } onQueue:nil];
+        
+        [[EaseMob sharedInstance].chatManager asyncLogoffWithUnbindDeviceToken:YES completion:^(NSDictionary *info, EMError *error) {
+            
+            //退出登陆
+            [[UserInfoModel defaultUserInfo] loginOut];
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+            NSSet *set = [NSSet setWithObject:JPushTag];
+            [APService setTags:set alias:@"" callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+            
+        } onQueue:nil];
         
     }
 }

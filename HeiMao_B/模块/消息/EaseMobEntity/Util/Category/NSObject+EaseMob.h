@@ -10,8 +10,6 @@
 
 @interface NSObject (EaseMob)
 
-- (void)registerEaseMobLiteNotification;
-
 - (void)unregisterEaseMobLiteNotification;
 
 - (void)registerEaseMobNotification;

@@ -233,9 +233,10 @@ static NSString *kGroupName = @"GroupName";
                 ws.systemBadgeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagecount"]];
                 ws.systemDetailsStr = [NSString stringWithFormat:@"%@",messageinfo[@"message"]];
 
-                NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
-                NSLog(@"conversations:%@",conversations);
-                
+//                NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
+                NSArray *conversations = [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:YES];
+                NSLog(@"获取聊天会话列表conversations:%@",conversations);
+
                 NSArray* sorted = [conversations sortedArrayUsingComparator:
                                    ^(EMConversation *obj1, EMConversation* obj2){
                                        EMMessage *message1 = [obj1 latestMessage];
@@ -296,13 +297,6 @@ static NSString *kGroupName = @"GroupName";
     
 }
 
-- (void)didUpdateConversationList:(NSArray *)conversationList
-{
-
-    [self tableViewDidTriggerHeaderRefresh];
-    
-}
-
 #pragma mark - IChatManagerDelegate 消息变化
 
 // 未读消息数量变化回调
@@ -345,13 +339,6 @@ static NSString *kGroupName = @"GroupName";
     [application setApplicationIconBadgeNumber:unreadCount];
     
     [self.tableView reloadData];
-}
-
-#pragma mark - IChatMangerDelegate
-
-- (void)didUpdateGroupList:(NSArray *)allGroups error:(EMError *)error
-{
-    [self tableViewDidTriggerHeaderRefresh];
 }
 
 #pragma mark - registerNotifications
