@@ -213,6 +213,10 @@
     
     [_bgView removeFromSuperview];
     _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, _bgH)];
+    _bgView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _bgView.layer.shadowOffset = CGSizeMake(0, 2);
+    _bgView.layer.shadowOpacity = 0.072;
+    _bgView.layer.shadowRadius = 2;
     _bgView.backgroundColor = [UIColor whiteColor];
     if (_isshowSegment) {
         
