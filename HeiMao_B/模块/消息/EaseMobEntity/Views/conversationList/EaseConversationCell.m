@@ -183,7 +183,7 @@ CGFloat const EaseConversationCellPadding = 10;
 {
     _model = model;
 
-    NSDictionary * ext = [[_model conversation] ext];
+    NSDictionary * ext = [[_model conversation] ext];    
     NSString * title = [ext objectStringForKey:@"nickName"];
     NSString * ava = [ext objectStringForKey:@"headUrl"];
     NSLog(@"setModel获取用户信息ext:%@ title:%@ ava:%@",ext,title,ava);
