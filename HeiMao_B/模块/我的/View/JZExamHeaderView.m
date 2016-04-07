@@ -104,6 +104,13 @@
     [self.studentCountButton setTitle:[NSString stringWithFormat:@"报考\n%zd人",_modelGrop.studentcount] forState:UIControlStateNormal];
     //缺考
     [self.missExamStudentButton setTitle:[NSString stringWithFormat:@"缺考\n%zd人",_modelGrop.missexamstudent] forState:UIControlStateNormal];
+    
+    if (_modelGrop.passstudent == 0) {
+        
+        self.passCountButton.userInteractionEnabled = NO;
+        [self.passCountButton setTitleColor:RGB_Color(202, 202, 202) forState:UIControlStateNormal];
+    }
+    
     //通过
     [self.passCountButton setTitle:[NSString stringWithFormat:@"通过\n%zd人",_modelGrop.passstudent] forState:UIControlStateNormal];
     //未通过
