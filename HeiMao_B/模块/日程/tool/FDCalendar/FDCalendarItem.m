@@ -298,7 +298,7 @@ typedef NS_ENUM(NSUInteger, FDCalendarMonth) {
 
         NSInteger day = indexPath.row - firstWeekday + 1;
         
-        cell.dayLabel.text= [NSString stringWithFormat:@"%ld\n%ld", day,(long)indexPath.row];
+        cell.dayLabel.text= [NSString stringWithFormat:@"%ld", day];
         
         int compareDataNum = [YBObjectTool compareDateWithSelectDate:[self getCurrentData:indexPath]];
         if (compareDataNum==0) {// 当前

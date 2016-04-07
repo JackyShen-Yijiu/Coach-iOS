@@ -338,7 +338,7 @@
         if (reservationstate==9) {
             cell.stateImageView.hidden = NO;
             cell.stateImageView.image = [UIImage imageNamed:@"JZCourseregister"];
-        }else if (reservationstate==6){
+        }else if (reservationstate==6||reservationstate==7){
             cell.stateImageView.hidden = NO;
             cell.stateImageView.image = [UIImage imageNamed:@"JZCoursecomplete"];
         }else if(reservationstate==10){
