@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "JZCoursehead_null.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "JZCoursehead_null.png",
+      "filename" : "JZCoursehead_null@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "JZCoursehead_null@3x.png",
       "scale" : "3x"
     }
   ],
