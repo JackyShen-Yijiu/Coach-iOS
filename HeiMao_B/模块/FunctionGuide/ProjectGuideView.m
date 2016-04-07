@@ -71,20 +71,25 @@ static NSString * staticImage6[3] ={@"guide_6_1",@"guide_6_2",@"guide_6_3"};
 }
 - (void)addStartButton
 {
-    UIImageView * imageView = (UIImageView *)[_scrollView viewWithTag:PAGENUM - 1];
-    [imageView setUserInteractionEnabled:YES];
-    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.backgroundColor = [UIColor clearColor];
-    [button setImage:[UIImage imageNamed:@"button_normal.png"] forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:@"button_press.png"] forState:UIControlStateHighlighted];
-    if ([self isIphone5]) {
-        button.frame = CGRectMake(80, self.frame.size.height - 80 - 44, 160, 44);
-    }else{
-        button.frame = CGRectMake(80, self.frame.size.height - 80 - 44, 160, 44);
-    }
-    button.frame = imageView.bounds;
-    [button addTarget:self action:@selector(beginUseButtonClick:) forControlEvents:UIControlEventTouchDown];
-    [imageView addSubview:button];
+    
+    _scrollView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginUseButtonClick)];
+    [_scrollView addGestureRecognizer:tap];
+    
+//    UIImageView * imageView = (UIImageView *)[_scrollView viewWithTag:PAGENUM - 1];
+//    [imageView setUserInteractionEnabled:YES];
+//    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    button.backgroundColor = [UIColor clearColor];
+//    [button setImage:[UIImage imageNamed:@"button_normal.png"] forState:UIControlStateNormal];
+//    [button setImage:[UIImage imageNamed:@"button_press.png"] forState:UIControlStateHighlighted];
+//    if ([self isIphone5]) {
+//        button.frame = CGRectMake(80, self.frame.size.height - 80 - 44, 160, 44);
+//    }else{
+//        button.frame = CGRectMake(80, self.frame.size.height - 80 - 44, 160, 44);
+//    }
+//    button.frame = imageView.bounds;
+//    [button addTarget:self action:@selector(beginUseButtonClick:) forControlEvents:UIControlEventTouchDown];
+//    [imageView addSubview:button];
 }
 
 - (void)addPageControll
@@ -100,7 +105,7 @@ static NSString * staticImage6[3] ={@"guide_6_1",@"guide_6_2",@"guide_6_3"};
     [_pageControll setUserInteractionEnabled:NO];
 //    [self addSubview:_pageControll];
 }
-- (void)beginUseButtonClick:(UIButton *)button
+- (void)beginUseButtonClick
 {
 //    if (button.tag != 100) {
 //        if ([delegate respondsToSelector:@selector(functionGuideView:loginButtonClick:)])
@@ -125,7 +130,7 @@ static NSString * staticImage6[3] ={@"guide_6_1",@"guide_6_2",@"guide_6_3"};
         NSInteger curPage = floorf(([_scrollView contentOffset].x+ 161) / _scrollView.bounds.size.width);
         _pageControll.currentPage = curPage;
         if ([_scrollView contentOffset].x > _scrollView.contentSize.width - _scrollView.width ) {
-            [self beginUseButtonClick:nil];
+//            [self beginUseButtonClick:nil];
         }
     }
     NSLog(@"%f",scrollView.contentOffset.x);
