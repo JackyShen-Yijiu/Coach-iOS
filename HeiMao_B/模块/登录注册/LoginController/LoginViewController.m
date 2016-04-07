@@ -100,7 +100,7 @@ static NSString *const kuserType = @"usertype";
         _loginButton.backgroundColor = JZ_BlueColor;
         [_loginButton addTarget:self action:@selector(dealLogin:) forControlEvents:UIControlEventTouchUpInside];
         [_loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_loginButton setTitle:@"立即加入" forState:UIControlStateNormal];
+        [_loginButton setTitle:@"立即登陆" forState:UIControlStateNormal];
         _loginButton.titleLabel.font = [UIFont systemFontOfSize:16];
         
         _loginButton.layer.masksToBounds = YES;
@@ -209,7 +209,7 @@ static NSString *const kuserType = @"usertype";
         _messageLabel.font = [UIFont systemFontOfSize:font];
         _messageLabel.backgroundColor = [UIColor clearColor];
         _messageLabel.textAlignment = NSTextAlignmentLeft;
-        _messageLabel.text = @" 只有联盟驾校教练才可以通过验证，加入极致驾服！";
+        _messageLabel.text = @" 只有联盟驾校教练才可以通过验证！";
         _messageLabel.textColor = [UIColor lightGrayColor];
         _messageLabel.numberOfLines = 0;
         
