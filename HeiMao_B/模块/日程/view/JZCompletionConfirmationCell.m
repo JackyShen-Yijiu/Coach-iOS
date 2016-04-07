@@ -137,7 +137,7 @@
 - (UIImageView *)arrowImageView{
     if (_arrowImageView == nil) {
         _arrowImageView = [[UIImageView alloc] init];
-        _arrowImageView.image = [UIImage imageNamed:@"more_right"];
+        _arrowImageView.image = [UIImage imageNamed:@"JZCoursemore_dwon"];
     }
     return _arrowImageView;
 }

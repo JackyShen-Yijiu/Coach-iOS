@@ -29,7 +29,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 @implementation SetupViewController
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = @[@[@"预约提醒",@"新消息通知",@"自动接收预约"],@[@"清除缓存",@"关于我们",@"去评分",@"意见反馈",@"版本更新"]];
+        _dataArray = @[@[@"预约提醒",@"新消息通知",@"自动接受预约"],@[@"清除缓存",@"关于我们",@"去评分",@"意见反馈",@"版本更新"]];
     }
     return _dataArray;
 }
@@ -374,10 +374,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 }
 #pragma mark ------ 去评分和版本更新相关操作
 - (void)goToAppStore{
-    NSString *str = [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=1089530725" ];
-    if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)){
-        str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/1089530725"];
-    }
+    NSString *str = [NSString stringWithFormat:@"https://itunes.apple.com/us/app/ji-zhi-jiao-lian/id1089530725?l=zh&ls=1&mt=8" ];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 }
 

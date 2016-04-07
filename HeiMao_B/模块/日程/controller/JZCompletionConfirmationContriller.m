@@ -163,11 +163,8 @@
     // 展开箭头的方向
     if (listModel.isOpen) {
         
-        [UIView animateWithDuration:0.5 animations:^{
-            cell.arrowImageView.transform = CGAffineTransformMakeRotation(M_PI / 2);
-        } completion:^(BOOL finished) {
-        }];
-
+        cell.arrowImageView.image = [UIImage imageNamed:@"JZCoursemore_up"];
+       
     }
     
     return cell;

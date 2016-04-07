@@ -44,7 +44,7 @@
         make.centerX.equalTo(self.contentView.mas_centerX);
         make.top.equalTo(self.contentView.mas_top).offset(10);
         make.width.equalTo(@80);
-        make.height.equalTo(@20);
+        make.height.equalTo(@12);
         
     }];
     [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -65,7 +65,7 @@
         make.top.equalTo(self.detailBackView.mas_top).offset(10);
         make.left.equalTo(self.detailBackView.mas_left).offset(10);
         make.width.equalTo(@200);
-        make.height.equalTo(@20);
+        make.height.equalTo(@16);
         
     }];
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,26 +76,26 @@
         
     }];
     [self.dataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(2);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(5);
         make.left.equalTo(self.detailBackView.mas_left).offset(10);
         make.width.equalTo(@100);
         make.height.equalTo(@12);
         
     }];
     [self.contentTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.dataLabel.mas_bottom).offset(2);
+        make.top.equalTo(self.dataLabel.mas_bottom).offset(5);
         make.left.equalTo(self.detailBackView.mas_left).offset(10);
         make.right.equalTo(self.detailBackView.mas_right).offset(0);
-        make.height.equalTo(@25);
+        make.height.equalTo(@16);
         
     }];
 
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentTitleLabel.mas_bottom).offset(0);
+        make.top.equalTo(self.contentTitleLabel.mas_bottom).offset(10);
         make.left.equalTo(self.detailBackView.mas_left).offset(10);
         make.right.equalTo(self.detailBackView.mas_right).offset(-10);
 //        make.bottom.equalTo(self.detailBackView.mas_bottom).offset(-10);
-        make.height.equalTo(@50);
+        make.height.equalTo(@14);
         
     }];
     
@@ -105,7 +105,7 @@
     if (_timeLabel == nil) {
         _timeLabel = [[ UILabel alloc] init];
         _timeLabel.backgroundColor = RGB_Color(153, 153, 153);
-        _timeLabel.text = @" ";
+        _timeLabel.text = @"10:20";
         _timeLabel.textColor = [UIColor whiteColor];
         _timeLabel.textAlignment = UITextAlignmentCenter;
         [_timeLabel.layer setMasksToBounds:YES];
