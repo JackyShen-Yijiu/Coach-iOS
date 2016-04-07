@@ -11,7 +11,7 @@
 #import "CustomMessageCell.h"
 #import "EaseEmotionManager.h"
 #import "EaseEmoji.h"
-#import "SutdentHomeController.h"
+#import "YBStudentDetailsViewController.h"
 
 @interface ChatViewController ()<UIAlertViewDelegate, EaseMessageViewControllerDelegate, EaseMessageViewControllerDataSource>
 {
@@ -179,8 +179,12 @@
     if ([fromId isEqualToString:[[UserInfoModel defaultUserInfo] userID]]) {
         return;
     }else{
-        SutdentHomeController * stuH = [[SutdentHomeController alloc] init];
-        stuH.studentId = self.studentModel.userId;
+        YBStudentDetailsViewController * stuH = [[YBStudentDetailsViewController alloc] init];
+        if (self.studentModel.userId) {
+            stuH.studentID = self.studentModel.userId;
+        }else{
+            stuH.studentID = fromId;
+        }
         [self.navigationController pushViewController:stuH animated:YES];
     }
 }
@@ -264,7 +268,6 @@
         model.avatarURLPath = [dic objectStringForKey:@"headUrl"];
         model.nickname = [dic objectStringForKey:@"nickName"];
     }
-    
     model.failImageName = @"user";
 }
 

@@ -17,6 +17,7 @@
 #import "APService.h"
 #import "EaseSDKHelper.h"
 #import "ProtocalViewController.h"
+#import "JGUserTools.h"
 
 static NSString *const kloginUrl = @"userinfo/userlogin";
 
@@ -46,6 +47,8 @@ static NSString *const kuserType = @"usertype";
 @property (nonatomic,strong) UIImageView *messageImg;
 
 @property (nonatomic,strong) UIImageView *footImg;
+
+@property (nonatomic, strong) NSString *passwordStr;
 
 @end
 
@@ -97,7 +100,7 @@ static NSString *const kuserType = @"usertype";
         _loginButton.backgroundColor = JZ_BlueColor;
         [_loginButton addTarget:self action:@selector(dealLogin:) forControlEvents:UIControlEventTouchUpInside];
         [_loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_loginButton setTitle:@"立即加入" forState:UIControlStateNormal];
+        [_loginButton setTitle:@"立即登陆" forState:UIControlStateNormal];
         _loginButton.titleLabel.font = [UIFont systemFontOfSize:16];
         
         _loginButton.layer.masksToBounds = YES;
@@ -206,7 +209,7 @@ static NSString *const kuserType = @"usertype";
         _messageLabel.font = [UIFont systemFontOfSize:font];
         _messageLabel.backgroundColor = [UIColor clearColor];
         _messageLabel.textAlignment = NSTextAlignmentLeft;
-        _messageLabel.text = @" 只有联盟驾校教练才可以通过验证，加入极致驾服！";
+        _messageLabel.text = @" 只有联盟驾校教练才可以通过验证！";
         _messageLabel.textColor = [UIColor lightGrayColor];
         _messageLabel.numberOfLines = 0;
         
@@ -244,7 +247,6 @@ static NSString *const kuserType = @"usertype";
 }
 
 #pragma mark - loginAction
-
 - (void)dealLogin:(UIButton *)sender {
     
     if (self.phoneNumTextField.text == nil || self.phoneNumTextField.text.length  == 0) {
@@ -274,22 +276,74 @@ static NSString *const kuserType = @"usertype";
         
         if (type.integerValue == 1) {
             
-            NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:param[@"data"]];
-            
-            [dic setValue:[self.passwordTextField.text DY_MD5] forKey:@"md5Pass"];
-            
-            [[UserInfoModel defaultUserInfo] loginViewDic:dic];
-           
-            NSString *coachID = [NSString stringWithFormat:@"%@",[UserInfoModel defaultUserInfo].driveschoolinfo[@"id"]];
-            NSSet *set = [NSSet setWithObjects:JPushTag,coachID, nil];
-            [APService setTags:set alias:[UserInfoModel defaultUserInfo].userID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
-            
-            [[EaseMob sharedInstance].chatManager removeAllConversationsWithDeleteMessages:YES append2Chat:NO];
+            self.passwordStr = responseObject[@"data"][@"password"];
 
-            if ([_delegate respondsToSelector:@selector(loginViewControllerdidLoginSucess:)]) {
-                [_delegate loginViewControllerdidLoginSucess:self];
-                self.passwordTextField.text = @"";
+            BOOL isLoggedIn = [[EaseMob sharedInstance].chatManager isLoggedIn];
+            
+            if (isLoggedIn) {
+                [[EaseMob sharedInstance].chatManager logoffWithUnbindDeviceToken:YES error:nil];
+                
+                [[EaseMob sharedInstance].chatManager asyncLogoffWithUnbindDeviceToken:YES];
+                
+                [[EaseMob sharedInstance].chatManager asyncLogoffWithUnbindDeviceToken:YES completion:^(NSDictionary *info, EMError *error) {
+                    
+                } onQueue:nil];
+                [[EaseMob sharedInstance].chatManager asyncLogoffWithUnbindDeviceToken:YES completion:^(NSDictionary *info, EMError *error) {
+                    
+                    if (!error && info) {
+                    }
+                } onQueue:nil];
             }
+            
+            NSString *coachid = [NSString stringWithFormat:@"%@",param[@"data"][@"coachid"]];
+            
+            // 异步登陆账号
+            [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:coachid
+                                                                password:self.passwordStr
+                                                              completion:
+             ^(NSDictionary *loginInfo, EMError *error) {
+                 
+                 NSLog(@"环信登陆loginInfo:%@ error:%@",loginInfo,error);
+                 
+                 [MBProgressHUD hideHUDForView:self.view animated:NO];
+                 
+                 if (loginInfo && !error) {
+                     
+                     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:param[@"data"]];
+                     
+                     [[UserInfoModel defaultUserInfo] loginViewDic:dic];
+                     
+                     NSString *coachID = [NSString stringWithFormat:@"%@",[UserInfoModel defaultUserInfo].driveschoolinfo[@"id"]];
+                     NSSet *set = [NSSet setWithObjects:JPushTag,coachID, nil];
+                     [APService setTags:set alias:[UserInfoModel defaultUserInfo].userID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+                     
+                     // 旧数据转换 (如果您的sdk是由2.1.2版本升级过来的，需要家这句话)
+                     EMError *error = [[EaseMob sharedInstance].chatManager importDataToNewDatabase];
+                     if (!error) {
+                         //获取数据库中数据
+                         error = [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
+                     }
+                     
+//                    [[EaseMob sharedInstance].chatManager removeAllConversationsWithDeleteMessages:YES append2Chat:NO];
+                     
+                     // 设置自动登录
+                     [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
+                     
+                     self.passwordTextField.text = @"";
+                     
+                     if ([_delegate respondsToSelector:@selector(loginViewControllerdidLoginSucess:)]) {
+                         [_delegate loginViewControllerdidLoginSucess:self];
+                     }
+                     
+                 }
+                 else
+                 {
+                     ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:error.description controller:self];
+                     [alerview show];
+                     
+                 }
+                 
+             } onQueue:nil];
             
         }else {
             [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
@@ -431,7 +485,7 @@ static NSString *const kuserType = @"usertype";
             NSString *msg = [NSString stringWithFormat:@"%@",param[@"msg"]];
             
             if (type.integerValue != 1) {
-                
+            
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:msg delegate:self cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
                 [alert show];
                 

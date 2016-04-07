@@ -512,8 +512,6 @@
 //    [UserInfoModel storeData:name forKey:@"name"];
 }
 
-
-
 - (NSDictionary *)messageExt
 {
     if (![[self class] isLogin]) {

@@ -8,7 +8,7 @@
 
 #import "CourseDetailViewController.h"
 #import "CourseDetailView.h"
-#import "SutdentHomeController.h"
+#import "YBStudentDetailsViewController.h"
 #import "CourseCancelController.h"
 #import "RefreshTableView.h"
 #import "CourseDetailViewCell.h"
@@ -271,8 +271,8 @@
 
 - (void)courseDetailViewDidClickStudentDetail:(CourseDetailView *)view
 {
-    SutdentHomeController * sudH = [[SutdentHomeController alloc] init];
-    sudH.studentId = self.model.studentInfo.userId;
+    YBStudentDetailsViewController * sudH = [[YBStudentDetailsViewController alloc] init];
+    sudH.studentID = self.model.studentInfo.userId;
     [self.navigationController pushViewController:sudH animated:YES];
 }
 

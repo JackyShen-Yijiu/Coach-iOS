@@ -33,13 +33,12 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-//    [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:NO];
+        
     self.showRefreshHeader = YES;
     self.delegate = self;
     self.dataSource = self;
     
-    [self removeEmptyConversationsFromDB];
+//    [self removeEmptyConversationsFromDB];
 
     [self tableViewDidTriggerHeaderRefresh];
 
@@ -73,23 +72,23 @@
 
 - (void)removeEmptyConversationsFromDB
 {
-    NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
-    NSMutableArray *needRemoveConversations;
-    for (EMConversation *conversation in conversations) {
-        if (!conversation.latestMessage || (conversation.conversationType == eConversationTypeChatRoom)) {
-            if (!needRemoveConversations) {
-                needRemoveConversations = [[NSMutableArray alloc] initWithCapacity:0];
-            }
-            
-            [needRemoveConversations addObject:conversation.chatter];
-        }
-    }
-    
-    if (needRemoveConversations && needRemoveConversations.count > 0) {
-        [[EaseMob sharedInstance].chatManager removeConversationsByChatters:needRemoveConversations
-                                                             deleteMessages:YES
-                                                                append2Chat:NO];
-    }
+//    NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
+//    NSLog(@"removeEmptyConversationsFromDB conversations:%@",conversations);
+//    NSMutableArray *needRemoveConversations;
+//    for (EMConversation *conversation in conversations) {
+//        if (!conversation.latestMessage || (conversation.conversationType == eConversationTypeChatRoom)) {
+//            if (!needRemoveConversations) {
+//                needRemoveConversations = [[NSMutableArray alloc] initWithCapacity:0];
+//            }
+//            [needRemoveConversations addObject:conversation.chatter];
+//        }
+//    }
+//    
+//    if (needRemoveConversations && needRemoveConversations.count > 0) {
+//        [[EaseMob sharedInstance].chatManager removeConversationsByChatters:needRemoveConversations
+//                                                             deleteMessages:YES
+//                                                                append2Chat:NO];
+//    }
 }
 
 #pragma mark - getter
@@ -113,8 +112,8 @@
     
     return _networkStateView;
 }
-#pragma mark - EaseConversationListViewControllerDelegate
 
+#pragma mark - EaseConversationListViewControllerDelegate
 - (void)conversationListViewController:(EaseConversationListViewController *)conversationListViewController
             didSelectConversationModel:(id<IConversationModel>)conversationModel
 {

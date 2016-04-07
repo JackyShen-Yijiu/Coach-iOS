@@ -46,5 +46,6 @@
  */
 +(void)queryUserFromRemoteAsync:(NSString *)mEMUsername;
 
+
 @end
 

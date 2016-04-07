@@ -12,7 +12,7 @@
 #import "MJRefresh.h"
 #import "DVVToast.h"
 #import "ChineseString.h"
-#import "SutdentHomeController.h"
+#import "YBStudentDetailsViewController.h"
 
 #define kCellIdentifier @"kCellIdentifier"
 
@@ -174,13 +174,13 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    SutdentHomeController * stuH = [[SutdentHomeController alloc] init];
+    YBStudentDetailsViewController * stuH = [[YBStudentDetailsViewController alloc] init];
     
     NSString *str = [[self.LetterResultArr objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     
     DVVStudentListDMData *item = [self.dataDict objectForKey:str];
     
-    stuH.studentId = item.ID;
+    stuH.studentID = item.ID;
     
     [self.parentViewController.navigationController pushViewController:stuH animated:YES];
     

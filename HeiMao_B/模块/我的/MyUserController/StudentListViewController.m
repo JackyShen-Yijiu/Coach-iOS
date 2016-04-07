@@ -13,7 +13,7 @@
 #import "ToolHeader.h"
 #import "StudentListCell.h"
 #import "HMStudentModel.h"
-#import "SutdentHomeController.h"
+#import "YBStudentDetailsViewController.h"
 #import "NoContentTipView.h"
 #import "RefreshTableView.h"
 
@@ -219,9 +219,9 @@ static NSString *const kstudentList = @"userinfo/coachstudentlist?coachid=%@&ind
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    SutdentHomeController * stuH = [[SutdentHomeController alloc] init];
+    YBStudentDetailsViewController * stuH = [[YBStudentDetailsViewController alloc] init];
     HMStudentModel *model = self.dataArray[indexPath.row];
-    stuH.studentId = model.userId;
+    stuH.studentID = model.userId;
     [self.navigationController pushViewController:stuH animated:YES];
 
 }

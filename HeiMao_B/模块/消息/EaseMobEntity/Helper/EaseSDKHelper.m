@@ -11,7 +11,7 @@
 #import "EaseConvertToCommonEmoticonsHelper.h"
 #import "NSObject+EaseMob.h"
 
-@interface EMChatImageOptions : NSObject<IChatImageOptions>
+@interface EMChatImageOptions : NSObject<IChatImageOptions,EMChatManagerDelegate,EMCallManagerDelegate>
 
 @property (assign, nonatomic) CGFloat compressionQuality;
 
@@ -159,12 +159,14 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
                                         otherConfig:otherConfig];
     
     // 注册环信监听
-    [self registerEaseMobLiteNotification];
-    
+    [[EaseMob sharedInstance].chatManager removeDelegate:self];
+    [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
+
     //启动easemob sdk
     [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
     [[EaseMob sharedInstance].chatManager setIsAutoFetchBuddyList:YES];
+    
 }
 
 #pragma mark - EMChatManagerLoginDelegate
@@ -173,22 +175,24 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 -(void)willAutoLoginWithInfo:(NSDictionary *)loginInfo error:(EMError *)error
 {
 //    UIAlertView *alertView = nil;
-//    if (error) {
+    if (error) {
 //        alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompt", @"Prompt") message:NSLocalizedString(@"login.errorAutoLogin", @"Automatic logon failure") delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", @"OK") otherButtonTitles:nil, nil];
-//        
-//        //发送自动登陆状态通知
-//        [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:@NO];
-//    }
-//    else{
+        
+        //发送自动登陆状态通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:@NO];
+    }
+    else{
 //        alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompt", @"Prompt") message:NSLocalizedString(@"login.beginAutoLogin", @"Start automatic login...") delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", @"OK") otherButtonTitles:nil, nil];
-//        
-//        //将旧版的coredata数据导入新的数据库
-//        EMError *error = [[EaseMob sharedInstance].chatManager importDataToNewDatabase];
-//        if (!error) {
-//            error = [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
-//        }
-//    }
-//    
+        
+        //将旧版的coredata数据导入新的数据库
+        EMError *error = [[EaseMob sharedInstance].chatManager importDataToNewDatabase];
+        if (!error) {
+            error = [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
+        }
+        [[EaseMob sharedInstance].chatManager setApnsNickname:[UserInfoModel defaultUserInfo].name];
+
+    }
+    
 //    [alertView show];
 }
 
@@ -196,19 +200,19 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 -(void)didAutoLoginWithInfo:(NSDictionary *)loginInfo error:(EMError *)error
 {
 //    UIAlertView *alertView = nil;
-//    if (error) {
+    if (error) {
 //        alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompt", @"Prompt") message:NSLocalizedString(@"login.errorAutoLogin", @"Automatic logon failure") delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", @"OK") otherButtonTitles:nil, nil];
-//        
-//        //发送自动登陆状态通知
-//        //        [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:@NO];
-//    }
-//    else{
-//        //获取群组列表
-//        [[EaseMob sharedInstance].chatManager asyncFetchMyGroupsList];
-//        
+        
+        //发送自动登陆状态通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:@NO];
+    }
+    else{
+        //获取群组列表
+        [[EaseMob sharedInstance].chatManager asyncFetchMyGroupsList];
+        
 //        alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompt", @"Prompt") message:NSLocalizedString(@"login.endAutoLogin", @"End automatic login...") delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", @"OK") otherButtonTitles:nil, nil];
-//    }
-//    
+    }
+    
 //    [alertView show];
 }
 

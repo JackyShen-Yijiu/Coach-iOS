@@ -13,8 +13,8 @@
 #import "CourseDesInPutCell.h"
 #import "CourseEnsureCell.h"
 #import "HMCourseModel.h"
-#import "SutdentHomeController.h"
 #import "CourseRatingCell.h"
+#import "YBStudentDetailsViewController.h"
 
 #define GOTORECOMENDTAG     1000
 
@@ -301,8 +301,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 0) {
-        SutdentHomeController * sudH = [[SutdentHomeController alloc] init];
-        sudH.studentId = self.courseModel.studentInfo.userId;
+        YBStudentDetailsViewController * sudH = [[YBStudentDetailsViewController alloc] init];
+        sudH.studentID = self.courseModel.studentInfo.userId;
         [self.navigationController pushViewController:sudH animated:YES];
     }
 }

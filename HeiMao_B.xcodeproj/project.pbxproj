@@ -432,7 +432,6 @@
 		B2BA42B31CA5035700926584 /* StudentHomeRecomendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA41471CA5035700926584 /* StudentHomeRecomendCell.m */; };
 		B2BA42B41CA5035700926584 /* StudentHomeUserBasicInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA41491CA5035700926584 /* StudentHomeUserBasicInfoCell.m */; };
 		B2BA42B51CA5035700926584 /* StudentHomeUserCourseInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA414B1CA5035700926584 /* StudentHomeUserCourseInfoCell.m */; };
-		B2BA42B61CA5035700926584 /* SutdentHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA414D1CA5035700926584 /* SutdentHomeController.m */; };
 		B2BA42B71CA5035700926584 /* DVVDrivingStudentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA41501CA5035700926584 /* DVVDrivingStudentListCell.m */; };
 		B2BA42B81CA5035700926584 /* DVVDrivingStudentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2BA41511CA5035700926584 /* DVVDrivingStudentListCell.xib */; };
 		B2BA42B91CA5035700926584 /* DVVDrivingStudentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BA41531CA5035700926584 /* DVVDrivingStudentListView.m */; };
@@ -1319,8 +1318,6 @@
 		B2BA41491CA5035700926584 /* StudentHomeUserBasicInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentHomeUserBasicInfoCell.m; sourceTree = "<group>"; };
 		B2BA414A1CA5035700926584 /* StudentHomeUserCourseInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentHomeUserCourseInfoCell.h; sourceTree = "<group>"; };
 		B2BA414B1CA5035700926584 /* StudentHomeUserCourseInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentHomeUserCourseInfoCell.m; sourceTree = "<group>"; };
-		B2BA414C1CA5035700926584 /* SutdentHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SutdentHomeController.h; sourceTree = "<group>"; };
-		B2BA414D1CA5035700926584 /* SutdentHomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SutdentHomeController.m; sourceTree = "<group>"; };
 		B2BA414F1CA5035700926584 /* DVVDrivingStudentListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVDrivingStudentListCell.h; sourceTree = "<group>"; };
 		B2BA41501CA5035700926584 /* DVVDrivingStudentListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVDrivingStudentListCell.m; sourceTree = "<group>"; };
 		B2BA41511CA5035700926584 /* DVVDrivingStudentListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DVVDrivingStudentListCell.xib; sourceTree = "<group>"; };
@@ -3128,8 +3125,6 @@
 				B2BA41491CA5035700926584 /* StudentHomeUserBasicInfoCell.m */,
 				B2BA414A1CA5035700926584 /* StudentHomeUserCourseInfoCell.h */,
 				B2BA414B1CA5035700926584 /* StudentHomeUserCourseInfoCell.m */,
-				B2BA414C1CA5035700926584 /* SutdentHomeController.h */,
-				B2BA414D1CA5035700926584 /* SutdentHomeController.m */,
 			);
 			path = StudentHomeController;
 			sourceTree = "<group>";
@@ -4103,7 +4098,6 @@
 				B2BA3EB91CA4FF9800926584 /* PortraitView.m in Sources */,
 				B2BA417E1CA5035700926584 /* ButtonSelectedCell.m in Sources */,
 				B2BA3ED91CA5003B00926584 /* HMCarLicenseModel.m in Sources */,
-				B2BA42B61CA5035700926584 /* SutdentHomeController.m in Sources */,
 				B2BA41F31CA5035700926584 /* PSTGridLayoutSection.m in Sources */,
 				B2BA42C11CA5035700926584 /* DVVTheoreticalStudentListCell.m in Sources */,
 				B2BA41E71CA5035700926584 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
@@ -4348,7 +4342,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jizhijiafu.coach;
 				PRODUCT_NAME = "极致教练端";
-				PROVISIONING_PROFILE = "a833d7d0-8104-4b15-974a-e704cd89ed5e";
+				PROVISIONING_PROFILE = "9a2ac392-5fcf-4b55-a453-2ea09b54a805";
 			};
 			name = Debug;
 		};
@@ -4378,7 +4372,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jizhijiafu.coach;
 				PRODUCT_NAME = "极致教练端";
-				PROVISIONING_PROFILE = "a833d7d0-8104-4b15-974a-e704cd89ed5e";
+				PROVISIONING_PROFILE = "9a2ac392-5fcf-4b55-a453-2ea09b54a805";
 			};
 			name = Release;
 		};
