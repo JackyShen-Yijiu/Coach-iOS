@@ -1,20 +1,20 @@
 //
-//  JZHomeStudentSubjectThreeView.m
+//  JZHomeStudentSubjectTwoView.m
 //  HeiMao_B
 //
 //  Created by ytzhang on 16/3/28.
 //  Copyright © 2016年 ke. All rights reserved.
 //
 
-#import "JZHomeStudentSubjectThreeView.h"
+#import "JZHomeStudentNoExameListView.h"
 
 #import "JZHomeStudentListCell.h"
 
-@interface JZHomeStudentSubjectThreeView ()<UITableViewDataSource,UITableViewDelegate>
+@interface JZHomeStudentNoExameListView ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @end
 
-@implementation JZHomeStudentSubjectThreeView
+@implementation JZHomeStudentNoExameListView
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self initUI];
@@ -26,7 +26,7 @@
 }
 #pragma mark ---- UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return self.dataArray.count;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -38,6 +38,7 @@
     if (!listCell) {
         listCell = [[JZHomeStudentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDCell];
     }
+    listCell.listModel = self.dataArray[indexPath.row];
     return listCell;
 }
 - (UITableView *)tableView{

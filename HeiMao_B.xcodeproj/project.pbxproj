@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		060673831CB7764200B49EE8 /* JZHomeStudentAppointView.m in Sources */ = {isa = PBXBuildFile; fileRef = 060673821CB7764200B49EE8 /* JZHomeStudentAppointView.m */; };
+		060673861CB7765B00B49EE8 /* JZHomeStudentPassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 060673851CB7765B00B49EE8 /* JZHomeStudentPassView.m */; };
 		0608CA411CAA71CF0068A18B /* JZHomeStudentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA401CAA71CF0068A18B /* JZHomeStudentViewModel.m */; };
 		0608CA441CAA732F0068A18B /* JZHomeStudetModelClassRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA431CAA732F0068A18B /* JZHomeStudetModelClassRoot.m */; };
 		0608CA561CAA7CDE0068A18B /* JZResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608CA551CAA7CDE0068A18B /* JZResultModel.m */; };
@@ -42,10 +44,9 @@
 		06DB70C51CA90E3800A6AC9D /* WorkTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70C41CA90E3800A6AC9D /* WorkTimeViewController.m */; };
 		06DB70C91CA91D4200A6AC9D /* JZHomeStudentToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70C81CA91D4200A6AC9D /* JZHomeStudentToolBarView.m */; };
 		06DB70CC1CA942F400A6AC9D /* JZHomeStudentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70CB1CA942F400A6AC9D /* JZHomeStudentListCell.m */; };
-		06DB70CF1CA9557500A6AC9D /* JZHomeStudentSubjectOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70CE1CA9557500A6AC9D /* JZHomeStudentSubjectOneView.m */; };
-		06DB70D21CA9559800A6AC9D /* JZHomeStudentSubjectTwoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70D11CA9559800A6AC9D /* JZHomeStudentSubjectTwoView.m */; };
-		06DB70D51CA955AF00A6AC9D /* JZHomeStudentSubjectThreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70D41CA955AF00A6AC9D /* JZHomeStudentSubjectThreeView.m */; };
-		06DB70D81CA955C000A6AC9D /* JZHomeStudentSubjectFourView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70D71CA955C000A6AC9D /* JZHomeStudentSubjectFourView.m */; };
+		06DB70CF1CA9557500A6AC9D /* JZHomeStudentAllListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70CE1CA9557500A6AC9D /* JZHomeStudentAllListView.m */; };
+		06DB70D21CA9559800A6AC9D /* JZHomeStudentNoExameListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70D11CA9559800A6AC9D /* JZHomeStudentNoExameListView.m */; };
+		06DB70D81CA955C000A6AC9D /* JZHomeStudentRetestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DB70D71CA955C000A6AC9D /* JZHomeStudentRetestView.m */; };
 		06EFEB0B1CAD57F2002B7E82 /* JZData.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EFEB021CAD57F2002B7E82 /* JZData.m */; };
 		06EFEB0C1CAD57F2002B7E82 /* JZFinishStudentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EFEB041CAD57F2002B7E82 /* JZFinishStudentListCell.m */; };
 		06EFEB0D1CAD57F2002B7E82 /* JZHeadportrait.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EFEB061CAD57F2002B7E82 /* JZHeadportrait.m */; };
@@ -584,6 +585,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		060673811CB7764200B49EE8 /* JZHomeStudentAppointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentAppointView.h; sourceTree = "<group>"; };
+		060673821CB7764200B49EE8 /* JZHomeStudentAppointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentAppointView.m; sourceTree = "<group>"; };
+		060673841CB7765B00B49EE8 /* JZHomeStudentPassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentPassView.h; sourceTree = "<group>"; };
+		060673851CB7765B00B49EE8 /* JZHomeStudentPassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentPassView.m; sourceTree = "<group>"; };
 		0608CA3F1CAA71C60068A18B /* JZHomeStudentViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentViewModel.h; sourceTree = "<group>"; };
 		0608CA401CAA71CF0068A18B /* JZHomeStudentViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentViewModel.m; sourceTree = "<group>"; };
 		0608CA421CAA732F0068A18B /* JZHomeStudetModelClassRoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudetModelClassRoot.h; sourceTree = "<group>"; };
@@ -654,14 +659,12 @@
 		06DB70C81CA91D4200A6AC9D /* JZHomeStudentToolBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentToolBarView.m; sourceTree = "<group>"; };
 		06DB70CA1CA942F400A6AC9D /* JZHomeStudentListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentListCell.h; sourceTree = "<group>"; };
 		06DB70CB1CA942F400A6AC9D /* JZHomeStudentListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentListCell.m; sourceTree = "<group>"; };
-		06DB70CD1CA9557500A6AC9D /* JZHomeStudentSubjectOneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentSubjectOneView.h; sourceTree = "<group>"; };
-		06DB70CE1CA9557500A6AC9D /* JZHomeStudentSubjectOneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentSubjectOneView.m; sourceTree = "<group>"; };
-		06DB70D01CA9559800A6AC9D /* JZHomeStudentSubjectTwoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentSubjectTwoView.h; sourceTree = "<group>"; };
-		06DB70D11CA9559800A6AC9D /* JZHomeStudentSubjectTwoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentSubjectTwoView.m; sourceTree = "<group>"; };
-		06DB70D31CA955AF00A6AC9D /* JZHomeStudentSubjectThreeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentSubjectThreeView.h; sourceTree = "<group>"; };
-		06DB70D41CA955AF00A6AC9D /* JZHomeStudentSubjectThreeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentSubjectThreeView.m; sourceTree = "<group>"; };
-		06DB70D61CA955C000A6AC9D /* JZHomeStudentSubjectFourView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentSubjectFourView.h; sourceTree = "<group>"; };
-		06DB70D71CA955C000A6AC9D /* JZHomeStudentSubjectFourView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentSubjectFourView.m; sourceTree = "<group>"; };
+		06DB70CD1CA9557500A6AC9D /* JZHomeStudentAllListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentAllListView.h; sourceTree = "<group>"; };
+		06DB70CE1CA9557500A6AC9D /* JZHomeStudentAllListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentAllListView.m; sourceTree = "<group>"; };
+		06DB70D01CA9559800A6AC9D /* JZHomeStudentNoExameListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentNoExameListView.h; sourceTree = "<group>"; };
+		06DB70D11CA9559800A6AC9D /* JZHomeStudentNoExameListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentNoExameListView.m; sourceTree = "<group>"; };
+		06DB70D61CA955C000A6AC9D /* JZHomeStudentRetestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZHomeStudentRetestView.h; sourceTree = "<group>"; };
+		06DB70D71CA955C000A6AC9D /* JZHomeStudentRetestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZHomeStudentRetestView.m; sourceTree = "<group>"; };
 		06EFEB011CAD57F2002B7E82 /* JZData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZData.h; sourceTree = "<group>"; };
 		06EFEB021CAD57F2002B7E82 /* JZData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZData.m; sourceTree = "<group>"; };
 		06EFEB031CAD57F2002B7E82 /* JZFinishStudentListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZFinishStudentListCell.h; sourceTree = "<group>"; };
@@ -1751,14 +1754,16 @@
 			children = (
 				06DB70C71CA91D4200A6AC9D /* JZHomeStudentToolBarView.h */,
 				06DB70C81CA91D4200A6AC9D /* JZHomeStudentToolBarView.m */,
-				06DB70CD1CA9557500A6AC9D /* JZHomeStudentSubjectOneView.h */,
-				06DB70CE1CA9557500A6AC9D /* JZHomeStudentSubjectOneView.m */,
-				06DB70D01CA9559800A6AC9D /* JZHomeStudentSubjectTwoView.h */,
-				06DB70D11CA9559800A6AC9D /* JZHomeStudentSubjectTwoView.m */,
-				06DB70D31CA955AF00A6AC9D /* JZHomeStudentSubjectThreeView.h */,
-				06DB70D41CA955AF00A6AC9D /* JZHomeStudentSubjectThreeView.m */,
-				06DB70D61CA955C000A6AC9D /* JZHomeStudentSubjectFourView.h */,
-				06DB70D71CA955C000A6AC9D /* JZHomeStudentSubjectFourView.m */,
+				06DB70CD1CA9557500A6AC9D /* JZHomeStudentAllListView.h */,
+				06DB70CE1CA9557500A6AC9D /* JZHomeStudentAllListView.m */,
+				06DB70D01CA9559800A6AC9D /* JZHomeStudentNoExameListView.h */,
+				06DB70D11CA9559800A6AC9D /* JZHomeStudentNoExameListView.m */,
+				06DB70D61CA955C000A6AC9D /* JZHomeStudentRetestView.h */,
+				06DB70D71CA955C000A6AC9D /* JZHomeStudentRetestView.m */,
+				060673811CB7764200B49EE8 /* JZHomeStudentAppointView.h */,
+				060673821CB7764200B49EE8 /* JZHomeStudentAppointView.m */,
+				060673841CB7765B00B49EE8 /* JZHomeStudentPassView.h */,
+				060673851CB7765B00B49EE8 /* JZHomeStudentPassView.m */,
 				06DB70CA1CA942F400A6AC9D /* JZHomeStudentListCell.h */,
 				06DB70CB1CA942F400A6AC9D /* JZHomeStudentListCell.m */,
 				067945AA1CB60B9B0010B6B2 /* JZNoDataShowBGView.h */,
@@ -3891,7 +3896,6 @@
 				B2BA428B1CA5035700926584 /* NSDate+Category.m in Sources */,
 				06234CA01CA8E5D100007DB7 /* PhoneNumViewController.m in Sources */,
 				B2BA432C1CA5041100926584 /* CourseDetailViewController.m in Sources */,
-				06DB70D51CA955AF00A6AC9D /* JZHomeStudentSubjectThreeView.m in Sources */,
 				B2BA41A11CA5035700926584 /* NSUserStoreTool.m in Sources */,
 				B2BA41D51CA5035700926584 /* MWZoomingScrollView.m in Sources */,
 				B253C2F21C43C960001AF771 /* PermissiveAlignementMethods.c in Sources */,
@@ -3976,6 +3980,7 @@
 				B2BA41EB1CA5035700926584 /* PSTCollectionViewData.m in Sources */,
 				B2BA41F21CA5035700926584 /* PSTGridLayoutRow.m in Sources */,
 				B2BA3EDC1CA5003B00926584 /* HMPortraitInfoModel.m in Sources */,
+				060673861CB7765B00B49EE8 /* JZHomeStudentPassView.m in Sources */,
 				B2BA44661CABC15C00926584 /* YBStudentDetailsExaminationinfo.m in Sources */,
 				B2A0B9641CB3571800E2008C /* RatingBar.m in Sources */,
 				B2BA42861CA5035700926584 /* JGUserModel.m in Sources */,
@@ -3984,7 +3989,7 @@
 				06EFEB0B1CAD57F2002B7E82 /* JZData.m in Sources */,
 				B2BA41F01CA5035700926584 /* PSTGridLayoutInfo.m in Sources */,
 				B2BA42A81CA5035700926584 /* EaseImageView.m in Sources */,
-				06DB70D21CA9559800A6AC9D /* JZHomeStudentSubjectTwoView.m in Sources */,
+				06DB70D21CA9559800A6AC9D /* JZHomeStudentNoExameListView.m in Sources */,
 				B2BA41F11CA5035700926584 /* PSTGridLayoutItem.m in Sources */,
 				B2BA417C1CA5035700926584 /* AboutUsViewController.m in Sources */,
 				B2BA42931CA5035700926584 /* EaseMessageReadManager.m in Sources */,
@@ -4032,7 +4037,7 @@
 				B2BA43D91CA951A200926584 /* YBCourseCoursetime.m in Sources */,
 				B2BA41731CA5035700926584 /* ProtocalViewController.m in Sources */,
 				B253C2CF1C3FA742001AF771 /* QRCodeGenerator.m in Sources */,
-				06DB70CF1CA9557500A6AC9D /* JZHomeStudentSubjectOneView.m in Sources */,
+				06DB70CF1CA9557500A6AC9D /* JZHomeStudentAllListView.m in Sources */,
 				B2BA41AA1CA5035700926584 /* StudentListModel.m in Sources */,
 				B8C458711BDB59AC00901F71 /* RFSegmentView.m in Sources */,
 				B2BA42AE1CA5035700926584 /* EaseConversationCell.m in Sources */,
@@ -4143,7 +4148,7 @@
 				06361A541CA51E12002708F2 /* BottomCollectionCell.m in Sources */,
 				B28D5E441C64857000D9E9E1 /* WChineseSting.m in Sources */,
 				B2BA3EA11CA4F49F00926584 /* NetWorkEntiry.m in Sources */,
-				06DB70D81CA955C000A6AC9D /* JZHomeStudentSubjectFourView.m in Sources */,
+				06DB70D81CA955C000A6AC9D /* JZHomeStudentRetestView.m in Sources */,
 				B2BA42901CA5035700926584 /* UIViewController+HUD.m in Sources */,
 				B2BA432B1CA5041100926584 /* CourseDetailViewCell.m in Sources */,
 				BE311C931CAE803600337C51 /* JZNopassStudentCell.m in Sources */,
@@ -4192,6 +4197,7 @@
 				B2BA43361CA5041100926584 /* InformationMessageViewModel.m in Sources */,
 				B86EB3561BDB50EB0014EBD7 /* main.m in Sources */,
 				B2BA43721CA62ECD00926584 /* YBFDCalendar.m in Sources */,
+				060673831CB7764200B49EE8 /* JZHomeStudentAppointView.m in Sources */,
 				B2BA41761CA5035700926584 /* WorkTypeListController.m in Sources */,
 				B2BA43C31CA6678E00926584 /* FDCalendarCell.m in Sources */,
 				B2BA435F1CA51DF600926584 /* YBHomeRightViewController.m in Sources */,
@@ -4323,8 +4329,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Jizhi Driver Services Co., Ltd (2VG884M937)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Jizhi Driver Services Co., Ltd (2VG884M937)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
@@ -4342,7 +4348,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jizhijiafu.coach;
 				PRODUCT_NAME = "极致教练端";
-				PROVISIONING_PROFILE = "867132ac-aa6f-42e4-a860-c18fd954072a";
+				PROVISIONING_PROFILE = "a833d7d0-8104-4b15-974a-e704cd89ed5e";
 			};
 			name = Debug;
 		};
@@ -4353,8 +4359,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Jizhi Driver Services Co., Ltd (2VG884M937)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Jizhi Driver Services Co., Ltd (2VG884M937)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
 				INFOPLIST_FILE = HeiMao_B/Info.plist;
@@ -4372,7 +4378,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jizhijiafu.coach;
 				PRODUCT_NAME = "极致教练端";
-				PROVISIONING_PROFILE = "867132ac-aa6f-42e4-a860-c18fd954072a";
+				PROVISIONING_PROFILE = "a833d7d0-8104-4b15-974a-e704cd89ed5e";
 			};
 			name = Release;
 		};

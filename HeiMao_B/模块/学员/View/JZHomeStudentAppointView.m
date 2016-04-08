@@ -1,19 +1,20 @@
 //
-//  JZHomeStudentSubjectOneView.m
+//  JZHomeStudentAppointView.m
 //  HeiMao_B
 //
-//  Created by ytzhang on 16/3/28.
+//  Created by ytzhang on 16/4/8.
 //  Copyright © 2016年 ke. All rights reserved.
 //
 
-#import "JZHomeStudentSubjectOneView.h"
+#import "JZHomeStudentAppointView.h"
+
 #import "JZHomeStudentListCell.h"
 
-@interface JZHomeStudentSubjectOneView ()<UITableViewDataSource,UITableViewDelegate>
-
+@interface JZHomeStudentAppointView ()<UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
-@implementation JZHomeStudentSubjectOneView
+@implementation JZHomeStudentAppointView
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self initUI];
@@ -23,9 +24,9 @@
 - (void)initUI{
     [self addSubview:self.tableView];
 }
-#pragma mark ---- UITableViewDelegate 
+#pragma mark ---- UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return self.dataArray.count;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -37,6 +38,7 @@
     if (!listCell) {
         listCell = [[JZHomeStudentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDCell];
     }
+    listCell.listModel = self.dataArray[indexPath.row];
     return listCell;
 }
 - (UITableView *)tableView{

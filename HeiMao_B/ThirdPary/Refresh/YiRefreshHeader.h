@@ -21,4 +21,7 @@ typedef void (^BeginRefreshingBlock)(void);
 -(void)endRefreshing;
 -(void)beginRefreshing;
 -(void)beginRefreshingWithAniamtion:(BOOL)aniamtin;
+
+ 
+
 @end

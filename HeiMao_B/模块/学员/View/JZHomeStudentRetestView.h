@@ -1,5 +1,5 @@
 //
-//  JZHomeStudentSubjectTwoView.h
+//  JZHomeStudentSubjectFourView.h
 //  HeiMao_B
 //
 //  Created by ytzhang on 16/3/28.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JZHomeStudentSubjectTwoView : UIView
-
+@interface JZHomeStudentRetestView : UIView
+@property (nonatomic, strong) NSArray *dataArray;
 @end

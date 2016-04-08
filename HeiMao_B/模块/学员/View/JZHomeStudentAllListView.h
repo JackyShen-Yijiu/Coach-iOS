@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JZHomeStudentSubjectOneView : UIView
+@interface JZHomeStudentAllListView : UIView
+
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, strong) NSArray *dataArray;
+
 @end

@@ -1,20 +1,19 @@
 //
-//  JZHomeStudentSubjectTwoView.m
+//  JZHomeStudentSubjectOneView.m
 //  HeiMao_B
 //
 //  Created by ytzhang on 16/3/28.
 //  Copyright © 2016年 ke. All rights reserved.
 //
 
-#import "JZHomeStudentSubjectTwoView.h"
-
+#import "JZHomeStudentAllListView.h"
 #import "JZHomeStudentListCell.h"
 
-@interface JZHomeStudentSubjectTwoView ()<UITableViewDataSource,UITableViewDelegate>
-@property (nonatomic, strong) UITableView *tableView;
+@interface JZHomeStudentAllListView ()<UITableViewDataSource,UITableViewDelegate>
+
 @end
 
-@implementation JZHomeStudentSubjectTwoView
+@implementation JZHomeStudentAllListView
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self initUI];
@@ -24,9 +23,9 @@
 - (void)initUI{
     [self addSubview:self.tableView];
 }
-#pragma mark ---- UITableViewDelegate
+#pragma mark ---- UITableViewDelegate 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return self.dataArray.count;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -38,6 +37,7 @@
     if (!listCell) {
         listCell = [[JZHomeStudentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDCell];
     }
+    listCell.listModel = self.dataArray[indexPath.row];
     return listCell;
 }
 - (UITableView *)tableView{
@@ -45,7 +45,7 @@
         CGRect rect = self.bounds;
         _tableView = [[UITableView alloc] initWithFrame:rect];
         _tableView.backgroundColor = [UIColor clearColor];
-         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.dataSource = self;
         _tableView.delegate = self;
     }

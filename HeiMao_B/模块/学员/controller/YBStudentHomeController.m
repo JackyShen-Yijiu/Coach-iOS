@@ -9,10 +9,13 @@
 #import "YBStudentHomeController.h"
 #import "JZHomeStudentToolBarView.h"
 
-#import "JZHomeStudentSubjectOneView.h"
-#import "JZHomeStudentSubjectTwoView.h"
-#import "JZHomeStudentSubjectThreeView.h"
-#import "JZHomeStudentSubjectFourView.h"
+#import "JZHomeStudentAllListView.h"
+#import "JZHomeStudentNoExameListView.h"
+#import "JZHomeStudentAppointView.h"
+#import "JZHomeStudentRetestView.h"
+#import "JZHomeStudentPassView.h"
+
+
 #import "JZHomeStudentViewModel.h"
 #import "RefreshTableView.h"
 #import "JZHomeStudentListCell.h"
