@@ -7,11 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RefreshTableView.h"
 
 @interface JZHomeStudentAllListView : UIView
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) RefreshTableView *tableView;
 
-@property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) NSMutableArray *dataArray;
+
+@property (nonatomic, strong) UIViewController *parementVC;
+
+@property (nonatomic, assign) NSInteger subjectID;  // 科目的选择
+
+@property (nonatomic, assign) NSInteger studentState; // 学员状态的选择
+
 
 @end

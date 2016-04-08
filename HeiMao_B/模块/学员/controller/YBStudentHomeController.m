@@ -41,9 +41,13 @@
 
 #define ksegmentH 36
 
-@interface YBStudentHomeController ()<UITableViewDataSource,UITableViewDelegate>
+@interface YBStudentHomeController ()<UIScrollViewDelegate>
 
-@property (nonatomic, strong) RefreshTableView *tableView;
+@property (nonatomic, strong) JZHomeStudentAllListView *allListView;
+@property (nonatomic, strong) JZHomeStudentAllListView *noExameListView;
+@property (nonatomic, strong) JZHomeStudentAllListView *retestListView;
+@property (nonatomic, strong) JZHomeStudentAllListView *appointListView;
+@property (nonatomic, strong) JZHomeStudentAllListView *passListView;
 
 @property (nonatomic, strong) UIView *bgView;
 
@@ -65,18 +69,16 @@
 
 @property (nonatomic, strong) JZHomeStudentViewModel *studentViewModel;
 
-@property (nonatomic, assign) NSInteger subjectID;  // 科目的选择
-
-@property (nonatomic, assign) NSInteger studentState; // 学员状态的选择
-
 @property (nonatomic, strong) NSMutableArray *resultDataArray;
 
 
 @property (nonatomic, strong) NSArray *subjectIDArray;   // 根据教练授课科目 排序好的subjectID
 
-@property (nonatomic, strong) NSMutableArray *removeImgArray;
-
 @property (nonatomic, strong) JZNoDataShowBGView *noDataShowBGView;
+
+@property (nonatomic, strong) UIScrollView *scrollView;
+
+@property (nonatomic, assign) NSInteger subjectID;
 @end
 
 @implementation YBStudentHomeController
@@ -91,109 +93,32 @@
     
     // 设置里面可以更改授课科目 所以在这里要动态的改变segment 和 toolBarView 的位置坐标
     [self changeBgViewFrame];
-    
-    [self initRefreshView];
+
     
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self initShowNOBG];
+   
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
-    // 添加之前先移除背景图片
-    [self removeImage];
     _noDataShowBGView.hidden = YES;
-
-}
-#pragma mark ---- 根据数据判断是否显示暂无字样
-- (void)initShowNOBG{
-    // 开始是全部置为可点击状态,
-    NSArray *viewArray = [_toolBarView subviews];
-    for (UIView *view in viewArray) {
-        if ([view isKindOfClass:[UIButton class]]) {
-            view.userInteractionEnabled = YES;
-        }
-    }
-    [NetWorkEntiry getAllSubjectNumberStateWithCoachId:[UserInfoModel defaultUserInfo].userID subjectID:[NSString stringWithFormat:@"%lu",_subjectID] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *param = responseObject;
-        NSLog(@"pass= responseObject= %@ _subjectID=%lu",responseObject, _subjectID);
-        if (1 == [param[@"type"] integerValue]) {
-            /*
-             {
-             "type": 1,
-             "msg": "",
-             "data": {
-             "studentcount": 26, // 全部学员
-             "onstudystudentcount": 21, // 在学学员
-             "noexamstudentcount": 0, // 未考学员
-             "reservationstudentcount": 0, // 约考学员
-             "nopassstudentcount": 0, // 补考学员
-             "passstudentcount": 4 // 通过学员
-             }
-             }
-             */
-            NSDictionary *data = param[@"data"];
-            if (0 == [data[@"studentcount"] integerValue]) {
-                [self showBgTitleWith:0];
-            }
-            if (0 == [data[@"noexamstudentcount"] integerValue]) {
-                [self showBgTitleWith:1];
-            }
-            if (0 == [data[@"reservationstudentcount"] integerValue]) {
-                [self showBgTitleWith:2];
-            }
-            if (0 == [data[@"nopassstudentcount"] integerValue]) {
-                [self showBgTitleWith:3];
-            }
-            if (0 == [data[@"passstudentcount"] integerValue]) {
-                [self showBgTitleWith:4];
-            }
-            
-        }
-        else {
-            [self showTotasViewWithMes:param[@"msg"]];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self showTotasViewWithMes:@"网络错误"];
-    }];
-    
-    
-    [self.tableView.refreshHeader beginRefreshing];
-
-}
-- (void)showBgTitleWith:(NSInteger )tag{
-    NSArray *viewArray = [_toolBarView subviews];
-    for (UIView *view in viewArray) {
-        if ([view isKindOfClass:[UIButton class]]) {
-            if (view.tag == tag) {
-                view.userInteractionEnabled = NO;
-                CGRect rect = view.bounds;
-                UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(rect.origin.x + 20, rect.origin.y + 10, 40, 27)];
-                
-                img.image = [UIImage imageNamed:@"flage_null"];
-                [_removeImgArray addObject:img];
-                [view addSubview:img];
-                
-            }
-        }
-    }
 
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     _isshowSegment = YES;
     _resultDataArray = [NSMutableArray array];
-    _removeImgArray = [NSMutableArray array];
+
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self setNavBar];
-    [self.view addSubview:self.tableView];
     [self.view addSubview:self.noDataShowBGView];
 //    [self.tableView.header beginRefreshing];
+    [self.view addSubview:self.scrollView];
     
     
 }
@@ -205,7 +130,7 @@
         _isshowSegment = NO;
         NSDictionary *dic = sujectArray.firstObject;
         self.myNavigationItem.title = dic[@"name"];
-        _subjectID = [dic[@"subjectid"] integerValue];
+        self.allListView.subjectID = [dic[@"subjectid"] integerValue];
         
     }
     _isshowSegment ? (_bgH = ktopHight) : (_bgH = ktopSmallHight);
@@ -233,8 +158,8 @@
         
         // 冒泡排序后将_id转化为相应的科目文字
         _subjectIDArray = [self bubbleSort:titleArray];
-        _subjectID = [[_subjectIDArray firstObject] integerValue];
-        _studentState = 0;
+       _subjectID = [[_subjectIDArray firstObject] integerValue];
+        self.allListView.studentState = 0;
         NSMutableArray *resultMustArray = [NSMutableArray array];
         NSString *str = nil;
         for (NSNumber *_id in _subjectIDArray) {
@@ -279,10 +204,16 @@
     [self.bgView addSubview:self.toolBarView];
     [self.view addSubview:self.bgView];
     if (!_isshowSegment) {
-        _tableView.frame = CGRectMake(0, _bgH + 64, self.view.width, self.view.height - _bgH - 45);
+        _scrollView.frame = CGRectMake(0, _bgH + 64, self.view.width, self.view.height - _bgH - 45);
     }else{
-        _tableView.frame = CGRectMake(0, ktopHight + 64, self.view.width, self.view.height - ktopHight - 64);
+        _scrollView.frame = CGRectMake(0, ktopHight + 64, self.view.width, self.view.height - ktopHight - 64);
     }
+    [self.scrollView addSubview:self.allListView];
+    self.allListView.subjectID = _subjectID;
+    self.allListView.studentState = 0;
+    [self.allListView.tableView.refreshHeader  beginRefreshing];
+    
+    
     
     
 }
@@ -296,124 +227,18 @@
 
 }
 
-
-#pragma mark Load Data
-- (void)dealErrorResponseWithTableView:(RefreshTableView *)tableview info:(NSDictionary *)dic
-{
-    [self showTotasViewWithMes:[dic objectForKey:@"msg"]];
-    [tableview.refreshHeader endRefreshing];
-    [tableview.refreshFooter endRefreshing];
-}
-
-- (void)netErrorWithTableView:(RefreshTableView*)tableView
-{
-    [self showTotasViewWithMes:@"网络异常，稍后重试"];
-    [tableView.refreshHeader endRefreshing];
-    [tableView.refreshFooter endRefreshing];
-}
-
-- (void)initRefreshView
-    {
-        NSLog(@"self.subjectID = %@",(NSString *)@(self.subjectID));
-        
-         NSLog(@"self.studentState = %@",(NSString *)@(self.studentState));
-        WS(ws);
-        self.tableView.refreshHeader.beginRefreshingBlock = ^(){
-             NSLog(@" subjectID=%@ State == %@  ", (NSString *)@(ws.subjectID),(NSString *)@(ws.studentState) );
-            [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(ws.subjectID) studentID:(NSString *)@(ws.studentState) index:1 count:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"responseObject=%@ subjectID=%@ State == %@  ",responseObject, (NSString *)@(ws.subjectID),(NSString *)@(ws.studentState) );
-                NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
-                NSArray *data = [responseObject objectArrayForKey:@"data"];
-                if (type == 1) {
-        
-                    [ws.resultDataArray removeAllObjects];
-                    
-                    if (data.count == 0) {
-                        ws.noDataShowBGView.hidden = NO;
-                        [ws.tableView.refreshHeader endRefreshing];
-                        [ws.tableView reloadData];
-                        return ;
-                    }
-                    ws.noDataShowBGView.hidden = YES;
-                    for (NSDictionary *dic in data) {
-                        JZResultModel *model = [JZResultModel yy_modelWithDictionary:dic];
-                        [ws.resultDataArray addObject:model];
-                    }
-                    
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [ws.tableView.refreshHeader endRefreshing];
-                        
-                        [ws.tableView reloadData];
-                        
-                        if (data.count>=10) {
-                            ws.tableView.refreshFooter.scrollView = ws.tableView;
-                        }else{
-                            ws.tableView.refreshFooter.scrollView = nil;
-                        }
-                        
-                    });
-                    
-                }else{
-                    [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
-                }
-
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                [ws netErrorWithTableView:ws.tableView];
-            }];
-            
-        };
-        
-        ws.tableView.refreshFooter.beginRefreshingBlock = ^(){
-//                        NSArray *dataArray = [NSArray array];
-        
-                        if(_resultDataArray.count % RELOADDATACOUNT){
-                            [ws showTotasViewWithMes:@"已经加载所有数据"];
-                            if (ws.tableView.refreshFooter) {
-                                [ws.tableView.refreshFooter endRefreshing];
-                                ws.tableView.refreshFooter.scrollView = nil;
-                            }
-                            return ;
-                        }
-            
-            [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(ws.subjectID) studentID:(NSString *)@(ws.studentState) index:_resultDataArray.count / RELOADDATACOUNT count:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
-                                if (type == 1) {
-                                    if (responseObject[@"data"]) {
-                                        for (NSDictionary *dic in responseObject[@"data"]) {
-                                            JZResultModel *model = [JZResultModel yy_modelWithDictionary:dic];
-                                            [ws.resultDataArray addObject:model];
-                                            [ws.tableView reloadData];
-                                        }
-
-                                    }else{
-                                        [ws showTotasViewWithMes:@"已经加载所有数据"];
-                                    }
-                                    [ws.tableView.refreshFooter endRefreshing];
-                                    
-                                } else{
-                                     [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
-                                }
-                
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                [ws netErrorWithTableView:ws.tableView];
-            }];
-            
-            
-
-        };
-        
-    }
-
 #pragma mark ---- segment的点击事件
 - (void)didClicksegmentedControlAction:(UISegmentedControl *)Seg {
-    [self removeImage];
+
     NSInteger index = Seg.selectedSegmentIndex;
-     _subjectID = [_subjectIDArray[index] integerValue];
+    // 默认始终显示全部学员
+     self.allListView.subjectID = [_subjectIDArray[index] integerValue];
+    // 当切换学员状态时因为重新创建UItable,所以重新给subjectID赋值
+    self.subjectID = [_subjectIDArray[index] integerValue];
+    
     [_toolBarView selectItem:0];
-    [self initShowNOBG];
     _noDataShowBGView.hidden = YES;
-    [self.tableView.refreshHeader  beginRefreshing];
+    [self.allListView.tableView.refreshHeader  beginRefreshing];
     
 }
 #pragma mark 筛选条件
@@ -423,26 +248,101 @@
      学员状态：0 全部学员 1在学学员 2未考学员 3约考学员 4补考学员 5通过学员
      */
     if (0 == index) {
-        _studentState = index;
+        CGFloat contentOffsetX = 0;
+        [UIView animateWithDuration:0.5 animations:^{
+            _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
+        }];
+
+        self.allListView.studentState = index;
+        self.allListView.subjectID = self.subjectID;
+        [self.scrollView addSubview:self.allListView];
+        [self.allListView.tableView.refreshHeader  beginRefreshing];
         
     }else if (1 == index) {
-        _studentState = index + 1;
+        CGFloat contentOffsetX = self.view.width;
+        [UIView animateWithDuration:0.5 animations:^{
+            _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
+        }];
+         [self.scrollView addSubview:self.noExameListView];
+
+        self.noExameListView.studentState = index + 1;
+         self.noExameListView.subjectID = self.subjectID;
+        
+        [self.noExameListView.tableView.refreshHeader  beginRefreshing];
        
     }else if (2 == index) {
-        _studentState = index + 1;
+        CGFloat contentOffsetX = 2 * self.view.width;
+        [UIView animateWithDuration:0.5 animations:^{
+            _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
+        }];
+        self.appointListView.subjectID = self.subjectID;
+        self.appointListView.studentState = index + 1;
+         [self.scrollView addSubview:self.appointListView];
+        [self.appointListView.tableView.refreshHeader  beginRefreshing];
         
     }
     else if (3 == index) {
-        _studentState = index + 1;
+        CGFloat contentOffsetX = 3 * self.view.width;
+        [UIView animateWithDuration:0.5 animations:^{
+            _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
+        }];
+        self.retestListView.subjectID = self.subjectID;
+        self.retestListView.studentState = index + 1;
+         [self.scrollView addSubview:self.retestListView];
+        [self.retestListView.tableView.refreshHeader  beginRefreshing];
         
     }else if (4 == index) {
-        _studentState = index + 1;
+        CGFloat contentOffsetX = 4 * self.view.width;
+        [UIView animateWithDuration:0.5 animations:^{
+            _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
+        }];
+        self.passListView.subjectID = self.subjectID;
+        self.passListView.studentState = index + 1;
+         [self.scrollView addSubview:self.passListView];
+        [self.passListView.tableView.refreshHeader  beginRefreshing];
         
     }
     _noDataShowBGView.hidden = YES;
-   [self.tableView.refreshHeader  beginRefreshing];
+   
 }
+#pragma mark --- UIScroller delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    CGFloat width = self.view.width;
+    
+    if (0 == scrollView.contentOffset.x) {
+       // 全部
+         [_toolBarView selectItem:0];
+    }
+    if (width == scrollView.contentOffset.x) {
+        // 未考
+        [_toolBarView selectItem:1];
 
+        
+        
+    }
+    if (2 * width== scrollView.contentOffset.x) {
+        // 约考
+        [_toolBarView selectItem:2];
+
+    }
+    if (3 * width == scrollView.contentOffset.x) {
+        // 补考
+        [_toolBarView selectItem:3];
+
+        
+        
+    }
+    if (4 * width == scrollView.contentOffset.x) {
+        // 通过
+        [_toolBarView selectItem:4];
+        
+        
+    }
+
+
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
@@ -467,88 +367,6 @@
         }
     }
     return args;
-}
-#pragma mark ---- UITableViewDelegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _resultDataArray.count;
-    
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 98;
-}
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *IDCell = @"cellID";
-    JZHomeStudentListCell *listCell = [tableView dequeueReusableCellWithIdentifier:IDCell];
-    if (!listCell) {
-        listCell = [[JZHomeStudentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDCell];
-    }
-    listCell.listModel = _resultDataArray[indexPath.row];
-    listCell.studentListMessageAndCall = ^(NSInteger tag){
-        if (500 == tag) {
-            // 信息
-            JZResultModel *model = _resultDataArray[indexPath.row];
-            [self messageWithModel:model];
-        }
-        if (501 == tag) {
-            // 电话
-            JZResultModel *model = _resultDataArray[indexPath.row];
-            [self callPhonewithModel:model];
-        }
-    };
-    return listCell;
-}
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // 跳转学员详情页
-    JZResultModel *model = _resultDataArray[indexPath.row];
-    YBStudentDetailsViewController *studentDetailVC = [[YBStudentDetailsViewController alloc] init];
-    studentDetailVC.studentID = model.userid;
-    [self.navigationController pushViewController:studentDetailVC animated:YES];
-}
-#pragma mark ---- 电话
-- (void)callPhonewithModel:(JZResultModel *)model{
-    
-        if (model.mobile == nil ||[model.mobile isEqualToString:@""]) {
-            [self showTotasViewWithMes:@"该学员未录入电话!"];
-            return;
-        }
-        
-        [BLPFAlertView showAlertWithTitle:@"电话号码" message:model.mobile cancelButtonTitle:@"取消" otherButtonTitles:@[@"确定"] completion:^(NSUInteger selectedOtherButtonIndex) {
-            
-            NSUInteger indexAlert = selectedOtherButtonIndex + 1;
-            if (indexAlert == 1) {
-                
-                NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",model.mobile];
-                UIWebView * callWebview = [[UIWebView alloc] init];
-                [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
-                [self.view addSubview:callWebview];
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-            }else {
-                return ;
-            }
-            
-        }];
-}
-
-#pragma mark ---- 信息
-- (void)messageWithModel:(JZResultModel *)model{
-    NSLog(@"%s self.dmData.data.studentinfo.userid:%@",__func__,model.userid);
-    
-    ChatViewController *chatController = [[ChatViewController alloc] initWithConversationChatter:model.userid conversationType:eConversationTypeChat];
-    chatController.title = model.name;
-    [self.parentViewController.navigationController pushViewController:chatController animated:YES];
-
-    
-}
-#pragma mark --- 每次点击的时候移除
-- (void)removeImage{
-    // 添加之前先移除背景图片
-    if (_removeImgArray.count) {
-        for (UIImageView *imgView in _removeImgArray) {
-            [imgView removeFromSuperview];
-        }
-    }
-
 }
 - (JZHomeStudentToolBarView *)toolBarView {
     
@@ -584,16 +402,55 @@
         }
     return _toolBarView;
 }
-- (RefreshTableView *)tableView{
-    if (_tableView == nil) {
-        _tableView = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, ktopHight + 64, self.view.width, self.view.height - 45 - ktopHight - 64) style:UITableViewStylePlain];
-        _tableView.backgroundColor = [UIColor clearColor];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.dataSource = self;
-        _tableView.delegate = self;
+// 全部学员
+- (JZHomeStudentAllListView *)allListView{
+    if (_allListView == nil) {
+        _allListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - 45 - ktopHight - 64)];
+        _allListView.backgroundColor = [UIColor clearColor];
+        
     }
-    return _tableView;
+    return _allListView;
 }
+// 未考学员
+- (JZHomeStudentAllListView *)noExameListView{
+    if (_noExameListView == nil) {
+        _noExameListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(self.view.width, 0, self.view.width, self.view.height - 45 - ktopHight - 64)];
+        _noExameListView.backgroundColor = [UIColor clearColor];
+
+    }
+    return _noExameListView;
+}
+
+// 约考学员
+- (JZHomeStudentAllListView *)appointListView{
+    if (_appointListView == nil) {
+        _appointListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(2 * self.view.width, 0, self.view.width, self.view.height - 45 - ktopHight - 64) ];
+        _appointListView.backgroundColor = [UIColor clearColor];
+    }
+    return _appointListView;
+}
+// 补考学员
+- (JZHomeStudentAllListView *)retestListView{
+    if (_retestListView == nil) {
+        _retestListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(3 * self.view.width, 0, self.view.width, self.view.height - 45 - ktopHight - 64) ];
+        _retestListView.backgroundColor = [UIColor clearColor];
+    
+    }
+    return _retestListView;
+}
+
+
+// 通过学员
+- (JZHomeStudentAllListView *)passListView{
+    if (_passListView == nil) {
+        _passListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(4 * self.view.width, 0, self.view.width, self.view.height - 45 - ktopHight - 64)];
+        _passListView.backgroundColor = [UIColor clearColor];
+        
+    }
+    return _passListView;
+}
+
+
 - (JZNoDataShowBGView *)noDataShowBGView{
     if (_noDataShowBGView == nil) {
         _noDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(0, ktopHight, self.view.width, self.view.height - ktopHight)];
@@ -604,5 +461,16 @@
         _noDataShowBGView.hidden = YES;
     }
     return _noDataShowBGView;
+}
+- (UIScrollView *)scrollView{
+    if (_scrollView == nil) {
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ktopHight + 64, self.view.width, self.view.height - 45 - ktopHight - 64)];
+        _scrollView.contentSize = CGSizeMake(5 * self.view.width, 0);
+        _scrollView.backgroundColor = [UIColor clearColor];
+        _scrollView.pagingEnabled = YES;
+        _scrollView.userInteractionEnabled = YES;
+        _scrollView.delegate = self;
+    }
+    return _scrollView;
 }
 @end
