@@ -100,7 +100,7 @@ static NSString *const kuserType = @"usertype";
         _loginButton.backgroundColor = JZ_BlueColor;
         [_loginButton addTarget:self action:@selector(dealLogin:) forControlEvents:UIControlEventTouchUpInside];
         [_loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_loginButton setTitle:@"立即登陆" forState:UIControlStateNormal];
+        [_loginButton setTitle:@"立即登录" forState:UIControlStateNormal];
         _loginButton.titleLabel.font = [UIFont systemFontOfSize:16];
         
         _loginButton.layer.masksToBounds = YES;
