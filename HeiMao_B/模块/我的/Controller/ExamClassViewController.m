@@ -219,8 +219,27 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
     ExamClassModel *model = self.dataArray[indexPath.row];
     
     cell.drivingName.text = model.classname;
-    cell.moneyLabel.text = [NSString stringWithFormat:@"%@",model.price];
-    cell.drivingAdress.text = model.address;
+    
+    
+    cell.moneyLabel.text = [NSString stringWithFormat:@"%@元",model.price];
+    
+    ///  直辖市地区不显示省级名称
+    
+    BOOL isBJ = [model.address hasPrefix:@"北京市北京市"];
+    BOOL isSH = [model.address hasPrefix:@"上海市上海市"];
+    BOOL isTJ = [model.address hasPrefix:@"天津市天津市"];
+    BOOL isCQ = [model.address hasPrefix:@"重庆市重庆市"];
+    
+    if (isBJ || isCQ || isSH || isTJ) {
+        
+        cell.drivingAdress.text = [model.address substringFromIndex:3];
+
+    }else {
+        cell.drivingAdress.text = model.address;
+    }
+    
+    
+    
     NSLog(@"model.is_choose:%d",model.is_choose);
     
     [cell setSelectedState:model.is_choose];

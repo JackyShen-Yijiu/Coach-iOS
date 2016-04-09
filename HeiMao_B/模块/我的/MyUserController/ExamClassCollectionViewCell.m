@@ -94,8 +94,8 @@
     
     [self.drivingAdress mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.mas_left).offset(20);
-        make.top.mas_equalTo(self.drivingName.mas_bottom).offset(0);
-        make.width.mas_equalTo(@250);
+        make.top.mas_equalTo(self.drivingName.mas_bottom).offset(8);
+        make.width.mas_equalTo(@200);
     }];
     
     [self.moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
