@@ -138,7 +138,9 @@
         _iconView.layer.masksToBounds = YES;
         _iconView.layer.cornerRadius = 34;
         _iconView.image = [UIImage imageNamed:@"littleImage.png"];
-        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signatureSetUp)];
+        [_iconView addGestureRecognizer:tap];
+        _iconView.userInteractionEnabled = YES;
     }
     return _iconView;
 }
@@ -162,5 +164,8 @@
     }
     return _yLabel;
 }
-
+// 头像手势
+- (void)infoMessage{
+    
+}
 @end

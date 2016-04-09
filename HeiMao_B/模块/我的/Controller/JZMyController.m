@@ -88,10 +88,11 @@
     self.myNavigationItem.rightBarButtonItems = nil;
     self.myNavigationItem.leftBarButtonItem = nil;
     self.myNavigationItem.title = [UserInfoModel defaultUserInfo].name;
-    CGRect backframe= CGRectMake(0, 0, 14, 14);
-    UIButton* backButton= [UIButton buttonWithType:UIButtonTypeSystem];
+    CGRect backframe= CGRectMake(0, 0, 28, 28);
+    UIButton* backButton= [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = backframe;
-    [backButton setBackgroundImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
+    [backButton  setImageEdgeInsets:UIEdgeInsetsMake(7, 14, 7, 0)];
     [backButton addTarget:self action:@selector(dealGoBack:) forControlEvents:UIControlEventTouchUpInside];
     self.myNavigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 
@@ -120,8 +121,14 @@
     self.bottomTitleArray = @[@"休假",@"考试信息",@"资讯",@"设置",@""];
 }
 - (void)initUI{
+     __weak typeof(self) ws = self;
     self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -kHeight, self.view.frame.size.width, kHeight) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%ld",[UserInfoModel defaultUserInfo].fcode]];
     _headerView.tag = 201;
+    self.headerView.signtureImageGas = ^{
+        EditorUserViewController *editor = [[EditorUserViewController alloc] init];
+        [ws.navigationController pushViewController:editor animated:YES];
+
+    };
     [self.collectionView addSubview:self.headerView];
     
 }
