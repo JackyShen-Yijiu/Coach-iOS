@@ -211,6 +211,7 @@
     [self.scrollView addSubview:self.allListView];
     self.allListView.subjectID = _subjectID;
     self.allListView.studentState = 0;
+    self.allListView.parementVC = self;
     [self.allListView.tableView.refreshHeader  beginRefreshing];
     
     
@@ -235,7 +236,7 @@
      self.allListView.subjectID = [_subjectIDArray[index] integerValue];
     // 当切换学员状态时因为重新创建UItable,所以重新给subjectID赋值
     self.subjectID = [_subjectIDArray[index] integerValue];
-    
+    self.allListView.parementVC = self;
     [_toolBarView selectItem:0];
     _noDataShowBGView.hidden = YES;
     [self.allListView.tableView.refreshHeader  beginRefreshing];
@@ -256,6 +257,7 @@
         self.allListView.studentState = index;
         self.allListView.subjectID = self.subjectID;
         [self.scrollView addSubview:self.allListView];
+        self.allListView.parementVC = self;
         [self.allListView.tableView.refreshHeader  beginRefreshing];
         
     }else if (1 == index) {
@@ -267,7 +269,7 @@
 
         self.noExameListView.studentState = index + 1;
          self.noExameListView.subjectID = self.subjectID;
-        
+        self.noExameListView.parementVC = self;
         [self.noExameListView.tableView.refreshHeader  beginRefreshing];
        
     }else if (2 == index) {
@@ -277,6 +279,7 @@
         }];
         self.appointListView.subjectID = self.subjectID;
         self.appointListView.studentState = index + 1;
+        self.appointListView.parementVC = self;
          [self.scrollView addSubview:self.appointListView];
         [self.appointListView.tableView.refreshHeader  beginRefreshing];
         
@@ -289,6 +292,7 @@
         self.retestListView.subjectID = self.subjectID;
         self.retestListView.studentState = index + 1;
          [self.scrollView addSubview:self.retestListView];
+        self.retestListView.parementVC = self;
         [self.retestListView.tableView.refreshHeader  beginRefreshing];
         
     }else if (4 == index) {
@@ -299,6 +303,7 @@
         self.passListView.subjectID = self.subjectID;
         self.passListView.studentState = index + 1;
          [self.scrollView addSubview:self.passListView];
+        self.passListView.parementVC = self;
         [self.passListView.tableView.refreshHeader  beginRefreshing];
         
     }
