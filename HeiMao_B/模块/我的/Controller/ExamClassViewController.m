@@ -225,10 +225,10 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
     
     ///  直辖市地区不显示省级名称
     
-    BOOL isBJ = [model.address hasPrefix:@"北京市"];
-    BOOL isSH = [model.address hasPrefix:@"上海市"];
-    BOOL isTJ = [model.address hasPrefix:@"天津市"];
-    BOOL isCQ = [model.address hasPrefix:@"重庆市"];
+    BOOL isBJ = [model.address hasPrefix:@"北京市北京市"];
+    BOOL isSH = [model.address hasPrefix:@"上海市上海市"];
+    BOOL isTJ = [model.address hasPrefix:@"天津市天津市"];
+    BOOL isCQ = [model.address hasPrefix:@"重庆市重庆市"];
     
     if (isBJ || isCQ || isSH || isTJ) {
         
