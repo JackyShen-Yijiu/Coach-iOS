@@ -405,7 +405,7 @@
 // 全部学员
 - (JZHomeStudentAllListView *)allListView{
     if (_allListView == nil) {
-        _allListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - 45 - ktopHight - 64)];
+        _allListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.scrollView.height)];
         _allListView.backgroundColor = [UIColor clearColor];
         
     }
@@ -414,7 +414,7 @@
 // 未考学员
 - (JZHomeStudentAllListView *)noExameListView{
     if (_noExameListView == nil) {
-        _noExameListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(self.view.width, 0, self.view.width, self.view.height - 45 - ktopHight - 64)];
+        _noExameListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(self.view.width, 0, self.view.width, self.scrollView.height)];
         _noExameListView.backgroundColor = [UIColor clearColor];
 
     }
@@ -424,7 +424,7 @@
 // 约考学员
 - (JZHomeStudentAllListView *)appointListView{
     if (_appointListView == nil) {
-        _appointListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(2 * self.view.width, 0, self.view.width, self.view.height - 45 - ktopHight - 64) ];
+        _appointListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(2 * self.view.width, 0, self.view.width, self.scrollView.height) ];
         _appointListView.backgroundColor = [UIColor clearColor];
     }
     return _appointListView;
@@ -432,7 +432,7 @@
 // 补考学员
 - (JZHomeStudentAllListView *)retestListView{
     if (_retestListView == nil) {
-        _retestListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(3 * self.view.width, 0, self.view.width, self.view.height - 45 - ktopHight - 64) ];
+        _retestListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(3 * self.view.width, 0, self.view.width, self.scrollView.height) ];
         _retestListView.backgroundColor = [UIColor clearColor];
     
     }
@@ -443,7 +443,7 @@
 // 通过学员
 - (JZHomeStudentAllListView *)passListView{
     if (_passListView == nil) {
-        _passListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(4 * self.view.width, 0, self.view.width, self.view.height - 45 - ktopHight - 64)];
+        _passListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(4 * self.view.width, 0, self.view.width, self.scrollView.height)];
         _passListView.backgroundColor = [UIColor clearColor];
         
     }
@@ -470,6 +470,7 @@
         _scrollView.pagingEnabled = YES;
         _scrollView.userInteractionEnabled = YES;
         _scrollView.delegate = self;
+        _scrollView.showsHorizontalScrollIndicator = NO;
     }
     return _scrollView;
 }

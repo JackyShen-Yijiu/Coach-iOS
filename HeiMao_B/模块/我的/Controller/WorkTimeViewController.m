@@ -164,9 +164,16 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     [self.beginTextField resignFirstResponder];
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [UIView animateWithDuration:0.5 animations:^{
-        self.tableView.frame = CGRectMake(0, -150, kSystemWide, kSystemHeight-64);
-     }];
+    if (YBIphone5) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.tableView.frame = CGRectMake(0, -200, kSystemWide, kSystemHeight-64);
+        }];
+    }else{
+        [UIView animateWithDuration:0.5 animations:^{
+            self.tableView.frame = CGRectMake(0, -150, kSystemWide, kSystemHeight-64);
+        }];
+    }
+    
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     [UIView animateWithDuration:0.5 animations:^{
