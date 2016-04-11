@@ -117,7 +117,6 @@
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self setNavBar];
     [self.view addSubview:self.noDataShowBGView];
-//    [self.tableView.header beginRefreshing];
     [self.view addSubview:self.scrollView];
     
     
@@ -212,7 +211,7 @@
     self.allListView.subjectID = _subjectID;
     self.allListView.studentState = 0;
     self.allListView.parementVC = self;
-    [self.allListView.tableView.refreshHeader  beginRefreshing];
+    [self loadNetworkData];
     
     
     
@@ -227,6 +226,44 @@
     self.myNavigationItem.leftBarButtonItems = nil;
 
 }
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if ([scrollView isKindOfClass:[UIScrollView class]]) {
+        NSLog(@"ScrollView在滚动");
+    }else if ([scrollView isKindOfClass:[UITableView class]]) {
+        NSLog(@"TableView在滚动");
+    }
+}
+- (void)loadNetworkData {
+    
+    CGFloat offSetX = self.scrollView.contentOffset.x;
+    CGFloat width = self.scrollView.width;
+    
+    if (offSetX >= 0 && offSetX < self.scrollView.width) {
+        self.allListView.subjectID = self.subjectID;
+        self.allListView.studentState = 0;
+        [self.allListView networkRequest];
+    }else if (offSetX >= width && offSetX < width * 2) {
+        self.noExameListView.subjectID = self.subjectID;
+        self.noExameListView.studentState = 2;
+        [self.noExameListView networkRequest];
+
+        
+
+    }else if (offSetX >= width * 2 && offSetX < width * 3) {
+        self.appointListView.subjectID = self.subjectID;
+        self.appointListView.studentState = 3;
+        [self.appointListView networkRequest];
+        
+    }else if (offSetX >= width * 3 && offSetX < width * 4) {
+        self.retestListView.subjectID = self.subjectID;
+        self.retestListView.studentState = 4;
+        [self.retestListView networkRequest];
+    }else if (offSetX >= width * 4) {
+        self.passListView.subjectID = self.subjectID;
+        self.passListView.studentState = 5;
+        [self.passListView networkRequest];
+    }
+}
 
 #pragma mark ---- segment的点击事件
 - (void)didClicksegmentedControlAction:(UISegmentedControl *)Seg {
@@ -239,7 +276,7 @@
     self.allListView.parementVC = self;
     [_toolBarView selectItem:0];
     _noDataShowBGView.hidden = YES;
-    [self.allListView.tableView.refreshHeader  beginRefreshing];
+    [self loadNetworkData];
     
 }
 #pragma mark 筛选条件
@@ -258,7 +295,7 @@
         self.allListView.subjectID = self.subjectID;
         [self.scrollView addSubview:self.allListView];
         self.allListView.parementVC = self;
-        [self.allListView.tableView.refreshHeader  beginRefreshing];
+       
         
     }else if (1 == index) {
         CGFloat contentOffsetX = self.view.width;
@@ -270,8 +307,7 @@
         self.noExameListView.studentState = index + 1;
          self.noExameListView.subjectID = self.subjectID;
         self.noExameListView.parementVC = self;
-        [self.noExameListView.tableView.refreshHeader  beginRefreshing];
-       
+        
     }else if (2 == index) {
         CGFloat contentOffsetX = 2 * self.view.width;
         [UIView animateWithDuration:0.5 animations:^{
@@ -281,7 +317,7 @@
         self.appointListView.studentState = index + 1;
         self.appointListView.parementVC = self;
          [self.scrollView addSubview:self.appointListView];
-        [self.appointListView.tableView.refreshHeader  beginRefreshing];
+        
         
     }
     else if (3 == index) {
@@ -293,7 +329,6 @@
         self.retestListView.studentState = index + 1;
          [self.scrollView addSubview:self.retestListView];
         self.retestListView.parementVC = self;
-        [self.retestListView.tableView.refreshHeader  beginRefreshing];
         
     }else if (4 == index) {
         CGFloat contentOffsetX = 4 * self.view.width;
@@ -304,9 +339,11 @@
         self.passListView.studentState = index + 1;
          [self.scrollView addSubview:self.passListView];
         self.passListView.parementVC = self;
-        [self.passListView.tableView.refreshHeader  beginRefreshing];
+       
         
     }
+    [self loadNetworkData];
+
     _noDataShowBGView.hidden = YES;
    
 }
@@ -412,6 +449,7 @@
     if (_allListView == nil) {
         _allListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.scrollView.height)];
         _allListView.backgroundColor = [UIColor clearColor];
+        _allListView.searchType = kDateSearchTypeToday;
         
     }
     return _allListView;
@@ -421,7 +459,7 @@
     if (_noExameListView == nil) {
         _noExameListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(self.view.width, 0, self.view.width, self.scrollView.height)];
         _noExameListView.backgroundColor = [UIColor clearColor];
-
+        _noExameListView.searchType = kDateSearchTypeYesterday;
     }
     return _noExameListView;
 }
@@ -431,6 +469,8 @@
     if (_appointListView == nil) {
         _appointListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(2 * self.view.width, 0, self.view.width, self.scrollView.height) ];
         _appointListView.backgroundColor = [UIColor clearColor];
+        _appointListView.searchType = kDateSearchTypeWeek;
+        
     }
     return _appointListView;
 }
@@ -439,7 +479,7 @@
     if (_retestListView == nil) {
         _retestListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(3 * self.view.width, 0, self.view.width, self.scrollView.height) ];
         _retestListView.backgroundColor = [UIColor clearColor];
-    
+        _retestListView.searchType = kDateSearchTypeMonth;
     }
     return _retestListView;
 }
@@ -450,6 +490,7 @@
     if (_passListView == nil) {
         _passListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(4 * self.view.width, 0, self.view.width, self.scrollView.height)];
         _passListView.backgroundColor = [UIColor clearColor];
+        _passListView.searchType = kDateSearchTypeYear;
         
     }
     return _passListView;

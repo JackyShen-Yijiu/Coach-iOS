@@ -88,4 +88,34 @@
 // 百度地图
 #define baiduMapAppkey @"gBe9r3Gd8PYRrcDkz0etT1f6"
 
+/**
+ *  制定时间类型
+ */
+typedef NS_ENUM(NSInteger,kDateSearchType) {
+    /**
+     *  今天
+     */
+    kDateSearchTypeToday = 1,
+    /**
+     *  昨天
+     */
+    kDateSearchTypeYesterday,
+    /**
+     *  本周
+     */
+    kDateSearchTypeWeek,
+    /**
+     *  本月
+     */
+    kDateSearchTypeMonth,
+    /**
+     *  本年
+     */
+    kDateSearchTypeYear
+};
+
+
+
+
+
 #endif

@@ -25,6 +25,8 @@
 		06234CA61CA8E64200007DB7 /* TeachSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06234CA51CA8E64200007DB7 /* TeachSubjectViewController.m */; };
 		06234CA91CA8E66A00007DB7 /* TrainingGroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06234CA81CA8E66A00007DB7 /* TrainingGroundViewController.m */; };
 		06234CAC1CA8E69200007DB7 /* SignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06234CAB1CA8E69200007DB7 /* SignatureViewController.m */; };
+		062569441CBB42C800BEC406 /* HomeDataDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 062569431CBB42C800BEC406 /* HomeDataDetailViewModel.m */; };
+		062569471CBB43B700BEC406 /* YBBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 062569461CBB43B700BEC406 /* YBBaseViewModel.m */; };
 		06361A4E1CA51AB8002708F2 /* JZMyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A4D1CA51AB8002708F2 /* JZMyController.m */; };
 		06361A511CA51DF1002708F2 /* TopCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A501CA51DF1002708F2 /* TopCollectionCell.m */; };
 		06361A541CA51E12002708F2 /* BottomCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361A531CA51E12002708F2 /* BottomCollectionCell.m */; };
@@ -621,6 +623,10 @@
 		06234CA81CA8E66A00007DB7 /* TrainingGroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingGroundViewController.m; sourceTree = "<group>"; };
 		06234CAA1CA8E69200007DB7 /* SignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignatureViewController.h; sourceTree = "<group>"; };
 		06234CAB1CA8E69200007DB7 /* SignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignatureViewController.m; sourceTree = "<group>"; };
+		062569421CBB42C800BEC406 /* HomeDataDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeDataDetailViewModel.h; sourceTree = "<group>"; };
+		062569431CBB42C800BEC406 /* HomeDataDetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeDataDetailViewModel.m; sourceTree = "<group>"; };
+		062569451CBB43B700BEC406 /* YBBaseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBBaseViewModel.h; sourceTree = "<group>"; };
+		062569461CBB43B700BEC406 /* YBBaseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBBaseViewModel.m; sourceTree = "<group>"; };
 		06361A4C1CA51AB8002708F2 /* JZMyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZMyController.h; sourceTree = "<group>"; };
 		06361A4D1CA51AB8002708F2 /* JZMyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZMyController.m; sourceTree = "<group>"; };
 		06361A4F1CA51DF1002708F2 /* TopCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopCollectionCell.h; sourceTree = "<group>"; };
@@ -1637,8 +1643,12 @@
 		0608CA3D1CAA716D0068A18B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				062569451CBB43B700BEC406 /* YBBaseViewModel.h */,
+				062569461CBB43B700BEC406 /* YBBaseViewModel.m */,
 				0608CA3F1CAA71C60068A18B /* JZHomeStudentViewModel.h */,
 				0608CA401CAA71CF0068A18B /* JZHomeStudentViewModel.m */,
+				062569421CBB42C800BEC406 /* HomeDataDetailViewModel.h */,
+				062569431CBB42C800BEC406 /* HomeDataDetailViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4068,6 +4078,7 @@
 				B2BA43391CA5041100926584 /* JGAppointMentMidView.m in Sources */,
 				B2BA43241CA5041100926584 /* CourEnsureItemView.m in Sources */,
 				BECA64191CAE15CD00FAE001 /* JZExamStudentListData.m in Sources */,
+				062569471CBB43B700BEC406 /* YBBaseViewModel.m in Sources */,
 				06361A511CA51DF1002708F2 /* TopCollectionCell.m in Sources */,
 				B2BA3E661CA4E70300926584 /* SMPageControl.m in Sources */,
 				067945AC1CB60B9C0010B6B2 /* JZNoDataShowBGView.m in Sources */,
@@ -4079,6 +4090,7 @@
 				B2BA3E971CA4F44E00926584 /* CWStarRateView.m in Sources */,
 				B2BA43451CA5041100926584 /* SystemMessageModel.m in Sources */,
 				B2BA41DF1CA5035700926584 /* NSData+EMImageContentType.m in Sources */,
+				062569441CBB42C800BEC406 /* HomeDataDetailViewModel.m in Sources */,
 				B2BA43EA1CAA805F00926584 /* YBCourseTableView.m in Sources */,
 				B2BA41941CA5035700926584 /* PrivateMessageController.m in Sources */,
 				B253C2D01C3FA742001AF771 /* qrencode.c in Sources */,

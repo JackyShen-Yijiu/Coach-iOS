@@ -12,28 +12,80 @@
 #import "ChatViewController.h"
 #import "YBStudentDetailsViewController.h"
 #import <YYModel.h>
+#import "HomeDataDetailViewModel.h"
+#import "JZNoDataShowBGView.h"
 
 
 @interface JZHomeStudentAllListView ()<UITableViewDataSource,UITableViewDelegate>
 
+@property (nonatomic, strong) HomeDataDetailViewModel *viewModel;
+
+@property (nonatomic, assign) BOOL successRequest;
+
+@property (nonatomic, strong) JZNoDataShowBGView *noDataShowBGView;
+
 @end
 
 @implementation JZHomeStudentAllListView
-- (instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]) {
-        [self initUI];
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
+    self = [super initWithFrame:frame style:style];
+    if (self) {
+        self.dataSource = self;
+        self.delegate = self;
+        self.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.noDataShowBGView];
+        self.viewModel = [HomeDataDetailViewModel new];
+        [self.viewModel successRefreshBlock:^{
+            [self refreshUI];
+            self.successRequest = 1;
+        }];
     }
     return self;
 }
-- (void)initUI{
-    _dataArray = [NSMutableArray array];
-    [self addSubview:self.tableView];
-    [self initRefreshView];
-}
-#pragma mark ---- UITableViewDelegate 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.dataArray.count;
+#pragma mark - 刷新数据
+- (void)refreshUI {
     
+    [self reloadData];
+}
+
+#pragma mark - 刷新数据
+- (void)networkRequest {
+    self.viewModel.subjectID = self.subjectID;
+    self.viewModel.studentState = self.studentState;
+    [self.viewModel networkRequestRefresh];
+    if (self.successRequest) {
+        [self refreshUI];
+        return;
+    }
+       }
+
+- (void)setSearchType:(kDateSearchType)searchType {
+    _searchType = searchType;
+    self.viewModel.searchType = searchType;
+}
+
+#pragma mark ---- UITableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (_searchType == kDateSearchTypeToday) {
+        return self.viewModel.allListArray.count;
+    }
+    if (_searchType == kDateSearchTypeYesterday) {
+        
+        return self.viewModel.noexamListArray.count;
+    }
+    if (_searchType == kDateSearchTypeWeek) {
+        
+        return self.viewModel.appiontListArray.count;
+    }
+    if (_searchType == kDateSearchTypeMonth) {
+        
+        return self.viewModel.retestListArray.count;
+    }
+    if (_searchType == kDateSearchTypeYear) {
+                return self.viewModel.passListArray.count;
+    }
+    return 0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 98;
@@ -44,16 +96,35 @@
     if (!listCell) {
         listCell = [[JZHomeStudentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDCell];
     }
-    listCell.listModel = self.dataArray[indexPath.row];
+    JZResultModel *model = [[JZResultModel alloc] init];
+    if (_searchType == kDateSearchTypeToday) {
+        model = self.viewModel.allListArray[indexPath.row];
+    }
+    if (_searchType == kDateSearchTypeYesterday) {
+        model = self.viewModel.noexamListArray[indexPath.row];
+    }
+    if (_searchType == kDateSearchTypeWeek) {
+        model = self.viewModel.appiontListArray[indexPath.row];
+    }
+    if (_searchType == kDateSearchTypeMonth) {
+        model = self.viewModel.retestListArray[indexPath.row];
+    }
+    if (_searchType == kDateSearchTypeYear) {
+        model = self.viewModel.passListArray[indexPath.row];
+    }
+
+    listCell.listModel = model;
+    
+    
+    
+    
     listCell.studentListMessageAndCall = ^(NSInteger tag){
         if (500 == tag) {
             // 信息
-            JZResultModel *model = self.dataArray[indexPath.row];
             [self messageWithModel:model];
         }
         if (501 == tag) {
             // 电话
-            JZResultModel *model = self.dataArray[indexPath.row];
             [self callPhonewithModel:model];
         }
     };
@@ -62,8 +133,25 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // 跳转学员详情页
-    JZResultModel *model = _dataArray[indexPath.row];
+   // 跳转学员详情页
+    JZResultModel *model = [[JZResultModel alloc] init];
+    if (_searchType == kDateSearchTypeToday) {
+        model = self.viewModel.allListArray[indexPath.row];
+    }
+    if (_searchType == kDateSearchTypeYesterday) {
+        model = self.viewModel.noexamListArray[indexPath.row];
+    }
+    if (_searchType == kDateSearchTypeWeek) {
+        model = self.viewModel.appiontListArray[indexPath.row];
+    }
+    if (_searchType == kDateSearchTypeMonth) {
+        model = self.viewModel.retestListArray[indexPath.row];
+    }
+    if (_searchType == kDateSearchTypeYear) {
+        model = self.viewModel.passListArray[indexPath.row];
+    }
+
+    
     YBStudentDetailsViewController *studentDetailVC = [[YBStudentDetailsViewController alloc] init];
     studentDetailVC.studentID = model.userid;
     [self.parementVC.navigationController pushViewController:studentDetailVC animated:YES];
@@ -93,111 +181,6 @@
         
     }];
 }
-- (void)initRefreshView
-{
-    NSLog(@"self.subjectID = %@",(NSString *)@(self.subjectID));
-    
-    NSLog(@"self.studentState = %@",(NSString *)@(self.studentState));
-    WS(ws);
-    self.tableView.refreshHeader.beginRefreshingBlock = ^(){
-        NSLog(@" subjectID=%@ State == %@  ", (NSString *)@(ws.subjectID),(NSString *)@(ws.studentState) );
-        [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(ws.subjectID) studentID:(NSString *)@(ws.studentState) index:1 count:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"responseObject=%@ subjectID=%@ State == %@  ",responseObject, (NSString *)@(ws.subjectID),(NSString *)@(ws.studentState) );
-            NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
-            NSArray *data = [responseObject objectArrayForKey:@"data"];
-            if (type == 1) {
-                
-                [ws.dataArray removeAllObjects];
-                
-                if (data.count == 0) {
-//                    ws.noDataShowBGView.hidden = NO;
-                    [ws.tableView.refreshHeader endRefreshing];
-                    [ws.tableView reloadData];
-                    return ;
-                }
-//                ws.noDataShowBGView.hidden = YES;
-                for (NSDictionary *dic in data) {
-                    JZResultModel *model = [JZResultModel yy_modelWithDictionary:dic];
-                    [ws.dataArray addObject:model];
-                }
-                
-                
-                    [ws.tableView.refreshHeader endRefreshing];
-                NSLog(@"ws.dataArray.count = %lu",ws.dataArray.count);
-                    [ws.tableView reloadData];
-                    
-                    if (data.count>=10) {
-                        ws.tableView.refreshFooter.scrollView = ws.tableView;
-                    }else{
-                        ws.tableView.refreshFooter.scrollView = nil;
-                    }
-                
-                
-            }else{
-                [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
-            }
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [ws netErrorWithTableView:ws.tableView];
-        }];
-        
-    };
-    
-    ws.tableView.refreshFooter.beginRefreshingBlock = ^(){
-        //                        NSArray *dataArray = [NSArray array];
-        
-        if(_dataArray.count % RELOADDATACOUNT){
-            [ws.parementVC showTotasViewWithMes:@"已经加载所有数据"];
-            if (ws.tableView.refreshFooter) {
-                [ws.tableView.refreshFooter endRefreshing];
-                ws.tableView.refreshFooter.scrollView = nil;
-            }
-            return ;
-        }
-        
-        [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(ws.subjectID) studentID:(NSString *)@(ws.studentState) index:_dataArray.count / RELOADDATACOUNT count:RELOADDATACOUNT success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
-            if (type == 1) {
-                if (responseObject[@"data"]) {
-                    for (NSDictionary *dic in responseObject[@"data"]) {
-                        JZResultModel *model = [JZResultModel yy_modelWithDictionary:dic];
-                        [ws.dataArray addObject:model];
-                        [ws.tableView reloadData];
-                    }
-                    
-                }else{
-                    [ws.parementVC showTotasViewWithMes:@"已经加载所有数据"];
-                }
-                [ws.tableView.refreshFooter endRefreshing];
-                
-            } else{
-                [ws dealErrorResponseWithTableView:ws.tableView info:responseObject];
-            }
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [ws netErrorWithTableView:ws.tableView];
-        }];
-        
-        
-        
-    };
-    
-}
-#pragma mark Load Data
-- (void)dealErrorResponseWithTableView:(RefreshTableView *)tableview info:(NSDictionary *)dic
-{
-    [self.parementVC showTotasViewWithMes:[dic objectForKey:@"msg"]];
-    [tableview.refreshHeader endRefreshing];
-    [tableview.refreshFooter endRefreshing];
-}
-
-- (void)netErrorWithTableView:(RefreshTableView*)tableView
-{
-    [self.parementVC showTotasViewWithMes:@"网络异常，稍后重试"];
-    [tableView.refreshHeader endRefreshing];
-    [tableView.refreshFooter endRefreshing];
-}
-
 
 #pragma mark ---- 信息
 - (void)messageWithModel:(JZResultModel *)model{
@@ -209,17 +192,16 @@
     
     
 }
-
-- (RefreshTableView *)tableView{
-    if (_tableView == nil) {
-        CGRect rect = self.frame;
-        _tableView = [[RefreshTableView alloc] initWithFrame:rect];
-        _tableView.backgroundColor = [UIColor clearColor];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.dataSource = self;
-        _tableView.delegate = self;
+- (JZNoDataShowBGView *)noDataShowBGView{
+    if (_noDataShowBGView == nil) {
+        _noDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(0, self.frame.origin.x,self.frame.size.width,self.frame.size.height)];
+        _noDataShowBGView.imgStr = @"people_null";
+        _noDataShowBGView.titleStr = @"暂无数据";
+        _noDataShowBGView.titleColor  = JZ_FONTCOLOR_DRAK;
+        _noDataShowBGView.fontSize = 14.f;
+        _noDataShowBGView.hidden = YES;
     }
-    return _tableView;
+    return _noDataShowBGView;
 }
 
 @end
