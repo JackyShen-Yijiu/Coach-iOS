@@ -121,16 +121,6 @@
     }
     return _bottomImgView;
 }
-//- (UILabel *)nameLable{
-//    if (_nameLable == nil) {
-//        _nameLable = [[UILabel alloc] init];
-//        _nameLable.text = @"王教练";
-//        _nameLable.font = [UIFont systemFontOfSize:14];
-//        _nameLable.textColor = [UIColor whiteColor];
-//        _nameLable.textAlignment = NSTextAlignmentCenter;
-//    }
-//    return _nameLable;
-//}
 - (UIImageView *)iconView{
     if (_iconView == nil) {
         _iconView = [[UIImageView alloc] init];
