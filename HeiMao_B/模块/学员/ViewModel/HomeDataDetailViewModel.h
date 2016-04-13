@@ -26,4 +26,6 @@
 @property (nonatomic, strong) NSMutableArray *retestListArray;
 
 @property (nonatomic, strong) NSMutableArray *passListArray;
+
+@property (nonatomic, assign) NSInteger titleIndex;
 @end

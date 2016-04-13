@@ -10,7 +10,7 @@
 #import "RefreshTableView.h"
 #import "JZResultModel.h"
 
-@interface JZHomeStudentAllListView : UITableView
+@interface JZHomeStudentAllListView : RefreshTableView
 
 //@property (nonatomic, strong) RefreshTableView *tableView;
 //
@@ -33,4 +33,7 @@
 
 // 请求网络数据的方法
 - (void)networkRequest;
+
+// 加载更多
+- (void)moreData;
 @end

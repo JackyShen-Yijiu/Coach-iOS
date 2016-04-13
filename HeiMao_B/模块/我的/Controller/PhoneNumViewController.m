@@ -106,7 +106,7 @@
     if ([UIDevice jeSystemVersion] >= 7.0) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    self.title = @"手机号";
+    self.title = @"修改绑定手机";
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.naviBarRightButton];
     self.navigationItem.rightBarButtonItem = rightItem;

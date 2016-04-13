@@ -74,7 +74,7 @@
 
 @property (nonatomic, strong) NSArray *subjectIDArray;   // 根据教练授课科目 排序好的subjectID
 
-@property (nonatomic, strong) JZNoDataShowBGView *noDataShowBGView;
+//@property (nonatomic, strong) JZNoDataShowBGView *noDataShowBGView;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 
@@ -104,7 +104,7 @@
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
-    _noDataShowBGView.hidden = YES;
+//    _noDataShowBGView.hidden = YES;
 
 }
 - (void)viewDidLoad {
@@ -116,7 +116,7 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self setNavBar];
-    [self.view addSubview:self.noDataShowBGView];
+//    [self.view addSubview:self.noDataShowBGView];
     [self.view addSubview:self.scrollView];
     
     
@@ -212,9 +212,43 @@
     self.allListView.studentState = 0;
     self.allListView.parementVC = self;
     [self loadNetworkData];
+    __weak typeof (self) ws = self;
+    self.allListView.refreshHeader.beginRefreshingBlock = ^(){
+         [ws loadNetworkData];
+    };
+    self.noExameListView.refreshHeader.beginRefreshingBlock = ^(){
+        [ws loadNetworkData];
+    };
+    self.appointListView.refreshHeader.beginRefreshingBlock = ^(){
+        [ws loadNetworkData];
+    };
+    self.retestListView.refreshHeader.beginRefreshingBlock = ^(){
+        [ws loadNetworkData];
+    };
+    self.passListView.refreshHeader.beginRefreshingBlock = ^(){
+        [ws loadNetworkData];
+    };
+
     
     
     
+    
+    self.allListView.refreshFooter.beginRefreshingBlock = ^(){
+        [ws moreLoadData];
+    };
+    self.noExameListView.refreshFooter.beginRefreshingBlock = ^(){
+        [ws moreLoadData];
+    };
+    self.appointListView.refreshFooter.beginRefreshingBlock = ^(){
+        [ws moreLoadData];
+    };
+    self.retestListView.refreshFooter.beginRefreshingBlock = ^(){
+        [ws moreLoadData];
+    }; self.passListView.refreshFooter.beginRefreshingBlock = ^(){
+        [ws moreLoadData];
+    };
+
+
     
 }
 - (void)setNavBar{
@@ -233,6 +267,8 @@
         NSLog(@"TableView在滚动");
     }
 }
+
+//
 - (void)loadNetworkData {
     
     CGFloat offSetX = self.scrollView.contentOffset.x;
@@ -264,6 +300,37 @@
         [self.passListView networkRequest];
     }
 }
+- (void)moreLoadData {
+    
+    CGFloat offSetX = self.scrollView.contentOffset.x;
+    CGFloat width = self.scrollView.width;
+    
+    if (offSetX >= 0 && offSetX < self.scrollView.width) {
+        self.allListView.subjectID = self.subjectID;
+        self.allListView.studentState = 0;
+        [self.allListView moreData];
+    }else if (offSetX >= width && offSetX < width * 2) {
+        self.noExameListView.subjectID = self.subjectID;
+        self.noExameListView.studentState = 2;
+        [self.noExameListView moreData];
+        
+        
+        
+    }else if (offSetX >= width * 2 && offSetX < width * 3) {
+        self.appointListView.subjectID = self.subjectID;
+        self.appointListView.studentState = 3;
+        [self.appointListView moreData];
+        
+    }else if (offSetX >= width * 3 && offSetX < width * 4) {
+        self.retestListView.subjectID = self.subjectID;
+        self.retestListView.studentState = 4;
+        [self.retestListView moreData];
+    }else if (offSetX >= width * 4) {
+        self.passListView.subjectID = self.subjectID;
+        self.passListView.studentState = 5;
+        [self.passListView moreData];
+    }
+}
 
 #pragma mark ---- segment的点击事件
 - (void)didClicksegmentedControlAction:(UISegmentedControl *)Seg {
@@ -275,7 +342,7 @@
     self.subjectID = [_subjectIDArray[index] integerValue];
     self.allListView.parementVC = self;
     [_toolBarView selectItem:0];
-    _noDataShowBGView.hidden = YES;
+//    _noDataShowBGView.hidden = YES;
     [self loadNetworkData];
     
 }
@@ -344,7 +411,7 @@
     }
     [self loadNetworkData];
 
-    _noDataShowBGView.hidden = YES;
+//    _noDataShowBGView.hidden = YES;
    
 }
 #pragma mark --- UIScroller delegate
@@ -497,17 +564,17 @@
 }
 
 
-- (JZNoDataShowBGView *)noDataShowBGView{
-    if (_noDataShowBGView == nil) {
-        _noDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(0, ktopHight, self.view.width, self.view.height - ktopHight)];
-        _noDataShowBGView.imgStr = @"people_null";
-        _noDataShowBGView.titleStr = @"暂无数据";
-        _noDataShowBGView.titleColor  = JZ_FONTCOLOR_DRAK;
-        _noDataShowBGView.fontSize = 14.f;
-        _noDataShowBGView.hidden = YES;
-    }
-    return _noDataShowBGView;
-}
+//- (JZNoDataShowBGView *)noDataShowBGView{
+//    if (_noDataShowBGView == nil) {
+//        _noDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(0, ktopHight, self.view.width, self.view.height - ktopHight)];
+//        _noDataShowBGView.imgStr = @"people_null";
+//        _noDataShowBGView.titleStr = @"暂无数据";
+//        _noDataShowBGView.titleColor  = JZ_FONTCOLOR_DRAK;
+//        _noDataShowBGView.fontSize = 14.f;
+//        _noDataShowBGView.hidden = YES;
+//    }
+//    return _noDataShowBGView;
+//}
 - (UIScrollView *)scrollView{
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ktopHight + 64, self.view.width, self.view.height - 45 - ktopHight - 64)];

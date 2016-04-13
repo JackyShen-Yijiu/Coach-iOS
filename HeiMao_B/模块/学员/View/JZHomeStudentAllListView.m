@@ -24,6 +24,7 @@
 
 @property (nonatomic, strong) JZNoDataShowBGView *noDataShowBGView;
 
+
 @end
 
 @implementation JZHomeStudentAllListView
@@ -39,8 +40,15 @@
         [self.viewModel successRefreshBlock:^{
             [self refreshUI];
             self.successRequest = 1;
+            [self.refreshHeader endRefreshing];
+            return;
+        }];
+        [self.viewModel successLoadMoreBlock:^{
+//            [self.parementVC showTotasViewWithMes:@"已经加载全部数据"];
+            
         }];
     }
+    
     return self;
 }
 #pragma mark - 刷新数据
@@ -54,11 +62,25 @@
     self.viewModel.subjectID = self.subjectID;
     self.viewModel.studentState = self.studentState;
     [self.viewModel networkRequestRefresh];
+//    if (self.successRequest) {
+//        [self refreshUI];
+//        [self.refreshHeader endRefreshing];
+//        return;
+//    }
+       }
+
+#pragma mark --- 加载更多
+- (void)moreData{
+    self.viewModel.subjectID = self.subjectID;
+    self.viewModel.studentState = self.studentState;
+    [self.viewModel networkRequestLoadMore];
     if (self.successRequest) {
         [self refreshUI];
+        [self.refreshFooter endRefreshing];
         return;
     }
-       }
+    
+}
 
 - (void)setSearchType:(kDateSearchType)searchType {
     _searchType = searchType;
@@ -67,6 +89,8 @@
 
 #pragma mark ---- UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+//     _noDataShowBGView.hidden = YES;
     if (_searchType == kDateSearchTypeToday) {
         return self.viewModel.allListArray.count;
     }
@@ -75,10 +99,20 @@
         return self.viewModel.noexamListArray.count;
     }
     if (_searchType == kDateSearchTypeWeek) {
-        
+        if (self.viewModel.appiontListArray.count == 0) {
+            NSLog(@"%@",_noDataShowBGView);
+            self.noDataShowBGView.hidden = NO;
+            _noDataShowBGView.backgroundColor = [UIColor cyanColor];
+            NSLog(@"%@",_noDataShowBGView);
+        }
         return self.viewModel.appiontListArray.count;
     }
     if (_searchType == kDateSearchTypeMonth) {
+        if (self.viewModel.retestListArray.count == 0) {
+            NSLog(@"%@",_noDataShowBGView);
+            self.noDataShowBGView.hidden = NO;
+        }
+
         
         return self.viewModel.retestListArray.count;
     }
@@ -194,12 +228,12 @@
 }
 - (JZNoDataShowBGView *)noDataShowBGView{
     if (_noDataShowBGView == nil) {
-        _noDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(0, self.frame.origin.x,self.frame.size.width,self.frame.size.height)];
+        _noDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(self.frame.origin.x, 0,self.frame.size.width,self.frame.size.height)];
         _noDataShowBGView.imgStr = @"people_null";
         _noDataShowBGView.titleStr = @"暂无数据";
         _noDataShowBGView.titleColor  = JZ_FONTCOLOR_DRAK;
         _noDataShowBGView.fontSize = 14.f;
-        _noDataShowBGView.hidden = YES;
+        _noDataShowBGView.hidden = NO;
     }
     return _noDataShowBGView;
 }
