@@ -10,6 +10,12 @@
 #import "RefreshTableView.h"
 #import "JZResultModel.h"
 
+@protocol ShowNoDataBG <NSObject>
+
+- (void)initWithDataSearchType:(kDateSearchType)dataSearchType;
+
+@end
+
 @interface JZHomeStudentAllListView : RefreshTableView
 
 //@property (nonatomic, strong) RefreshTableView *tableView;
@@ -23,6 +29,8 @@
 @property (nonatomic, assign) NSInteger studentState; // 学员状态的选择
 
 @property (nonatomic, assign) kDateSearchType searchType;
+
+@property (nonatomic, strong) id<ShowNoDataBG> showNodataDelegate;
 
 //- (void)setCoachTeacherClickBlock:(void(^)(NSInteger tag))handle;
 //

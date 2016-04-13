@@ -90,33 +90,53 @@
 #pragma mark ---- UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-//     _noDataShowBGView.hidden = YES;
+     _noDataShowBGView.hidden = YES;
     if (_searchType == kDateSearchTypeToday) {
+        if (self.viewModel.allListArray.count == 0) {
+            if ([self.showNodataDelegate respondsToSelector:@selector(initWithDataSearchType:)]) {
+                [self.showNodataDelegate initWithDataSearchType:kDateSearchTypeToday];
+            }
+        }
+
         return self.viewModel.allListArray.count;
     }
     if (_searchType == kDateSearchTypeYesterday) {
+        if (self.viewModel.noexamListArray.count == 0) {
+            if ([self.showNodataDelegate respondsToSelector:@selector(initWithDataSearchType:)]) {
+                [self.showNodataDelegate initWithDataSearchType:kDateSearchTypeYesterday];
+            }
+        }
+
         
         return self.viewModel.noexamListArray.count;
     }
     if (_searchType == kDateSearchTypeWeek) {
         if (self.viewModel.appiontListArray.count == 0) {
-            NSLog(@"%@",_noDataShowBGView);
-            self.noDataShowBGView.hidden = NO;
-            _noDataShowBGView.backgroundColor = [UIColor cyanColor];
-            NSLog(@"%@",_noDataShowBGView);
+        if ([self.showNodataDelegate respondsToSelector:@selector(initWithDataSearchType:)]) {
+                [self.showNodataDelegate initWithDataSearchType:kDateSearchTypeWeek];
+            }
         }
         return self.viewModel.appiontListArray.count;
     }
     if (_searchType == kDateSearchTypeMonth) {
         if (self.viewModel.retestListArray.count == 0) {
-            NSLog(@"%@",_noDataShowBGView);
-            self.noDataShowBGView.hidden = NO;
+                
+                if ([self.showNodataDelegate respondsToSelector:@selector(initWithDataSearchType:)]) {
+                    [self.showNodataDelegate initWithDataSearchType:kDateSearchTypeMonth];
+                }
+
         }
 
         
         return self.viewModel.retestListArray.count;
     }
     if (_searchType == kDateSearchTypeYear) {
+        if (self.viewModel.passListArray.count == 0) {
+            if ([self.showNodataDelegate respondsToSelector:@selector(initWithDataSearchType:)]) {
+                [self.showNodataDelegate initWithDataSearchType:kDateSearchTypeYear];
+            }
+        }
+
                 return self.viewModel.passListArray.count;
     }
     return 0;

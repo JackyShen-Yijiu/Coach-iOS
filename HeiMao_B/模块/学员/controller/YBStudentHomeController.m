@@ -41,7 +41,7 @@
 
 #define ksegmentH 36
 
-@interface YBStudentHomeController ()<UIScrollViewDelegate>
+@interface YBStudentHomeController ()<UIScrollViewDelegate,ShowNoDataBG>
 
 @property (nonatomic, strong) JZHomeStudentAllListView *allListView;
 @property (nonatomic, strong) JZHomeStudentAllListView *noExameListView;
@@ -74,7 +74,17 @@
 
 @property (nonatomic, strong) NSArray *subjectIDArray;   // 根据教练授课科目 排序好的subjectID
 
-//@property (nonatomic, strong) JZNoDataShowBGView *noDataShowBGView;
+@property (nonatomic, strong) JZNoDataShowBGView *allnoDataShowBGView;
+
+@property (nonatomic, strong) JZNoDataShowBGView *noexamnoDataShowBGView;
+
+@property (nonatomic, strong) JZNoDataShowBGView *appointnoDataShowBGView;
+
+@property (nonatomic, strong) JZNoDataShowBGView *retestDataShowBGView;
+
+@property (nonatomic, strong) JZNoDataShowBGView *passnoDataShowBGView;
+
+
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 
@@ -477,6 +487,34 @@
     }
     return args;
 }
+
+#pragma mark --- 显示占位图片Delegate
+- (void)initWithDataSearchType:(kDateSearchType)dataSearchType{
+    if (dataSearchType == kDateSearchTypeToday) {
+        _appointnoDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.scrollView.height)];
+        [self.scrollView addSubview:_appointnoDataShowBGView];
+    }
+
+    if (dataSearchType == kDateSearchTypeYesterday) {
+        _appointnoDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(self.view.width, 0, self.view.width, self.scrollView.height)];
+        [self.scrollView addSubview:_appointnoDataShowBGView];
+    }
+
+    if (dataSearchType == kDateSearchTypeWeek) {
+       _appointnoDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(self.view.width * 2, 0, self.view.width, self.scrollView.height)];
+        [self.scrollView addSubview:_appointnoDataShowBGView];
+    }
+    if (dataSearchType == kDateSearchTypeMonth) {
+       _retestDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(self.view.width * 3, 0, self.view.width, self.scrollView.height)];
+        [self.scrollView addSubview:_retestDataShowBGView];
+    }
+    if (dataSearchType == kDateSearchTypeYear) {
+        _appointnoDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(self.view.width * 4, 0, self.view.width, self.scrollView.height)];
+        [self.scrollView addSubview:_appointnoDataShowBGView];
+    }
+
+
+}
 - (JZHomeStudentToolBarView *)toolBarView {
     
     // 这里没有用懒加载, 因为当设置里面的科目相应更改后, 这样要动态的调整
@@ -537,6 +575,7 @@
         _appointListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(2 * self.view.width, 0, self.view.width, self.scrollView.height) ];
         _appointListView.backgroundColor = [UIColor clearColor];
         _appointListView.searchType = kDateSearchTypeWeek;
+        _appointListView.showNodataDelegate = self;
         
     }
     return _appointListView;
@@ -547,6 +586,7 @@
         _retestListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(3 * self.view.width, 0, self.view.width, self.scrollView.height) ];
         _retestListView.backgroundColor = [UIColor clearColor];
         _retestListView.searchType = kDateSearchTypeMonth;
+        _retestListView.showNodataDelegate = self;
     }
     return _retestListView;
 }
@@ -562,19 +602,6 @@
     }
     return _passListView;
 }
-
-
-//- (JZNoDataShowBGView *)noDataShowBGView{
-//    if (_noDataShowBGView == nil) {
-//        _noDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(0, ktopHight, self.view.width, self.view.height - ktopHight)];
-//        _noDataShowBGView.imgStr = @"people_null";
-//        _noDataShowBGView.titleStr = @"暂无数据";
-//        _noDataShowBGView.titleColor  = JZ_FONTCOLOR_DRAK;
-//        _noDataShowBGView.fontSize = 14.f;
-//        _noDataShowBGView.hidden = YES;
-//    }
-//    return _noDataShowBGView;
-//}
 - (UIScrollView *)scrollView{
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ktopHight + 64, self.view.width, self.view.height - 45 - ktopHight - 64)];
