@@ -270,15 +270,6 @@
     self.myNavigationItem.leftBarButtonItems = nil;
 
 }
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    if ([scrollView isKindOfClass:[UIScrollView class]]) {
-        NSLog(@"ScrollView在滚动");
-    }else if ([scrollView isKindOfClass:[UITableView class]]) {
-        NSLog(@"TableView在滚动");
-    }
-}
-
-//
 - (void)loadNetworkData {
     
     CGFloat offSetX = self.scrollView.contentOffset.x;
@@ -370,6 +361,7 @@
 
         self.allListView.studentState = index;
         self.allListView.subjectID = self.subjectID;
+        self.allListView.frame = CGRectMake(0, 0, self.view.width, self.scrollView.height);
         [self.scrollView addSubview:self.allListView];
         self.allListView.parementVC = self;
        
@@ -379,6 +371,7 @@
         [UIView animateWithDuration:0.5 animations:^{
             _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
         }];
+         self.noExameListView.frame = CGRectMake(self.view.width, 0, self.view.width, self.scrollView.height);
          [self.scrollView addSubview:self.noExameListView];
 
         self.noExameListView.studentState = index + 1;
@@ -393,6 +386,7 @@
         self.appointListView.subjectID = self.subjectID;
         self.appointListView.studentState = index + 1;
         self.appointListView.parementVC = self;
+         self.appointListView.frame = CGRectMake(self.view.width * 2, 0, self.view.width, self.scrollView.height);
          [self.scrollView addSubview:self.appointListView];
         
         
@@ -404,6 +398,7 @@
         }];
         self.retestListView.subjectID = self.subjectID;
         self.retestListView.studentState = index + 1;
+         self.retestListView.frame = CGRectMake(self.view.width * 3, 0, self.view.width, self.scrollView.height);
          [self.scrollView addSubview:self.retestListView];
         self.retestListView.parementVC = self;
         
@@ -414,6 +409,7 @@
         }];
         self.passListView.subjectID = self.subjectID;
         self.passListView.studentState = index + 1;
+         self.passListView.frame = CGRectMake(self.view.width * 4, 0, self.view.width, self.scrollView.height);
          [self.scrollView addSubview:self.passListView];
         self.passListView.parementVC = self;
        
@@ -432,22 +428,25 @@
     if (0 == scrollView.contentOffset.x) {
        // 全部
          [_toolBarView selectItem:0];
+         self.allListView.frame = CGRectMake(0, -64, self.view.width, self.scrollView.height);
     }
     if (width == scrollView.contentOffset.x) {
         // 未考
         [_toolBarView selectItem:1];
-
+self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, self.scrollView.height);
         
         
     }
     if (2 * width== scrollView.contentOffset.x) {
         // 约考
         [_toolBarView selectItem:2];
+        self.appointListView.frame = CGRectMake(self.view.width * 2, -64, self.view.width, self.scrollView.height);
 
     }
     if (3 * width == scrollView.contentOffset.x) {
         // 补考
         [_toolBarView selectItem:3];
+        self.retestListView.frame = CGRectMake(self.view.width * 3, -64, self.view.width, self.scrollView.height);
 
         
         
@@ -455,6 +454,7 @@
     if (4 * width == scrollView.contentOffset.x) {
         // 通过
         [_toolBarView selectItem:4];
+        self.passListView.frame = CGRectMake(self.view.width * 4, -64, self.view.width, self.scrollView.height);
         
         
     }
@@ -552,7 +552,7 @@
 // 全部学员
 - (JZHomeStudentAllListView *)allListView{
     if (_allListView == nil) {
-        _allListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.scrollView.height)];
+        _allListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(0, -64, self.view.width, self.scrollView.height)];
         _allListView.backgroundColor = [UIColor clearColor];
         _allListView.searchType = kDateSearchTypeToday;
         
@@ -562,7 +562,7 @@
 // 未考学员
 - (JZHomeStudentAllListView *)noExameListView{
     if (_noExameListView == nil) {
-        _noExameListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(self.view.width, 0, self.view.width, self.scrollView.height)];
+        _noExameListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(self.view.width, -64, self.view.width, self.scrollView.height)];
         _noExameListView.backgroundColor = [UIColor clearColor];
         _noExameListView.searchType = kDateSearchTypeYesterday;
     }
@@ -572,7 +572,7 @@
 // 约考学员
 - (JZHomeStudentAllListView *)appointListView{
     if (_appointListView == nil) {
-        _appointListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(2 * self.view.width, 0, self.view.width, self.scrollView.height) ];
+        _appointListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(2 * self.view.width, -64, self.view.width, self.scrollView.height) ];
         _appointListView.backgroundColor = [UIColor clearColor];
         _appointListView.searchType = kDateSearchTypeWeek;
         _appointListView.showNodataDelegate = self;
@@ -583,7 +583,7 @@
 // 补考学员
 - (JZHomeStudentAllListView *)retestListView{
     if (_retestListView == nil) {
-        _retestListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(3 * self.view.width, 0, self.view.width, self.scrollView.height) ];
+        _retestListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(3 * self.view.width, -64, self.view.width, self.scrollView.height) ];
         _retestListView.backgroundColor = [UIColor clearColor];
         _retestListView.searchType = kDateSearchTypeMonth;
         _retestListView.showNodataDelegate = self;
@@ -595,7 +595,7 @@
 // 通过学员
 - (JZHomeStudentAllListView *)passListView{
     if (_passListView == nil) {
-        _passListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(4 * self.view.width, 0, self.view.width, self.scrollView.height)];
+        _passListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(4 * self.view.width, -64, self.view.width, self.scrollView.height)];
         _passListView.backgroundColor = [UIColor clearColor];
         _passListView.searchType = kDateSearchTypeYear;
         
