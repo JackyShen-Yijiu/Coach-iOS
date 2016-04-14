@@ -33,6 +33,7 @@
     if (self) {
         self.dataSource = self;
         self.delegate = self;
+        self.refreshHeader = nil;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.backgroundColor = [UIColor clearColor];
         [self addSubview:self.noDataShowBGView];
@@ -44,8 +45,14 @@
             return;
         }];
         [self.viewModel successLoadMoreBlock:^{
-//            [self.parementVC showTotasViewWithMes:@"已经加载全部数据"];
+            [self refreshUI];
+            [self.refreshFooter endRefreshing];
             
+            
+        }];
+        [self.viewModel successLoadMoreBlockAndNoData:^{
+            [self.parementVC showTotasViewWithMes:@"已经加载更多"];
+            [self.refreshFooter endRefreshing];
         }];
     }
     
@@ -62,23 +69,13 @@
     self.viewModel.subjectID = self.subjectID;
     self.viewModel.studentState = self.studentState;
     [self.viewModel networkRequestRefresh];
-//    if (self.successRequest) {
-//        [self refreshUI];
-//        [self.refreshHeader endRefreshing];
-//        return;
-//    }
-       }
+}
 
 #pragma mark --- 加载更多
 - (void)moreData{
     self.viewModel.subjectID = self.subjectID;
     self.viewModel.studentState = self.studentState;
     [self.viewModel networkRequestLoadMore];
-    if (self.successRequest) {
-        [self refreshUI];
-        [self.refreshFooter endRefreshing];
-        return;
-    }
     
 }
 

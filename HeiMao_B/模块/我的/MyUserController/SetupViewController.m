@@ -29,7 +29,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 @implementation SetupViewController
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = @[@[@"预约提醒",@"新消息通知",@"自动接受预约"],@[@"清除缓存",@"关于我们",@"去评分",@"意见反馈",@"版本更新"]];
+        _dataArray = @[@[@"预约提醒",@"新消息通知",@"自动接受预约"],@[@"清除缓存",@"关于我们",@"去评分",@"意见反馈"]];
     }
     return _dataArray;
 }
@@ -366,10 +366,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
             FeedBackViewController *feedBack = [[FeedBackViewController alloc] init];
             [self.navigationController pushViewController:feedBack animated:YES];
         }
-        if (4 == indexPath.row) {
-            // 版本更新
-            [self goToAppStore];
-        }
+        
     }
 }
 #pragma mark ------ 去评分和版本更新相关操作

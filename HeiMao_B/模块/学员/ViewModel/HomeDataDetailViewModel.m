@@ -88,8 +88,8 @@
         if (type == 1) {
             
             if (data.count == 0) {
-                [self successLoadMoreBlock];
-
+            
+                [self successLoadMoreBlockAndNoData];
             }
             
             for (NSDictionary *dic in data) {
@@ -115,9 +115,7 @@
                 
             }
             
-//            [self successRefreshBlock];
-            
-            
+            [self successLoadMoreBlock];
         }else{
             
         }

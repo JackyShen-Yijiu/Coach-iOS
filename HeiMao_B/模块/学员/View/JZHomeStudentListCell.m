@@ -69,13 +69,6 @@
         make.width.mas_equalTo(@80);
         
     }];
-    [self.studyConLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(10);
-        make.left.mas_equalTo(self.nameLabel.mas_left);
-        make.height.mas_equalTo(@12);
-
-        
-    }];
     [self.classTimeLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.studyConLabel.mas_bottom).offset(10);
         make.left.mas_equalTo(self.nameLabel.mas_left);
@@ -99,6 +92,15 @@
         
         
     }];
+    [self.studyConLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(10);
+        make.left.mas_equalTo(self.nameLabel.mas_left);
+        make.right.mas_equalTo(self.messageButton.mas_left).offset(0);
+        make.height.mas_equalTo(@12);
+        
+        
+    }];
+
 
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(0);

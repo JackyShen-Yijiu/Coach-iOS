@@ -223,22 +223,27 @@
     self.allListView.parementVC = self;
     [self loadNetworkData];
     __weak typeof (self) ws = self;
-    self.allListView.refreshHeader.beginRefreshingBlock = ^(){
-         [ws loadNetworkData];
-    };
-    self.noExameListView.refreshHeader.beginRefreshingBlock = ^(){
-        [ws loadNetworkData];
-    };
-    self.appointListView.refreshHeader.beginRefreshingBlock = ^(){
-        [ws loadNetworkData];
-    };
-    self.retestListView.refreshHeader.beginRefreshingBlock = ^(){
-        [ws loadNetworkData];
-    };
-    self.passListView.refreshHeader.beginRefreshingBlock = ^(){
-        [ws loadNetworkData];
-    };
-
+//    self.allListView.refreshHeader.beginRefreshingBlock = ^(){
+//         [ws loadNetworkData];
+//    };
+//    self.noExameListView.refreshHeader.beginRefreshingBlock = ^(){
+//        [ws loadNetworkData];
+//    };
+//    self.appointListView.refreshHeader.beginRefreshingBlock = ^(){
+//        [ws loadNetworkData];
+//    };
+//    self.retestListView.refreshHeader.beginRefreshingBlock = ^(){
+//        [ws loadNetworkData];
+//    };
+//    self.passListView.refreshHeader.beginRefreshingBlock = ^(){
+//        [ws loadNetworkData];
+//    };
+    
+    self.noExameListView.refreshHeader = nil;
+    self.appointListView.refreshHeader = nil;
+    self.allListView.refreshHeader = nil;
+    self.retestListView.refreshHeader = nil;
+    self.passListView.refreshHeader = nil;
     
     
     
@@ -555,6 +560,7 @@ self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, s
         _allListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(0, -64, self.view.width, self.scrollView.height)];
         _allListView.backgroundColor = [UIColor clearColor];
         _allListView.searchType = kDateSearchTypeToday;
+        _allListView.refreshHeader = nil;
         
     }
     return _allListView;
@@ -565,6 +571,7 @@ self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, s
         _noExameListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(self.view.width, -64, self.view.width, self.scrollView.height)];
         _noExameListView.backgroundColor = [UIColor clearColor];
         _noExameListView.searchType = kDateSearchTypeYesterday;
+        _noExameListView.refreshHeader = nil;
     }
     return _noExameListView;
 }

@@ -18,6 +18,7 @@
 
 @property (nonatomic, copy) BaseViewModelUpdataBlock myErrorLoadMoreBlock;
 
+@property (nonatomic, copy) BaseViewModelUpdataBlock mySuccessMoreNoData;
 @end
 
 @implementation YBBaseViewModel
@@ -55,7 +56,13 @@
     }
     return NO;
 }
-
+- (BOOL) successLoadMoreBlockAndNoData{
+    if (_mySuccessMoreNoData) {
+        _mySuccessMoreNoData();
+        return YES;
+    }
+    return NO;
+}
 - (BOOL)errorLoadMoreBlock {
     if (_myErrorLoadMoreBlock) {
         _myErrorLoadMoreBlock();
@@ -81,5 +88,7 @@
 - (void)errorLoadMoreBlock:(BaseViewModelUpdataBlock)errorLoadMoreBlock {
     _myErrorLoadMoreBlock = errorLoadMoreBlock;
 }
-
+- (void)successLoadMoreBlockAndNoData:(BaseViewModelUpdataBlock)successLoadMoreBlockAndNoData{
+    _mySuccessMoreNoData = successLoadMoreBlockAndNoData;
+}
 @end
