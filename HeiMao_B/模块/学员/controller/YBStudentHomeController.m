@@ -31,6 +31,7 @@
 #import "JZNoDataShowBGView.h"
 
 #define YBRatio 1.15
+
 #define ScreenWidthIs_6Plus_OrWider [UIScreen mainScreen].bounds.size.width >= 414
 
 #define ktopHight 112
@@ -40,6 +41,9 @@
 #define kbottmWith 44
 
 #define ksegmentH 36
+
+
+#define yinyingH 2
 
 @interface YBStudentHomeController ()<UIScrollViewDelegate,ShowNoDataBG>
 
@@ -74,6 +78,7 @@
 
 @property (nonatomic, strong) NSArray *subjectIDArray;   // 根据教练授课科目 排序好的subjectID
 
+
 @property (nonatomic, strong) JZNoDataShowBGView *allnoDataShowBGView;
 
 @property (nonatomic, strong) JZNoDataShowBGView *noexamnoDataShowBGView;
@@ -89,6 +94,7 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 
 @property (nonatomic, assign) NSInteger subjectID;
+
 @end
 
 @implementation YBStudentHomeController
@@ -114,24 +120,33 @@
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
-//    _noDataShowBGView.hidden = YES;
+    [_allnoDataShowBGView removeFromSuperview];
+    [_noexamnoDataShowBGView removeFromSuperview];
+    [_appointnoDataShowBGView removeFromSuperview];
+    [_retestDataShowBGView removeFromSuperview];
+    [_passnoDataShowBGView removeFromSuperview];
+    
 
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     _isshowSegment = YES;
     _resultDataArray = [NSMutableArray array];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
+  
     [self setNavBar];
 //    [self.view addSubview:self.noDataShowBGView];
-    [self.view addSubview:self.scrollView];
+  
+//    [self.view addSubview:self.scrollView];
     
     
 }
 - (void)changeBgViewFrame{
+    
     _isshowSegment = YES;
     self.myNavigationItem.title = @"学员";
     NSArray *sujectArray = [UserInfoModel defaultUserInfo].subject;
@@ -140,6 +155,9 @@
         NSDictionary *dic = sujectArray.firstObject;
         self.myNavigationItem.title = dic[@"name"];
         self.allListView.subjectID = [dic[@"subjectid"] integerValue];
+        _subjectID = [dic[@"subjectid"] integerValue];
+        self.allListView.studentState = 0;
+        NSLog(@"%lu",[dic[@"subjectid"] integerValue]);
         
     }
     _isshowSegment ? (_bgH = ktopHight) : (_bgH = ktopSmallHight);
@@ -213,11 +231,21 @@
     [self.bgView addSubview:self.toolBarView];
     [self.view addSubview:self.bgView];
     if (!_isshowSegment) {
-        _scrollView.frame = CGRectMake(0, _bgH + 64, self.view.width, self.view.height - _bgH - 45);
+        _scrollView.frame = CGRectMake(0, CGRectGetMaxY(self.bgView.frame) + yinyingH , self.view.width, self.view.height - _bgH - 49);
     }else{
-        _scrollView.frame = CGRectMake(0, ktopHight + 64, self.view.width, self.view.height - ktopHight - 64);
+        _scrollView.frame = CGRectMake(0, CGRectGetMaxY(self.bgView.frame) + yinyingH, self.view.width, self.view.height - ktopHight -49);
     }
-    [self.scrollView addSubview:self.allListView];
+    [self.view addSubview:self.scrollView];
+    
+    [_scrollView addSubview:self.allListView];
+    [_scrollView addSubview:self.noExameListView];
+    [_scrollView addSubview:self.retestListView];
+    [_scrollView addSubview:self.appointListView];
+    [_scrollView addSubview:self.passListView];
+
+    NSLog(@"--------_scrollView.contentOffset.y:%f",_scrollView.contentOffset.y);
+
+    //[self.scrollView addSubview:self.allListView];
     self.allListView.subjectID = _subjectID;
     self.allListView.studentState = 0;
     self.allListView.parementVC = self;
@@ -244,9 +272,6 @@
     self.allListView.refreshHeader = nil;
     self.retestListView.refreshHeader = nil;
     self.passListView.refreshHeader = nil;
-    
-    
-    
     
     self.allListView.refreshFooter.beginRefreshingBlock = ^(){
         [ws moreLoadData];
@@ -354,75 +379,87 @@
 }
 #pragma mark 筛选条件
 - (void)dvvToolBarViewItemSelectedAction:(NSInteger)index {
+    
+    NSLog(@"11_scrollView.contentOffset.y:%f",_scrollView.contentOffset.y);
+    
     /*
      
      学员状态：0 全部学员 1在学学员 2未考学员 3约考学员 4补考学员 5通过学员
      */
     if (0 == index) {
+        
         CGFloat contentOffsetX = 0;
-        [UIView animateWithDuration:0.5 animations:^{
-            _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
-        }];
+        _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
 
         self.allListView.studentState = index;
         self.allListView.subjectID = self.subjectID;
+        [self.allListView removeFromSuperview];
+
         self.allListView.frame = CGRectMake(0, 0, self.view.width, self.scrollView.height);
         [self.scrollView addSubview:self.allListView];
         self.allListView.parementVC = self;
        
-        
     }else if (1 == index) {
         CGFloat contentOffsetX = self.view.width;
-        [UIView animateWithDuration:0.5 animations:^{
-            _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
-        }];
-         self.noExameListView.frame = CGRectMake(self.view.width, 0, self.view.width, self.scrollView.height);
+        _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
+ NSLog(@"22_scrollView.contentOffset.y:%f",_scrollView.contentOffset.y);
+        [self.noExameListView removeFromSuperview];
+        self.noExameListView.frame = CGRectMake(self.view.width, 0, self.view.width, self.scrollView.height);
+ NSLog(@"33_scrollView.contentOffset.y:%f",_scrollView.contentOffset.y);
          [self.scrollView addSubview:self.noExameListView];
 
         self.noExameListView.studentState = index + 1;
          self.noExameListView.subjectID = self.subjectID;
         self.noExameListView.parementVC = self;
+         NSLog(@"44_scrollView.contentOffset.y:%f",_scrollView.contentOffset.y);
         
     }else if (2 == index) {
         CGFloat contentOffsetX = 2 * self.view.width;
-        [UIView animateWithDuration:0.5 animations:^{
-            _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
-        }];
+        _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
+
         self.appointListView.subjectID = self.subjectID;
         self.appointListView.studentState = index + 1;
         self.appointListView.parementVC = self;
-         self.appointListView.frame = CGRectMake(self.view.width * 2, 0, self.view.width, self.scrollView.height);
-         [self.scrollView addSubview:self.appointListView];
         
+        [self.noExameListView removeFromSuperview];
+
+         [self.scrollView addSubview:self.appointListView];
+        self.appointListView.frame = CGRectMake(self.view.width * 2, 0, self.view.width, self.scrollView.height);
+
         
     }
     else if (3 == index) {
         CGFloat contentOffsetX = 3 * self.view.width;
-        [UIView animateWithDuration:0.5 animations:^{
-            _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
-        }];
+        _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
+
         self.retestListView.subjectID = self.subjectID;
         self.retestListView.studentState = index + 1;
-         self.retestListView.frame = CGRectMake(self.view.width * 3, 0, self.view.width, self.scrollView.height);
-         [self.scrollView addSubview:self.retestListView];
+        
+        [self.retestListView removeFromSuperview];
+        [self.scrollView addSubview:self.retestListView];
+        self.retestListView.frame = CGRectMake(self.view.width * 3, 0, self.view.width, self.scrollView.height);
         self.retestListView.parementVC = self;
         
     }else if (4 == index) {
+        
         CGFloat contentOffsetX = 4 * self.view.width;
-        [UIView animateWithDuration:0.5 animations:^{
-            _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
-        }];
+        _scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
+
         self.passListView.subjectID = self.subjectID;
         self.passListView.studentState = index + 1;
+        
+        [self.passListView removeFromSuperview];
+        
          self.passListView.frame = CGRectMake(self.view.width * 4, 0, self.view.width, self.scrollView.height);
          [self.scrollView addSubview:self.passListView];
         self.passListView.parementVC = self;
        
         
     }
-    [self loadNetworkData];
+   
+    NSLog(@"+++++++_scrollView.contentOffset.y:%f",_scrollView.contentOffset.y);
 
-//    _noDataShowBGView.hidden = YES;
+    [self loadNetworkData];
    
 }
 #pragma mark --- UIScroller delegate
@@ -433,25 +470,25 @@
     if (0 == scrollView.contentOffset.x) {
        // 全部
          [_toolBarView selectItem:0];
-         self.allListView.frame = CGRectMake(0, -64, self.view.width, self.scrollView.height);
+//         self.allListView.frame = CGRectMake(0, -64, self.view.width, self.scrollView.height);
     }
     if (width == scrollView.contentOffset.x) {
         // 未考
         [_toolBarView selectItem:1];
-self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, self.scrollView.height);
+//self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, self.scrollView.height);
         
         
     }
     if (2 * width== scrollView.contentOffset.x) {
         // 约考
         [_toolBarView selectItem:2];
-        self.appointListView.frame = CGRectMake(self.view.width * 2, -64, self.view.width, self.scrollView.height);
+//        self.appointListView.frame = CGRectMake(self.view.width * 2, -64, self.view.width, self.scrollView.height);
 
     }
     if (3 * width == scrollView.contentOffset.x) {
         // 补考
         [_toolBarView selectItem:3];
-        self.retestListView.frame = CGRectMake(self.view.width * 3, -64, self.view.width, self.scrollView.height);
+//        self.retestListView.frame = CGRectMake(self.view.width * 3, -64, self.view.width, self.scrollView.height);
 
         
         
@@ -459,7 +496,7 @@ self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, s
     if (4 * width == scrollView.contentOffset.x) {
         // 通过
         [_toolBarView selectItem:4];
-        self.passListView.frame = CGRectMake(self.view.width * 4, -64, self.view.width, self.scrollView.height);
+//        self.passListView.frame = CGRectMake(self.view.width * 4, -64, self.view.width, self.scrollView.height);
         
         
     }
@@ -495,14 +532,22 @@ self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, s
 
 #pragma mark --- 显示占位图片Delegate
 - (void)initWithDataSearchType:(kDateSearchType)dataSearchType{
+    
+    
+    [_allnoDataShowBGView removeFromSuperview];
+    [_noexamnoDataShowBGView removeFromSuperview];
+    [_appointnoDataShowBGView removeFromSuperview];
+    [_retestDataShowBGView removeFromSuperview];
+    [_passnoDataShowBGView removeFromSuperview];
+    
     if (dataSearchType == kDateSearchTypeToday) {
         _appointnoDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.scrollView.height)];
-        [self.scrollView addSubview:_appointnoDataShowBGView];
+        [self.scrollView addSubview:_allnoDataShowBGView];
     }
 
     if (dataSearchType == kDateSearchTypeYesterday) {
         _appointnoDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(self.view.width, 0, self.view.width, self.scrollView.height)];
-        [self.scrollView addSubview:_appointnoDataShowBGView];
+        [self.scrollView addSubview:_noexamnoDataShowBGView];
     }
 
     if (dataSearchType == kDateSearchTypeWeek) {
@@ -515,7 +560,7 @@ self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, s
     }
     if (dataSearchType == kDateSearchTypeYear) {
         _appointnoDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(self.view.width * 4, 0, self.view.width, self.scrollView.height)];
-        [self.scrollView addSubview:_appointnoDataShowBGView];
+        [self.scrollView addSubview:_passnoDataShowBGView];
     }
 
 
@@ -534,11 +579,7 @@ self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, s
         _toolBarView.titleNormalColor = JZ_FONTCOLOR_LIGHT;
         _toolBarView.titleSelectColor = JZ_MAIN_COLOR;
         _toolBarView.followBarColor = JZ_MAIN_COLOR;
-        
-        _toolBarView.layer.shadowColor = [UIColor blackColor].CGColor;
-        _toolBarView.layer.shadowOffset = CGSizeMake(0, 2);
-        _toolBarView.layer.shadowOpacity = 0.036;
-        _toolBarView.layer.shadowRadius = 2;
+    
         _toolBarView.titleFont = [UIFont systemFontOfSize:12];
         _toolBarView.titleArray = @[ @"全部", @"未考",@"约考", @"补考",@"通过" ];
         _toolBarView.imgNormalArray = @[@"student_all_off",@"student_study_off",@"student_exam_off",@"student_examed_off",@"student_pass_off"];
@@ -546,9 +587,10 @@ self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, s
     
         __weak typeof(self) ws = self;
         [_toolBarView dvvToolBarViewItemSelected:^(UIButton *button) {
+            NSLog(@"%f",self.scrollView.contentOffset.y);
             [ws dvvToolBarViewItemSelectedAction:button.tag];
         }];
-        
+    
         if (ScreenWidthIs_6Plus_OrWider) {
             _toolBarView.titleFont = [UIFont systemFontOfSize:14*YBRatio];
         }
@@ -557,7 +599,7 @@ self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, s
 // 全部学员
 - (JZHomeStudentAllListView *)allListView{
     if (_allListView == nil) {
-        _allListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(0, -64, self.view.width, self.scrollView.height)];
+        _allListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.scrollView.height)];
         _allListView.backgroundColor = [UIColor clearColor];
         _allListView.searchType = kDateSearchTypeToday;
         _allListView.refreshHeader = nil;
@@ -568,7 +610,7 @@ self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, s
 // 未考学员
 - (JZHomeStudentAllListView *)noExameListView{
     if (_noExameListView == nil) {
-        _noExameListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(self.view.width, -64, self.view.width, self.scrollView.height)];
+        _noExameListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(self.view.width, 0, self.view.width, self.scrollView.height)];
         _noExameListView.backgroundColor = [UIColor clearColor];
         _noExameListView.searchType = kDateSearchTypeYesterday;
         _noExameListView.refreshHeader = nil;
@@ -579,7 +621,7 @@ self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, s
 // 约考学员
 - (JZHomeStudentAllListView *)appointListView{
     if (_appointListView == nil) {
-        _appointListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(2 * self.view.width, -64, self.view.width, self.scrollView.height) ];
+        _appointListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(2 * self.view.width, 0, self.view.width, self.scrollView.height) ];
         _appointListView.backgroundColor = [UIColor clearColor];
         _appointListView.searchType = kDateSearchTypeWeek;
         _appointListView.showNodataDelegate = self;
@@ -590,7 +632,7 @@ self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, s
 // 补考学员
 - (JZHomeStudentAllListView *)retestListView{
     if (_retestListView == nil) {
-        _retestListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(3 * self.view.width, -64, self.view.width, self.scrollView.height) ];
+        _retestListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(3 * self.view.width, 0, self.view.width, self.scrollView.height) ];
         _retestListView.backgroundColor = [UIColor clearColor];
         _retestListView.searchType = kDateSearchTypeMonth;
         _retestListView.showNodataDelegate = self;
@@ -602,7 +644,7 @@ self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, s
 // 通过学员
 - (JZHomeStudentAllListView *)passListView{
     if (_passListView == nil) {
-        _passListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(4 * self.view.width, -64, self.view.width, self.scrollView.height)];
+        _passListView = [[JZHomeStudentAllListView alloc] initWithFrame:CGRectMake(4 * self.view.width, 0, self.view.width, self.scrollView.height)];
         _passListView.backgroundColor = [UIColor clearColor];
         _passListView.searchType = kDateSearchTypeYear;
         
@@ -610,14 +652,16 @@ self.noExameListView.frame = CGRectMake(self.view.width, -64, self.view.width, s
     return _passListView;
 }
 - (UIScrollView *)scrollView{
+    
     if (_scrollView == nil) {
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ktopHight + 64, self.view.width, self.view.height - 45 - ktopHight - 64)];
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.bgView.frame) + yinyingH, self.view.width, self.view.height - _bgH - 49)];
         _scrollView.contentSize = CGSizeMake(5 * self.view.width, 0);
         _scrollView.backgroundColor = [UIColor clearColor];
         _scrollView.pagingEnabled = YES;
         _scrollView.userInteractionEnabled = YES;
         _scrollView.delegate = self;
         _scrollView.showsHorizontalScrollIndicator = NO;
+        
     }
     return _scrollView;
 }
