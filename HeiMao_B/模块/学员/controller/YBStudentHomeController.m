@@ -543,6 +543,10 @@
     if (dataSearchType == kDateSearchTypeToday) {
         _appointnoDataShowBGView = [[JZNoDataShowBGView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.scrollView.height)];
         [self.scrollView addSubview:_allnoDataShowBGView];
+        
+        
+        
+        
     }
 
     if (dataSearchType == kDateSearchTypeYesterday) {
