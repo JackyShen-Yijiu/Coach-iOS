@@ -278,7 +278,6 @@ NSString *sqlCreateGroupInfoTable = nil;
                 JGUserModel *globalUserObject = [[JGUserModel alloc] init];
                 [globalUserObject setUserid:mEMUsername];
                 [globalUserObject setName:[data objectForKey:@"name"]];
-                
                 [globalUserObject setOriginalpic:[headportrait objectForKey:@"originalpic"]];
                 
                 [self saveKFZUser:globalUserObject];

@@ -62,13 +62,9 @@
         
         if (type == 1) {
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                ws.systemBadgeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagecount"]];
-                
-                [self setupUnreadMessageCount];
-                
-            });
+            ws.systemBadgeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagecount"]];
+            
+            [self setupUnreadMessageCount];
             
         }
         

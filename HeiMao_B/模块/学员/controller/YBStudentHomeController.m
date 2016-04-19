@@ -98,6 +98,7 @@
 @end
 
 @implementation YBStudentHomeController
+
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
@@ -106,20 +107,17 @@
     self.myNavigationItem.leftBarButtonItem = nil;
     self.myNavigationItem.title = nil;
     self.myNavigationItem.titleView = nil;
-    
-    // 设置里面可以更改授课科目 所以在这里要动态的改变segment 和 toolBarView 的位置坐标
+//
+//    // 设置里面可以更改授课科目 所以在这里要动态的改变segment 和 toolBarView 的位置坐标
     [self changeBgViewFrame];
 
     
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-   
-    
-}
 - (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    
     [_allnoDataShowBGView removeFromSuperview];
     [_noexamnoDataShowBGView removeFromSuperview];
     [_appointnoDataShowBGView removeFromSuperview];
@@ -173,22 +171,34 @@
     _bgView.layer.shadowOpacity = 0.072;
     _bgView.layer.shadowRadius = 2;
     _bgView.backgroundColor = [UIColor whiteColor];
+   
+    
     if (_isshowSegment) {
         
         // 显示segmnet
         NSArray *subject =  [UserInfoModel defaultUserInfo].subject;
         NSMutableArray *titleArray = [NSMutableArray array];
+        NSLog(@"subject:%@",subject);
         
         for (NSDictionary *dic in subject) {
             [titleArray addObject:dic[@"subjectid"]];
         }
         
         // 冒泡排序后将_id转化为相应的科目文字
+        NSLog(@"-----冒泡排序后将_id转化为相应的科目文字------titleArray:%@",titleArray);
         _subjectIDArray = [self bubbleSort:titleArray];
+        NSLog(@"+++++冒泡排序后将_id转化为相应的科目文字++++++");
+        NSLog(@"_subjectIDArray:%@",_subjectIDArray);
+
        _subjectID = [[_subjectIDArray firstObject] integerValue];
+        NSLog(@"_subjectID:%ld",(long)_subjectID);
+
         self.allListView.studentState = 0;
+        
         NSMutableArray *resultMustArray = [NSMutableArray array];
+        
         NSString *str = nil;
+        
         for (NSNumber *_id in _subjectIDArray) {
             
             if ( [_id isEqualToNumber:@1]) {
@@ -212,6 +222,7 @@
                 [resultMustArray addObject:str];
             }
         }
+        
         _segment = [[UISegmentedControl alloc] initWithItems:resultMustArray];
         // segmnetW 根据 教练所授课科目自由伸缩;
         CGFloat segmentX  = 50;
@@ -227,6 +238,7 @@
         [_bgView addSubview:_segment];
         
     }
+    
     // 不显示时不添加 segment 控件
     [self.bgView addSubview:self.toolBarView];
     [self.view addSubview:self.bgView];
@@ -251,22 +263,7 @@
     self.allListView.parementVC = self;
     [self loadNetworkData];
     __weak typeof (self) ws = self;
-//    self.allListView.refreshHeader.beginRefreshingBlock = ^(){
-//         [ws loadNetworkData];
-//    };
-//    self.noExameListView.refreshHeader.beginRefreshingBlock = ^(){
-//        [ws loadNetworkData];
-//    };
-//    self.appointListView.refreshHeader.beginRefreshingBlock = ^(){
-//        [ws loadNetworkData];
-//    };
-//    self.retestListView.refreshHeader.beginRefreshingBlock = ^(){
-//        [ws loadNetworkData];
-//    };
-//    self.passListView.refreshHeader.beginRefreshingBlock = ^(){
-//        [ws loadNetworkData];
-//    };
-    
+
     self.noExameListView.refreshHeader = nil;
     self.appointListView.refreshHeader = nil;
     self.allListView.refreshHeader = nil;
@@ -506,17 +503,18 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
 }
+
 - (NSArray *)bubbleSort:(NSArray *)arg{//冒泡排序算法
     
     NSMutableArray *args = [NSMutableArray arrayWithArray:arg];
+    NSLog(@"冒泡排序算法 args:%@",args);
     
     for(int i=0;i<args.count-1;i++){
         
         for(int j=i+1;j<args.count;j++){
             
-            if (args[i]>args[j]){
+            if ([args[i] integerValue]  > [args[j] integerValue]){
                 
                 int temp = [args[i] intValue];
                 
@@ -527,7 +525,11 @@
             }
         }
     }
+    
+    NSLog(@"冒泡排序算法之后args:%@",args);
+    
     return args;
+    
 }
 
 #pragma mark --- 显示占位图片Delegate

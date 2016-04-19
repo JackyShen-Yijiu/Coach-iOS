@@ -4360,7 +4360,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jizhijiafu.coach;
 				PRODUCT_NAME = "极致教练端";
-				PROVISIONING_PROFILE = "9a2ac392-5fcf-4b55-a453-2ea09b54a805";
+				PROVISIONING_PROFILE = "8bf94a6d-8b3e-4dbf-9ed7-ecd51e654406";
 			};
 			name = Debug;
 		};
@@ -4390,7 +4390,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jizhijiafu.coach;
 				PRODUCT_NAME = "极致教练端";
-				PROVISIONING_PROFILE = "9a2ac392-5fcf-4b55-a453-2ea09b54a805";
+				PROVISIONING_PROFILE = "8bf94a6d-8b3e-4dbf-9ed7-ecd51e654406";
 			};
 			name = Release;
 		};

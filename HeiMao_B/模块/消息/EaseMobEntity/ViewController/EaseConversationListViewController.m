@@ -228,60 +228,56 @@ static NSString *kGroupName = @"GroupName";
         
         if (type == 1) {
             
-            dispatch_async(dispatch_get_main_queue(), ^{
+            ws.systemBadgeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagecount"]];
+            ws.systemDetailsStr = [NSString stringWithFormat:@"%@",messageinfo[@"message"]];
+            
+            //                NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
+            NSArray *conversations = [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:YES];
+            NSLog(@"获取聊天会话列表conversations:%@",conversations);
+            
+            NSArray* sorted = [conversations sortedArrayUsingComparator:
+                               ^(EMConversation *obj1, EMConversation* obj2){
+                                   EMMessage *message1 = [obj1 latestMessage];
+                                   EMMessage *message2 = [obj2 latestMessage];
+                                   if(message1.timestamp > message2.timestamp) {
+                                       return(NSComparisonResult)NSOrderedAscending;
+                                   }else {
+                                       return(NSComparisonResult)NSOrderedDescending;
+                                   }
+                               }];
+            
+            [ws.dataArray removeAllObjects];
+            
+            // 添加顶部数据
+            EaseConversationModel *topData1 = [[EaseConversationModel alloc] init];
+            topData1.title = @"系统消息";
+            topData1.detailsTitle = [self strTolerance:self.systemDetailsStr];
+            topData1.avatarPic = @"system_messages.png";
+            topData1.badgeStr = [self strTolerance:self.systemBadgeStr];
+            [ws.dataArray addObject:topData1];
+            
+            for (EMConversation *converstion in sorted) {
                 
-                ws.systemBadgeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagecount"]];
-                ws.systemDetailsStr = [NSString stringWithFormat:@"%@",messageinfo[@"message"]];
-
-//                NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
-                NSArray *conversations = [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:YES];
-                NSLog(@"获取聊天会话列表conversations:%@",conversations);
-
-                NSArray* sorted = [conversations sortedArrayUsingComparator:
-                                   ^(EMConversation *obj1, EMConversation* obj2){
-                                       EMMessage *message1 = [obj1 latestMessage];
-                                       EMMessage *message2 = [obj2 latestMessage];
-                                       if(message1.timestamp > message2.timestamp) {
-                                           return(NSComparisonResult)NSOrderedAscending;
-                                       }else {
-                                           return(NSComparisonResult)NSOrderedDescending;
-                                       }
-                                   }];
+                NSLog(@"converstion.chatter:%@",converstion.chatter);
                 
-                [ws.dataArray removeAllObjects];
-                
-                // 添加顶部数据
-                EaseConversationModel *topData1 = [[EaseConversationModel alloc] init];
-                topData1.title = @"系统消息";
-                topData1.detailsTitle = [self strTolerance:self.systemDetailsStr];
-                topData1.avatarPic = @"system_messages.png";
-                topData1.badgeStr = [self strTolerance:self.systemBadgeStr];
-                [ws.dataArray addObject:topData1];
-                
-                for (EMConversation *converstion in sorted) {
-                    
-                    NSLog(@"converstion.chatter:%@",converstion.chatter);
-                    
-                    EaseConversationModel *model = nil;
-                    if (_dataSource && [_dataSource respondsToSelector:@selector(conversationListViewController:modelForConversation:)]) {
-                        model = [_dataSource conversationListViewController:self
-                                                       modelForConversation:converstion];
-                    }
-                    else{
-                        model = [[EaseConversationModel alloc] initWithConversation:converstion];
-                    }
-                    
-                    if (model) {
-                        [ws.dataArray addObject:model];
-                    }
-                    
+                EaseConversationModel *model = nil;
+                if (_dataSource && [_dataSource respondsToSelector:@selector(conversationListViewController:modelForConversation:)]) {
+                    model = [_dataSource conversationListViewController:self
+                                                   modelForConversation:converstion];
+                }
+                else{
+                    model = [[EaseConversationModel alloc] initWithConversation:converstion];
                 }
                 
-                [ws setupUnreadMessageCount];
+                if (model) {
+                    [ws.dataArray addObject:model];
+                }
                 
-                [ws tableViewDidFinishTriggerHeader:YES reload:YES];
-                
-            });
+            }
+            
+            [ws setupUnreadMessageCount];
+            
+            [ws tableViewDidFinishTriggerHeader:YES reload:YES];
             
         }
         
