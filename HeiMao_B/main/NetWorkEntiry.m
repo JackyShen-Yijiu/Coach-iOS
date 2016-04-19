@@ -132,7 +132,7 @@
     if (!userId) {
         return [self missParagramercallBackFailure:failure];
     }
-    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getuserinfo/%@/userid/%@",HOST_TEST_DAMIAN,type,userId];
+    NSString * urlStr = [NSString stringWithFormat:@"%@/userinfo/getimuserinfo?userid=%@",HOST_TEST_DAMIAN,userId];
     [self GET:urlStr parameters:nil success:success failure:failure];
 }
 
