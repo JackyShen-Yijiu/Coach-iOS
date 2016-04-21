@@ -1,5 +1,5 @@
 //
-//  JZBulletin.h
+//  JZBulletinView.h
 //  HeiMao_B
 //
 //  Created by 雷凯 on 16/4/21.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JZBulletin : UITableView
+@interface JZBulletinView : UITableView
 
 @end

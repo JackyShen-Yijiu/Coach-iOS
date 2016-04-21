@@ -7,9 +7,10 @@
 //
 
 #import "JZBulletinController.h"
+#import "JZBulletinView.h"
 
 @interface JZBulletinController ()
-
+@property (nonatomic, weak) JZBulletinView *bulletinView;
 @end
 
 @implementation JZBulletinController
@@ -17,6 +18,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.title = @"公告";
+    
+    JZBulletinView *bulletinView = [[JZBulletinView alloc]initWithFrame:CGRectMake(0, 0, JZScreen.width, JZScreen.height - 64)];
+    self.bulletinView = bulletinView;
+    
+    [self.view addSubview:bulletinView];
+    
+    self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
+    
 }
 
 - (void)didReceiveMemoryWarning {

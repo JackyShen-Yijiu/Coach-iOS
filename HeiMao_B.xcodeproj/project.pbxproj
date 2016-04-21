@@ -582,7 +582,7 @@
 		D9ABF86D1C896463001B6930 /* BLPFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ABF86C1C896463001B6930 /* BLPFAlertView.m */; };
 		D9B4A5521CC8702900AAEB4F /* JZBulletinController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4A5511CC8702900AAEB4F /* JZBulletinController.m */; };
 		D9B4A5551CC871E400AAEB4F /* JZBulletinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4A5541CC871E400AAEB4F /* JZBulletinCell.m */; };
-		D9B4A55A1CC8723A00AAEB4F /* JZBulletin.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4A5591CC8723A00AAEB4F /* JZBulletin.m */; };
+		D9B4A5601CC875EC00AAEB4F /* JZBulletinView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4A55F1CC875EC00AAEB4F /* JZBulletinView.m */; };
 		D9D607D81CAA7D3800B61874 /* LKAddStudentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */; };
 		D9D607D91CAA7D3800B61874 /* LKAddStudentTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */; };
 		D9D607DC1CAA7D4800B61874 /* LKAddStudentTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */; };
@@ -1611,8 +1611,8 @@
 		D9B4A5511CC8702900AAEB4F /* JZBulletinController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZBulletinController.m; sourceTree = "<group>"; };
 		D9B4A5531CC871E400AAEB4F /* JZBulletinCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZBulletinCell.h; sourceTree = "<group>"; };
 		D9B4A5541CC871E400AAEB4F /* JZBulletinCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZBulletinCell.m; sourceTree = "<group>"; };
-		D9B4A5581CC8723A00AAEB4F /* JZBulletin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZBulletin.h; sourceTree = "<group>"; };
-		D9B4A5591CC8723A00AAEB4F /* JZBulletin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZBulletin.m; sourceTree = "<group>"; };
+		D9B4A55E1CC875EC00AAEB4F /* JZBulletinView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZBulletinView.h; sourceTree = "<group>"; };
+		D9B4A55F1CC875EC00AAEB4F /* JZBulletinView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZBulletinView.m; sourceTree = "<group>"; };
 		D9D607D41CAA7D3800B61874 /* LKAddStudentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTableViewCell.h; sourceTree = "<group>"; };
 		D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTableViewCell.m; sourceTree = "<group>"; };
 		D9D607D61CAA7D3800B61874 /* LKAddStudentTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTimeView.h; sourceTree = "<group>"; };
@@ -3574,8 +3574,8 @@
 		D9B4A5571CC871FD00AAEB4F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D9B4A5581CC8723A00AAEB4F /* JZBulletin.h */,
-				D9B4A5591CC8723A00AAEB4F /* JZBulletin.m */,
+				D9B4A55E1CC875EC00AAEB4F /* JZBulletinView.h */,
+				D9B4A55F1CC875EC00AAEB4F /* JZBulletinView.m */,
 				D9B4A5531CC871E400AAEB4F /* JZBulletinCell.h */,
 				D9B4A5541CC871E400AAEB4F /* JZBulletinCell.m */,
 			);
@@ -4029,7 +4029,6 @@
 				B2BA428A1CA5035700926584 /* EaseUserModel.m in Sources */,
 				06EFEB0F1CAD57F2002B7E82 /* JZUserid.m in Sources */,
 				B2BA42BA1CA5035700926584 /* DVVLicensingStudentListView.m in Sources */,
-				D9B4A55A1CC8723A00AAEB4F /* JZBulletin.m in Sources */,
 				B2BA41EB1CA5035700926584 /* PSTCollectionViewData.m in Sources */,
 				B2BA41F21CA5035700926584 /* PSTGridLayoutRow.m in Sources */,
 				B2BA3EDC1CA5003B00926584 /* HMPortraitInfoModel.m in Sources */,
@@ -4157,6 +4156,7 @@
 				06DB70C91CA91D4200A6AC9D /* JZHomeStudentToolBarView.m in Sources */,
 				B2BA3EB91CA4FF9800926584 /* PortraitView.m in Sources */,
 				B2BA417E1CA5035700926584 /* ButtonSelectedCell.m in Sources */,
+				D9B4A5601CC875EC00AAEB4F /* JZBulletinView.m in Sources */,
 				B2BA3ED91CA5003B00926584 /* HMCarLicenseModel.m in Sources */,
 				B2BA41F31CA5035700926584 /* PSTGridLayoutSection.m in Sources */,
 				B2BA42C11CA5035700926584 /* DVVTheoreticalStudentListCell.m in Sources */,
