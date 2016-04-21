@@ -95,6 +95,13 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
         NSArray *resultData = responseObject[@"data"];
         if ([[responseObject objectForKey:@"type"] integerValue]) {
             NSArray *array = resultData;
+            if (!array.count) {
+                
+                [self.vc showTotasViewWithMes:@"暂无公告"];
+            }
+            
+            
+            
             for (NSDictionary *dict in array) {
                 
                 JZBulletinData *listModel = [JZBulletinData yy_modelWithDictionary:dict];
@@ -104,6 +111,11 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
             
             [self reloadData];
             
+            
+        }else {
+            
+            [self.vc showTotasViewWithMes:@"网络出错啦"];
+
             
         }
 
@@ -160,6 +172,10 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
             
             
             
+        }else {
+            
+            [self.vc showTotasViewWithMes:@"网络出错啦"];
+
         }
         
         
