@@ -159,13 +159,14 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
             [self reloadData];
             
             
+            
         }
         
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        
+        [self.vc showTotasViewWithMes:@"网络出错啦"];
         
     }];
 

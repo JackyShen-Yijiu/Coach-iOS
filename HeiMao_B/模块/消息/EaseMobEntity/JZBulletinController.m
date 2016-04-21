@@ -50,7 +50,7 @@
     [self.view addSubview:bulletinView];
 //
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
-    
+        
     
 
     
