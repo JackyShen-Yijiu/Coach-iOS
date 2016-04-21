@@ -44,6 +44,7 @@
 //    };
     
     self.refreshFooter.beginRefreshingBlock=^(){
+        
     };
     
 }

@@ -20,6 +20,7 @@
 #import "InformationMessageController.h"
 #import "ChatViewController.h"
 #import "JGUserTools.h"
+#import "JZBulletinController.h"
 
 //两次提示的默认间隔
 static const CGFloat kDefaultPlaySoundInterval = 3.0;
@@ -27,7 +28,7 @@ static NSString *kMessageType = @"MessageType";
 static NSString *kConversationChatter = @"ConversationChatter";
 static NSString *kGroupName = @"GroupName";
 
-@interface EaseConversationListViewController () <IChatManagerDelegate,EMChatManagerDelegate,SystemMessageDetailControllerDelegate,InformationMessageControllerDelegate>
+@interface EaseConversationListViewController () <IChatManagerDelegate,EMChatManagerDelegate,SystemMessageDetailControllerDelegate,InformationMessageControllerDelegate,JZBulletinControllerDelegate>
 
 @property (nonatomic,strong)NoContentTipView * tipView;
 
@@ -186,13 +187,15 @@ static NSString *kGroupName = @"GroupName";
     
 }
 
-//- (void)SystemMessageDetailControllerGetMessagelastmessage:(NSString *)lastmessage
-//{
-//    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-//    [user setObject:lastmessage forKey:@"lastmessage"];
-//    [user synchronize];
-//    
-//}
+- (void)JZBulletinControllerGetLastBulletin:(NSString *)lastBulletin
+{
+    NSLog(@"JZBulletinControllerGetLastBulletin lastbulletin:%@",lastBulletin);
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setObject:lastBulletin forKey:@"lastbulletin"];
+    [user synchronize];
+    
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -212,7 +215,15 @@ static NSString *kGroupName = @"GroupName";
             
             self.noticeBadgeStr = nil;
             
+            
             NSLog(@"跳转到公告界面");
+            
+            JZBulletinController *buletinVC = [[JZBulletinController alloc]init];
+            
+            buletinVC.delegate = self;
+            
+            [self.navigationController pushViewController:buletinVC animated:YES];
+            
             
         }
         

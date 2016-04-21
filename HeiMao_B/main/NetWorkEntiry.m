@@ -784,8 +784,25 @@
     
 }
 
-
-
+#pragma mark - 获取公告
++ (void)getBulletinWithSchoolId:(NSString *)schoolId withUserId:(NSString *)userId index:(NSUInteger)index count:(NSUInteger)count
+                                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure {
+    
+    NSString *url = @"http://jzapi.yibuxueche.com/api/headmaster/userinfo/getbulletin";
+    
+    NSDictionary *paramterDict = @{ @"userid": userId,
+                                    @"seqindex":[NSString stringWithFormat:@"%zd",index],
+                                    @"count":[NSString stringWithFormat:@"%zd",count],
+                                    @"schoolid":schoolId
+                                    };
+    NSLog(@"paramterDict:%@",paramterDict);
+    
+    [self GET:url parameters:paramterDict success:success failure:failure];
+    
+    
+    
+}
 
 
 
