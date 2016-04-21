@@ -20,7 +20,7 @@
 #import "JZCompletionConfirmationContriller.h"
 #import "NoContentTipView.h"
 
-@interface YBHomeLeftViewController ()<FDCalendarDelegate,YBFDCalendarDelegate,UIScrollViewDelegate>
+@interface YBHomeLeftViewController ()<FDCalendarDelegate,YBFDCalendarDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
 {
     CGFloat startContentOffsetX;
     CGFloat willEndContentOffsetX;
@@ -139,6 +139,11 @@
     
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self confimBtnDidClick];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -199,6 +204,27 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefresh:) name:KCourseViewController_NeedRefresh object:nil];
     // 隐藏展开日历
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hiddenOpenCalendar) name:@"hiddenOpenCalendar" object:nil];
+    
+    
+    [NetWorkEntiry getCoachOfFinishStudentWihtCoachID:[UserInfoModel defaultUserInfo].userID success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"initListData responseObject:%@",responseObject);
+        
+        NSDictionary *param = responseObject;
+        if ([param[@"type"] integerValue] == 1) {
+            NSArray *resultArray = param[@"data"];
+            if (resultArray && resultArray.count>0) {
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"您有尚未确认的订单，请点击确认" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                [alert show];
+                
+            }
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
     
 }
 
