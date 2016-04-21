@@ -117,7 +117,7 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
  
 }
 
-
+#pragma mark - 执行刷新操作
 - (void)setRefresh{
     WS(ws);
 

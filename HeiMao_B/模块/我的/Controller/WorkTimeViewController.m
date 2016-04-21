@@ -283,27 +283,41 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     NSDictionary *param = @{@"coachid":[UserInfoModel defaultUserInfo].userID,@"workweek":workweek,@"worktimedesc":workDes,@"begintimeint":first.firstObject,@"endtimeint":second.firstObject};
     NSLog(@"param:%@",param);
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    WS(ws);
-    [JENetwoking startDownLoadWithUrl:urlString postParam:param WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
-        NSDictionary *dataParam = data;
-        NSNumber *messege = dataParam[@"type"];
-        NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
-        
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
-        if (messege.intValue == 1) {
-            [self showTotasViewWithMes:@"设置成功"];
-            [UserInfoModel defaultUserInfo].workweek = [ws upDateArray];
-            [UserInfoModel defaultUserInfo].beginTime = [first firstObject];
-            [UserInfoModel defaultUserInfo].endTime = [second firstObject];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kworktimeChange object:nil];
-            [self.navigationController popViewControllerAnimated:YES];
-        }else {
-            [self showTotasViewWithMes:msg];
-        }
-    }];
+    if (self.beginTextField.text>self.endTextField.text) {
+        
+        [self showTotasViewWithMes:@"开始时间不得大于结束时间"];
+        
+        return ;
+    }else {
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+        WS(ws);
+        [JENetwoking startDownLoadWithUrl:urlString postParam:param WithMethod:JENetworkingRequestMethodPost withCompletion:^(id data) {
+            
+            NSDictionary *dataParam = data;
+            NSNumber *messege = dataParam[@"type"];
+            NSString *msg = [NSString stringWithFormat:@"%@",dataParam[@"msg"]];
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            
+            if (messege.intValue == 1) {
+                [self showTotasViewWithMes:@"设置成功"];
+                [UserInfoModel defaultUserInfo].workweek = [ws upDateArray];
+                [UserInfoModel defaultUserInfo].beginTime = [first firstObject];
+                [UserInfoModel defaultUserInfo].endTime = [second firstObject];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kworktimeChange object:nil];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else {
+                [self showTotasViewWithMes:msg];
+            }
+        }];
+    }
+    
+    
+   
 }
 
 - (void)timeChange:(UIDatePicker *)picker {
