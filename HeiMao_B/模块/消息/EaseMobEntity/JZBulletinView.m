@@ -30,7 +30,6 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
         self.dataSource = self;
         
         self.delegate = self;
-        [self setSeparatorInset:UIEdgeInsetsZero];
         
         self.showsVerticalScrollIndicator = NO;
         self.showsHorizontalScrollIndicator = NO;
@@ -111,7 +110,7 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        
+        [self.vc showTotasViewWithMes:@"网络出错啦"];
         
     }];
  
@@ -120,7 +119,7 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
 #pragma mark - 执行刷新操作
 - (void)setRefresh{
     WS(ws);
-
+    
     self.refreshFooter.beginRefreshingBlock = ^{
         [ws networkRequestLoadMore];
     };
@@ -155,6 +154,7 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
                 
             }
             [self.refreshFooter endRefreshing];
+            
 
             [self reloadData];
             
@@ -185,32 +185,7 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
 }
 
 
-#pragma mark - 分割线两端置顶
--(void)viewDidLayoutSubviews {
-    if ([self respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self setSeparatorInset:UIEdgeInsetsZero];
-    }
-    if ([self respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self setLayoutMargins:UIEdgeInsetsZero];
-    }
-}
 
-
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
-    {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
-    }
-    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)])
-    {
-        [cell setPreservesSuperviewLayoutMargins:NO];
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
-    {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
-}
 
 
 @end
