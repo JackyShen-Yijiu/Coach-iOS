@@ -77,6 +77,8 @@
 #define YBIphone5 [UIScreen mainScreen].bounds.size.height==568
 #define YBIphone4 [UIScreen mainScreen].bounds.size.height==480
 
+#define JZScreen [UIScreen mainScreen].bounds.size
+
 // 环信appKey
 #define easeMobAPPkey @"black-cat#jizhijaifu"
 // 环信推送证书 jizhijiafuCoachDevelopment	:开发 jizhijiafuCoachDistribution:生产
