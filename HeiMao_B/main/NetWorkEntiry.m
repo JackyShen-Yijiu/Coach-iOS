@@ -508,7 +508,7 @@
  * 获取系统消息和咨询消息数量
  *
  */
-+ (void)getMessageUnReadCountlastmessage:(NSString *)lastmessage notice:(NSString *)notice
++ (void)getMessageUnReadCountlastmessage:(NSString *)lastmessage lastnews:(NSString *)lastnews lastbulletin:(NSString *)lastbulletin
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -519,7 +519,8 @@
     [dic setValue:[UserInfoModel defaultUserInfo].userID forKey:@"coachid"];
 
     [dic setValue:lastmessage forKey:@"lastmessage"];
-    [dic setValue:lastmessage forKey:@"lastmessage"];
+    [dic setValue:lastnews forKey:@"lastnews"];
+    [dic setValue:lastbulletin forKey:@"lastbulletin"];
 
     NSLog(@"获取系统消息和咨询消息数量dic:%@",dic);
     

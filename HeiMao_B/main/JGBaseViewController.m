@@ -52,9 +52,10 @@
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *lastmessage = [user objectForKey:@"lastmessage"];
     NSString *lastnew = [user objectForKey:@"lastnew"];
+    NSString *lastbulletin = [user objectForKey:@"lastbulletin"];
 
     WS(ws);
-    [NetWorkEntiry getMessageUnReadCountlastmessage:lastmessage notice:lastnew success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry getMessageUnReadCountlastmessage:lastmessage lastnews:lastnew lastbulletin:lastbulletin success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"获取未读消息responseObject:%@",responseObject);
         
@@ -62,12 +63,12 @@
         NSDictionary *data = [responseObject objectInfoForKey:@"data"];
         
         NSDictionary *messageinfo = [data objectInfoForKey:@"messageinfo"];
-        NSDictionary *Newsinfo = [data objectInfoForKey:@"Newsinfo"];
+        NSDictionary *Newsinfo = [data objectInfoForKey:@"bulletininfo"];
 
         if (type == 1) {
             
             ws.systemBadgeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagecount"]];
-            ws.noticeBadgeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"newscount"]];
+            ws.noticeBadgeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"bulletincount"]];
             
             [self setupUnreadMessageCount];
             

@@ -93,12 +93,19 @@ static NSString *kGroupName = @"GroupName";
 
 #pragma mark - Table view data source
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 10)];
+    footer.backgroundColor = self.view.backgroundColor;
+    return footer;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 10;
 }
@@ -223,7 +230,7 @@ static NSString *kGroupName = @"GroupName";
         NSLog(@"获取用户信息ext:%@",ext);
         
         if (_delegate && [_delegate respondsToSelector:@selector(conversationListViewController:didSelectConversationModel:)]) {
-            EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row];
+            EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row+2];
             [_delegate conversationListViewController:self didSelectConversationModel:model];
         }
         
@@ -258,9 +265,10 @@ static NSString *kGroupName = @"GroupName";
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *lastmessage = [user objectForKey:@"lastmessage"];
     NSString *lastnew = [user objectForKey:@"lastnew"];
+    NSString *lastbulletin = [user objectForKey:@"lastbulletin"];
 
     WS(ws);
-    [NetWorkEntiry getMessageUnReadCountlastmessage:lastmessage notice:lastnew success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry getMessageUnReadCountlastmessage:lastmessage lastnews:lastnew lastbulletin:lastbulletin success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"获取未读消息responseObject:%@",responseObject);
         
@@ -268,15 +276,15 @@ static NSString *kGroupName = @"GroupName";
         NSDictionary *data = [responseObject objectInfoForKey:@"data"];
         
         NSDictionary *messageinfo = [data objectInfoForKey:@"messageinfo"];
-        NSDictionary *Newsinfo = [data objectInfoForKey:@"Newsinfo"];
+        NSDictionary *Newsinfo = [data objectInfoForKey:@"bulletininfo"];
 
         if (type == 1) {
             
             ws.systemBadgeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagecount"]];
             ws.systemDetailsStr = [NSString stringWithFormat:@"%@",messageinfo[@"message"]];
             
-            ws.noticeBadgeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"newscount"]];
-            ws.noticeDetailsStr = [NSString stringWithFormat:@"%@",Newsinfo[@"news"]];
+            ws.noticeBadgeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"bulletincount"]];
+            ws.noticeDetailsStr = [NSString stringWithFormat:@"%@",Newsinfo[@"bulletin"]];
             
             //                NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
             NSArray *conversations = [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:YES];
