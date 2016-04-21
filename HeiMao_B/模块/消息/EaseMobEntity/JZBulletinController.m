@@ -41,7 +41,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
     self.title = @"公告";
     JZBulletinView *bulletinView = [[JZBulletinView alloc]initWithFrame:CGRectMake(0, 0, JZScreen.width, JZScreen.height)];
     self.bulletinView = bulletinView;
