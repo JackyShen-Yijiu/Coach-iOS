@@ -205,7 +205,7 @@
     // 漏课课时
     NSString *missClass = [NSString stringWithFormat:@"%lu",listModel.courseinfo.missingcourse];
     
-    self.classTimeLable.text = [NSString stringWithFormat:@"%@ %@",surplusClass,missClass];
+    self.classTimeLable.text = [NSString stringWithFormat:@"%@ 漏课%@课时",surplusClass,missClass];
     
    
 }
