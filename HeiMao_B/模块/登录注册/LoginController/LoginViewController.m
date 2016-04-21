@@ -490,39 +490,45 @@ static NSString *const kuserType = @"usertype";
                 [alert show];
                 
             }else{
+                
                 [ws.phoneNumTextField resignFirstResponder];
+                
                 [ws.passwordTextField becomeFirstResponder];
+                
+                sender.userInteractionEnabled = NO;
+                __block int count = TIME;
+                dispatch_queue_t myQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, myQueue);
+                dispatch_source_set_timer(timer, dispatch_walltime(NULL, 0), 1 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+                dispatch_source_set_event_handler(timer, ^{
+                    if (count < 0) {
+                        dispatch_source_cancel(timer);
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [self.gainNum setTitle:@"验证" forState:UIControlStateNormal];
+                            self.gainNum.userInteractionEnabled = YES;
+                            
+                        });
+                    }else {
+                        NSString *str = [NSString stringWithFormat:@"%ds",count];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [self.gainNum setTitle:str forState:UIControlStateNormal];
+                            
+                        });
+                        count--;
+                    }
+                });
+                dispatch_resume(timer);
+                
             }
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
         }];
+        
     }
     
-    sender.userInteractionEnabled = NO;
-    __block int count = TIME;
-    dispatch_queue_t myQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, myQueue);
-    dispatch_source_set_timer(timer, dispatch_walltime(NULL, 0), 1 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
-    dispatch_source_set_event_handler(timer, ^{
-        if (count < 0) {
-            dispatch_source_cancel(timer);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [self.gainNum setTitle:@"验证" forState:UIControlStateNormal];
-                self.gainNum.userInteractionEnabled = YES;
-                
-            });
-        }else {
-            NSString *str = [NSString stringWithFormat:@"%ds",count];
-            dispatch_async(dispatch_get_main_queue(), ^{
-
-                [self.gainNum setTitle:str forState:UIControlStateNormal];
-                
-            });
-            count--;
-        }
-    });
-    dispatch_resume(timer);
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
