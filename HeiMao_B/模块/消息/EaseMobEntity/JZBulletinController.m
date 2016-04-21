@@ -21,11 +21,11 @@
     
     self.title = @"公告";
     
-    JZBulletinView *bulletinView = [[JZBulletinView alloc]initWithFrame:CGRectMake(0, 0, JZScreen.width, JZScreen.height - 64)];
+    JZBulletinView *bulletinView = [[JZBulletinView alloc]initWithFrame:CGRectMake(0, 0, JZScreen.width, JZScreen.height)];
     self.bulletinView = bulletinView;
     
     [self.view addSubview:bulletinView];
-    
+//
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     
 }

@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class JZBulletinData;
+
 @interface JZBulletinCell : UITableViewCell
+@property (nonatomic, strong) JZBulletinData *data;
+
++ (CGFloat)cellHeightDmData:(JZBulletinData *)dmData;
+
 
 @end

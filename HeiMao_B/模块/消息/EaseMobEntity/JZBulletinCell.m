@@ -7,6 +7,7 @@
 //
 
 #import "JZBulletinCell.h"
+#import "JZBulletinData.h"
 
 @interface JZBulletinCell ()
 ///  标题
@@ -46,6 +47,7 @@
     self.postNameLabel = [[UILabel alloc]init];
     self.postNameLabel.textAlignment = NSTextAlignmentRight;
     self.postNameLabel.textColor = JZ_FONTCOLOR_LIGHT;
+    [self.postNameLabel setFont:[UIFont systemFontOfSize:12]];
     
     self.contentLabel = [[UILabel alloc]init];
     self.contentLabel.textAlignment = NSTextAlignmentLeft;
@@ -99,6 +101,52 @@
         
     }];
 }
+
+
++ (CGFloat)cellHeightDmData:(JZBulletinData *)dmData
+{
+    
+    JZBulletinCell *cell = [[JZBulletinCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"JZBulletinCellID"];
+    
+    cell.data = dmData;
+    
+    [cell layoutIfNeeded];
+    
+    return cell.timeLabel.height + cell.mainTitleLabel.height + cell.contentLabel.height + 50;
+    
+}
+
+-(void)setData:(JZBulletinData *)data {
+    
+    _data = data;
+    
+    if ([_data.title isEqualToString:@""]) {
+        
+        self.mainTitleLabel.text = @"无标题";
+    }else {
+        self.mainTitleLabel.text = _data.title;
+    }
+    
+    
+    self.contentLabel.text = _data.content;
+    self.timeLabel.text = [self getYearLocalDateFormateUTCDate:_data.createtime];
+    
+    self.postNameLabel.text = [NSString stringWithFormat:@"发布者：%@",_data.name];
+    
+    [self.contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.timeLabel.mas_bottom).offset(12);
+        make.left.equalTo(self.contentView.mas_left).offset(16);
+        make.right.equalTo(self.contentView.mas_right).offset(-16);
+        
+    }];
+
+    
+    
+    
+}
+
+
 
 - (NSString *)getYearLocalDateFormateUTCDate:(NSString *)utcDate {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

@@ -20,6 +20,7 @@
 #import "InformationMessageController.h"
 #import "ChatViewController.h"
 #import "JGUserTools.h"
+#import "JZBulletinController.h"
 
 //两次提示的默认间隔
 static const CGFloat kDefaultPlaySoundInterval = 3.0;
@@ -206,6 +207,11 @@ static NSString *kGroupName = @"GroupName";
             self.noticeBadgeStr = nil;
             
             NSLog(@"跳转到公告界面");
+            
+            JZBulletinController *buletinVC = [[JZBulletinController alloc]init];
+            
+            [self.navigationController pushViewController:buletinVC animated:YES];
+            
             
         }
         
