@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol JZBulletinControllerDelegate <NSObject>
 
+- (void)JZBulletinControllerGetLastBulletin:(NSString *)lastBulletin;
+@end
 @interface JZBulletinController : UIViewController
+@property (nonatomic,weak)id<JZBulletinControllerDelegate>delegate;
 
 @end

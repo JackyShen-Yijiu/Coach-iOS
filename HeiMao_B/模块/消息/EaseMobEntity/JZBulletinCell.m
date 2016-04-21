@@ -18,6 +18,9 @@
 @property (nonatomic, strong) UILabel *postNameLabel;
 ///  内容
 @property (nonatomic, strong) UILabel *contentLabel;
+
+@property (nonatomic, strong) UIView *lineView;
+
 @end
 @implementation JZBulletinCell
 
@@ -55,10 +58,14 @@
     self.contentLabel.numberOfLines = 0;
     [self.contentLabel setFont:[UIFont systemFontOfSize:14]];
     
+    self.lineView = [[UIView alloc]init];
+    self.lineView.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
+    
     [self.contentView addSubview:self.mainTitleLabel];
     [self.contentView addSubview:self.timeLabel];
     [self.contentView addSubview:self.postNameLabel];
     [self.contentView addSubview:self.contentLabel];
+    [self.contentView addSubview:self.lineView];
 
 }
 
@@ -97,9 +104,19 @@
         make.left.equalTo(self.contentView.mas_left).offset(16);
         make.right.equalTo(self.contentView.mas_right).offset(-16);
         
+    }];
+    
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         
+        make.left.equalTo(self.contentView.mas_left).offset(0);
+        make.right.equalTo(self.contentView.mas_right).offset(0);
+        make.top.equalTo(self.contentLabel.mas_bottom).offset(14);
+        make.height.equalTo(@0.5);
         
     }];
+    
+    
+    
 }
 
 
@@ -112,7 +129,7 @@
     
     [cell layoutIfNeeded];
     
-    return cell.timeLabel.height + cell.mainTitleLabel.height + cell.contentLabel.height + 50;
+    return cell.timeLabel.height + cell.mainTitleLabel.height + cell.contentLabel.height + 50.5;
     
 }
 

@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RefreshTableView.h"
+#import "JZBulletinData.h"
+@interface JZBulletinView : RefreshTableView
 
-@interface JZBulletinView : UITableView
+@property (nonatomic, strong) UIViewController *vc;
+@property (nonatomic, strong) NSMutableArray *listDataArray;
+@property (nonatomic, strong) JZBulletinData *dataModel;
+
 
 @end

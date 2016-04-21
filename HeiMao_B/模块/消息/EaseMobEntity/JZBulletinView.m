@@ -8,14 +8,15 @@
 
 #import "JZBulletinView.h"
 #import "JZBulletinCell.h"
-#import "JZBulletinData.h"
+//#import "JZBulletinData.h"
 #import <YYModel.h>
 
 static NSString *JZBulletinCellID = @"JZBulletinCellID";
 
 @interface JZBulletinView ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) NSMutableArray *listDataArray;
+//@property (nonatomic, strong) NSMutableArray *listDataArray;
+
 
 @end
 @implementation JZBulletinView
@@ -31,9 +32,13 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
         self.delegate = self;
         [self setSeparatorInset:UIEdgeInsetsZero];
         
+        self.showsVerticalScrollIndicator = NO;
+        self.showsHorizontalScrollIndicator = NO;
+        
+
         [self loadData];
-        
-        
+   
+        [self setRefresh];
         
     }
     return self;
@@ -62,6 +67,7 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
     }
     
     JZBulletinData *dataModel = self.listDataArray[indexPath.row];
+    
     listCell.data = dataModel;
 
     
@@ -85,6 +91,7 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
     
     [NetWorkEntiry getBulletinWithSchoolId:[UserInfoModel defaultUserInfo].schoolId withUserId:[UserInfoModel defaultUserInfo].userID index:0 count:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
        
+        NSLog(@"网络请求，加载数据responseObject:%@",responseObject);
         
         NSArray *resultData = responseObject[@"data"];
         if ([[responseObject objectForKey:@"type"] integerValue]) {
@@ -101,6 +108,59 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
             
         }
 
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        
+    }];
+ 
+}
+
+
+- (void)setRefresh{
+    WS(ws);
+
+    self.refreshFooter.beginRefreshingBlock = ^{
+        [ws networkRequestLoadMore];
+    };
+}
+-(void)networkRequestLoadMore {
+    
+    JZBulletinData *dataModel = self.listDataArray.lastObject;
+    
+    NSLog(@"seqindexseqindex == %zd",dataModel.seqindex);
+    
+    [NetWorkEntiry getBulletinWithSchoolId:[UserInfoModel defaultUserInfo].schoolId withUserId:[UserInfoModel defaultUserInfo].userID index:dataModel.seqindex count:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"responseObject:%@",responseObject);
+        
+        if (![responseObject[@"data"] count]) {
+            
+            [self.refreshFooter endRefreshing];
+            self.refreshFooter.scrollView = nil;
+            [self.vc showTotasViewWithMes:@"已经加载所有数据"];
+            return;
+            
+        }
+
+        NSArray *resultData = responseObject[@"data"];
+        if ([[responseObject objectForKey:@"type"] integerValue]) {
+            NSArray *array = resultData;
+            for (NSDictionary *dict in array) {
+                
+                JZBulletinData *listModel = [JZBulletinData yy_modelWithDictionary:dict];
+                
+                [self.listDataArray addObject:listModel];
+                
+            }
+            [self.refreshFooter endRefreshing];
+
+            [self reloadData];
+            
+            
+        }
+        
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -108,12 +168,11 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
         
         
     }];
-    
-    
-    
-    
+
 }
 
+
+#pragma mark - lazy
 -(NSMutableArray *)listDataArray {
     
     if (!_listDataArray) {
