@@ -4384,11 +4384,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-<<<<<<< HEAD
 				CODE_SIGN_IDENTITY = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
-=======
-				CODE_SIGN_IDENTITY = "";
->>>>>>> edbdc5b751b6ce0316e332546408c649847e41cb
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
@@ -4407,11 +4403,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jizhijiafu.coach;
 				PRODUCT_NAME = "极致教练端";
-<<<<<<< HEAD
 				PROVISIONING_PROFILE = "8bf94a6d-8b3e-4dbf-9ed7-ecd51e654406";
-=======
-				PROVISIONING_PROFILE = "9a2ac392-5fcf-4b55-a453-2ea09b54a805";
->>>>>>> edbdc5b751b6ce0316e332546408c649847e41cb
 			};
 			name = Debug;
 		};
@@ -4422,11 +4414,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
-<<<<<<< HEAD
 				CODE_SIGN_IDENTITY = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
-=======
-				CODE_SIGN_IDENTITY = "";
->>>>>>> edbdc5b751b6ce0316e332546408c649847e41cb
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
@@ -4445,11 +4433,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jizhijiafu.coach;
 				PRODUCT_NAME = "极致教练端";
-<<<<<<< HEAD
 				PROVISIONING_PROFILE = "8bf94a6d-8b3e-4dbf-9ed7-ecd51e654406";
-=======
-				PROVISIONING_PROFILE = "9a2ac392-5fcf-4b55-a453-2ea09b54a805";
->>>>>>> edbdc5b751b6ce0316e332546408c649847e41cb
 			};
 			name = Release;
 		};
