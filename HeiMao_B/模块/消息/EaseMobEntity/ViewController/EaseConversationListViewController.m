@@ -50,6 +50,8 @@ static NSString *kGroupName = @"GroupName";
 {
     [super viewDidLoad];
 
+    self.showRefreshHeader = NO;
+    
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
 
     [self registerNotifications];

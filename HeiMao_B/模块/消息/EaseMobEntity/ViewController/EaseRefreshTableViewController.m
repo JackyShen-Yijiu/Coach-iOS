@@ -59,40 +59,40 @@
 
 #pragma mark - setter
 
-- (void)setShowRefreshHeader:(BOOL)showRefreshHeader
-{
-    if (_showRefreshHeader != showRefreshHeader) {
-        _showRefreshHeader = showRefreshHeader;
-        if (_showRefreshHeader) {
-            __weak EaseRefreshTableViewController *weakSelf = self;
-            [self.tableView addLegendHeaderWithRefreshingBlock:^{
-                [weakSelf tableViewDidTriggerHeaderRefresh];
-//                [weakSelf.tableView.header beginRefreshing];
-            }];
-//            header.updatedTimeHidden = YES;
-        }
-        else{
-            [self.tableView removeHeader];
-        }
-    }
-}
+//- (void)setShowRefreshHeader:(BOOL)showRefreshHeader
+//{
+//    if (_showRefreshHeader != showRefreshHeader) {
+//        _showRefreshHeader = showRefreshHeader;
+//        if (_showRefreshHeader) {
+//            __weak EaseRefreshTableViewController *weakSelf = self;
+//            [self.tableView addLegendHeaderWithRefreshingBlock:^{
+//                [weakSelf tableViewDidTriggerHeaderRefresh];
+////                [weakSelf.tableView.header beginRefreshing];
+//            }];
+////            header.updatedTimeHidden = YES;
+//        }
+//        else{
+//            [self.tableView removeHeader];
+//        }
+//    }
+//}
 
-- (void)setShowRefreshFooter:(BOOL)showRefreshFooter
-{
-    if (_showRefreshFooter != showRefreshFooter) {
-        _showRefreshFooter = showRefreshFooter;
-        if (_showRefreshFooter) {
-            __weak EaseRefreshTableViewController *weakSelf = self;
-            [self.tableView addLegendFooterWithRefreshingBlock:^{
-                [weakSelf tableViewDidTriggerFooterRefresh];
-//                [weakSelf.tableView.footer beginRefreshing];
-            }];
-        }
-        else{
-            [self.tableView removeFooter];
-        }
-    }
-}
+//- (void)setShowRefreshFooter:(BOOL)showRefreshFooter
+//{
+//    if (_showRefreshFooter != showRefreshFooter) {
+//        _showRefreshFooter = showRefreshFooter;
+//        if (_showRefreshFooter) {
+//            __weak EaseRefreshTableViewController *weakSelf = self;
+//            [self.tableView addLegendFooterWithRefreshingBlock:^{
+//                [weakSelf tableViewDidTriggerFooterRefresh];
+////                [weakSelf.tableView.footer beginRefreshing];
+//            }];
+//        }
+//        else{
+//            [self.tableView removeFooter];
+//        }
+//    }
+//}
 
 - (void)setShowTableBlankView:(BOOL)showTableBlankView
 {
