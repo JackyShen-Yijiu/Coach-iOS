@@ -580,6 +580,9 @@
 		D9162B891CB508B600441EA5 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9162B881CB508B600441EA5 /* ScanViewController.m */; };
 		D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */; };
 		D9ABF86D1C896463001B6930 /* BLPFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ABF86C1C896463001B6930 /* BLPFAlertView.m */; };
+		D9B4A5521CC8702900AAEB4F /* JZBulletinController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4A5511CC8702900AAEB4F /* JZBulletinController.m */; };
+		D9B4A5551CC871E400AAEB4F /* JZBulletinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4A5541CC871E400AAEB4F /* JZBulletinCell.m */; };
+		D9B4A5601CC875EC00AAEB4F /* JZBulletinView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4A55F1CC875EC00AAEB4F /* JZBulletinView.m */; };
 		D9D607D81CAA7D3800B61874 /* LKAddStudentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */; };
 		D9D607D91CAA7D3800B61874 /* LKAddStudentTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607D71CAA7D3800B61874 /* LKAddStudentTimeView.m */; };
 		D9D607DC1CAA7D4800B61874 /* LKAddStudentTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D607DB1CAA7D4800B61874 /* LKAddStudentTimeViewController.m */; };
@@ -1604,6 +1607,12 @@
 		D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVLocationStatus.m; sourceTree = "<group>"; };
 		D9ABF86B1C896463001B6930 /* BLPFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLPFAlertView.h; sourceTree = "<group>"; };
 		D9ABF86C1C896463001B6930 /* BLPFAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLPFAlertView.m; sourceTree = "<group>"; };
+		D9B4A5501CC8702900AAEB4F /* JZBulletinController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZBulletinController.h; sourceTree = "<group>"; };
+		D9B4A5511CC8702900AAEB4F /* JZBulletinController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZBulletinController.m; sourceTree = "<group>"; };
+		D9B4A5531CC871E400AAEB4F /* JZBulletinCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZBulletinCell.h; sourceTree = "<group>"; };
+		D9B4A5541CC871E400AAEB4F /* JZBulletinCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZBulletinCell.m; sourceTree = "<group>"; };
+		D9B4A55E1CC875EC00AAEB4F /* JZBulletinView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZBulletinView.h; sourceTree = "<group>"; };
+		D9B4A55F1CC875EC00AAEB4F /* JZBulletinView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZBulletinView.m; sourceTree = "<group>"; };
 		D9D607D41CAA7D3800B61874 /* LKAddStudentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTableViewCell.h; sourceTree = "<group>"; };
 		D9D607D51CAA7D3800B61874 /* LKAddStudentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAddStudentTableViewCell.m; sourceTree = "<group>"; };
 		D9D607D61CAA7D3800B61874 /* LKAddStudentTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAddStudentTimeView.h; sourceTree = "<group>"; };
@@ -2294,6 +2303,7 @@
 		B2BA3F7C1CA5035700926584 /* 消息 */ = {
 			isa = PBXGroup;
 			children = (
+				D9B4A54F1CC86FE000AAEB4F /* Bulletin（公告） */,
 				B2BA3F7D1CA5035700926584 /* EaseMobEntity */,
 			);
 			path = "消息";
@@ -3542,6 +3552,36 @@
 			path = JZExamSummaryInfoModel;
 			sourceTree = "<group>";
 		};
+		D9B4A54F1CC86FE000AAEB4F /* Bulletin（公告） */ = {
+			isa = PBXGroup;
+			children = (
+				D9B4A5561CC871EA00AAEB4F /* Controller */,
+				D9B4A5571CC871FD00AAEB4F /* View */,
+			);
+			name = "Bulletin（公告）";
+			path = EaseMobEntity;
+			sourceTree = "<group>";
+		};
+		D9B4A5561CC871EA00AAEB4F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D9B4A5501CC8702900AAEB4F /* JZBulletinController.h */,
+				D9B4A5511CC8702900AAEB4F /* JZBulletinController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		D9B4A5571CC871FD00AAEB4F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D9B4A55E1CC875EC00AAEB4F /* JZBulletinView.h */,
+				D9B4A55F1CC875EC00AAEB4F /* JZBulletinView.m */,
+				D9B4A5531CC871E400AAEB4F /* JZBulletinCell.h */,
+				D9B4A5541CC871E400AAEB4F /* JZBulletinCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3965,6 +4005,7 @@
 				B2BA418E1CA5035700926584 /* MagicMainTableViewCell.m in Sources */,
 				B2BA42911CA5035700926584 /* EaseChineseToPinyin.m in Sources */,
 				B2BA3EBC1CA4FF9800926584 /* UINavigationBar+JGNavigationBar.m in Sources */,
+				D9B4A5521CC8702900AAEB4F /* JZBulletinController.m in Sources */,
 				B2BA42B11CA5035700926584 /* DVVSendMessageToStudentController.m in Sources */,
 				B2BA42AD1CA5035700926584 /* EaseRecordView.m in Sources */,
 				B2BA3EBB1CA4FF9800926584 /* UIBarButtonItem+JGBarButtonItem.m in Sources */,
@@ -3979,6 +4020,7 @@
 				B2BA43501CA5041100926584 /* YBUserInfoModel.m in Sources */,
 				06234CAC1CA8E69200007DB7 /* SignatureViewController.m in Sources */,
 				B2BA41E61CA5035700926584 /* UIView+EMWebCacheOperation.m in Sources */,
+				D9B4A5551CC871E400AAEB4F /* JZBulletinCell.m in Sources */,
 				B253C2F61C43C960001AF771 /* PermissiveScoringMatrix.m in Sources */,
 				B8C458801BDB5B5C00901F71 /* ToastAlertView.m in Sources */,
 				B2BA429F1CA5035700926584 /* EaseBubbleView+File.m in Sources */,
@@ -4114,6 +4156,7 @@
 				06DB70C91CA91D4200A6AC9D /* JZHomeStudentToolBarView.m in Sources */,
 				B2BA3EB91CA4FF9800926584 /* PortraitView.m in Sources */,
 				B2BA417E1CA5035700926584 /* ButtonSelectedCell.m in Sources */,
+				D9B4A5601CC875EC00AAEB4F /* JZBulletinView.m in Sources */,
 				B2BA3ED91CA5003B00926584 /* HMCarLicenseModel.m in Sources */,
 				B2BA41F31CA5035700926584 /* PSTGridLayoutSection.m in Sources */,
 				B2BA42C11CA5035700926584 /* DVVTheoreticalStudentListCell.m in Sources */,
@@ -4341,7 +4384,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
+<<<<<<< HEAD
 				CODE_SIGN_IDENTITY = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
+=======
+				CODE_SIGN_IDENTITY = "";
+>>>>>>> edbdc5b751b6ce0316e332546408c649847e41cb
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
@@ -4360,7 +4407,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jizhijiafu.coach;
 				PRODUCT_NAME = "极致教练端";
+<<<<<<< HEAD
 				PROVISIONING_PROFILE = "8bf94a6d-8b3e-4dbf-9ed7-ecd51e654406";
+=======
+				PROVISIONING_PROFILE = "9a2ac392-5fcf-4b55-a453-2ea09b54a805";
+>>>>>>> edbdc5b751b6ce0316e332546408c649847e41cb
 			};
 			name = Debug;
 		};
@@ -4371,7 +4422,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_CODE_COVERAGE = YES;
+<<<<<<< HEAD
 				CODE_SIGN_IDENTITY = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
+=======
+				CODE_SIGN_IDENTITY = "";
+>>>>>>> edbdc5b751b6ce0316e332546408c649847e41cb
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guo Bin Shen (L74C9NC842)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HeiMao_B/PrefixHeader.pch";
@@ -4390,7 +4445,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jizhijiafu.coach;
 				PRODUCT_NAME = "极致教练端";
+<<<<<<< HEAD
 				PROVISIONING_PROFILE = "8bf94a6d-8b3e-4dbf-9ed7-ecd51e654406";
+=======
+				PROVISIONING_PROFILE = "9a2ac392-5fcf-4b55-a453-2ea09b54a805";
+>>>>>>> edbdc5b751b6ce0316e332546408c649847e41cb
 			};
 			name = Release;
 		};
