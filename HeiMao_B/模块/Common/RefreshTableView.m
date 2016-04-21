@@ -32,16 +32,16 @@
 
 - (void)initRefreshView
 {
-//    self.refreshHeader =[[YiRefreshHeader alloc] init];
-//    self.refreshHeader.scrollView = self;
-//    [self.refreshHeader header];
+    self.refreshHeader =[[YiRefreshHeader alloc] init];
+    self.refreshHeader.scrollView = self;
+    [self.refreshHeader header];
     
     self.refreshFooter = [[YiRefreshFooter alloc] init];
     self.refreshFooter.scrollView = self;
     [self.refreshFooter footer];
     
-//    self.refreshHeader.beginRefreshingBlock=^(){
-//    };
+    self.refreshHeader.beginRefreshingBlock=^(){
+    };
     
     self.refreshFooter.beginRefreshingBlock=^(){
         
