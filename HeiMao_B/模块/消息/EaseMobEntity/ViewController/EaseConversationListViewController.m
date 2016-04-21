@@ -92,12 +92,19 @@ static NSString *kGroupName = @"GroupName";
 
 #pragma mark - Table view data source
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 10)];
+    footer.backgroundColor = self.view.backgroundColor;
+    return footer;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 10;
 }
@@ -217,7 +224,7 @@ static NSString *kGroupName = @"GroupName";
         NSLog(@"获取用户信息ext:%@",ext);
         
         if (_delegate && [_delegate respondsToSelector:@selector(conversationListViewController:didSelectConversationModel:)]) {
-            EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row];
+            EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row+2];
             [_delegate conversationListViewController:self didSelectConversationModel:model];
         }
         
