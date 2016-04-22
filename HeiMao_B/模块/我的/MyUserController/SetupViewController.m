@@ -309,6 +309,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (1 == indexPath.section) {
         if (0 == indexPath.row) {
+            
             // 清除缓存
             NSString * path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES)lastObject];
             CGFloat sizeF = [self folderSizeAtPath:path];
@@ -402,6 +403,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
         }
         //SDWebImage框架自身计算缓存的实现
         folderSize+=[[SDImageCache sharedImageCache] getSize]/1024.0/1024.0;
+    
         return folderSize;
     }
     return 0;
