@@ -91,8 +91,8 @@
     [self.arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.bgTopView.mas_centerY);
         make.right.mas_equalTo(self.bgTopView.mas_right).offset(-16);
-        make.width.mas_equalTo(@8);
-        make.height.mas_equalTo(@14);
+        make.width.mas_equalTo(@14);
+        make.height.mas_equalTo(@8);
     }];
     
     
