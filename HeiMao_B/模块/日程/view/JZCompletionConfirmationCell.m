@@ -161,9 +161,9 @@
     CGFloat height = [self.confimContentView confimContentView:_subjectArray model:_listModel];
     NSLog(@"setListModel height:%f",height);
     [self.confimContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(0);
-        make.top.mas_equalTo(90);
-        make.right.mas_equalTo(0);
+        make.left.mas_equalTo(self.mas_left).offset(0);
+        make.top.mas_equalTo(self.mas_top).offset(90);
+        make.right.mas_equalTo(self.mas_right).offset(0);
         make.height.mas_equalTo(height);
     }];
     
