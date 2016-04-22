@@ -67,8 +67,14 @@
     [self initArray];
     [self initUI];
     [self initNationcenter];
-   
+    
 }
+
+- (void)userLoaded
+{
+    [self.collectionView reloadData];
+}
+
 - (void)initNationcenter{
     
     // 授课班型
@@ -79,6 +85,10 @@
     
     // 用户头像 kHeadImageChange
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(iconImageChange) name:kHeadImageChange object: nil];
+
+    // 刷新未读消息
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoaded) name:KNOTIFICATION_USERLOADED object:nil];
+
 }
 
 - (void)initNarBar{
@@ -196,6 +206,15 @@
         static NSString * CellIdentifier = @"bottomCell";
         [_collectionView registerClass:[BottomCollectionCell class] forCellWithReuseIdentifier:CellIdentifier];
         BottomCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+        cell.badegLabel.hidden = YES;
+        
+        if (indexPath.row==2) {
+            if (self.newsBadgeStr && [self.newsBadgeStr length]!=0 && [self.newsBadgeStr integerValue]>0) {
+                cell.badegLabel.hidden = NO;
+                cell.badegLabel.text = [NSString stringWithFormat:@"%@",self.newsBadgeStr];
+            }
+        }
+        
         if (4 == indexPath.row) {
             // + 图片显示
             cell.isNoShowLabel = YES;

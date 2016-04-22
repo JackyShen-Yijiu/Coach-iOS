@@ -11,10 +11,6 @@
 
 @interface JGBaseViewController ()<UIGestureRecognizerDelegate>
 
-@property (nonatomic,copy)NSString *systemBadgeStr;
-
-@property (nonatomic,copy)NSString *noticeBadgeStr;
-
 @end
 
 @implementation JGBaseViewController
@@ -63,14 +59,29 @@
         NSDictionary *data = [responseObject objectInfoForKey:@"data"];
         
         NSDictionary *messageinfo = [data objectInfoForKey:@"messageinfo"];
-        NSDictionary *Newsinfo = [data objectInfoForKey:@"bulletininfo"];
+        NSDictionary *bulletininfo = [data objectInfoForKey:@"bulletininfo"];
+        NSDictionary *Newsinfo = [data objectInfoForKey:@"Newsinfo"];
 
         if (type == 1) {
             
+            // 系统消息
             ws.systemBadgeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagecount"]];
-            ws.noticeBadgeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"bulletincount"]];
-            
+            ws.systemDetailsStr = [NSString stringWithFormat:@"%@",messageinfo[@"message"]];
+            ws.systemTimeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagetime"]];
+
+            // 公告
+            ws.noticeBadgeStr = [NSString stringWithFormat:@"%@",bulletininfo[@"bulletincount"]];
+            ws.noticeDetailsStr = [NSString stringWithFormat:@"%@",bulletininfo[@"bulletin"]];
+            ws.noticeTimeStr = [NSString stringWithFormat:@"%@",bulletininfo[@"bulletintime"]];
+
+            // 资讯
+            ws.newsBadgeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"newscount"]];
+            ws.newsDetailsStr = [NSString stringWithFormat:@"%@",Newsinfo[@"news"]];
+            ws.newsTimeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"newstime"]];
+
             [self setupUnreadMessageCount];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_USERLOADED object:ws];
             
         }
         
@@ -82,26 +93,34 @@
     
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - 小红点逻辑 Tab小红点 + App小红点
 -(void)setupUnreadMessageCount
 {
     
     NSArray *conversations = [[[EaseMob sharedInstance] chatManager] conversations];
-    NSInteger unreadCount = [self.systemBadgeStr integerValue] + [self.noticeBadgeStr integerValue];
+    NSInteger unreadCount = [self.systemBadgeStr integerValue] + [self.noticeBadgeStr integerValue] + [self.newsBadgeStr integerValue];
     for (EMConversation *conversation in conversations) {
         unreadCount += conversation.unreadMessagesCount;
     }
-    UIViewController *tController = [self.tabBarController.viewControllers objectAtIndex:2];
-
-    if (unreadCount > 0) {
-        
-        tController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%ld",(long)unreadCount];
-        
+    UIViewController *messageVc = [self.tabBarController.viewControllers objectAtIndex:2];
+    if ([self.systemBadgeStr integerValue] + [self.noticeBadgeStr integerValue] > 0) {
+        messageVc.tabBarItem.badgeValue = [NSString stringWithFormat:@"%ld",(long)[self.systemBadgeStr integerValue] + [self.noticeBadgeStr integerValue]];
     }else{
-        
-        tController.tabBarItem.badgeValue = nil;
-        
-        [self hiddenMessCountInTabBar];
+        messageVc.tabBarItem.badgeValue = nil;
+        [self hiddenMessCountInTabBar:2];
+    }
+    
+    UIViewController *myVc = [self.tabBarController.viewControllers objectAtIndex:3];
+    if ([self.newsBadgeStr integerValue] > 0) {
+        myVc.tabBarItem.badgeValue = [NSString stringWithFormat:@"%ld",(long)[self.newsBadgeStr integerValue]];
+    }else{
+        myVc.tabBarItem.badgeValue = nil;
+        [self hiddenMessCountInTabBar:3];
     }
     
     UIApplication *application = [UIApplication sharedApplication];
