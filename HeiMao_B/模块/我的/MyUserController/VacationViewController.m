@@ -10,6 +10,7 @@
 #import "ToolHeader.h"
 #import "UIDevice+JEsystemVersion.h"
 #import "UIView+CalculateUIView.h"
+#import "NSDateFormatter+sharedDateFormatter.h"
 static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
 @interface VacationViewController ()
 @property (strong, nonatomic) UILabel *beginLabel;
@@ -100,6 +101,8 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
     if (_beginStart == nil) {
         _beginStart = [[UITextField alloc] init];
         _beginStart.placeholder = @"  日期";
+        
+        _beginStart.text = [self getNowDate];
         _beginStart.backgroundColor = [UIColor whiteColor];
     }
     return _beginStart;
@@ -108,6 +111,7 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
     if (_beginEnd == nil) {
         _beginEnd = [[UITextField alloc] init];
         _beginEnd.placeholder = @"  时间";
+        _beginEnd.text = [self getNowTime];
         _beginEnd.backgroundColor = [UIColor whiteColor];
 
     }
@@ -117,6 +121,7 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
     if (_finalStart == nil) {
         _finalStart = [[UITextField alloc] init];
         _finalStart.placeholder = @"  日期";
+        _finalStart.text = [self getNowDate];
         _finalStart.backgroundColor = [UIColor whiteColor];
 
     }
@@ -126,11 +131,37 @@ static NSString *const kVacationUrl = @"courseinfo/putcoachleave";
     if (_finalEnd == nil) {
         _finalEnd = [[UITextField alloc] init];
         _finalEnd.placeholder = @"  时间";
+        _finalEnd.text = [self getNowTime];
         _finalEnd.backgroundColor = [UIColor whiteColor];
 
     }
     return _finalEnd;
 }
+
+-(NSString *)getNowTime {
+    
+    NSDate *date = [NSDate date];
+    
+    NSDateFormatter *formatter = [NSDateFormatter sharedDateFormatter];
+    
+    formatter.dateFormat = @"HH:mm";
+    
+    return [formatter stringFromDate:date];
+    
+    
+}
+-(NSString *)getNowDate {
+    
+    NSDate *date = [NSDate date];
+    
+    NSDateFormatter *formatter = [NSDateFormatter sharedDateFormatter];
+    
+    formatter.dateFormat = @"yyyy年MM月dd日";
+    
+    return [formatter stringFromDate:date];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
