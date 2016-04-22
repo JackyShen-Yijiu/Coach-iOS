@@ -180,7 +180,8 @@
         return;
     }
     CGPoint point = [[touches anyObject] locationInView:self];
-    int newRating = (int) (point.x / width) + 1;
+    NSLog(@"point=%f width=%f",point.x,width);
+    int newRating = (int) (point.x / width);
     if (newRating > 5)
         return;
     
@@ -200,6 +201,7 @@
     }
     
     CGPoint point = [[touches anyObject] locationInView:self];
+//    NSLog(@"point=%f width=%f",point.x,width);
     int newRating = (int) (point.x / width) + 1;
     if (newRating > 5)
         return;

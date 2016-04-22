@@ -21,7 +21,7 @@
 static NSString *const kSettingUrl = @"userinfo/personalsetting";
 
 
-@interface SetupViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface SetupViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *dataArray;
 @end
@@ -180,7 +180,11 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(150, 0, self.view.width - 150 - 30, 44)];
             NSString * path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES)lastObject];
             CGFloat sizeF = [self folderSizeAtPath:path];
-            NSString *message = [NSString stringWithFormat:@"%.2fM",sizeF];
+            NSString *message = [NSString stringWithFormat:@"%zdM",(int)sizeF];
+            
+            cell.userInteractionEnabled = (int)sizeF;
+
+            
             label.text = message;
             label.textColor = [UIColor colorWithHexString:@"b7b7b7"];
             label.font = [UIFont systemFontOfSize:12];
@@ -305,18 +309,19 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (1 == indexPath.section) {
         if (0 == indexPath.row) {
+            
             // 清除缓存
             NSString * path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES)lastObject];
             CGFloat sizeF = [self folderSizeAtPath:path];
             
-            if (sizeF == 0) {
+            if ((int)sizeF == 0) {
                 // 当缓存为0时,不让去在去清理
                 ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:@"现在没有可清理的内存!" controller:self];
                 [alerview show];
                 return;
 
             }
-            NSString *message = [NSString stringWithFormat:@"缓存大小为%fM.确定要清除缓存吗?",sizeF];
+            NSString *message = [NSString stringWithFormat:@"缓存大小为%dM,确定要清除缓存吗?",(int)sizeF];
             
             [BLPFAlertView showAlertWithTitle:@"提示" message:message cancelButtonTitle:@"取消" otherButtonTitles:@[ @"确定" ] completion:^(NSUInteger selectedOtherButtonIndex) {
                 
@@ -371,7 +376,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 }
 #pragma mark ------ 去评分和版本更新相关操作
 - (void)goToAppStore{
-    NSString *str = [NSString stringWithFormat:@"https://itunes.apple.com/us/app/ji-zhi-jiao-lian/id1089530725?l=zh&ls=1&mt=8" ];
+    NSString *str = @"https://itunes.apple.com/cn/app/ji-zhi-jiao-lian/id1089530725?mt=8&ign-mpt=uo%3D4";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 }
 
@@ -398,6 +403,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
         }
         //SDWebImage框架自身计算缓存的实现
         folderSize+=[[SDImageCache sharedImageCache] getSize]/1024.0/1024.0;
+    
         return folderSize;
     }
     return 0;
