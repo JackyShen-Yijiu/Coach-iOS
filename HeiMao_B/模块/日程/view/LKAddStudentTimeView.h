@@ -13,6 +13,8 @@
 @property (nonatomic, strong) UIButton *selectButton;
 @property (nonatomic, strong) UILabel *starTimeLabel;
 @property (nonatomic, strong) UILabel *finishTimeLabel;
+@property (nonatomic, strong) UIView *lineView;
+
 
 
 //+(instancetype)addStudentTimeView;

@@ -22,13 +22,27 @@
         UILabel *starTimeLabel = [[UILabel alloc]init];
         UILabel *finishTimeLabel = [[UILabel alloc]init];
         UIButton *selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIView *lineView = [[UIView alloc]init];
+        
         self.starTimeLabel = starTimeLabel;
         self.finishTimeLabel = finishTimeLabel;
         self.selectButton = selectButton;
+        self.lineView = lineView;
         
+        [self addSubview:lineView];
         [self addSubview:starTimeLabel];
         [self addSubview:finishTimeLabel];
         [self addSubview:selectButton];
+        
+        [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.mas_equalTo(self.mas_top).offset(-0.5);
+            make.right.mas_equalTo(self.mas_right).offset(-0.5);
+            make.bottom.mas_equalTo(self.mas_bottom).offset(-0.5);
+            make.width.mas_equalTo(0.5);
+            
+            
+        }];
         
             [self.starTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -58,6 +72,7 @@
 
             }];
         
+        lineView.backgroundColor = RGB_Color(232, 232, 237);
         self.starTimeLabel.textAlignment = NSTextAlignmentCenter;
         [self.starTimeLabel setFont:[UIFont systemFontOfSize:15]];
         self.finishTimeLabel.textAlignment = NSTextAlignmentCenter;
