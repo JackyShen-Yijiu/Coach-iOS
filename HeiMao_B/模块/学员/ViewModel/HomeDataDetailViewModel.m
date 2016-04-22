@@ -19,15 +19,42 @@
         _appiontListArray = [NSMutableArray array];
         _retestListArray = [NSMutableArray array];
         _passListArray = [NSMutableArray array];
-        _titleIndex = 1;
+        _allIndex = 1;
+        _noexamIndex = 1;
+        _appiontIndex = 1;
+        _passIndex = 1;
+        _retestIndex = 1;
         
     }
     return self;
 }
 - (void)networkRequestRefresh {
-    _titleIndex = 1;
+    _allIndex = 1;
+    _noexamIndex = 1;
+    _appiontIndex = 1;
+    _passIndex = 1;
+    _retestIndex = 1;
+
+    NSInteger index = 0;
+    if (_searchType == kDateSearchTypeToday) {
+        index = _allIndex;
+    }
+    if (_searchType == kDateSearchTypeYesterday) {
+        index = _noexamIndex;
+    }
     
-    [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(self.subjectID) studentID:(NSString *)@(self.studentState) index:_titleIndex count:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    if (_searchType == kDateSearchTypeWeek) {
+       index = _appiontIndex;
+    }
+    
+    if (_searchType == kDateSearchTypeMonth) {
+        index = _retestIndex;
+    }
+    if (_searchType == kDateSearchTypeYear) {
+        index = _passIndex;
+    }
+    
+    [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(self.subjectID) studentID:(NSString *)@(self.studentState) index:index count:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@ subjectID=%@ State == %@  ",responseObject, (NSString *)@(self.subjectID),(NSString *)@(self.studentState) );
         NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
         NSArray *data = [responseObject objectArrayForKey:@"data"];
@@ -81,8 +108,32 @@
 
 }
 - (void)networkRequestLoadMore{
-    [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(self.subjectID) studentID:(NSString *)@(self.studentState) index:_titleIndex++ count:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"responseObject=%@ subjectID=%@ State == %@  ",responseObject, (NSString *)@(self.subjectID),(NSString *)@(self.studentState) );
+    
+    NSInteger index = 0;
+    if (_searchType == kDateSearchTypeToday) {
+        index = ++_allIndex;
+    }
+    if (_searchType == kDateSearchTypeYesterday) {
+        index = ++_noexamIndex;
+    }
+    
+    if (_searchType == kDateSearchTypeWeek) {
+        index = ++_appiontIndex;
+    }
+    
+    if (_searchType == kDateSearchTypeMonth) {
+        index = ++_retestIndex;
+    }
+    if (_searchType == kDateSearchTypeYear) {
+        index = ++_passIndex;
+    }
+
+    
+    
+    
+    
+    [NetWorkEntiry coachStudentListWithCoachId:[[UserInfoModel defaultUserInfo] userID] subjectID:(NSString *)@(self.subjectID) studentID:(NSString *)@(self.studentState) index:index count:10 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@ subjectID=%@ State == %@ _titleIndex_titleIndex = %lu ",responseObject, (NSString *)@(self.subjectID),(NSString *)@(self.studentState),index);
         NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
         NSArray *data = [responseObject objectArrayForKey:@"data"];
         if (type == 1) {

@@ -438,9 +438,9 @@
         
         NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
         
+        [ws.centerTableDataArray removeAllObjects];
+
         if (type == 1) {
-            
-            [ws.centerTableDataArray removeAllObjects];
             
             NSArray *dataArray = responseObject[@"data"];
             
@@ -482,8 +482,15 @@
             [self.tipView1 setHidden:ws.centerTableDataArray.count];
 
         }else{
-            
+           
+            ws.centerCourseTableView.dataArray = ws.centerTableDataArray;
+
+            [ws.centerCourseTableView reloadData];
+
+            [self.tipView1 setHidden:ws.centerTableDataArray.count];
+
             [ws dealErrorResponseWithTableView:nil info:responseObject];
+            
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

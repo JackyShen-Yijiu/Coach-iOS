@@ -105,7 +105,8 @@
         }];
         [self.contentTextView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.ratingBar.mas_bottom).offset(16);
-            make.right.mas_equalTo(self.bgRateView.mas_right).offset(-16);
+            NSNumber *withW = [NSNumber numberWithFloat:(JZScreen.width - 16 * 2)];
+            make.width.mas_equalTo(withW);
             make.left.mas_equalTo(self.bgRateView.mas_left).offset(16);
             make.height.mas_equalTo(@100);
         }];
@@ -117,7 +118,8 @@
         }];
         [self.commitButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.contentTextView.mas_bottom).offset(16);
-            make.right.mas_equalTo(self.bgRateView.mas_right).offset(-16);
+            NSNumber *withW = [NSNumber numberWithFloat:(JZScreen.width - 16 * 2)];
+            make.width.mas_equalTo(withW);
             make.left.mas_equalTo(self.bgRateView.mas_left).offset(16);
             make.height.mas_equalTo(@32);
         }];

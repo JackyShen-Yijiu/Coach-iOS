@@ -50,6 +50,12 @@ static NSString *const kuserType = @"usertype";
 
 @property (nonatomic, strong) NSString *passwordStr;
 
+
+@property (nonatomic, strong) NSTimer *timer;
+
+
+@property (nonatomic, assign) int codeTime;
+
 @end
 
 @implementation LoginViewController
@@ -65,6 +71,7 @@ static NSString *const kuserType = @"usertype";
 {
     [super viewWillDisappear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [self stopPainting];
 }
 
 - (NSMutableDictionary *)userParam {
@@ -221,7 +228,7 @@ static NSString *const kuserType = @"usertype";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    _codeTime = 60;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(DYdealRegister) name:kregisterUser object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dealSubmit) name:@"submitSuccess" object:nil];
 
@@ -350,6 +357,13 @@ static NSString *const kuserType = @"usertype";
             ToastAlertView *alerview = [[ToastAlertView alloc] initWithTitle:msg controller:self];
             [alerview show];
             [ws.passwordTextField becomeFirstResponder];
+            
+            [self stopPainting];
+            _gainNum.userInteractionEnabled = YES;
+            [_gainNum setTitle:@"验证" forState:UIControlStateNormal];
+            [_gainNum setTitleColor:JZ_BlueColor forState:UIControlStateNormal];
+            [_gainNum setTitleColor:JZ_BlueColor forState:UIControlStateHighlighted];
+
         }
 
 
@@ -488,39 +502,18 @@ static NSString *const kuserType = @"usertype";
             
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:msg delegate:self cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
                 [alert show];
+                return ;
                 
             }else{
                 
                 [ws.phoneNumTextField resignFirstResponder];
                 
                 [ws.passwordTextField becomeFirstResponder];
-                
                 sender.userInteractionEnabled = NO;
-                __block int count = TIME;
-                dispatch_queue_t myQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-                dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, myQueue);
-                dispatch_source_set_timer(timer, dispatch_walltime(NULL, 0), 1 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
-                dispatch_source_set_event_handler(timer, ^{
-                    if (count < 0) {
-                        dispatch_source_cancel(timer);
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            
-                            [self.gainNum setTitle:@"验证" forState:UIControlStateNormal];
-                            self.gainNum.userInteractionEnabled = YES;
-                            
-                        });
-                    }else {
-                        NSString *str = [NSString stringWithFormat:@"%ds",count];
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            
-                            [self.gainNum setTitle:str forState:UIControlStateNormal];
-                            
-                        });
-                        count--;
-                    }
-                });
-                dispatch_resume(timer);
+                _codeTime = 60;
+                [self startPainting];
                 
+            
             }
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -529,7 +522,70 @@ static NSString *const kuserType = @"usertype";
         
     }
     
+    
+//    sender.userInteractionEnabled = NO;
+//    __block int count = TIME;
+//    dispatch_queue_t myQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, myQueue);
+//    dispatch_source_set_timer(timer, dispatch_walltime(NULL, 0), 1 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+//    dispatch_source_set_event_handler(timer, ^{
+//        if (count < 0) {
+//            dispatch_source_cancel(timer);
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                
+//                [self.gainNum setTitle:@"验证" forState:UIControlStateNormal];
+//                self.gainNum.userInteractionEnabled = YES;
+//                
+//            });
+//        }else {
+//            NSString *str = [NSString stringWithFormat:@"%ds",count];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//
+//                [self.gainNum setTitle:str forState:UIControlStateNormal];
+//                
+//            });
+//            count--;
+//        }
+//    });
+//    dispatch_resume(timer);
 }
+
+
+// 定时器执行的方法
+- (void)function:(NSTimer *)paramTimer{
+    
+    NSLog(@"定时器执行的方法");
+    if (_codeTime < 0) {
+        [self.gainNum setTitle:@"验证" forState:UIControlStateNormal];
+        self.gainNum.userInteractionEnabled = YES;
+        [self stopPainting];
+        
+    }else {
+        NSString *str = [NSString stringWithFormat:@"%ds",_codeTime];
+        [self.gainNum setTitle:str forState:UIControlStateNormal];
+        _codeTime--;
+    }
+
+}
+
+// 开始定时器
+- (void) startPainting{
+    
+    // 定义一个NSTimer
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                          target:self
+                                                        selector:@selector(function:)  userInfo:nil
+                                                         repeats:YES];
+}
+
+// 停止定时器
+- (void) stopPainting{
+    if (self.timer != nil){
+        // 定时器调用invalidate后，就会自动执行release方法。不需要在显示的调用release方法
+        [self.timer invalidate];
+    }
+}
+
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [_phoneNumTextField resignFirstResponder];
