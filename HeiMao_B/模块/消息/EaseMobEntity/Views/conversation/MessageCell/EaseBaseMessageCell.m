@@ -218,9 +218,9 @@
     [super setModel:model];
     
     if (model.avatarURLPath) {
-        [self.avatarView sd_setImageWithURL:[NSURL URLWithString:model.avatarURLPath] placeholderImage:model.avatarImage];
+        [self.avatarView sd_setImageWithURL:[NSURL URLWithString:model.avatarURLPath] placeholderImage:[UIImage imageNamed:@"defoult_por"]];
     } else {
-        self.avatarView.image = model.avatarImage;
+        self.avatarView.image = [UIImage imageNamed:@"defoult_por"];
     }
     _nameLabel.text = model.nickname;
     

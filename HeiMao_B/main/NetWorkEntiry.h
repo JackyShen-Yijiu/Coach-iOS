@@ -263,7 +263,7 @@
  * 获取系统消息和咨询消息数量
  *
  */
-+ (void)getMessageUnReadCountlastmessage:(NSString *)lastmessage
++ (void)getMessageUnReadCountlastmessage:(NSString *)lastmessage lastnews:(NSString *)lastnews lastbulletin:(NSString *)lastbulletin
                                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 /**
@@ -409,6 +409,12 @@
 + (void)coachChangePhoneNumber:(NSString *)mobile smscode:(NSString *)code userType:(NSInteger)userType
                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure;
+
+
+///  获取公告
++ (void)getBulletinWithSchoolId:(NSString *)schoolId withUserId:(NSString *)userId index:(NSUInteger)index count:(NSUInteger)count
+                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 
 @end

@@ -13,6 +13,8 @@
 
 @property (nonatomic,copy)NSString *systemBadgeStr;
 
+@property (nonatomic,copy)NSString *noticeBadgeStr;
+
 @end
 
 @implementation JGBaseViewController
@@ -49,9 +51,11 @@
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *lastmessage = [user objectForKey:@"lastmessage"];
-    
+    NSString *lastnew = [user objectForKey:@"lastnew"];
+    NSString *lastbulletin = [user objectForKey:@"lastbulletin"];
+
     WS(ws);
-    [NetWorkEntiry getMessageUnReadCountlastmessage:lastmessage success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry getMessageUnReadCountlastmessage:lastmessage lastnews:lastnew lastbulletin:lastbulletin success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"获取未读消息responseObject:%@",responseObject);
         
@@ -59,10 +63,12 @@
         NSDictionary *data = [responseObject objectInfoForKey:@"data"];
         
         NSDictionary *messageinfo = [data objectInfoForKey:@"messageinfo"];
-        
+        NSDictionary *Newsinfo = [data objectInfoForKey:@"bulletininfo"];
+
         if (type == 1) {
             
             ws.systemBadgeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagecount"]];
+            ws.noticeBadgeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"bulletincount"]];
             
             [self setupUnreadMessageCount];
             
@@ -81,7 +87,7 @@
 {
     
     NSArray *conversations = [[[EaseMob sharedInstance] chatManager] conversations];
-    NSInteger unreadCount = [self.systemBadgeStr integerValue];
+    NSInteger unreadCount = [self.systemBadgeStr integerValue] + [self.noticeBadgeStr integerValue];
     for (EMConversation *conversation in conversations) {
         unreadCount += conversation.unreadMessagesCount;
     }

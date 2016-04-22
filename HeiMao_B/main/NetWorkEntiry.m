@@ -508,7 +508,7 @@
  * 获取系统消息和咨询消息数量
  *
  */
-+ (void)getMessageUnReadCountlastmessage:(NSString *)lastmessage
++ (void)getMessageUnReadCountlastmessage:(NSString *)lastmessage lastnews:(NSString *)lastnews lastbulletin:(NSString *)lastbulletin
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -519,7 +519,9 @@
     [dic setValue:[UserInfoModel defaultUserInfo].userID forKey:@"coachid"];
 
     [dic setValue:lastmessage forKey:@"lastmessage"];
-    
+    [dic setValue:lastnews forKey:@"lastnews"];
+    [dic setValue:lastbulletin forKey:@"lastbulletin"];
+
     NSLog(@"获取系统消息和咨询消息数量dic:%@",dic);
     
     [self GET:urlStr parameters:dic success:success failure:failure];
@@ -782,8 +784,25 @@
     
 }
 
-
-
+#pragma mark - 获取公告
++ (void)getBulletinWithSchoolId:(NSString *)schoolId withUserId:(NSString *)userId index:(NSUInteger)index count:(NSUInteger)count
+                                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError * error))failure {
+    
+    NSString *url = @"http://jzapi.yibuxueche.com/api/headmaster/userinfo/getbulletin";
+    
+    NSDictionary *paramterDict = @{ @"userid": userId,
+                                    @"seqindex":[NSString stringWithFormat:@"%zd",index],
+                                    @"count":[NSString stringWithFormat:@"%zd",count],
+                                    @"schoolid":schoolId
+                                    };
+    NSLog(@"paramterDict:%@",paramterDict);
+    
+    [self GET:url parameters:paramterDict success:success failure:failure];
+    
+    
+    
+}
 
 
 

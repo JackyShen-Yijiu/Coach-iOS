@@ -20,6 +20,7 @@
 #import "InformationMessageController.h"
 #import "ChatViewController.h"
 #import "JGUserTools.h"
+#import "JZBulletinController.h"
 
 //两次提示的默认间隔
 static const CGFloat kDefaultPlaySoundInterval = 3.0;
@@ -27,7 +28,7 @@ static NSString *kMessageType = @"MessageType";
 static NSString *kConversationChatter = @"ConversationChatter";
 static NSString *kGroupName = @"GroupName";
 
-@interface EaseConversationListViewController () <IChatManagerDelegate,EMChatManagerDelegate,SystemMessageDetailControllerDelegate,InformationMessageControllerDelegate>
+@interface EaseConversationListViewController () <IChatManagerDelegate,EMChatManagerDelegate,SystemMessageDetailControllerDelegate,InformationMessageControllerDelegate,JZBulletinControllerDelegate>
 
 @property (nonatomic,strong)NoContentTipView * tipView;
 
@@ -37,6 +38,10 @@ static NSString *kGroupName = @"GroupName";
 @property (nonatomic,copy)NSString *systemDetailsStr;
 @property (nonatomic,copy)NSString *systemTimeStr;
 
+@property (nonatomic,copy)NSString *noticeBadgeStr;
+@property (nonatomic,copy)NSString *noticeDetailsStr;
+@property (nonatomic,copy)NSString *noticeTimeStr;
+
 @end
 
 @implementation EaseConversationListViewController
@@ -45,6 +50,8 @@ static NSString *kGroupName = @"GroupName";
 {
     [super viewDidLoad];
 
+    self.showRefreshHeader = NO;
+    
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
 
     [self registerNotifications];
@@ -88,39 +95,64 @@ static NSString *kGroupName = @"GroupName";
 
 #pragma mark - Table view data source
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 10)];
+    footer.backgroundColor = self.view.backgroundColor;
+    return footer;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 10;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    
     [self.tipView setHidden:self.dataArray.count ? YES : NO];
     
-    return [self.dataArray count];
-    
+    if (section==0) {
+        if(self.dataArray && self.dataArray.count!=0){
+            return 2;
+        }else{
+            return 0;
+        }
+    }else{
+        if(self.dataArray && self.dataArray.count!=0){
+            return [self.dataArray count]-2;
+        }else{
+            return 0;
+        }
+    }
+    return 0;
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *CellIdentifier = [EaseConversationCell cellIdentifierWithModel:nil];
     EaseConversationCell *cell = (EaseConversationCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
     if (cell == nil) {
         cell = [[EaseConversationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    if (indexPath.row<1) {
-
+    NSLog(@"self.dataArray:%@",self.dataArray);
+    
+    if (indexPath.section==0) {
+     
         EaseConversationModel *topModal = self.dataArray[indexPath.row];
-        
         cell.topModel = topModal;
         
     }else{
     
-        id<IConversationModel> model = [self.dataArray objectAtIndex:indexPath.row];
+        id<IConversationModel> model = [self.dataArray objectAtIndex:indexPath.row+2];
         NSLog(@"model.type:%@",model.type);
         
         cell.model = model;
@@ -136,7 +168,7 @@ static NSString *kGroupName = @"GroupName";
         } else {
             cell.timeLabel.text = [self _latestMessageTimeForConversationModel:model];
         }
-
+        
     }
     
     return cell;
@@ -157,11 +189,21 @@ static NSString *kGroupName = @"GroupName";
     
 }
 
+- (void)JZBulletinControllerGetLastBulletin:(NSString *)lastBulletin
+{
+    NSLog(@"JZBulletinControllerGetLastBulletin lastbulletin:%@",lastBulletin);
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setObject:lastBulletin forKey:@"lastbulletin"];
+    [user synchronize];
+    
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row<1) {
+    if (indexPath.section==0) {
         
         if (indexPath.row==0) {
             
@@ -171,17 +213,31 @@ static NSString *kGroupName = @"GroupName";
             systemMessageView.delegate = self;
             [self.navigationController pushViewController:systemMessageView animated:YES];
             
+        }else if (indexPath.row==1){
+            
+            self.noticeBadgeStr = nil;
+            
+            
+            NSLog(@"跳转到公告界面");
+            
+            JZBulletinController *buletinVC = [[JZBulletinController alloc]init];
+            
+            buletinVC.delegate = self;
+            
+            [self.navigationController pushViewController:buletinVC animated:YES];
+            
+            
         }
         
     }else{
         
-        id<IConversationModel> model = [self.dataArray objectAtIndex:indexPath.row];
-
+        id<IConversationModel> model = [self.dataArray objectAtIndex:indexPath.row+2];
+        
         NSDictionary * ext = [[model conversation] ext];
         NSLog(@"获取用户信息ext:%@",ext);
         
         if (_delegate && [_delegate respondsToSelector:@selector(conversationListViewController:didSelectConversationModel:)]) {
-            EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row];
+            EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row+2];
             [_delegate conversationListViewController:self didSelectConversationModel:model];
         }
         
@@ -192,7 +248,7 @@ static NSString *kGroupName = @"GroupName";
 }
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row<1) {
+    if (indexPath.section==0) {
         return NO;
     }
     return YES;
@@ -201,23 +257,25 @@ static NSString *kGroupName = @"GroupName";
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row];
+        EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row+2];
         [[EaseMob sharedInstance].chatManager removeConversationByChatter:model.conversation.chatter deleteMessages:YES append2Chat:YES];
         [self.dataArray removeObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
+    
 }
 
 #pragma mark - data
 - (void)tableViewDidTriggerHeaderRefresh
 {
     
-    
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *lastmessage = [user objectForKey:@"lastmessage"];
-    
+    NSString *lastnew = [user objectForKey:@"lastnew"];
+    NSString *lastbulletin = [user objectForKey:@"lastbulletin"];
+
     WS(ws);
-    [NetWorkEntiry getMessageUnReadCountlastmessage:lastmessage success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetWorkEntiry getMessageUnReadCountlastmessage:lastmessage lastnews:lastnew lastbulletin:lastbulletin success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"获取未读消息responseObject:%@",responseObject);
         
@@ -225,11 +283,15 @@ static NSString *kGroupName = @"GroupName";
         NSDictionary *data = [responseObject objectInfoForKey:@"data"];
         
         NSDictionary *messageinfo = [data objectInfoForKey:@"messageinfo"];
-        
+        NSDictionary *Newsinfo = [data objectInfoForKey:@"bulletininfo"];
+
         if (type == 1) {
             
             ws.systemBadgeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagecount"]];
             ws.systemDetailsStr = [NSString stringWithFormat:@"%@",messageinfo[@"message"]];
+            
+            ws.noticeBadgeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"bulletincount"]];
+            ws.noticeDetailsStr = [NSString stringWithFormat:@"%@",Newsinfo[@"bulletin"]];
             
             //                NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
             NSArray *conversations = [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:YES];
@@ -255,6 +317,13 @@ static NSString *kGroupName = @"GroupName";
             topData1.avatarPic = @"system_messages.png";
             topData1.badgeStr = [self strTolerance:self.systemBadgeStr];
             [ws.dataArray addObject:topData1];
+            
+            EaseConversationModel *topData2 = [[EaseConversationModel alloc] init];
+            topData2.title = @"公告";
+            topData2.detailsTitle = [self strTolerance:self.noticeDetailsStr];
+            topData2.avatarPic = @"system_bulletin.png";
+            topData2.badgeStr = [self strTolerance:self.noticeBadgeStr];
+            [ws.dataArray addObject:topData2];
             
             for (EMConversation *converstion in sorted) {
                 
@@ -318,7 +387,7 @@ static NSString *kGroupName = @"GroupName";
 {
     
     NSArray *conversations = [[[EaseMob sharedInstance] chatManager] conversations];
-    NSInteger unreadCount = [self.systemBadgeStr integerValue];
+    NSInteger unreadCount = [self.systemBadgeStr integerValue] + [self.noticeBadgeStr integerValue];
     for (EMConversation *conversation in conversations) {
         unreadCount += conversation.unreadMessagesCount;
     }
