@@ -589,8 +589,6 @@ static NSString *const kuserType = @"usertype";
         _codeTime--;
     }
 
-=======
->>>>>>> 008f397253197d22dfbb885b9f80288dda479ef3
 }
 
 // 开始定时器
