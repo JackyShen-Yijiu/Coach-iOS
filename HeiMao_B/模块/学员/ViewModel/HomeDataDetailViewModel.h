@@ -27,5 +27,9 @@
 
 @property (nonatomic, strong) NSMutableArray *passListArray;
 
-@property (nonatomic, assign) NSInteger titleIndex;
+@property (nonatomic, assign) NSInteger allIndex;
+@property (nonatomic, assign) NSInteger noexamIndex;
+@property (nonatomic, assign) NSInteger appiontIndex;
+@property (nonatomic, assign) NSInteger retestIndex;
+@property (nonatomic, assign) NSInteger passIndex;
 @end

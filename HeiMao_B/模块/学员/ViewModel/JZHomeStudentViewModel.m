@@ -38,6 +38,8 @@
 - (void)dvv_networkRequestWithIndex:(NSUInteger)index isRefresh:(BOOL)isRefresh {
     
     [NetWorkEntiry coachStudentListWithCoachId:_coachid subjectID:_subjectid studentID:_studentState index:_index count:_count success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"responseObject = %@ _index_index = %lu",responseObject,_index);
          [self dvv_networkCallBack];
         JZHomeStudetModelClassRoot *dmRoot = [JZHomeStudetModelClassRoot yy_modelWithJSON:responseObject];
         if (0 == dmRoot.type) {
