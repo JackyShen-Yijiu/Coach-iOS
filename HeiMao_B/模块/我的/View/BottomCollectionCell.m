@@ -10,9 +10,6 @@
 
 @interface BottomCollectionCell ()
 
-
-
-
 @end
 
 @implementation BottomCollectionCell
@@ -24,13 +21,21 @@
     }
     return self;
 }
+
 - (void)initUI{
+    
     self.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.imgView];
     [self addSubview:self.titleLabel];
+    [self addSubview:self.badegLabel];
     
-}
-- (void)layoutSubviews{
+    [self.badegLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self).offset(-1);
+        make.top.mas_equalTo(self).offset(1);
+        make.width.mas_equalTo(15);
+        make.height.mas_equalTo(15);
+    }];
+    
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
         if (_isNoShowLabel) {
             make.centerY.mas_equalTo(self.mas_centerY);
@@ -41,6 +46,7 @@
         make.width.mas_equalTo(@30);
         make.height.mas_equalTo(@24);
     }];
+    
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.imgView.mas_bottom).offset(12);
         make.centerX.mas_equalTo(self.mas_centerX);
@@ -48,6 +54,25 @@
         make.height.mas_equalTo(@14);
     }];
     
+    self.badegLabel.layer.masksToBounds = YES;
+    self.badegLabel.layer.cornerRadius = 15/2;
+    
+}
+
+- (UILabel *)badegLabel
+{
+    if (_badegLabel==nil) {
+        
+        _badegLabel = [[UILabel alloc] init];
+        _badegLabel.text = @"1";
+        _badegLabel.textColor = [UIColor whiteColor];
+        _badegLabel.backgroundColor = [UIColor redColor];
+        _badegLabel.textAlignment = NSTextAlignmentCenter;
+        _badegLabel.font = [UIFont systemFontOfSize:8];
+//        _badegLabel.frame = CGRectMake(self.width-16, 1, 15, 15);
+        
+    }
+    return _badegLabel;
 }
 
 - (UIImageView *)imgView{

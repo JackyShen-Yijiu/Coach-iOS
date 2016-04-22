@@ -34,14 +34,6 @@ static NSString *kGroupName = @"GroupName";
 
 @property (strong, nonatomic) NSDate *lastPlaySoundDate;
 
-@property (nonatomic,copy)NSString *systemBadgeStr;
-@property (nonatomic,copy)NSString *systemDetailsStr;
-@property (nonatomic,copy)NSString *systemTimeStr;
-
-@property (nonatomic,copy)NSString *noticeBadgeStr;
-@property (nonatomic,copy)NSString *noticeDetailsStr;
-@property (nonatomic,copy)NSString *noticeTimeStr;
-
 @end
 
 @implementation EaseConversationListViewController
@@ -243,6 +235,7 @@ static NSString *kGroupName = @"GroupName";
         
     }
     
+    [self loadMessageData];
     [self tableViewDidTriggerHeaderRefresh];
 
 }
@@ -269,97 +262,58 @@ static NSString *kGroupName = @"GroupName";
 - (void)tableViewDidTriggerHeaderRefresh
 {
     
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSString *lastmessage = [user objectForKey:@"lastmessage"];
-    NSString *lastnew = [user objectForKey:@"lastnew"];
-    NSString *lastbulletin = [user objectForKey:@"lastbulletin"];
-
-    WS(ws);
-    [NetWorkEntiry getMessageUnReadCountlastmessage:lastmessage lastnews:lastnew lastbulletin:lastbulletin success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSArray *conversations = [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:YES];
+    NSLog(@"获取聊天会话列表conversations:%@",conversations);
+    
+    NSArray* sorted = [conversations sortedArrayUsingComparator:
+                       ^(EMConversation *obj1, EMConversation* obj2){
+                           EMMessage *message1 = [obj1 latestMessage];
+                           EMMessage *message2 = [obj2 latestMessage];
+                           if(message1.timestamp > message2.timestamp) {
+                               return(NSComparisonResult)NSOrderedAscending;
+                           }else {
+                               return(NSComparisonResult)NSOrderedDescending;
+                           }
+                       }];
+    
+    [self.dataArray removeAllObjects];
+    
+    // 添加顶部数据
+    EaseConversationModel *topData1 = [[EaseConversationModel alloc] init];
+    topData1.title = @"系统消息";
+    topData1.detailsTitle = [self strTolerance:self.systemDetailsStr];
+    topData1.avatarPic = @"system_messages.png";
+    topData1.badgeStr = [self strTolerance:self.systemBadgeStr];
+    [self.dataArray addObject:topData1];
+    
+    EaseConversationModel *topData2 = [[EaseConversationModel alloc] init];
+    topData2.title = @"公告";
+    topData2.detailsTitle = [self strTolerance:self.noticeDetailsStr];
+    topData2.avatarPic = @"system_bulletin.png";
+    topData2.badgeStr = [self strTolerance:self.noticeBadgeStr];
+    [self.dataArray addObject:topData2];
+    
+    for (EMConversation *converstion in sorted) {
         
-        NSLog(@"获取未读消息responseObject:%@",responseObject);
+        NSLog(@"converstion.chatter:%@",converstion.chatter);
         
-        NSInteger type = [[responseObject objectForKey:@"type"] integerValue];
-        NSDictionary *data = [responseObject objectInfoForKey:@"data"];
-        
-        NSDictionary *messageinfo = [data objectInfoForKey:@"messageinfo"];
-        NSDictionary *Newsinfo = [data objectInfoForKey:@"bulletininfo"];
-
-        if (type == 1) {
-            
-            ws.systemBadgeStr = [NSString stringWithFormat:@"%@",messageinfo[@"messagecount"]];
-            ws.systemDetailsStr = [NSString stringWithFormat:@"%@",messageinfo[@"message"]];
-            
-            ws.noticeBadgeStr = [NSString stringWithFormat:@"%@",Newsinfo[@"bulletincount"]];
-            ws.noticeDetailsStr = [NSString stringWithFormat:@"%@",Newsinfo[@"bulletin"]];
-            
-            //                NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
-            NSArray *conversations = [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:YES];
-            NSLog(@"获取聊天会话列表conversations:%@",conversations);
-            
-            NSArray* sorted = [conversations sortedArrayUsingComparator:
-                               ^(EMConversation *obj1, EMConversation* obj2){
-                                   EMMessage *message1 = [obj1 latestMessage];
-                                   EMMessage *message2 = [obj2 latestMessage];
-                                   if(message1.timestamp > message2.timestamp) {
-                                       return(NSComparisonResult)NSOrderedAscending;
-                                   }else {
-                                       return(NSComparisonResult)NSOrderedDescending;
-                                   }
-                               }];
-            
-            [ws.dataArray removeAllObjects];
-            
-            // 添加顶部数据
-            EaseConversationModel *topData1 = [[EaseConversationModel alloc] init];
-            topData1.title = @"系统消息";
-            topData1.detailsTitle = [self strTolerance:self.systemDetailsStr];
-            topData1.avatarPic = @"system_messages.png";
-            topData1.badgeStr = [self strTolerance:self.systemBadgeStr];
-            [ws.dataArray addObject:topData1];
-            
-            EaseConversationModel *topData2 = [[EaseConversationModel alloc] init];
-            topData2.title = @"公告";
-            topData2.detailsTitle = [self strTolerance:self.noticeDetailsStr];
-            topData2.avatarPic = @"system_bulletin.png";
-            topData2.badgeStr = [self strTolerance:self.noticeBadgeStr];
-            [ws.dataArray addObject:topData2];
-            
-            for (EMConversation *converstion in sorted) {
-                
-                NSLog(@"converstion.chatter:%@",converstion.chatter);
-                
-                EaseConversationModel *model = nil;
-                if (_dataSource && [_dataSource respondsToSelector:@selector(conversationListViewController:modelForConversation:)]) {
-                    model = [_dataSource conversationListViewController:self
-                                                   modelForConversation:converstion];
-                }
-                else{
-                    model = [[EaseConversationModel alloc] initWithConversation:converstion];
-                }
-                
-                if (model) {
-                    [ws.dataArray addObject:model];
-                }
-                
-            }
-            
-            [ws setupUnreadMessageCount];
-            
-            [ws tableViewDidFinishTriggerHeader:YES reload:YES];
-            
+        EaseConversationModel *model = nil;
+        if (_dataSource && [_dataSource respondsToSelector:@selector(conversationListViewController:modelForConversation:)]) {
+            model = [_dataSource conversationListViewController:self
+                                           modelForConversation:converstion];
+        }
+        else{
+            model = [[EaseConversationModel alloc] initWithConversation:converstion];
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (model) {
+            [self.dataArray addObject:model];
+        }
         
-        [self showTotasViewWithMes:@"网络连接失败"];
-        
-         [ws tableViewDidFinishTriggerHeader:NO reload:NO];
-        
-        NSLog(@"%@",error.debugDescription);
-        
-    }];
+    }
     
+    [self tableViewDidFinishTriggerHeader:YES reload:YES];
+
 }
 
 #pragma mark - IChatManagerDelegate 消息变化
@@ -376,34 +330,9 @@ static NSString *kGroupName = @"GroupName";
 
 - (void)didFinishedReceiveOfflineMessages
 {
-    [self setupUnreadMessageCount];
     
     [[self tableView] reloadData];
     
-}
-
-#pragma mark - 小红点逻辑 Tab小红点 + App小红点
--(void)setupUnreadMessageCount
-{
-    
-    NSArray *conversations = [[[EaseMob sharedInstance] chatManager] conversations];
-    NSInteger unreadCount = [self.systemBadgeStr integerValue] + [self.noticeBadgeStr integerValue];
-    for (EMConversation *conversation in conversations) {
-        unreadCount += conversation.unreadMessagesCount;
-    }
-    if (unreadCount > 0) {
-
-        self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%ld",(long)unreadCount];
-
-    }else{
-        self.tabBarItem.badgeValue = nil;
-        
-        [self hiddenMessCountInTabBar];
-    }
-    UIApplication *application = [UIApplication sharedApplication];
-    [application setApplicationIconBadgeNumber:unreadCount];
-    
-    [self.tableView reloadData];
 }
 
 #pragma mark - registerNotifications

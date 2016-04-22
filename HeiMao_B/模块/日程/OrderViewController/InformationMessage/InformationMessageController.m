@@ -26,14 +26,13 @@
 {
     [super viewWillDisappear:animated];
     
-    if ([self.delegate respondsToSelector:@selector(InformationMessageControllerGetMessageLastnews:)]) {
+    NSLog(@"((InformationMessageModel *)[_informationMessageViewModel.informationArray lastObject]).seqindex:%@",((InformationMessageModel *)_informationMessageViewModel.informationArray[0]).seqindex);
+    
+    if (_informationMessageViewModel.informationArray && _informationMessageViewModel.informationArray.count > 0) {
         
-        if (_informationMessageViewModel.informationArray&&_informationMessageViewModel.informationArray.count>0) {
-          
-            NSLog(@"((InformationMessageModel *)[_informationMessageViewModel.informationArray lastObject]).seqindex:%@",((InformationMessageModel *)_informationMessageViewModel.informationArray[0]).seqindex);
-            
-            [self.delegate InformationMessageControllerGetMessageLastnews:((InformationMessageModel *)_informationMessageViewModel.informationArray[0]).seqindex];
-        }
+        NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+        [user setObject:((InformationMessageModel *)_informationMessageViewModel.informationArray[0]).seqindex forKey:@"lastnew"];
+        [user synchronize];
         
     }
     
