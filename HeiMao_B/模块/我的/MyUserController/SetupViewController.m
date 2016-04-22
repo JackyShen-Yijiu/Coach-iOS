@@ -376,7 +376,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 }
 #pragma mark ------ 去评分和版本更新相关操作
 - (void)goToAppStore{
-    NSString *str = [NSString stringWithFormat:@"https://itunes.apple.com/us/app/ji-zhi-jiao-lian/id1089530725?l=zh&ls=1&mt=8" ];
+    NSString *str = @"https://itunes.apple.com/cn/app/ji-zhi-jiao-lian/id1089530725?mt=8&ign-mpt=uo%3D4";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 }
 
