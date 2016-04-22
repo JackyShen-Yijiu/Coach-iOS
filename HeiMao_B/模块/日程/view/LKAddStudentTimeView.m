@@ -11,38 +11,6 @@
 
 
 @implementation LKAddStudentTimeView
-
-
--(void)layoutSubviews {
-//    
-//    [self.starTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.top.mas_equalTo(self.mas_top).offset(16);
-//        make.width.mas_equalTo(50);
-//        make.centerX.mas_equalTo(self.mas_centerX);
-//        
-//    }];
-//    
-//    [self.finishTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.top.mas_equalTo(self.mas_top).offset(8);
-//        make.width.mas_equalTo(50);
-//        make.centerX.mas_equalTo(self.mas_centerX);
-//        
-//    }];
-//    
-//    [self mas_makeConstraints:^(MASConstraintMaker *make) {
-//       
-//        make.top.mas_equalTo(self.mas_top).offset(6);
-//        make.width.mas_equalTo(50);
-//        make.centerX.mas_equalTo(self.mas_centerX);
-//        
-//        
-//    }];
-//    
-    
-}
-
 -(instancetype)initWithFrame:(CGRect)frame {
     
     self = [super initWithFrame:frame];
@@ -90,34 +58,18 @@
 
             }];
         
-        
-        
-//        self.starTimeLabel.text = @"11:00";
-        self.starTimeLabel.textAlignment = UITextAlignmentCenter;
+        self.starTimeLabel.textAlignment = NSTextAlignmentCenter;
         [self.starTimeLabel setFont:[UIFont systemFontOfSize:15]];
-//        self.finishTimeLabel.text = @"12:00";
-        self.finishTimeLabel.textAlignment = UITextAlignmentCenter;
+        self.finishTimeLabel.textAlignment = NSTextAlignmentCenter;
         [self.finishTimeLabel setFont:[UIFont systemFontOfSize:13]];
         [self.finishTimeLabel setTextColor:[UIColor lightGrayColor]];
-      
-        
-//        self.selectButton.backgroundColor = [UIColor orangeColor];
-        
-                
+
         [selectButton sizeToFit];
         selectButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 
-        
-//        NSLog(@"%@",NSStringFromCGRect(frame));
-        
-        
-        
     }
     return self;
  
 }
-
-
-
 
 @end
