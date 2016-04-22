@@ -580,6 +580,7 @@
 		D9097EA51CC881150087AD36 /* JZBulletinData.m in Sources */ = {isa = PBXBuildFile; fileRef = D9097EA21CC881150087AD36 /* JZBulletinData.m */; };
 		D9097EA61CC881150087AD36 /* JZBulletinRootClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D9097EA41CC881150087AD36 /* JZBulletinRootClass.m */; };
 		D9162B891CB508B600441EA5 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9162B881CB508B600441EA5 /* ScanViewController.m */; };
+		D91DC7681CCA080600D91C65 /* NSDateFormatter+sharedDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D91DC7671CCA080600D91C65 /* NSDateFormatter+sharedDateFormatter.m */; };
 		D978ACD51C47B38A00D633B4 /* DVVLocationStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */; };
 		D9ABF86D1C896463001B6930 /* BLPFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ABF86C1C896463001B6930 /* BLPFAlertView.m */; };
 		D9B4A5521CC8702900AAEB4F /* JZBulletinController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4A5511CC8702900AAEB4F /* JZBulletinController.m */; };
@@ -1609,6 +1610,8 @@
 		D9097EA41CC881150087AD36 /* JZBulletinRootClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZBulletinRootClass.m; sourceTree = "<group>"; };
 		D9162B871CB508B600441EA5 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
 		D9162B881CB508B600441EA5 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
+		D91DC7661CCA080600D91C65 /* NSDateFormatter+sharedDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+sharedDateFormatter.h"; sourceTree = "<group>"; };
+		D91DC7671CCA080600D91C65 /* NSDateFormatter+sharedDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+sharedDateFormatter.m"; sourceTree = "<group>"; };
 		D978ACD31C47B38A00D633B4 /* DVVLocationStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVVLocationStatus.h; sourceTree = "<group>"; };
 		D978ACD41C47B38A00D633B4 /* DVVLocationStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVVLocationStatus.m; sourceTree = "<group>"; };
 		D9ABF86B1C896463001B6930 /* BLPFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLPFAlertView.h; sourceTree = "<group>"; };
@@ -3362,6 +3365,8 @@
 				B2BA43EC1CAB7CC600926584 /* UIColor+Hex.m */,
 				B2BA43E41CAA2F0700926584 /* NSString+CurrentTimeDay.h */,
 				B2BA43E51CAA2F0700926584 /* NSString+CurrentTimeDay.m */,
+				D91DC7661CCA080600D91C65 /* NSDateFormatter+sharedDateFormatter.h */,
+				D91DC7671CCA080600D91C65 /* NSDateFormatter+sharedDateFormatter.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -4073,6 +4078,7 @@
 				B2BA3E891CA4F3D900926584 /* CourseCancelController.m in Sources */,
 				B2BA3EB81CA4FF9800926584 /* NoContentTipView.m in Sources */,
 				065E82C21CAD677300D98BFA /* YBConfimContentView.m in Sources */,
+				D91DC7681CCA080600D91C65 /* NSDateFormatter+sharedDateFormatter.m in Sources */,
 				B2BA41BD1CA5035700926584 /* amrFileCodec.mm in Sources */,
 				B8C4586E1BDB59AC00901F71 /* AFNetworkActivityLogger.m in Sources */,
 				B2BA43411CA5041100926584 /* StudentSignInDataModel.m in Sources */,
