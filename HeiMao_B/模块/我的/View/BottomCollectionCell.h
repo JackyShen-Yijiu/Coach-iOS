@@ -15,4 +15,6 @@
 
 @property (nonatomic, assign) BOOL isNoShowLabel;
 
+@property (nonatomic,strong) UILabel *badegLabel;
+
 @end
