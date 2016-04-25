@@ -148,6 +148,12 @@
     _isshowSegment = YES;
     self.myNavigationItem.title = @"学员";
     NSArray *sujectArray = [UserInfoModel defaultUserInfo].subject;
+    
+    if (sujectArray.count == 0) {
+        [self showTotasViewWithMes:@"暂无设置授课科目"];
+        return;
+    }
+
     if (sujectArray.count == 1) {
         _isshowSegment = NO;
         NSDictionary *dic = sujectArray.firstObject;

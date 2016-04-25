@@ -342,6 +342,12 @@ static NSString *const kuserType = @"usertype";
                          [_delegate loginViewControllerdidLoginSucess:self];
                      }
                      
+                     [self stopPainting];
+                     _gainNum.userInteractionEnabled = YES;
+                     [_gainNum setTitle:@"验证" forState:UIControlStateNormal];
+                     [_gainNum setTitleColor:JZ_BlueColor forState:UIControlStateNormal];
+                     [_gainNum setTitleColor:JZ_BlueColor forState:UIControlStateHighlighted];
+                     
                  }
                  else
                  {
