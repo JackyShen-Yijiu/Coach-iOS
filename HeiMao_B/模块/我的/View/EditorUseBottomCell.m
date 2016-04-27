@@ -36,10 +36,21 @@
 }
 - (void)layoutSubviews{
     [self.iconImgeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentView.mas_top).offset(14);
+//        make.top.mas_equalTo(self.contentView.mas_top).offset(14);
         make.left.mas_equalTo(self.contentView.mas_left).offset(16);
-        make.width.mas_equalTo(@16);
-        make.height.mas_equalTo(@16);
+        make.centerY.mas_equalTo(self.contentView.mas_centerY);
+        
+        if (YBIphone6Plus) {
+            
+            make.width.mas_equalTo(16 * JZRatio_1_5);
+            make.height.mas_equalTo(16* JZRatio_1_5);
+        }else {
+            
+            make.width.mas_equalTo(@16);
+            make.height.mas_equalTo(@16);
+        }
+        
+
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
@@ -49,11 +60,20 @@
     [self.arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
         make.right.mas_equalTo(self.contentView.mas_right).offset(-16);
-        make.width.mas_equalTo(@8);
-        make.height.mas_equalTo(@14);
+        
+        if (YBIphone6Plus) {
+            make.width.mas_equalTo(8 * JZRatio_1_5);
+            make.height.mas_equalTo(14 * JZRatio_1_5);
+        }else {
+            
+            make.width.mas_equalTo(@8);
+            make.height.mas_equalTo(@14);
+        }
+
     }];
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
+        
         make.right.mas_equalTo(self.arrowImageView.mas_left).offset(-8);
         make.height.mas_equalTo(@12);
     }];
@@ -84,7 +104,14 @@
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.text = @"更换头像";
-        _titleLabel.font = [UIFont systemFontOfSize:14];
+        if (YBIphone6Plus) {
+            
+            _titleLabel.font = [UIFont systemFontOfSize:14*JZRatio_1_1_5];
+
+        }else {
+            _titleLabel.font = [UIFont systemFontOfSize:14];
+
+        }
         _titleLabel.textColor  = JZ_FONTCOLOR_DRAK;
     }
     return _titleLabel;
@@ -95,7 +122,15 @@
         _detailLabel = [[UILabel alloc] init];
         _detailLabel.text = @"更换头像";
         _detailLabel.textAlignment = NSTextAlignmentRight;
-        _detailLabel.font = [UIFont systemFontOfSize:12];
+        if (YBIphone6Plus) {
+            
+            _detailLabel.font = [UIFont systemFontOfSize:12 * JZRatio_1_1_5];
+        }else {
+            
+            _detailLabel.font = [UIFont systemFontOfSize:12];
+
+        }
+        
         _detailLabel.textColor  = JZ_FONTCOLOR_LIGHT;
     }
     return _detailLabel;

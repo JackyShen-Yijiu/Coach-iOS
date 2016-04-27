@@ -34,16 +34,37 @@
 }
 - (void)layoutSubviews{
     [self.iconImgeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentView.mas_top).offset(16);
+//        make.top.mas_equalTo(self.contentView.mas_top).offset(16);
         make.left.mas_equalTo(self.contentView.mas_left).offset(16);
-        make.width.mas_equalTo(@48);
-        make.height.mas_equalTo(@48);
+        make.centerY.mas_equalTo(self.contentView.mas_centerY);
+
+        if (YBIphone6Plus) {
+            
+            make.width.mas_equalTo(48* JZRatio_1_5);
+            make.height.mas_equalTo(48 * JZRatio_1_5);
+
+        }else {
+            make.width.mas_equalTo(@48);
+            make.height.mas_equalTo(@48);
+
+        }
+        
     }];
     [self.arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
         make.right.mas_equalTo(self.contentView.mas_right).offset(-16);
-        make.width.mas_equalTo(@8);
-        make.height.mas_equalTo(@14);
+        
+        if (YBIphone6Plus) {
+            
+            make.width.mas_equalTo(8 * JZRatio_1_5);
+            make.height.mas_equalTo(14 * JZRatio_1_5);
+            
+        }else {
+            
+            make.width.mas_equalTo(@8);
+            make.height.mas_equalTo(@14);
+        }
+
     }];
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
@@ -64,7 +85,15 @@
         _iconImgeView.image = [UIImage imageNamed:@"littleImage"];
         _iconImgeView.backgroundColor = [UIColor clearColor];
         _iconImgeView.layer.masksToBounds = YES;
-        _iconImgeView.layer.cornerRadius = 24;
+        
+        if (YBIphone6Plus) {
+            _iconImgeView.layer.cornerRadius = 24 *JZRatio_1_5;
+
+        }else {
+            
+            _iconImgeView.layer.cornerRadius = 24;
+
+        }
         
     }
     return _iconImgeView;
@@ -74,7 +103,15 @@
         _detailLabel = [[UILabel alloc] init];
         _detailLabel.text = @"更换头像";
         _detailLabel.textAlignment = NSTextAlignmentRight;
-        _detailLabel.font = [UIFont systemFontOfSize:12];
+        if (YBIphone6Plus) {
+            
+            _detailLabel.font = [UIFont systemFontOfSize:12 *JZRatio_1_1_5];
+
+        }else {
+            _detailLabel.font = [UIFont systemFontOfSize:12];
+
+        }
+        
         _detailLabel.textColor  = JZ_FONTCOLOR_LIGHT;
     }
     return _detailLabel;

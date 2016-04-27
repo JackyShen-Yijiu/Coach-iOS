@@ -73,19 +73,7 @@
     [self initUI];
     [self initNationcenter];
     
-    if (YBIphone6Plus) {
-        
-        UIColor * color = [UIColor whiteColor];
-        UIFont *font = [UIFont systemFontOfSize:JZNavBarTitleFont];
-        
-        NSMutableDictionary *dict=[NSMutableDictionary dictionary];
-        [dict setObject:color forKey:NSForegroundColorAttributeName];
-        [dict setObject:font forKey:NSFontAttributeName];
-        
-        self.navigationController.navigationBar.titleTextAttributes = dict;
-        
-    }
-
+   
 }
 
 - (void)userLoaded
@@ -116,6 +104,7 @@
     self.myNavigationItem.rightBarButtonItems = nil;
     self.myNavigationItem.leftBarButtonItem = nil;
     self.myNavigationItem.title = [UserInfoModel defaultUserInfo].name;
+   
     
     
     UIButton* backButton= [UIButton buttonWithType:UIButtonTypeCustom];
