@@ -90,6 +90,13 @@
 // 百度地图
 #define baiduMapAppkey @"gBe9r3Gd8PYRrcDkz0etT1f6"
 
+///  适配6P放大比（文字）
+#define JZRatio_1_1_5 1.15
+//  适配6P放大比（图片）
+#define JZRatio_1_5 1.5
+
+#define JZNavBarTitleFont 18
+
 /**
  *  制定时间类型
  */

@@ -49,6 +49,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nopassCountLabel;
 
 @property (nonatomic, strong) JZExamSummaryInfoData *modelGrop;
+@property (weak, nonatomic) IBOutlet UILabel *passTitle;
 
 
 /// 创建examHeaderView
