@@ -36,6 +36,7 @@
             _yLabel.text  = [NSString stringWithFormat:@"y码:%@",yNum];
 
         }
+
         
         
     }
@@ -73,20 +74,44 @@
     [self.yLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(-16);
         make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.height.mas_equalTo(12);
-        make.width.mas_equalTo(200);
+        if (YBIphone6Plus) {
+            
+            make.height.mas_equalTo(12 * JZRatio_1_5);
+            make.width.mas_equalTo(200);
+        }else {
+            
+            make.height.mas_equalTo(12 * JZRatio_1_5);
+            make.width.mas_equalTo(200);
+        }
     }];
     [self.schoolLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.yLabel.mas_top).offset(-16);
         make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.height.mas_equalTo(12);
-        make.width.mas_equalTo(100);
+        
+        if (YBIphone6Plus) {
+            
+            make.height.mas_equalTo(12 * JZRatio_1_5);
+//            make.width.mas_equalTo(100);
+        }else {
+            make.height.mas_equalTo(12);
+            make.width.mas_equalTo(100);
+        }
     }];
     [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
         make.bottom.mas_equalTo(self.schoolLabel.mas_top).offset(-16);
         make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.height.mas_equalTo(68);
-        make.width.mas_equalTo(68);
+        
+        if (YBIphone6Plus) {
+            make.height.mas_equalTo(68 * JZRatio_1_1_5);
+            make.width.mas_equalTo(68 * JZRatio_1_1_5);
+   
+        }else {
+            make.height.mas_equalTo(68);
+            make.width.mas_equalTo(68);
+
+        }
+        
     }];
 
 }
@@ -126,7 +151,15 @@
         _iconView = [[UIImageView alloc] init];
         _iconView.backgroundColor = [UIColor cyanColor];
         _iconView.layer.masksToBounds = YES;
+        
+        if (YBIphone6Plus) {
+        _iconView.layer.cornerRadius = 39.1;
+        }else {
+           
         _iconView.layer.cornerRadius = 34;
+
+        }
+        
         _iconView.image = [UIImage imageNamed:@"littleImage.png"];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signatureSetUp)];
         [_iconView addGestureRecognizer:tap];
@@ -138,7 +171,17 @@
     if (_schoolLabel == nil) {
         _schoolLabel = [[UILabel alloc] init];
         _schoolLabel.text = @"北京只有驾校";
-        _schoolLabel.font = [UIFont systemFontOfSize:12];
+        
+        if (YBIphone6Plus) {
+            
+            _schoolLabel.font = [UIFont systemFontOfSize:14 * JZRatio_1_1_5];
+            
+        }else {
+           
+            _schoolLabel.font = [UIFont systemFontOfSize:12];
+            
+        }
+        
         _schoolLabel.textColor = JZ_FONTCOLOR_DRAK;
         _schoolLabel.textAlignment = NSTextAlignmentCenter;
     }
@@ -148,7 +191,17 @@
     if (_yLabel == nil) {
         _yLabel = [[UILabel alloc] init];
         _yLabel.text = @"我的Y码:JAOIKKDIKDK";
-        _yLabel.font = [UIFont systemFontOfSize:12];
+        
+        if (YBIphone6Plus) {
+            
+            _yLabel.font = [UIFont systemFontOfSize:14 * JZRatio_1_1_5];
+
+        }else {
+            
+            _yLabel.font = [UIFont systemFontOfSize:12];
+
+        }
+        
         _yLabel.textColor = JZ_FONTCOLOR_LIGHT;
         _yLabel.textAlignment = NSTextAlignmentCenter;
     }
