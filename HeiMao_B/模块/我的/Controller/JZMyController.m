@@ -62,6 +62,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
+    
+    if (YBIphone6Plus) {
+        
+        UIColor * color = [UIColor whiteColor];
+        UIFont *font = [UIFont systemFontOfSize:JZNavBarTitleFont];
+        
+        NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+        [dict setObject:color forKey:NSForegroundColorAttributeName];
+        [dict setObject:font forKey:NSFontAttributeName];
+        
+        self.navigationController.navigationBar.titleTextAttributes = dict;
+        
+    }
+    
     [self.view addSubview:self.collectionView];
     
     [self initArray];

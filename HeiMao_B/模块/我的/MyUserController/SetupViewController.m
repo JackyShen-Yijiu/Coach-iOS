@@ -50,6 +50,17 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
     quit.titleLabel.font = [UIFont systemFontOfSize:14];
     [quit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     quit.frame = CGRectMake(0, 0, kSystemWide, 44);
+    
+    
+    if (YBIphone6Plus) {
+        quit.frame = CGRectMake(0, 0, kSystemWide, 44 * JZRatio_1_1_5);
+
+        quit.titleLabel.font = [UIFont systemFontOfSize:14 * JZRatio_1_1_5];
+        
+    }
+    
+    
+    
     [quit addTarget:self action:@selector(clickQuit:) forControlEvents:UIControlEventTouchUpInside];
     return quit;
     
@@ -135,6 +146,13 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
     }
     [self.view addSubview:self.tableView];
     
+
+    if (YBIphone6Plus) {
+        
+        self.tableView.rowHeight = 44 * JZRatio_1_1_5;
+
+    }
+    
     self.tableView.tableFooterView = [self tableFootView];
 
 }
@@ -172,12 +190,28 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
+    
     cell.textLabel.font = [UIFont systemFontOfSize:14];
+    
+    if (YBIphone6Plus) {
+
+    cell.textLabel.font = [UIFont systemFontOfSize:14 * JZRatio_1_1_5];
+
+        
+    }
+    
     cell.textLabel.textColor = [UIColor blackColor];
     
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(150, 0, self.view.width - 150 - 30, 44)];
+            
+            if (YBIphone6Plus) {
+            
+            label.frame = CGRectMake(150, 3, self.view.width - 150 - 30, 44);
+                
+            }
+            
             NSString * path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES)lastObject];
             CGFloat sizeF = [self folderSizeAtPath:path];
             NSString *message = [NSString stringWithFormat:@"%zdM",(int)sizeF];
@@ -188,6 +222,15 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
             label.text = message;
             label.textColor = [UIColor colorWithHexString:@"b7b7b7"];
             label.font = [UIFont systemFontOfSize:12];
+            
+            if (YBIphone6Plus) {
+        
+            label.font = [UIFont systemFontOfSize:12 * JZRatio_1_1_5];
+
+            }
+    
+            
+            
             label.textAlignment = NSTextAlignmentRight;
             [cell addSubview:label];
         }
@@ -196,6 +239,9 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.section == 0) {
         UISwitch *switchControl = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 45, 20)];
+
+        
+        
         switchControl.onTintColor = kDefaultTintColor;
         switchControl.tag = 100 + indexPath.row;
         if (indexPath.row == 0) {

@@ -27,6 +27,19 @@
     [super viewDidLoad];
     self.title = @"通过学员";
     self.dataArray = [NSMutableArray array];
+    
+    if (YBIphone6Plus) {
+        
+        UIColor * color = [UIColor whiteColor];
+        UIFont *font = [UIFont systemFontOfSize:JZNavBarTitleFont];
+        
+        NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+        [dict setObject:color forKey:NSForegroundColorAttributeName];
+        [dict setObject:font forKey:NSFontAttributeName];
+        
+        self.navigationController.navigationBar.titleTextAttributes = dict;
+        
+    }
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     [self.view addSubview:self.tableView];
     [self initData];

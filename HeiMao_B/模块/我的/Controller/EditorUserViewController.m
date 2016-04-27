@@ -400,6 +400,21 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     // Do any additional setup after loading the view.
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     self.title = @"个人信息";
+    
+    if (YBIphone6Plus) {
+        
+        UIColor * color = [UIColor whiteColor];
+        UIFont *font = [UIFont systemFontOfSize:JZNavBarTitleFont];
+        
+        NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+        [dict setObject:color forKey:NSForegroundColorAttributeName];
+        [dict setObject:font forKey:NSFontAttributeName];
+        
+        self.navigationController.navigationBar.titleTextAttributes = dict;
+        
+    }
+    
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     //    if ([UIDevice jeSystemVersion] >= 7.0f) {

@@ -47,6 +47,21 @@ static NSString *kGroupName = @"GroupName";
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
 
     [self registerNotifications];
+    
+    if (YBIphone6Plus) {
+        
+        UIColor * color = [UIColor whiteColor];
+        UIFont *font = [UIFont systemFontOfSize:JZNavBarTitleFont];
+        
+        NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+        [dict setObject:color forKey:NSForegroundColorAttributeName];
+        [dict setObject:font forKey:NSFontAttributeName];
+        
+        self.navigationController.navigationBar.titleTextAttributes = dict;
+        
+    }
+    
+    
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoaded) name:KNOTIFICATION_USERLOADED object:nil];
     

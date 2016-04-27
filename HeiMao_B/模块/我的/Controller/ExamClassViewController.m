@@ -62,6 +62,19 @@ static NSString *const kUpClassType = @"userinfo/coachsetclass";
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"班型设置";
+    
+    if (YBIphone6Plus) {
+        
+        UIColor * color = [UIColor whiteColor];
+        UIFont *font = [UIFont systemFontOfSize:JZNavBarTitleFont];
+        
+        NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+        [dict setObject:color forKey:NSForegroundColorAttributeName];
+        [dict setObject:font forKey:NSFontAttributeName];
+        
+        self.navigationController.navigationBar.titleTextAttributes = dict;
+        
+    }
     self.collectionView.backgroundColor = RGBColor(247, 249, 251);
     [self.view addSubview:self.collectionView];
     
