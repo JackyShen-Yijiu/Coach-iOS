@@ -42,8 +42,8 @@
         
         if (YBIphone6Plus) {
             
-            make.width.mas_equalTo(16 * JZRatio_1_5);
-            make.height.mas_equalTo(16* JZRatio_1_5);
+            make.width.mas_equalTo(16 * JZRatio_1_1_5);
+            make.height.mas_equalTo(16* JZRatio_1_1_5);
         }else {
             
             make.width.mas_equalTo(@16);
@@ -62,8 +62,8 @@
         make.right.mas_equalTo(self.contentView.mas_right).offset(-16);
         
         if (YBIphone6Plus) {
-            make.width.mas_equalTo(8 * JZRatio_1_5);
-            make.height.mas_equalTo(14 * JZRatio_1_5);
+            make.width.mas_equalTo(8 * JZRatio_1_1_5);
+            make.height.mas_equalTo(14 * JZRatio_1_1_5);
         }else {
             
             make.width.mas_equalTo(@8);

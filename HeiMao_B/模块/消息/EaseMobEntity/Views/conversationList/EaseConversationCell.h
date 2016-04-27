@@ -16,6 +16,9 @@
 
 static CGFloat EaseConversationCellMinHeight = 60;
 
+static CGFloat EaseConversationCellMinHeight6P = 60*JZRatio_1_1_5;
+
+
 @interface EaseConversationCell : UITableViewCell<IModelCell>
 
 @property (strong, nonatomic) EaseImageView *avatarView;

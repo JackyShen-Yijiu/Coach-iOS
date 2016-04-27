@@ -39,24 +39,56 @@
     self.mainTitleLabel = [[UILabel alloc]init];
     self.mainTitleLabel.textAlignment = NSTextAlignmentLeft;
     self.mainTitleLabel.textColor = JZ_FONTCOLOR_DRAK;
-    [self.mainTitleLabel setFont:[UIFont systemFontOfSize:14]];
+    
+    if (YBIphone6Plus) {
+        
+        [self.mainTitleLabel setFont:[UIFont systemFontOfSize:14 * JZRatio_1_1_5]];
+ 
+    }else {
+        [self.mainTitleLabel setFont:[UIFont systemFontOfSize:14]];
+
+    }
     
     
     self.timeLabel = [[UILabel alloc]init];
     self.timeLabel.textAlignment = NSTextAlignmentLeft;
     self.timeLabel.textColor = JZ_FONTCOLOR_LIGHT;
-    [self.timeLabel setFont:[UIFont systemFontOfSize:12]];
+
+    if (YBIphone6Plus) {
+        
+        [self.timeLabel setFont:[UIFont systemFontOfSize:12 * JZRatio_1_1_5]];
+
+    }else {
+        [self.timeLabel setFont:[UIFont systemFontOfSize:12]];
+
+    }
     
     self.postNameLabel = [[UILabel alloc]init];
     self.postNameLabel.textAlignment = NSTextAlignmentRight;
     self.postNameLabel.textColor = JZ_FONTCOLOR_LIGHT;
-    [self.postNameLabel setFont:[UIFont systemFontOfSize:12]];
+
+    if (YBIphone6Plus) {
+        
+        [self.postNameLabel setFont:[UIFont systemFontOfSize:12 * JZRatio_1_1_5]];
+
+    }else {
+        [self.postNameLabel setFont:[UIFont systemFontOfSize:12]];
+
+    }
     
     self.contentLabel = [[UILabel alloc]init];
     self.contentLabel.textAlignment = NSTextAlignmentLeft;
     self.contentLabel.textColor = JZ_FONTCOLOR_DRAK;
     self.contentLabel.numberOfLines = 0;
-    [self.contentLabel setFont:[UIFont systemFontOfSize:14]];
+    
+    if (YBIphone6Plus) {
+        [self.contentLabel setFont:[UIFont systemFontOfSize:14*JZRatio_1_1_5]];
+
+        
+    }else {
+        [self.contentLabel setFont:[UIFont systemFontOfSize:14]];
+
+    }
     
     self.lineView = [[UIView alloc]init];
     self.lineView.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
@@ -129,7 +161,17 @@
     
     [cell layoutIfNeeded];
     
-    return cell.timeLabel.height + cell.mainTitleLabel.height + cell.contentLabel.height + 50.5;
+//    if (YBIphone6Plus) {
+//     return (cell.timeLabel.height + cell.mainTitleLabel.height + cell.contentLabel.height + 50.5) *JZRatio_1_1_5;
+//        
+//    }else {
+    
+        return cell.timeLabel.height + cell.mainTitleLabel.height + cell.contentLabel.height + 50.5;
+//    }
+//    
+//    return 0;
+//    
+    
     
 }
 

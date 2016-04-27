@@ -40,8 +40,8 @@
 
         if (YBIphone6Plus) {
             
-            make.width.mas_equalTo(48* JZRatio_1_5);
-            make.height.mas_equalTo(48 * JZRatio_1_5);
+            make.width.mas_equalTo(48* JZRatio_1_1_5);
+            make.height.mas_equalTo(48 * JZRatio_1_1_5);
 
         }else {
             make.width.mas_equalTo(@48);
@@ -56,8 +56,8 @@
         
         if (YBIphone6Plus) {
             
-            make.width.mas_equalTo(8 * JZRatio_1_5);
-            make.height.mas_equalTo(14 * JZRatio_1_5);
+            make.width.mas_equalTo(8 * JZRatio_1_1_5);
+            make.height.mas_equalTo(14 * JZRatio_1_1_5);
             
         }else {
             
@@ -87,7 +87,7 @@
         _iconImgeView.layer.masksToBounds = YES;
         
         if (YBIphone6Plus) {
-            _iconImgeView.layer.cornerRadius = 24 *JZRatio_1_5;
+            _iconImgeView.layer.cornerRadius = 24 *JZRatio_1_1_5;
 
         }else {
             
