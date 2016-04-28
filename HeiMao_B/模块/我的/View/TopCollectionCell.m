@@ -52,9 +52,12 @@
             
             make.top.mas_equalTo(self.mas_top).offset(20 * JZRatio_1_5);
 
+        }else if(YBIphone4) {
+            make.top.mas_equalTo(self.mas_top).offset(20 *JZRatio_0_8);
+
         }else {
             make.top.mas_equalTo(self.mas_top).offset(20);
-
+ 
         }
         
         
@@ -63,8 +66,15 @@
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.classTypeLabel.mas_left);
         make.right.mas_equalTo(self.mas_right).offset(0);
-        make.top.mas_equalTo(self.classTypeLabel.mas_bottom).offset(14);
-        make.height.mas_equalTo(@12);
+        if (YBIphone4) {
+            
+            make.top.mas_equalTo(self.classTypeLabel.mas_bottom).offset(14*JZRatio_0_8);
+            make.height.mas_equalTo(12 *JZRatio_0_8);
+        }else {
+            make.top.mas_equalTo(self.classTypeLabel.mas_bottom).offset(14);
+            make.height.mas_equalTo(@12);
+        }
+
     }];
 
 }

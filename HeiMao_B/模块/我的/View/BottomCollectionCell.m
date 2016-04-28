@@ -54,34 +54,46 @@
             make.centerX.mas_equalTo(self.mas_centerX);
             make.top.mas_equalTo(self.mas_top).offset(20 * JZRatio_1_1_5);
 
-//            if (_isNoShowLabel) {
-//                make.centerY.mas_equalTo(self.mas_centerY);
-//            }
 
         }];
         
         
-    }else {
+    }else if(YBIphone4){
        
+        [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.width.mas_equalTo(30 *JZRatio_0_8);
+            make.height.mas_equalTo(24 *JZRatio_0_8);
+            make.top.mas_equalTo(self.mas_top).offset(20*JZRatio_0_8);
+            make.centerX.mas_equalTo(self.mas_centerX);
+
+        }];
+        
+    }else {
         [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.width.mas_equalTo(@30);
             make.height.mas_equalTo(@24);
             make.top.mas_equalTo(self.mas_top).offset(20);
             make.centerX.mas_equalTo(self.mas_centerX);
-//            if (_isNoShowLabel) {
-//                make.centerY.mas_equalTo(self.mas_centerY);
-//            }
-  
+            
         }];
-        
     }
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.imgView.mas_bottom).offset(12);
         make.centerX.mas_equalTo(self.mas_centerX);
         make.width.mas_equalTo(self.frame.size.width);
-        make.height.mas_equalTo(@14);
+        if (YBIphone4) {
+            
+            make.height.mas_equalTo(14 *JZRatio_0_8);
+            make.top.mas_equalTo(self.imgView.mas_bottom).offset(12*JZRatio_0_8);
+        }else {
+            make.height.mas_equalTo(@14);
+            make.top.mas_equalTo(self.imgView.mas_bottom).offset(12);
+        }
+
+        
+        
     }];
     
     self.badegLabel.layer.masksToBounds = YES;

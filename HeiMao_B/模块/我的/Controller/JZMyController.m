@@ -162,6 +162,7 @@
         self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -k6PHeight, self.view.frame.size.width, k6PHeight) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%zd",[UserInfoModel defaultUserInfo].fcode]];
     }else if(YBIphone4) {
         self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -k4Height, self.view.frame.size.width, k4Height) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%zd",[UserInfoModel defaultUserInfo].fcode]];
+        
     }else {
         
         self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -kHeight, self.view.frame.size.width, kHeight) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%zd",[UserInfoModel defaultUserInfo].fcode]];
@@ -354,7 +355,7 @@
         if (YBIphone6Plus) {
             return CGSizeMake( w / 2, 88 * JZRatio_1_1_5);
         }else if(YBIphone4){
-            return CGSizeMake( w / 2, 88*0.9);
+            return CGSizeMake( w / 2, 88*JZRatio_0_8);
 
         }else {
             return CGSizeMake( w / 2, 88);
@@ -367,7 +368,7 @@
         if (YBIphone6Plus) {
             return CGSizeMake( w / 4, 88 * JZRatio_1_1_5);
         }else if(YBIphone4){
-            return CGSizeMake( w / 4, 88* 0.9);
+            return CGSizeMake( w / 4, 88* JZRatio_0_8);
 
         }else {
             return CGSizeMake( w / 4, 88);
