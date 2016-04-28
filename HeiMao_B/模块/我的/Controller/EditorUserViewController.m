@@ -138,7 +138,16 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 - (UILabel *)footerLabel{
     if (_footerLabel == nil) {
         _footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, 10, self.view.width - 16, 50)];
-        _footerLabel.font = [UIFont systemFontOfSize:12];
+        
+        if (YBIphone6Plus) {
+            
+            _footerLabel.font = [UIFont systemFontOfSize:12 *JZRatio_1_1_5];
+
+        }else {
+            
+            _footerLabel.font = [UIFont systemFontOfSize:12];
+
+        }
         _footerLabel.numberOfLines = 0;
         _footerLabel.textColor = JZ_FONTCOLOR_LIGHT;
     }
@@ -164,7 +173,16 @@ static NSString *const ktagArrChange = @"ktagArrChange";
 - (UILabel *)teachageLabel{
     if (_teachageLabel == nil) {
         _teachageLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, 44)];
-        _teachageLabel.font = [UIFont systemFontOfSize:14];
+        
+        if (YBIphone6Plus) {
+            
+            _teachageLabel.font = [UIFont systemFontOfSize:14 * JZRatio_1_1_5];
+
+        }else {
+            
+            _teachageLabel.font = [UIFont systemFontOfSize:14];
+
+        }
         _teachageLabel.textColor  = JZ_FONTCOLOR_DRAK;
         _teachageLabel.text = @"教龄";
     }
@@ -178,7 +196,14 @@ static NSString *const ktagArrChange = @"ktagArrChange";
         [_sureButton addTarget:self action:@selector(didClickSure:) forControlEvents:UIControlEventTouchUpInside];
         [_sureButton setTitleColor:JZ_BlueColor forState:UIControlStateNormal];
         [_sureButton setTitle:@"确定" forState:UIControlStateNormal];
-        _sureButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        
+        if (YBIphone6Plus) {
+            _sureButton.titleLabel.font = [UIFont systemFontOfSize:14 *JZRatio_1_1_5];
+
+        }else {
+            _sureButton.titleLabel.font = [UIFont systemFontOfSize:14];
+
+        }
         
     }
     return _sureButton;
@@ -400,6 +425,21 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     // Do any additional setup after loading the view.
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
     self.title = @"个人信息";
+    
+    if (YBIphone6Plus) {
+        
+        UIColor * color = [UIColor whiteColor];
+        UIFont *font = [UIFont systemFontOfSize:JZNavBarTitleFont];
+        
+        NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+        [dict setObject:color forKey:NSForegroundColorAttributeName];
+        [dict setObject:font forKey:NSFontAttributeName];
+        
+        self.navigationController.navigationBar.titleTextAttributes = dict;
+        
+    }
+    
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     //    if ([UIDevice jeSystemVersion] >= 7.0f) {
@@ -512,9 +552,25 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     
     
     if (0 == indexPath.section) {
-        return 80;
+        
+//        if (YBIphone6Plus) {
+//            
+//            return 80 * JZRatio_1_5;
+//        }else {
+            return 80;
+
+//        }
+        
     }
-    return 44;
+    
+//    if (YBIphone6Plus) {
+//        
+//        return 44 * JZRatio_1_5;
+//    }else {
+        return 44;
+        
+//    }
+  
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 10;
@@ -758,6 +814,7 @@ static NSString *const ktagArrChange = @"ktagArrChange";
             NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:2];
             [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 
+            
             
         }else {
             if(msg){

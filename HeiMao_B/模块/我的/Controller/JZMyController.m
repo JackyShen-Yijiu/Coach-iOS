@@ -22,6 +22,9 @@
 #import "ComingSoonController.h"
 
 #define kHeight 216
+
+#define k6PHeight 250
+
 @interface JZMyController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -62,12 +65,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
+    
+    
     [self.view addSubview:self.collectionView];
     
     [self initArray];
     [self initUI];
     [self initNationcenter];
     
+   
 }
 
 - (void)userLoaded
@@ -98,11 +104,27 @@
     self.myNavigationItem.rightBarButtonItems = nil;
     self.myNavigationItem.leftBarButtonItem = nil;
     self.myNavigationItem.title = [UserInfoModel defaultUserInfo].name;
-    CGRect backframe= CGRectMake(0, 0, 28, 28);
+   
+    
+    
     UIButton* backButton= [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame = backframe;
-    [backButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
-    [backButton  setImageEdgeInsets:UIEdgeInsetsMake(7, 14, 7, 0)];
+//    backButton.backgroundColor = [UIColor redColor];
+    
+    if (YBIphone6Plus) {
+        
+        backButton.frame = CGRectMake(0, 0, 14 * JZRatio_1_1_5, 14 *JZRatio_1_1_5);
+        [backButton setBackgroundImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
+        
+    }else {
+        
+        backButton.frame = CGRectMake(0, 0, 28, 28);
+        [backButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
+        [backButton  setImageEdgeInsets:UIEdgeInsetsMake(7, 14, 7, 0)];
+    }
+    
+    
+
+  
     [backButton addTarget:self action:@selector(dealGoBack:) forControlEvents:UIControlEventTouchUpInside];
     self.myNavigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 
@@ -128,11 +150,20 @@
     self.topDetailArray = @[classTypeStr,workTimeStr];
     
     self.bottomImgArray = @[@"rest",@"test",@"Information",@"set",@"add_tool"];
-    self.bottomTitleArray = @[@"休假",@"考试信息",@"资讯",@"设置",@""];
+    self.bottomTitleArray = @[@"休假",@"考试信息",@"资讯",@"设置",@"添加功能"];
 }
 - (void)initUI{
      __weak typeof(self) ws = self;
-    self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -kHeight, self.view.frame.size.width, kHeight) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%ld",[UserInfoModel defaultUserInfo].fcode]];
+    
+    
+    if (YBIphone6Plus) {
+        
+        self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -k6PHeight, self.view.frame.size.width, k6PHeight) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%ld",[UserInfoModel defaultUserInfo].fcode]];
+    }else {
+        self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -kHeight, self.view.frame.size.width, kHeight) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%ld",[UserInfoModel defaultUserInfo].fcode]];
+    }
+    
+    
     _headerView.tag = 201;
     self.headerView.signtureImageGas = ^{
         EditorUserViewController *editor = [[EditorUserViewController alloc] init];
@@ -145,13 +176,28 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
      CGPoint point = scrollView.contentOffset;
     NSLog(@"point%f",point.y);
-     if (point.y < -kHeight) {
-         CGRect rect = [self.collectionView viewWithTag:201].frame;
-         rect.origin.y = point.y;
-         rect.size.height = -point.y;
-         [self.collectionView viewWithTag:201].frame = rect;
-         
-     }
+
+    
+    if (YBIphone6Plus) {
+        if (point.y < -k6PHeight) {
+            CGRect rect = [self.collectionView viewWithTag:201].frame;
+            rect.origin.y = point.y;
+            rect.size.height = -point.y;
+            [self.collectionView viewWithTag:201].frame = rect;
+            
+        }
+        
+    }else {
+        if (point.y < -kHeight) {
+            CGRect rect = [self.collectionView viewWithTag:201].frame;
+            rect.origin.y = point.y;
+            rect.size.height = -point.y;
+            [self.collectionView viewWithTag:201].frame = rect;
+            
+        }
+    }
+    
+    
  }
 #pragma  mark ---- 头像点击进入编辑
 - (void)dealGoBack:(UIButton *)btn{
@@ -194,7 +240,7 @@
         cell.contentLabel.text = self.topDetailArray[indexPath.row];
         if (YBIphone6Plus) {
             if (0 == indexPath.section) {
-                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 10)];
+                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 6)];
                 view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
                 [cell addSubview:view];
             }
@@ -208,7 +254,10 @@
         BottomCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
         cell.badegLabel.hidden = YES;
         
+        
+        
         if (indexPath.row==2) {
+            
             if (self.newsBadgeStr && [self.newsBadgeStr length]!=0 && [self.newsBadgeStr integerValue]>0) {
                 cell.badegLabel.hidden = NO;
                 cell.badegLabel.text = [NSString stringWithFormat:@"%@",self.newsBadgeStr];
@@ -286,11 +335,26 @@
     
     if (0 == indexPath.section) {
         CGFloat w = self.view.frame.size.width - 1;
-        return CGSizeMake( w / 2, 88);
+        
+        
+        if (YBIphone6Plus) {
+            return CGSizeMake( w / 2, 88 * JZRatio_1_1_5);
+        }else {
+            return CGSizeMake( w / 2, 88);
+
+        }
+        
     } else if (1 == indexPath.section) {
         CGFloat w = self.view.frame.size.width - 3;
-        return CGSizeMake( w / 4, 88);
-    }
+        
+        if (YBIphone6Plus) {
+            return CGSizeMake( w / 4, 88 * JZRatio_1_1_5);
+        }else {
+            return CGSizeMake( w / 4, 88);
+
+        }
+        
+            }
     
     return CGSizeMake(0, 0);
     
@@ -437,7 +501,13 @@
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         _collectionView.alwaysBounceVertical = YES;
-        _collectionView.contentInset = UIEdgeInsetsMake(kHeight, 0, 0, 0);
+        if (YBIphone6Plus) {
+            _collectionView.contentInset = UIEdgeInsetsMake(k6PHeight, 0, 0, 0);
+
+        }else {
+            _collectionView.contentInset = UIEdgeInsetsMake(kHeight, 0, 0, 0);
+
+        }
     }
     return _collectionView;
 }

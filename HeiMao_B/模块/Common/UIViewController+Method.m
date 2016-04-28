@@ -110,7 +110,12 @@
     [[[self myNavController] navigationBar] setBarTintColor:JZ_BlueColor];
     NSDictionary *textAttributes1 = @{NSFontAttributeName: [UIFont systemFontOfSize:16.f],
                                       NSForegroundColorAttributeName: [UIColor whiteColor]
-                                      };    
+                                      };
+    if (YBIphone6Plus) {
+        textAttributes1 = @{NSFontAttributeName: [UIFont systemFontOfSize:16.f*JZRatio_1_1_5],
+                            NSForegroundColorAttributeName: [UIColor whiteColor]
+                            };
+    }
     [[[self myNavController] navigationBar]  setTitleTextAttributes:textAttributes1];
     
 }

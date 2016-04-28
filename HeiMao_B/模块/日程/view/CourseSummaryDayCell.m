@@ -56,7 +56,14 @@
 
     // 开始时间
     self.coureBeginTime = [self getOnePropertyLabel];
-    self.coureBeginTime.font = [UIFont systemFontOfSize:14];
+    
+    if (YBIphone6Plus) {
+        self.coureBeginTime.font = [UIFont systemFontOfSize:14 *JZRatio_1_1_5];
+    }else {
+        self.coureBeginTime.font = [UIFont systemFontOfSize:14];
+
+    }
+    
     self.coureBeginTime.textColor = JZ_BlueColor;
     self.coureBeginTime.textAlignment = NSTextAlignmentCenter;
     self.coureBeginTime.text = @"开始开始";
@@ -64,7 +71,12 @@
 
     // 结束时间
     self.coureEndTime = [self getOnePropertyLabel];
-    self.coureEndTime.font = [UIFont systemFontOfSize:12];
+    if (YBIphone6Plus) {
+        self.coureEndTime.font = [UIFont systemFontOfSize:12 *JZRatio_1_1_5];
+    }else {
+        self.coureEndTime.font = [UIFont systemFontOfSize:12];
+
+    }
     self.coureEndTime.textColor = JZ_BlueColor;
     self.coureEndTime.textAlignment = NSTextAlignmentCenter;
     self.coureEndTime.text = @"结束结束";
@@ -72,7 +84,14 @@
 
     // 已约、剩余名额
     self.coureTopCountLabel = [self getOnePropertyLabel];
-    self.coureTopCountLabel.font = [UIFont systemFontOfSize:14];
+    if (YBIphone6Plus) {
+        
+        self.coureTopCountLabel.font = [UIFont systemFontOfSize:14*JZRatio_1_1_5];
+
+    }else {
+        self.coureTopCountLabel.font = [UIFont systemFontOfSize:14];
+
+    }
     self.coureTopCountLabel.textColor = JZ_BlueColor;
     self.coureTopCountLabel.textAlignment = NSTextAlignmentLeft;
     self.coureTopCountLabel.text = @"已约2人     剩余名额3人";

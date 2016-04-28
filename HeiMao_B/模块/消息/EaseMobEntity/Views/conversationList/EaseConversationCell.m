@@ -34,11 +34,20 @@ CGFloat const EaseConversationCellPadding = 10;
     // UIAppearance Proxy Defaults
     EaseConversationCell *cell = [self appearance];
     cell.titleLabelColor = [UIColor blackColor];
-    cell.titleLabelFont = [UIFont systemFontOfSize:17];
+    if (YBIphone6Plus) {
+        
+        cell.titleLabelFont = [UIFont systemFontOfSize:17*JZRatio_1_1_5];
+        cell.detailLabelFont = [UIFont systemFontOfSize:15*JZRatio_1_1_5];
+        cell.timeLabelFont = [UIFont systemFontOfSize:13*JZRatio_1_1_5];
+
+    }else {
+        cell.titleLabelFont = [UIFont systemFontOfSize:17];
+        cell.detailLabelFont = [UIFont systemFontOfSize:15];
+        cell.timeLabelFont = [UIFont systemFontOfSize:13];
+
+    }
     cell.detailLabelColor = [UIColor lightGrayColor];
-    cell.detailLabelFont = [UIFont systemFontOfSize:15];
-    cell.timeLabelColor = [UIColor blackColor];
-    cell.timeLabelFont = [UIFont systemFontOfSize:13];
+    cell.timeLabelColor = [UIColor lightGrayColor];
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style
@@ -58,8 +67,6 @@ CGFloat const EaseConversationCellPadding = 10;
 - (void)_setupSubview
 {
     _avatarView = [[EaseImageView alloc] init];
-//    _avatarView.layer.masksToBounds = YES;
-//    _avatarView.layer.cornerRadius = 20;
     _avatarView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_avatarView];
     
@@ -75,14 +82,31 @@ CGFloat const EaseConversationCellPadding = 10;
     _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _titleLabel.numberOfLines = 1;
     _titleLabel.backgroundColor = [UIColor clearColor];
-    _titleLabel.font = [UIFont systemFontOfSize:14];
+    
+    if (YBIphone6Plus) {
+        
+        _titleLabel.font = [UIFont systemFontOfSize:14 * JZRatio_1_1_5];
+
+    }else {
+        _titleLabel.font = [UIFont systemFontOfSize:14];
+
+        
+    }
+    
     _titleLabel.textColor = JZ_FONTCOLOR_DRAK;
     [self.contentView addSubview:_titleLabel];
     
     _detailLabel = [[UILabel alloc] init];
     _detailLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _detailLabel.backgroundColor = [UIColor clearColor];
-    _detailLabel.font = [UIFont systemFontOfSize:12];
+    if (YBIphone6Plus) {
+        _detailLabel.font = [UIFont systemFontOfSize:12 * JZRatio_1_1_5];
+
+    }else {
+        _detailLabel.font = [UIFont systemFontOfSize:12];
+
+    }
+    
     _detailLabel.textColor = JZ_FONTCOLOR_LIGHT;
     [self.contentView addSubview:_detailLabel];
     
@@ -167,6 +191,8 @@ CGFloat const EaseConversationCellPadding = 10;
     self.timeLabel.text = _topModel.time;
     
     self.avatarView.image = [UIImage imageNamed:_topModel.avatarPic];
+    self.avatarView.layer.masksToBounds = YES;
+    self.avatarView.layer.cornerRadius = self.avatarView.width/2;
     
     if (_topModel.badgeStr && [_topModel.badgeStr length]!=0) {
         _avatarView.showBadge = NO;
@@ -269,7 +295,14 @@ CGFloat const EaseConversationCellPadding = 10;
 
 + (CGFloat)cellHeightWithModel:(id)model
 {
+    if (YBIphone6Plus) {
+        return EaseConversationCellMinHeight6P;
+        
+    }else{
     return EaseConversationCellMinHeight;
+    }
+    
+    return 0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
