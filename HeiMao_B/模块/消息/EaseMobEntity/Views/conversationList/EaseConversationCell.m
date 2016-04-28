@@ -67,8 +67,6 @@ CGFloat const EaseConversationCellPadding = 10;
 - (void)_setupSubview
 {
     _avatarView = [[EaseImageView alloc] init];
-//    _avatarView.layer.masksToBounds = YES;
-//    _avatarView.layer.cornerRadius = 20;
     _avatarView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_avatarView];
     
@@ -193,6 +191,8 @@ CGFloat const EaseConversationCellPadding = 10;
     self.timeLabel.text = _topModel.time;
     
     self.avatarView.image = [UIImage imageNamed:_topModel.avatarPic];
+    self.avatarView.layer.masksToBounds = YES;
+    self.avatarView.layer.cornerRadius = self.avatarView.width/2;
     
     if (_topModel.badgeStr && [_topModel.badgeStr length]!=0) {
         _avatarView.showBadge = NO;

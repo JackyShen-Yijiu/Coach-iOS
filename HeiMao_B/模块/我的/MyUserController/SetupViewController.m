@@ -138,7 +138,7 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+
     self.title = @"设置";
     self.automaticallyAdjustsScrollViewInsets = NO;
     if ([UIDevice jeSystemVersion] >= 7.0f) {
@@ -163,7 +163,8 @@ static NSString *const kSettingUrl = @"userinfo/personalsetting";
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *view = [[UIView alloc] init];
-    view.backgroundColor = RGBColor(245, 247, 250);
+//    view.backgroundColor = RGBColor(245, 247, 250);
+    view.backgroundColor = RGB_Color(232, 232, 237);
     return view;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
