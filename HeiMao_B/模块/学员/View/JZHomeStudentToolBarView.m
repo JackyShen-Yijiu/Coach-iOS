@@ -218,7 +218,14 @@
         CGFloat titleW = 2 * 12;
         [btn setImage:[UIImage imageNamed:imgNormalArray] forState:UIControlStateNormal];
         [btn setImageEdgeInsets:UIEdgeInsetsMake(0, (size.width - imgW) / 2, 26, (size.width - imgW) / 2)];
+        
+        if (YBIphone6Plus) {
+            
+            [btn setTitleEdgeInsets:UIEdgeInsetsMake(26, (size.width - titleW) / 2 - 25, 0, 25)];
+
+        }else {
         [btn setTitleEdgeInsets:UIEdgeInsetsMake(26, (size.width - titleW) / 2 - 20, 0, 20)];
+        }
     }
 
     //tag值

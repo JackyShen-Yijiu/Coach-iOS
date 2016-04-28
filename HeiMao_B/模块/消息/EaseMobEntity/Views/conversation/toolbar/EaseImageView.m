@@ -70,7 +70,15 @@
         
         _imageView = [[UIImageView alloc] init];
         _imageView.translatesAutoresizingMaskIntoConstraints = NO;
-        _imageView.layer.cornerRadius = 20;
+        
+        if (YBIphone6Plus) {
+            _imageView.layer.cornerRadius = 20 *JZRatio_1_1_5;
+
+        }else {
+            _imageView.layer.cornerRadius = 20;
+
+        }
+        
         _imageView.clipsToBounds = YES;
         _imageView.backgroundColor = [UIColor grayColor];
         [self addSubview:_imageView];
@@ -82,7 +90,15 @@
         _badgeView.backgroundColor = _badgeBackgroudColor;
         _badgeView.font = _badgeFont;
         _badgeView.hidden = YES;
-        _badgeView.layer.cornerRadius = _badgeSize / 2;
+        
+        if (YBIphone6Plus) {
+            _badgeView.layer.cornerRadius = _badgeSize / 2 *JZRatio_1_1_5;
+
+            
+        }else {
+            _badgeView.layer.cornerRadius = _badgeSize / 2;
+
+        }
         _badgeView.clipsToBounds = YES;
         [self addSubview:_badgeView];
         
@@ -170,6 +186,7 @@
     if (_imageCornerRadius != imageCornerRadius) {
         _imageCornerRadius = imageCornerRadius;
         self.imageView.layer.cornerRadius = _imageCornerRadius;
+        
     }
 }
 

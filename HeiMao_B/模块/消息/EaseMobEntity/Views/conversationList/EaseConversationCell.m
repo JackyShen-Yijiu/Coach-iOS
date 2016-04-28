@@ -191,8 +191,6 @@ CGFloat const EaseConversationCellPadding = 10;
     self.timeLabel.text = _topModel.time;
     
     self.avatarView.image = [UIImage imageNamed:_topModel.avatarPic];
-    self.avatarView.layer.masksToBounds = YES;
-    self.avatarView.layer.cornerRadius = self.avatarView.width/2;
     
     if (_topModel.badgeStr && [_topModel.badgeStr length]!=0) {
         _avatarView.showBadge = NO;

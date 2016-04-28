@@ -423,10 +423,21 @@ static NSString *const kuserType = @"usertype";
         height = 235;
     }
     [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view.mas_top);
-        make.height.mas_equalTo(height);
-        make.left.mas_equalTo(0);
-        make.right.mas_equalTo(0);
+        
+        if (YBIphone4) {
+            make.top.mas_equalTo(self.view.mas_top);
+            make.height.mas_equalTo(height * JZRatio_0_8);
+            make.left.mas_equalTo(0);
+            make.right.mas_equalTo(0);
+            
+        }else {
+            make.top.mas_equalTo(self.view.mas_top);
+            make.height.mas_equalTo(height);
+            make.left.mas_equalTo(0);
+            make.right.mas_equalTo(0);
+        }
+        
+        
     }];
     
     [self.backGroundView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -439,29 +450,54 @@ static NSString *const kuserType = @"usertype";
     [self.gainNum mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(@0);
         make.top.mas_equalTo(@0);
-        make.height.mas_equalTo(@45);
-        make.width.mas_equalTo(@75);
+        if (YBIphone4) {
+            make.height.mas_equalTo(45*JZRatio_0_8);
+            make.width.mas_equalTo(75*JZRatio_0_8);
+            
+        }else {
+            make.height.mas_equalTo(@45);
+            make.width.mas_equalTo(@75);
+        }
+ 
     }];
     
     [self.phoneNumTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(@0);
         make.right.mas_equalTo(self.gainNum.mas_left).offset(-10);
         make.top.mas_equalTo(@0);
-        make.height.mas_equalTo(@45);
+        if (YBIphone4) {
+            
+            make.height.mas_equalTo(45 * JZRatio_0_8);
+
+        }else {
+            make.height.mas_equalTo(@45);
+
+        }
     }];
 
     [self.passwordTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(@0);
         make.right.mas_equalTo(@0);
         make.top.mas_equalTo(self.phoneNumTextField.mas_bottom).with.offset(15);
-        make.height.mas_equalTo(@45);
+        if (YBIphone4) {
+            make.height.mas_equalTo(45 * JZRatio_0_8);
+        }else {
+            make.height.mas_equalTo(@45);
+
+        }
     }];
     
     [self.messageImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.backGroundView.mas_left);
         make.centerY.mas_equalTo(self.messageLabel.mas_centerY);
-        make.width.mas_equalTo(16);
-        make.height.mas_equalTo(16);
+        if (YBIphone4) {
+            make.width.mas_equalTo(16*YBIphone4);
+            make.height.mas_equalTo(16*YBIphone4);
+        }else {
+            make.width.mas_equalTo(16);
+            make.height.mas_equalTo(16);
+        }
+        
     }];
     
     [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -474,7 +510,13 @@ static NSString *const kuserType = @"usertype";
         make.left.mas_equalTo(self.view.mas_left).with.offset(20);
         make.right.mas_equalTo(self.view.mas_right).with.offset(-20);
         make.top.mas_equalTo(self.messageLabel.mas_bottom).with.offset(16);
-        make.height.mas_equalTo(@44);
+        
+        if (YBIphone4) {
+            make.height.mas_equalTo(44 * JZRatio_0_8);
+        }else {
+            make.height.mas_equalTo(@44);
+
+        }
     }];
     
     
@@ -482,7 +524,12 @@ static NSString *const kuserType = @"usertype";
         make.left.mas_equalTo(30);
         make.bottom.mas_equalTo(-20);
         make.right.mas_equalTo(-30);
-        make.height.mas_equalTo(13);
+        if (YBIphone4) {
+            make.height.mas_equalTo(13 *JZRatio_0_8);
+        }else {
+            make.height.mas_equalTo(13);
+
+        }
     }];
     
 }

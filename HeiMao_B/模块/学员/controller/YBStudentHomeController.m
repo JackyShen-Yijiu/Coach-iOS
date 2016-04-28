@@ -588,6 +588,7 @@
     if (_isshowSegment) {
         _toolBarView.frame = CGRectMake(0, CGRectGetMaxY(self.segment.frame) + 14, self.view.width, 52);
     }
+//    _toolBarView.titleNormalColor = [UIColor redColor];
         _toolBarView.titleNormalColor = JZ_FONTCOLOR_LIGHT;
         _toolBarView.titleSelectColor = JZ_MAIN_COLOR;
         _toolBarView.followBarColor = JZ_MAIN_COLOR;
@@ -604,7 +605,7 @@
         }];
     
         if (ScreenWidthIs_6Plus_OrWider) {
-            _toolBarView.titleFont = [UIFont systemFontOfSize:14*YBRatio];
+            _toolBarView.titleFont = [UIFont systemFontOfSize:14];
         }
     return _toolBarView;
 }

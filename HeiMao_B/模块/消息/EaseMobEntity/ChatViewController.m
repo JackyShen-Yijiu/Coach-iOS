@@ -104,16 +104,36 @@
         self.myNavigationItem.title = self.studentModel.userName;
     }
     
-    //单聊
-    if (self.conversation.conversationType == eConversationTypeChat) {
-
-        
-        UIButton *clearButton = [self getBarButtonWithTitle:@""];
-        [clearButton setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
-        [clearButton addTarget:self action:@selector(deleteAllMessages:) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithCustomView:clearButton];
-        self.myNavigationItem.rightBarButtonItems = @[[self barSpaingItem],item];
-    }
+//    //单聊
+//    if (self.conversation.conversationType == eConversationTypeChat) {
+//
+//        
+//        UIButton *clearButton = [self getBarButtonWithTitle:@""];
+//        
+//        
+//        [clearButton addTarget:self action:@selector(deleteAllMessages:) forControlEvents:UIControlEventTouchUpInside];
+//        [clearButton setBackgroundImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+//
+//        if (YBIphone6Plus) {
+//            
+//            clearButton.frame = CGRectMake(0, 0, 14 * JZRatio_1_1_5, 14 *JZRatio_1_1_5);
+//            
+//        }else {
+//            
+//            clearButton.frame = CGRectMake(0, 0, 28, 28);
+//            [clearButton  setImageEdgeInsets:UIEdgeInsetsMake(7, 14, 7, 0)];
+//        }
+//        
+//        UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithCustomView:clearButton];
+//        
+//        self.myNavigationItem.rightBarButtonItems = @[[self barSpaingItem],item];
+//        
+//        
+//        
+//
+//
+//
+//    }
 }
 
 #pragma mark - UIAlertViewDelegate
