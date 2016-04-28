@@ -47,7 +47,7 @@ CGFloat const EaseConversationCellPadding = 10;
 
     }
     cell.detailLabelColor = [UIColor lightGrayColor];
-    cell.timeLabelColor = [UIColor blackColor];
+    cell.timeLabelColor = [UIColor lightGrayColor];
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style

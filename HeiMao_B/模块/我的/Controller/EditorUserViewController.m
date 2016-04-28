@@ -553,23 +553,23 @@ static NSString *const ktagArrChange = @"ktagArrChange";
     
     if (0 == indexPath.section) {
         
-        if (YBIphone6Plus) {
-            
-            return 80 * JZRatio_1_5;
-        }else {
+//        if (YBIphone6Plus) {
+//            
+//            return 80 * JZRatio_1_5;
+//        }else {
             return 80;
 
-        }
+//        }
         
     }
     
-    if (YBIphone6Plus) {
-        
-        return 44 * JZRatio_1_5;
-    }else {
+//    if (YBIphone6Plus) {
+//        
+//        return 44 * JZRatio_1_5;
+//    }else {
         return 44;
         
-    }
+//    }
   
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -814,6 +814,7 @@ static NSString *const ktagArrChange = @"ktagArrChange";
             NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:2];
             [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 
+            
             
         }else {
             if(msg){
