@@ -85,8 +85,16 @@
         }
     }];
     [self.schoolLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.yLabel.mas_top).offset(-16);
         make.centerX.mas_equalTo(self.bgView.mas_centerX);
+
+        if (YBIphone4) {
+            
+            make.bottom.mas_equalTo(self.yLabel.mas_top).offset(-16 * JZRatio_0_8);
+
+        }else {
+            make.bottom.mas_equalTo(self.yLabel.mas_top).offset(-16);
+
+        }
         
         if (YBIphone6Plus) {
             

@@ -25,6 +25,8 @@
 
 #define k6PHeight 250
 
+#define k4Height 108
+
 @interface JZMyController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -116,7 +118,6 @@
         [backButton setBackgroundImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
         
     }else {
-        
         backButton.frame = CGRectMake(0, 0, 28, 28);
         [backButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
         [backButton  setImageEdgeInsets:UIEdgeInsetsMake(7, 14, 7, 0)];
@@ -158,9 +159,12 @@
     
     if (YBIphone6Plus) {
         
-        self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -k6PHeight, self.view.frame.size.width, k6PHeight) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%ld",[UserInfoModel defaultUserInfo].fcode]];
+        self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -k6PHeight, self.view.frame.size.width, k6PHeight) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%zd",[UserInfoModel defaultUserInfo].fcode]];
+    }else if(YBIphone4) {
+        self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -k4Height, self.view.frame.size.width, k4Height) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%zd",[UserInfoModel defaultUserInfo].fcode]];
     }else {
-        self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -kHeight, self.view.frame.size.width, kHeight) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%ld",[UserInfoModel defaultUserInfo].fcode]];
+        
+        self.headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, -kHeight, self.view.frame.size.width, kHeight) withUserPortrait:[UserInfoModel defaultUserInfo].portrait withUserPhoneNum:[UserInfoModel defaultUserInfo].driveschoolinfo[@"name"] withYNum:[NSString stringWithFormat:@"%zd",[UserInfoModel defaultUserInfo].fcode]];
     }
     
     
@@ -187,6 +191,15 @@
             
         }
         
+    }else if (YBIphone4) {
+        if (point.y < -k4Height) {
+            CGRect rect = [self.collectionView viewWithTag:201].frame;
+            rect.origin.y = point.y;
+            rect.size.height = -point.y;
+            [self.collectionView viewWithTag:201].frame = rect;
+            
+        }
+
     }else {
         if (point.y < -kHeight) {
             CGRect rect = [self.collectionView viewWithTag:201].frame;
@@ -195,6 +208,7 @@
             [self.collectionView viewWithTag:201].frame = rect;
             
         }
+ 
     }
     
     
@@ -339,9 +353,12 @@
         
         if (YBIphone6Plus) {
             return CGSizeMake( w / 2, 88 * JZRatio_1_1_5);
+        }else if(YBIphone4){
+            return CGSizeMake( w / 2, 88*0.9);
+
         }else {
             return CGSizeMake( w / 2, 88);
-
+ 
         }
         
     } else if (1 == indexPath.section) {
@@ -349,6 +366,9 @@
         
         if (YBIphone6Plus) {
             return CGSizeMake( w / 4, 88 * JZRatio_1_1_5);
+        }else if(YBIphone4){
+            return CGSizeMake( w / 4, 88* 0.9);
+
         }else {
             return CGSizeMake( w / 4, 88);
 
@@ -398,7 +418,7 @@
     NSArray * weekArray = [[UserInfoModel defaultUserInfo] workweek];
     
     NSLog(@"weekArray:%@",weekArray);
-    NSLog(@"weekArray.count:%lu",weekArray.count);
+//    NSLog(@"weekArray.count:%lu",weekArray.count);
     
     BOOL isInclude = [weekArray containsObject:@(7)];
     NSLog(@"isInclude:%d",isInclude);
@@ -506,7 +526,7 @@
 
         }else {
             _collectionView.contentInset = UIEdgeInsetsMake(kHeight, 0, 0, 0);
-
+  
         }
     }
     return _collectionView;
