@@ -237,7 +237,13 @@
         return CGSizeMake(self.view.frame.size.width, 1);
     }
     if (1 == section) {
-        return CGSizeMake(self.view.frame.size.width, 10);
+        if (YBIphone4) {
+            return CGSizeMake(self.view.frame.size.width, 5);
+
+        }else {
+            return CGSizeMake(self.view.frame.size.width, 10);
+
+        }
     }
     
 
