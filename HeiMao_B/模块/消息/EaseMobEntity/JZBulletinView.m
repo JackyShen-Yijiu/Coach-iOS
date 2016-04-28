@@ -44,6 +44,19 @@ static NSString *JZBulletinCellID = @"JZBulletinCellID";
     
 }
 
+-(void)initRefreshView {
+    
+    
+    self.refreshFooter = [[YiRefreshFooter alloc] init];
+    self.refreshFooter.scrollView = self;
+    [self.refreshFooter footer];
+    
+
+    self.refreshFooter.beginRefreshingBlock=^(){
+        
+    };
+}
+
 
 #pragma mark - 数据源
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
