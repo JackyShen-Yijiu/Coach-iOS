@@ -93,20 +93,22 @@
 -(void)setModelGrop:(JZExamSummaryInfoData *)modelGrop {
     _modelGrop = modelGrop;
     
-    NSString *dateYear = [_modelGrop.examdate substringWithRange:NSMakeRange(0, 4)];
+//    NSString *dateYear = [_modelGrop.examdate substringWithRange:NSMakeRange(0, 4)];
     //日期
-    if (_modelGrop.examdate.length == 9) {
-        
-        NSString *dateMonth = [_modelGrop.examdate substringWithRange:NSMakeRange(5, 1)];
-        NSString *dateDay = [_modelGrop.examdate substringWithRange:NSMakeRange(7, 2)];
-        self.examDataLabel.text = [NSString stringWithFormat:@"%@年%@月%@日",dateYear,dateMonth,dateDay];
-    }else {
-        
-        NSString *dateMonth = [_modelGrop.examdate substringWithRange:NSMakeRange(5, 2)];
-        NSString *dateDay = [_modelGrop.examdate substringWithRange:NSMakeRange(8, 2)];
-        self.examDataLabel.text = [NSString stringWithFormat:@"%@年%@月%@日",dateYear,dateMonth,dateDay];
-        
-    }
+//    if (_modelGrop.examdate.length == 9) {
+//        
+//        NSString *dateMonth = [_modelGrop.examdate substringWithRange:NSMakeRange(5, 1)];
+//        NSString *dateDay = [_modelGrop.examdate substringWithRange:NSMakeRange(7, 2)];
+//        self.examDataLabel.text = [NSString stringWithFormat:@"%@年%@月%@日",dateYear,dateMonth,dateDay];
+//    }else {
+//        
+//        NSString *dateMonth = [_modelGrop.examdate substringWithRange:NSMakeRange(5, 2)];
+//        NSString *dateDay = [_modelGrop.examdate substringWithRange:NSMakeRange(8, 2)];
+//        self.examDataLabel.text = [NSString stringWithFormat:@"%@年%@月%@日",dateYear,dateMonth,dateDay];
+//        
+//    }
+    
+    self.examDataLabel.text = [self getYearLocalDateFormateUTCDate:_modelGrop.examdate];
 
     //科目
     if ([_modelGrop.subject isEqualToString:@"1"]) {
@@ -168,7 +170,19 @@
 
     [super layoutSubviews];
 }
-
+- (NSString *)getYearLocalDateFormateUTCDate:(NSString *)utcDate {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //输入格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
+    [dateFormatter setTimeZone:localTimeZone];
+    
+    NSDate *dateFormatted = [dateFormatter dateFromString:utcDate];
+    //输出格式
+    [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
+    NSString *dateString = [dateFormatter stringFromDate:dateFormatted];
+    return dateString;
+}
 
 
 @end
