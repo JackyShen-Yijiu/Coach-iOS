@@ -47,6 +47,21 @@ static NSString *kGroupName = @"GroupName";
     self.view.backgroundColor = JZ_BACKGROUNDCOLOR_COLOR;
 
     [self registerNotifications];
+    
+    if (YBIphone6Plus) {
+        
+        UIColor * color = [UIColor whiteColor];
+        UIFont *font = [UIFont systemFontOfSize:JZNavBarTitleFont];
+        
+        NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+        [dict setObject:color forKey:NSForegroundColorAttributeName];
+        [dict setObject:font forKey:NSFontAttributeName];
+        
+        self.navigationController.navigationBar.titleTextAttributes = dict;
+        
+    }
+    
+    
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoaded) name:KNOTIFICATION_USERLOADED object:nil];
     
@@ -130,7 +145,6 @@ static NSString *kGroupName = @"GroupName";
 {
     NSString *CellIdentifier = [EaseConversationCell cellIdentifierWithModel:nil];
     EaseConversationCell *cell = (EaseConversationCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (cell == nil) {
         cell = [[EaseConversationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
@@ -139,11 +153,15 @@ static NSString *kGroupName = @"GroupName";
     
     if (indexPath.section==0) {
      
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
         EaseConversationModel *topModal = self.dataArray[indexPath.row];
         cell.topModel = topModal;
         
     }else{
     
+        cell.accessoryType = UITableViewCellAccessoryNone;
+
         id<IConversationModel> model = [self.dataArray objectAtIndex:indexPath.row+2];
         NSLog(@"model.type:%@",model.type);
         

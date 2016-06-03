@@ -123,6 +123,19 @@ static NSString *const kchangeWorkTime = @"userinfo/coachsetworktime";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"工作时间";
+    if (YBIphone6Plus) {
+        
+        UIColor * color = [UIColor whiteColor];
+        UIFont *font = [UIFont systemFontOfSize:JZNavBarTitleFont];
+        
+        NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+        [dict setObject:color forKey:NSForegroundColorAttributeName];
+        [dict setObject:font forKey:NSFontAttributeName];
+        
+        self.navigationController.navigationBar.titleTextAttributes = dict;
+        
+    }
+    
     self.view.backgroundColor = RGB_Color(245, 247, 250);
     self.automaticallyAdjustsScrollViewInsets = NO;
     if ([UIDevice jeSystemVersion] >= 7.0f) {

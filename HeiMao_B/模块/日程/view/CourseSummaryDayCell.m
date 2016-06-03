@@ -56,7 +56,14 @@
 
     // 开始时间
     self.coureBeginTime = [self getOnePropertyLabel];
-    self.coureBeginTime.font = [UIFont systemFontOfSize:14];
+    
+    if (YBIphone6Plus) {
+        self.coureBeginTime.font = [UIFont systemFontOfSize:14 *JZRatio_1_1_5];
+    }else {
+        self.coureBeginTime.font = [UIFont systemFontOfSize:14];
+
+    }
+    
     self.coureBeginTime.textColor = JZ_BlueColor;
     self.coureBeginTime.textAlignment = NSTextAlignmentCenter;
     self.coureBeginTime.text = @"开始开始";
@@ -64,7 +71,12 @@
 
     // 结束时间
     self.coureEndTime = [self getOnePropertyLabel];
-    self.coureEndTime.font = [UIFont systemFontOfSize:12];
+    if (YBIphone6Plus) {
+        self.coureEndTime.font = [UIFont systemFontOfSize:12 *JZRatio_1_1_5];
+    }else {
+        self.coureEndTime.font = [UIFont systemFontOfSize:12];
+
+    }
     self.coureEndTime.textColor = JZ_BlueColor;
     self.coureEndTime.textAlignment = NSTextAlignmentCenter;
     self.coureEndTime.text = @"结束结束";
@@ -72,7 +84,14 @@
 
     // 已约、剩余名额
     self.coureTopCountLabel = [self getOnePropertyLabel];
-    self.coureTopCountLabel.font = [UIFont systemFontOfSize:14];
+    if (YBIphone6Plus) {
+        
+        self.coureTopCountLabel.font = [UIFont systemFontOfSize:14*JZRatio_1_1_5];
+
+    }else {
+        self.coureTopCountLabel.font = [UIFont systemFontOfSize:14];
+
+    }
     self.coureTopCountLabel.textColor = JZ_BlueColor;
     self.coureTopCountLabel.textAlignment = NSTextAlignmentLeft;
     self.coureTopCountLabel.text = @"已约2人     剩余名额3人";
@@ -163,26 +182,27 @@
     NSInteger rightStr;
     
     if (compareDataNum==0) {// 当前
-//        self.coureleftStateImgView.image = [UIImage imageNamed:@"JZCoursenode_now"];
+        
+        self.coureleftStateImgView.image = [UIImage imageNamed:@"JZCoursenode_now"];
 //        // 已约、剩余名额
 //        leftStr = _model.selectedstudentcount;
 //        rightStr = _model.coursestudentcount - _model.selectedstudentcount;
 //        self.coureTopCountLabel.text = [NSString stringWithFormat:@"已约%ld     剩余名额%ld",(long)leftStr,(long)rightStr];
-//        self.coureTopCountLabel.textColor = JZ_BlueColor;
-//        self.coureleftTopDelive.backgroundColor = JZ_BlueColor;
-//        self.coureBeginTime.textColor = JZ_BlueColor;
-//        self.coureEndTime.textColor = JZ_BlueColor;
-//        
-//        self.contentView.backgroundColor = RGB_Color(255, 255, 255);
+        self.coureTopCountLabel.textColor = JZ_BlueColor;
+        self.coureleftTopDelive.backgroundColor = JZ_BlueColor;
+        self.coureBeginTime.textColor = JZ_BlueColor;
+        self.coureEndTime.textColor = JZ_BlueColor;
+//
+        self.contentView.backgroundColor = RGB_Color(255, 255, 255);
 //        self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
 //        self.contentView.layer.shadowOffset = CGSizeMake(0, 2);
 //        self.contentView.layer.shadowOpacity = 0.036;
 //        self.contentView.layer.shadowRadius = 2;
 //        self.bottomLine.hidden = YES;
        
-        self.coureleftStateImgView.image = [UIImage imageNamed:@"JZCoursenode_past"];
+//        self.coureleftStateImgView.image = [UIImage imageNamed:@"JZCoursenode_past"];
         
-        self.contentView.backgroundColor = RGB_Color(243, 243, 246);
+//        self.contentView.backgroundColor = RGB_Color(243, 243, 246);
         self.contentView.layer.shadowColor = [UIColor clearColor].CGColor;
         self.contentView.layer.shadowOffset = CGSizeMake(0, 0);
         self.contentView.layer.shadowOpacity = 0;
@@ -192,10 +212,10 @@
         leftStr = _model.signinstudentcount;
         rightStr = _model.coursestudentcount - _model.signinstudentcount;
         self.coureTopCountLabel.text = [NSString stringWithFormat:@"已学%ld     漏课%ld",(long)leftStr,(long)rightStr];
-        self.coureTopCountLabel.textColor = [UIColor lightGrayColor];
-        self.coureleftTopDelive.backgroundColor = [UIColor lightGrayColor];
-        self.coureBeginTime.textColor = [UIColor lightGrayColor];
-        self.coureEndTime.textColor = [UIColor lightGrayColor];
+//        self.coureTopCountLabel.textColor = [UIColor lightGrayColor];
+//        self.coureleftTopDelive.backgroundColor = [UIColor lightGrayColor];
+//        self.coureBeginTime.textColor = [UIColor lightGrayColor];
+//        self.coureEndTime.textColor = [UIColor lightGrayColor];
         self.bottomLine.hidden = NO;
         
     }else if (compareDataNum==1){// 大于当前日期

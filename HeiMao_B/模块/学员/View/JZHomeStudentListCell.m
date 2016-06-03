@@ -58,8 +58,16 @@
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView.mas_top).offset(25);
         make.left.mas_equalTo(self.contentView.mas_left).offset(16);
-        make.height.mas_equalTo(@48);
-        make.width.mas_equalTo(@48);
+        
+        if (YBIphone6Plus) {
+            make.height.mas_equalTo(48 *JZRatio_1_1_5);
+            make.width.mas_equalTo(48 *JZRatio_1_1_5);
+        }else {
+            
+            make.height.mas_equalTo(@48);
+            make.width.mas_equalTo(@48);
+        }
+      
         
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -79,16 +87,31 @@
     [self.phoneButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
         make.right.mas_equalTo(self.contentView.mas_right).offset(-16);
-        make.height.mas_equalTo(@64);
-         make.width.mas_equalTo(@32);
+        if (YBIphone6Plus) {
+            
+            make.height.mas_equalTo(64*JZRatio_1_1_5);
+            make.width.mas_equalTo(32*JZRatio_1_1_5);
+        }else {
+            make.height.mas_equalTo(@64);
+            make.width.mas_equalTo(@32);
+        }
+
         
         
     }];
     [self.messageButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
         make.right.mas_equalTo(self.phoneButton.mas_left).offset(0);
-        make.height.mas_equalTo(@32);
-        make.width.mas_equalTo(@32);
+        
+        if (YBIphone6Plus) {
+            
+            make.height.mas_equalTo(32 *JZRatio_1_1_5);
+            make.width.mas_equalTo(32*JZRatio_1_1_5);
+        }else {
+            make.height.mas_equalTo(@32);
+            make.width.mas_equalTo(@32);
+        }
+
         
         
     }];
@@ -130,7 +153,17 @@
         _iconImageView.backgroundColor = [UIColor clearColor];
         _iconImageView.image = [UIImage imageNamed:@"JZCoursenull_student"];
         _iconImageView.layer.masksToBounds = YES;
-        _iconImageView.layer.cornerRadius = 24;
+        
+        if (YBIphone6Plus) {
+            
+            _iconImageView.layer.cornerRadius = 24 * JZRatio_1_1_5;
+ 
+        }else {
+            _iconImageView.layer.cornerRadius = 24;
+
+        }
+        
+        
     }
     return _iconImageView;
 }
@@ -138,7 +171,14 @@
     if (_nameLabel == nil) {
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.textColor = JZ_FONTCOLOR_DRAK;
-        _nameLabel.font = [UIFont systemFontOfSize:14];
+        
+        if (YBIphone6Plus) {
+            _nameLabel.font = [UIFont systemFontOfSize:14*JZRatio_1_1_5];
+        }else {
+            _nameLabel.font = [UIFont systemFontOfSize:14];
+
+        }
+        
         _nameLabel.text = @"田娜";
     }
     return _nameLabel;
@@ -147,7 +187,16 @@
     if (_studyConLabel == nil) {
         _studyConLabel = [[UILabel alloc] init];
         _studyConLabel.textColor = JZ_FONTCOLOR_LIGHT;
-        _studyConLabel.font = [UIFont systemFontOfSize:12];
+        
+        if (YBIphone6Plus) {
+            
+            _studyConLabel.font = [UIFont systemFontOfSize:12 *JZRatio_1_1_5];
+
+        }else {
+            
+            _studyConLabel.font = [UIFont systemFontOfSize:12];
+
+        }
         _studyConLabel.text = @"科目二第11课时 变更车道";
     }
     return _studyConLabel;
@@ -156,7 +205,15 @@
     if (_classTimeLable == nil) {
         _classTimeLable = [[UILabel alloc] init];
         _classTimeLable.textColor = JZ_FONTCOLOR_LIGHT;
-        _classTimeLable.font = [UIFont systemFontOfSize:12];
+        if (YBIphone6Plus) {
+            
+            _classTimeLable.font = [UIFont systemFontOfSize:12*JZRatio_1_1_5];
+
+        }else {
+            _classTimeLable.font = [UIFont systemFontOfSize:12];
+
+        }
+        
         _classTimeLable.text = @"剩余17课时 已漏2课时";
     }
     return _classTimeLable;

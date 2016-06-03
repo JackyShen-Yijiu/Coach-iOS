@@ -14,5 +14,5 @@
 
 @property(nonatomic,strong)YiRefreshHeader * refreshHeader;
 @property(nonatomic,strong)YiRefreshFooter * refreshFooter;
-
+- (void)initRefreshView;
 @end

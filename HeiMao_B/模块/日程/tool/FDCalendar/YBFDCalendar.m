@@ -71,7 +71,7 @@ static NSDateFormatter *dateFormattor;
 {
 
     self.titleLabel = [[UILabel alloc] init];
-    self.titleLabel.frame = CGRectMake(15+(DeviceWidth-30)/2-60/2, 0, 60, topTitleH);
+    self.titleLabel.frame = CGRectMake(15+(DeviceWidth-30)/2-80/2, 0, 80, topTitleH);
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.font = [UIFont systemFontOfSize:12.f];
     self.titleLabel.textColor = RGB_Color(31, 124, 235);

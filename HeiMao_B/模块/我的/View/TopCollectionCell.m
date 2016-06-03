@@ -33,20 +33,48 @@
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.mas_left).offset(44);
         make.centerY.mas_equalTo(self.mas_centerY);
-        make.width.mas_equalTo(@18);
-        make.height.mas_equalTo(@18);
+        if (YBIphone6Plus) {
+            make.width.mas_equalTo(18 * JZRatio_1_1_5);
+            make.height.mas_equalTo(18 * JZRatio_1_1_5);
+            
+        }else {
+            make.width.mas_equalTo(@18);
+            make.height.mas_equalTo(@18);
+        }
+        
+        
     }];
     [self.classTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.imgView.mas_right).offset(14);
-         make.right.mas_equalTo(self.mas_right).offset(0);
-        make.top.mas_equalTo(self.mas_top).offset(20);
+        make.right.mas_equalTo(self.mas_right).offset(0);
+        
+        if (YBIphone6Plus) {
+            
+            make.top.mas_equalTo(self.mas_top).offset(20 * JZRatio_1_5);
+
+        }else if(YBIphone4) {
+            make.top.mas_equalTo(self.mas_top).offset(20 *JZRatio_0_8);
+
+        }else {
+            make.top.mas_equalTo(self.mas_top).offset(20);
+ 
+        }
+        
+        
         make.height.mas_equalTo(@14);
     }];
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.classTypeLabel.mas_left);
         make.right.mas_equalTo(self.mas_right).offset(0);
-        make.top.mas_equalTo(self.classTypeLabel.mas_bottom).offset(14);
-        make.height.mas_equalTo(@12);
+        if (YBIphone4) {
+            
+            make.top.mas_equalTo(self.classTypeLabel.mas_bottom).offset(14*JZRatio_0_8);
+            make.height.mas_equalTo(12 *JZRatio_0_8);
+        }else {
+            make.top.mas_equalTo(self.classTypeLabel.mas_bottom).offset(14);
+            make.height.mas_equalTo(@12);
+        }
+
     }];
 
 }
@@ -61,7 +89,17 @@
     if (_classTypeLabel == nil) {
         _classTypeLabel = [[UILabel alloc] init];
         _classTypeLabel.text = @"授课班型";
-        _classTypeLabel.font = [UIFont systemFontOfSize:14];
+        
+        if (YBIphone6Plus) {
+            
+            _classTypeLabel.font = [UIFont systemFontOfSize:14 * JZRatio_1_1_5];
+            
+        }else {
+            _classTypeLabel.font = [UIFont systemFontOfSize:14];
+            
+        }
+        
+        
         _classTypeLabel.textColor = JZ_FONTCOLOR_DRAK;
         _classTypeLabel.backgroundColor = [UIColor clearColor];
         
@@ -72,7 +110,17 @@
     if (_contentLabel == nil) {
         _contentLabel = [[UILabel alloc] init];
         _contentLabel.text = @"C1泉州办";
-        _contentLabel.font = [UIFont systemFontOfSize:12];
+        
+        if (YBIphone6Plus) {
+ 
+            _contentLabel.font = [UIFont systemFontOfSize:12 * JZRatio_1_1_5];
+ 
+        }else {
+            _contentLabel.font = [UIFont systemFontOfSize:12];
+
+        }
+        
+        
         _contentLabel.textColor = JZ_FONTCOLOR_LIGHT;
         _contentLabel.backgroundColor = [UIColor clearColor];
     }

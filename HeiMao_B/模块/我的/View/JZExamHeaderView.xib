@@ -80,13 +80,17 @@
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JZCoursemore_dwon" translatesAutoresizingMaskIntoConstraints="NO" id="dvZ-Vz-R1Y" userLabel="下拉图片">
                             <rect key="frame" x="371" y="15" width="14" height="9"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="9" id="Gxl-bg-HAx"/>
+                                <constraint firstAttribute="width" constant="14" id="HF7-Qd-m1q"/>
+                            </constraints>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="dvZ-Vz-R1Y" secondAttribute="trailing" constant="16" id="0G7-70-d4x"/>
                         <constraint firstItem="7lv-mG-w6y" firstAttribute="leading" secondItem="ujr-Vc-x7u" secondAttribute="leading" constant="16" id="NZf-x3-2wa"/>
-                        <constraint firstItem="dvZ-Vz-R1Y" firstAttribute="centerY" secondItem="ujr-Vc-x7u" secondAttribute="centerY" id="U3I-Uh-N6C"/>
+                        <constraint firstItem="dvZ-Vz-R1Y" firstAttribute="centerY" secondItem="ujr-Vc-x7u" secondAttribute="centerY" id="ZGd-4Z-Ieg"/>
+                        <constraint firstAttribute="trailing" secondItem="dvZ-Vz-R1Y" secondAttribute="trailing" constant="16" id="kd8-pl-HYE"/>
                         <constraint firstItem="7lv-mG-w6y" firstAttribute="centerY" secondItem="ujr-Vc-x7u" secondAttribute="centerY" id="pXV-Mq-6uz"/>
                         <constraint firstAttribute="height" constant="40" id="xIa-6j-9Cy"/>
                     </constraints>
@@ -167,6 +171,7 @@
                 <outlet property="nopassDownImg" destination="dvZ-Vz-R1Y" id="yYY-8b-NUa"/>
                 <outlet property="nopassView" destination="ujr-Vc-x7u" id="nK0-to-Q3j"/>
                 <outlet property="passCountButton" destination="5Wj-EQ-6gW" id="q6H-dY-Yky"/>
+                <outlet property="passTitle" destination="mJp-te-vuy" id="hyf-1j-XTh"/>
                 <outlet property="passrateCountLabel" destination="FMf-8V-rtS" id="qGV-HJ-HyU"/>
                 <outlet property="studentCountButton" destination="ZCC-XF-IPz" id="vq7-eI-QSH"/>
                 <outlet property="subjectLabel" destination="fb6-3C-zhK" id="271-bu-N73"/>

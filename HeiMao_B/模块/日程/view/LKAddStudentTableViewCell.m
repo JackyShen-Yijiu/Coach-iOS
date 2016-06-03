@@ -22,7 +22,6 @@
 
         self.studentNameLabel.backgroundColor = [UIColor whiteColor];
         
-        
 //        self.studyDetilsLabel.text = @"studyDetilsLabel";
         
         self.studentIconView.image = [UIImage imageNamed:@"JZCoursehead_null"];

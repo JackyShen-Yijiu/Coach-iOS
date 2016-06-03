@@ -45,6 +45,22 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
     self.title = @"公告";
+    
+    
+    if (YBIphone6Plus) {
+        
+        UIColor * color = [UIColor whiteColor];
+        UIFont *font = [UIFont systemFontOfSize:JZNavBarTitleFont];
+        
+        NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+        [dict setObject:color forKey:NSForegroundColorAttributeName];
+        [dict setObject:font forKey:NSFontAttributeName];
+        
+        self.navigationController.navigationBar.titleTextAttributes = dict;
+        
+    }
+
+    
     JZBulletinView *bulletinView = [[JZBulletinView alloc]initWithFrame:CGRectMake(0, 0, JZScreen.width, JZScreen.height)];
     self.bulletinView = bulletinView;
     bulletinView.vc = self;

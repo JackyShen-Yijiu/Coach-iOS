@@ -117,6 +117,19 @@
     self.view.backgroundColor = RGBColor(245, 247, 250);
     self.title = @"反馈";
     
+    if (YBIphone6Plus) {
+        
+        UIColor * color = [UIColor whiteColor];
+        UIFont *font = [UIFont systemFontOfSize:JZNavBarTitleFont];
+        
+        NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+        [dict setObject:color forKey:NSForegroundColorAttributeName];
+        [dict setObject:font forKey:NSFontAttributeName];
+        
+        self.navigationController.navigationBar.titleTextAttributes = dict;
+        
+    }
+    
     [self.view addSubview:self.textView];
     
     [self.view addSubview:self.submitButton];
