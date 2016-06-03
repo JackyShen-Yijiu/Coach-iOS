@@ -40,6 +40,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
+    // 系统基本信息配置
     [self sysConfigWithApplication:application LaunchOptions:launchOptions];
     
     if (([UIDevice jeSystemVersion] > 7.99)&&
