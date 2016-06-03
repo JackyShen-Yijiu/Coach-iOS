@@ -262,6 +262,7 @@
     
     NSLog(@"%s userInfo:%@",__func__,userInfo);
 
+
     if ([self isReciveFromHunaxin:userInfo]) {
         [self.navController jumpToMessageList];
     }else{
@@ -272,6 +273,9 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler
 {
+    //    ?????????????????????????????????????????   zyt   在前台是直接跳转到消息列表 ???????   以及同上的区别
+    
+    
     
 #warning 当App在后台接受到消息推送,点击消息提醒,调用此方法
 #warning 当App在前台接受到消息推送,调用此方法

@@ -119,6 +119,8 @@ static NSString * staticImage6[3] ={@"guide_6_1",@"guide_6_2",@"guide_6_3"};
     [self removeFromSuperview];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:FUNCTIONSHOWED];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
