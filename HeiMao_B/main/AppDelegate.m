@@ -30,7 +30,6 @@
 }
 @property(nonatomic,strong)HMNagationController * navController;
 @property (nonatomic, strong) BMKLocationService *locationService;
-@property (nonatomic, strong) NSString *nameStr;
 @end
 
 @implementation AppDelegate
