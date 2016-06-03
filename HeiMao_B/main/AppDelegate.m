@@ -30,6 +30,7 @@
 }
 @property(nonatomic,strong)HMNagationController * navController;
 @property (nonatomic, strong) BMKLocationService *locationService;
+@property (nonatomic, strong) NSString *nameStr;
 @end
 
 @implementation AppDelegate
@@ -39,8 +40,8 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+
     
-    // 系统基本信息配置
     [self sysConfigWithApplication:application LaunchOptions:launchOptions];
     
     if (([UIDevice jeSystemVersion] > 7.99)&&
